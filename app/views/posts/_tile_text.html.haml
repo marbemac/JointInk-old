@@ -1,0 +1,9 @@
+- cache post do
+  %div{:class => "article #{post.photo_url ? 'with-photo' : ''}"}
+
+    %a.top{:href => post_via_channel_path(post.primary_channel, post)}
+      - if post.photo_url
+        .image.cover-image{:style => "background-image: url('#{post.photo_url(:medium)}')"}
+      .text
+        %h1= post.title
+        %p= truncate(post.content_clean, :length => 500)

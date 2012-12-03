@@ -1,0 +1,26 @@
+%a.nav_link.left.home{:href => root_url(:host => site_host)}
+  %i.icon-home
+
+- if @channel && @channel.persisted?
+  %a.nav_link.left.share_something{:href => new_post_path(@channel), 'data-skip-pjax' => true}
+    %i.icon-plus
+    %span New Post
+
+.nav_link.left.dropdown
+  %i.icon-caret-down
+  %ul.menu
+    - if signed_in?
+      %li
+        %a{:href => new_channel_path, 'data-skip-pjax' => true}
+          %i.icon-plus
+          New Channel
+      %li
+        %a{:href => user_path(current_user)} My Profile
+      %li
+        %a{:href => user_drafts_path}= "My Drafts (#{current_user.drafts.count})"
+      -#%li
+      -#  %a{:href => user_basic_settings_url(:host => site_host)} Settings
+      %li.logout
+        %a{:href => destroy_user_session_url(:host => site_host, 'data-skip-pjax' => true)} Logout
+    %li
+      %a{:href => '#'} About

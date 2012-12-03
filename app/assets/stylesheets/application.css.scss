@@ -1,0 +1,587 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ //= require foundation_and_overrides
+ //= require font-awesome
+ *= require_self
+*/
+
+@import "compass";
+@import "variables";
+//@import "soulmate";
+//@import "sprites";
+
+/* apply a natural box layout model to all elements */
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+html {
+  height: 100%;
+  &.wf-loading {
+    visibility: hidden;
+  }
+}
+
+body {
+  background: $site-background-color;
+  height: 100%;
+}
+
+a {
+  outline: 0;
+  color: $action-color;
+
+  &:focus {
+    @include box-shadow(none);
+    outline: 0;
+  }
+}
+
+p {
+  font-size: 18px;
+  margin: 0 0 25px 0;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+textarea,
+select {
+  @include border-radius(0);
+  @include single-box-shadow(none);
+  border: 1px solid #999;
+  height: auto;
+  margin: 0;
+
+  &:focus {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+}
+
+label {
+  cursor: default;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+}
+
+.hide {
+  display: none;
+}
+
+.clear {
+  clear: both;
+}
+
+blockquote {
+  font-size: 14px;
+  font-style: italic;
+  max-width: 500px;
+  margin: 0 0 25px -20px;
+  padding: 5px 0 5px 20px;
+  border-left: 5px solid $action-color;
+  position: relative;
+  p {
+    margin: 0;
+  }
+}
+
+.alert {
+  padding: 15px;
+  font-size: 2.0rem;
+  font-weight: bold;
+  background: #FFF;
+  position: relative;
+  z-index: 1000;
+  text-align: center;
+
+  &.alert-success {
+    color: #FFF;
+    background: $green;
+  }
+  &.alert-error {
+    color: #FFF;
+    background: $red;
+  }
+}
+.error {
+  margin: 5px 0;
+  color: $red;
+  font-weight: bold;
+  font-size: 14px;
+  display: block;
+}
+
+.button {
+  &.red {
+    background: $red;
+    border-color: darken($red, 10%);
+    &:hover {
+      background: darken($red, 10%);
+    }
+  }
+  &.secondary {
+    background: $secondary-color;
+    border-color: darken($secondary-color, 10%);
+    color: #FFF;
+    &:hover {
+      background: darken($secondary-color, 10%);
+    }
+  }
+  &.action {
+    background: $action-color;
+    border-color: darken($action-color, 10%);
+    color: #FFF;
+    &:hover {
+      background: darken($action-color, 10%);
+    }
+  }
+  &.disabled {
+    background: $grayLighter;
+    border-color: darken($grayLighter, 10%);
+    color: #333;
+    &:hover {
+      cursor: progress;
+      background: $grayLighter;
+    }
+  }
+}
+
+.cover-image {
+  background-position: 50% center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.contain-image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+#data-pjax-container {
+  height: 100%;
+}
+
+#container {
+  width: 1360px;
+  padding: $site-vertical-padding $site-horizontal-padding;
+  margin: auto;
+  height: 100%;
+}
+
+#main {
+  padding: 0;
+  height: 100%;
+
+  > form {
+    margin: 25px;
+    max-width: 500px;
+
+    label {
+      font-weight: bold;
+      padding: 0 0 2px 2px;
+    }
+    input {
+      max-width: 250px;
+    }
+    .submit {
+      margin: 25px 0 0 0;
+    }
+  }
+
+  .single_section {
+    border-bottom: 1px solid #DDD;
+    padding: 25px;
+    margin: 0;
+    .wrapper {
+      max-width: 800px;
+
+      >.content {
+        padding-left: 0px;
+      }
+    }
+  }
+
+  &.with-sidebar {
+    padding-left: $sidebar-width;
+  }
+}
+
+#sidebar {
+  position: relative;
+  padding-right: 15px;
+  float: left;
+  width: $sidebar-width;
+  margin-left: -1 * $sidebar-width;
+
+  >.name {
+    position: absolute;
+    top: 33px;
+    left: 0;
+    padding: 0 15px;
+    width: 100%;
+
+    a {
+      color: inherit;
+    }
+  }
+  h1 {
+    display: inline;
+    background: #FFF;
+    padding: 2px 10px 2px 0;
+    max-width: 90%;
+    overflow: hidden;
+    cursor: default;
+
+    p {
+      background: #FFF;
+      font-size: inherit;
+    }
+  }
+  .visual_head {
+    @include box-shadow(rgba(0, 0, 0, 0.15) 0 1px 2px);
+    margin-bottom: 25px;
+    text-align: center;
+    background: #FFF;
+    width: 100%;
+    height: 200px;
+    border: 5px solid #FFF;
+
+    .icon-cog,
+    .icon-tint {
+      cursor: default;
+      font-size: 8.5rem;
+    }
+  }
+  .container {
+    background: darken($site-background-color, 5%);
+    padding: 0;
+
+    .top {
+      padding: 15px;
+    }
+  }
+  .full_name {
+    margin: 0 0 10px 0;
+  }
+  .subheader {
+    margin: 0 0 15px 0;
+  }
+  .fact {
+    margin: 10px 15px 10px 0;
+    a {
+      color: inherit;
+      border-bottom: 1px dotted #222;
+    }
+    .icon-facebook {
+      margin: 0 4px 0 4px;
+    }
+  }
+  .section {
+    padding-bottom: 5px;
+  }
+  li {
+    padding: 3px 35px 3px 15px;
+    margin: 0 0 2px 0;
+    position: relative;
+
+    .name {
+      color: inherit;
+      display: block;
+      font-size: 1.5rem;
+      cursor: default;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    a.name {
+      cursor: pointer;
+    }
+    .icon-plus,
+    .icon-minus {
+      @include transition(opacity .25s);
+      position: absolute;
+      top: 6px;
+      right: 10px;
+    }
+    .icon-plus {
+      @include opacity(0);
+      visibility: hidden;
+    }
+    &.on,
+    &:hover {
+      background: yellow;
+      .icon-plus {
+        @include opacity(1);
+        visibility: visible;
+      }
+    }
+  }
+}
+
+#header {
+  @include opacity(.8);
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  color: #FFF;
+  height: $header-height;
+  z-index: 2000;
+
+  .nav_link {
+    background: #333;
+    padding: 13px;
+    color: #FFF;
+    height: $header-height;
+    font-size: 15px;
+    display: inline-block;
+    margin-right: 1px;
+
+    &.left {
+      border-right: 1px solid transparent;
+    }
+    .icon-plus {
+      margin: 0;
+    }
+    &:hover {
+      color: yellow;
+    }
+  }
+  .dropdown {
+    i {
+      cursor: default;
+    }
+    .menu {
+      position: absolute;
+      top: $header-height;
+      left: 1px;
+      min-width: 187px;
+      display: none;
+      padding-top: 1px;
+
+      li {
+        background: #666;
+        padding: 5px 10px;
+        margin-bottom: 1px;
+
+        a {
+          color: #FFF;
+          width: 100%;
+          display: block;
+          &:hover {
+            color: yellow;
+          }
+        }
+        &.logout {
+          margin-bottom: 5px;
+        }
+      }
+    }
+    &:hover {
+      .menu {
+        display: block;
+      }
+    }
+  }
+  &:hover {
+    @include opacity(1);
+  }
+}
+
+#loader {
+  background: yellow;
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  margin-left: -140px;
+  padding: 15px 30px;
+  display: none;
+
+  h1 {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+#page-title {
+  padding: 20px 25px;
+  margin: 0 10px ($site-vertical-padding - 10) 10px;
+  cursor: default;
+  background: darken($site-background-color, 5%);
+  position: relative;
+
+  h1 {
+    margin: 0;
+    padding: 0;
+  }
+  .subheader {
+    margin: 5px 0 0 0;
+  }
+  a {
+    color: inherit;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  img {
+    position: absolute;
+    top: 0px;
+    left: -2px;
+  }
+  &.with-image {
+    padding-left: 100px;
+  }
+}
+
+#top_image {
+  height: 350px;
+  margin-bottom: 20px;
+}
+
+.fullscreen_bg {
+  @include clearfix();
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  #main {
+    height: auto;
+  }
+  #bg {
+    width: 100%;
+    heigth: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+  #container {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    background: rgba(0,0,0,.3);
+  }
+  .center-screen {
+    position: relative;
+    z-index: 1;
+    max-width: 550px;
+    margin: 0 auto;
+
+    h1,h2 {
+      @include single-text-shadow(rgba(0, 0, 0, 0.8), 1px, 2px, 5px);
+      color: #fff;
+      cursor: default;
+    }
+  }
+}
+
+.fullscreen {
+  $sidebar-width: 350px;
+
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  #container {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  #right-bar {
+    @include box-shadow(rgba(0, 0, 0, 0.5) 2px 0 6px inset);
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    height: 100%;
+    width: $sidebar-width;
+    overflow: hidden;
+    z-index: 50;
+  }
+
+  &#posts-show {
+    padding-right: $sidebar-width;
+  }
+}
+
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  transform: translate(-300px, 0) scale(4);
+  font-size: 23px;
+  direction: ltr;
+  cursor: pointer;
+}
+
+#pages-home {
+  .center-screen {
+    text-align: center;
+    margin: 10rem auto;
+  }
+  h1 {
+    font-size: 5rem;
+  }
+  h2 {
+    font-weight: normal;
+    border-bottom: 1px solid #FFF;
+    font-size: 3rem;
+    margin: 8rem auto 6rem auto;
+    padding: 0 0 6rem 0;
+  }
+  .login {
+    @include single-text-shadow(rgba(0, 0, 0, 0.8), 1px, 2px, 5px);
+    color: #FFF;
+    font-size: 2rem;
+    position: relative;
+    z-index: 1;
+
+    a {
+      color: #FFF;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@import "channel.css.scss";
+@import "users";
+@import "posts";
+@import "editor";
+@import "media_queries";

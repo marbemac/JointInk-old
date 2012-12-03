@@ -1,0 +1,34 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  activerecord:
+    attributes:
+      user:
+        email: "E-mail address"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "Email is required"
+              invalid: "Email is invalid"
+              taken: "Email is already taken"
+            username:
+              taken: "Username is already taken"
+            password:
+              blank: "Password is required"
+        post:
+          attributes:
+            channel:
+              blank: "Please choose a channel."
+            photo:
+              blank: "You must add a photo."
+        channel:
+          attributes:
+            name:
+              blank: "You must provide a name."
+            description:
+              blank: "You must provide a description."
+            photo:
+              blank: "You must add a photo."

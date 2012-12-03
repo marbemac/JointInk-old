@@ -1,0 +1,37 @@
+#post-editor{:class => @post.post_type}
+
+  #controls
+
+    .section.channel
+      .head
+        %h5 Channels
+      .content
+        .name= @post.primary_channel.name
+
+    .section.post-type
+      .head
+        %h5 Post Type
+      .content
+        %ul.choices
+          %li{:class => "text #{@post.post_type == 'text' && @post.post_subtype == 'article' ? 'on' : ''}", 'data-type' => 'text', 'data-subtype' => 'article'}
+            Text
+          -#%li{:class => "picture-text #{@post.post_type == 'picture' && @post.post_subtype == 'text' ? 'on' : ''}", 'data-type' => 'picture', 'data-subtype' => 'text'}
+          -#  Picture w/ Text
+          %li{:class => "picture-caption #{@post.post_type == 'picture' && @post.post_subtype == 'caption' ? 'on' : ''}", 'data-type' => 'picture', 'data-subtype' => 'caption'}
+            Picture w/ Caption
+
+    .section.actions{'data-url' => post_path(@post.id)}
+      .head
+      .content
+        .action.save
+          %i.icon-save
+          .name Save
+        .action.publish
+          %i.icon-upload
+          .name Publish
+        %a{:href => post_path(@post), 'data-method' => :delete, 'data-confirm' => 'Are you sure you want to discard this post?', 'data-skip-pjax' => true, :class => 'remove'}
+          %i.icon-remove
+          Discard
+
+  #editor
+    = render :partial => "posts/content_text", :layout => 'content'

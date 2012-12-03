@@ -1,0 +1,33 @@
+<p>Hi<%= @user.username ? " #{@user.username}" : "" %>,</p>
+
+<p>
+  I am one of the Co-Founders of ThisThat and I noticed you signed up <%= @today_or_yesterday %>. Welcome!
+</p>
+
+<p>
+  I want to thank you for trying ThisThat and get your initial impressions. Matt and I created ThisThat to make it easier to organize and follow the things that interest you. We just launched (you're one of our first users!) and would greatly appreciate any feedback you have - ideas, problems, bugs, etc - we want it all!
+  In fact, if you could answer a few questions, it'd be really helpful as we improve the site:
+</p>
+
+<p>
+  1. Do you understand how to use ThisThat? What doesn't make sense about the site?
+</p>
+
+<p>
+  2. What do you think of the publishing process? If you have auto-publish turned on, do you approve of the categories on your posts?
+</p>
+
+<p>
+  3. Would you invite a friend to ThisThat? If not, why not?
+</p>
+
+<p>
+  This is my personal email address, so feel free to send suggestions my way, or just say hi.
+</p>
+
+<div>
+  Best,
+  <br/>Marc
+  <br/>marc@getthisthat.com
+  <br/><a href="<%= root_url %>Marc" target="_blank">Marc</a> on ThisThat
+</div>

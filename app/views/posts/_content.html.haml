@@ -1,0 +1,6 @@
+- if @post.status == 'draft' && !defined?(@editing)
+  .notice.draft This post is a draft. It is only viewable by you until you publish it!
+
+%div{:class => "post-full #{defined?(@editing) ? 'editing' : ''} #{@post.post_type}-type #{@post.post_subtype}-subtype"}
+  = render "content_body"
+  = yield

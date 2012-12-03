@@ -1,0 +1,27 @@
+.post
+  - if defined?(@editing) || @post.photo.present?
+    #picture-wrapper
+      .show-editing.fileinput-button
+        .upload-help
+          click to upload a picture
+          %span.loading
+          %input{:type => 'file', 'data-url' => post_update_photo_path(@post.id), :name => 'post[photo]'}
+        %a.remove-image{:href => post_remove_photo_path(@post.id), 'data-method' => :put, 'data-remote' => true, 'data-skip-pjax' => true}
+          %i.icon-remove
+          Remove Image
+      %div{:style => "background-image: url('#{@post.photo_url}')", :class => "image #{@post.photo_ratio >= 1.4 ? 'cover-image' : 'contain-image'}"}
+
+  .content-wrapper
+    .post-top-meta.hide-picture
+      %a.post-author{:href => user_path(@post.user), :rel => 'author'}= @post.user.name
+      in
+      %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
+
+    %h1#post-title{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
+      = !@post.title.blank? ? @post.title : 'Title... (click to edit)'
+
+    #post-body.hide-picture{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
+      != !@post.content.blank? ? @post.content : '<p>Body... (click to edit)</p>'
+
+    - if can? :update, @post
+      %a.hide-editing.edit{:href => edit_post_path(@post.id), 'data-skip-pjax' => true} Edit

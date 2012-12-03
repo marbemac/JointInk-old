@@ -1,0 +1,461 @@
+.post.tile {
+  $top-vertical-padding: 25px;
+  $horizontal-padding: 30px;
+  $bottom-height: 54px;
+  $bottom-vertical-padding: 20px;
+
+  @include box-shadow(rgba(0, 0, 0, 0.15) 0 1px 2px);
+  width: $post-width;
+  margin: $post-margin;
+  height: $post-height - $bottom-height;
+  float: left;
+  background: #FFF;
+  position: relative;
+  padding-bottom: $bottom-height;
+
+  .top {
+    display: block;
+    height: $post-height - $bottom-height - ($top-vertical-padding * 3);
+    overflow: hidden;
+    position: relative;
+
+    .image {
+      background-position: 50% center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: block;
+      height: 200px;
+    }
+    .text {
+      padding: $top-vertical-padding $horizontal-padding;
+
+      h1 {
+        margin: 0;
+        font-size: 2.6rem;
+        line-height: 3.4rem;
+        font-weight: 700;
+      }
+      p {
+        font-size: 15px;
+        margin-top: 15px;
+        color: #222;
+      }
+    }
+  }
+  .bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: $bottom-vertical-padding $horizontal-padding;
+    border-top: 1px solid #EEE;
+    width: 100%;
+    height: $bottom-height;
+    font-size: 12px;
+    a {
+      color: #333;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .channel {
+      font-weight: bold;
+    }
+  }
+  .with-photo {
+    .top {
+      .text {
+        padding: 1.8rem $horizontal-padding;
+        h1 {
+          font-size: 2.2rem;
+          line-height: 3.0rem;
+        }
+        p {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+  .picture {
+    height: 100%;
+    .top {
+      height: 100%;
+    }
+    .image {
+      height: 100%;
+    }
+    .bg {
+      @include box-shadow(0 -70px 70px -20px rgba(0, 0, 0, 0.65) inset);
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+    }
+    .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      color: #FFF;
+      font-style: italic;
+      padding: 20px 30px;
+      width: 100%;
+      font-weight: 500;
+      line-height: 1.6rem;
+    }
+  }
+  .actions {
+    @include box-shadow(rgba(0, 0, 0, 0.15) 0 1px 2px);
+    $background: darken($site-background-color, 10%);
+    background: $background;
+    position: absolute;
+    top: -2px;
+    right: 10px;
+    padding: 7px 10px;
+
+    ul {
+      display: none;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      padding: 5px 0;
+      background: $background;
+    }
+    li {
+      font-weight: bold;
+      a {
+        padding: 5px 20px;
+      }
+    }
+    &:hover {
+      ul {
+        display: block;
+      }
+    }
+  }
+  &:hover {
+    @include box-shadow(rgba(0, 0, 0, 0.3) 0 1px 6px);
+  }
+}
+
+#posts-show {
+  .draft {
+    background: #666;
+    color: #FFF;
+    font-size: 17px;
+    padding: 10px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  #container {
+    max-width: $post-article-max-width;
+  }
+  &.fullscreen {
+    #container {
+      width: auto;
+      max-width: none;
+    }
+  }
+}
+
+.post-full {
+  height: 100%;
+  position: relative;
+
+  h3 {
+    margin: 4.5rem 0 2.5rem 0;
+    font-size: 2.6rem;
+  }
+  h4 {
+    margin: 3.5rem 0 2rem 0;
+    font-size: 2rem;
+  }
+  .post {
+    width: 100%;
+    height: 100%;
+  }
+  #picture-wrapper {
+    position: relative;
+    z-index: 100;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    background: #000;
+
+    .show-editing {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 150;
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+    .upload-help {
+      @include single-text-shadow(rgba(0, 0, 0, 0.8), 1px, 2px, 5px);
+      color: #FFF;
+      position: absolute;
+      margin: -2rem 0 0 -226px;
+      top: 50%;
+      left: 50%;
+      font-size: 4rem;
+      cursor: pointer;
+    }
+    .image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 100;
+    }
+    .remove-image {
+      @include single-text-shadow(rgba(0, 0, 0, 0.8), 1px, 2px, 5px);
+      color: #FFF;
+      font-size: 1.8rem;
+      position: absolute;
+      top: 80%;
+      left: 50%;
+      cursor: pointer;
+      margin: 0 0 0 -74px;
+
+      &:hover {
+        color: #E3E3E3;
+      }
+    }
+  }
+  #post-title {
+    margin: 2.5rem 0;
+    font-size: 4.6rem;
+    position: relative;
+    z-index: 200;
+  }
+  .post-top-meta {
+    border-bottom: 1px solid #DDD;
+    padding: 0 0 2rem 0;
+    margin: 0 0 2rem 0;
+    font-size: 1.6rem;
+
+    .post-author,
+    .post-channel {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .post-author {
+
+    }
+    .post-channel {
+    }
+  }
+  #post-body {
+    background: transparent;
+    outline: none;
+    border: none;
+
+    p {
+      font-size: 1.8rem;
+      line-height: 2.8rem;
+    }
+    ol {
+      margin: 0 0 0 -5px;
+    }
+    ul {
+      margin: 0 0 0 -5px;
+      list-style: inherit;
+    }
+    li {
+      font-size: 1.8rem;
+      padding: 0 0 0 6px;
+    }
+  }
+  .info {
+    .section {
+      padding: 2.5rem;
+      border-bottom: 1px solid #DDD;
+      margin-left: 0.5rem;
+
+      &.channel {
+        a {
+          color: #222;
+          font-weight: bold;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .caption {
+      font-size: 2.2rem;
+      margin: 2.5rem 0 0 0;
+    }
+  }
+  .show-editing {
+    display: none;
+  }
+  &.text-type {
+    max-width: 650px;
+    margin: 0 auto;
+    .hide-text {
+      display: none;
+    }
+    #picture-wrapper {
+      height: 300px;
+      margin: 0 0 22px 0;
+      .show-editing {
+        border: 1px dashed #CCC;
+      }
+      .image {
+        @extend .cover-image;
+      }
+    }
+    .info {
+      display: none;
+    }
+  }
+  &.picture-type {
+    .hide-picture {
+      display: none;
+    }
+    .post {
+      @include box-shadow(rgba(0, 0, 0, 0.2) 3px 0px 4px);
+      float: left;
+    }
+    .user-badge {
+      font-size: 1.6rem;
+    }
+    #post-title {
+      @include single-text-shadow(rgba(0, 0, 0, 0.8), 1px, 2px, 5px);
+      color: #FFF;
+      font-size: 2.5rem;
+      font-weight: bold;
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      padding: 2rem 5rem;
+      font-style: italic;
+    }
+    .edit {
+      @include single-text-shadow(rgba(0, 0, 0, 0.8), 1px, 2px, 5px);
+      position: absolute;
+      top: 21px;
+      right: 30px;
+      font-size: 2rem;
+      color: #FFF;
+      z-index: 300;
+    }
+    .info {
+      float: left;
+      margin-right: -1 * $sidebar-width;
+      width: $sidebar-width;
+    }
+  }
+  &.editing {
+    #post-body {
+      cursor: text;
+    }
+    .hide-editing {
+      display: none;
+    }
+    .show-editing {
+      display: block;
+    }
+    &.text-type {
+      padding: 25px;
+    }
+  }
+}
+
+#post-editor {
+  @include clearfix();
+  $controls-width: 175px;
+  height: 100%;
+  padding: 0 0 0 $controls-width;
+
+  #controls {
+    $padding: 10px;
+    overflow-y: auto;
+    float: left;
+    margin: 0 0 0 -1 * $controls-width;
+    width: $controls-width;
+    background: #FFF;
+    height: 100%;
+    padding-top: 50px;
+
+    .section {
+      .head {
+        border-bottom: 1px solid #DDD;
+        margin: 25px 0 3px;
+
+        h5 {
+          margin: 0 0 3px $padding;
+          text-transform: uppercase;
+          cursor: default;
+        }
+      }
+      .content {
+        margin: $padding 0 0 0;
+        padding: 5px $padding;
+        font-size: 1.4rem;
+      }
+      &.post-type {
+        .content {
+          padding: 0;
+        }
+
+        li {
+          padding: 5px $padding;
+          &:hover {
+            cursor: pointer;
+            background: lighten($accent-color, 40%);
+          }
+          &.on {
+            cursor: default;
+            background: $accent-color;
+          }
+        }
+      }
+      &.actions {
+        .content {
+          @include clearfix();
+          text-align: center;
+
+          .save,
+          .publish {
+            cursor: pointer;
+            float: left;
+            font-size: 6.5rem;
+            margin: 0;
+            text-align: center;
+            width: 75px;
+
+            &:hover {
+              color: $action-color;
+            }
+            &.disabled {
+              color: #CCC;
+              cursor: progress;
+            }
+          }
+          .remove {
+            margin: 120px 0 0 -15px;
+            display: block;
+            color: #222;
+            &:hover {
+              color: $red;
+            }
+          }
+        }
+      }
+    }
+  }
+  #editor {
+    @include box-shadow(rgba(0, 0, 0, 0.15) -2px 0px 4px);
+    float: left;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+  }
+
+}

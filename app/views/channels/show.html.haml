@@ -1,0 +1,8 @@
+- content_for :sidebar do
+  = render :partial => "channels/sidebar", :layout => 'layouts/sidebar'
+
+#page-title
+  %h1= @channel.name
+  %h4.subheader= @channel.description
+
+= render "posts/collection", :posts => @posts

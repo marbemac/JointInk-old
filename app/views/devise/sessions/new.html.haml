@@ -1,0 +1,12 @@
+#signin
+  .center-screen
+    %h1 Sign In
+
+    = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+
+      = f.input :login, :label => 'Username or Email', :input_html => {:autocomplete => 'off'}
+      = f.input :password, :input_html => {:autocomplete => 'off'}
+
+      = f.submit "Sign In", :class => 'medium action submit button'
+
+      %a{:href => user_registration_path} Don't have an account? Join Now!

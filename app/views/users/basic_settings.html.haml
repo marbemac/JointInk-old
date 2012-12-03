@@ -1,0 +1,17 @@
+- content_for :left_sidebar do
+  = render :partial => "settings_sidebar", :layout => 'layouts/left_sidebar'
+
+#main_window.ten.columns
+
+  %h1#page_title Basic Settings
+
+  = simple_form_for current_user do |f|
+    = f.error_notification
+
+    = f.input :name
+    = f.input :bio
+    %input{:type => 'hidden', :value => params[:action], :name => 'page'}
+
+    = f.error :base
+
+    = f.button :submit, 'Update', :class => 'medium action button submit', :input_html => {:autocomplete => 'off'}

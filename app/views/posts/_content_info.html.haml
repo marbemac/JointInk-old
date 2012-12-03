@@ -1,0 +1,10 @@
+.info
+  .section.channel
+    In
+    %a{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
+
+  .section
+    = render "users/badge", :user => @post.user
+
+    %h1.caption
+      = @post.title

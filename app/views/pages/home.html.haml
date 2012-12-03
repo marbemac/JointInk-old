@@ -1,0 +1,14 @@
+.center-screen
+  %h1 ThisThat
+
+  %h2 Publishing. Reimagined.
+
+  .login
+    %a{:href => '#'} Learn More
+    ,
+    %a{:href => signin_path} Sign In
+    , or
+    %a{:href => user_registration_path} Join Now
+
+#bg
+  .cover-image{:style => "background-image: url('#{asset_path('splash-'+(1+rand(5)).to_s+'.jpg')}')"}

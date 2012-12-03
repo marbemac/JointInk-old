@@ -1,0 +1,22 @@
+- content_for :left_sidebar do
+  = render :partial => "settings_sidebar", :layout => 'layouts/left_sidebar'
+
+#main_window.ten.columns
+
+  %h1#page_title Custom Domain Settings
+
+  .single_section
+    %h4.subheader
+      It's easy to use a custom domain for your page. Simply login to your DNS provider and set your A-record
+      %br
+      to "SOME IP". It may take up to 72 hours to update.
+
+  = simple_form_for current_user do |f|
+    = f.error_notification
+
+    = f.input :domain
+    %input{:type => 'hidden', :value => params[:action], :name => 'page'}
+
+    = f.error :base
+
+    = f.button :submit, 'Update Domain', :class => 'medium action button submit', :input_html => {:autocomplete => 'off'}

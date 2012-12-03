@@ -1,0 +1,40 @@
+!!!
+%html
+  = render "layouts/head"
+
+  %body
+
+    #data-pjax-container{'data-pjax-container' => 'true'}
+
+      %div{:id => "#{params[:controller]}-#{params[:action]}", :class => "#{@body_class} #{@fullscreen ? 'fullscreen' : ''}"}
+
+        #header
+          = render 'layouts/navigation'
+
+        #container
+          = yield :top_image
+
+          = render 'layouts/messages'
+
+          #main{:role => 'main', :class => content_for?(:sidebar) ? "with-sidebar" : ''}
+            = yield :sidebar
+            = yield
+
+          #loader
+            %h1 Loading...
+
+    != social_js
+
+    - if Rails.env.production?
+      -#= woopra_js
+
+    = javascript_include_tag "application"
+
+    %script
+      = yield :javascript
+
+    -# TODO: this is an ugly way of including the editor js files only on certain pages
+    - if params[:controller] == 'posts' && ['edit','new','create','update'].include?(params[:action])
+      %script{:type => 'text/javascript', :src => '/assets/javascripts/ckeditor/ckeditor.js'}
+      %script{:type => 'text/javascript', :src => '/assets/javascripts/ckeditor/config.js'}
+      = javascript_include_tag "editor"

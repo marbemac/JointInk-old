@@ -1,0 +1,7 @@
+- cache post do
+  .picture
+
+    %a.top{:href => post_via_channel_path(post.primary_channel, post)}
+      .image.cover-image{:style => "background-image: url('#{post.photo_url(:medium)}')"}
+      .bg
+        .caption= post.title

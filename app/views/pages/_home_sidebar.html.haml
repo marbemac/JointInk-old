@@ -1,0 +1,13 @@
+#home_sidebar
+  .visual_head
+    %i.icon-tint
+
+  %h3.full_name ThisThat
+  %h5.subheader One sentence description.
+
+  - if signed_in?
+    %h5
+      %a{:href => user_path(current_user)}= "Hi #{current_user.first_name}"
+  - else
+    %a.facebook.social_login{:href => '/users/auth/facebook', 'data-skip-pjax' => true}
+      Login with Facebook

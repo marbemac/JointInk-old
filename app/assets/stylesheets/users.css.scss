@@ -1,0 +1,101 @@
+.social_settings {
+  .subheader {
+  }
+  i {
+    font-size: 10rem;
+    cursor: default;
+  }
+  .icon-twitter-sign {
+    color: $tw-color;
+  }
+  .icon-facebook-sign {
+    color: $fb-color;
+  }
+  .ten {
+    padding-top: 10px;
+  }
+  .add {
+    margin: 0 0 10px 0;
+  }
+  .account {
+    margin: 5px 0;
+    .name {
+      display: inline-block;
+      font-weight: bold;
+      margin: 0 10px 0 0;
+    }
+  }
+}
+
+.user-badge {
+  img {
+    vertical-align: middle;
+  }
+  .text {
+    display: inline-block;
+    margin: 0 0 0 10px;
+  }
+  .name {
+    font-weight: 700;
+    color: #222;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+#signup,
+#signin {
+  h1 {
+    text-align: center;
+  }
+  .center-screen {
+    margin: 6rem auto 2rem auto;
+    max-width: 33rem;
+  }
+  form {
+    @include box-shadow(rgba(0, 0, 0, 0.8) 1px 2px 4px);
+    background: rgba(255,255,255,.85);
+    padding: 2.5rem;
+  }
+  label {
+    font-weight: bold;
+  }
+  input {
+    margin: 0.5rem 0 1.5rem 0;
+    max-width: 30rem;
+  }
+  .submit {
+    margin-bottom: 0;
+  }
+  .error {
+    margin: -1rem 0 1.5rem 0;
+  }
+  a {
+    display: block;
+    margin: 2rem 0 0 0;
+  }
+}
+#signup {
+  .url {
+    @include clearfix();
+    margin: 0 0 1.5rem 0;
+
+    .head {
+      font-weight: bold;
+      margin: 0 0 0.5rem 0;
+    }
+    .root,
+    .username {
+      float: left;
+      cursor: default;
+      font-size: 1.6rem;
+    }
+    .root {
+      color: #999;
+    }
+    .username {
+      font-weight: bold;
+    }
+  }
+}

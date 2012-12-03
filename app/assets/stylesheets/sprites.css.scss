@@ -1,0 +1,163 @@
+/*
+    Document   : _sprite
+    Created on : May 6, 2011
+    Author     : Marc MacLeod (marbemac@gmail.com
+    Description:
+        Sprite definitions.
+*/
+
+@import "icons/*.png";
+
+.twitter_bird {
+  &.grey {
+    @include icons-sprite(twitter_bird);
+    width: 14px;
+    height: 12px;
+
+    &:hover {
+      @include icons-sprite(twitter_bird_hover);
+    }
+  }
+  &.white {
+    @include icons-sprite(twitter_bird_white);
+    width: 23px;
+    height: 23px;
+  }
+}
+
+.twitter_favorite {
+  @include icons-sprite(twitter_favorite);
+  width: 16px;
+  height: 16px;
+
+  &:hover {
+    @include icons-sprite(twitter_favorite_hover);
+  }
+}
+
+.twitter_retweet {
+  @include icons-sprite(twitter_retweet);
+  width: 16px;
+  height: 16px;
+
+  &:hover {
+    @include icons-sprite(twitter_retweet_hover);
+  }
+}
+
+.twitter_reply {
+  @include icons-sprite(twitter_reply);
+  width: 16px;
+  height: 16px;
+
+  &:hover {
+    @include icons-sprite(twitter_reply_hover);
+  }
+}
+
+.plus {
+  &.small {
+    width: 12px;
+    height: 12px;
+    &.white {
+      @include icons-sprite(plus_white_12x12);
+    }
+    &.blue {
+      @include icons-sprite(plus_blue_12x12);
+    }
+    &.brown {
+      @include icons-sprite(plus_brown_12x12);
+      &:hover {
+        @include icons-sprite(plus_blue_12x12);
+      }
+    }
+  }
+  &.medium {
+    width: 16px;
+    height: 16px;
+    &.white {
+      @include icons-sprite(plus_white_16x16);
+    }
+    &.blue {
+      @include icons-sprite(plus_blue_16x16);
+    }
+    &.brown {
+      @include icons-sprite(plus_brown_16x16);
+      &:hover {
+        @include icons-sprite(plus_blue_16x16);
+      }
+    }
+  }
+}
+
+.curved-arrow {
+  &.medium {
+    width: 24px;
+    height: 18px;
+
+    &.white {
+      @include icons-sprite(curved_arrow_white_24x18);
+    }
+    &.orange {
+      @include icons-sprite(curved_arrow_orange_24x18);
+    }
+  }
+  &.small {
+    width: 12px;
+    height: 9px;
+
+    &.grey {
+      @include icons-sprite(curved_arrow_grey_12x9);
+    }
+  }
+}
+
+.facebook_f {
+  &.grey {
+    @include icons-sprite(facebook_f);
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+
+    &:hover {
+      @include icons-sprite(facebook_f_blue);
+    }
+  }
+  &.white {
+    @include icons-sprite(facebook_f_white);
+    width: 23px;
+    height: 23px;
+  }
+}
+
+.bars {
+  &.grey {
+    &.small {
+      @include icons-sprite(bars_grey_8x8);
+      width: 8px;
+      height: 8px;
+    }
+  }
+}
+
+.cog {
+  &.grey {
+    &.small {
+      @include icons-sprite(cog_grey_12x12);
+      width: 12px;
+      height: 12px;
+    }
+  }
+}
+
+.instagram_c {
+  &.grey {
+    @include icons-sprite(instagram_grey);
+    width: 14px;
+    height: 14px;
+
+    &:hover {
+      @include icons-sprite(instagram_color);
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.visual_head
+  .image.cover-image{:style => "background-image: url('#{channel_photo_path(@channel, :width => 400, :height => 400, :crop => :limit, :class => 'cover-image')}')"}
+
+.container
+
+  .top
+    %h4.full_name= @channel.name
+
+    %div
+      Created By
+      %a{:href => user_path(@channel.user)}= @channel.user.name

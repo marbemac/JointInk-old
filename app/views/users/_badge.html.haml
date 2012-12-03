@@ -1,0 +1,4 @@
+.user-badge
+  = user_avatar(user, :width => 65, :height => 65, :crop => :fill, :radius => :max)
+  .text
+    %a.name{:href => user_path(user)}= user.name

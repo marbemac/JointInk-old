@@ -1,0 +1,14 @@
+- content_for :sidebar do
+  = render :partial => "sidebar", :layout => 'layouts/sidebar'
+
+#page-title{:class => @channel ? 'with-image' : ''}
+  %h1
+    - if @channel
+      = cl_image_tag(@channel.photo_image, :width => 90, :height => 90, :crop => :fill, :radius => :max)
+      = @user.first_name
+      in
+      %a{:href => channel_path(@channel)}= @channel.name
+    - else
+      = "#{@user.first_name}'s Posts"
+
+= render "posts/collection", :posts => @posts

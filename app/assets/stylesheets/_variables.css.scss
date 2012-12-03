@@ -1,0 +1,61 @@
+//
+// Variables
+// --------------------------------------------------
+
+
+// Global values
+// --------------------------------------------------
+
+$site-background-color: #F2F2F0;
+$fb-color: #3B5998;
+$tw-color: #00C0F7;
+$tt-color: #666;
+$accent-color: yellow;
+$action-color: #5aaacd;
+$secondary-color: #51A351;
+
+// Site structure
+// --------------------------------------------------
+
+$site-vertical-padding: 50px;
+$site-horizontal-padding: 15px;
+$sidebar-width: 220px;
+$header-height: 40px;
+$post-width: 350px;
+$post-margin: 10px;
+$post-height: 440px;
+$post-article-max-width: 650px;
+
+// Grays
+// -------------------------
+$black:                 #000 !default;
+$grayDarker:            #222 !default;
+$grayDark:              #333 !default;
+$gray:                  #555 !default;
+$grayLight:             #999 !default;
+$grayLighter:           #eee !default;
+$white:                 #fff !default;
+
+
+// Accent colors
+// -------------------------
+$blue:                  #2f5990 !default;
+$blueDark:              #1650A1 !default;
+$green:                 #46a546 !default;
+$red:                   #9d261d !default;
+$yellow:                #ffc40d !default;
+$orange:                #f89406 !default;
+$pink:                  #c3325f !default;
+$purple:                #7a43b6 !default;
+
+
+// Scaffolding
+// -------------------------
+$bodyBackground:        $white !default;
+$textColor:             $grayDark !default;
+
+
+// Links
+// -------------------------
+$linkColor:             $blue !default;
+$linkColorHover:        darken($linkColor, 15%) !default;

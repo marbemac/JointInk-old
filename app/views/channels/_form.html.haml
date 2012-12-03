@@ -1,0 +1,25 @@
+#channel_form
+  %h1 Create a Channel
+  %h4.subheader
+    A channel is a place for people to express themselves around a common idea, theme, or prompt.
+
+  = simple_form_for channel do |f|
+    = f.error_notification
+    = f.error :base
+
+    = f.input :name
+    = f.input :description
+
+    %label * Photo
+    .fileinput-button
+      Choose Photo...
+      %span.loading
+      = f.hidden_field :photo_cache
+      = f.file_field :photo, :tabindex => '-1'
+
+    = f.error :photo
+
+    %input{:type => 'hidden', :name => 'redirect', :value => 'new_post'}
+
+    .actions
+      = f.button :submit, :class => 'medium action button', :value => @channel.persisted? ? 'Update Channel' : 'Create Channel'

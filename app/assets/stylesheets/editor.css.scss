@@ -1,0 +1,47 @@
+#cke_post-body {
+  @include border-radius(3px);
+  @include box-shadow(rgba(0, 0, 0, 0.5) 0 1px 3px);
+  @include opacity(0.95);
+  padding: 0 !important;
+  border: none !important;
+  z-index: 1000;
+}
+.cke_inner {
+  padding: 0 !important;
+}
+.cke_toolgroup {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+}
+#cke_post-body {
+  .icon {
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .icon-blockquote {
+    font-size: 50px;
+    top: 12px;
+    position: relative;
+    line-height: 8px;
+  }
+}
+.cke_button {
+  border-radius: 0px !important;
+  height: 44px !important;
+  padding: 0 !important;
+  width: 50px !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  background-color: darken($action-color, 15%) !important;
+  border-right: 1px solid darken($action-color, 25%) !important;
+  border-left: 1px solid lighten($action-color, 10%) !important;
+
+  .icon {
+    line-height: 44px !important;
+    color: #FFF !important;
+  }
+}
+.cke_button_on {
+  background-color: darken($action-color, 30%) !important;
+}
