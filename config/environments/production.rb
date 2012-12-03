@@ -84,6 +84,4 @@ ThisThat::Application.configure do
     user_name: ENV["SENDGRID_USERNAME"],
     password: ENV["SENDGRID_PASSWORD"]
   }
-
-  LIMELIGHT_ROOT = "http://projectlimelight.com/api/"
 end

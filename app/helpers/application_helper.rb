@@ -20,7 +20,7 @@ module ApplicationHelper
       when 'staging'
         'foobar-staging.herokuapp.com'
       when 'production'
-        'foobar-staging.herokuapp.com'
+        'www.getthisthat.com'
     end
   end
 
