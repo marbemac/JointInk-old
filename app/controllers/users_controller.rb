@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
     @user = User.find(params[:id])
     @title = @user.name + "'s Posts"
+    @page_title = @user.name
 
     @page = params[:page]
     @channel = nil
@@ -18,6 +19,7 @@ class UsersController < ApplicationController
       @title += ' in ' + @channel.name
     end
     @description = @user.bio
+    build_og_tags(@user.og_title, @user.og_type, @user.permalink, @user.og_description)
 
     case params[:page]
       when 'posts'
@@ -27,10 +29,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def show_redirect
+    @user = User.find(params[:id])
+    redirect_to user_path(@user)
+  end
+
   def drafts
     @user = current_user
     @title = "Drafts"
-    @posts = @user.posts.drafts.page(params[:page])
+    @page_title = "Your Draft Posts"
+    @posts = @user.posts.drafts.page(params[:page]).to_a
   end
 
   def add

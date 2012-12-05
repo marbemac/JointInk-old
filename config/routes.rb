@@ -21,12 +21,16 @@ ThisThat::Application.routes.draw do
 
   resources :channels
   scope 'c/:id' do
-    get 'new-post' => 'posts#new', :as => :new_post
+    get 'new-:type-:subtype-post' => 'posts#new', :as => :new_post
     get 'edit' => 'channels#edit', :as => :edit_channel
     scope ':post_id' do
       get '' => 'posts#show', :as => :post_via_channel
     end
     get '' => 'channels#show', :as => :channel
+  end
+
+  scope 'u/:id' do
+    get '' => 'users#show_redirect', :as => :user_permalink
   end
 
   scope 'settings' do

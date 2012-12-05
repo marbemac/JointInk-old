@@ -42,12 +42,17 @@ class ChannelsController < ApplicationController
 
   def show
     @channel = Channel.find(params[:id])
-
     authorize! :read, @channel
+
+    if params[:id].is_a? Integer
+      redirect_to channel_path(@channel), :status => :moved_permanently
+    end
 
     @posts = @channel.posts.active
     @title = @channel.name
+    @page_title = @channel.name
     @description = @channel.description
+    build_og_tags(@channel.og_title, @channel.og_type, @channel.permalink, @channel.og_description)
   end
 
 end

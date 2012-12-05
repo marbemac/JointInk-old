@@ -1,7 +1,4 @@
 - content_for :sidebar do
   = render :partial => "sidebar", :layout => 'layouts/sidebar'
 
-#page-title
-  %h1 Drafts
-
 = render "posts/collection", :posts => @posts

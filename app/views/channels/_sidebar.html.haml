@@ -4,8 +4,6 @@
 .container
 
   .top
-    %h4.full_name= @channel.name
-
     %div
       Created By
       %a{:href => user_path(@channel.user)}= @channel.user.name

@@ -6,7 +6,6 @@
 // Global values
 // --------------------------------------------------
 
-$site-background-color: #F2F2F0;
 $fb-color: #3B5998;
 $tw-color: #00C0F7;
 $tt-color: #666;
@@ -17,10 +16,10 @@ $secondary-color: #51A351;
 // Site structure
 // --------------------------------------------------
 
-$site-vertical-padding: 50px;
+$site-vertical-padding: 25px;
 $site-horizontal-padding: 15px;
 $sidebar-width: 220px;
-$header-height: 40px;
+$header-height: 50px;
 $post-width: 350px;
 $post-margin: 10px;
 $post-height: 440px;
@@ -51,7 +50,7 @@ $purple:                #7a43b6 !default;
 
 // Scaffolding
 // -------------------------
-$bodyBackground:        $white !default;
+$bodyBackground:        #F2F2F0 !default;
 $textColor:             $grayDark !default;
 
 

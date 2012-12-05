@@ -37,7 +37,8 @@
 #
 
 class User < ActiveRecord::Base
-  include Limelight::Images
+  #include Limelight::Images
+  include ActionView::Helpers::TextHelper
 
   extend FriendlyId
   friendly_id :username, :use => :slugged
@@ -185,6 +186,22 @@ class User < ActiveRecord::Base
       .where("(channels.user_id = ? AND channels.status = ?) OR (posts.user_id = ? AND posts.status = ?)", id, 'active', id, 'active')
       .uniq.to_a
     channels ? channels : []
+  end
+
+  def og_title
+    name
+  end
+
+  def og_description
+    truncate(bio, :length => 100, :separator => ' ', :omission => '...')
+  end
+
+  def og_type
+    'user'
+  end
+
+  def permalink
+    "http://www.getthisthat.com/u/#{id}"
   end
 
   #################

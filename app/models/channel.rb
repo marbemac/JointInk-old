@@ -15,7 +15,10 @@
 require "limelight"
 
 class Channel < ActiveRecord::Base
-  include Limelight::Images
+  #include Limelight::Images
+  include ActionView::Helpers::TextHelper
+  include CloudinaryHelper
+
 
   extend FriendlyId
   friendly_id :name, :use => :slugged
@@ -63,6 +66,23 @@ class Channel < ActiveRecord::Base
 
   def photo_image
     self['photo'] ? self['photo'].split('/').last : nil
+  end
+
+  def og_title
+    name
+  end
+
+  def og_description
+    truncate(description, :length => 100, :separator => ' ', :omission => '...')
+  end
+
+  def og_type
+    #TODO: create channel open graph type on facebook, make sure it works
+    'channel'
+  end
+
+  def permalink
+    "http://www.getthisthat.com/c/#{id}"
   end
 
   ##########

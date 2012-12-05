@@ -45,3 +45,16 @@
 .cke_button_on {
   background-color: darken($action-color, 30%) !important;
 }
+
+#post-editor {
+  height: 100%;
+
+  #editor {
+    width: 100%;
+    min-height: 100%;
+  }
+
+  .post {
+    float: none;
+  }
+}

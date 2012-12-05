@@ -3,22 +3,22 @@
 
 .container
 
-  .top
-    %h4.full_name= @user.name
-    %h5.subheader= @user.bio
-
-    - @user.accounts.each do |account|
-      - if account.provider == 'twitter'
-        .fact
-          %i.icon-twitter
-          %a{:href => account.url}= account.username
-      - elsif account.provider == 'facebook'
-        .fact
-          %i.icon-facebook
-          %a{:href => account.url}= account.username
+  -#.top
+  -#  %h5.subheader= @user.bio
+  -#
+  -#  - @user.accounts.each do |account|
+  -#    - if account.provider == 'twitter'
+  -#      .fact
+  -#        %i.icon-twitter
+  -#        %a{:href => account.url}= account.username
+  -#    - elsif account.provider == 'facebook'
+  -#      .fact
+  -#        %i.icon-facebook
+  -#        %a{:href => account.url}= account.username
 
   .section
-    %ul
-      - @user.post_channels.each do |channel|
-        %li
-          %a.name{:href => channel_path(channel)}= channel.name
+    .content
+      %ul
+        - @user.post_channels.each do |channel|
+          %li
+            %a.name{:href => channel_path(channel)}= channel.name

@@ -24,9 +24,7 @@
             %h1 Loading...
 
     != social_js
-
-    - if Rails.env.production?
-      -#= woopra_js
+    != google_analytics
 
     = javascript_include_tag "application"
 

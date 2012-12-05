@@ -3,12 +3,6 @@ jQuery ->
   CKEDITOR.disableAutoInline = true;
   editor = CKEDITOR.inline( document.getElementById( 'post-body' ) )
 
-  # post type picker
-  $('body').on 'click', '.post-type li', (e) ->
-    $('.post-type li').removeClass('on')
-    $(@).addClass('on')
-    $('.post-full').removeClass().addClass('post-full editing').addClass("#{$(@).data('type')}-type").addClass("#{$(@).data('subtype')}-subtype")
-
   # handle photo uploads
   $('#picture-wrapper .fileinput-button input').fileupload
     dataType: "json"
@@ -28,53 +22,52 @@ jQuery ->
       $('#picture-wrapper .image').css('background-image', "url(#{data.result.url})").removeClass('cover-image contain-image').addClass(data.result.class)
 
   # submit the form
-  $('#controls .save,#controls .publish').on 'click', (e) ->
+  $('.editor-save, .editor-publish').on 'click', (e) ->
     self = $(@)
     return if $(@).hasClass('disabled')
-    $('.save,.publish').addClass('disabled')
+    $('.editor-save, .editor-publish').addClass('disabled')
 
     data = {'post':{}}
-    data['post']['post_type'] = $('#controls .post-type li.on').data('type')
-    data['post']['post_subtype'] = $('#controls .post-type li.on').data('subtype')
     data['post']['title'] = $.trim($('#post-title').text())
     data['post']['content'] = $.trim($('#post-body').html())
 
-    if $(@).hasClass('publish')
+    if $(@).hasClass('editor-publish')
       data['post']['status'] = 'active'
-      $('.publish .name').text('Publishing')
+      $(@).find('.name').text('Publishing')
     else
       data['post']['status'] = 'draft'
-      $('.save .name').text('Saving')
+      $(@).find('.name').text('Saving')
 
     $.ajax
-      url: $('#controls .actions').data('url')
+      url: $('#editor-submit-url').data('url')
       data: data
       type: 'put'
       dataType: 'JSON'
       success: (data, textStatus, jqXHR) ->
-        if self.hasClass('publish')
+        if self.hasClass('editor-publish')
           window.location = data.url
         else
           # $('.last-saved .timeago').html($.timeago(data.post.updated_at))
       complete: ->
-        $('.save,.publish').removeClass('disabled')
-        $('.save .name').text('Save')
-        $('.publish .name').text('Publish')
+        $('.editor-save, .editor-publish').removeClass('disabled')
+        $('.editor-save .name').text('Save')
+        $('.editor-publish .name').text('Publish')
 
   # auto save the post every x seconds
   $('#editor').livequery ->
     $('body').everyTime "30s", 'save-form', ->
-      $('#controls .save').click()
+      $('.editor-save').click()
 
   # save on ctrl + s
   $('body,#post-title,#post-body').bind 'keydown.ctrl_s', (e) ->
     e.preventDefault()
-    $('#controls .save').click()
+    $('.editor-save').click()
     false
+
   # save on command (mac) + s
   $('body,#post-title,#post-body').bind 'keydown.meta_s', (e) ->
     e.preventDefault()
-    $('#controls .save').click()
+    $('.editor-save').click()
     false
 
   $('.cke_button__bold_icon').livequery ->

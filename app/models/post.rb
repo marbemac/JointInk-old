@@ -21,7 +21,8 @@
 require "limelight"
 
 class Post < ActiveRecord::Base
-  include Limelight::Images
+  #include Limelight::Images
+  include ActionView::Helpers::TextHelper
 
   extend FriendlyId
   friendly_id :title, :use => :slugged
@@ -31,8 +32,8 @@ class Post < ActiveRecord::Base
   belongs_to :user, :touch => true
   has_and_belongs_to_many :channels
 
-  validates :title, :length => {:maximum => 250}, :if => lambda { |post| post.is_active? }
-  validates :content, :length => {:maximum => 20000}, :if => lambda { |post| post.is_active? }
+  validates :title, :length => {:maximum => 250}
+  validates :content, :length => {:maximum => 20000}
   validates :primary_channel, :presence => true, :if => lambda { |post| post.is_active? }
   validates :post_type, :presence => true, :if => lambda { |post| post.is_active? }
   validates :photo, :presence => true, :if => lambda { |post| post.is_active? && post.post_type == 'picture' }
@@ -47,10 +48,6 @@ class Post < ActiveRecord::Base
 
   def is_active?
     status == 'active'
-  end
-
-  def og_type
-    og_namespace + ":post"
   end
 
   def disconnect
@@ -94,6 +91,22 @@ class Post < ActiveRecord::Base
     relationship.channel = channel
     relationship.post = self
     relationship.save
+  end
+
+  def og_title
+    title
+  end
+
+  def og_description
+    truncate(content, :length => 100, :separator => ' ', :omission => '...')
+  end
+
+  def og_type
+    'article'
+  end
+
+  def permalink
+    "http://www.getthisthat.com/p/#{id}"
   end
 
   ##########

@@ -105,7 +105,7 @@
   }
   .actions {
     @include box-shadow(rgba(0, 0, 0, 0.15) 0 1px 2px);
-    $background: darken($site-background-color, 10%);
+    $background: darken($bodyBackground, 10%);
     background: $background;
     position: absolute;
     top: -2px;
@@ -137,6 +137,12 @@
   }
 }
 
+#post-collection {
+  @include clearfix();
+  position: relative;
+  top: -10px;
+}
+
 #posts-show {
   .draft {
     background: #666;
@@ -149,7 +155,8 @@
     left: 0;
     width: 100%;
   }
-  #container {
+  #container,
+  #header {
     max-width: $post-article-max-width;
   }
   &.fullscreen {
@@ -361,101 +368,5 @@
     .show-editing {
       display: block;
     }
-    &.text-type {
-      padding: 25px;
-    }
   }
-}
-
-#post-editor {
-  @include clearfix();
-  $controls-width: 175px;
-  height: 100%;
-  padding: 0 0 0 $controls-width;
-
-  #controls {
-    $padding: 10px;
-    overflow-y: auto;
-    float: left;
-    margin: 0 0 0 -1 * $controls-width;
-    width: $controls-width;
-    background: #FFF;
-    height: 100%;
-    padding-top: 50px;
-
-    .section {
-      .head {
-        border-bottom: 1px solid #DDD;
-        margin: 25px 0 3px;
-
-        h5 {
-          margin: 0 0 3px $padding;
-          text-transform: uppercase;
-          cursor: default;
-        }
-      }
-      .content {
-        margin: $padding 0 0 0;
-        padding: 5px $padding;
-        font-size: 1.4rem;
-      }
-      &.post-type {
-        .content {
-          padding: 0;
-        }
-
-        li {
-          padding: 5px $padding;
-          &:hover {
-            cursor: pointer;
-            background: lighten($accent-color, 40%);
-          }
-          &.on {
-            cursor: default;
-            background: $accent-color;
-          }
-        }
-      }
-      &.actions {
-        .content {
-          @include clearfix();
-          text-align: center;
-
-          .save,
-          .publish {
-            cursor: pointer;
-            float: left;
-            font-size: 6.5rem;
-            margin: 0;
-            text-align: center;
-            width: 75px;
-
-            &:hover {
-              color: $action-color;
-            }
-            &.disabled {
-              color: #CCC;
-              cursor: progress;
-            }
-          }
-          .remove {
-            margin: 120px 0 0 -15px;
-            display: block;
-            color: #222;
-            &:hover {
-              color: $red;
-            }
-          }
-        }
-      }
-    }
-  }
-  #editor {
-    @include box-shadow(rgba(0, 0, 0, 0.15) -2px 0px 4px);
-    float: left;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-  }
-
 }

@@ -1,8 +1,34 @@
+- content_for :og_tags do
+  %meta{:property => 'og:image', :content => channel_photo_path(@channel, :width => 400, :height => 400, :crop => :limit)}
+
 - content_for :sidebar do
   = render :partial => "channels/sidebar", :layout => 'layouts/sidebar'
 
-#page-title
-  %h1= @channel.name
-  %h4.subheader= @channel.description
+- content_for :header do
+  - if can? :post, @channel
+    .section.post
+      .part.dropdown
+        .name
+          +Post
+          %i.icon-caret-down
+        .menu
+          %ul
+            %li
+              %a{:href => new_post_path(@channel, 'text', 'article'), 'data-skip-pjax' => true} +New Article
+            %li
+              %a{:href => new_post_path(@channel, 'picture', 'caption'), 'data-skip-pjax' => true} +New Picture
+
+  - if can? :update, @channel
+    .section.admin
+      .part.dropdown
+        .name
+          Admin
+          %i.icon-caret-down
+        .menu
+          %ul
+            %li
+              %a{:href => '#'} Invite Users
+            %li
+              %a{:href => '#'} Edit Channel
 
 = render "posts/collection", :posts => @posts

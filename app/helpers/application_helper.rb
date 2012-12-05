@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def description
-    @description.nil? ? "ThisThat organizes social media around real-world topics." : truncate(@description, :length => 150, :separator => ' ', :omission => '...')
+    @description.nil? ? "ThisThat is a new type of publishing platform." : truncate(@description, :length => 150, :separator => ' ', :omission => '...')
   end
 
   def site_host
@@ -22,42 +22,6 @@ module ApplicationHelper
       when 'production'
         'www.getthisthat.com'
     end
-  end
-
-  def markdown(text)
-    return '' unless text && !text.blank?
-    options = {:hard_wrap => true, :filter_html => true, :autolink => true, :no_intraemphasis => true, :fenced_code => true, :gh_blockcode => true}
-    Redcarpet::Markdown.new(Redcarpet::Render::HTML, options).render(text).html_safe
-  end
-
-  def woopra_js
-    extra = ""
-    if signed_in?
-      extra += "tracker.addVisitorProperty('email','#{current_user.email}');"
-      if current_user.name
-        extra += "tracker.addVisitorProperty('name','#{current_user.name}');"
-      else
-        extra += "tracker.addVisitorProperty('name','#{current_user.username}');"
-      end
-    end
-
-    "
-    function woopraReady(tracker) {
-        tracker.setDomain('getthisthat.com');
-        tracker.setIdleTimeout(300000);
-        #{extra}
-        tracker.track();
-        return false;
-    }
-    (function() {
-    var wsc = document.createElement('script');
-    wsc.src = document.location.protocol+'//static.woopra.com/js/woopra.js';
-    wsc.type = 'text/javascript';
-    wsc.async = true;
-    var ssc = document.getElementsByTagName('script')[0];
-    ssc.parentNode.insertBefore(wsc, ssc);
-    })();
-    "
   end
 
   def social_js
@@ -78,6 +42,24 @@ module ApplicationHelper
     <!-- JQUERY -->
     <script src='//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>
     <script>window.jQuery || document.write('<script src=\"/offline/javascripts/jquery1.8.js\"><\\/script>')</script>
+    "
+  end
+
+  def google_analytics
+    "
+    <script type='text/javascript'>
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-36765363-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
     "
   end
 

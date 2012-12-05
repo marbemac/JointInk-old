@@ -53,6 +53,14 @@ class ApplicationController < ActionController::Base
   def init
     @body_class = ''
     @fullscreen = false
+    @page_title = nil
+    @og_tags = {
+        "og:site_name" => 'ThisThat',
+        "og:site_title" => "ThisThat",
+        "og:type" => "website",
+        "og:url" => request.url,
+        "og:description" => "ThisThat is a new type of publishing platform."
+    }
   end
 
   def set_user_time_zone
@@ -61,17 +69,15 @@ class ApplicationController < ActionController::Base
   end
 
   # open graph tags
-  def build_og_tags(title, type, url, image, desc, extra={})
-    og_tags = []
-    og_tags << ["og:title", title]
-    og_tags << ["og:type", type]
-    og_tags << ["og:url", url]
-    og_tags << ["og:image", image] if image && !image.blank?
-    og_tags << ["og:description", desc]
+  def build_og_tags(title, type, url, desc, extra={})
+    @og_tags = {}
+    @og_tags["og:title"] = title
+    @og_tags["og:type"] = type
+    @og_tags["og:url"] = url
+    @og_tags["og:description"] = desc
     extra.each do |k,e|
-      og_tags << [k, e]
+      @og_tags[k] = e
     end
-    og_tags
   end
 
   def render_error(status, exception)

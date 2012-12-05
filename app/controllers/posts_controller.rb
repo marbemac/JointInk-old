@@ -5,7 +5,7 @@ class PostsController < ApplicationController
     @channel = Channel.find(params[:id])
     authorize! :post, @channel
 
-    @post = current_user.posts.create(:status => 'draft')
+    @post = current_user.posts.create(:status => 'draft', :post_type => params[:type], :post_subtype => params[:subtype])
     @post.add_channel current_user, @channel
     authorize! :create, @post
 
@@ -32,10 +32,12 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:post_id])
     authorize! :read, @post
+    @body_class = @post.post_type
     @fullscreen = @post.post_type == 'picture' ? true : false
     @channel = @post.primary_channel
     @title = @post.title
     @description = @post.content
+    build_og_tags(@post.og_title, @post.og_type, @post.permalink, @post.og_description)
   end
 
   def show_redirect
@@ -46,7 +48,8 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     authorize! :update, @post
-    @fullscreen = true
+    @body_class = @post.post_type
+    @fullscreen = @post.post_type == 'picture' ? true : false
     @editing = true
   end
 

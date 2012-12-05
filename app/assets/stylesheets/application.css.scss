@@ -29,7 +29,7 @@ html {
 }
 
 body {
-  background: $site-background-color;
+  background: $bodyBackground;
   height: 100%;
 }
 
@@ -186,10 +186,13 @@ blockquote {
 }
 
 #container {
-  width: 1360px;
   padding: $site-vertical-padding $site-horizontal-padding;
-  margin: auto;
   height: 100%;
+}
+#container,
+#header {
+  width: 1360px;
+  margin: auto;
 }
 
 #main {
@@ -277,7 +280,7 @@ blockquote {
     }
   }
   .container {
-    background: darken($site-background-color, 5%);
+    background: darken($bodyBackground, 5%);
     padding: 0;
 
     .top {
@@ -301,7 +304,7 @@ blockquote {
     }
   }
   .section {
-    padding-bottom: 5px;
+    padding: 5px 0;
   }
   li {
     padding: 3px 35px 3px 15px;
@@ -342,50 +345,136 @@ blockquote {
 }
 
 #header {
-  @include opacity(.8);
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 100;
-  color: #FFF;
+  $font-size: 24px;
+
   height: $header-height;
-  z-index: 2000;
+  padding: 0 $site-horizontal-padding;
+  position: relative;
+  z-index: 10000;
 
-  .nav_link {
-    background: #333;
-    padding: 13px;
-    color: #FFF;
-    height: $header-height;
-    font-size: 15px;
-    display: inline-block;
-    margin-right: 1px;
+  .wrapper {
+    background-color: darken($bodyBackground, 15%);
+  }
+  .section {
+    float: left;
 
-    &.left {
-      border-right: 1px solid transparent;
+    &.home {
+      width: 60px;
+      text-align: center;
     }
+    &.menu {
+      width: 145px;
+      border-left: 5px solid $bodyBackground;
+      .dropdown {
+        .menu {
+          width: 205px;
+        }
+      }
+    }
+    &.main {
+      border-left: 25px solid $bodyBackground;
+      .part {
+        padding-left: 25px;
+      }
+    }
+    &.share {
+      width: 145px;
+    }
+    &.post {
+      background: $action-color;
+      .part {
+        color: #FFF;
+      }
+    }
+    &.editor-save {
+      .part {
+        cursor: pointer;
+      }
+    }
+    &.editor-publish {
+      background: $action-color;
+
+      .part {
+        color: #FFF;
+        cursor: pointer;
+      }
+    }
+    &.editor-discard {
+      a {
+        color: $red;
+      }
+    }
+    &.share,
+    &.admin,
+    &.post,
+    &.editor-save,
+    &.editor-publish,
+    &.editor-discard {
+      border-left: 5px solid $bodyBackground;
+      float: right;
+    }
+    &.disabled {
+      background: #CCC;
+      cursor: wait;
+      .part {
+        color: #999;
+        cursor: wait;
+        a {
+          cursor: wait;
+        }
+      }
+    }
+  }
+  .part {
+    padding: 0 15px;
+    line-height: $header-height;
+    color: #222;
+    height: $header-height;
+    font-size: $font-size;
+    display: block;
+    margin: 0;
+
+    &.home {
+      padding-left: 20px;
+      padding-right: 22px;
+      &:hover {
+        color: $accent-color;
+      }
+    }
+  }
+  .nav_link {
     .icon-plus {
       margin: 0;
     }
-    &:hover {
-      color: yellow;
-    }
   }
   .dropdown {
-    i {
+    position: relative;
+    min-width: 135px;
+
+    .name {
+      font-size: $font-size;
+      text-align: center;
+    }
+    .icon-caret-down {
       cursor: default;
+      margin: 0 0 0 5px;
+      position: relative;
+      top: -1px;
+      font-size: 20px;
     }
     .menu {
       position: absolute;
       top: $header-height;
-      left: 1px;
-      min-width: 187px;
+      right: 0;
       display: none;
-      padding-top: 1px;
+      z-index: 10000;
+      margin-top: 3px;
+      padding: 5px 10px;
+      min-width: 100%;
+      background: #666;
 
       li {
-        background: #666;
-        padding: 5px 10px;
-        margin-bottom: 1px;
+        padding: 5px 3px;
 
         a {
           color: #FFF;
@@ -395,12 +484,13 @@ blockquote {
             color: yellow;
           }
         }
-        &.logout {
-          margin-bottom: 5px;
-        }
       }
     }
     &:hover {
+      .name {
+        color: $accent-color;
+        cursor: default;
+      }
       .menu {
         display: block;
       }
@@ -430,7 +520,7 @@ blockquote {
   padding: 20px 25px;
   margin: 0 10px ($site-vertical-padding - 10) 10px;
   cursor: default;
-  background: darken($site-background-color, 5%);
+  background: darken($bodyBackground, 5%);
   position: relative;
 
   h1 {
@@ -467,6 +557,9 @@ blockquote {
   height: 100%;
   position: relative;
 
+  #header {
+    display: none;
+  }
   #main {
     height: auto;
   }
@@ -526,8 +619,22 @@ blockquote {
     z-index: 50;
   }
 
+  &#posts-edit {
+    #header {
+      position: fixed;
+      width: 100%;
+    }
+  }
+
   &#posts-show {
     padding-right: $sidebar-width;
+
+    &.picture {
+      #header {
+        position: fixed;
+        width: 380px;
+      }
+    }
   }
 }
 

@@ -5,5 +5,5 @@
   .bottom
     = render "posts/tile_bottom", :post => post
 
-  - if signed_in? && current_user.id == post.user_id && !defined?(editing)
+  - if can?(:update, post) && !defined?(editing)
     = render "posts/tile_actions", :post => post
