@@ -110,6 +110,7 @@ blockquote {
   position: relative;
   z-index: 1000;
   text-align: center;
+  margin-bottom: 15px;
 
   &.alert-success {
     color: #FFF;
@@ -372,7 +373,7 @@ blockquote {
       }
     }
     &.main {
-      border-left: 25px solid $bodyBackground;
+      border-left: 35px solid $bodyBackground;
       .part {
         padding-left: 25px;
       }
@@ -618,6 +619,9 @@ blockquote {
     overflow: hidden;
     z-index: 50;
   }
+  .alert {
+    margin-bottom: 0;
+  }
 
   &#posts-edit {
     #header {
@@ -635,6 +639,20 @@ blockquote {
         width: 380px;
       }
     }
+  }
+}
+
+.page-header {
+  text-align: center;
+  margin: 15px 0 60px 0;
+  display: none;
+
+  .badge {
+
+  }
+  h1 {
+    font-size: 24px;
+    margin: 10px 0 0 0;
   }
 }
 

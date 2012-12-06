@@ -16,6 +16,9 @@
 
           = render 'layouts/messages'
 
+          .page-header
+            = yield :page_header
+
           #main{:role => 'main', :class => content_for?(:sidebar) ? "with-sidebar" : ''}
             = yield :sidebar
             = yield

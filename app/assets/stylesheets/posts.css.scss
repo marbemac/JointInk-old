@@ -141,6 +141,7 @@
   @include clearfix();
   position: relative;
   top: -10px;
+  left: 10px;
 }
 
 #posts-show {
@@ -158,6 +159,7 @@
   #container,
   #header {
     max-width: $post-article-max-width;
+    padding: 0;
   }
   &.fullscreen {
     #container {
@@ -309,7 +311,7 @@
     }
     #picture-wrapper {
       height: 300px;
-      margin: 0 0 22px 0;
+      margin: 20px 0 22px 0;
       .show-editing {
         border: 1px dashed #CCC;
       }

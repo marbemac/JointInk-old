@@ -18,6 +18,7 @@ html {
 #sidebar {
   float: none;
   margin-left: 0;
+  margin-bottom: 15px;
   padding-right: 0;
   width: 100%;
   position: static !important;
@@ -43,6 +44,48 @@ html {
 
 #header {
   width: 100%;
+  padding: 0;
+
+  .part {
+    font-size: 14px;
+  }
+  .dropdown {
+    min-width: 90px;
+    .name,
+    .icon-caret-down {
+      font-size: 14px;
+    }
+  }
+  .section {
+    &.home {
+      width: 36px;
+      .part {
+        padding: 0;
+      }
+    }
+    &.main {
+      display: none;
+    }
+    &.share,
+    &.post,
+    &.admin {
+      .dropdown {
+        .menu {
+          width: 135px;
+        }
+      }
+    }
+    &.menu {
+      width: 90px;
+      .dropdown {
+        .menu {
+          width: 165px;
+          right: auto;
+          left: 0;
+        }
+      }
+    }
+  }
 }
 
 #main {
@@ -90,6 +133,26 @@ html {
     padding: 0 25px;
   }
 }
+
+#post-collection {
+  left: 0;
+}
+
+.page-header {
+  margin-top: 35px;
+  margin-bottom: -5px;
+}
+
+#posts-show {
+  &.fullscreen {
+    &.picture {
+      #header {
+        width: 275px;
+      }
+    }
+  }
+}
+
 
 // 2. TYPOGRAPHY 			==============================
 // 3. COLOUR 				==============================

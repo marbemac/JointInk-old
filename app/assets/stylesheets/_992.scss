@@ -6,7 +6,54 @@
 #header {
   width: 620px;
 }
-
+#header {
+  .part {
+    font-size: 16px;
+  }
+  .dropdown {
+    min-width: 115px;
+    .name,
+    .icon-caret-down {
+      font-size: 16px;
+    }
+  }
+  .section {
+    &.home {
+      width: 45px;
+    }
+    &.main {
+      display: none;
+    }
+    &.menu {
+      width: 115px;
+      .dropdown {
+        .menu {
+          width: 165px;
+        }
+      }
+    }
+  }
+}
+#sidebar {
+  .visual_head {
+    display: none;
+  }
+}
+.page-header {
+  display: block;
+}
+#posts-show {
+  .page-header {
+    display: none;
+  }
+  &.fullscreen {
+    &.picture {
+      #header {
+        width: 335px;
+      }
+    }
+  }
+}
 // 2. TYPOGRAPHY 			==============================
 // 3. COLOUR 				==============================
 // 4. TEXTURE 				==============================
