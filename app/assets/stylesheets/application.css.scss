@@ -275,19 +275,26 @@ blockquote {
       background: darken($bodyBackground, 10%);
       border-bottom: 1px solid darken($bodyBackground, 20%);
       font-weight: bold;
+      cursor: default;
+    }
+    .icon-chevron-down {
+      margin: 0 0 0 10px;
+      font-size: 13px;
+      display: none;
     }
     .content {
       padding: 15px;
     }
     ul {
       padding: 5px 0;
+      background: darken($bodyBackground, 5%);
     }
   }
   a {
     white-space: nowrap;
   }
   li {
-    padding: 3px 35px 3px 15px;
+    padding: 3px 15px 3px 15px;
     margin: 0 0 2px 0;
     position: relative;
 
@@ -298,20 +305,10 @@ blockquote {
       cursor: default;
       white-space: nowrap;
       overflow: hidden;
+      text-align: left;
     }
     a.name {
       cursor: pointer;
-    }
-    .icon-plus,
-    .icon-minus {
-      @include transition(opacity .25s);
-      position: absolute;
-      top: 6px;
-      right: 10px;
-    }
-    .icon-plus {
-      @include opacity(0);
-      visibility: hidden;
     }
     &.on,
     &:hover {
@@ -435,7 +432,7 @@ blockquote {
       font-size: $font-size;
       text-align: center;
     }
-    .icon-caret-down {
+    .icon-chevron-down {
       cursor: default;
       margin: 0 0 0 5px;
       position: relative;

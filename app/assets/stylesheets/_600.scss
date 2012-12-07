@@ -29,10 +29,56 @@ html {
     border: none;
   }
   .container {
-    background: transparent;
+    padding: 35px 0 0 0;
+  }
+  .section {
+    display: inline-block;
+    position: relative;
 
-    .section {
+    .icon-chevron-down {
+      display: inline;
+    }
+    ul {
+      position: absolute;
       display: none;
+      top: 36px;
+      width: 100%;
+      z-index: 1000;
+    }
+    &:hover {
+      ul {
+        display: block;
+      }
+    }
+    &.description,
+    &.bio {
+      background: transparent;
+      display: block;
+
+      .content {
+        padding-top: 8px;
+      }
+      h2 {
+        font-size: 18px;
+        font-size: 1.8rem;
+      }
+    }
+    &.creator {
+      @include clearfix();
+      background: transparent;
+
+      .head {
+        float: left;
+        border: none;
+        background: transparent;
+        font-size: 14px;
+        font-weight: normal;
+        padding: 0;
+      }
+      .content {
+        float: left;
+        padding: 0 0 0 10px;
+      }
     }
   }
 }
@@ -58,7 +104,7 @@ html {
       top: 35px;
     }
     .name,
-    .icon-caret-down {
+    .icon-chevron-down {
       font-size: 14px;
     }
   }
