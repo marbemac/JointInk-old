@@ -656,6 +656,13 @@ blockquote {
   }
 }
 
+#posts-edit,
+#posts-update {
+  .page-header {
+    display: none;
+  }
+}
+
 .fileinput-button {
   position: relative;
   overflow: hidden;

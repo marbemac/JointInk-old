@@ -62,6 +62,9 @@ class Post < ActiveRecord::Base
     if content_changed?
       self.content = Sanitize.clean(content, :elements => ['b','i','strong','em','blockquote','p','br','a','h3','h4','ol','ul','li'],
                                              :protocols => {'a' => {'href' => ['http', 'https', 'mailto']}},
+                                             :attributes => {
+                                                 'a'          => ['href'],
+                                             },
                                              :add_attributes => {
                                                  'a' => {'rel' => 'nofollow', 'target' => '_blank'}
                                              }
