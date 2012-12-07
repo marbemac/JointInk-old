@@ -45,12 +45,18 @@ html {
 #header {
   width: 100%;
   padding: 0;
+  height: 35px;
 
   .part {
+    height: 35px;
+    line-height: 35px;
     font-size: 14px;
   }
   .dropdown {
     min-width: 90px;
+    .menu {
+      top: 35px;
+    }
     .name,
     .icon-caret-down {
       font-size: 14px;

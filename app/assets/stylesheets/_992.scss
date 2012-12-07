@@ -7,11 +7,19 @@
   width: 620px;
 }
 #header {
+  height: 40px;
+
   .part {
     font-size: 16px;
+    height: 40px;
+    line-height: 40px;
   }
   .dropdown {
     min-width: 115px;
+
+    .menu {
+      top: 40px;
+    }
     .name,
     .icon-caret-down {
       font-size: 16px;
