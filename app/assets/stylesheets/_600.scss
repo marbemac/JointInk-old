@@ -153,7 +153,9 @@ html {
   &.fullscreen {
     &.picture {
       #header {
-        width: 275px;
+        width: 100%;
+        position: static;
+        margin-bottom: 5px;
       }
     }
   }

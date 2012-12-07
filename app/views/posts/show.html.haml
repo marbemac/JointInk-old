@@ -11,14 +11,27 @@
       .menu
         %ul
           %li
-            %a{:href => "http://twitter.com/share?text=#{@post.title}&url=#{@post.permalink}", 'data-skip-pjax' => true, :target => '_blank'} On Twitter
+            %a{:href => "http://twitter.com/share?text=#{@post.title}&url=#{@post.permalink}", 'data-skip-pjax' => true, :target => '_blank'} Twitter
           %li
-            %a{:href => "https://www.facebook.com/dialog/feed?link=#{@post.permalink}", 'data-skip-pjax' => true, :target => '_blank'} On Facebook
+            %a{:href => "https://www.facebook.com/dialog/feed?link=#{@post.permalink}", 'data-skip-pjax' => true, :target => '_blank'} Facebook
           %li
-            %a{:href => "http://reddit.com/submit?url=#{@post.permalink}&title=#{@post.title}", 'data-skip-pjax' => true, :target => '_blank'} On Reddit
+            %a{:href => "http://reddit.com/submit?url=#{@post.permalink}&title=#{@post.title}", 'data-skip-pjax' => true, :target => '_blank'} Reddit
           %li
-            %a{:href => "http://www.stumbleupon.com/submit?url=#{@post.permalink}&title=#{@post.title}", 'data-skip-pjax' => true, :target => '_blank'} On StumbleUpon
+            %a{:href => "http://www.stumbleupon.com/submit?url=#{@post.permalink}&title=#{@post.title}", 'data-skip-pjax' => true, :target => '_blank'} StumbleUpon
           %li
-            %a{:href => "http://news.ycombinator.com/submitlink?u=#{@post.permalink}&t=#{@post.title}", 'data-skip-pjax' => true, :target => '_blank'} On Hacker News
+            %a{:href => "http://news.ycombinator.com/submitlink?u=#{@post.permalink}&t=#{@post.title}", 'data-skip-pjax' => true, :target => '_blank'} Hacker News
+
+  - if can? :update, @post
+    .section.admin
+      .part.dropdown
+        .name
+          Admin
+          %i.icon-caret-down
+        .menu
+          %ul
+            %li
+              %a{:href => edit_post_path(@post.id), 'data-skip-pjax' => true} Edit Post
+            %li
+              = link_to "Delete Post", post_path(@post), :method => :delete, :confirm => 'Are you sure you want to delete this post?', :remote => true, 'data-skip-pjax' => true
 
 = render :partial => "content_#{@post.post_type}", :layout => 'content'

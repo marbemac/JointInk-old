@@ -54,7 +54,7 @@ jQuery ->
         $('.editor-publish .name').text('Publish')
 
   # auto save the post every x seconds
-  $('#editor').livequery ->
+  $('.editor').livequery ->
     $('body').everyTime "30s", 'save-form', ->
       $('.editor-save').click()
 

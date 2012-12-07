@@ -8,7 +8,7 @@ module UserHelper
       cl_image_tag(user.avatar_image, options)
     else
       options.delete(:gravity)
-      gravatar_profile_image_tag(user.email, options.merge(:default_image => :mm))
+      gravatar_profile_image_tag(user.email, options.merge(:default_image => :mm)).gsub('jpg', 'png').html_safe
     end
   end
 

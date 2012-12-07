@@ -241,30 +241,6 @@ blockquote {
   width: $sidebar-width;
   margin-left: -1 * $sidebar-width;
 
-  >.name {
-    position: absolute;
-    top: 33px;
-    left: 0;
-    padding: 0 15px;
-    width: 100%;
-
-    a {
-      color: inherit;
-    }
-  }
-  h1 {
-    display: inline;
-    background: #FFF;
-    padding: 2px 10px 2px 0;
-    max-width: 90%;
-    overflow: hidden;
-    cursor: default;
-
-    p {
-      background: #FFF;
-      font-size: inherit;
-    }
-  }
   .visual_head {
     @include box-shadow(rgba(0, 0, 0, 0.15) 0 1px 2px);
     margin-bottom: 25px;
@@ -280,32 +256,35 @@ blockquote {
       font-size: 8.5rem;
     }
   }
-  .container {
-    background: darken($bodyBackground, 5%);
-    padding: 0;
-
-    .top {
-      padding: 15px;
-    }
-  }
-  .full_name {
-    margin: 0 0 10px 0;
-  }
-  .subheader {
-    margin: 0 0 15px 0;
-  }
-  .fact {
-    margin: 10px 15px 10px 0;
-    a {
-      color: inherit;
-      border-bottom: 1px dotted #222;
-    }
-    .icon-facebook {
-      margin: 0 4px 0 4px;
-    }
+  h2 {
+    margin: 0;
+    font-size: 22px;
+    font-size: 2.2rem;
+    line-height: 27px;
+    line-height: 2.7rem;
+    color: darken($bodyBackground, 50%);
   }
   .section {
-    padding: 5px 0;
+    background: darken($bodyBackground, 5%);
+    padding: 0;
+    margin: 0 0 20px 0;
+
+    .head {
+      padding: 10px 15px;
+      font-size: 15px;
+      background: darken($bodyBackground, 10%);
+      border-bottom: 1px solid darken($bodyBackground, 20%);
+      font-weight: bold;
+    }
+    .content {
+      padding: 15px;
+    }
+    ul {
+      padding: 5px 0;
+    }
+  }
+  a {
+    white-space: nowrap;
   }
   li {
     padding: 3px 35px 3px 15px;
@@ -636,7 +615,7 @@ blockquote {
     &.picture {
       #header {
         position: fixed;
-        width: 380px;
+        width: 490px;
       }
     }
   }

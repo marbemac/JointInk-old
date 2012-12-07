@@ -180,12 +180,18 @@ class User < ActiveRecord::Base
     end
   end
 
-  def post_channels
-    channels = Channel
+  def created_channels
+    @created_channels ||= Channel
       .includes(:posts)
-      .where("(channels.user_id = ? AND channels.status = ?) OR (posts.user_id = ? AND posts.status = ?)", id, 'active', id, 'active')
-      .uniq.to_a
-    channels ? channels : []
+      .where("channels.user_id = ? AND channels.status = ?", id, 'active')
+      .uniq
+  end
+
+  def contributed_channels
+    @contributed_channels ||= Channel
+      .includes(:posts)
+      .where("channels.user_id != ? AND channels.status = ? AND posts.user_id = ? AND posts.status = ?", id, 'active', id, 'active')
+      .uniq
   end
 
   def og_title

@@ -3,6 +3,11 @@
 
 .container
 
+  - if @user.bio && !@user.bio.blank?
+    .section.bio
+      .content
+        %h2= @user.bio
+
   -#.top
   -#  %h5.subheader= @user.bio
   -#
@@ -16,9 +21,18 @@
   -#        %i.icon-facebook
   -#        %a{:href => account.url}= account.username
 
-  .section
-    .content
+  - if @user.created_channels.count > 0
+    .section.my_channels
+      .head Channels I Created
       %ul
-        - @user.post_channels.each do |channel|
+        - @user.created_channels.each do |channel|
+          %li
+            %a.name{:href => channel_path(channel)}= channel.name
+
+  - if @user.contributed_channels.count > 0
+    .section.channels
+      .head Channels I Post To
+      %ul
+        - @user.contributed_channels.each do |channel|
           %li
             %a.name{:href => channel_path(channel)}= channel.name

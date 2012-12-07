@@ -22,6 +22,3 @@
 
     #post-body.hide-picture{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
       != !@post.content.blank? ? @post.content : '<p>Body... (click to edit)</p>'
-
-    - if can? :update, @post
-      %a.hide-editing.edit{:href => edit_post_path(@post.id), 'data-skip-pjax' => true} Edit
