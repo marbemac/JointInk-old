@@ -48,7 +48,7 @@ class ChannelsController < ApplicationController
       redirect_to channel_path(@channel), :status => :moved_permanently
     end
 
-    @posts = @channel.posts.active
+    @posts = @channel.posts.active.order('created_at DESC')
     @title = @channel.name
     @page_title = @channel.name
     @description = @channel.description

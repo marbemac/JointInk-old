@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 
     case params[:page]
       when 'posts'
-        @posts = @user.sharing(@channel).page(params[:page])
+        @posts = @user.sharing(@channel).page(params[:page]).order('created_at DESC')
       when 'feed'
         @posts = @user.feed(@channel).page(params[:page])
     end
