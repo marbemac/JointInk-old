@@ -7,7 +7,6 @@ jQuery ->
     $('body').oneTime 1000, 'show-loader', ->
       $('#loader').fadeIn(200)
   .on 'pjax:end', ->
-    set_sidebar_height()
     $('body').stopTime 'show-loader'
     $('#loader').hide()
 

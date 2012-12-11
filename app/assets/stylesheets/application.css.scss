@@ -259,17 +259,17 @@ blockquote {
     font-size: 2.2rem;
     line-height: 27px;
     line-height: 2.7rem;
-    color: darken($bodyBackground, 50%);
+    color: darken($bodyBackground, 60%);
   }
   .section {
-    background: darken($bodyBackground, 5%);
+    background: $bodyBackground;
     padding: 0;
     margin: 0 0 20px 0;
 
     .head {
       padding: 10px 15px;
       font-size: 15px;
-      background: darken($bodyBackground, 10%);
+      background: darken($bodyBackground, 5%);
       border-bottom: 1px solid #FFF;
       font-weight: bold;
       cursor: default;
@@ -284,7 +284,7 @@ blockquote {
     }
     ul {
       padding: 5px 0;
-      background: darken($bodyBackground, 5%);
+      background: $bodyBackground;
     }
   }
   a {
@@ -327,7 +327,7 @@ blockquote {
   z-index: 10000;
 
   .wrapper {
-    background-color: darken($bodyBackground, 15%);
+    background-color: darken($bodyBackground, 10%);
   }
   .section {
     float: left;

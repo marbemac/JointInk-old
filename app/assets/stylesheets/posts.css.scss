@@ -1,8 +1,4 @@
 .post.tile {
-  @include transition-property(all);
-  @include transition-delay(0.2s);
-  @include transition-duration(0.3s);
-
   $top-vertical-padding: 25px;
   $horizontal-padding: 25px;
   $bottom-height: 54px;
@@ -39,7 +35,7 @@
         font-weight: 700;
       }
       p {
-        font-size: 15px;
+        font-size: 16px;
         margin-top: 15px;
         color: #222;
       }
@@ -108,26 +104,29 @@
   }
   .actions {
     @include box-shadow(rgba(0, 0, 0, 0.15) 0 1px 2px);
-    $background: darken($bodyBackground, 10%);
-    background: $background;
+    background: $action-color;
     position: absolute;
     top: 0px;
     right: 0px;
     padding: 7px 10px;
     display: none;
 
+    .icon-chevron-down {
+      color: #FFF;
+    }
     ul {
       display: none;
       position: absolute;
       top: 0px;
       right: 0px;
       padding: 5px 0;
-      background: $background;
+      background: $action-color;
     }
     li {
       font-weight: bold;
       a {
         padding: 5px 15px;
+        color: #FFF;
       }
     }
     &:hover {
@@ -138,7 +137,7 @@
   }
   &:hover {
     @include box-shadow(rgba(0, 0, 0, 0.15) 0 1px 2px);
-    background: #F3F3F3;
+    background: $bodyBackground;
     .actions {
       display: block;
     }
