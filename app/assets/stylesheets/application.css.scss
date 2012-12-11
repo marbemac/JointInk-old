@@ -29,7 +29,7 @@ html {
 }
 
 body {
-  background: $bodyBackground;
+  //background: $bodyBackground;
   height: 100%;
 }
 
@@ -236,19 +236,16 @@ blockquote {
 
 #sidebar {
   position: relative;
-  padding-right: 15px;
   float: left;
   width: $sidebar-width;
   margin-left: -1 * $sidebar-width;
 
   .visual_head {
-    @include box-shadow(rgba(0, 0, 0, 0.15) 0 1px 2px);
     margin-bottom: 25px;
     text-align: center;
     background: #FFF;
     width: 100%;
     height: 200px;
-    border: 5px solid #FFF;
 
     .icon-cog,
     .icon-tint {
@@ -273,7 +270,7 @@ blockquote {
       padding: 10px 15px;
       font-size: 15px;
       background: darken($bodyBackground, 10%);
-      border-bottom: 1px solid darken($bodyBackground, 20%);
+      border-bottom: 1px solid #FFF;
       font-weight: bold;
       cursor: default;
     }
@@ -341,7 +338,7 @@ blockquote {
     }
     &.menu {
       width: 145px;
-      border-left: 5px solid $bodyBackground;
+      border-left: 5px solid #FFF;
       .dropdown {
         .menu {
           width: 205px;
@@ -349,7 +346,7 @@ blockquote {
       }
     }
     &.main {
-      border-left: 35px solid $bodyBackground;
+      border-left: 40px solid #FFF;
       .part {
         padding-left: 25px;
       }
@@ -387,7 +384,7 @@ blockquote {
     &.editor-save,
     &.editor-publish,
     &.editor-discard {
-      border-left: 5px solid $bodyBackground;
+      border-left: 5px solid #FFF;
       float: right;
     }
     &.disabled {
@@ -458,7 +455,7 @@ blockquote {
           width: 100%;
           display: block;
           &:hover {
-            color: yellow;
+            color: $accent-color;
           }
         }
       }
@@ -490,36 +487,6 @@ blockquote {
   h1 {
     margin: 0;
     padding: 0;
-  }
-}
-
-#page-title {
-  padding: 20px 25px;
-  margin: 0 10px ($site-vertical-padding - 10) 10px;
-  cursor: default;
-  background: darken($bodyBackground, 5%);
-  position: relative;
-
-  h1 {
-    margin: 0;
-    padding: 0;
-  }
-  .subheader {
-    margin: 5px 0 0 0;
-  }
-  a {
-    color: inherit;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-  img {
-    position: absolute;
-    top: 0px;
-    left: -2px;
-  }
-  &.with-image {
-    padding-left: 100px;
   }
 }
 

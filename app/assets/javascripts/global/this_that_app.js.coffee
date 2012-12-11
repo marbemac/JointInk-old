@@ -9,24 +9,11 @@ jQuery ->
   .on 'pjax:end', ->
     set_sidebar_height()
     $('body').stopTime 'show-loader'
+    $('#loader').hide()
 
   # Initiate timeago timestamps
   $(".timeago").livequery ->
     $(@).timeago()
-
-  # Left sidebar height adjustment
-  set_sidebar_height = ->
-    window_height = $(window).height()
-    sidebar = $("#sidebar")
-    if sidebar.height() < window_height
-      sidebar.css('position': 'fixed')
-    else
-      sidebar.css('position': 'static')
-
-  set_sidebar_height()
-  $(window).resize ->
-    set_sidebar_height()
-  # end left sidebar
 
   # copy input to area
   $('.copy_over').live 'keyup', (e) ->

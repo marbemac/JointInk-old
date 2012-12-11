@@ -1,12 +1,15 @@
 .post.tile {
+  @include transition-property(all);
+  @include transition-delay(0.2s);
+  @include transition-duration(0.3s);
+
   $top-vertical-padding: 25px;
-  $horizontal-padding: 30px;
+  $horizontal-padding: 25px;
   $bottom-height: 54px;
   $bottom-vertical-padding: 20px;
 
-  @include box-shadow(rgba(0, 0, 0, 0.15) 0 1px 2px);
   width: $post-width;
-  margin: $post-margin;
+  padding: $post-margin;
   height: $post-height - $bottom-height;
   float: left;
   background: #FFF;
@@ -27,7 +30,7 @@
       height: 200px;
     }
     .text {
-      padding: $top-vertical-padding $horizontal-padding;
+      //padding: $top-vertical-padding $horizontal-padding;
 
       h1 {
         margin: 0;
@@ -45,10 +48,10 @@
   .bottom {
     position: absolute;
     bottom: 0;
-    left: 0;
-    padding: $bottom-vertical-padding $horizontal-padding;
+    left: 20px;
+    right: 20px;
+    padding: $bottom-vertical-padding $horizontal-padding $bottom-vertical-padding 0;
     border-top: 1px solid #EEE;
-    width: 100%;
     height: $bottom-height;
     font-size: 12px;
     a {
@@ -64,7 +67,7 @@
   .with-photo {
     .top {
       .text {
-        padding: 1.8rem $horizontal-padding;
+        padding: 1.8rem 0;
         h1 {
           font-size: 2.2rem;
           line-height: 3.0rem;
@@ -108,9 +111,10 @@
     $background: darken($bodyBackground, 10%);
     background: $background;
     position: absolute;
-    top: -2px;
-    right: 10px;
+    top: 0px;
+    right: 0px;
     padding: 7px 10px;
+    display: none;
 
     ul {
       display: none;
@@ -123,7 +127,7 @@
     li {
       font-weight: bold;
       a {
-        padding: 5px 20px;
+        padding: 5px 15px;
       }
     }
     &:hover {
@@ -133,15 +137,22 @@
     }
   }
   &:hover {
-    @include box-shadow(rgba(0, 0, 0, 0.3) 0 1px 6px);
+    @include box-shadow(rgba(0, 0, 0, 0.15) 0 1px 2px);
+    background: #F3F3F3;
+    .actions {
+      display: block;
+    }
+    .bottom {
+      border-top: 1px solid #FFF;
+    }
   }
 }
 
 #post-collection {
   @include clearfix();
   position: relative;
-  top: -10px;
-  left: 10px;
+  top: -20px;
+  left: 20px;
 }
 
 #posts-show {
