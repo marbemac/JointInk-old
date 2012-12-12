@@ -12,10 +12,6 @@
 
 
 //= require jquery_ujs
-//= require foundation
-//= require jquery_ui
-
-//= require underscore
 //= require jquery.pjax
 //= require jquery.livequery
 // require soulmate

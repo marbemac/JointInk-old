@@ -13,9 +13,12 @@
 
   %link{:rel => 'shortcut icon', :href => '/favicon.ico', :type => 'image/x-icon'}
 
+  %link{:rel => 'stylesheet', :href => '//cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/stylesheets/foundation.min.css'}
   = stylesheet_link_tag "application", :media => "all"
+
   = csrf_meta_tags
 
+  %script{:src => '//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js'}
   %script{:type => "text/javascript", :src => "//use.typekit.net/slf6ypd.js"}
   %script try{Typekit.load();}catch(e){}
 

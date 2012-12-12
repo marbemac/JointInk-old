@@ -24,6 +24,11 @@ module ApplicationHelper
     end
   end
 
+  def span_first_word(text)
+    firstWord = text.split(' ').first
+    text.sub(firstWord, "<strong>#{firstWord}</strong>")
+  end
+
   def social_js
     "
     <!-- Facebook -->
@@ -40,7 +45,7 @@ module ApplicationHelper
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='//platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','twitter-wjs');</script>
 
     <!-- JQUERY -->
-    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>
     <script>window.jQuery || document.write('<script src=\"/offline/javascripts/jquery1.8.js\"><\\/script>')</script>
     "
   end

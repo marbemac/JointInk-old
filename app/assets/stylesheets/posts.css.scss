@@ -180,6 +180,13 @@
       max-width: none;
     }
   }
+  &.picture {
+    #header {
+      max-width: none;
+      width: 100%;
+      margin: 0;
+    }
+  }
 }
 
 .post-full {
@@ -250,25 +257,29 @@
   }
   #post-title {
     margin: 2.5rem 0;
-    font-size: 4.6rem;
+    font-size: 3.4rem;
+    font-weight: normal;
     position: relative;
     z-index: 200;
+
+    span {
+      font-weight: bold;
+    }
   }
   .post-top-meta {
-    border-bottom: 1px solid #DDD;
-    padding: 0 0 2rem 0;
-    margin: 0 0 2rem 0;
+    color: #A6A6A6;
     font-size: 1.6rem;
 
     .post-author,
     .post-channel {
-      font-weight: bold;
       text-transform: uppercase;
+      color: #A6A6A6;
     }
-    .post-author {
-
-    }
-    .post-channel {
+    a {
+      white-space: nowrap;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
   #post-body {
@@ -292,36 +303,13 @@
       padding: 0 0 0 6px;
     }
   }
-  .info {
-    .section {
-      padding: 2.5rem;
-      border-bottom: 1px solid #DDD;
-      margin-left: 0.5rem;
-
-      &.channel {
-        a {
-          color: #222;
-          font-weight: bold;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-    }
-    .caption {
-      font-size: 2.2rem;
-      margin: 2.5rem 0 0 0;
-    }
-  }
   .show-editing {
     display: none;
   }
   &.text-type {
     max-width: 650px;
     margin: 0 auto;
-    .hide-text {
-      display: none;
-    }
+
     #picture-wrapper {
       height: 300px;
       margin: 0 0 22px 0;
@@ -335,42 +323,20 @@
     .info {
       display: none;
     }
-  }
-  &.picture-type {
-    .hide-picture {
-      display: none;
-    }
-    .post {
-      @include box-shadow(rgba(0, 0, 0, 0.2) 3px 0px 4px);
-      float: left;
-    }
-    .user-badge {
+    .post-top-meta {
+      border-bottom: 1px solid #DDD;
+      padding: 0 0 2rem 0;
+      margin: 0 0 2rem 0;
       font-size: 1.6rem;
     }
+  }
+  &.picture-type {
     #post-title {
-      @include single-text-shadow(rgba(0, 0, 0, 0.8), 1px, 2px, 5px);
-      color: #FFF;
-      font-size: 2.5rem;
-      font-weight: bold;
-      position: absolute;
-      bottom: 0px;
-      left: 0px;
-      padding: 2rem 5rem;
-      font-style: italic;
+      font-size: 3rem;
+      margin: 0 0 8px 0;
     }
-    .edit {
-      @include single-text-shadow(rgba(0, 0, 0, 0.8), 1px, 2px, 5px);
-      position: absolute;
-      top: 21px;
-      right: 30px;
-      font-size: 2rem;
-      color: #FFF;
-      z-index: 300;
-    }
-    .info {
-      float: left;
-      margin-right: -1 * $sidebar-width;
-      width: $sidebar-width;
+    .info-strip {
+      padding: 25px;
     }
   }
   &.editor {
