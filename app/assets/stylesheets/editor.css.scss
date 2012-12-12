@@ -49,6 +49,18 @@
   background-color: darken($action-color, 30%) !important;
 }
 
+#posts-edit {
+  #header {
+    padding: 0;
+  }
+
+  &.picture {
+    #post-editor {
+      padding-top: 50px;
+    }
+  }
+}
+
 #post-editor {
   height: 100%;
 

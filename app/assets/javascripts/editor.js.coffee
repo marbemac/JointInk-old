@@ -1,7 +1,8 @@
 jQuery ->
 
   CKEDITOR.disableAutoInline = true;
-  editor = CKEDITOR.inline( document.getElementById( 'post-body' ) )
+  if $('#post-body').length
+    editor = CKEDITOR.inline( document.getElementById( 'post-body' ) )
 
   # handle photo uploads
   $('#picture-wrapper .fileinput-button input').fileupload
@@ -23,6 +24,7 @@ jQuery ->
 
   # submit the form
   $('.editor-save, .editor-publish').on 'click', (e) ->
+    console.log 'foo'
     self = $(@)
     return if $(@).hasClass('disabled')
     $('.editor-save, .editor-publish').addClass('disabled')

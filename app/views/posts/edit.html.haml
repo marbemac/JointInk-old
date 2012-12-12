@@ -20,4 +20,4 @@
           Discard
 
   #editor-submit-url{'data-url' => post_path(@post.id)}
-  = render :partial => "posts/content_text", :layout => 'content'
+  = render :partial => "content_#{@post.post_type}", :layout => 'content'
