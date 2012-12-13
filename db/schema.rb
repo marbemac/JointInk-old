@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128230309) do
+ActiveRecord::Schema.define(:version => 20121213181010) do
 
   create_table "accounts", :force => true do |t|
     t.string  "username",                       :null => false
@@ -39,26 +39,6 @@ ActiveRecord::Schema.define(:version => 20121128230309) do
   add_index "channels", ["slug"], :name => "index_channels_on_slug", :unique => true
   add_index "channels", ["user_id"], :name => "index_channels_on_user_id"
 
-  create_table "posts", :force => true do |t|
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
-    t.string   "title"
-    t.string   "slug"
-    t.text     "content"
-    t.string   "status",       :default => "active"
-    t.text     "url"
-    t.string   "post_type",    :default => "text"
-    t.string   "post_subtype", :default => "article"
-    t.string   "photo"
-    t.integer  "photo_width"
-    t.integer  "photo_height"
-    t.integer  "user_id"
-  end
-
-  add_index "posts", ["post_type"], :name => "index_posts_on_post_type"
-  add_index "posts", ["slug"], :name => "index_posts_on_slug", :unique => true
-  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
-
   create_table "channels_posts", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -67,9 +47,12 @@ ActiveRecord::Schema.define(:version => 20121128230309) do
     t.integer  "channel_id"
   end
 
-  add_index "channels_posts", ["channel_id"], :name => "index_channels_posts_on_channel_id"
-  add_index "channels_posts", ["post_id", "channel_id"], :name => "index_channels_posts_on_post_id_and_channel_id", :unique => true
-  add_index "channels_posts", ["post_id"], :name => "index_channels_posts_on_post_id"
+  add_index "channels_posts", ["channel_id"], :name => "index_posts_channels_on_channel_id"
+  add_index "channels_posts", ["post_id", "channel_id"], :name => "index_posts_channels_on_post_id_and_channel_id", :unique => true
+  add_index "channels_posts", ["post_id"], :name => "index_posts_channels_on_post_id"
+
+# Could not dump table "posts" because of following StandardError
+#   Unknown type 'hstore' for column 'photo_exif'
 
   create_table "relationships", :force => true do |t|
     t.integer  "follower_id"

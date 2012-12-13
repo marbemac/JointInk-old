@@ -28,8 +28,10 @@ GEM
       activesupport (= 3.2.9)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
-    activerecord-postgres-array (0.0.8)
-      activerecord
+    activerecord-postgres-hstore (0.4.1)
+      pg
+      rails
+      rake
     activeresource (3.2.9)
       activemodel (= 3.2.9)
       activesupport (= 3.2.9)
@@ -401,7 +403,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-postgres-array
+  activerecord-postgres-hstore
   airbrake
   annotate
   bundler (~> 1.2)

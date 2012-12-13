@@ -21,8 +21,9 @@
 require "limelight"
 
 class Post < ActiveRecord::Base
-  #include Limelight::Images
   include ActionView::Helpers::TextHelper
+
+  serialize :photo_exif, ActiveRecord::Coders::Hstore
 
   extend FriendlyId
   friendly_id :title, :use => :slugged
@@ -155,8 +156,36 @@ class Post < ActiveRecord::Base
 
   def update_photo_attributes
     if photo.present?
-      self.photo_width = photo.image_width
-      self.photo_height = photo.image_height
+
+      public_id = self['photo'].split('/').last.split('.').first
+      self.photo_public_id = public_id
+
+      if photo_public_id_changed?
+        attributes = Cloudinary::Api.resource(public_id, :exif => true)
+        self.photo_width = attributes['width']
+        self.photo_height = attributes['height']
+        if attributes['exif']
+          self.photo_exif = attributes['exif'].slice(
+              'ApertureValue',
+              'DateTime',
+              'ExposureMode',
+              'ExposureTime',
+              'FNumber',
+              'FocalLength',
+              'GPSLatitude',
+              'GPSLatitudeRef',
+              'GPSLongitude',
+              'GPSLongitudeRef',
+              'ISOSpeedRatings',
+              'Make',
+              'Model',
+              'Orientation',
+              'ShutterSpeedValue',
+              'XResolution',
+              'YResolution'
+          )
+        end
+      end
     end
   end
 

@@ -31,8 +31,8 @@ gem 'mixpanel' # analytics
 gem 'cloudinary'
 gem "switch_user"
 gem 'annotate'
-#gem 'activerecord-postgres-hstore'
-gem 'activerecord-postgres-array'
+gem 'activerecord-postgres-hstore'
+#gem 'activerecord-postgres-array'
 gem "friendly_id", "~> 4.0.1"
 gem 'carrierwave'
 gem 'kaminari'
