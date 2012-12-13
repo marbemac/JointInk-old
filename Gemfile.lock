@@ -195,7 +195,6 @@ GEM
     modular-scale (1.0.2)
       compass (>= 0.11.5)
       sassy-math (>= 1.2)
-    multi_fetch_fragments (0.0.9)
     multi_json (1.5.0)
     multipart-post (1.1.5)
     newrelic_rpm (3.5.3.25)
@@ -410,7 +409,6 @@ DEPENDENCIES
   launchy (>= 2.1.2)
   memcachier
   mixpanel
-  multi_fetch_fragments
   newrelic_rpm (~> 3.5.0)
   omniauth-facebook
   omniauth-twitter
