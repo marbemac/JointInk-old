@@ -2,20 +2,22 @@
 #
 # Table name: posts
 #
-#  channel_id   :integer
-#  content      :text
-#  created_at   :datetime         not null
-#  id           :integer          not null, primary key
-#  photo        :string(255)
-#  photo_height :integer
-#  photo_width  :integer
-#  post_type    :string(255)
-#  slug         :string(255)
-#  status       :string(255)      default("active")
-#  title        :string(255)
-#  updated_at   :datetime         not null
-#  url          :text
-#  user_id      :integer
+#  content         :text
+#  created_at      :datetime         not null
+#  id              :integer          not null, primary key
+#  photo           :string(255)
+#  photo_exif      :hstore
+#  photo_height    :integer
+#  photo_public_id :string(255)
+#  photo_width     :integer
+#  post_subtype    :string(255)      default("article")
+#  post_type       :string(255)      default("text")
+#  slug            :string(255)
+#  status          :string(255)      default("active")
+#  title           :string(255)
+#  updated_at      :datetime         not null
+#  url             :text
+#  user_id         :integer
 #
 
 require "limelight"

@@ -4,7 +4,6 @@ require 'cloudinary/carrier_wave'
 class ImageUploader < CarrierWave::Uploader::Base
 
   include Cloudinary::CarrierWave
-  include CarrierWave::RMagick
 
   #process :convert => 'png'
   #process :tags => ['picture']
@@ -19,18 +18,6 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   def public_id
     secure_token(10)
-  end
-
-  def image
-    @image ||= ::Magick::Image::read(model.photo_url).first
-  end
-
-  def image_width
-    image.columns
-  end
-
-  def image_height
-    image.rows
   end
 
   protected

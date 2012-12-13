@@ -26,7 +26,6 @@ gem 'dalli' # memcache
 
 gem 'rack-pjax'
 
-gem 'pusher' # pusher publish/subscribe
 gem 'mixpanel' # analytics
 gem 'cloudinary'
 gem "switch_user"
@@ -40,17 +39,13 @@ gem 'sidekiq' # background jobs
 gem 'sinatra' # for sidekiq
 gem 'slim' # for sidekiq
 gem 'cache_digests'
-gem 'mechanize'
 gem 'hirefire-resource', :git => 'git://github.com/meskyanichi/hirefire-resource.git'
-gem 'heroku-api'
 gem 'simple_form'
-gem 'redcarpet'
 gem 'sanitize'
+gem 'multi_fetch_fragments'
 #gem 'turbo-sprockets-rails3' # speed up asset compiling
 
 gem 'newrelic_rpm', '~> 3.5.0'
-
-gem 'rmagick'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.5'
