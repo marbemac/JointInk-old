@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def show
     #TODO: Gross controller
 
-    @user = User.find(params[:id])
+    @user = User.find(params[:id].downcase)
     @title = @user.name + "'s Posts"
     @page_title = @user.name
 
