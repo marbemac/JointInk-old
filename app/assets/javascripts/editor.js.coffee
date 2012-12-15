@@ -37,7 +37,7 @@ jQuery ->
       data['post']['status'] = 'active'
       $(@).find('.name').text('Publishing')
     else
-      data['post']['status'] = 'draft'
+      data['post']['status'] = 'idea'
       $(@).find('.name').text('Saving')
 
     $.ajax

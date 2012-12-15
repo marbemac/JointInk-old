@@ -5,7 +5,7 @@ class PostsController < ApplicationController
     @channel = Channel.find(params[:id])
     authorize! :post, @channel
 
-    @post = current_user.posts.create(:status => 'draft', :post_type => params[:type], :post_subtype => params[:subtype])
+    @post = current_user.posts.create(:status => 'idea', :post_type => params[:type], :post_subtype => params[:subtype])
     @post.add_channel current_user, @channel
     authorize! :create, @post
 

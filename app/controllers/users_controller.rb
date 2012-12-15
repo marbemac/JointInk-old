@@ -34,11 +34,11 @@ class UsersController < ApplicationController
     redirect_to user_path(@user)
   end
 
-  def drafts
+  def ideas
     @user = current_user
-    @title = "Drafts"
-    @page_title = "Your Draft Posts"
-    @posts = @user.posts.drafts.page(params[:page]).to_a
+    @title = "Ideas"
+    @page_title = "Your Ideas"
+    @posts = @user.posts.ideas.page(params[:page]).to_a
   end
 
   def add

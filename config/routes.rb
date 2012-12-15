@@ -86,7 +86,7 @@ ThisThat::Application.routes.draw do
 
   get 'home' => 'pages#home', :as => :home
 
-  get 'drafts' => 'users#drafts', :as => :user_drafts
+  get 'ideas' => 'users#ideas', :as => :user_ideas
   scope ':id' do
     scope ':channel_id' do
       get '' => 'users#show', :as => :user_channel, :page => 'posts'

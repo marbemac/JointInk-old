@@ -35,6 +35,6 @@
 
   .actions
     .medium.action.submit.button Publish Post
-    .medium.secondary.save-draft.button Save Draft
+    .medium.secondary.save-idea.button Save Idea
     = link_to "Delete Post", post_path(@post), :method => :delete, :confirm => 'Are you sure you want to delete this post? No take-backs!', 'data-skip-pjax' => true, :class => 'remove'
     .last-saved!= "last saved #{time_ago(@post.updated_at)}"

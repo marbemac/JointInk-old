@@ -96,8 +96,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def drafts
-    posts.where(:status => 'draft')
+  def ideas
+    posts.ideas
   end
 
   ###

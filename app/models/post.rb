@@ -44,7 +44,7 @@ class Post < ActiveRecord::Base
   attr_accessible :title, :content, :photo, :status, :post_type, :post_subtype
 
   scope :active, where(:status => 'active')
-  scope :drafts, where(:status => 'draft')
+  scope :ideas, where(:status => 'idea')
 
   before_save :sanitize
   before_destroy :disconnect
