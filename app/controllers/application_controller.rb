@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_filter :init, :set_user_time_zone, :save_referer
+  before_filter :catch_flash, :init, :set_user_time_zone, :save_referer
 
   unless Rails.application.config.consider_all_requests_local
     rescue_from Exception, :with => (lambda do |exception|
@@ -49,6 +49,14 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def catch_flash
+    if params[:notice] || params[:alert]
+      flash[:notice] = params[:notice] if params[:notice]
+      flash[:alert] = params[:alert] if params[:alert]
+      redirect_to request.fullpath.split('?').first
+    end
+  end
 
   def init
     @body_class = ''

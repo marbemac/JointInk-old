@@ -1,13 +1,16 @@
 .info-strip
-  %h1#post-title{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
-    != !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
+  - cache @post do
+    %h1#post-title{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
+      != !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
 
-  .post-top-meta
-    %a.post-author{:href => user_path(@post.user), :rel => 'author'}= @post.user.name
-    in
-    %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
+    .post-top-meta
+      %a.post-author{:href => user_path(@post.user), :rel => 'author'}= @post.user.name
+      in
+      %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
 
-- if defined?(@editing) || @post.photo.present?
+  = render "posts/recommend_btn"
+
+- cache @post do
   #picture-wrapper
     .show-editing.fileinput-button
       .upload-help

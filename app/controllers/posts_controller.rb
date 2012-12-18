@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_filter :authenticate_user!, :only => [:new,:update,:edit,:destroy,:update_photo]
+  before_filter :authenticate_user!, :except => [:show]
 
   def new
     @channel = Channel.find(params[:id])
@@ -80,5 +80,29 @@ class PostsController < ApplicationController
     @post.remove_photo!
     @post.update_photo_attributes
     @post.save
+  end
+
+  def create_vote
+    @post = Post.find(params[:id])
+    sleep 5
+    # can't vote on your own posts
+    if @post.user_id == current_user.id
+      render :json => {:status => 'error'}, status: :unprocessable_entity
+    else
+      PostStat.add(@post.id, request.remote_ip, 'vote', request.referer, current_user.id)
+      render :json => {:status => 'success'}, status: 200
+    end
+  end
+
+  def destroy_vote
+    @post = Post.find(params[:id])
+
+    stat = PostStat.retrieve(@post.id, 'vote', request.remote_ip, current_user.id)
+    if stat
+      stat.destroy
+      render :json => {:status => 'success'}, status: 200
+    else
+      render :json => {:status => 'error'}, status: :unprocessable_entity
+    end
   end
 end

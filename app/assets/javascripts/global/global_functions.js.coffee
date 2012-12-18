@@ -1,5 +1,12 @@
 jQuery ->
 
+  window.authenticate_user = ->
+    if $('body[data-loggedIn="false"]').length
+      location.href = '/sign-in?alert=You have to sign in to do that.'
+      false
+    else
+      true
+
   window.globalSuccess = (data) ->
     if data.flash
       createGrowl false, data.flash, 'Success', 'green'
@@ -27,4 +34,4 @@ jQuery ->
 
   # case insensitive contains selector
   jQuery.expr[':'].Contains = (a, i, m) ->
-      return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0
+    return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0

@@ -11,13 +11,16 @@
     %div{:style => "background-image: url('#{@post.photo_url}')", :class => "image #{@post.photo_ratio >= 1.4 ? 'cover-image' : 'contain-image'}"}
 
 .content-wrapper
-  .post-top-meta
-    %a.post-author{:href => user_path(@post.user), :rel => 'author'}= @post.user.name
-    in
-    %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
+  - cache @post do
+    .post-top-meta
+      %a.post-author{:href => user_path(@post.user), :rel => 'author'}= @post.user.name
+      in
+      %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
 
-  %h1#post-title{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
-    != !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
+    %h1#post-title{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
+      != !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
 
-  #post-body{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
-    != !@post.content.blank? ? @post.content : '<p>Body... (click to edit)</p>'
+    #post-body{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
+      != !@post.content.blank? ? @post.content : '<p>Content... (click to edit)</p>'
+
+  = render "posts/recommend_btn"

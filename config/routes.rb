@@ -6,6 +6,7 @@ ThisThat::Application.routes.draw do
     #root :to => 'pages#index'
   #end
 
+  # posts
   resources :posts, :only => [:update, :destroy, :edit]
   scope 'p' do
     scope ':id' do
@@ -16,9 +17,12 @@ ThisThat::Application.routes.draw do
       put 'remove-photo' => 'posts#remove_photo', :as => :post_remove_photo
       get 'channel' => 'posts#edit', :as => :edit_post_channel
       get '' => 'posts#show_redirect', :as => :post
+      put 'vote' => 'posts#create_vote', :as => :post_vote
+      delete 'vote' => 'posts#destroy_vote', :as => :post_vote
     end
   end
 
+  # channels
   resources :channels
   scope 'c/:id' do
     get 'new-:type-:subtype-post' => 'posts#new', :as => :new_post
@@ -29,17 +33,14 @@ ThisThat::Application.routes.draw do
     get '' => 'channels#show', :as => :channel
   end
 
-  scope 'u/:id' do
-    get '' => 'users#show_redirect', :as => :user_permalink
-  end
-
-  scope 'settings' do
-    get 'social' => 'users#social_settings', :as => :user_social_settings
-    get 'email' => 'users#email_settings', :as => :user_email_settings
-    get '' => 'users#basic_settings', :as => :user_basic_settings
-  end
+  # pages
   get 'about' => 'pages#about', :as => :about
   get 'faq' => 'pages#faq', :as => :faq
+  #scope 'settings' do
+  #  get 'social' => 'users#social_settings', :as => :user_social_settings
+  #  get 'email' => 'users#email_settings', :as => :user_email_settings
+  #  get '' => 'users#basic_settings', :as => :user_basic_settings
+  #end
 
   mount Soulmate::Server, :at => "autocomplete"
 
@@ -51,6 +52,10 @@ ThisThat::Application.routes.draw do
     mount Sidekiq::Web, :at => '/a/workers'
   end
 
+  # users
+  scope 'u/:id' do
+    get '' => 'users#show_redirect', :as => :user_permalink
+  end
   devise_for :users, :skip => [:sessions,:registrations], :controllers => {
                                                              :omniauth_callbacks => "omniauth_callbacks",
                                                              :sessions => :sessions,

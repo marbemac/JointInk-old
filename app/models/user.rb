@@ -37,7 +37,6 @@
 #
 
 class User < ActiveRecord::Base
-  #include Limelight::Images
   include ActionView::Helpers::TextHelper
 
   extend FriendlyId

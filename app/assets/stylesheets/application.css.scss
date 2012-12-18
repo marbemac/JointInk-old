@@ -130,11 +130,21 @@ blockquote {
 }
 
 .button {
+  @include box-shadow(none);
+  border: none;
+  text-transform: uppercase;
+
   &.red {
     background: $red;
     border-color: darken($red, 10%);
     &:hover {
       background: darken($red, 10%);
+    }
+  }
+  &.gray {
+    background: $grayLight;
+    &:hover {
+      background: darken($grayLight, 10%);
     }
   }
   &.secondary {
@@ -161,6 +171,10 @@ blockquote {
       cursor: progress;
       background: $grayLighter;
     }
+  }
+  &.medium {
+    padding: 15px 25px;
+    font-size: 12px;
   }
 }
 

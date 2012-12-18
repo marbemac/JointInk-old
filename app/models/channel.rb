@@ -12,10 +12,7 @@
 #  user_id     :integer
 #
 
-require "limelight"
-
 class Channel < ActiveRecord::Base
-  #include Limelight::Images
   include ActionView::Helpers::TextHelper
   include CloudinaryHelper
 

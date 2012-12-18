@@ -2,7 +2,7 @@
 %html
   = render "layouts/head"
 
-  %body
+  %body{'data-loggedIn' => signed_in? ? 'true' : 'false'}
 
     #data-pjax-container{'data-pjax-container' => 'true'}
 

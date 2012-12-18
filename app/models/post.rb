@@ -20,8 +20,6 @@
 #  user_id         :integer
 #
 
-require "limelight"
-
 class Post < ActiveRecord::Base
   include ActionView::Helpers::TextHelper
 
@@ -113,6 +111,11 @@ class Post < ActiveRecord::Base
 
   def permalink
     "http://www.getthisthat.com/p/#{id}"
+  end
+
+  # has the user voted on this post?
+  def voted?(user_id)
+    PostStat.retrieve(id, 'vote', nil, user_id)
   end
 
   ##########
