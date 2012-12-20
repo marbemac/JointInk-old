@@ -4,6 +4,8 @@ jQuery ->
   if $('#post-body').length
     editor = CKEDITOR.inline( document.getElementById( 'post-body' ) )
 
+  $('#post-editor #post-title, #post-editor #post-body').attr('contenteditable', true)
+
   # handle photo uploads
   $('#picture-wrapper .fileinput-button input').fileupload
     dataType: "json"
