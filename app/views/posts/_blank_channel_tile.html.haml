@@ -1,0 +1,12 @@
+.post.tile.blank
+  - if signed_in?
+    .title Contribute
+    %p Contribute to the '#{@channel.name}' channel.
+    .buttons
+      %a.small.action.button{:href => new_post_path(@channel, 'text', 'article'), 'data-skip-pjax' => true} +New Article
+      %a.small.action.button{:href => new_post_path(@channel, 'picture', 'caption'), 'data-skip-pjax' => true} +New Picture
+  - else
+    .title Contribute Soon
+    %p Sign in to get an invite.
+    .buttons
+      %a.medium.action.button{:href => user_registration_path} Sign In

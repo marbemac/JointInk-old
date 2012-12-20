@@ -145,6 +145,32 @@
       border-top: 1px solid #FFF;
     }
   }
+  &.blank {
+    text-align: center;
+    border: 1px dashed transparent;
+
+    .title {
+      font-size: 26px;
+      font-size: 2.6rem;
+      margin: 95px 0 5px 0;
+      cursor: default;
+      font-weight: bold;
+    }
+    p {
+      font-size: 14px;
+      line-height: 20px;
+      cursor: default;
+      color: #666;
+      margin: 0;
+    }
+    .buttons {
+      margin: 25px 0 0 0;
+    }
+    &:hover {
+      border-color: #999;
+      background: #FCFCFC;
+    }
+  }
 }
 
 #post-collection {
