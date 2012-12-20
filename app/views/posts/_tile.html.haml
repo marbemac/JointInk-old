@@ -1,4 +1,4 @@
-.post.tile{:id => "posts-#{post.id}"}
+%div{:id => "posts-#{post.id}", :class => "post tile #{defined?(@channel) && @channel != nil ? 'channel-page' : ''}"}
 
   = yield
 
