@@ -1,25 +1,38 @@
 #channel_form
-  %h1 Create a Channel
-  %h4.subheader
-    A channel is a place for people to express themselves around a common idea, theme, or prompt.
+  .section
+    %h1 Create a Channel
+    %h4.subheader
+      A channel is a place for people to express themselves around a common idea, theme, or prompt.
 
   = simple_form_for channel do |f|
-    = f.error_notification
-    = f.error :base
+    .section.basic
+      .help.show-for-touch click the text below to edit
 
-    = f.input :name
-    = f.input :description
+      = f.error_notification
+      = f.error :base
 
-    %label * Photo
-    .fileinput-button
-      Choose Photo...
-      %span.loading
-      = f.hidden_field :photo_cache
-      = f.file_field :photo, :tabindex => '-1'
+      .fileinput-button
+        %span.prompt Choose Photo
+        %img
+        = f.hidden_field :photo_cache
+        = f.file_field :photo, :tabindex => '-1'
 
-    = f.error :photo
+      = f.error :photo
 
-    %input{:type => 'hidden', :name => 'redirect', :value => 'new_post'}
+      = f.input :name, :label => false, :input_html => {:placeholder => 'Channel Name', :autocomplete => 'off'}
+      = f.input :description, :label => false, :input_html => {:placeholder => 'Channel Description', :autocomplete => 'off'}
 
-    .actions
-      = f.button :submit, :class => 'medium action button', :value => @channel.persisted? ? 'Update Channel' : 'Create Channel'
+    .section.permissions
+      .help.show-for-touch choose permissions
+      .option-wrapper.first
+        %div{:class => "option #{channel.privacy == 'public' ? 'on' : ''}", 'data-value' => 'public'}
+          .head Public
+          %p Everybody can view posts. Everybody can contribute posts.
+      .option-wrapper.second
+        %div{:class => "option #{channel.privacy == 'invite' ? 'on' : ''}", 'data-value' => 'invite'}
+          .head Invite Only
+          %p Everybody can view posts. Only those you invite can contribute posts.
+
+      = f.input :privacy, :as => :hidden, :label => false, :input_html => { :value => channel.persisted? ? channel.privacy : 'public' }
+
+    = f.button :submit, :class => 'large action submit button', :value => @channel.persisted? ? 'Update Channel' : 'Create Channel'

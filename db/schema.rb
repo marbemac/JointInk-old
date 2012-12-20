@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217183003) do
+ActiveRecord::Schema.define(:version => 20121219224521) do
 
   create_table "accounts", :force => true do |t|
     t.string  "username",                       :null => false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20121217183003) do
     t.string  "photo"
     t.string  "cover_photo"
     t.integer "user_id"
+    t.string  "privacy",     :default => "public"
   end
 
   add_index "channels", ["slug"], :name => "index_channels_on_slug", :unique => true
@@ -47,9 +48,9 @@ ActiveRecord::Schema.define(:version => 20121217183003) do
     t.integer  "channel_id"
   end
 
-  add_index "channels_posts", ["channel_id"], :name => "index_posts_channels_on_channel_id"
-  add_index "channels_posts", ["post_id", "channel_id"], :name => "index_posts_channels_on_post_id_and_channel_id", :unique => true
-  add_index "channels_posts", ["post_id"], :name => "index_posts_channels_on_post_id"
+  add_index "channels_posts", ["channel_id"], :name => "index_channels_posts_on_channel_id"
+  add_index "channels_posts", ["post_id", "channel_id"], :name => "index_channels_posts_on_post_id_and_channel_id", :unique => true
+  add_index "channels_posts", ["post_id"], :name => "index_channels_posts_on_post_id"
 
   create_table "post_stats", :force => true do |t|
     t.string   "stat_type"
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20121217183003) do
   end
 
   add_index "post_stats", ["created_at"], :name => "index_post_stats_on_created_at"
+  add_index "post_stats", ["ip_address"], :name => "index_post_stats_on_ip_address"
   add_index "post_stats", ["post_id"], :name => "index_post_stats_on_post_id"
   add_index "post_stats", ["stat_type"], :name => "index_post_stats_on_stat_type"
   add_index "post_stats", ["user_id"], :name => "index_post_stats_on_user_id"
@@ -100,37 +102,37 @@ ActiveRecord::Schema.define(:version => 20121217183003) do
   add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email"
-    t.string   "encrypted_password",     :default => "",                           :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
-    t.string   "authentication_token"
-    t.datetime "created_at",                                                       :null => false
-    t.datetime "updated_at",                                                       :null => false
-    t.string   "username"
-    t.boolean  "username_reset",         :default => false
-    t.string   "name"
-    t.string   "slug"
-    t.string   "status",                 :default => "active"
-    t.string   "gender"
-    t.date     "birthday"
-    t.string   "time_zone",              :default => "Eastern Time (US & Canada)"
-    t.text     "bio"
-    t.boolean  "use_fb_image",           :default => false
-    t.string   "origin"
-    t.string   "avatar"
-    t.string   "cover_photo"
-    t.string   "roles",                  :default => "{}"
+    t.string       "email"
+    t.string       "encrypted_password",                    :default => "",                           :null => false
+    t.string       "reset_password_token"
+    t.datetime     "reset_password_sent_at"
+    t.datetime     "remember_created_at"
+    t.integer      "sign_in_count",                         :default => 0
+    t.datetime     "current_sign_in_at"
+    t.datetime     "last_sign_in_at"
+    t.string       "current_sign_in_ip"
+    t.string       "last_sign_in_ip"
+    t.string       "confirmation_token"
+    t.datetime     "confirmed_at"
+    t.datetime     "confirmation_sent_at"
+    t.string       "unconfirmed_email"
+    t.string       "authentication_token"
+    t.datetime     "created_at",                                                                      :null => false
+    t.datetime     "updated_at",                                                                      :null => false
+    t.string       "username"
+    t.boolean      "username_reset",                        :default => false
+    t.string       "name"
+    t.string       "slug"
+    t.string       "status",                                :default => "active"
+    t.string       "gender"
+    t.date         "birthday"
+    t.string       "time_zone",                             :default => "Eastern Time (US & Canada)"
+    t.text         "bio"
+    t.boolean      "use_fb_image",                          :default => false
+    t.string       "origin"
+    t.string       "avatar"
+    t.string       "cover_photo"
+    t.string_array "roles",                  :limit => 255, :default => "{}"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

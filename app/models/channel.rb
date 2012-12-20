@@ -29,8 +29,9 @@ class Channel < ActiveRecord::Base
   validates :name, :presence => true, :length => { :minimum => 2, :maximum => 50 }
   validates :description, :presence => true, :length => { :minimum => 2, :maximum => 200 }
   validates :photo, :presence => true
+  validates :privacy, :inclusion => { :in => ['public', 'invite'] }
 
-  attr_accessible :name, :photo, :cover_photo, :description
+  attr_accessible :name, :photo, :cover_photo, :description, :privacy
 
   after_create :add_to_soulmate
   after_update :update_denorms

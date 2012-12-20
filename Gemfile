@@ -17,7 +17,7 @@ gem "sendgrid"
 gem "cancan", ">= 1.6.8"
 gem 'rack-contrib'
 gem 'soulmate', '0.1.3', :require => 'soulmate/server' # Redis based autocomplete storage
-gem 'koala', '1.5' # facebook graph api support
+gem 'koala', '1.6' # facebook graph api support
 gem 'twitter' # twitter api support
 gem 'chronic' # Date/Time management
 
@@ -31,8 +31,8 @@ gem 'cloudinary'
 gem "switch_user"
 gem 'annotate'
 gem 'activerecord-postgres-hstore'
-#gem 'activerecord-postgres-array'
-gem "friendly_id", "~> 4.0.1"
+gem 'activerecord-postgres-array'
+gem "friendly_id", "~> 4.0.9"
 gem 'carrierwave'
 gem 'kaminari'
 gem 'sidekiq' # background jobs
@@ -44,7 +44,7 @@ gem 'simple_form'
 gem 'sanitize'
 #gem 'turbo-sprockets-rails3' # speed up asset compiling
 
-gem 'newrelic_rpm', '~> 3.5.0'
+gem 'newrelic_rpm', '~> 3.5.4'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.5'
