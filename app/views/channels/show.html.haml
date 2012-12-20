@@ -26,8 +26,9 @@
           %i.icon-chevron-down
         .menu
           %ul
-            %li
-              %a{:href => '#'} Invite Users
+            - unless @channel.privacy == 'public'
+              %li
+                %a{:href => '#'} Invite Users
             %li
               %a{:href => edit_channel_path(@channel.id), 'data-skip-pjax' => true} Edit Channel
 

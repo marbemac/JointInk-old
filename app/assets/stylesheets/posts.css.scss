@@ -11,6 +11,7 @@
   background: #FFF;
   position: relative;
   padding-bottom: $bottom-height;
+  border: 1px dashed transparent;
 
   .top {
     display: block;
@@ -23,7 +24,7 @@
       background-repeat: no-repeat;
       background-size: cover;
       display: block;
-      height: 200px;
+      height: 190px;
     }
     .text {
       //padding: $top-vertical-padding $horizontal-padding;
@@ -96,7 +97,7 @@
       left: 0;
       color: #FFF;
       font-style: italic;
-      padding: 20px 30px;
+      padding: 20px 25px;
       width: 100%;
       font-weight: 500;
       line-height: 1.6rem;
@@ -143,16 +144,7 @@
       }
     }
   }
-  &:hover {
-    @include box-shadow(rgba(0, 0, 0, 0.15) 0 1px 2px);
-    background: $bodyBackground;
-    .actions {
-      display: block;
-    }
-    .bottom {
-      border-top: 1px solid #FFF;
-    }
-  }
+
   &.blank {
     text-align: center;
     border: 1px dashed transparent;
@@ -174,9 +166,18 @@
     .buttons {
       margin: 25px 0 0 0;
     }
-    &:hover {
-      border-color: #999;
-      background: #FCFCFC;
+  }
+
+  &:hover {
+    //@include box-shadow(rgba(0, 0, 0, 0.15) 0 1px 2px);
+    background: #F9F9F9;
+    border-color: #CCC;
+
+    .actions {
+      display: block;
+    }
+    .bottom {
+      border-top: 1px solid #DDD;
     }
   }
 }
@@ -214,6 +215,7 @@
   }
   &.text {
     .recommend {
+      display: block;
       margin: 30px 0 0 0;
     }
   }
