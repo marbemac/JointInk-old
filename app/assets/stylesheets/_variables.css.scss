@@ -69,3 +69,13 @@ $linkColorHover:        darken($linkColor, 15%) !default;
 :-ms-input-placeholder {
   color:    #999 !important;
 }
+
+// Selection
+::selection {
+  background: #999; /* Safari */
+  color: #FFF;
+}
+::-moz-selection {
+  background: #999; /* Firefox */
+  color: #FFF;
+}
