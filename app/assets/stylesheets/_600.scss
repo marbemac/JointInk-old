@@ -161,6 +161,17 @@ html {
 }
 
 #posts-show {
+  #post-picture-title {
+    width: 100%;
+    left: 0 !important;
+    margin-left: 0;
+    max-width: none;
+
+    h1 {
+      font-size: 30px !important;
+      font-size: 3rem !important;
+    }
+  }
   &.fullscreen {
     padding-right: 0px;
   }
