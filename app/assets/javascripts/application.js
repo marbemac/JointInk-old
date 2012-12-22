@@ -17,8 +17,10 @@
 // require soulmate
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
+//= require jquery.easing
 //= require jquery.timer
 //= require jquery.timeago
 //= require jquery.hotkeys
+//= require jquery.scrollTo
 
 //= require_tree ./global

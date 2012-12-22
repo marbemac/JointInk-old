@@ -6,6 +6,6 @@
 
 - content_for :page_header do
   %img.badge{:src => user_avatar_path(@user, :width => 90, :height => 90, :crop => :fill, :radius => :max, :border => { :width => 4, :color => '#CDCDC6' })}
-  %h1= @user.name
+  %h1.san-serif= @user.name
 
 = render "posts/collection", :posts => @posts

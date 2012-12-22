@@ -4,20 +4,7 @@
 - if @user.bio && !@user.bio.blank?
   .section.bio
     .content
-      %h2= @user.bio
-
--#.top
--#  %h5.subheader= @user.bio
--#
--#  - @user.accounts.each do |account|
--#    - if account.provider == 'twitter'
--#      .fact
--#        %i.icon-twitter
--#        %a{:href => account.url}= account.username
--#    - elsif account.provider == 'facebook'
--#      .fact
--#        %i.icon-facebook
--#        %a{:href => account.url}= account.username
+      %h2.san-serif= @user.bio
 
 - if @user.created_channels.count > 0
   .section.my_channels

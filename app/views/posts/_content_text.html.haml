@@ -8,19 +8,33 @@
       %a.remove-image{:href => post_remove_photo_path(@post.id), 'data-method' => :put, 'data-remote' => true, 'data-skip-pjax' => true}
         %i.icon-remove
         Remove Image
+
+    - if defined?(@editing) || @post.style == 'full-page'
+      #post-picture-title
+        %h1#post-title{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
+          != !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
+        .divider
+        .post-top-meta
+          by
+          %a.post-author{:href => user_path(@post.user), :rel => 'author'}= @post.user.name
+          in
+          %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
+
     %div{:style => "background-image: url('#{@post.photo_url}')", :class => "image #{@post.photo_ratio >= 1.4 ? 'cover-image' : 'contain-image'}"}
 
-.content-wrapper
-  - cache @post do
-    .post-top-meta
-      %a.post-author{:href => user_path(@post.user), :rel => 'author'}= @post.user.name
-      in
-      %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
+.white-wrap
+  .content-wrapper
+    - cache @post do
+      - unless defined?(@editing) || @post.style == 'full-page'
+        .post-top-meta
+          %a.post-author{:href => user_path(@post.user), :rel => 'author'}= @post.user.name
+          in
+          %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
 
-    %h1#post-title{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
-      != !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
+        %h1#post-title{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
+          != !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
 
-    #post-body{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
-      != !@post.content.blank? ? @post.content : '<p>Content... (click to edit)</p>'
+      #post-body{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
+        != !@post.content.blank? ? @post.content : '<p>Content... (click to edit)</p>'
 
-  = render "posts/recommend_btn"
+    = render "posts/recommend_btn"

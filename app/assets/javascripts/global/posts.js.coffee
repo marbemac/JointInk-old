@@ -5,6 +5,7 @@ jQuery ->
     if (e.keyCode == 27 && $('.post-full').length > 0)
       history.back();
 
+  # recommend buttons
   $('body').on 'click', '.recommend.button', (e) ->
     return unless window.authenticate_user()
 
@@ -30,3 +31,45 @@ jQuery ->
           self.text('Recommend')
 
         self.toggleClass('action gray')
+
+
+  # full page article cover photo sizing and handling
+  updateFullPageArticle = ->
+    $('#picture-wrapper').height($(window).height())
+    $('.white-wrap').css('margin-top', $(window).height())
+
+  $('#posts-show.text.full-page').livequery ->
+    picture = $('#picture-wrapper')
+    content = $('.white-wrap')
+
+    updateFullPageArticle()
+
+    $.scrollTo '60'
+
+    setTimeout ->
+      $('#post-picture-title').fadeIn(800)
+    , 500
+
+    setTimeout ->
+      if $(document).scrollTop() <= 60
+        $.scrollTo '150',
+          duration: 1500
+          easing:'easeInOutCubic'
+    , 1500
+
+    $(window).on 'scroll', ->
+      unless $('#posts-show.text.full-page').length > 0
+        $(window).off 'scroll'
+        return
+
+      distance = content.offset().top - $(document).scrollTop()
+      height = $(window).height()
+      $('#picture-wrapper').css(opacity: distance / height)
+
+    $(window).on 'resize', ->
+      $('body').stopTime 'resize-full-page'
+      $('body').oneTime 200, 'resize-full-page', ->
+        unless $('#posts-show.text.full-page').length > 0
+          $(window).off 'resize'
+          return
+        updateFullPageArticle()

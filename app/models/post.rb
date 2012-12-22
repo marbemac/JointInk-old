@@ -14,6 +14,7 @@
 #  post_type       :string(255)      default("text")
 #  slug            :string(255)
 #  status          :string(255)      default("active")
+#  style           :string(255)      default("default")
 #  title           :string(255)
 #  updated_at      :datetime         not null
 #  url             :text

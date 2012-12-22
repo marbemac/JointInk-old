@@ -1,6 +1,5 @@
 - if @post.status == 'idea' && !defined?(@editing)
   .notice.idea This post is an idea. It is only viewable by you until you publish it!
 
-%div{:class => "post-full #{defined?(@editing) ? 'editor' : ''} #{@post.post_type}-type #{@post.post_subtype}-subtype"}
-  .post
-    = yield
+%div{:class => "post-full #{defined?(@editing) ? 'editor' : ''}"}
+  = yield

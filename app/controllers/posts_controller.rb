@@ -32,7 +32,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:post_id])
     authorize! :read, @post
-    @body_class = @post.post_type
+    @body_class = "#{@post.post_type} #{@post.post_subtype} #{@post.style}"
     @fullscreen = @post.post_type == 'picture' ? true : false
     @channel = @post.primary_channel
     @title = @post.title

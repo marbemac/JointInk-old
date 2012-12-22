@@ -24,7 +24,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string(255)
-#  roles                  :string(255)      default("{}")
+#  roles                  :string_array(255 default("{}")
 #  sign_in_count          :integer          default(0)
 #  slug                   :string(255)
 #  status                 :string(255)      default("active")

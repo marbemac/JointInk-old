@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121219224521) do
+ActiveRecord::Schema.define(:version => 20121222215243) do
 
   create_table "accounts", :force => true do |t|
     t.string  "username",                       :null => false
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(:version => 20121219224521) do
     t.integer  "user_id"
     t.string   "photo_public_id"
     t.hstore   "photo_exif"
+    t.string   "style",           :default => "default"
   end
 
   add_index "posts", ["post_type"], :name => "index_posts_on_post_type"
