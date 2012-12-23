@@ -38,7 +38,7 @@ jQuery ->
     $('#picture-wrapper').height($(window).height())
     $('.white-wrap').css('margin-top', $(window).height())
 
-  $('#posts-show.text.full-page').livequery ->
+  $('#posts-show.text.full-page,#posts-edit.text.full-page').livequery ->
     picture = $('#picture-wrapper')
     content = $('.white-wrap')
 
@@ -58,7 +58,7 @@ jQuery ->
     , 1500
 
     $(window).on 'scroll', ->
-      unless $('#posts-show.text.full-page').length > 0
+      unless $('#posts-show.text.full-page,#posts-edit.text.full-page').length > 0
         $(window).off 'scroll'
         return
 
@@ -69,7 +69,7 @@ jQuery ->
     $(window).on 'resize', ->
       $('body').stopTime 'resize-full-page'
       $('body').oneTime 200, 'resize-full-page', ->
-        unless $('#posts-show.text.full-page').length > 0
+        unless $('#posts-show.text.full-page,#posts-edit.text.full-page').length > 0
           $(window).off 'resize'
           return
         updateFullPageArticle()

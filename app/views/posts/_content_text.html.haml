@@ -25,7 +25,7 @@
 .white-wrap
   .content-wrapper
     - cache @post do
-      - unless defined?(@editing) || @post.style == 'full-page'
+      - if defined?(@editing) || @post.style != 'full-page'
         .post-top-meta
           %a.post-author{:href => user_path(@post.user), :rel => 'author'}= @post.user.name
           in

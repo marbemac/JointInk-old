@@ -48,7 +48,7 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     authorize! :update, @post
-    @body_class = @post.post_type
+    @body_class = "#{@post.post_type} #{@post.post_subtype} #{@post.style}"
     @fullscreen = @post.post_type == 'picture' ? true : false
     @editing = true
   end

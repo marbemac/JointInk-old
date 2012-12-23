@@ -189,7 +189,8 @@
   left: 20px;
 }
 
-#posts-show {
+#posts-show,
+#posts-edit {
   .idea {
     background: #666;
     color: #FFF;
@@ -213,6 +214,7 @@
   #post-picture-title {
     display: none;
   }
+
   &.fullscreen {
     #container {
       width: auto;
@@ -288,9 +290,6 @@
           background-size: cover;
         }
       }
-      #post-picture-title {
-        display: none;
-      }
       .white-wrap {
         background: #FFF;
         padding: 35px 0;
@@ -314,7 +313,6 @@
         max-width: 450px;
         padding: 25px;
         background: rgba(255,255,255,.6);
-        display: block;
 
         h1 {
           @include single-text-shadow(rgba(0, 0, 0, 0.3), 1px, 2px, 5px);
