@@ -4,7 +4,7 @@ jQuery ->
   if $('#post-body').length
     editor = CKEDITOR.inline( document.getElementById( 'post-body' ) )
 
-  $('#post-editor #post-title, #post-editor #post-body').attr('contenteditable', true)
+  $('#post-picture-title h1, #post-title, #post-body').attr('contenteditable', true)
 
   # handle photo uploads
   $('#picture-wrapper .fileinput-button input').fileupload
@@ -32,7 +32,11 @@ jQuery ->
     $('.editor-save, .editor-publish').addClass('disabled')
 
     data = {'post':{}}
-    data['post']['title'] = $.trim($('#post-title').text())
+    if $('#post-title:visible').length
+      data['post']['title'] = $.trim($('#post-title').text())
+    else
+      data['post']['title'] = $.trim($('#post-picture-title h1').text())
+
     data['post']['content'] = $.trim($('#post-body').html())
 
     if $(@).hasClass('editor-publish')

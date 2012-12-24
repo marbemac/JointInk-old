@@ -9,9 +9,9 @@
         %i.icon-remove
         Remove Image
 
-    - if defined?(@editing) || @post.style == 'full-page'
+    - if @post.style == 'full-page'
       #post-picture-title
-        %h1#post-title{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
+        %h1.copy-over{'data-target' => '#post-title'}
           != !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
         .divider
         .post-top-meta
@@ -31,7 +31,7 @@
           in
           %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
 
-        %h1#post-title{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
+        %h1#post-title.copy-over{'data-target' => '#post-picture-title h1'}
           != !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
 
       #post-body{(defined?(@editing) ? {:contenteditable => 'true'} : {})}

@@ -15,7 +15,7 @@ jQuery ->
     $(@).timeago()
 
   # copy input to area
-  $('.copy_over').live 'keyup', (e) ->
+  $('.copy-over').live 'keyup', (e) ->
     $($(@).data('target')).text($(@).val())
 
   # toggle target element
