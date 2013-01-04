@@ -84,7 +84,7 @@ class PostsController < ApplicationController
 
   def create_vote
     @post = Post.find(params[:id])
-    sleep 5
+
     # can't vote on your own posts
     if @post.user_id == current_user.id
       render :json => {:status => 'error'}, status: :unprocessable_entity

@@ -27,6 +27,7 @@ ThisThat::Application.routes.draw do
   scope 'c/:id' do
     get 'new-:type-:subtype-post' => 'posts#new', :as => :new_post
     get 'edit' => 'channels#edit', :as => :edit_channel
+    get 'members' => 'channels#members', :as => :channel_members
     put '' => 'channels#update'
     scope ':post_id' do
       get '' => 'posts#show', :as => :post_via_channel
