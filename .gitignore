@@ -67,3 +67,4 @@ tmp/*
 
 # Uploaded files
 /dump.rdb
+/.rvmrc
