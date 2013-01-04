@@ -5,7 +5,7 @@
     = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
 
       = f.input :name, :label => 'Full Name', :input_html => {:autocomplete => 'off'}
-      = f.input :username, :input_html => {:class => 'copy_over', 'data-target' => '.url .username', :autocomplete => 'off'}
+      = f.input :username, :input_html => {:class => 'copy-over', 'data-target' => '.url .username', :autocomplete => 'off'}
       = f.input :email, :input_html => {:autocomplete => 'off'}
       = f.input :password, :input_html => {:autocomplete => 'off'}
 

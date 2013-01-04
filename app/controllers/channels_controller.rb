@@ -48,11 +48,16 @@ class ChannelsController < ApplicationController
       redirect_to channel_path(@channel), :status => :moved_permanently
     end
 
-    @posts = @channel.posts.active.order('created_at DESC')
+    @posts = @channel.posts.active.order('votes_count DESC, created_at DESC')
     @title = @channel.name
     @page_title = @channel.name
     @description = @channel.description
     build_og_tags(@channel.og_title, @channel.og_type, @channel.permalink, @channel.og_description)
+  end
+
+  # invited members
+  def members
+
   end
 
 end

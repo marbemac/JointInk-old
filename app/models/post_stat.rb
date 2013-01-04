@@ -18,6 +18,19 @@ class PostStat < ActiveRecord::Base
   belongs_to :post
   belongs_to :user
 
+  after_create :increase_post_votes
+  before_destroy :decrease_post_votes
+
+  def increase_post_votes
+    post.votes_count += 1
+    post.save
+  end
+
+  def decrease_post_votes
+    post.votes_count -= 1
+    post.save
+  end
+
   def self.retrieve(post_id, stat_type, ip_address, user_id)
     stat = PostStat.where(:post_id => post_id, :stat_type => stat_type)
     if user_id

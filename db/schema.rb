@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121222215243) do
+ActiveRecord::Schema.define(:version => 20130104202724) do
 
   create_table "accounts", :force => true do |t|
     t.string  "username",                       :null => false
@@ -86,11 +86,13 @@ ActiveRecord::Schema.define(:version => 20121222215243) do
     t.string   "photo_public_id"
     t.hstore   "photo_exif"
     t.string   "style",           :default => "default"
+    t.integer  "votes_count",     :default => 0
   end
 
   add_index "posts", ["post_type"], :name => "index_posts_on_post_type"
   add_index "posts", ["slug"], :name => "index_posts_on_slug", :unique => true
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+  add_index "posts", ["votes_count"], :name => "index_posts_on_votes_count"
 
   create_table "relationships", :force => true do |t|
     t.integer  "follower_id"
