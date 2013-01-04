@@ -19,6 +19,8 @@
               %a{:href => user_path(current_user)} My Profile
             %li
               %a{:href => user_ideas_path}= "My Ideas (#{current_user.ideas.count})"
+            %li
+              %a{:href => settings_path}= "Settings"
             -#%li
             -#  %a{:href => user_basic_settings_url(:host => site_host)} Settings
             %li.logout

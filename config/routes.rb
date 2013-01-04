@@ -91,6 +91,7 @@ ThisThat::Application.routes.draw do
   put 'remove/:user_id(/:channel_id)' => 'users#remove', :as => :user_remove
 
   get 'home' => 'pages#home', :as => :home
+  get 'settings' => 'users#settings', :as => :settings
 
   get 'ideas' => 'users#ideas', :as => :user_ideas
   scope ':id' do

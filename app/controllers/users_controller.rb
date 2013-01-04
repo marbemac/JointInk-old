@@ -114,4 +114,8 @@ class UsersController < ApplicationController
   def signup
 
   end
+
+  def settings
+
+  end
 end
