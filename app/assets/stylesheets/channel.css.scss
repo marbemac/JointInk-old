@@ -1,32 +1,3 @@
-#channel_form {
-  .fileinput-button {
-    @include border-radius(1000px);
-    width: 125px;
-    height: 125px;
-    background: transparent;
-    border: 1px solid #999;
-    margin: 0 auto 20px auto;
-    cursor: pointer;
-    text-align: center;
-    position: relative;
-
-    .prompt {
-      margin: 56px 5px 0 5px;
-      font-size: 13px;
-      color: #999;
-      display: block;
-    }
-    img {
-      @include border-radius(1000px);
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
-
 .channel-badge {
   img {
     vertical-align: middle;
@@ -44,5 +15,12 @@
   }
   .description {
 
+  }
+}
+
+#channel_form {
+  .action {
+    margin: 55px auto 0 auto;
+    display: block;
   }
 }
