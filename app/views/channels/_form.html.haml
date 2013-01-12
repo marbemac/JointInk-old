@@ -1,8 +1,8 @@
-#channel_form
+#channel_form.tt-form
   - unless @channel.persisted?
     .section
-      %h1 Create a Channel
-      %h4.subheader
+      %h1.san-serif Create a Channel
+      %h4.san-serif.subheader
         A channel is a place for people to express themselves around a common idea, theme, or prompt.
 
   = simple_form_for channel do |f|

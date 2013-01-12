@@ -85,13 +85,14 @@ ThisThat::Application.routes.draw do
 
   # Users
   scope 'users' do
-    post 'update_photo' => 'users#update_cover_photo', :as => :user_update_photo
+    put 'update_avatar' => 'users#update_avatar', :as => :update_user_avatar
   end
 
   put 'add/:user_id(/:channel_id)' => 'users#add', :as => :user_add
   put 'remove/:user_id(/:channel_id)' => 'users#remove', :as => :user_remove
 
   get 'home' => 'pages#home', :as => :home
+  get 'settings' => 'users#settings', :as => :settings
 
   get 'ideas' => 'users#ideas', :as => :user_ideas
   scope ':id' do

@@ -1,0 +1,25 @@
+#settings.tt-form
+  .section
+    %h1 Settings
+    %h4.subheader
+      This is where you set them.
+
+  .section.basic
+    = simple_form_for @user do |f|
+      .help.show-for-touch click "Save Changes" to save changes to your picture and bio
+
+      = f.error_notification
+      = f.error :base
+
+      .fileinput-button
+        %span.prompt Choose Photo
+        %div
+          %img{:src => @user.avatar.present? ? user_avatar_path(@user, :width => 200, :height => 200, :crop => :fit) : ''}
+          = f.hidden_field :avatar_cache
+        = f.file_field :avatar, :tabindex => '-1'
+      = f.error :avatar
+
+      = f.input :name, :label => false, :input_html => {:placeholder => @user.name, :autocomplete => 'off'}
+      = f.input :bio, :label => false, :input_html => {:placeholder => 'My Bio', :autocomplete => 'off', :rows => 5}
+
+      = f.button :submit, :class => 'medium action submit button', :value => @user.avatar.present? ? 'Save Changes' : 'Save Changes'

@@ -87,6 +87,9 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = current_user
+    authorize! :update, @user
+
     respond_to do |format|
       current_user.update_attributes(params[:user])
       if current_user.save
@@ -120,5 +123,9 @@ class UsersController < ApplicationController
 
   def signup
 
+  end
+
+  def settings
+    @user = current_user
   end
 end
