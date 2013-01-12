@@ -37,4 +37,8 @@
       #post-body{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
         != !@post.content.blank? ? @post.content : '<p>Content... (click to edit)</p>'
 
-    = render "posts/recommend_btn"
+    .action-bar
+      = render "posts/recommend_btn"
+      = render "posts/share_btns"
+      - if can? :update, @post
+        = render "posts/admin_btns"

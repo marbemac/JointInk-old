@@ -1,38 +1,6 @@
 - content_for :og_tags do
   %meta{:property => 'og:image', :content => channel_photo_path(@channel, :width => 400, :height => 400, :crop => :limit)}
 
-- content_for :sidebar do
-  = render :partial => "channels/sidebar", :layout => 'layouts/sidebar'
-
-- content_for :header do
-  - if can? :post, @channel
-    .section.post
-      .part.dropdown
-        .name
-          +Post
-          %i.icon-chevron-down
-        .menu
-          %ul
-            %li
-              %a{:href => new_post_path(@channel, 'text', 'article'), 'data-skip-pjax' => true} +New Article
-            %li
-              %a{:href => new_post_path(@channel, 'picture', 'caption'), 'data-skip-pjax' => true} +New Picture
-
-  - if can? :update, @channel
-    .section.admin
-      .part.dropdown
-        .name
-          Admin
-          %i.icon-chevron-down
-        .menu
-          %ul
-            %li
-              %a{:href => channel_members_path, 'data-skip-pjax' => true } Invite Users
-            %li
-              %a{:href => edit_channel_path(@channel.id), 'data-skip-pjax' => true} Edit Channel
-
-- content_for :page_header do
-  %img.badge{:src => channel_photo_path(@channel, :width => 90, :height => 90, :crop => :fill, :radius => :max, :border => { :width => 4, :color => '#CDCDC6' })}
-  %h1= @channel.name
+= render "header"
 
 = render "posts/collection", :posts => @posts

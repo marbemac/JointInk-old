@@ -8,7 +8,10 @@
       in
       %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
 
-  = render "posts/recommend_btn"
+  .action-bar
+    - if can? :update, @post
+      = render "posts/admin_btns"
+    = render "posts/recommend_btn"
 
 - cache @post do
   #picture-wrapper

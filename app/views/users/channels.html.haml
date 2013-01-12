@@ -1,0 +1,25 @@
+= render "header"
+
+.centered-sections
+  .section
+    %h3.san-serif.head
+      = @user.created_channels_count
+      %b Created
+      by
+      = current_user == @user ? 'You' : @user.first_name
+    %i.icon-caret-down
+    .content
+      - @created_channels.each do |channel|
+        = render "channels/tile", :channel => channel
+      = render "channels/create_channel_tile"
+
+  .section
+    %h3.san-serif.head
+      = @user.contributed_channels_count
+      %b Contributed
+      To
+    %i.icon-caret-down
+    .content
+      - @contributed_channels.each do |channel|
+        = render "channels/tile", :channel => channel
+      = render "channels/browse_channel_tile"

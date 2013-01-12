@@ -6,6 +6,7 @@
 #  avatar                 :string(255)
 #  bio                    :text
 #  birthday               :date
+#  color_theme            :string(255)
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime

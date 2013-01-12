@@ -1,4 +1,5 @@
 - cache post do
   %a.user{:href => user_path(post.user)}= post.user.name
   %span.in in
+  %i.icon-double-angle-right
   %a.channel{:href => channel_path(post.primary_channel)}= post.primary_channel.name

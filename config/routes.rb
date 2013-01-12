@@ -95,11 +95,12 @@ ThisThat::Application.routes.draw do
 
   get 'ideas' => 'users#ideas', :as => :user_ideas
   scope ':id' do
-    scope ':channel_id' do
-      get '' => 'users#show', :as => :user_channel, :page => 'posts'
-    end
+    get '' => 'users#show', :as => :user
     put '' => 'users#update', :as => :update_user
-    get '' => 'users#show', :as => :user, :page => 'posts'
+    get 'channels' => 'users#channels', :as => :user_channels
+    scope ':channel_id' do
+      get '' => 'users#show', :as => :user_channel
+    end
   end
 
   root :to => "pages#home"

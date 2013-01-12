@@ -6,25 +6,28 @@
 
     #data-pjax-container{'data-pjax-container' => 'true'}
 
-      %div{:id => "#{params[:controller]}-#{params[:action]}", :class => "#{@body_class} #{@fullscreen ? 'fullscreen' : ''}"}
+      %div{:id => "#{params[:controller]}-#{params[:action]}", :class => "#{params[:controller]}-c #{@body_class} #{@fullscreen ? 'fullscreen' : ''}"}
 
-        #header
-          = render 'layouts/navigation'
+        - if content_for?(:header)
+          #mast-header{:style => "#{defined?(@user) ? 'background-color: ' + @user.color_theme + ';' : ''}"}
+            = yield :header
+
+        #page-nav
+          = yield :page_nav
 
         #container
-          = yield :top_image
 
           = render 'layouts/messages'
 
           .page-header
             = yield :page_header
 
-          #main{:role => 'main', :class => content_for?(:sidebar) ? "with-sidebar" : ''}
-            = yield :sidebar
+          #main{:role => 'main'}
             = yield
 
-          #loader
-            %h1 Loading...
+          #loader Loading...
+
+        = render 'layouts/nav'
 
     != social_js
     != google_analytics

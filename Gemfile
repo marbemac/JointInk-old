@@ -3,7 +3,7 @@ source :rubygems
 ruby '1.9.3'
 
 gem 'bundler', '~> 1.2'
-gem 'rails', '~> 3.2.9'
+gem 'rails', '~> 3.2.11'
 
 gem 'jquery-rails'
 gem "haml-rails"

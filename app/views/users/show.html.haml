@@ -1,11 +1,6 @@
 - content_for :og_tags do
   %meta{:property => 'og:image', :content => user_avatar_path(@user, :width => 400, :height => 400, :crop => :limit, :gravity => :face)}
 
-- content_for :sidebar do
-  = render :partial => "sidebar", :layout => 'layouts/sidebar'
-
-- content_for :page_header do
-  %img.badge{:src => user_avatar_path(@user, :width => 90, :height => 90, :crop => :fill, :radius => :max, :border => { :width => 4, :color => '#CDCDC6' })}
-  %h1.san-serif= @user.name
+= render "header"
 
 = render "posts/collection", :posts => @posts

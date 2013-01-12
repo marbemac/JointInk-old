@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130104202724) do
+ActiveRecord::Schema.define(:version => 20130112201237) do
 
   create_table "accounts", :force => true do |t|
     t.string  "username",                       :null => false
@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(:version => 20130104202724) do
     t.string       "avatar"
     t.string       "cover_photo"
     t.string_array "roles",                  :limit => 255, :default => "{}"
+    t.string       "color_theme"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

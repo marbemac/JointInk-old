@@ -15,129 +15,13 @@ html {
   font-size: 60%;
 }
 
-#sidebar {
-  float: none;
-  margin-left: 0;
-  margin-bottom: 15px;
-  padding-right: 0;
-  width: 100%;
-  position: static !important;
-  text-align: center;
-
-  .visual_head {
-    height: 250px;
-    border: none;
-  }
-  .container {
-    padding: 35px 0 0 0;
-  }
-  .section {
-    display: inline-block;
-    position: relative;
-
-    .icon-chevron-down {
-      display: inline;
-    }
-    ul {
-      position: absolute;
-      display: none;
-      top: 36px;
-      width: 100%;
-      z-index: 1000;
-    }
-    &:hover {
-      ul {
-        display: block;
-      }
-    }
-    &.description,
-    &.bio {
-      background: transparent;
-      display: block;
-
-      .content {
-        padding-top: 8px;
-      }
-      h2 {
-        font-size: 18px;
-        font-size: 1.8rem;
-      }
-    }
-    &.creator {
-      @include clearfix();
-      background: transparent;
-
-      .head {
-        float: left;
-        border: none;
-        background: transparent;
-        font-size: 14px;
-        font-weight: normal;
-        padding: 0;
-      }
-      .content {
-        float: left;
-        padding: 0 0 0 10px;
-      }
-    }
-  }
-}
-
 #container {
   width: 100%;
   padding: 0 0 25px 0;
 }
 
-#header {
+#mast-header header {
   width: 100%;
-  padding: 0;
-  height: 35px;
-
-  .part {
-    height: 35px;
-    line-height: 35px;
-    font-size: 14px;
-  }
-  .dropdown {
-    min-width: 90px;
-    .menu {
-      top: 35px;
-    }
-    .name,
-    .icon-chevron-down {
-      font-size: 14px;
-    }
-  }
-  .section {
-    &.home {
-      width: 36px;
-      .part {
-        padding: 0;
-      }
-    }
-    &.main {
-      display: none;
-    }
-    &.share,
-    &.post,
-    &.admin {
-      .dropdown {
-        .menu {
-          width: 135px;
-        }
-      }
-    }
-    &.menu {
-      width: 90px;
-      .dropdown {
-        .menu {
-          width: 165px;
-          right: auto;
-          left: 0;
-        }
-      }
-    }
-  }
 }
 
 #main {

@@ -6,6 +6,7 @@
 #  avatar                 :string(255)
 #  bio                    :text
 #  birthday               :date
+#  color_theme            :string(255)
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
@@ -65,9 +66,14 @@ class User < ActiveRecord::Base
   validates :bio, :length => { :maximum => 250, :message => 'Bio has a max length of 250' }
   validate :username_change
 
+  before_create :set_color_theme
   after_create :add_to_soulmate, :send_personal_email
   after_update :update_denorms
   before_destroy :remove_from_soulmate, :disconnect
+
+  def set_color_theme
+    self.color_theme = %w(#8C2300 #661A00 #8C4600 #B25900 #698C00 #4C6600 #1A6600 #00661A #008C46 #00664C #006666 #008C8C #00698C #004C66 #003366 #00468C #001A66 #1A0066 #46008C #660066 #660066 #8A8A7B #79796A #686859 #646473 #313140).sample
+  end
 
   def is_active?
     status == 'active'
@@ -97,6 +103,47 @@ class User < ActiveRecord::Base
 
   def ideas
     posts.ideas
+  end
+
+  def posts_count
+    Rails.cache.fetch "#{cache_key}/posts_count" do
+      posts.active.count
+    end
+  end
+
+  def ideas_count
+    Rails.cache.fetch "#{cache_key}/ideas_count" do
+      posts.ideas.count
+    end
+  end
+
+  def channels_count
+    created_channels_count + contributed_channels_count
+  end
+
+  def created_channels_count
+    Rails.cache.fetch "#{cache_key}/created_channels_count" do
+      created_channels.count
+    end
+  end
+
+  def contributed_channels_count
+    Rails.cache.fetch "#{cache_key}/contributed_channels_count" do
+      contributed_channels.count
+    end
+  end
+
+  def created_channels
+    @created_channels ||= Channel
+    .where("channels.user_id = ? AND channels.status = ?", id, 'active')
+    .uniq
+  end
+
+  def contributed_channels
+    @contributed_channels ||= Channel
+    .includes(:posts)
+    .where("channels.user_id != ? AND channels.status = ? AND posts.user_id = ? AND posts.status = ?", id, 'active', id, 'active')
+    .uniq
   end
 
   ###
@@ -177,20 +224,6 @@ class User < ActiveRecord::Base
       account = account('twitter')
       account ? account.connect : nil
     end
-  end
-
-  def created_channels
-    @created_channels ||= Channel
-      .includes(:posts)
-      .where("channels.user_id = ? AND channels.status = ?", id, 'active')
-      .uniq
-  end
-
-  def contributed_channels
-    @contributed_channels ||= Channel
-      .includes(:posts)
-      .where("channels.user_id != ? AND channels.status = ? AND posts.user_id = ? AND posts.status = ?", id, 'active', id, 'active')
-      .uniq
   end
 
   def og_title

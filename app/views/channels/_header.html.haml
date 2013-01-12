@@ -1,0 +1,45 @@
+- content_for :header do
+  %header
+    %hrgroup
+      %h1.san-serif= @channel.name
+
+      %h3.subheader.san-serif= @channel.description
+
+      .extra
+        Created by
+        %a{:href => user_path(@channel.user)}= @channel.user.name
+
+- content_for :page_nav do
+  %nav
+    %ul.left
+      %li{:class => (params[:action] == 'show' ? 'on' : '')}
+        %a{:href => channel_path(@channel)}
+          3 Posts
+          %i.icon-caret-up
+    %img.badge{:src => channel_photo_path(@channel, :width => 100, :height => 100, :crop => :fill, :radius => :max, :border => { :width => 6, :color => '#DDDDDD' })}
+    %ul.right
+      - if can? :post, @channel || !signed_in?
+        - if can? :update, @channel
+          %li
+            .dropdown.text-dropdown
+              .name
+                Admin
+              .menu.down
+                %i.icon-caret-up
+                %ul
+                  %li
+                    %a{:href => edit_channel_path(@channel.id), 'data-skip-pjax' => true} Edit Channel
+            %li
+              &bull;
+
+        %li.action
+          .dropdown.text-dropdown
+            .name
+              Contribute
+            .menu.down
+              %i.icon-caret-up
+              %ul
+                %li
+                  %a{:href => new_post_path(@channel, 'text', 'article'), 'data-skip-pjax' => true} +New Article
+                %li
+                  %a{:href => new_post_path(@channel, 'picture', 'caption'), 'data-skip-pjax' => true} +New Picture

@@ -67,6 +67,12 @@ class Channel < ActiveRecord::Base
     self['photo'] ? self['photo'].split('/').last : nil
   end
 
+  def posts_count
+    Rails.cache.fetch "#{cache_key}/posts_count" do
+      posts.active.count
+    end
+  end
+
   def og_title
     name
   end

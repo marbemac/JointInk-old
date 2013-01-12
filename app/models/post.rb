@@ -19,6 +19,7 @@
 #  updated_at      :datetime         not null
 #  url             :text
 #  user_id         :integer
+#  votes_count     :integer          default(0)
 #
 
 class Post < ActiveRecord::Base
