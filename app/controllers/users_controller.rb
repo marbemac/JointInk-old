@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     @user = current_user
     @title = "Ideas"
     @page_title = "Your Ideas"
-    @posts = @user.posts.ideas.page(params[:page]).to_a
+    @posts = @user.posts.ideas.page(params[:page]).order('created_at DESC')
   end
 
   def add
