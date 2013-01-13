@@ -71,18 +71,21 @@ $panel-width: 175px;
         }
       }
     }
-    //.button {
-    //  float: right;
-    //
-    //  &.editor-publish {
-    //    background: $action-color;
-    //  }
-    //}
   }
 
   &.picture {
-    #post-editor {
-      padding-top: 20px;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    .editor-actions {
+      position: absolute;
+      top: 36px;
+      right: 200px;
+      text-align: right;
+      z-index: -1;
+    }
+    .info-strip {
+      padding-right: 370px;
     }
   }
   &.text {
