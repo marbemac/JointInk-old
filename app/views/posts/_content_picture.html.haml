@@ -8,7 +8,7 @@
       in
       %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
 
-  .action-bar
+  .action-bar.hide-editing
     - if can? :update, @post
       = render "posts/admin_btns"
     = render "posts/recommend_btn"
@@ -20,7 +20,4 @@
         click to upload a picture
         %span.loading
         %input{:type => 'file', 'data-url' => post_update_photo_path(@post.id), :name => 'post[photo]'}
-      %a.remove-image{:href => post_remove_photo_path(@post.id), 'data-method' => :put, 'data-remote' => true, 'data-skip-pjax' => true}
-        %i.icon-remove
-        Remove Image
     %div{:style => "background-image: url('#{@post.photo_url}')", :class => "image #{@post.photo_ratio >= 1.4 ? 'cover-image' : 'contain-image'}"}

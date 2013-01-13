@@ -27,7 +27,8 @@
 
           #loader Loading...
 
-        = render 'layouts/nav'
+        - unless params[:controller] == 'posts' && (params[:action] == 'new' || params[:action] == 'edit')
+          = render 'layouts/nav'
 
     != social_js
     != google_analytics

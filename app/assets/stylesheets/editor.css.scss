@@ -49,16 +49,79 @@
   background-color: darken($action-color, 30%) !important;
 }
 
+$panel-width: 175px;
 #posts-edit {
-  #header {
-    padding: 0;
+  padding: 60px $panel-width 200px $panel-width;
+
+  .editor-actions {
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+
+    .button {
+      a {
+        color: #FFF;
+      }
+      &.editor-discard {
+        &:hover {
+          background: $red;
+        }
+      }
+    }
+    //.button {
+    //  float: right;
+    //
+    //  &.editor-publish {
+    //    background: $action-color;
+    //  }
+    //}
   }
 
   &.picture {
     #post-editor {
-      padding-top: 50px;
+      padding-top: 20px;
     }
   }
+  &.text {
+    &.full-page {
+      #picture-wrapper {
+        width: auto;
+        left: $panel-width;
+        right: $panel-width;
+      }
+      .white-wrap {
+        padding-bottom: 250px !important;
+      }
+    }
+  }
+}
+
+#left-panel,
+#right-panel {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: $panel-width - 5;
+  background: #222;
+  color: #FFF;
+
+  .title {
+    text-align: center;
+    border-bottom: 1px solid #FFF;
+    line-height: 130px;
+    font-size: 22px;
+    text-transform: uppercase;
+    cursor: default;
+  }
+}
+#left-panel {
+  left: 0;
+}
+#right-panel {
+  right: 0;
 }
 
 #post-editor {

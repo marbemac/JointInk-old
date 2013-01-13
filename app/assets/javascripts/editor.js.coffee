@@ -78,6 +78,7 @@ jQuery ->
     $('.editor-save').click()
     false
 
+  # replace the cke editor icons
   $('.cke_button__bold_icon').livequery ->
     $(@).replaceWith($('<i/>').addClass('icon icon-bold'))
   $('.cke_button__italic_icon').livequery ->
@@ -96,3 +97,9 @@ jQuery ->
     $(@).replaceWith($('<i/>').addClass('icon icon-list-ol'))
   $('.cke_button__bulletedlist_icon').livequery ->
     $(@).replaceWith($('<i/>').addClass('icon icon-list-ul'))
+
+  # toggle text post styles
+  $('.post-style .content div').click (e) ->
+    $('#posts-edit').removeClass('default half-page full-page').addClass($(@).data('value'))
+    unless $(@).data('value') == 'full-page'
+      $('#picture-wrapper,.white-wrap').removeAttr('style')

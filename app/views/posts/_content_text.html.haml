@@ -9,7 +9,7 @@
         %i.icon-remove
         Remove Image
 
-    - if @post.style == 'full-page'
+    - if @post.style == 'full-page' || defined?(@editing)
       #post-picture-title
         %h1.copy-over{'data-target' => '#post-title'}
           != !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
@@ -37,7 +37,7 @@
       #post-body{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
         != !@post.content.blank? ? @post.content : '<p>Content... (click to edit)</p>'
 
-    .action-bar
+    .action-bar.hide-editing
       = render "posts/recommend_btn"
       = render "posts/share_btns"
       - if can? :update, @post
