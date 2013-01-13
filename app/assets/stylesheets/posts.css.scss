@@ -1,17 +1,17 @@
 .post.tile {
+  @include box-shadow(rgba(0, 0, 0, 0.05) 0 1px 2px);
   $top-vertical-padding: 25px;
   $horizontal-padding: 25px;
   $bottom-height: 54px;
   $bottom-vertical-padding: 20px;
 
   width: $post-width;
-  padding: $post-margin;
   height: $post-height - $bottom-height;
   display: inline-block;
   background: #FFF;
   position: relative;
-  padding-bottom: $bottom-height;
-  border: 1px dashed #DDD;
+  padding: 0 0 $bottom-height 0;
+  border: 1px solid #DDD;
   text-align: left;
   margin: 10px;
   vertical-align: top;
@@ -30,7 +30,8 @@
       height: 192px;
     }
     .text {
-      //padding: $top-vertical-padding $horizontal-padding;
+      padding-left: 20px;
+      padding-right: 20px;
 
       h1 {
         margin: 0;
@@ -71,7 +72,9 @@
   .with-photo {
     .top {
       .text {
-        padding: 1.8rem 0;
+        padding-top: 1.8rem;
+        padding-bottom: 1.8rem;
+
         h1 {
           font-size: 2.2rem;
           line-height: 3.0rem;
@@ -165,6 +168,8 @@
 
   &.blank {
     text-align: center;
+    background: transparent;
+    border: 2px dashed #DDD;
 
     .title {
       font-size: 26px;
@@ -183,11 +188,13 @@
     .buttons {
       margin: 25px 0 0 0;
     }
+    &:hover {
+      @include box-shadow(none);
+    }
   }
 
   &:hover {
-    background: #F9F9F9;
-    border-color: #AAA;
+    @include box-shadow(rgba(0, 0, 0, 0.2) 0 1px 2px);
 
     .actions {
       display: block;

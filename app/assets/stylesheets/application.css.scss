@@ -29,7 +29,7 @@ html {
 }
 
 body {
-  //background: $bodyBackground;
+  background: #F9F9F9;
   height: 100%;
 }
 
@@ -319,6 +319,7 @@ blockquote {
   height: $header-height;
   padding: 25px 0;
   position: relative;
+  background-color: #FFF;
   background-image: image-url('squaresBG.png');
 
   header {
@@ -437,7 +438,7 @@ blockquote {
 
 #page-nav {
   nav {
-    background: #FAFAFA;
+    background: #FFF;
     border-top: 1px solid transparent;
     border-bottom: 1px solid #DDD;
     text-align: center;
@@ -680,7 +681,7 @@ blockquote {
     }
     .icon-caret-down {
       display: block;
-      color: #EFEFEF;
+      color: #DDD;
       font-size: 50px;
       font-size: 4rem;
       margin: 0 0 10px 0;
