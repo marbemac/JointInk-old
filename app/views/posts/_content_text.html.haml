@@ -39,6 +39,7 @@
 
     .action-bar.hide-editing
       = render "posts/recommend_btn"
-      = render "posts/share_btns"
+      - if @post.status == 'active'
+        = render "posts/share_btns"
       - if can? :update, @post
         = render "posts/admin_btns"
