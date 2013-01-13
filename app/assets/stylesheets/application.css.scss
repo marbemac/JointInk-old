@@ -379,7 +379,6 @@ blockquote {
     }
   }
   .dropdown {
-    position: relative;
     float: left;
     height: 50px;
 
@@ -404,7 +403,7 @@ blockquote {
       right: 0px;
       margin-top: 5px;
       background: #222;
-      width: 159px;
+      width: 100%;
       padding: 10px 14px;
       display: none;
 

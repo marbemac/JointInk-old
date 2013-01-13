@@ -20,11 +20,11 @@
           &bull;
         %li{:class => (params[:action] == 'ideas' ? 'on' : '')}
           %a{:href => user_ideas_path}
-            = pluralize(@user.ideas_count, "Ideas")
+            = pluralize(@user.ideas_count, "Idea")
             %i.icon-caret-up
     %img.badge{:src => user_avatar_path(@user, :width => 100, :height => 100, :crop => :fill, :radius => :max, :border => { :width => 6, :color => '#FFFFFF20' })}
     %ul.right
       %li{:class => (params[:action] == 'channels' ? 'on' : '')}
         %a{:href => user_channels_path(@user)}
-          = pluralize(@user.channels_count, "Channels")
+          = pluralize(@user.channels_count, "Channel")
           %i.icon-caret-up
