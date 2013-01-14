@@ -14,7 +14,7 @@
     %ul.left
       %li{:class => (params[:action] == 'show' ? 'on' : '')}
         %a{:href => channel_path(@channel)}
-          3 Posts
+          = pluralize(@channel.posts_count, 'Post')
           %i.icon-caret-up
     %img.badge{:src => channel_photo_path(@channel, :width => 100, :height => 100, :crop => :fill, :radius => :max, :border => { :width => 6, :color => '#DDDDDD' })}
     %ul.right

@@ -67,12 +67,14 @@ class User < ActiveRecord::Base
   validate :username_change
 
   before_create :set_color_theme
-  after_create :add_to_soulmate, :send_personal_email
+  after_create :add_to_soulmate, :send_welcome_email, :send_personal_email
   after_update :update_denorms
   before_destroy :remove_from_soulmate, :disconnect
 
   def set_color_theme
-    self.color_theme = %w(#8C2300 #661A00 #8C4600 #B25900 #698C00 #4C6600 #1A6600 #00661A #008C46 #00664C #006666 #008C8C #00698C #004C66 #003366 #00468C #001A66 #1A0066 #46008C #660066 #660066 #8A8A7B #79796A #686859 #646473 #313140).sample
+    self.color_theme = %w(#8C2300 #661A00 #8C4600 #B25900 #698C00 #4C6600 #1A6600 #00661A #008C46
+                          #00664C #006666 #008C8C #00698C #004C66 #003366 #00468C #001A66 #1A0066 #46008C #660066 #660066
+                          #8A8A7B #79796A #686859 #646473 #313140).sample
   end
 
   def is_active?
@@ -381,7 +383,6 @@ class User < ActiveRecord::Base
 
     if user && !user.confirmed?
       user.confirm!
-      user.send_welcome_email
     end
 
     # update the users primary twitter handle
