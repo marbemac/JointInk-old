@@ -17,10 +17,7 @@
 
     #bg.cover-image{:style => "background-image: url('#{asset_path('splash-'+(1+rand(5)).to_s+'.jpg')}')"}
 
-    != social_js
-
-    - if Rails.env.production?
-      -#= woopra_js
+    != common_js
 
     = javascript_include_tag "application"
 

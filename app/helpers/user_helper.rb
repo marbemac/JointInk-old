@@ -9,12 +9,8 @@ module UserHelper
     end
   end
 
-  def user_avatar_path(user, options, dpi='1x')
-
-    if dpi == '2x'
-      options[:width] *= 2 if options[:width]
-      options[:height] *= 2 if options[:height]
-    end
+  def user_avatar_path(user, options)
+    update_image_options(options)
 
     if user.avatar.present?
       cl_image_path(user.avatar_image, options)

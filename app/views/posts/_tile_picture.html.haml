@@ -2,6 +2,6 @@
   .picture
 
     %a.top{:href => post_via_channel_path(post.primary_channel, post)}
-      .image.cover-image{:style => "background-image: url('#{post_photo_path(post, {:width => 400, :height => 400, :crop => :limit}, cookies[:dpi])}')"}
+      .image.cover-image{:style => "background-image: url('#{post_photo_path(post, :width => 400, :height => 400, :crop => :limit)}')"}
       .bg
         .caption= post.title

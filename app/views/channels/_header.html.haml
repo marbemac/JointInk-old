@@ -17,7 +17,7 @@
           = pluralize(@channel.posts_count, 'Post')
           %i.icon-caret-up
 
-    .circle-image{:style => "background-image: url('#{channel_photo_path(@channel, {:width => 120, :height => 120, :crop => :thumb}, cookies[:dpi])}')"}
+    .circle-image{:style => "background-image: url('#{channel_photo_path(@channel, :width => 120, :height => 120, :crop => :thumb)}')"}
       .ring
 
     %ul.right

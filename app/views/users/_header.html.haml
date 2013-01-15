@@ -23,7 +23,7 @@
             = pluralize(@user.ideas_count, "Idea")
             %i.icon-caret-up
 
-    .circle-image{:style => "background-image: url('#{user_avatar_path(@user, {:width => 120, :height => 120, :crop => :thumb, :gravity => :face}, cookies[:dpi])}')"}
+    .circle-image{:style => "background-image: url('#{user_avatar_path(@user, :width => 120, :height => 120, :crop => :thumb, :gravity => :face)}')"}
       .ring
 
     %ul.right

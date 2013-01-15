@@ -30,8 +30,7 @@
         - unless params[:controller] == 'posts' && (params[:action] == 'new' || params[:action] == 'edit')
           = render 'layouts/nav'
 
-    != social_js
-    != google_analytics
+    != common_js
 
     %script{:src => '//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js'}
     %script{:src => '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js'}
