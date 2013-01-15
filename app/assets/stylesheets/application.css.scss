@@ -876,6 +876,7 @@ blockquote {
   @include border-radius(1000px);
   background-position: 50% center;
   position: relative;
+  background-color: #FFF;
 
   .ring {
     @include border-radius(1000px);
