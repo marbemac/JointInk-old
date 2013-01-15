@@ -87,6 +87,10 @@ class Post < ActiveRecord::Base
     end
   end
 
+  def photo_image
+    self['photo'] ? self['photo'].split('/').last : nil
+  end
+
   def primary_channel
     channels.first
   end

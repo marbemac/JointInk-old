@@ -21,3 +21,16 @@ jQuery ->
   # toggle target element
   $('.toggler').live 'click', (e) ->
     $($(@).data('target')).toggle()
+
+  $.cookie("dpi", '2x', { expires : 1 });
+
+  # responsive images
+#  for element in $('.ri')
+#    value = $(element).css('background-image')
+#
+#    width = value.match /w_(\d+)/
+#    value = value.replace /w_(\d+)/, 'w_' + width[1] * 2
+#    height = value.match /h_(\d+)/
+#    value = value.replace /h_(\d+)/, 'h_' + height[1] * 2
+#
+#    $(element).attr('style', "background-image: #{value}")

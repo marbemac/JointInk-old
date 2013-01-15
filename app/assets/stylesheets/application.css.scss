@@ -472,6 +472,8 @@ blockquote {
 
     .left,
     .right {
+      position: absolute;
+
       >li {
         $link-color: #8A8A7A;
 
@@ -518,20 +520,20 @@ blockquote {
       }
     }
     .left {
-      position: absolute;
       right: 50%;
       margin-right: 75px;
     }
     .right {
-      position: absolute;
       left: 50%;
-      margin-left: 71px;
+      margin-left: 75px;
     }
-    .badge {
+    .circle-image {
       position: absolute;
+      width: 120px;
+      height: 120px;
       top: -50px;
       left: 50%;
-      margin-left: -56px;
+      margin-left: -60px;
     }
   }
   .text-dropdown {
@@ -865,6 +867,23 @@ blockquote {
   .action {
     margin: 10px auto 0 auto;
     display: block;
+  }
+}
+
+.circle-image {
+  @extend .cover-image;
+  @include border-radius(1000px);
+  background-position: 50% center;
+  position: relative;
+
+  .ring {
+    @include border-radius(1000px);
+    //@include box-shadow(rgba(0, 0, 0, 0.30) 0 1px 2px);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    border: 6px solid rgba(255,255,255,0.3);
+    height: 100%;
+    width: 100%;
   }
 }
 
