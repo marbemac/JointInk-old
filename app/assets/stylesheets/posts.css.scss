@@ -31,6 +31,7 @@
     .text {
       padding-left: 20px;
       padding-right: 20px;
+      padding-top: 1.8rem;
 
       h1 {
         margin: 0;
@@ -71,7 +72,6 @@
   .with-photo {
     .top {
       .text {
-        padding-top: 1.8rem;
         padding-bottom: 1.8rem;
 
         h1 {
@@ -231,6 +231,11 @@
   }
   .white-wrap {
     width: 100%;
+    margin-top: 50px;
+
+    &.with-photo {
+      margin-top: 0;
+    }
   }
   #post-picture-title {
     display: none;

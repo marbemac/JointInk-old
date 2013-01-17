@@ -22,7 +22,7 @@
 
     %div{:style => "background-image: url('#{@post.photo_url}')", :class => "image #{@post.photo_ratio >= 1.4 ? 'cover-image' : 'contain-image'}"}
 
-.white-wrap
+%div{:class => "white-wrap #{defined?(@editing) || @post.photo.present? ? 'with-photo' : ''}"}
   .content-wrapper
     - cache @post do
       - if defined?(@editing) || @post.style != 'full-page'
