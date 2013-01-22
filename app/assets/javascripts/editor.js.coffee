@@ -1,8 +1,10 @@
 jQuery ->
 
-  CKEDITOR.disableAutoInline = true;
   if $('#post-body').length
-    editor = CKEDITOR.inline( document.getElementById( 'post-body' ) )
+    $('#post-body').redactor
+      air: true
+      airButtons: ['formatting','bold','italic','|','unorderedlist','orderedlist','link']
+      formattingTags: ['h3','h4','p','blockquote']
 
   $('#post-picture-title h1, #post-title, #post-body').attr('contenteditable', true)
 
@@ -26,7 +28,6 @@ jQuery ->
 
   # submit the form
   $('.editor-save, .editor-publish').on 'click', (e) ->
-    console.log 'foo'
     self = $(@)
     return if $(@).hasClass('disabled')
     $('.editor-save, .editor-publish').addClass('disabled')
@@ -79,24 +80,24 @@ jQuery ->
     false
 
   # replace the cke editor icons
-  $('.cke_button__bold_icon').livequery ->
-    $(@).replaceWith($('<i/>').addClass('icon icon-bold'))
-  $('.cke_button__italic_icon').livequery ->
-    $(@).replaceWith($('<i/>').addClass('icon icon-italic'))
-  $('.cke_button__button-h1_icon').livequery ->
-    $(@).replaceWith($('<span/>').addClass('icon icon-h1').text('H1'))
-  $('.cke_button__button-h2_icon').livequery ->
-    $(@).replaceWith($('<span/>').addClass('icon icon-h1').text('H2'))
-  $('.cke_button__blockquote_icon').livequery ->
-    $(@).replaceWith($('<span/>').addClass('icon icon-blockquote').html('&quot;'))
-  $('.cke_button__link_icon').livequery ->
-    $(@).replaceWith($('<i/>').addClass('icon icon-link'))
-  $('.cke_button__unlink_icon').livequery ->
-    $(@).replaceWith($('<i/>').addClass('icon icon-link unlink'))
-  $('.cke_button__numberedlist_icon').livequery ->
-    $(@).replaceWith($('<i/>').addClass('icon icon-list-ol'))
-  $('.cke_button__bulletedlist_icon').livequery ->
-    $(@).replaceWith($('<i/>').addClass('icon icon-list-ul'))
+#  $('.cke_button__bold_icon').livequery ->
+#    $(@).replaceWith($('<i/>').addClass('icon icon-bold'))
+#  $('.cke_button__italic_icon').livequery ->
+#    $(@).replaceWith($('<i/>').addClass('icon icon-italic'))
+#  $('.cke_button__button-h1_icon').livequery ->
+#    $(@).replaceWith($('<span/>').addClass('icon icon-h1').text('H1'))
+#  $('.cke_button__button-h2_icon').livequery ->
+#    $(@).replaceWith($('<span/>').addClass('icon icon-h1').text('H2'))
+#  $('.cke_button__blockquote_icon').livequery ->
+#    $(@).replaceWith($('<span/>').addClass('icon icon-blockquote').html('&quot;'))
+#  $('.cke_button__link_icon').livequery ->
+#    $(@).replaceWith($('<i/>').addClass('icon icon-link'))
+#  $('.cke_button__unlink_icon').livequery ->
+#    $(@).replaceWith($('<i/>').addClass('icon icon-link unlink'))
+#  $('.cke_button__numberedlist_icon').livequery ->
+#    $(@).replaceWith($('<i/>').addClass('icon icon-list-ol'))
+#  $('.cke_button__bulletedlist_icon').livequery ->
+#    $(@).replaceWith($('<i/>').addClass('icon icon-list-ul'))
 
   # toggle text post styles
   $('.post-style .content div').click (e) ->

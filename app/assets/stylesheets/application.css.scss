@@ -445,6 +445,10 @@ blockquote {
       width: 100%;
       display: none;
     }
+    .divider {
+      border-bottom: 1px solid #FFF;
+      margin: 5px 0;
+    }
     &:hover {
       .name {
         cursor: default;

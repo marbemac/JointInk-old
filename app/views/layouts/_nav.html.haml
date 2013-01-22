@@ -17,6 +17,15 @@
               %i.icon-plus
               New Channel
           %li
+            %a{:href => new_channel_path, 'data-skip-pjax' => true}
+              %i.icon-plus
+              New Article
+          %li
+            %a{:href => new_channel_path, 'data-skip-pjax' => true}
+              %i.icon-plus
+              New Picture
+          %li.divider
+          %li
             %a{:href => user_path(current_user)} My Profile
           %li
             %a{:href => user_ideas_path}= "My Ideas (#{current_user.ideas.count})"
@@ -24,11 +33,13 @@
             %a{:href => settings_path}= "Settings"
           %li.logout
             %a{:href => destroy_user_session_url(:host => site_host, 'data-skip-pjax' => true)} Logout
+          %li.divider
         - else
           %li
             %a{:href => signin_path} Sign In
           %li
             %a{:href => user_registration_path} Join Now
+          %li.divider
 
         %li
           %a{:href => "http://www.getthisthat.com/c/about-thisthat/hello-world"} About

@@ -43,6 +43,8 @@
 
     -# TODO: this is an ugly way of including the editor js files only on certain pages
     - if params[:controller] == 'posts' && ['edit','new','create','update'].include?(params[:action])
-      %script{:type => 'text/javascript', :src => '/assets/javascripts/ckeditor/ckeditor.js'}
-      %script{:type => 'text/javascript', :src => '/assets/javascripts/ckeditor/config.js'}
+      -#%script{:type => 'text/javascript', :src => '/assets/javascripts/ckeditor/ckeditor.js'}
+      -#%script{:type => 'text/javascript', :src => '/assets/javascripts/ckeditor/config.js'}
+      -#%script{:type => 'text/javascript', :src => '/assets/javascripts/redactor/redactor/redactor.js'}
+      = javascript_include_tag "redactor"
       = javascript_include_tag "editor"

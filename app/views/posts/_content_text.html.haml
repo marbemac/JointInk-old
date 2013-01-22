@@ -37,6 +37,9 @@
       #post-body{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
         != !@post.content.blank? ? @post.content : '<p>Content... (click to edit)</p>'
 
+      -#%textarea#post-textarea
+        != !@post.content.blank? ? @post.content : '<p>Content... (click to edit)</p>'
+
     .action-bar.hide-editing
       = render "posts/recommend_btn"
       - if @post.status == 'active'

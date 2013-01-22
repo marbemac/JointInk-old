@@ -50,8 +50,6 @@
     <orderEntry type="library" scope="PROVIDED" name="compass (v0.12.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="compass-rails (v1.0.3, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="connection_pool (v1.0.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="cucumber (v1.2.1, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="cucumber-rails (v1.3.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="daemons (v1.1.9, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="dalli (v2.6.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="database_cleaner (v0.9.1, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
@@ -72,7 +70,6 @@
     <orderEntry type="library" scope="PROVIDED" name="foreman (v0.60.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="friendly_id (v4.0.9, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="fssm (v0.2.9, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="gherkin (v2.11.5, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="girl_friday (v0.11.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="guard (v1.6.1, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="guard-livereload (v1.1.3, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />

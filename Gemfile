@@ -15,7 +15,7 @@ gem 'omniauth-twitter'
 gem 'yajl-ruby' # json
 gem "sendgrid"
 gem "cancan", ">= 1.6.8"
-gem 'rack-contrib'
+gem 'rack-contrib', '1.1.0'
 gem 'soulmate', '0.1.3', :require => 'soulmate/server' # Redis based autocomplete storage
 gem 'koala', '1.6' # facebook graph api support
 gem 'twitter' # twitter api support
@@ -69,10 +69,9 @@ group :development do
 end
 
 group :test do
-  gem "rspec-rails", ">= 2.11.0"
+  gem "rspec-rails", ">= 2.12.2"
   gem "capybara", ">= 1.1.2"
   gem "email_spec", ">= 1.2.1"
-  gem "cucumber-rails", ">= 1.3.0", :require => false
   gem "launchy", ">= 2.1.2"
   gem "factory_girl_rails", ">= 4.0.0"
   gem 'guard-rspec'
