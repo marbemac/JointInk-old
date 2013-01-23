@@ -41,7 +41,7 @@ class Post < ActiveRecord::Base
   validates :post_type, :presence => true, :if => lambda { |post| post.is_active? }
   validates :photo, :presence => true, :if => lambda { |post| post.is_active? && post.post_type == 'picture' }
 
-  attr_accessible :title, :content, :photo, :status, :post_type, :post_subtype
+  attr_accessible :title, :content, :photo, :status, :post_type, :post_subtype, :style
 
   scope :active, where(:status => 'active')
   scope :ideas, where(:status => 'idea')

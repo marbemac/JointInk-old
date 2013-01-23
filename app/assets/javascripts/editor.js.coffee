@@ -39,6 +39,7 @@ jQuery ->
       data['post']['title'] = $.trim($('#post-picture-title h1').text())
 
     data['post']['content'] = $.trim($('#post-body').html())
+    data['post']['style'] = $('#left-panel .post-style .content > div.on').data('value')
 
     if $(@).hasClass('editor-publish')
       data['post']['status'] = 'active'
@@ -55,8 +56,6 @@ jQuery ->
       success: (data, textStatus, jqXHR) ->
         if self.hasClass('editor-publish')
           window.location = data.url
-        else
-          # $('.last-saved .timeago').html($.timeago(data.post.updated_at))
       complete: ->
         $('.editor-save, .editor-publish').removeClass('disabled')
         $('.editor-save .name').text('Save')
@@ -81,6 +80,11 @@ jQuery ->
 
   # toggle text post styles
   $('.post-style .content div').click (e) ->
-    $('#posts-edit').removeClass('default half-page full-page').addClass($(@).data('value'))
+    $('#posts-edit').removeClass('default small-image half-page full-page').addClass($(@).data('value'))
+    $('.post-style .content div').removeClass('on')
+    $(@).addClass('on')
     unless $(@).data('value') == 'full-page'
-      $('#picture-wrapper,.white-wrap').removeAttr('style')
+      $('#picture-wrapper,.white-wrap,#post-picture-title').removeAttr('style')
+    $.scrollTo '0',
+      duration: 300
+      easing:'easeInOutCubic'

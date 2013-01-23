@@ -14,13 +14,31 @@
 
 #left-panel
   .title= @post.post_type == 'text' ? 'Article' : @post.post_type
-  -#.section.post-style
-  -#  .head Post Style
-  -#  .content
-  -#    .default{'data-value' => 'default'} No Image
-  -#    .small{'data-value' => 'default'} Small Image
-  -#    .half{'data-value' => 'half-page'} Half Page
-  -#    .full{'data-value' => 'full-page'} Full Page
+  .section.post-style
+    - if @post.post_type == 'text'
+      .head Article Style
+      .content
+        %div{'data-value' => 'default', :class => "#{@post.style == 'default' ? 'on' : ''}"}
+          %i.icon-double-angle-right
+          No Image
+        %div{'data-value' => 'small-image', :class => "#{@post.style == 'small-image' ? 'on' : ''}"}
+          %i.icon-double-angle-right
+          Small Image
+        %div{'data-value' => 'half-page', :class => "#{@post.style == 'half-page' ? 'on' : ''}"}
+          %i.icon-double-angle-right
+          Half Page
+        %div{'data-value' => 'full-page', :class => "#{@post.style == 'full-page' ? 'on' : ''}"}
+          %i.icon-double-angle-right
+          Full Page
+    - else
+      .head Picture Style
+      .content
+        %div{'data-value' => 'default', :class => "#{@post.style == 'default' ? 'on' : ''}"}
+          %i.icon-double-angle-right
+          Contain Image
+        %div{'data-value' => 'cover-image', :class => "#{@post.style == 'cover-image' ? 'on' : ''}"}
+          %i.icon-double-angle-right
+          Cover Image
 
 #right-panel
 

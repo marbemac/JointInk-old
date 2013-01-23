@@ -5,9 +5,6 @@
         click to upload a picture
         %span.loading
         %input{:type => 'file', 'data-url' => post_update_photo_path(@post.id), :name => 'post[photo]'}
-      %a.remove-image{:href => post_remove_photo_path(@post.id), 'data-method' => :put, 'data-remote' => true, 'data-skip-pjax' => true}
-        %i.icon-remove
-        Remove Image
 
     - if @post.style == 'full-page' || defined?(@editing)
       #post-picture-title
@@ -35,9 +32,6 @@
           != !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
 
       #post-body{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
-        != !@post.content.blank? ? @post.content : '<p>Content... (click to edit)</p>'
-
-      -#%textarea#post-textarea
         != !@post.content.blank? ? @post.content : '<p>Content... (click to edit)</p>'
 
     .action-bar.hide-editing

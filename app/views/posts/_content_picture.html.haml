@@ -20,4 +20,4 @@
         click to upload a picture
         %span.loading
         %input{:type => 'file', 'data-url' => post_update_photo_path(@post.id), :name => 'post[photo]'}
-    %div{:style => "background-image: url('#{@post.photo_url}')", :class => "image #{@post.photo_ratio >= 1.4 ? 'cover-image' : 'contain-image'}"}
+    %div{:style => "background-image: url('#{@post.photo_url}')", :class => "image"}"}
