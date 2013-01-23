@@ -9,7 +9,7 @@
         %i.icon-remove
         Remove Image
 
-    - if @post.style == 'full-page'
+    - if @post.style == 'full-page' || defined?(@editing)
       #post-picture-title
         %h1.copy-over{'data-target' => '#post-title'}
           != !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
@@ -22,7 +22,7 @@
 
     %div{:style => "background-image: url('#{@post.photo_url}')", :class => "image #{@post.photo_ratio >= 1.4 ? 'cover-image' : 'contain-image'}"}
 
-.white-wrap
+%div{:class => "white-wrap #{defined?(@editing) || @post.photo.present? ? 'with-photo' : ''}"}
   .content-wrapper
     - cache @post do
       - if defined?(@editing) || @post.style != 'full-page'
@@ -37,4 +37,12 @@
       #post-body{(defined?(@editing) ? {:contenteditable => 'true'} : {})}
         != !@post.content.blank? ? @post.content : '<p>Content... (click to edit)</p>'
 
-    = render "posts/recommend_btn"
+      -#%textarea#post-textarea
+        != !@post.content.blank? ? @post.content : '<p>Content... (click to edit)</p>'
+
+    .action-bar.hide-editing
+      = render "posts/recommend_btn"
+      - if @post.status == 'active'
+        = render "posts/share_btns"
+      - if can? :update, @post
+        = render "posts/admin_btns"

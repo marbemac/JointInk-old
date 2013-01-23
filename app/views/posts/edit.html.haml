@@ -1,23 +1,31 @@
+.editor-actions
+  .editor-publish.action.button
+    %i.icon-upload
+    %span.name Publish
+
+  .editor-save.gray.button
+    %i.icon-save
+    %span.name Save
+
+  .editor-discard.gray.button
+    %a{:href => post_path(@post), 'data-method' => :delete, 'data-confirm' => 'Are you sure you want to discard this post?', 'data-skip-pjax' => true}
+      %i.icon-remove
+      Discard
+
+#left-panel
+  .title= @post.post_type == 'text' ? 'Article' : @post.post_type
+  -#.section.post-style
+  -#  .head Post Style
+  -#  .content
+  -#    .default{'data-value' => 'default'} No Image
+  -#    .small{'data-value' => 'default'} Small Image
+  -#    .half{'data-value' => 'half-page'} Half Page
+  -#    .full{'data-value' => 'full-page'} Full Page
+
+#right-panel
 
 
-#post-editor{:class => @post.post_type}
-
-  - content_for :header do
-    .section.editor-publish
-      .part
-        %i.icon-upload
-        %span.name Publish
-
-    .section.editor-save
-      .part
-        %i.icon-save
-        %span.name Save
-
-    .section.editor-discard
-      .part
-        %a{:href => post_path(@post), 'data-method' => :delete, 'data-confirm' => 'Are you sure you want to discard this post?', 'data-skip-pjax' => true}
-          %i.icon-remove
-          Discard
+#post-editor
 
   #editor-submit-url{'data-url' => post_path(@post.id)}
   = render :partial => "content_#{@post.post_type}", :layout => 'content'

@@ -22,5 +22,6 @@
 //= require jquery.timeago
 //= require jquery.hotkeys
 //= require jquery.scrollTo
+//= require jquery.cookie
 
 //= require_tree ./global

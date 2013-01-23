@@ -44,8 +44,6 @@ jQuery ->
 
     updateFullPageArticle()
 
-    $.scrollTo '60'
-
     setTimeout ->
       $('#post-picture-title').fadeIn(800)
     , 500

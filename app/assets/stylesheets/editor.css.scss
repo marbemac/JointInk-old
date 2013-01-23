@@ -1,64 +1,79 @@
-#cke_post-body {
-  @include border-radius(3px);
-  @include box-shadow(rgba(0, 0, 0, 0.5) 0 1px 3px);
-  @include opacity(0.95);
-  padding: 0 !important;
-  border: none !important;
-  z-index: 1000;
-  margin: 0 0 0 -70px;
-}
-.cke_inner {
-  padding: 0 !important;
-}
-.cke_toolgroup {
-  margin: 0 !important;
-  padding: 0 !important;
-  background: none !important;
-}
-#cke_post-body {
-  .icon {
-    font-size: 18px;
-    cursor: pointer;
-  }
-  .icon-blockquote {
-    font-size: 50px;
-    top: 12px;
-    position: relative;
-    line-height: 8px;
-  }
-}
-.cke_button {
-  border-radius: 0px !important;
-  height: 36px !important;
-  padding: 0 !important;
-  width: 40px !important;
-  text-align: center !important;
-  cursor: pointer !important;
-  background-color: darken($action-color, 15%) !important;
-  border-right: 1px solid darken($action-color, 25%) !important;
-  border-left: 1px solid lighten($action-color, 10%) !important;
-  float: none !important;
-  display: block !important;
-
-  .icon {
-    line-height: 36px !important;
-    color: #FFF !important;
-  }
-}
-.cke_button_on {
-  background-color: darken($action-color, 30%) !important;
-}
-
+$panel-width: 175px;
 #posts-edit {
-  #header {
-    padding: 0;
+  padding: 60px $panel-width 200px $panel-width;
+
+  .editor-actions {
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+
+    .button {
+      a {
+        color: #FFF;
+      }
+      &.editor-discard {
+        &:hover {
+          background: $red;
+        }
+      }
+    }
   }
 
   &.picture {
-    #post-editor {
-      padding-top: 50px;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    .editor-actions {
+      position: absolute;
+      top: 36px;
+      right: 200px;
+      left: auto;
+      text-align: right;
+    }
+    .info-strip {
+      padding-right: 370px;
     }
   }
+  &.text {
+    &.full-page {
+      #picture-wrapper {
+        width: auto;
+        left: $panel-width;
+        right: $panel-width;
+      }
+      .white-wrap {
+        padding-bottom: 250px !important;
+      }
+    }
+  }
+}
+
+#left-panel,
+#right-panel {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: $panel-width - 5;
+  background: #222;
+  color: #FFF;
+
+  .title {
+    text-align: center;
+    border-bottom: 1px solid #FFF;
+    line-height: 130px;
+    font-size: 22px;
+    text-transform: uppercase;
+    cursor: default;
+  }
+}
+#left-panel {
+  left: 0;
+}
+#right-panel {
+  right: 0;
 }
 
 #post-editor {
@@ -66,15 +81,5 @@
 
   .post {
     float: none;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  #cke_post-body {
-    margin-left: 0 !important;
-  }
-  .cke_button {
-    float: left !important;
-    display: inline-block !important;
   }
 }

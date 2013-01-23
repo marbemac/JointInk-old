@@ -1,21 +1,23 @@
 .post.tile {
+  @include box-shadow(rgba(0, 0, 0, 0.10) 0 1px 2px);
   $top-vertical-padding: 25px;
   $horizontal-padding: 25px;
   $bottom-height: 54px;
   $bottom-vertical-padding: 20px;
 
   width: $post-width;
-  padding: $post-margin;
   height: $post-height - $bottom-height;
-  float: left;
+  display: inline-block;
   background: #FFF;
   position: relative;
-  padding-bottom: $bottom-height;
-  border: 1px dashed transparent;
+  padding: 0 0 $bottom-height 0;
+  text-align: left;
+  margin: 10px;
+  vertical-align: top;
 
   .top {
     display: block;
-    height: $post-height - $bottom-height - ($top-vertical-padding * 3);
+    height: $post-height - $bottom-height - ($top-vertical-padding * 3) +5;
     overflow: hidden;
     position: relative;
 
@@ -27,7 +29,9 @@
       height: 192px;
     }
     .text {
-      //padding: $top-vertical-padding $horizontal-padding;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 1.8rem;
 
       h1 {
         margin: 0;
@@ -51,6 +55,7 @@
     border-top: 1px solid #EEE;
     height: $bottom-height;
     font-size: 12px;
+
     a {
       color: #333;
       &:hover {
@@ -60,11 +65,15 @@
     .channel {
       font-weight: bold;
     }
+    .icon-double-angle-right {
+      display: none;
+    }
   }
   .with-photo {
     .top {
       .text {
-        padding: 1.8rem 0;
+        padding-bottom: 1.8rem;
+
         h1 {
           font-size: 2.2rem;
           line-height: 3.0rem;
@@ -104,7 +113,7 @@
     }
   }
   .actions {
-    @include box-shadow(rgba(0, 0, 0, 0.15) 0 1px 2px);
+    @include box-shadow(rgba(0, 0, 0, 0.1) 0 1px 2px);
     background: $action-color;
     position: absolute;
     top: 0px;
@@ -144,10 +153,22 @@
       }
     }
   }
+  &.user-page {
+    .bottom {
+      .in,
+      .user {
+        display: none;
+      }
+      .icon-double-angle-right {
+        display: inline;
+      }
+    }
+  }
 
   &.blank {
     text-align: center;
-    border: 1px dashed transparent;
+    background: transparent;
+    border: 2px dashed #DDD;
 
     .title {
       font-size: 26px;
@@ -166,12 +187,13 @@
     .buttons {
       margin: 25px 0 0 0;
     }
+    &:hover {
+      @include box-shadow(none);
+    }
   }
 
   &:hover {
-    //@include box-shadow(rgba(0, 0, 0, 0.15) 0 1px 2px);
-    background: #F9F9F9;
-    border-color: #CCC;
+    @include box-shadow(rgba(0, 0, 0, 0.2) 0 1px 2px);
 
     .actions {
       display: block;
@@ -185,8 +207,7 @@
 #post-collection {
   @include clearfix();
   position: relative;
-  top: -20px;
-  left: 20px;
+  text-align: center;
 }
 
 #posts-show,
@@ -197,7 +218,7 @@
     font-size: 17px;
     padding: 10px;
     text-align: center;
-    margin: -15px 0 22px 0;
+    margin: 0 0 23px 0;
     width: 100%;
   }
   #container,
@@ -210,6 +231,11 @@
   }
   .white-wrap {
     width: 100%;
+    margin-top: 50px;
+
+    &.with-photo {
+      margin-top: 0;
+    }
   }
   #post-picture-title {
     display: none;
@@ -222,10 +248,21 @@
     }
   }
 
+  .recommend,
+  .share-btns,
+  .admin-btns {
+    display: inline-block;
+    margin-right: 15px;
+    .icon-caret-up,
+    .icon-caret-down {
+      margin-left: -8px;
+    }
+  }
+
   // Post Types
   &.text {
-    .recommend {
-      margin: 30px 0;
+    .action-bar {
+      margin: 100px 0;
     }
 
     // Post Subtypes
@@ -351,7 +388,21 @@
       margin: 0 0 8px 0;
     }
     .info-strip {
+      position: relative;
       padding: 25px 175px 25px 25px;
+
+      .action-bar {
+        position: absolute;
+        right: 25px;
+        top: 100%;
+        margin-top: 25px;
+        z-index: 150;
+
+        .button,
+        .btn-dropdown {
+          margin: 0;
+        }
+      }
     }
   }
 }
@@ -481,15 +532,6 @@
     li {
       font-size: 1.8rem;
       padding: 0 0 0 6px;
-    }
-  }
-  .info-strip {
-    position: relative;
-    .recommend {
-      position: absolute;
-      right: 25px;
-      top: 50%;
-      margin-top: -21px;
     }
   }
   .show-editing {

@@ -6,7 +6,7 @@ class UserMailer < ActionMailer::Base
 
   def welcome_email(user_id)
     @user = User.find(user_id)
-    mail(:to => "#{@user.name} <#{@user.email}>", :subject => "#{@user.name}, welcome to ThisThat")
+    mail(:to => "#{@user.name} <#{@user.email}>", :subject => "#{@user.first_name}, welcome to ThisThat")
   end
 
   def welcome_email_admins(user_id)

@@ -1,0 +1,8 @@
+- cache channel do
+  .channel.tile
+
+    %a{:href => channel_path(channel)}
+      .image.cover-image{:style => "background-image: url('#{channel.photo_url(:medium)}')"}
+      %h5.name.san-serif= channel.name
+
+      .subheader= pluralize(channel.posts_count, 'Post')

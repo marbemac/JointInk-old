@@ -5,24 +5,19 @@
 
   %body.fullscreen_bg{:id => "#{params[:controller]}-#{params[:action]}"}
 
-    #header
-      = render 'layouts/navigation'
-
     #container
       = render 'layouts/messages'
 
       #main{:role => 'main'}
         = yield
 
-      #loader
-        %h1 Loading...
+      #loader Loading...
+
+    = render 'layouts/nav'
 
     #bg.cover-image{:style => "background-image: url('#{asset_path('splash-'+(1+rand(5)).to_s+'.jpg')}')"}
 
-    != social_js
-
-    - if Rails.env.production?
-      -#= woopra_js
+    != common_js
 
     = javascript_include_tag "application"
 

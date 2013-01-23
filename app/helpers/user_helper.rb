@@ -1,10 +1,6 @@
 module UserHelper
 
   def user_avatar(user, options)
-    #if user.account('facebook')
-    #  options.delete(:gravity)
-    #  facebook_profile_image_tag("#{user.fbuid}.png", options)
-    #els
     if user.avatar.present?
       cl_image_tag(user.avatar_image, options)
     else
@@ -14,10 +10,8 @@ module UserHelper
   end
 
   def user_avatar_path(user, options)
-    #if user.account('facebook')
-    #  options.delete(:gravity)
-    #  cl_image_path("#{user.fbuid}.png", {:type=>:facebook}.merge(options))
-    #els
+    update_image_options(options)
+
     if user.avatar.present?
       cl_image_path(user.avatar_image, options)
     else

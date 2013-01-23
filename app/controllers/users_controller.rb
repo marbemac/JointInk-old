@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show, :channels]
 
   def index
 
@@ -21,12 +21,13 @@ class UsersController < ApplicationController
     @description = @user.bio
     build_og_tags(@user.og_title, @user.og_type, @user.permalink, @user.og_description)
 
-    case params[:page]
-      when 'posts'
-        @posts = @user.sharing(@channel).page(params[:page]).order('created_at DESC')
-      when 'feed'
-        @posts = @user.feed(@channel).page(params[:page])
-    end
+    #case params[:page]
+    #  when 'posts'
+    #    @posts = @user.sharing(@channel).page(params[:page]).order('created_at DESC')
+    #  when 'feed'
+    #    @posts = @user.feed(@channel).page(params[:page])
+    #end
+    @posts = @user.sharing(@channel).page(params[:page]).order('created_at DESC')
   end
 
   def show_redirect
@@ -38,7 +39,7 @@ class UsersController < ApplicationController
     @user = current_user
     @title = "Ideas"
     @page_title = "Your Ideas"
-    @posts = @user.posts.ideas.page(params[:page]).to_a
+    @posts = @user.posts.ideas.page(params[:page]).order('created_at DESC')
   end
 
   def add
@@ -108,6 +109,12 @@ class UsersController < ApplicationController
       account.save
     end
     redirect_to :back, :notice => 'Account successfully removed'
+  end
+
+  def channels
+    @user = User.find(params[:id])
+    @created_channels = @user.created_channels
+    @contributed_channels = @user.contributed_channels
   end
 
   def signin
