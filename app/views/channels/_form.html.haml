@@ -23,7 +23,7 @@
       = f.input :name, :label => false, :input_html => {:placeholder => 'Channel Name', :autocomplete => 'off'}
       = f.input :description, :label => false, :input_html => {:placeholder => 'Channel Description', :autocomplete => 'off'}
 
-    - if user.role? "admin"
+    - if current_user.role? "admin"
       .section.permissions
         .help.show-for-touch choose permissions
         .option-wrapper.first

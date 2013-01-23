@@ -42,7 +42,9 @@ class PostStat < ActiveRecord::Base
   end
 
   def self.add(post_id, ip_address, stat_type, referral_url, user_id=nil, value=nil)
-    stat = retrieve(post_id, stat_type, ip_address, user_id)
+    if stat_type == "vote"
+      stat = retrieve(post_id, stat_type, ip_address, user_id)
+    end
     return false if stat
     stat = PostStat.new
     stat.post_id = post_id
