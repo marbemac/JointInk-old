@@ -1,6 +1,6 @@
 $panel-width: 175px;
 #posts-edit {
-  padding: 60px $panel-width 200px $panel-width;
+  padding: 60px $panel-width 0 $panel-width;
 
   .editor-actions {
     text-align: center;
@@ -58,15 +58,45 @@ $panel-width: 175px;
   bottom: 0;
   width: $panel-width - 5;
   background: #222;
-  color: #FFF;
+  color: #EFEFEF;
 
   .title {
     text-align: center;
-    border-bottom: 1px solid #FFF;
     line-height: 130px;
     font-size: 22px;
     text-transform: uppercase;
     cursor: default;
+  }
+  .section {
+    .head {
+      background: #EFEFEF;
+      color: #222;
+      font-size: 18px;
+      padding: 7px 10px;
+      display: inline-block;
+    }
+    .content {
+      margin: 10px 10px 10px 0;
+    }
+    &.post-style {
+      .content {
+        >div {
+          margin: 5px 0;
+          padding: 5px 10px;
+
+          &:hover {
+            background: #CFCFCF;
+            color: #222;
+            cursor: pointer;
+          }
+          &.on {
+            background: #EFEFEF;
+            color: #222;
+            cursor: default;
+          }
+        }
+      }
+    }
   }
 }
 #left-panel {

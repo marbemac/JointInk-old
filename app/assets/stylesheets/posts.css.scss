@@ -285,14 +285,19 @@
     // Post Styles
     &.default {
       #picture-wrapper {
+        display: none;
+      }
+    }
+    &.small-image {
+      #picture-wrapper {
         height: 300px;
         margin: 0 0 22px 0;
-        .show-editing {
-          border: 1px dashed #CCC;
-        }
         .image {
           @extend .cover-image;
         }
+      }
+      .white-wrap {
+        padding-top: 0px;
       }
     }
     &.half-page {
@@ -361,7 +366,6 @@
           font-size: 4.4rem;
           margin: 0;
           padding: 0;
-          cursor: default;
         }
         .divider {
           width: 75px;
