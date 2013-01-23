@@ -466,6 +466,8 @@ blockquote {
 
 #page-nav {
   nav {
+    $link-color: #8A8A7A;
+
     background: #FFF;
     border-top: 1px solid transparent;
     border-bottom: 1px solid #DDD;
@@ -480,8 +482,6 @@ blockquote {
       position: absolute;
 
       >li {
-        $link-color: #8A8A7A;
-
         display: inline-block;
         font-size: 18px;
         font-weight: 300;
@@ -539,6 +539,12 @@ blockquote {
       top: -50px;
       left: 50%;
       margin-left: -60px;
+    }
+    .circle-dot {
+      color: $link-color;
+      font-size: 18px;
+      margin: 0 5px;
+      display: none;
     }
   }
   .text-dropdown {
