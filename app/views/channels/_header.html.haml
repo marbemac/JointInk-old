@@ -20,6 +20,8 @@
     .circle-image{:style => "background-image: url('#{channel_photo_path(@channel, :width => 120, :height => 120, :crop => :thumb)}')"}
       .ring
 
+    .circle-dot &bull;
+
     %ul.right
       - if can? :post, @channel || !signed_in?
         - if can? :update, @channel

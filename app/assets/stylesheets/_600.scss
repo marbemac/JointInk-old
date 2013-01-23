@@ -22,11 +22,31 @@ html {
 
 #mast-header header {
   width: 100%;
+  margin: 70px 0 0 0;
+}
+
+#page-nav {
+  nav {
+    .circle-image {
+      display: none;
+    }
+    .circle-dot {
+      display: inline;
+    }
+    .left,
+    .right {
+      float: none;
+      display: inline;
+      position: static;
+      margin-right: 0;
+      margin-left: 0;
+    }
+  }
 }
 
 #main {
   width: 100%;
-  padding-left: 0 !important;
+  margin-top: 50px;
 }
 
 .fullscreen {
@@ -45,45 +65,21 @@ html {
 }
 
 #posts-show {
-  #post-picture-title {
-    width: 100%;
-    left: 0 !important;
-    margin-left: 0;
-    max-width: none;
-
-    h1 {
-      font-size: 30px !important;
-      font-size: 3rem !important;
-    }
+  .info-strip {
+    padding: 25px 15px !important;
+    text-align: center;
   }
-  &.fullscreen {
-    padding-right: 0px;
+  .white-wrap {
+    padding: 25px 15px !important;
+    width: auto;
   }
-}
-
-#page-title {
-  display: none;
 }
 
 .post.tile {
-  margin: 15px auto;
+  margin: 20px auto;
   float: none;
   width: 100%;
-}
-
-.text-type {
-  .content-wrapper {
-    padding: 0 25px;
-  }
-}
-
-#post-collection {
-  left: 0;
-}
-
-.page-header {
-  margin-top: 35px;
-  margin-bottom: -5px;
+  max-width: 420px;
 }
 
 #posts-show {

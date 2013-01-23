@@ -26,6 +26,8 @@
     .circle-image{:style => "background-image: url('#{user_avatar_path(@user, :width => 120, :height => 120, :crop => :thumb, :gravity => :face)}')"}
       .ring
 
+    .circle-dot &bull;
+
     %ul.right
       %li{:class => (params[:action] == 'channels' ? 'on' : '')}
         %a{:href => user_channels_path(@user)}

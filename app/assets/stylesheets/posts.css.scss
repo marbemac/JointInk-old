@@ -166,6 +166,7 @@
   }
 
   &.blank {
+    @include box-shadow(none);
     text-align: center;
     background: transparent;
     border: 2px dashed #DDD;
