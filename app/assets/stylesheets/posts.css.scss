@@ -412,6 +412,21 @@
         }
       }
     }
+    // Post Styles
+    &.default {
+      #picture-wrapper {
+        .image {
+          @extend .contain-image;
+        }
+      }
+    }
+    &.cover-image {
+      #picture-wrapper {
+        .image {
+          @extend .cover-image;
+        }
+      }
+    }
   }
 }
 
@@ -448,7 +463,7 @@
     text-align: center;
     height: 100%;
     width: 100%;
-    background: #000;
+    background: #222;
 
     .show-editing {
       position: absolute;
