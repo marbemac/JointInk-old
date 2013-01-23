@@ -221,6 +221,8 @@
     text-align: center;
     margin: 0 0 23px 0;
     width: 100%;
+    position: relative;
+    z-index: 500;
   }
   #container,
   #header {
@@ -297,16 +299,17 @@
       $picture-height: 475px;
       #picture-wrapper {
         position: absolute;
-        top: $header-height;
+        top: 0;
         left: 0;
         right: 0;
         height: $picture-height;
+        z-index: 50;
         .image {
           background-size: cover;
         }
       }
-      .content-wrapper {
-        padding-top: $picture-height + 3px;
+      .white-wrap {
+        padding-top: $picture-height + 21px;
       }
     }
     &.full-page {
