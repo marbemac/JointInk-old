@@ -23,5 +23,6 @@
 //= require jquery.hotkeys
 //= require jquery.scrollTo
 //= require jquery.cookie
+//= require bootstrap.tooltips
 
 //= require_tree ./global

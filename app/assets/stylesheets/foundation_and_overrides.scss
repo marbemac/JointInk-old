@@ -241,3 +241,13 @@ $bodyFontWeight: 500;
 // http://www.modularscale.com by Tim Brown
 // https://github.com/scottkellum/modular-scale by scottkellum
 @import 'foundation';
+
+.tooltip {
+  background: none;
+  font-weight: normal;
+  line-height: 18px;
+  .tooltip-inner {
+    @include border-radius(0);
+    padding: 8px;
+  }
+}

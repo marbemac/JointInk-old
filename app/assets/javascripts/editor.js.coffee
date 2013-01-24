@@ -1,5 +1,8 @@
 jQuery ->
 
+  $('#post-picture-title h1, #post-title, #post-body').attr('contenteditable', true)
+
+  # start the redactor editor
   if $('#post-body').length
     $('#post-body').redactor
 #      air: true
@@ -11,7 +14,10 @@ jQuery ->
       allowedTags: ["a", "p", "b", "i", "img", "blockquote", "ul", "ol", "li", "h3", "h4"]
       formattingTags: ['h3','h4','p','blockquote']
 
-  $('#post-picture-title h1, #post-title, #post-body').attr('contenteditable', true)
+  # prompt them before they leave the page, unless they are publishing or discarding
+  $(window).bind 'beforeunload', ->
+    unless $('.editor-publish,.editor-discard').hasClass('disabled')
+      return 'Are you sure you want to leave?'
 
   # handle photo uploads
   $('#picture-wrapper .fileinput-button input').fileupload
@@ -63,13 +69,13 @@ jQuery ->
           window.location = data.url
       complete: ->
         $('.editor-save, .editor-publish').removeClass('disabled')
-        $('.editor-save .name').text('Save')
+        $('.editor-save .name').text('Save As Idea')
         $('.editor-publish .name').text('Publish')
 
   # auto save the post every x seconds
-  $('.editor').livequery ->
-    $('body').everyTime "30s", 'save-form', ->
-      $('.editor-save').click()
+#  $('.editor').livequery ->
+#    $('body').everyTime "30s", 'save-form', ->
+#      $('.editor-save').click()
 
   # save on ctrl + s
   $('body,#post-title,#post-body').bind 'keydown.ctrl_s', (e) ->
@@ -81,6 +87,16 @@ jQuery ->
   $('body,#post-title,#post-body').bind 'keydown.meta_s', (e) ->
     e.preventDefault()
     $('.editor-save').click()
+    false
+
+  # capture ctrl + left
+  $('body,#post-title,#post-body').bind 'keydown.ctrl_left', (e) ->
+    e.preventDefault()
+    false
+
+  # capture command (mac) + left
+  $('body,#post-title,#post-body').bind 'keydown.meta_left', (e) ->
+    e.preventDefault()
     false
 
   # toggle text post styles

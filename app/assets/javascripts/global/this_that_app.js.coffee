@@ -11,8 +11,8 @@ jQuery ->
     $('#loader').hide()
 
   # Initiate timeago timestamps
-  $(".timeago").livequery ->
-    $(@).timeago()
+#  $(".timeago").livequery ->
+#    $(@).timeago()
 
   # copy input to area
   $('body').on 'keyup', '.copy-over', (e) ->
@@ -21,3 +21,7 @@ jQuery ->
   # toggle target element
   $('.toggler').live 'click', (e) ->
     $($(@).data('target')).toggle()
+
+  # tooltips
+  $('.has-tooltip').livequery ->
+    $(@).tooltip()

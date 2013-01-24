@@ -1,11 +1,11 @@
 .editor-actions
-  .editor-publish.action.button
+  .editor-publish.action.button.has-tooltip{'data-placement' => 'bottom', :title => 'Publishing makes your post live for other people to view.'}
     %i.icon-upload
     %span.name Publish
 
-  .editor-save.gray.button
+  .editor-save.gray.button.has-tooltip{'data-placement' => 'bottom', :title => 'Ideas function as draft posts. Save it for later.'}
     %i.icon-save
-    %span.name Save
+    %span.name Save As Idea
 
   .editor-discard.gray.button
     %a{:href => post_path(@post), 'data-method' => :delete, 'data-confirm' => 'Are you sure you want to discard this post?', 'data-skip-pjax' => true}
