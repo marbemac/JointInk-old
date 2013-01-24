@@ -3,6 +3,7 @@
 # Table name: channels
 #
 #  cover_photo :string(255)
+#  created_at  :datetime
 #  description :string(255)
 #  id          :integer          not null, primary key
 #  name        :string(255)
@@ -10,13 +11,13 @@
 #  privacy     :string(255)      default("public")
 #  slug        :string(255)
 #  status      :string(255)      default("active")
+#  updated_at  :datetime
 #  user_id     :integer
 #
 
 class Channel < ActiveRecord::Base
   include ActionView::Helpers::TextHelper
   include CloudinaryHelper
-
 
   extend FriendlyId
   friendly_id :name, :use => :slugged

@@ -47,6 +47,7 @@ class Post < ActiveRecord::Base
   scope :ideas, where(:status => 'idea')
 
   before_save :sanitize
+  after_save :touch_channels
   before_destroy :disconnect
 
   def is_active?
@@ -54,6 +55,12 @@ class Post < ActiveRecord::Base
   end
 
   def disconnect
+  end
+
+  def touch_channels
+    channels.each do |c|
+      c.touch
+    end
   end
 
   def sanitize
