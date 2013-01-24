@@ -1339,22 +1339,27 @@ var RLANG = {
 			var boxtop = this.$box.offset().top;
 			var left = 0;
 
+            this.$toolbar.addClass('vertical')
+
 			if (scrolltop > boxtop)
 			{
 				var width = '100%';
 				if (this.opts.fixedBox)
 				{
-					left = this.$box.offset().left;
+//					left = this.$box.offset().left;
+					left = this.$box.offset().left - 50;
 					width = this.$box.innerWidth();
 				}
 
 				this.fixed = true;
-				this.$toolbar.css({ position: 'fixed', width: width, zIndex: 1005, top: this.opts.fixedTop + 'px', left: left });
+//				this.$toolbar.css({ position: 'fixed', width: width, zIndex: 1005, top: this.opts.fixedTop + 'px', left: left });
+				this.$toolbar.css({ position: 'fixed', zIndex: 1005, top: this.opts.fixedTop + 'px', left: left });
 			}
 			else
 			{
 				this.fixed = false;
-				this.$toolbar.css({ position: 'relative', width: 'auto', zIndex: 1, top: 0, left: left });
+//				this.$toolbar.css({ position: 'relative', width: 'auto', zIndex: 1, top: 0, left: left });
+				this.$toolbar.css({ position: 'absolute', zIndex: 1, top: 0, left: '-50px' });
 			}
 		},
 

@@ -49,9 +49,10 @@ body .redactor_air {
 	line-height: 0 !important;
 	list-style: none !important;
 	font-size: 0;
-	background: #7ecdef;
+	background: #DDD;
 	overflow: hidden !important;
 	height: 32px !important;
+    border: 1px solid #BBB
 }
 body .redactor_air .redactor_toolbar {
 	padding-right: 5px !important;
@@ -67,6 +68,7 @@ body .redactor_air .redactor_toolbar {
 .redactor_toolbar li.redactor_separator {
 	float: left;
 	height: 34px;
+    width: 100%;
 	border-left: 1px solid #47b8eb;
 	border-right: 1px solid #6ebfe8;
 	padding: 0;
@@ -106,14 +108,41 @@ body .redactor_air .redactor_toolbar {
 }
 
 .redactor_toolbar li a:hover {
-	border-color: #3ea1cd;
-	background-color: #dde4ef;
+	border-color: #BBB;
+	background-color: #EEE;
 	outline: none;
 }
 .redactor_toolbar li a:active, .redactor_toolbar li a.redactor_act {
-	border-color: #3ea1cd;
-	background-color: #ddd;
+	border-color: BBB;
+	background-color: #EEE;
 	outline: none;
+}
+
+// Vertical toolbar
+.redactor_toolbar {
+  &.vertical {
+    padding-left: 0px !important;
+    height: auto !important;
+
+    li {
+      float: none !important;
+      padding: 3px 0;
+
+      a {
+        width: 27px;
+        border: none;
+      }
+      &.redactor_separator {
+        height: auto;
+        float: none;
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid #BBB;
+        margin: 5px 0 !important;
+        padding: 0;
+      }
+    }
+  }
 }
 
 

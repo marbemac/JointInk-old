@@ -2,8 +2,13 @@ jQuery ->
 
   if $('#post-body').length
     $('#post-body').redactor
-      air: true
-      airButtons: ['formatting','bold','italic','|','unorderedlist','orderedlist','link']
+#      air: true
+#      airButtons: ['formatting','bold','italic','|','unorderedlist','orderedlist','link']
+      fixed: true
+      fixedBox: true
+      fixedTop: 20
+      buttons: ['formatting','bold','italic','|','unorderedlist','orderedlist','link']
+      allowedTags: ["a", "p", "b", "i", "img", "blockquote", "ul", "ol", "li", "h3", "h4"]
       formattingTags: ['h3','h4','p','blockquote']
 
   $('#post-picture-title h1, #post-title, #post-body').attr('contenteditable', true)
