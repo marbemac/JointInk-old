@@ -19,6 +19,7 @@ ThisThat::Application.routes.draw do
       get '' => 'posts#show_redirect', :as => :post
       put 'vote' => 'posts#create_vote', :as => :post_vote
       delete 'vote' => 'posts#destroy_vote', :as => :post_vote
+      post 'read_post' => 'posts#create_read', :as => :read_post
     end
   end
 

@@ -23,17 +23,18 @@
       = f.input :name, :label => false, :input_html => {:placeholder => 'Channel Name', :autocomplete => 'off'}
       = f.input :description, :label => false, :input_html => {:placeholder => 'Channel Description', :autocomplete => 'off'}
 
-    .section.permissions
-      .help.show-for-touch choose permissions
-      .option-wrapper.first
-        %div{:class => "option #{@channel.privacy == 'public' ? 'on' : ''}", 'data-value' => 'public'}
-          .head Public
-          %p Everybody can view posts. Everybody can contribute posts.
-      .option-wrapper.second
-        %div{:class => "option #{@channel.privacy == 'invite' ? 'on' : ''}", 'data-value' => 'invite'}
-          .head Invite to Post
-          %p Everybody can view posts. Only those you invite can contribute posts.
+    - if current_user.role? "admin"
+      .section.permissions
+        .help.show-for-touch choose permissions
+        .option-wrapper.first
+          %div{:class => "option #{@channel.privacy == 'public' ? 'on' : ''}", 'data-value' => 'public'}
+            .head Public
+            %p Everybody can view posts. Everybody can contribute posts.
+        .option-wrapper.second
+          %div{:class => "option #{@channel.privacy == 'invite' ? 'on' : ''}", 'data-value' => 'invite'}
+            .head Invite to Post
+            %p Everybody can view posts. Only those you invite can contribute posts.
 
-      = f.input :privacy, :as => :hidden, :label => false, :input_html => { :value => @channel.persisted? ? @channel.privacy : 'public' }
+        = f.input :privacy, :as => :hidden, :label => false, :input_html => { :value => @channel.persisted? ? @channel.privacy : 'public' }
 
     = f.button :submit, :class => 'large action submit button', :value => @channel.persisted? ? 'Update Channel' : 'Create Channel'

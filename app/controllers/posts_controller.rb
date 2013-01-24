@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show]
+  before_filter :authenticate_user!, :except => [:show, :create_read]
 
   def new
     @channel = Channel.find(params[:id])
@@ -38,6 +38,8 @@ class PostsController < ApplicationController
     @title = @post.title
     @description = @post.content
     build_og_tags(@post.og_title, @post.og_type, @post.permalink, @post.og_description)
+    user_id = current_user ? current_user.id : nil
+    PostStat.add(@post.id, request.remote_ip, 'view', request.referer, user_id)
   end
 
   def show_redirect
@@ -103,6 +105,18 @@ class PostsController < ApplicationController
       render :json => {:status => 'success'}, status: 200
     else
       render :json => {:status => 'error'}, status: :unprocessable_entity
+    end
+  end
+
+  def create_read
+    @post = Post.find(params[:id])
+    user_id = current_user ? current_user.id : nil
+
+    if @post.user_id == user_id
+      render :json => {:status => 'success'}, status: 200
+    else
+      PostStat.add(@post.id, request.remote_ip, 'read', request.referer, user_id)
+      render :json => {:status => 'success'}, status: 200
     end
   end
 end
