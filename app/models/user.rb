@@ -67,9 +67,9 @@ class User < ActiveRecord::Base
   validate :username_change
 
   before_create :set_color_theme
-  after_create :add_to_soulmate, :send_welcome_email, :send_personal_email
+  after_create :send_welcome_email, :send_personal_email
   after_update :update_denorms
-  before_destroy :remove_from_soulmate, :disconnect
+  before_destroy :disconnect
 
   def set_color_theme
     self.color_theme = %w(#8C2300 #661A00 #8C4600 #B25900 #698C00 #4C6600 #1A6600 #00661A #008C46
@@ -165,14 +165,6 @@ class User < ActiveRecord::Base
   # Removes a role from this user
   def revoke_role(role)
     self.roles.delete(role)
-  end
-
-  def add_to_soulmate
-    #resque.enqueue(SmCreateUser, id) if is_active?
-  end
-
-  def remove_from_soulmate
-    #resque.enqueue(SmDestroyUser, id)
   end
 
   def send_welcome_email

@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require jquery.pjax
 //= require jquery.livequery
-// require soulmate
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
 //= require jquery.easing

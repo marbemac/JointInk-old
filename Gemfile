@@ -16,7 +16,6 @@ gem 'yajl-ruby' # json
 gem "sendgrid"
 gem "cancan", ">= 1.6.8"
 gem 'rack-contrib', '1.1.0'
-gem 'soulmate', '0.1.3', :require => 'soulmate/server' # Redis based autocomplete storage
 gem 'koala', '1.6' # facebook graph api support
 gem 'twitter' # twitter api support
 gem 'chronic' # Date/Time management

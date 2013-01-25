@@ -45,8 +45,6 @@ ThisThat::Application.routes.draw do
   #  get '' => 'users#basic_settings', :as => :user_basic_settings
   #end
 
-  mount Soulmate::Server, :at => "autocomplete"
-
   admin_constraint = lambda do |request|
     #request.env['warden'].authenticate? and request.env['warden'].user.role?('admin')
     true
