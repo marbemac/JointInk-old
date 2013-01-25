@@ -1,6 +1,10 @@
 class ChannelsController < ApplicationController
   before_filter :authenticate_user!, :only => [:new,:update,:edit]
 
+  def index
+    @channels = Channel.all
+  end
+
   def new
     @channel = Channel.new
     authorize! :create, @channel
