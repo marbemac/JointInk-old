@@ -41,6 +41,7 @@ gem 'cache_digests'
 gem 'hirefire-resource', :git => 'git://github.com/meskyanichi/hirefire-resource.git'
 gem 'simple_form'
 gem 'sanitize'
+#gem 'pg_search'
 #gem 'turbo-sprockets-rails3' # speed up asset compiling
 
 gem 'newrelic_rpm', '~> 3.5.4'

@@ -88,7 +88,7 @@ GEM
       compass (>= 0.12.2, < 0.14)
     connection_pool (1.0.0)
     daemons (1.1.9)
-    dalli (2.6.0)
+    dalli (2.6.1)
     database_cleaner (0.9.1)
     devise (2.2.2)
       bcrypt-ruby (~> 3.0)
