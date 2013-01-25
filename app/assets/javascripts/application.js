@@ -18,10 +18,11 @@
 //= require jquery-fileupload/vendor/tmpl
 //= require jquery.easing
 //= require jquery.timer
-//= require jquery.timeago
+// require jquery.timeago
 //= require jquery.hotkeys
 //= require jquery.scrollTo
 //= require jquery.cookie
+//= require jquery.autocomplete
 //= require bootstrap.tooltips
 
 //= require_tree ./global

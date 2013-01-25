@@ -1,5 +1,5 @@
 .editor-actions
-  %a.home.gray.button{:href => root_url(:host => site_host)}
+  %a.home.gray.button{:href => root_url(:host => site_host), 'data-skip-pjax' => true}
     %i.icon-home
 
   .editor-publish.action.button.has-tooltip{'data-placement' => 'bottom', :title => 'Publishing makes your post live for other people to view.'}
@@ -17,31 +17,44 @@
 
 #left-panel
   .title= @post.post_type == 'text' ? 'Article' : @post.post_type
+  .section.channels
+    .head
+      Channels
+      %i.icon-plus{:title => 'Add a channel to this post.'}
+    .content
+      = render "posts/channels_list"
+
+    #channel-autocomplete
+      %input{:type => 'text', :placeholder => 'Channel name...', :autocomplete => 'off'}
+
+
   .section.post-style
     - if @post.post_type == 'text'
       .head Article Style
       .content
-        %div{'data-value' => 'default', :class => "#{@post.style == 'default' ? 'on' : ''}"}
-          %i.icon-double-angle-right
-          No Image
-        %div{'data-value' => 'small-image', :class => "#{@post.style == 'small-image' ? 'on' : ''}"}
-          %i.icon-double-angle-right
-          Small Image
-        %div{'data-value' => 'half-page', :class => "#{@post.style == 'half-page' ? 'on' : ''}"}
-          %i.icon-double-angle-right
-          Half Page
-        %div{'data-value' => 'full-page', :class => "#{@post.style == 'full-page' ? 'on' : ''}"}
-          %i.icon-double-angle-right
-          Full Page
+        %ul
+          %li{'data-value' => 'default', :class => "#{@post.style == 'default' ? 'on' : ''}"}
+            %i.icon.icon-double-angle-right
+            No Image
+          %li{'data-value' => 'small-image', :class => "#{@post.style == 'small-image' ? 'on' : ''}"}
+            %i.icon.icon-double-angle-right
+            Small Image
+          %li{'data-value' => 'half-page', :class => "#{@post.style == 'half-page' ? 'on' : ''}"}
+            %i.icon.icon-double-angle-right
+            Half Page
+          %li{'data-value' => 'full-page', :class => "#{@post.style == 'full-page' ? 'on' : ''}"}
+            %i.icon.icon-double-angle-right
+            Full Page
     - else
       .head Picture Style
       .content
-        %div{'data-value' => 'default', :class => "#{@post.style == 'default' ? 'on' : ''}"}
-          %i.icon-double-angle-right
-          Contain Image
-        %div{'data-value' => 'cover-image', :class => "#{@post.style == 'cover-image' ? 'on' : ''}"}
-          %i.icon-double-angle-right
-          Cover Image
+        %ul
+          %li{'data-value' => 'default', :class => "#{@post.style == 'default' ? 'on' : ''}"}
+            %i.icon.icon-double-angle-right
+            Contain Image
+          %li{'data-value' => 'cover-image', :class => "#{@post.style == 'cover-image' ? 'on' : ''}"}
+            %i.icon.icon-double-angle-right
+            Cover Image
 
 #right-panel
 

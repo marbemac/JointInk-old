@@ -102,6 +102,7 @@
     <orderEntry type="library" scope="PROVIDED" name="omniauth-twitter (v0.0.14, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="orm_adapter (v0.4.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pg (v0.14.1, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="pg_search (v0.5.7, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="polyglot (v0.3.3, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pry (v0.9.11.4, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pry-rails (v0.2.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />

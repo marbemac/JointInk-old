@@ -898,8 +898,34 @@ blockquote {
   }
 }
 
+.tooltip {
+  background: none;
+  font-weight: normal;
+  line-height: 18px;
+  .tooltip-inner {
+    @include border-radius(0);
+    padding: 8px;
+  }
+  &.in {
+    @include opacity(0.9);
+  }
+  &.error {
+    .tooltip-inner {
+      background-color: $red;
+    }
+    .tooltip-arrow {
+      border-right-color: $red;
+    }
+    a {
+      color: #000;
+      font-weight: bold;
+    }
+  }
+}
+
 @import "channel.css.scss";
 @import "users";
 @import "posts";
 @import "editor";
 @import "media_queries";
+@import "jquery.autocomplete";

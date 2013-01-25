@@ -1,7 +1,7 @@
 - cache post do
   %div{:class => "article #{post.photo_url ? 'with-photo' : ''}"}
 
-    %a.top{:href => post_via_channel_path(post.primary_channel, post)}
+    %a.top{:href => post.primary_channel ? post_via_channel_path(post.primary_channel, post) : post_path(post.id)}
       - if post.photo_url
         .image.cover-image{:style => "background-image: url('#{post_photo_path(post, :width => 400, :height => 300, :crop => :limit)}')"}
       .text

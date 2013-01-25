@@ -6,7 +6,10 @@
     .post-top-meta
       %a.post-author{:href => user_path(@post.user), :rel => 'author'}= @post.user.name
       in
-      %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
+      - if @post.primary_channel
+        %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
+      - else
+        %a.post-channel{:href => '#'} None
 
   .action-bar.hide-editing
     - if can? :update, @post

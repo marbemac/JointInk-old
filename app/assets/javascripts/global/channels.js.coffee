@@ -3,7 +3,6 @@ jQuery ->
   $('#channel_photo').change (e) ->
     if (@.files && @.files[0])
       reader = new FileReader()
-      console.log 'reader'
       reader.onload = (e) ->
         $('#channel_form .fileinput-button img').attr('src', e.target.result)
 

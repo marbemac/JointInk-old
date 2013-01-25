@@ -71,6 +71,20 @@ jQuery ->
         $('.editor-save, .editor-publish').removeClass('disabled')
         $('.editor-save .name').text('Save As Idea')
         $('.editor-publish .name').text('Publish')
+      error: (jqXHR, textStatus, errorThrown) ->
+        data = $.parseJSON(jqXHR.responseText)
+        if data.errors && data.errors.primary_channel
+          $('#left-panel .channels').tooltip
+            placement: 'right'
+            html: true
+            title: "
+                You must add a channel before publishing.
+                Click the + to the left to choose an existing channel. <a href='/channels/new' data-skip-pjax='true' target='_blank'>Click here</a> to create a new one, and then add it with the + to the left.
+              "
+            trigger: 'manual'
+            classes: 'error'
+            width: 200
+          $('#left-panel .channels').tooltip('show')
 
   # auto save the post every x seconds
 #  $('.editor').livequery ->
@@ -100,12 +114,55 @@ jQuery ->
     false
 
   # toggle text post styles
-  $('.post-style .content div').click (e) ->
+  $('.post-style .content li').click (e) ->
     $('#posts-edit').removeClass('default small-image half-page full-page').addClass($(@).data('value'))
-    $('.post-style .content div').removeClass('on')
+    $('.post-style .content li').removeClass('on')
     $(@).addClass('on')
     unless $(@).data('value') == 'full-page'
       $('#picture-wrapper,.white-wrap,#post-picture-title').removeAttr('style')
     $.scrollTo '0',
       duration: 300
       easing:'easeInOutCubic'
+
+  # toggle channel autocomplete
+  $('#left-panel .channels .icon-plus').click (e) ->
+    $('#left-panel .channels').tooltip('destroy')
+    $('#channel-autocomplete').animate {width: 'toggle'}, 200, ->
+      $('#channel-autocomplete input').focus()
+      $('.autocomplete-suggestions').css('width': $('#channel-autocomplete').css('width'))
+
+  updatePostChannel = ->
+    if $('#left-panel .channels li').length > 0
+      target = $('#left-panel .channels li:first a:not(.remove)')
+      $('.post-full .post-channel').attr('href': target.attr('href')).text(target.find('.name').text())
+    else
+      $('.post-full .post-channel').attr('href', '#').text('none')
+
+  $('#channel-autocomplete input').autocomplete
+    serviceUrl: '/search/channels'
+    minChars: 3
+    deferRequestBy: 50
+    noCache: false
+    onSelect: (suggestion) ->
+      $.ajax
+        url: "#{$('#post-data').data('d').url}/channels"
+        type: 'PUT'
+        dataType: 'json'
+        data: {channel_id: suggestion.data.id}
+        success: (data, textStatus, jqXHR) ->
+          $('#left-panel .channels ul').append(data.channel.list_item)
+          $('#left-panel .channels .icon-plus').click()
+          $('#channel-autocomplete input').val('')
+          updatePostChannel()
+
+  $('#left-panel .channels').on 'click', '.remove', (e) ->
+    e.preventDefault()
+    self = $(@)
+    $.ajax
+      url: $(@).attr('href')
+      type: 'DELETE'
+      dataType: 'json'
+      success: (data, textStatus, jqXHR) ->
+        self.parents('li:first').remove()
+        updatePostChannel()
+    false

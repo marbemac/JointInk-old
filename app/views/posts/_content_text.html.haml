@@ -15,7 +15,10 @@
           by
           %a.post-author{:href => user_path(@post.user), :rel => 'author'}= @post.user.name
           in
-          %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
+          - if @post.primary_channel
+            %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
+          - else
+            %a.post-channel{:href => '#'} None
 
     %div{:style => "background-image: url('#{@post.photo_url}')", :class => "image #{@post.photo_ratio >= 1.4 ? 'cover-image' : 'contain-image'}"}
 
@@ -26,7 +29,10 @@
         .post-top-meta
           %a.post-author{:href => user_path(@post.user), :rel => 'author'}= @post.user.name
           in
-          %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
+          - if @post.primary_channel
+            %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
+          - else
+            %a.post-channel{:href => '#'} None
 
         %h1#post-title.copy-over{'data-target' => '#post-picture-title h1'}
           != !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'

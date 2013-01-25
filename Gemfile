@@ -21,7 +21,7 @@ gem 'twitter' # twitter api support
 gem 'chronic' # Date/Time management
 
 gem 'memcachier' # modify ENV variables to make dalli work with memcachier
-gem 'dalli' # memcache
+gem 'dalli', '2.6.0' # memcache
 
 gem 'rack-pjax'
 
@@ -41,7 +41,7 @@ gem 'cache_digests'
 gem 'hirefire-resource', :git => 'git://github.com/meskyanichi/hirefire-resource.git'
 gem 'simple_form'
 gem 'sanitize'
-#gem 'pg_search'
+gem 'pg_search'
 #gem 'turbo-sprockets-rails3' # speed up asset compiling
 
 gem 'newrelic_rpm', '~> 3.5.4'

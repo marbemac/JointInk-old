@@ -9,24 +9,33 @@ ThisThat::Application.routes.draw do
   # posts
   resources :posts, :only => [:update, :destroy, :edit]
   scope 'p' do
+    get 'new-:type-:subtype-post' => 'posts#new', :as => :new_post
     scope ':id' do
       get 'edit' => 'posts#edit', :as => :edit_post
       put '' => 'posts#update'
       delete '' => 'posts#destroy'
       put 'update-photo' => 'posts#update_photo', :as => :post_update_photo
       put 'remove-photo' => 'posts#remove_photo', :as => :post_remove_photo
-      get 'channel' => 'posts#edit', :as => :edit_post_channel
-      get '' => 'posts#show_redirect', :as => :post
-      put 'vote' => 'posts#create_vote', :as => :post_vote
-      delete 'vote' => 'posts#destroy_vote', :as => :post_vote
       post 'read_post' => 'posts#create_read', :as => :read_post
+      get '' => 'posts#show_redirect', :as => :post
+
+      scope 'vote' do
+        put '' => 'posts#create_vote', :as => :post_vote
+        delete '' => 'posts#destroy_vote', :as => :post_vote
+      end
+
+      scope 'channels' do
+        get '' => 'posts#channels', :as => :post_channels
+        put '' => 'posts#add_channel', :as => :post_add_channel
+        delete '' => 'posts#remove_channel', :as => :post_remove_channel
+      end
     end
   end
 
   # channels
   resources :channels
   scope 'c/:id' do
-    get 'new-:type-:subtype-post' => 'posts#new', :as => :new_post
+    get 'new-:type-:subtype-post' => 'posts#new', :as => :new_channel_post
     get 'edit' => 'channels#edit', :as => :edit_channel
     get 'members' => 'channels#members', :as => :channel_members
     put '' => 'channels#update'
@@ -36,14 +45,14 @@ ThisThat::Application.routes.draw do
     get '' => 'channels#show', :as => :channel
   end
 
+  # search
+  scope 'search' do
+    get ':resource' => 'search#go', :resource => 'all'
+  end
+
   # pages
   get 'about' => 'pages#about', :as => :about
   get 'faq' => 'pages#faq', :as => :faq
-  #scope 'settings' do
-  #  get 'social' => 'users#social_settings', :as => :user_social_settings
-  #  get 'email' => 'users#email_settings', :as => :user_email_settings
-  #  get '' => 'users#basic_settings', :as => :user_basic_settings
-  #end
 
   admin_constraint = lambda do |request|
     #request.env['warden'].authenticate? and request.env['warden'].user.role?('admin')

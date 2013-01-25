@@ -2,12 +2,18 @@ class PostsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :create_read]
 
   def new
-    @channel = Channel.find(params[:id])
-    authorize! :post, @channel
+    if params[:id]
+      @channel = Channel.find(params[:id])
+      authorize! :post, @channel
+    else
+      @channel = nil
+    end
 
-    @post = current_user.posts.create(:status => 'idea', :post_type => params[:type], :post_subtype => params[:subtype])
-    @post.add_channel current_user, @channel
     authorize! :create, @post
+    @post = current_user.posts.create(:status => 'idea', :post_type => params[:type], :post_subtype => params[:subtype])
+    if @channel
+      @post.add_channel current_user, @channel
+    end
 
     redirect_to edit_post_path(@post)
   end
@@ -44,7 +50,11 @@ class PostsController < ApplicationController
 
   def show_redirect
     @post = Post.find(params[:id])
-    redirect_to post_via_channel_path(@post.primary_channel, @post)
+    if @post.primary_channel
+      redirect_to post_via_channel_path(@post.primary_channel, @post)
+    else
+      redirect_to post_via_channel_path(0, @post)
+    end
   end
 
   def edit
@@ -118,5 +128,44 @@ class PostsController < ApplicationController
       PostStat.add(@post.id, request.remote_ip, 'read', request.referer, user_id)
       render :json => {:status => 'success'}, status: 200
     end
+  end
+
+  def add_channel
+    @post = Post.find(params[:id])
+    authorize! :destroy, @post
+    @channel = Channel.find(params[:channel_id])
+    authorize! :post, @channel
+
+    respond_to do |format|
+      if @post.channels.include?(@channel)
+        format.html { redirect_to :back }
+        format.js { render :json => {:status => 'error'}, :status => 400 }
+      else
+        @post.add_channel(current_user, @channel)
+        list_item_html = render_to_string('posts/_channels_list_item', :layout => false, :locals => { :channel => @channel })
+        format.html { redirect_to :back }
+        format.js { render :json => {:status => 'success', :channel => {:id => @channel.id, :name => @channel.name, :list_item => list_item_html}} }
+      end
+    end
+
+  end
+
+  def remove_channel
+    @post = Post.find(params[:id])
+    authorize! :destroy, @post
+    @channel = Channel.find(params[:channel_id])
+    authorize! :post, @channel
+
+    respond_to do |format|
+      if @post.channels.include?(@channel)
+        @post.remove_channel(@channel)
+        format.html { redirect_to :back }
+        format.js { render :json => {:status => 'success'} }
+      else
+        format.html { redirect_to :back }
+        format.js { render :json => {:status => 'error'}, :status => 400 }
+      end
+    end
+
   end
 end

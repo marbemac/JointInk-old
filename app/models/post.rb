@@ -110,6 +110,10 @@ class Post < ActiveRecord::Base
     relationship.save
   end
 
+  def remove_channel(channel)
+    ChannelsPosts.where(:post_id => id, :channel_id => channel.id).first.destroy
+  end
+
   def og_title
     title
   end

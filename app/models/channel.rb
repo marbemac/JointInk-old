@@ -35,20 +35,42 @@ class Channel < ActiveRecord::Base
 
   attr_accessible :name, :photo, :cover_photo, :description, :privacy
 
-  after_create :add_to_soulmate
+  scope :active, where(:status => 'active')
+
   after_update :update_denorms
-  before_destroy :remove_from_soulmate, :disconnect
+  before_destroy :disconnect
 
-  #
-  # SoulMate
-  #
+  include PgSearch
+  pg_search_scope :search,
+                  against: {
+                    :name => 'A',
+                    :description => 'B'
+                  },
+                  using: {
+                      tsearch: {
+                          prefix: true,
+                          #dictionary: 'english'
+                      }
+                  }
 
-  def add_to_soulmate
-    #resque.enqueue(SmCreateTopic, id)
+  def self.text_search(query)
+    if query.present?
+      search(query)
+    else
+      active.limit(10)
+    end
   end
 
-  def remove_from_soulmate
-    #resque.enqueue(SmDestroyTopic, id)
+  def self.to_search_json(results)
+    results.map do |result|
+      {
+          :value => result.name,
+          :data => {
+              :id => result.id,
+              :description => result.description
+          }
+      }
+    end
   end
 
   def disconnect

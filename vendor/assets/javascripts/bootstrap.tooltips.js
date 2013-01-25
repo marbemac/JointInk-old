@@ -56,6 +56,14 @@
             this.options.selector ?
                 (this._options = $.extend({}, this.options, { trigger: 'manual', selector: '' })) :
                 this.fixTitle()
+
+            if (this.options.classes) {
+                this.tip().addClass(this.options.classes)
+            }
+
+            if (this.options.width) {
+                this.tip().width(this.options.width)
+            }
         }
 
         , getOptions: function (options) {
@@ -244,6 +252,10 @@
             this.hide().$element.off('.' + this.type).removeData(this.type)
         }
 
+        , addClass: function (names) {
+            console.log(names);
+        }
+
     }
 
 
@@ -272,6 +284,8 @@
         , trigger: 'hover'
         , title: ''
         , delay: 0
+        , width: null
+        , classes: null
         , html: false
     }
 
