@@ -1,0 +1,37 @@
+-# Refactor this bitch!
+- content_for :header do
+  %header
+    %hrgroup
+      %h1.san-serif The River
+
+      %h3.subheader.san-serif Where all channels lead...
+
+- content_for :page_nav do
+  %nav
+    %ul.left
+      %li{:class => (params[:action] == 'show' ? 'on' : '')}
+        = pluralize(@channels.count, 'Channel')
+
+    .circle-dot &bull;
+
+    %ul.right
+      %li.action
+        .dropdown.text-dropdown
+          .name
+            Contribute
+          .menu.down
+            %i.icon-caret-up
+            %ul
+              %li
+                %a{:href => new_channel_path, 'data-skip-pjax' => true} +New Channel
+
+.centered-sections
+  .section
+    %h3.san-serif.head
+      = @channels.count
+      Channels
+    %i.icon-caret-down
+    .content
+      - @channels.each do |channel|
+        = render "channels/tile", :channel => channel
+      = render "channels/create_channel_tile"
