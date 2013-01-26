@@ -147,7 +147,6 @@ class PostsController < ApplicationController
         format.js { render :json => {:status => 'success', :channel => {:id => @channel.id, :name => @channel.name, :list_item => list_item_html}} }
       end
     end
-
   end
 
   def remove_channel
