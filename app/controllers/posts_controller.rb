@@ -122,7 +122,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     user_id = current_user ? current_user.id : nil
 
-    if @post.user_id == user_id
+    if @post.user_id == user_id || @post.status != 'active'
       render :json => {:status => 'success'}, status: 200
     else
       PostStat.add(@post.id, request.remote_ip, 'read', request.referer, user_id)
