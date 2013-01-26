@@ -59,6 +59,7 @@ $panel-width: 175px;
   width: $panel-width - 5;
   background: #222;
   color: #EFEFEF;
+  z-index: 500;
 
   .title {
     text-align: center;
