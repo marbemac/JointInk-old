@@ -3,12 +3,12 @@ class ApplicationController < ActionController::Base
 
   unless Rails.application.config.consider_all_requests_local
     rescue_from Exception, :with => (lambda do |exception|
-      notify_airbrake(exception)
+      notify_honeybadger(exception)
       logger.error"\n#{exception.class} (#{exception.message}):\n"
       render_error 500, exception
     end)
     rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, :with => (lambda do |exception|
-      notify_airbrake(exception)
+      notify_honeybadger(exception)
       logger.error"\n#{exception.class} (#{exception.message}):\n"
       render_error 404, exception
     end)
