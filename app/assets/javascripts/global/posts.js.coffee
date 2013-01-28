@@ -71,3 +71,24 @@ jQuery ->
           $(window).off 'resize'
           return
         updateFullPageArticle()
+
+  # post audio
+  $('body').bind 'reset-audio-player', ->
+    if $("#jquery_jplayer_1").data('url')
+      url = $("#jquery_jplayer_1").data('url')
+      extension = _.last(url.split('.'))
+      media = {}
+      media[extension] = url
+      console.log "Loading #{url} #{extension} audio."
+
+      $("#jquery_jplayer_1").jPlayer
+        ready: ->
+          $(@).jPlayer("setMedia", media).jPlayer("play")
+        swfPath: "/assets/javascripts"
+        supplied: extension
+      $("#jp_container_1").show()
+    else
+      $("#jp_container_1").hide()
+
+  $("#jquery_jplayer_1").livequery ->
+    $('body').trigger('reset-audio-player')

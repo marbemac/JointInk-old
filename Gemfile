@@ -8,7 +8,7 @@ gem 'rails', '~> 3.2.11'
 gem 'jquery-rails'
 gem "haml-rails"
 gem 'pg'
-gem 'airbrake' # Exception notification
+gem 'honeybadger' # Exception notification
 gem 'devise' # Authentication
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
@@ -32,7 +32,10 @@ gem 'annotate'
 gem 'activerecord-postgres-hstore'
 gem 'activerecord-postgres-array'
 gem "friendly_id", "~> 4.0.9"
+
 gem 'carrierwave'
+gem 'fog'
+
 gem 'kaminari'
 gem 'sidekiq' # background jobs
 gem 'sinatra' # for sidekiq
@@ -66,6 +69,9 @@ group :development do
   gem 'foreman'
   gem 'pry-rails'
   gem 'thin'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
 end
 
 group :test do

@@ -81,13 +81,18 @@ $panel-width: 175px;
       position: relative;
       cursor: default;
 
-      .icon-plus {
+      .plus {
         position: absolute;
         top: 9px;
         right: -25px;
         font-size: 16px;
         color: #EFEFEF;
         cursor: pointer;
+      }
+      .loading {
+        position: absolute;
+        top: 0px;
+        left: 20px;
       }
     }
     .content {
@@ -97,6 +102,8 @@ $panel-width: 175px;
         padding: 5px 10px 5px 20px;
         font-size: 13px;
         position: relative;
+        white-space: nowrap;
+        overflow: hidden;
 
         a {
           color: #EFEFEF;
@@ -177,4 +184,16 @@ $panel-width: 175px;
 }
 .autocomplete-suggestions {
   border-width: 2px !important;
+}
+
+#audio-upload {
+  position: relative;
+
+  .fileinput-button {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
 }

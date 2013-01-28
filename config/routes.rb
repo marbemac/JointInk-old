@@ -14,8 +14,13 @@ ThisThat::Application.routes.draw do
       get 'edit' => 'posts#edit', :as => :edit_post
       put '' => 'posts#update'
       delete '' => 'posts#destroy'
+
       put 'update-photo' => 'posts#update_photo', :as => :post_update_photo
       put 'remove-photo' => 'posts#remove_photo', :as => :post_remove_photo
+
+      put 'update-audio' => 'posts#update_audio', :as => :post_update_audio
+      put 'remove-audio' => 'posts#remove_audio', :as => :post_remove_audio
+
       post 'read_post' => 'posts#create_read', :as => :read_post
       get '' => 'posts#show_redirect', :as => :post
 

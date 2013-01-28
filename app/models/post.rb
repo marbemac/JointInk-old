@@ -2,6 +2,7 @@
 #
 # Table name: posts
 #
+#  audio           :string(255)
 #  content         :text
 #  created_at      :datetime         not null
 #  id              :integer          not null, primary key
@@ -31,6 +32,7 @@ class Post < ActiveRecord::Base
   friendly_id :title, :use => :slugged
 
   mount_uploader :photo, ImageUploader
+  mount_uploader :audio, AudioUploader
 
   belongs_to :user, :touch => true
   has_and_belongs_to_many :channels
@@ -174,6 +176,10 @@ class Post < ActiveRecord::Base
       .where(conditions)
       .group('posts.id')
       .order('posts.created_at DESC')
+  end
+
+  def audio_name
+    File.basename(audio.path || audio.filename) if audio
   end
 
   def update_photo_attributes

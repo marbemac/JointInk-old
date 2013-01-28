@@ -23,6 +23,7 @@
 //= require jquery.scrollTo
 //= require jquery.cookie
 //= require jquery.autocomplete
+//= require jquery.jplayer
 //= require bootstrap.tooltips
 
 //= require_tree ./global

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130125193640) do
+ActiveRecord::Schema.define(:version => 20130127194556) do
 
   create_table "accounts", :force => true do |t|
     t.string  "username",                       :null => false
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20130125193640) do
     t.hstore   "photo_exif"
     t.string   "style",           :default => "default"
     t.integer  "votes_count",     :default => 0
+    t.string   "audio"
   end
 
   add_index "posts", ["post_type"], :name => "index_posts_on_post_type"

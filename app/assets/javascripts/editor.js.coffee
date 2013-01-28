@@ -32,10 +32,50 @@ jQuery ->
         alert("#{file.name} is not a gif, jpeg, or png image file")
     progress: (e, data) ->
       progress = parseInt(data.loaded / data.total * 100, 10)
-      $('.fileinput-button .loading').text("#{progress}%")
+      $('#picture-wrapper .fileinput-button .loading').text("#{progress}%")
     done: (e,data) ->
-      $('.fileinput-button .loading').text('')
+      $('#picture-wrapper .fileinput-button .loading').text('')
       $('#picture-wrapper .image').css('background-image', "url(#{data.result.url})").removeClass('cover-image contain-image').addClass(data.result.class)
+
+  updatePostAudio = (data) ->
+    if data
+      $('#jquery_jplayer_1').data('url', data.url)
+      $('#left-panel .audio .name').text(data.name)
+    else
+      $('#jquery_jplayer_1').data('url', null)
+      $('#left-panel .audio .name').text('None')
+    $('body').trigger('reset-audio-player')
+
+  # handle audio uploads
+  $('#audio-upload .fileinput-button input').fileupload
+    dataType: "json"
+    type: 'PUT'
+    maxFileSize: 10000000
+    add: (e,data) ->
+      types = /(\.|\/)(mp3|m4a|ogg)$/i
+      file = data.files[0]
+      if types.test(file.type) || types.test(file.name)
+        data.submit()
+      else
+        alert("#{file.name} is not a mp3, m4a, or ogg file")
+    progress: (e, data) ->
+      progress = parseInt(data.loaded / data.total * 100, 10)
+      $('#audio-upload .loading').text("#{progress}%")
+    done: (e,data) ->
+      $('#audio-upload .loading').text('')
+      updatePostAudio(data.result)
+
+  # handle audio remove
+  $('#left-panel .audio').on 'click', '.remove', (e) ->
+    e.preventDefault
+    self = $(@)
+    $.ajax
+      url: $(@).attr('href')
+      type: 'PUT'
+      dataType: 'json'
+      success: (data, textStatus, jqXHR) ->
+        updatePostAudio(null)
+    false
 
   # submit the form
   $('.editor-save, .editor-publish').on 'click', (e) ->
@@ -50,7 +90,7 @@ jQuery ->
       data['post']['title'] = $.trim($('#post-picture-title h1').text())
 
     data['post']['content'] = $.trim($('#post-body').html())
-    data['post']['style'] = $('#left-panel .post-style .content > div.on').data('value')
+    data['post']['style'] = $('#left-panel .post-style .content li.on').data('value')
 
     if $(@).hasClass('editor-publish')
       data['post']['status'] = 'active'

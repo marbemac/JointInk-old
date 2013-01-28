@@ -20,7 +20,7 @@
   .section.channels
     .head
       Channels
-      %i.icon-plus{:title => 'Add a channel to this post.'}
+      %i.icon-plus.plus{:title => 'Add a channel to this post.'}
     .content
       = render "posts/channels_list"
 
@@ -55,6 +55,23 @@
           %li{'data-value' => 'cover-image', :class => "#{@post.style == 'cover-image' ? 'on' : ''}"}
             %i.icon.icon-double-angle-right
             Cover Image
+
+  .section.audio
+    .head
+      Audio
+      #audio-upload.plus
+        %i.icon-plus{:title => 'Add audio this post.'}
+        .fileinput-button
+          %input{:type => 'file', 'data-url' => post_update_audio_path(@post.id), :name => 'post[audio]'}
+        %span.loading
+
+    .content
+      %ul
+        %li
+          %i.icon.icon-double-angle-right
+          %span.name= @post.audio.present? ? @post.audio_name : 'None'
+          %a.remove{:href => post_remove_audio_path(:id => @post.id), 'data-skip-pjax' => true}
+            %i.icon-remove{:title => 'Remove audio.'}
 
 #right-panel
 

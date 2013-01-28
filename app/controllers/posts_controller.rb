@@ -94,6 +94,25 @@ class PostsController < ApplicationController
     @post.save
   end
 
+  def update_audio
+    @post = Post.find(params[:id])
+    authorize! :update, @post
+    @post.audio = params[:post][:audio]
+    @post.save
+    #@post.update_photo_attributes
+    #@post.save
+
+    render :json => {:url => @post.audio_url, :name => @post.audio_name}
+  end
+
+  def remove_audio
+    @post = Post.find(params[:id])
+    authorize! :update, @post
+    @post.remove_audio!
+    @post.save
+    render :json => {:status => 'success'}
+  end
+
   def create_vote
     @post = Post.find(params[:id])
 

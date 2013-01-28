@@ -65,6 +65,9 @@ tmp/*
 # RubyMine project files
 /.idea
 
+# intellij file
+/*.iml
+
 # Uploaded files
 /dump.rdb
 /.rvmrc

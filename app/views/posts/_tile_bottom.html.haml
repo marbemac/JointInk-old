@@ -6,3 +6,6 @@
     %a.channel{:href => channel_path(post.primary_channel)}= post.primary_channel.name
   - else
     %a.channel{:href => '#'} None
+
+  - if post.audio.present?
+    %i.icon-volume-up
