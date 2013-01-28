@@ -3,6 +3,6 @@
 
     %a{:href => channel_path(channel)}
       .image.cover-image{:style => "background-image: url('#{channel.photo_url(:medium)}')"}
-      %h5.name.san-serif= channel.name
+      %h4.name= channel.name
 
-      .subheader= pluralize(channel.posts_count, 'Post')
+      -#.subheader= pluralize(channel.posts_count, 'Post')
