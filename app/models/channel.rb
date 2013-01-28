@@ -73,6 +73,11 @@ class Channel < ActiveRecord::Base
     end
   end
 
+  def calculate_posts_count
+    self.posts_count = posts.active.count
+    save
+  end
+
   def disconnect
     # remove mentions of this channel
     Share.where(:channel => self).each do |share|

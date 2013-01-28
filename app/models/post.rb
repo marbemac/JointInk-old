@@ -60,8 +60,14 @@ class Post < ActiveRecord::Base
   end
 
   def touch_channels
-    channels.each do |c|
-      c.touch
+    if status_changed?
+      channels.each do |c|
+        c.calculate_posts_count
+      end
+    else
+      channels.each do |c|
+        c.touch
+      end
     end
   end
 
