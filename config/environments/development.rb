@@ -40,7 +40,7 @@ ThisThat::Application.configure do
       :port => 587,
       :authentication => :plain,
       :enable_starttls_auto => true,
-      :user_name => 'app8840789@heroku.com',
-      :password => 'wnwjj2af'
+      :user_name => 'app9707905@heroku.com',
+      :password => '25oda0a3'
   }
 end
