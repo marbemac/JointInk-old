@@ -108,3 +108,11 @@ jQuery ->
 
   $("#jquery_jplayer_1").livequery ->
     $('body').trigger('reset-audio-player')
+
+  # scroll pictures slowly
+  $(".posts-c.picture").livequery ->
+    setTimeout ->
+      $.scrollTo 'max',
+        duration: 3000
+        easing: 'easeInOutCubic'
+    , 1000
