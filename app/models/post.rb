@@ -97,7 +97,7 @@ class Post < ActiveRecord::Base
   end
 
   def content_clean
-    ActionView::Base.full_sanitizer.sanitize(content.gsub('<p></p>', '').gsub('</p>', '. ').gsub('..', '.'))
+    ActionView::Base.full_sanitizer.sanitize(content && !content.blank? ? content.gsub('<p></p>', '').gsub('</p>', '. ').gsub('..', '.') : content)
   end
 
   def photo_ratio
