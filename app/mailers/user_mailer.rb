@@ -14,16 +14,16 @@ class UserMailer < ActionMailer::Base
     mail(:to => 'founders@getthisthat.com', :reply_to => user.email, :subject => "[ThisThat signup] #{user.name ? user.name + '(' + user.username + ')' : user.username} signed up!")
   end
 
-  def matt_welcome(user_id)
-    @user = User.find(user_id)
-    mail(:from => "Matt <matt@getthisthat.com>", :to => "#{@user.username} <#{@user.email}>", :subject => "Thanks")
-  end
-
-  def marc_welcome(user_id, today_or_yesterday)
-    @user = User.find(user_id)
-    @today_or_yesterday = today_or_yesterday
-    mail(:from => "Marc <marc@getthisthat.com>", :to => "#{@user.username} <#{@user.email}>", :subject => "Hi There")
-  end
+  #def matt_welcome(user_id)
+  #  @user = User.find(user_id)
+  #  mail(:from => "Matt <matt@getthisthat.com>", :to => "#{@user.username} <#{@user.email}>", :subject => "Thanks")
+  #end
+  #
+  #def marc_welcome(user_id, today_or_yesterday)
+  #  @user = User.find(user_id)
+  #  @today_or_yesterday = today_or_yesterday
+  #  mail(:from => "Marc <marc@getthisthat.com>", :to => "#{@user.username} <#{@user.email}>", :subject => "Hi There")
+  #end
 
   def pending_reminder(user_id, pending_this_week, crowdsourced_this_week)
     @user = User.find(user_id)
