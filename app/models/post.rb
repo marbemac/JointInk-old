@@ -48,7 +48,7 @@ class Post < ActiveRecord::Base
   scope :active, where(:status => 'active')
   scope :ideas, where(:status => 'idea')
 
-  before_save :sanitize
+  before_save :sanitize, :set_published_at
   after_save :touch_channels
   before_destroy :disconnect
 
@@ -57,6 +57,12 @@ class Post < ActiveRecord::Base
   end
 
   def disconnect
+  end
+
+  def set_published_at
+    if status == "active" && published_at.nil?
+      self.published_at = Time.now
+    end
   end
 
   def touch_channels

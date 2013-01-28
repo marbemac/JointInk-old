@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128174411) do
+ActiveRecord::Schema.define(:version => 20130128212725) do
 
   create_table "accounts", :force => true do |t|
     t.string  "username",                       :null => false
@@ -25,6 +25,26 @@ ActiveRecord::Schema.define(:version => 20130128174411) do
 
   add_index "accounts", ["provider", "uid"], :name => "index_accounts_on_provider_and_uid", :unique => true
   add_index "accounts", ["user_id"], :name => "index_accounts_on_user_id"
+
+  create_table "amazing_facts", :force => true do |t|
+    t.text "content"
+  end
+
+  create_table "attachinary_files", :force => true do |t|
+    t.integer  "attachinariable_id"
+    t.string   "attachinariable_type"
+    t.string   "scope"
+    t.string   "public_id"
+    t.string   "version"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "format"
+    t.string   "resource_type"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "attachinary_files", ["attachinariable_type", "attachinariable_id", "scope"], :name => "by_scoped_parent"
 
   create_table "channels", :force => true do |t|
     t.string   "name"
@@ -40,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20130128174411) do
     t.integer  "posts_count"
   end
 
+  add_index "channels", ["posts_count"], :name => "index_channels_on_posts_count"
   add_index "channels", ["slug"], :name => "index_channels_on_slug", :unique => true
   add_index "channels", ["user_id"], :name => "index_channels_on_user_id"
 
@@ -91,6 +112,7 @@ ActiveRecord::Schema.define(:version => 20130128174411) do
     t.string   "style",           :default => "default"
     t.integer  "votes_count",     :default => 0
     t.string   "audio"
+    t.datetime "published_at"
   end
 
   add_index "posts", ["post_type"], :name => "index_posts_on_post_type"
@@ -103,10 +125,59 @@ ActiveRecord::Schema.define(:version => 20130128174411) do
     t.integer  "followed_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "channel_id"
   end
 
+  add_index "relationships", ["channel_id"], :name => "index_relationships_on_channel_id"
   add_index "relationships", ["followed_id"], :name => "index_relationships_on_followed_id"
+  add_index "relationships", ["follower_id", "followed_id", "channel_id"], :name => "index_relationship_follow_follower_channel_ids", :unique => true
   add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
+
+  create_table "share_actions", :force => true do |t|
+    t.text     "content"
+    t.string   "action_taken"
+    t.string   "social_id"
+    t.string   "social_url"
+    t.string   "social_privacy"
+    t.string   "provider"
+    t.integer  "share_id"
+    t.integer  "account_id"
+    t.hstore   "permissions"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "share_actions", ["account_id", "share_id"], :name => "index_share_actions_on_account_id_and_share_id", :unique => true
+  add_index "share_actions", ["account_id"], :name => "index_share_actions_on_account_id"
+  add_index "share_actions", ["share_id"], :name => "index_share_actions_on_share_id"
+
+  create_table "shares", :force => true do |t|
+    t.string   "status",       :default => "active"
+    t.boolean  "crowdsourced", :default => false
+    t.integer  "user_id"
+    t.integer  "account_id"
+    t.integer  "post_id"
+    t.integer  "channel_id"
+    t.integer  "topic_id"
+    t.hstore   "permissions"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
+  add_index "shares", ["account_id", "post_id"], :name => "index_shares_on_account_id_and_post_id", :unique => true
+  add_index "shares", ["account_id"], :name => "index_shares_on_account_id"
+  add_index "shares", ["channel_id"], :name => "index_shares_on_channel_id"
+  add_index "shares", ["post_id"], :name => "index_shares_on_post_id"
+  add_index "shares", ["topic_id"], :name => "index_shares_on_topic_id"
+  add_index "shares", ["user_id"], :name => "index_shares_on_user_id"
+
+  create_table "sources", :force => true do |t|
+    t.string "name", :null => false
+    t.string "url",  :null => false
+    t.string "slug"
+  end
+
+  add_index "sources", ["slug"], :name => "index_sources_on_slug", :unique => true
 
   create_table "users", :force => true do |t|
     t.string       "email"
@@ -141,10 +212,13 @@ ActiveRecord::Schema.define(:version => 20130128174411) do
     t.string       "cover_photo"
     t.string_array "roles",                  :limit => 255, :default => "{}"
     t.string       "color_theme"
+    t.string       "domain"
+    t.string       "oneliner"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
+  add_index "users", ["domain"], :name => "index_users_on_domain", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true
