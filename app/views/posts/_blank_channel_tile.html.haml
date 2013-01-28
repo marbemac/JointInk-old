@@ -3,8 +3,12 @@
     .title Contribute
     %p Contribute to the '#{@channel.name}' channel.
     .buttons
-      %a.small.action.button{:href => new_channel_post_path(@channel, 'text', 'article'), 'data-skip-pjax' => true} +New Article
-      %a.small.action.button{:href => new_channel_post_path(@channel, 'picture', 'caption'), 'data-skip-pjax' => true} +New Picture
+      %div
+        %a.medium.white.button{:href => new_channel_post_path(@channel, 'text', 'article'), 'data-skip-pjax' => true} +New Article
+      %div
+        %a.medium.white.button{:href => new_channel_post_path(@channel, 'picture', 'caption'), 'data-skip-pjax' => true} +New Picture
+      %div
+        %a.medium.white.button{:href => channels_path} Browse Channels
   - else
     .title Contribute Soon
     %p Sign in to get an invite.

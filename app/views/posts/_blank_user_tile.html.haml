@@ -1,9 +1,11 @@
 .post.tile.blank
   .title Contribute
-  %p
-    Every post must have a channel.
-    %br
-    Choose or create a channel first.
   .buttons
-    %a.small.action.button{:href => new_channel_path} Create Channel
-    %a.small.action.button{:href => channels_path} Browse Channels
+    %div
+      %a.medium.white.button{:href => new_channel_path, 'data-skip-pjax' => true} +New Channel
+    %div
+      %a.medium.white.button{:href => new_post_path('text', 'article'), 'data-skip-pjax' => true} +New Article
+    %div
+      %a.medium.white.button{:href => new_post_path('picture', 'caption'), 'data-skip-pjax' => true} +New Picture
+    %div
+      %a.medium.white.button{:href => channels_path} Browse Channels

@@ -12,7 +12,7 @@
   position: relative;
   padding: 0 0 $bottom-height 0;
   text-align: left;
-  margin: 10px;
+  margin: 15px;
   vertical-align: top;
 
   .top {
@@ -176,25 +176,30 @@
   &.blank {
     @include box-shadow(none);
     text-align: center;
-    background: transparent;
-    border: 2px dashed #DDD;
+    background: #222;
+    border: none;
 
     .title {
-      font-size: 26px;
-      font-size: 2.6rem;
-      margin: 95px 0 5px 0;
+      font-size: 34px;
+      font-size: 3.4rem;
+      margin: 50px 0 5px 0;
       cursor: default;
       font-weight: bold;
+      color: #EFEFEF;
     }
     p {
-      font-size: 14px;
-      line-height: 20px;
-      cursor: default;
-      color: #666;
-      margin: 0;
+      color: #CCC;
+      font-size: 16px;
+      padding: 0 20px;
+      line-height: 22px;
     }
     .buttons {
-      margin: 25px 0 0 0;
+      margin: 40px 0 0 0;
+
+      a {
+        margin: 10px 0 0 0;
+        width: 170px;
+      }
     }
     &:hover {
       @include box-shadow(none);

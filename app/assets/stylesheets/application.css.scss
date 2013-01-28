@@ -146,6 +146,14 @@ blockquote {
       background: darken($grayLight, 10%);
     }
   }
+  &.white {
+    background: #EFEFEF;
+    color: #222;
+    &:hover {
+      color: #EFEFEF;
+      background: darken($action-color, 10%);
+    }
+  }
   &.secondary {
     background: $secondary-color;
     border-color: darken($secondary-color, 10%);
