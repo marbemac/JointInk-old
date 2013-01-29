@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show, :create_read]
+  before_filter :authenticate_user!, :except => [:show, :create_read, :show_redirect]
 
   def new
     if params[:id]
@@ -121,6 +121,7 @@ class PostsController < ApplicationController
       render :json => {:status => 'error'}, status: :unprocessable_entity
     else
       PostStat.add(@post.id, request.remote_ip, 'vote', request.referer, current_user.id)
+      UserMailer.recommended(@post.id, current_user.id).deliver
       render :json => {:status => 'success'}, status: 200
     end
   end

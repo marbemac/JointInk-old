@@ -1,0 +1,5 @@
+<p>Hey <%= @user.first_name %>,</p>
+
+<p>
+  <%= @recommender.first_name %> recommended your post: <%= link_to @post.title, post_url(@post) %>
+</p>

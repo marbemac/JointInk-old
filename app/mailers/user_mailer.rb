@@ -14,6 +14,24 @@ class UserMailer < ActionMailer::Base
     mail(:to => 'founders@getthisthat.com', :reply_to => user.email, :subject => "[ThisThat signup] #{user.name ? user.name + '(' + user.username + ')' : user.username} signed up!")
   end
 
+  def post_admin(post_id)
+    @post = Post.find(post_id)
+    mail(:to => "matt.c.mccormick@gmail.com, marbemac@gmail.com", :subject => "New Post: #{@post.title}")
+  end
+
+  def posted_in_channel(post_id, channel_id)
+    @post = Post.find(post_id)
+    @channel = Channel.find(channel_id)
+    mail(:to => "#{@channel.user.name} <#{@channel.user.email}>", :subject => "#{@post.user.first_name} posted in your channel!")
+  end
+
+  def recommended(post_id, recommender_id)
+    @post = Post.find(post_id)
+    @user = @post.user
+    @recommender = User.find(recommender_id)
+    mail(:to => "#{@user.name} <#{@user.email}>", :subject => "#{@user.first_name}, #{@recommender.first_name} recommended your post!")
+  end
+
   #def matt_welcome(user_id)
   #  @user = User.find(user_id)
   #  mail(:from => "Matt <matt@getthisthat.com>", :to => "#{@user.username} <#{@user.email}>", :subject => "Thanks")

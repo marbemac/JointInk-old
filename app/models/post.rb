@@ -49,7 +49,7 @@ class Post < ActiveRecord::Base
   scope :ideas, where(:status => 'idea')
 
   before_save :sanitize, :set_published_at
-  after_save :touch_channels
+  after_save :touch_channels, :email_after_published
   before_destroy :disconnect
 
   def is_active?
@@ -62,6 +62,17 @@ class Post < ActiveRecord::Base
   def set_published_at
     if status == "active" && published_at.nil?
       self.published_at = Time.now
+    end
+  end
+
+  def email_after_published
+    if status == "active" && published_at_was.nil?
+      UserMailer.post_admin(id).deliver
+      channels.each do |c|
+        unless c.user_id == user_id
+          UserMailer.posted_in_channel(id, c.id).deliver
+        end
+      end
     end
   end
 
