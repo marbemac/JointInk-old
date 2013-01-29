@@ -19,7 +19,8 @@ jQuery ->
 
   # copy input to area
   $('body').on 'keyup', '.copy-over', (e) ->
-    $($(@).data('target')).text($(@).text())
+    value = if $(@).is('input') then $(@).val() else $(@).text()
+    $($(@).data('target')).text(value)
 
   # toggle target element
   $('.toggler').live 'click', (e) ->

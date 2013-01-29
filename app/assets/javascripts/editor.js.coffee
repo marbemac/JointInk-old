@@ -68,7 +68,6 @@ jQuery ->
   # handle audio remove
   $('#left-panel .audio').on 'click', '.remove', (e) ->
     e.preventDefault
-    self = $(@)
     $.ajax
       url: $(@).attr('href')
       type: 'PUT'
@@ -127,9 +126,10 @@ jQuery ->
           $('#left-panel .channels').tooltip('show')
 
   # auto save the post every x seconds
-#  $('.editor').livequery ->
-#    $('body').everyTime "30s", 'save-form', ->
-#      $('.editor-save').click()
+  $('.editor').livequery ->
+    if $('#post-data').data('d').status != 'active'
+      $('body').everyTime "30s", 'save-form', ->
+        $('.editor-save').click()
 
   # save on ctrl + s
   $('body,#post-title,#post-body').bind 'keydown.ctrl_s', (e) ->

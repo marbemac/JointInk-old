@@ -5,4 +5,4 @@
   = yield
 
 = render 'posts/audio_player'
-#post-data{'data-d' => {id: @post.id, url: post_url(@post.id)}.to_json}
+#post-data{'data-d' => {id: @post.id, url: post_url(@post.id)}.to_json, status: @post.status}
