@@ -102,6 +102,7 @@ module ApplicationHelper
 
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-36765363-1']);
+        _gaq.push(['_setDomainName', 'getthisthat.com']);
         _gaq.push(['_trackPageview']);
 
         (function() {
