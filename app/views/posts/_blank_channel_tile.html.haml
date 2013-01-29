@@ -4,13 +4,13 @@
     %p Contribute to the '#{@channel.name}' channel.
     .buttons
       %div
-        %a.medium.white.button{:href => new_channel_post_path(@channel, 'text', 'article'), 'data-skip-pjax' => true} +New Article
+        %a.medium.white.button{:href => new_channel_post_url(@channel, 'text', 'article', :subdomain => false), 'data-skip-pjax' => true} +New Article
       %div
-        %a.medium.white.button{:href => new_channel_post_path(@channel, 'picture', 'caption'), 'data-skip-pjax' => true} +New Picture
+        %a.medium.white.button{:href => new_channel_post_url(@channel, 'picture', 'caption', :subdomain => false), 'data-skip-pjax' => true} +New Picture
       %div
-        %a.medium.white.button{:href => channels_path} Browse Channels
+        %a.medium.white.button{:href => channels_url(:subdomain => false)} Browse Channels
   - else
-    .title Contribute Soon
-    %p Sign in to get an invite.
+    .title Contribute
+    %p You have to sign in first!
     .buttons
-      %a.medium.action.button{:href => user_registration_path} Sign In
+      %a.medium.white.button{:href => user_registration_url(:subdomain => false)} Sign In

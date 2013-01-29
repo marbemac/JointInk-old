@@ -15,7 +15,7 @@ class PostsController < ApplicationController
       @post.add_channel current_user, @channel
     end
 
-    redirect_to edit_post_path(@post)
+    redirect_to edit_post_url(@post, :subdomain => false)
   end
 
   def update
@@ -26,8 +26,8 @@ class PostsController < ApplicationController
       if @post.update_attributes(params[:post])
         @post.update_photo_attributes
         @post.save
-        format.html { redirect_to post_via_channel_path(@post.primary_channel, @post)}
-        format.js { render :json => {:post => @post, :url => post_path(@post)} }
+        format.html { redirect_to post_via_channel_url(@post.primary_channel, @post, :subdomain => @post.user.username)}
+        format.js { render :json => {:post => @post, :url => post_via_channel_url(@post.primary_channel, @post, :subdomain => @post.user.username)} }
       else
         format.html { render action: "edit" }
         format.json { render :json => {:errors => @post.errors}, status: :unprocessable_entity }
@@ -51,9 +51,9 @@ class PostsController < ApplicationController
   def show_redirect
     @post = Post.find(params[:id])
     if @post.primary_channel
-      redirect_to post_via_channel_path(@post.primary_channel, @post)
+      redirect_to post_via_channel_path(@post.primary_channel, @post, :subdomain => @post.user.username), :status => :moved_permanently
     else
-      redirect_to post_via_channel_path(0, @post)
+      redirect_to post_via_channel_path(0, @post, :subdomain => @post.user.username), :status => :moved_permanently
     end
   end
 
@@ -70,7 +70,7 @@ class PostsController < ApplicationController
     authorize! :destroy, @post
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to user_path(current_user) }
+      format.html { redirect_to user_url(:subdomain => current_user.username) }
       format.js
     end
   end

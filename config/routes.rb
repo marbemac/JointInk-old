@@ -37,19 +37,6 @@ ThisThat::Application.routes.draw do
     end
   end
 
-  # channels
-  resources :channels
-  scope 'c/:id' do
-    get 'new-:type-:subtype-post' => 'posts#new', :as => :new_channel_post
-    get 'edit' => 'channels#edit', :as => :edit_channel
-    get 'members' => 'channels#members', :as => :channel_members
-    put '' => 'channels#update'
-    scope ':post_id' do
-      get '' => 'posts#show', :as => :post_via_channel
-    end
-    get '' => 'channels#show', :as => :channel
-  end
-
   # search
   scope 'search' do
     get ':resource' => 'search#go', :resource => 'all'
@@ -96,6 +83,10 @@ ThisThat::Application.routes.draw do
     put ':id/deauth' => 'users#account_deauth', :as => :account_deauth
   end
 
+  get 'home' => 'pages#home', :as => :home
+  get 'settings' => 'users#settings', :as => :settings
+  get 'ideas' => 'users#ideas', :as => :user_ideas
+
   # Users
   scope 'users' do
     put 'update_avatar' => 'users#update_avatar', :as => :update_user_avatar
@@ -104,17 +95,23 @@ ThisThat::Application.routes.draw do
   put 'add/:user_id(/:channel_id)' => 'users#add', :as => :user_add
   put 'remove/:user_id(/:channel_id)' => 'users#remove', :as => :user_remove
 
-  get 'home' => 'pages#home', :as => :home
-  get 'settings' => 'users#settings', :as => :settings
-
-  get 'ideas' => 'users#ideas', :as => :user_ideas
-  scope ':id' do
+  constraints(Subdomain) do
     get '' => 'users#show', :as => :user
     put '' => 'users#update', :as => :update_user
     get 'channels' => 'users#channels', :as => :user_channels
-    scope ':channel_id' do
-      get '' => 'users#show', :as => :user_channel
+  end
+
+  # channels
+  resources :channels
+  scope ':id' do
+    get 'new-:type-:subtype-post' => 'posts#new', :as => :new_channel_post
+    get 'edit' => 'channels#edit', :as => :edit_channel
+    get 'members' => 'channels#members', :as => :channel_members
+    put '' => 'channels#update'
+    scope ':post_id' do
+      get '' => 'posts#show', :as => :post_via_channel
     end
+    get '' => 'channels#show', :as => :channel
   end
 
   root :to => "pages#home"

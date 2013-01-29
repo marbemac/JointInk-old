@@ -1,9 +1,9 @@
 - cache post do
-  %a.user{:href => user_path(post.user)}= post.user.name
+  %a.user{:href => user_url(:subdomain => post.user.username)}= post.user.name
   %span.in in
   %i.icon-double-angle-right
   - if post.primary_channel
-    %a.channel{:href => channel_path(post.primary_channel)}= post.primary_channel.name
+    %a.channel{:href => channel_url(post.primary_channel, :subdomain => false)}= post.primary_channel.name
   - else
     %a.channel{:href => '#'} None
 

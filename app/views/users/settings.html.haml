@@ -5,7 +5,7 @@
       This is where you set them.
 
   .section.basic
-    = simple_form_for @user do |f|
+    = simple_form_for @user, :url => user_url(:subdomain => @user.username) do |f|
       .help.show-for-touch Click something to change it. Click "Save Changes" to... save changes.
 
       = f.error_notification

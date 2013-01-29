@@ -1,7 +1,7 @@
 - cache channel do
   .channel.tile
 
-    %a{:href => channel_path(channel)}
+    %a{:href => channel_url(channel, :subdomain => false)}
       .image.cover-image{:style => "background-image: url('#{channel.photo_url(:medium)}')"}
       %h4.name= channel.name
 

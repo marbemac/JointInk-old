@@ -11,8 +11,9 @@
 
       .url
         .head Your URL
-        .root= request.host_with_port + '/'
         .username= resource.username && !resource.username.blank? ? resource.username : 'username'
+        .root= ".#{request.host_with_port}"
+
 
 
       = f.submit "Sign Up", :class => 'medium action submit button'

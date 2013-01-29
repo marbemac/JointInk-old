@@ -12,7 +12,7 @@
   %nav
     %ul.left
       %li{:class => (params[:action] == 'show' ? 'on' : '')}
-        %a{:href => user_path(@user)}
+        %a{:href => user_url(:subdomain => @user.username)}
           = pluralize(@user.posts_count, "Post")
           %i.icon-caret-up
       - if current_user == @user
@@ -30,6 +30,6 @@
 
     %ul.right
       %li{:class => (params[:action] == 'channels' ? 'on' : '')}
-        %a{:href => user_channels_path(@user)}
+        %a{:href => user_channels_url(:subdomain => @user.username)}
           = pluralize(@user.channels_count, "Channel")
           %i.icon-caret-up

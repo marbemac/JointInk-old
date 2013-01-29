@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include UrlHelper
   before_filter :catch_flash, :init, :set_user_time_zone, :save_referer
 
   unless Rails.application.config.consider_all_requests_local

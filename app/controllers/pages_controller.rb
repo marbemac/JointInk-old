@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   def home
     @fullscreen = true
     if signed_in?
-      redirect_to user_path(current_user)
+      redirect_to root_url(:subdomain => current_user.username)
     end
   end
 

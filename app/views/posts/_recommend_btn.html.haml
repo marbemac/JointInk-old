@@ -1,5 +1,5 @@
 - unless signed_in? && @post.user_id == current_user.id
-  %div{'data-url' => post_vote_path(@post.id), :class => "medium recommend button #{signed_in? && @post.voted?(current_user.id) ? 'gray' : 'action'}"}
+  %div{'data-url' => post_vote_url(@post.id, :subdomain => false), :class => "medium recommend button #{signed_in? && @post.voted?(current_user.id) ? 'gray' : 'action'}"}
     - if signed_in? && @post.voted?(current_user.id)
       Recommended
     - else

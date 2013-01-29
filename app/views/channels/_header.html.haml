@@ -7,13 +7,13 @@
 
       .extra
         Created by
-        %a{:href => user_path(@channel.user)}= @channel.user.name
+        %a{:href => user_url(:subdomain => @channel.user.username)}= @channel.user.name
 
 - content_for :page_nav do
   %nav
     %ul.left
       %li{:class => (params[:action] == 'show' ? 'on' : '')}
-        %a{:href => channel_path(@channel)}
+        %a{:href => channel_url(@channel, :subdomain => false)}
           = pluralize(@channel.posts_count, 'Post')
           %i.icon-caret-up
 
@@ -33,7 +33,7 @@
                 %i.icon-caret-up
                 %ul
                   %li
-                    %a{:href => edit_channel_path(@channel.id), 'data-skip-pjax' => true} Edit Channel
+                    %a{:href => edit_channel_url(@channel.id, :subdomain => false), 'data-skip-pjax' => true} Edit Channel
             %li
               &bull;
 
@@ -45,6 +45,6 @@
               %i.icon-caret-up
               %ul
                 %li
-                  %a{:href => new_channel_post_path(@channel, 'text', 'article'), 'data-skip-pjax' => true} +New Article
+                  %a{:href => new_channel_post_url(@channel, 'text', 'article', :subdomain => false), 'data-skip-pjax' => true} +New Article
                 %li
-                  %a{:href => new_channel_post_path(@channel, 'picture', 'caption'), 'data-skip-pjax' => true} +New Picture
+                  %a{:href => new_channel_post_url(@channel, 'picture', 'caption', :subdomain => false), 'data-skip-pjax' => true} +New Picture

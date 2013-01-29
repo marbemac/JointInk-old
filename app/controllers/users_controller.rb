@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def show
     #TODO: Gross controller
 
-    @user = User.find(params[:id].downcase)
+    @user = User.find(request.subdomain.downcase)
     @title = @user.name + "'s Posts"
     @page_title = @user.name
 
@@ -21,18 +21,12 @@ class UsersController < ApplicationController
     @description = @user.bio
     build_og_tags(@user.og_title, @user.og_type, @user.permalink, @user.og_description)
 
-    #case params[:page]
-    #  when 'posts'
-    #    @posts = @user.sharing(@channel).page(params[:page]).order('created_at DESC')
-    #  when 'feed'
-    #    @posts = @user.feed(@channel).page(params[:page])
-    #end
     @posts = @user.sharing(@channel).page(params[:page]).order('created_at DESC')
   end
 
   def show_redirect
     @user = User.find(params[:id])
-    redirect_to user_path(@user)
+    redirect_to root_url(:subdomain => @user.username), :status => :moved_permanently
   end
 
   def ideas
@@ -112,7 +106,7 @@ class UsersController < ApplicationController
   end
 
   def channels
-    @user = User.find(params[:id])
+    @user = User.find(request.subdomain.downcase)
     @created_channels = @user.created_channels
     @contributed_channels = @user.contributed_channels
   end

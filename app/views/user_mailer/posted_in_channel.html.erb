@@ -1,7 +1,7 @@
 <p>
-  <%= link_to @post.user.name, user_url(@post.user) %> just published a new post in your channel:
+  <%= link_to @post.user.name, user_url(:subdomain => @post.user.username) %> just published a new post in your channel:
 </p>
 
 <p>
-  <%= link_to @post.title, post_url(@post) %>
+  <%= link_to @post.title, post_url(@post.id, :subdomain => false) %>
 </p>

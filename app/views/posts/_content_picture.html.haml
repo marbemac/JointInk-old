@@ -4,10 +4,10 @@
       != !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
 
     .post-top-meta
-      %a.post-author{:href => user_path(@post.user), :rel => 'author'}= @post.user.name
+      %a.post-author{:href => user_url(:subdomain => @post.user.username), :rel => 'author'}= @post.user.name
       in
       - if @post.primary_channel
-        %a.post-channel{:href => channel_path(@post.primary_channel)}= @post.primary_channel.name
+        %a.post-channel{:href => channel_url(@post.primary_channel, :subdomain => false)}= @post.primary_channel.name
       - else
         %a.post-channel{:href => '#'} None
 
@@ -21,5 +21,5 @@
     .upload-help
       click to upload a picture
       %span.loading
-      %input{:type => 'file', 'data-url' => post_update_photo_path(@post.id), :name => 'post[photo]'}
+      %input{:type => 'file', 'data-url' => post_update_photo_url(@post.id, :subdomain => false), :name => 'post[photo]'}
   %div{:style => "background-image: url('#{@post.photo_url}')", :class => "image"}

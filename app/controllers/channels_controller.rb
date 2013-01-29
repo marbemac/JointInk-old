@@ -49,7 +49,9 @@ class ChannelsController < ApplicationController
     authorize! :read, @channel
 
     if params[:id].is_a? Integer
-      redirect_to channel_path(@channel), :status => :moved_permanently
+      redirect_to channel_url(@channel, :subdomain => false), :status => :moved_permanently
+    elsif request.subdomain && request.subdomain.present? && request.subdomain != 'www'
+      redirect_to channel_url(@channel, :subdomain => false)
     end
 
     @posts = @channel.posts.active.order('votes_count DESC, created_at DESC')
