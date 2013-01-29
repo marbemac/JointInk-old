@@ -41,7 +41,7 @@ gem 'sidekiq' # background jobs
 gem 'sinatra' # for sidekiq
 gem 'slim' # for sidekiq
 gem 'cache_digests'
-gem 'hirefire-resource', :git => 'git://github.com/meskyanichi/hirefire-resource.git'
+gem 'hirefire-resource'
 gem 'simple_form'
 gem 'sanitize'
 gem 'pg_search'
