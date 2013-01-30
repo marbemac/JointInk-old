@@ -22,13 +22,17 @@ class PostStat < ActiveRecord::Base
   before_destroy :decrease_post_votes
 
   def increase_post_votes
-    post.votes_count += 1
-    post.save
+    if stat_type == 'vote'
+      post.votes_count += 1
+      post.save
+    end
   end
 
   def decrease_post_votes
-    post.votes_count -= 1
-    post.save
+    if stat_type == 'vote'
+      post.votes_count -= 1
+      post.save
+    end
   end
 
   def self.retrieve(post_id, stat_type, ip_address, user_id)
@@ -36,7 +40,7 @@ class PostStat < ActiveRecord::Base
     if user_id
       stat = stat.where(:user_id => user_id)
     else
-      stat = stat.where(:ip_address => ip_address)
+      stat = stat.where("ip_address = ? AND user_id IS NULL", ip_address)
     end
     stat.first
   end

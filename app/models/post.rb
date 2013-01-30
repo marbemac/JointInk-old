@@ -156,8 +156,8 @@ class Post < ActiveRecord::Base
   end
 
   # has the user voted on this post?
-  def voted?(user_id)
-    PostStat.retrieve(id, 'vote', nil, user_id)
+  def voted?(user, request)
+    PostStat.retrieve(id, 'vote', request.remote_ip, user ? user.id : nil)
   end
 
   ##########

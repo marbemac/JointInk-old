@@ -129,6 +129,7 @@ blockquote {
 }
 
 .button {
+  @include transition();
   @include box-shadow(none);
   border: none;
   text-transform: uppercase;
@@ -180,7 +181,7 @@ blockquote {
     }
   }
   &.medium {
-    padding: 15px 25px;
+    padding: 16px 25px 14px 25px;
     font-size: 12px;
   }
   &.large {

@@ -6,9 +6,27 @@ jQuery ->
       history.back();
 
   # recommend buttons
-  $('body').on 'click', '.recommend.button', (e) ->
-    return unless window.authenticate_user()
+  recommendButtonColor = (target) ->
+    count = parseInt(target.text())
+    if count < 1
+      '#2C84AC'
+    else if count < 3
+      '#28799D'
+    else if count < 5
+      '#216887'
+    else if count < 7
+      '#87634E'
+    else if count < 10
+      '#2C84AC'
+    else if count < 15
+      '#874C30'
+    else
+      '#873112'
 
+  $('.recommend').livequery ->
+    $(@).find('.count').css('background-color', recommendButtonColor($(@).find('.count')))
+
+  $('body').on 'click', '.recommend .button', (e) ->
     self = $(@)
 
     return if self.hasClass('disabled')
@@ -16,6 +34,7 @@ jQuery ->
     $.ajax
       url: self.data('url')
       type: if self.hasClass('action') then 'PUT' else 'DELETE'
+      dataType: 'json'
       beforeSend: (jqXHR, settings) ->
         self.addClass('disabled')
         self.data('old-text', self.text())
@@ -32,6 +51,13 @@ jQuery ->
 
         self.toggleClass('action gray')
 
+        oldCount = self.parent().find('.count')
+        newCount = $('<span/>').addClass('count').text(data.votes_count).css(position:'absolute',top:0,right:0,display:'none','border-bottom':'1px solid #EFEFEF')
+        newCount.css('background-color', recommendButtonColor(newCount))
+        self.parent().append(newCount)
+        newCount.slideDown 500, 'easeOutBounce', ->
+          oldCount.remove()
+          newCount.css(position:'static','border-bottom':'none')
 
   # full page article cover photo sizing and handling
   updateFullPageArticle = ->

@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show, :create_read, :show_redirect]
+  before_filter :authenticate_user!, :except => [:show, :create_read, :show_redirect, :create_vote, :destroy_vote]
 
   def new
     if params[:id]
@@ -117,22 +117,24 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
 
     # can't vote on your own posts
-    if @post.user_id == current_user.id
+    if current_user && @post.user_id == current_user.id
       render :json => {:status => 'error'}, status: :unprocessable_entity
     else
-      PostStat.add(@post.id, request.remote_ip, 'vote', request.referer, current_user.id)
-      UserMailer.recommended(@post.id, current_user.id).deliver
-      render :json => {:status => 'success'}, status: 200
+      PostStat.add(@post.id, request.remote_ip, 'vote', request.referer, current_user ? current_user.id : nil)
+      if current_user
+        UserMailer.recommended(@post.id, current_user.id).deliver
+      end
+      render :json => {:status => 'success', :votes_count => @post.votes_count + 1}, status: 200
     end
   end
 
   def destroy_vote
     @post = Post.find(params[:id])
 
-    stat = PostStat.retrieve(@post.id, 'vote', request.remote_ip, current_user.id)
+    stat = PostStat.retrieve(@post.id, 'vote', request.remote_ip, current_user ? current_user.id : nil)
     if stat
       stat.destroy
-      render :json => {:status => 'success'}, status: 200
+      render :json => {:status => 'success', :votes_count => @post.votes_count - 1}, status: 200
     else
       render :json => {:status => 'error'}, status: :unprocessable_entity
     end

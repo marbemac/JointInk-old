@@ -275,6 +275,21 @@
     }
   }
 
+  .recommend {
+    position: relative;
+
+    .count {
+      display: inline-block;
+      font-weight: bold;
+      padding: 16px 15px 14px 15px;
+      background: darken($action-color, 10%);
+      color: #EFEFEF;
+      font-size: 12px;
+      margin-left: -4px;
+      cursor: default;
+    }
+  }
+
   // Post Types
   &.text {
     .action-bar {
