@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20130128212725) do
     t.string   "privacy",     :default => "public"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "posts_count"
+    t.integer  "posts_count",                         :default => 0
   end
 
   add_index "channels", ["slug"], :name => "index_channels_on_slug", :unique => true

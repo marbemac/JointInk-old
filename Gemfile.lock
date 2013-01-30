@@ -22,8 +22,6 @@ GEM
       activesupport (= 3.2.11)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
-    activerecord-postgres-array (0.0.8)
-      activerecord
     activerecord-postgres-hstore (0.5.3)
       rails
       rake
@@ -36,6 +34,8 @@ GEM
     addressable (2.3.2)
     annotate (2.5.0)
       rake
+    ar_pg_array (0.11.2)
+      activerecord (>= 3.0.6, < 4.0)
     arel (3.0.2)
     aws_cf_signer (0.1.1)
     bcrypt-ruby (3.0.1)
@@ -376,9 +376,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-postgres-array
   activerecord-postgres-hstore
   annotate
+  ar_pg_array
   better_errors
   binding_of_caller
   bundler (~> 1.2)

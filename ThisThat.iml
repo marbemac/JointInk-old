@@ -40,6 +40,7 @@
     <orderEntry type="library" scope="PROVIDED" name="capybara (v2.0.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="carrierwave (v0.8.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="celluloid (v0.12.4, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="childprocess (v0.3.7, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="chronic (v0.9.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="chunky_png (v1.2.7, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="cloudinary (v1.0.43, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
@@ -53,7 +54,9 @@
     <orderEntry type="library" scope="PROVIDED" name="daemons (v1.1.9, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="dalli (v2.6.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="database_cleaner (v0.9.1, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="devise (v2.2.3, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="diff-lcs (v1.1.3, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="em-websocket (v0.4.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="email_spec (v1.4.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubis (v2.7.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="escape (v0.0.4, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
@@ -66,15 +69,19 @@
     <orderEntry type="library" scope="PROVIDED" name="faraday (v0.8.4, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ffi (v1.3.1, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="fog (v1.9.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="font-awesome-rails (v3.0.2.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="foreman (v0.61.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="formatador (v0.2.4, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="friendly_id (v4.0.9, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="fssm (v0.2.10, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="guard (v1.6.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="guard-livereload (v1.1.3, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="guard-rspec (v2.4.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="haml (v3.1.7, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="haml-rails (v0.3.5, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="hashie (v1.2.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="hike (v1.2.1, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="hirefire-resource (v0.0.2@74e775, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="hirefire-resource (v0.0.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="honeybadger (v1.5.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="http_parser.rb (v0.5.3, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="httpauth (v0.2.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
@@ -85,19 +92,23 @@
     <orderEntry type="library" scope="PROVIDED" name="json (v1.7.6, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jwt (v0.1.5, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="kaminari (v0.14.1, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="kgio (v2.8.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="koala (v1.6.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="launchy (v2.1.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="listen (v0.7.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="lumberjack (v1.0.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mail (v2.4.4, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="memcachier (v0.0.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="meta_request (v0.2.1, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="method_source (v0.8.1, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mime-types (v1.19, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="mixpanel (v3.5.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mixpanel (v3.5.1, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="modular-scale (v1.0.6, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="multi_json (v1.5.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="multipart-post (v1.1.5, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-scp (v1.0.4, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-ssh (v2.6.3, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="newrelic_rpm (v3.5.6.46, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.5.6, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="oauth (v0.4.7, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="oauth2 (v0.8.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
@@ -118,7 +129,7 @@
     <orderEntry type="library" scope="PROVIDED" name="rack-mini-profiler (v0.1.23, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-pjax (v0.7.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-protection (v1.3.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rack-ssl (v1.3.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack-ssl (v1.3.3, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-test (v0.6.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-timeout (v0.0.3, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails (v3.2.11, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
@@ -132,16 +143,20 @@
     <orderEntry type="library" scope="PROVIDED" name="rspec (v2.12.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-core (v2.12.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-expectations (v2.12.1, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rspec-mocks (v2.12.1, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-mocks (v2.12.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-rails (v2.12.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="ruby-hmac (v0.4.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rubyzip (v0.9.9, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sanitize (v2.0.3, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass (v3.2.5, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass-rails (v3.2.6, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sassy-math (v1.5, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="selenium-webdriver (v2.29.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sendgrid (v1.1.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sidekiq (v2.6.5, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="simple_form (v2.0.4, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="simple_oauth (v0.2.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sinatra (v1.3.4, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="slim (v1.3.6, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="slop (v3.4.3, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets (v2.2.2, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
@@ -153,10 +168,12 @@
     <orderEntry type="library" scope="PROVIDED" name="tilt (v1.3.3, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="timers (v1.1.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="treetop (v1.4.12, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="twitter (v4.5.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v0.3.35, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="uglifier (v1.3.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="unicorn (v4.5.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="warden (v1.2.1, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="websocket (v1.0.7, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="xpath (v1.0.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="yajl-ruby (v1.1.0, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="zurb-foundation (v3.2.5, RVM: ruby-1.9.3-p327 [ThisThat]) [gem]" level="application" />

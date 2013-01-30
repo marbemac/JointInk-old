@@ -30,7 +30,8 @@ gem 'cloudinary'
 gem "switch_user"
 gem 'annotate'
 gem 'activerecord-postgres-hstore'
-gem 'activerecord-postgres-array'
+gem 'ar_pg_array'
+#gem 'activerecord-postgres-array'
 gem "friendly_id", "~> 4.0.9"
 
 gem 'carrierwave'
