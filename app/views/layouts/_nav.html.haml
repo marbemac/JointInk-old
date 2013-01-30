@@ -13,15 +13,15 @@
       %ul
         - if signed_in?
           %li
-            %a{:href => new_channel_path, 'data-skip-pjax' => true}
+            %a{:href => new_channel_url(:subdomain => false), 'data-skip-pjax' => true}
               %i.icon-plus
               New Channel
           %li
-            %a{:href => new_post_path('text', 'article'), 'data-skip-pjax' => true}
+            %a{:href => new_post_url('text', 'article', :subdomain => false), 'data-skip-pjax' => true}
               %i.icon-plus
               New Article
           %li
-            %a{:href => new_post_path('picture', 'caption'), 'data-skip-pjax' => true}
+            %a{:href => new_post_url('picture', 'caption', :subdomain => false), 'data-skip-pjax' => true}
               %i.icon-plus
               New Picture
           %li.divider
@@ -36,9 +36,9 @@
           %li.divider
         - else
           %li
-            %a{:href => signin_path} Sign In
+            %a{:href => signin_url(:subdomain => false)} Sign In
           %li
-            %a{:href => user_registration_path} Join Now
+            %a{:href => user_registration_url(:subdomain => false)} Join Now
           %li.divider
 
         %li
