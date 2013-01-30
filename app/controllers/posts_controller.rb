@@ -51,9 +51,9 @@ class PostsController < ApplicationController
   def show_redirect
     @post = Post.find(params[:id])
     if @post.primary_channel
-      redirect_to post_via_channel_path(@post.primary_channel, @post, :subdomain => @post.user.username), :status => :moved_permanently
+      redirect_to post_via_channel_url(@post.primary_channel, @post, :subdomain => @post.user.username), :status => :moved_permanently
     else
-      redirect_to post_via_channel_path(0, @post, :subdomain => @post.user.username), :status => :moved_permanently
+      redirect_to post_via_channel_url(0, @post, :subdomain => @post.user.username), :status => :moved_permanently
     end
   end
 
