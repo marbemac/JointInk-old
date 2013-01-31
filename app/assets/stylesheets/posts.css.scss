@@ -387,12 +387,15 @@
         z-index: 1500;
         max-width: 450px;
         padding: 25px;
-        background: rgba(255,255,255,.6);
+        background: rgba(255,255,255,.75);
+        text-align: left;
 
         h1 {
           @include single-text-shadow(rgba(0, 0, 0, 0.3), 1px, 2px, 5px);
-          font-size: 44px;
-          font-size: 4.4rem;
+          font-size: 40px;
+          font-size: 4rem;
+          line-height: 48px;
+          line-height: 4.8rem;
           margin: 0;
           padding: 0;
         }
@@ -400,7 +403,7 @@
           width: 75px;
           height: 3px;
           background: #333;
-          margin: 25px auto 33px auto;
+          margin: 25px 0 33px 0;
         }
         .post-top-meta, a {
           @include single-text-shadow(rgba(0, 0, 0, 0.3), 1px, 2px, 5px);
