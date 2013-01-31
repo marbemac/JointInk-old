@@ -1564,7 +1564,8 @@ var RLANG = {
 				}
 
                 // clean up ugly nested tags, and empty tags
-                this.$editor.find('p p, p ol, p ul, p h3, p h4, p blockquote').unwrap()
+                this.$editor.find('p p, p ol, p ul, p h3, p h4, p blockquote').unwrap();
+                this.$editor.find('ul p, ol p, ul blockquote, ol blockquote, ul h3, ol h3, ul h4, ol h4').contents().unwrap();
                 this.$editor.find('p,ul,ol,blockquote,h4,h3').filter( function() {
                     return $.trim($(this).html()) == '';
                 }).remove()
