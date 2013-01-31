@@ -1404,7 +1404,7 @@ var RLANG = {
 
 				if (cmd === 'inserthtml')
 				{
-					if (this.browser('msie'))
+                    if (this.browser('msie'))
 					{
 						this.$editor.focus();
 						this.document.selection.createRange().pasteHTML(param);
@@ -1419,7 +1419,7 @@ var RLANG = {
 				}
 				else if (cmd === 'unlink')
 				{
-					parent = this.getParentNode();
+                    parent = this.getParentNode();
 					if ($(parent).get(0).tagName === 'A')
 					{
 						$(parent).replaceWith($(parent).text());
@@ -1431,7 +1431,7 @@ var RLANG = {
 				}
 				else if (cmd === 'JustifyLeft' || cmd === 'JustifyCenter' || cmd === 'JustifyRight' || cmd === 'JustifyFull')
 				{
-					parent = this.getCurrentNode();
+                    parent = this.getCurrentNode();
 					var tag = $(parent).get(0).tagName;
 
 					if (this.opts.iframe === false && $(parent).parents('.redactor_editor').size() == 0)
@@ -1473,7 +1473,7 @@ var RLANG = {
 				}
 				else if (cmd === 'formatblock' && param === 'blockquote')
 				{
-					parent = this.getCurrentNode();
+                    parent = this.getCurrentNode();
 					if ($(parent).get(0).tagName === 'BLOCKQUOTE')
 					{
 						if (this.browser('msie'))
@@ -1515,7 +1515,7 @@ var RLANG = {
 				}
 				else if (cmd === 'formatblock' && (param === 'pre' || param === 'p'))
 				{
-					parent = this.getParentNode();
+                    parent = this.getParentNode();
 
 					if ($(parent).get(0).tagName === 'PRE')
 					{
@@ -1528,7 +1528,7 @@ var RLANG = {
 				}
 				else
 				{
-					if (cmd === 'inserthorizontalrule' && this.browser('msie'))
+                    if (cmd === 'inserthorizontalrule' && this.browser('msie'))
 					{
 						this.$editor.focus();
 					}
@@ -1543,7 +1543,7 @@ var RLANG = {
 
 				if (cmd === 'inserthorizontalrule')
 				{
-					this.$editor.find('hr').removeAttr('id');
+                    this.$editor.find('hr').removeAttr('id');
 				}
 
 				this.syncCode();
@@ -1562,17 +1562,38 @@ var RLANG = {
 				{
 					this.air.hide();
 				}
+
+                // clean up ugly nested tags, and empty tags
+                this.$editor.find('p p, p ol, p ul, p h3, p h4, p blockquote').unwrap()
+                this.$editor.find('p,ul,ol,blockquote,h4,h3').filter( function() {
+                    return $.trim($(this).html()) == '';
+                }).remove()
 			}
 			catch (e) { }
 		},
 		execRun: function(cmd, param)
 		{
-			if (cmd === 'formatblock' && this.browser('msie'))
+            if (cmd === 'formatblock' && this.browser('msie'))
 			{
 				param = '<' + param + '>';
 			}
 
 			this.document.execCommand(cmd, false, param);
+
+            if (cmd === 'insertorderedlist')
+            {
+                parent = this.getCurrentNode();
+                if ($(parent).get(0).tagName != 'OL') {
+                    this.execRun('formatblock', 'p')
+                }
+            }
+            if (cmd === 'insertunorderedlist')
+            {
+                parent = this.getCurrentNode();
+                if ($(parent).get(0).tagName != 'UL') {
+                    this.execRun('formatblock', 'p')
+                }
+            }
 		},
 
 		// FORMAT NEW LINE
