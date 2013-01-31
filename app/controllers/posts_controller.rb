@@ -26,8 +26,8 @@ class PostsController < ApplicationController
       if @post.update_attributes(params[:post])
         @post.update_photo_attributes
         @post.save
-        format.html { redirect_to post_via_channel_url(@post.primary_channel, @post, :subdomain => @post.user.username)}
-        format.js { render :json => {:post => @post, :url => post_via_channel_url(@post.primary_channel, @post, :subdomain => @post.user.username)} }
+        format.html { redirect_to @post.primary_channel ? post_via_channel_url(@post.primary_channel, @post, :subdomain => @post.user.username) : post_url(@post.id, :subdomain => false)}
+        format.js { render :json => {:post => @post, :url => @post.primary_channel ? post_via_channel_url(@post.primary_channel, @post, :subdomain => @post.user.username) : post_url(@post.id, :subdomain => false)} }
       else
         format.html { render action: "edit" }
         format.json { render :json => {:errors => @post.errors}, status: :unprocessable_entity }

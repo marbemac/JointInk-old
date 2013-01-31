@@ -7,7 +7,6 @@ ThisThat::Application.routes.draw do
   #end
 
   # posts
-  resources :posts, :only => [:update, :destroy, :edit]
   scope 'p' do
     get 'new-:type-:subtype-post' => 'posts#new', :as => :new_post
     scope ':id' do

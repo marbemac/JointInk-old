@@ -1,5 +1,5 @@
 .editor-actions
-  %a.home.gray.button{:href => root_url(:host => site_host), 'data-skip-pjax' => true}
+  %a.home.gray.button{:href => root_url(:subdomain => current_user.username), 'data-skip-pjax' => true}
     %i.icon-home
 
   .editor-publish.action.button.has-tooltip{'data-placement' => 'bottom', :title => 'Publishing makes your post live for other people to view.'}
