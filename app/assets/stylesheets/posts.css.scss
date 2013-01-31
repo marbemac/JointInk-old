@@ -248,6 +248,7 @@
   .white-wrap {
     width: 100%;
     padding-top: 50px;
+    padding-bottom: 50px;
 
     &.with-photo {
       margin-top: 0;
@@ -574,10 +575,10 @@
       line-height: 2.8rem;
     }
     ol {
-      margin: 0 0 0 -5px;
+      margin: 0 0 25px -5px;
     }
     ul {
-      margin: 0 0 0 -5px;
+      margin: 0 0 25px -5px;
       list-style: inherit;
     }
     li {
