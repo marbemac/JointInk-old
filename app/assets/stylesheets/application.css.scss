@@ -25,7 +25,7 @@ html {
 }
 
 body {
-  background: #F9F9F9;
+  background: #f3f3ed;
   height: 100%;
 }
 
@@ -733,7 +733,7 @@ blockquote {
     }
     .icon-caret-down {
       display: block;
-      color: #DDD;
+      color: #666;
       font-size: 40px;
       font-size: 4rem;
       margin: 0 0 15px 0;
@@ -760,7 +760,7 @@ blockquote {
     cursor: default;
   }
   .section {
-    border-bottom: 4px solid #DDD;
+    border-bottom: 4px solid #CCC;
     padding: 55px 0;
     position: relative;
 
