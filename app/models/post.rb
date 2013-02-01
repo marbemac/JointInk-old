@@ -144,7 +144,7 @@ class Post < ActiveRecord::Base
   end
 
   def og_description
-    truncate(content, :length => 100, :separator => ' ', :omission => '...')
+    truncate(content_clean, :length => 100, :separator => ' ', :omission => '...')
   end
 
   def og_type
