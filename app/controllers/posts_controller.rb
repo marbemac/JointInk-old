@@ -83,7 +83,7 @@ class PostsController < ApplicationController
     @post.update_photo_attributes
     @post.save
 
-    render :json => {:url => @post.photo_url, :class => @post.photo_ratio >= 1.4 ? 'cover-image' : 'contain-image'}
+    render :text => "{\"url\" : \"#{@post.photo_url}\", \"class\" : \"#{@post.photo_ratio >= 1.4 ? 'cover-image' : 'contain-image'}\"}", :content_type => "text/plain"
   end
 
   def remove_photo

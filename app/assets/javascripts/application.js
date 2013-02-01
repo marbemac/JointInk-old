@@ -14,7 +14,9 @@
 //= require jquery_ujs
 //= require jquery.pjax
 //= require jquery.livequery
-//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/jquery.ui.widget
+//= require jquery-fileupload/jquery.iframe-transport
+//= require jquery-fileupload/jquery.fileupload
 //= require jquery-fileupload/vendor/tmpl
 //= require jquery.easing
 //= require jquery.timer

@@ -5,8 +5,6 @@ jQuery ->
   # start the redactor editor
   if $('#post-body').length
     $('#post-body').redactor
-#      air: true
-#      airButtons: ['formatting','bold','italic','|','unorderedlist','orderedlist','link']
       fixed: true
       fixedBox: true
       fixedTop: 20
@@ -21,8 +19,9 @@ jQuery ->
 
   # handle photo uploads
   $('#picture-wrapper .fileinput-button input').fileupload
-    dataType: "json"
-    type: 'PUT'
+    dataType: "text"
+    type: 'POST'
+    paramName: 'post[photo]'
     add: (e,data) ->
       types = /(\.|\/)(gif|jpe?g|png)$/i
       file = data.files[0]
@@ -34,8 +33,9 @@ jQuery ->
       progress = parseInt(data.loaded / data.total * 100, 10)
       $('#picture-wrapper .fileinput-button .loading').text("#{progress}%")
     done: (e,data) ->
+      result = $.parseJSON(data.result)
       $('#picture-wrapper .fileinput-button .loading').text('')
-      $('#picture-wrapper .image').css('background-image', "url(#{data.result.url})").removeClass('cover-image contain-image').addClass(data.result.class)
+      $('#picture-wrapper .image').css('background-image', "url(#{result.url})").removeClass('cover-image contain-image').addClass(result.class)
 
   updatePostAudio = (data) ->
     if data

@@ -22,9 +22,6 @@
 
 html {
   height: 100%;
-  &.wf-loading {
-    visibility: hidden;
-  }
 }
 
 body {
@@ -103,6 +100,7 @@ blockquote {
 
 .alert {
   padding: 15px;
+  font-size: 20px;
   font-size: 2.0rem;
   font-weight: bold;
   background: #FFF;
@@ -371,10 +369,8 @@ blockquote {
 
   header {
     position: relative;
+    text-align: center;
 
-    hrgroup {
-      text-align: center;
-    }
     h1,
     .subheader {
       margin: 0;
@@ -414,6 +410,7 @@ blockquote {
 
   .home {
     background: #222;
+    font-size: 24px;
     font-size: 2.4rem;
     padding: 8px 12px 0 12px;
     color: #FFF;
@@ -431,6 +428,7 @@ blockquote {
 
     .name {
       background: #222;
+      font-size: 24px;
       font-size: 2.4rem;
       color: #FFF;
       padding: 8px 35px 0 12px;
@@ -439,6 +437,7 @@ blockquote {
 
       .icon-chevron-down {
         position: absolute;
+        font-size: 16px;
         font-size: 1.6rem;
         top: 13px;
         right: 10px;
@@ -687,21 +686,27 @@ blockquote {
 #pages-home {
   .center-screen {
     text-align: center;
+    margin: 100px auto;
     margin: 10rem auto;
   }
   h1 {
+    font-size: 50px;
     font-size: 5rem;
   }
   h2 {
     font-weight: normal;
     border-bottom: 1px solid #FFF;
+    font-size: 30px;
     font-size: 3rem;
+    margin: 80px auto 60px auto;
     margin: 8rem auto 6rem auto;
+    padding: 0 0 60px 0;
     padding: 0 0 6rem 0;
   }
   .login {
     @include single-text-shadow(rgba(0, 0, 0, 0.8), 1px, 2px, 5px);
     color: #FFF;
+    font-size: 20px;
     font-size: 2rem;
     position: relative;
     z-index: 1;
@@ -729,7 +734,7 @@ blockquote {
     .icon-caret-down {
       display: block;
       color: #DDD;
-      font-size: 50px;
+      font-size: 40px;
       font-size: 4rem;
       margin: 0 0 15px 0;
       cursor: default;
@@ -807,8 +812,11 @@ blockquote {
       .option {
         border: 1px dashed #CCC;
         background: #FCFCFC;
+        padding: 20px;
         padding: 2rem;
+        width: 170px;
         width: 17rem;
+        height: 160px;
         height: 16rem;
         text-align: left;
 
@@ -824,6 +832,7 @@ blockquote {
         }
       }
       .head {
+        font-size: 20px;
         font-size: 2rem;
         margin: 0 0 15px 0;
       }
@@ -898,9 +907,9 @@ blockquote {
 
   .ring {
     @include border-radius(1000px);
-    //@include box-shadow(rgba(0, 0, 0, 0.30) 0 1px 2px);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.4);
     position: absolute;
+    border: 6px solid #EFEFEF;
     border: 6px solid rgba(255,255,255,0.3);
     height: 100%;
     width: 100%;

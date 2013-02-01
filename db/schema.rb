@@ -37,9 +37,10 @@ ActiveRecord::Schema.define(:version => 20130128212725) do
     t.string   "privacy",     :default => "public"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "posts_count",                         :default => 0
+    t.integer  "posts_count", :default => 0
   end
 
+  add_index "channels", ["posts_count"], :name => "index_channels_on_posts_count"
   add_index "channels", ["slug"], :name => "index_channels_on_slug", :unique => true
   add_index "channels", ["user_id"], :name => "index_channels_on_user_id"
 
@@ -111,11 +112,11 @@ ActiveRecord::Schema.define(:version => 20130128212725) do
 
   create_table "users", :force => true do |t|
     t.string       "email"
-    t.string       "encrypted_password",                    :default => "",                           :null => false
+    t.string       "encrypted_password",     :default => "",                           :null => false
     t.string       "reset_password_token"
     t.datetime     "reset_password_sent_at"
     t.datetime     "remember_created_at"
-    t.integer      "sign_in_count",                         :default => 0
+    t.integer      "sign_in_count",          :default => 0
     t.datetime     "current_sign_in_at"
     t.datetime     "last_sign_in_at"
     t.string       "current_sign_in_ip"
@@ -125,22 +126,22 @@ ActiveRecord::Schema.define(:version => 20130128212725) do
     t.datetime     "confirmation_sent_at"
     t.string       "unconfirmed_email"
     t.string       "authentication_token"
-    t.datetime     "created_at",                                                                      :null => false
-    t.datetime     "updated_at",                                                                      :null => false
+    t.datetime     "created_at",                                                       :null => false
+    t.datetime     "updated_at",                                                       :null => false
     t.string       "username"
-    t.boolean      "username_reset",                        :default => false
+    t.boolean      "username_reset",         :default => false
     t.string       "name"
     t.string       "slug"
-    t.string       "status",                                :default => "active"
+    t.string       "status",                 :default => "active"
     t.string       "gender"
     t.date         "birthday"
-    t.string       "time_zone",                             :default => "Eastern Time (US & Canada)"
+    t.string       "time_zone",              :default => "Eastern Time (US & Canada)"
     t.text         "bio"
-    t.boolean      "use_fb_image",                          :default => false
+    t.boolean      "use_fb_image",           :default => false
     t.string       "origin"
     t.string       "avatar"
     t.string       "cover_photo"
-    t.string_array "roles",                  :limit => 255, :default => "{}"
+    t.string_array "roles"
     t.string       "color_theme"
   end
 

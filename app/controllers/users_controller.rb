@@ -90,7 +90,7 @@ class UsersController < ApplicationController
         format.html { redirect_to :back, notice: 'Successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render :action => params[:page] }
+        format.html { render :action => 'settings' }
         format.json { render json: current_user.errors, status: :unprocessable_entity }
       end
     end

@@ -4,7 +4,7 @@
       .upload-help
         click to upload a picture
         %span.loading
-        %input{:type => 'file', 'data-url' => post_update_photo_path(@post.id), :name => 'post[photo]'}
+        %input{:type => 'file', 'data-url' => post_update_photo_url(@post.id, :subdomain => false), :name => 'post[photo]'}
 
     - if @post.style == 'full-page' || defined?(@editing)
       #post-picture-title

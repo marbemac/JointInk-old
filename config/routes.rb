@@ -14,7 +14,7 @@ ThisThat::Application.routes.draw do
       put '' => 'posts#update'
       delete '' => 'posts#destroy'
 
-      put 'update-photo' => 'posts#update_photo', :as => :post_update_photo
+      post 'update-photo' => 'posts#update_photo', :as => :post_update_photo
       put 'remove-photo' => 'posts#remove_photo', :as => :post_remove_photo
 
       put 'update-audio' => 'posts#update_audio', :as => :post_update_audio

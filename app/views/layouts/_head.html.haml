@@ -18,7 +18,8 @@
 
   = csrf_meta_tags
 
-  %script{:src => '//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js'}
+  = javascript_include_tag "modernizr"
+
   %script{:type => "text/javascript", :src => "//use.typekit.net/slf6ypd.js"}
   %script try{Typekit.load();}catch(e){}
 
