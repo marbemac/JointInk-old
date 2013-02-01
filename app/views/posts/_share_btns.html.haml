@@ -12,5 +12,5 @@
         %a{:href => "http://reddit.com/submit?url=#{@post.permalink}&title=#{@post.title}", 'data-skip-pjax' => true, :target => '_blank'} Reddit
       %li
         %a{:href => "http://www.stumbleupon.com/submit?url=#{@post.permalink}&title=#{@post.title}", 'data-skip-pjax' => true, :target => '_blank'} StumbleUpon
-      %li
-        %a{:href => "http://news.ycombinator.com/submitlink?u=#{@post.permalink}&t=#{@post.title}", 'data-skip-pjax' => true, :target => '_blank'} Hacker News
+      -#%li
+      -#  %a{:href => "http://news.ycombinator.com/submitlink?u=#{@post.permalink}&t=#{@post.title}", 'data-skip-pjax' => true, :target => '_blank'} Hacker News

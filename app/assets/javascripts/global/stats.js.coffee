@@ -16,6 +16,7 @@ jQuery ->
 
     $(window).scroll ->
       if !clearedScroll && $("#post-body").offset().top + $("#post-body").height() <= $(window).scrollTop() + $(window).height()
+        $('.recommend').tooltip('show')
         clearedScroll = true
         sendRequest() if clearedTime
 
