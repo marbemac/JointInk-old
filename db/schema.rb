@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130204225108) do
+ActiveRecord::Schema.define(:version => 20130205182118) do
 
   create_table "accounts", :force => true do |t|
     t.string  "username",                       :null => false
@@ -25,6 +25,26 @@ ActiveRecord::Schema.define(:version => 20130204225108) do
 
   add_index "accounts", ["provider", "uid"], :name => "index_accounts_on_provider_and_uid", :unique => true
   add_index "accounts", ["user_id"], :name => "index_accounts_on_user_id"
+
+  create_table "amazing_facts", :force => true do |t|
+    t.text "content"
+  end
+
+  create_table "attachinary_files", :force => true do |t|
+    t.integer  "attachinariable_id"
+    t.string   "attachinariable_type"
+    t.string   "scope"
+    t.string   "public_id"
+    t.string   "version"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "format"
+    t.string   "resource_type"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "attachinary_files", ["attachinariable_type", "attachinariable_id", "scope"], :name => "by_scoped_parent"
 
   create_table "channels", :force => true do |t|
     t.string   "name"
@@ -40,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20130204225108) do
     t.integer  "posts_count"
   end
 
+  add_index "channels", ["posts_count"], :name => "index_channels_on_posts_count"
   add_index "channels", ["slug"], :name => "index_channels_on_slug", :unique => true
   add_index "channels", ["user_id"], :name => "index_channels_on_user_id"
 
@@ -72,82 +93,37 @@ ActiveRecord::Schema.define(:version => 20130204225108) do
   add_index "post_stats", ["stat_type"], :name => "index_post_stats_on_stat_type"
   add_index "post_stats", ["user_id"], :name => "index_post_stats_on_user_id"
 
-  create_table "posts", :force => true do |t|
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.string   "title"
-    t.string   "slug"
-    t.text     "content"
-    t.string   "status",          :default => "active"
-    t.text     "url"
-    t.string   "post_type",       :default => "text"
-    t.string   "post_subtype",    :default => "article"
-    t.string   "photo"
-    t.integer  "photo_width"
-    t.integer  "photo_height"
-    t.integer  "user_id"
-    t.string   "photo_public_id"
-    t.hstore   "photo_exif"
-    t.string   "style",           :default => "default"
-    t.integer  "votes_count",     :default => 0
-    t.string   "audio"
-    t.datetime "published_at"
-  end
-
-  add_index "posts", ["post_type"], :name => "index_posts_on_post_type"
-  add_index "posts", ["slug"], :name => "index_posts_on_slug", :unique => true
-  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
-  add_index "posts", ["votes_count"], :name => "index_posts_on_votes_count"
+# Could not dump table "posts" because of following StandardError
+#   Unknown type 'hstore' for column 'photo_exif'
 
   create_table "relationships", :force => true do |t|
     t.integer  "follower_id"
     t.integer  "followed_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "channel_id"
   end
 
+  add_index "relationships", ["channel_id"], :name => "index_relationships_on_channel_id"
   add_index "relationships", ["followed_id"], :name => "index_relationships_on_followed_id"
+  add_index "relationships", ["follower_id", "followed_id", "channel_id"], :name => "index_relationship_follow_follower_channel_ids", :unique => true
   add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
 
-  create_table "users", :force => true do |t|
-    t.string       "email"
-    t.string       "encrypted_password",     :default => "",                           :null => false
-    t.string       "reset_password_token"
-    t.datetime     "reset_password_sent_at"
-    t.datetime     "remember_created_at"
-    t.integer      "sign_in_count",          :default => 0
-    t.datetime     "current_sign_in_at"
-    t.datetime     "last_sign_in_at"
-    t.string       "current_sign_in_ip"
-    t.string       "last_sign_in_ip"
-    t.string       "confirmation_token"
-    t.datetime     "confirmed_at"
-    t.datetime     "confirmation_sent_at"
-    t.string       "unconfirmed_email"
-    t.string       "authentication_token"
-    t.datetime     "created_at",                                                       :null => false
-    t.datetime     "updated_at",                                                       :null => false
-    t.string       "username"
-    t.boolean      "username_reset",         :default => false
-    t.string       "name"
-    t.string       "slug"
-    t.string       "status",                 :default => "active"
-    t.string       "gender"
-    t.date         "birthday"
-    t.string       "time_zone",              :default => "Eastern Time (US & Canada)"
-    t.text         "bio"
-    t.boolean      "use_fb_image",           :default => false
-    t.string       "origin"
-    t.string       "avatar"
-    t.string       "cover_photo"
-    t.string_array "roles"
-    t.hstore       "theme_data"
+# Could not dump table "share_actions" because of following StandardError
+#   Unknown type 'hstore' for column 'permissions'
+
+# Could not dump table "shares" because of following StandardError
+#   Unknown type 'hstore' for column 'permissions'
+
+  create_table "sources", :force => true do |t|
+    t.string "name", :null => false
+    t.string "url",  :null => false
+    t.string "slug"
   end
 
-  add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
-  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-  add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true
+  add_index "sources", ["slug"], :name => "index_sources_on_slug", :unique => true
+
+# Could not dump table "users" because of following StandardError
+#   Unknown type 'hstore' for column 'theme_data'
 
 end

@@ -53,3 +53,23 @@
           = f.input :theme_background_pattern, :as => :hidden
 
       = f.button :submit, :class => 'medium action submit button', :value => 'Save Theme'
+
+
+  .section.email
+    = simple_form_for @user, :url => user_url(:subdomain => @user.username), :html => {:class => "custom"} do |f|
+
+      = f.error_notification
+      = f.error :base
+
+      %h3 Email me when...
+      .line
+        .name
+          %label{:for => "checkbox1"} Someone recommends my post
+        .content
+          .btn-group{ "data-toggle" => "buttons-radio" }
+            %input{:type => "checkbox", :id => "checkbox1", :style => "display: none;"}
+            %span{:class => "custom checkbox"} Label for Checkbox
+            -#%button{:type => "button", :class => "btn btn-primary #{"active" if @user.email_recommended}"} On
+            -#%button{:type => "button", :class => "btn btn-primary #{"active" unless @user.email_recommended}"} Off
+
+      = f.button :submit, :class => 'medium action submit button', :value => 'Save Theme'

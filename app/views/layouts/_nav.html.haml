@@ -30,7 +30,7 @@
           %li
             %a{:href => user_ideas_url(:subdomain => current_user.username)}= "My Ideas (#{current_user.ideas.count})"
           %li
-            %a{:href => settings_url(:subdomain => current_user.username)}= "Settings"
+            %a{:href => settings_url(:subdomain => current_user.username), 'data-skip-pjax' => true}= "Settings"
           %li.logout
             %a{:href => destroy_user_session_url(:subdomain => false, 'data-skip-pjax' => true)} Logout
           %li.divider

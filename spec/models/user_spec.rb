@@ -13,13 +13,18 @@
 #  created_at             :datetime         not null
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string(255)
+#  domain                 :string(255)
 #  email                  :string(255)
+#  email_channel_post     :boolean          default(TRUE)
+#  email_newsletter       :boolean          default(TRUE)
+#  email_recommended      :boolean          default(TRUE)
 #  encrypted_password     :string(255)      default(""), not null
 #  gender                 :string(255)
 #  id                     :integer          not null, primary key
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string(255)
 #  name                   :string(255)
+#  oneliner               :string(255)
 #  origin                 :string(255)
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime

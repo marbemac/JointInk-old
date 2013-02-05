@@ -2,6 +2,7 @@
 #
 # Table name: relationships
 #
+#  channel_id  :integer
 #  created_at  :datetime         not null
 #  followed_id :integer
 #  follower_id :integer
