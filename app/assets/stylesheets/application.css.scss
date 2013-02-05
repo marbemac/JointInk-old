@@ -776,18 +776,16 @@ blockquote {
       left: 0;
       right: 0;
     }
-    input,
-    textarea {
-      background: transparent;
-      border: none;
-      padding: 0;
-      text-align: center;
-      width: 100%;
-      resize: none;
-    }
-    .submit {
-      background: $action-color;
-      width: auto;
+    .input {
+      input,
+      textarea {
+        background: transparent;
+        border: none;
+        padding: 0;
+        text-align: center;
+        width: 100%;
+        resize: none;
+      }
     }
     .line {
       @include clearfix();

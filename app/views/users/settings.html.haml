@@ -45,7 +45,7 @@
             Patterns courtesy of
             %a{:href => 'http://subtlepatterns.com/', :target => '_blank'} Subtle Patterns.
         .content
-          #patternSelector{:style => "background: url('#{@user.theme_background_pattern_path}');", 'data-patterns' => User.theme_background_patterns.to_json, 'data-current-index' => User.theme_background_patterns.index(@user.theme_background_pattern)}
+          #patternSelector{:style => "background: url(#{@user.theme_background_pattern_path});", 'data-patterns' => User.theme_background_patterns.to_json, 'data-current-index' => User.theme_background_patterns.index(@user.theme_background_pattern)}
             .prev{:title => 'Previous pattern.'}
               %i.icon-arrow-left
             .next{:title => 'Next pattern.'}

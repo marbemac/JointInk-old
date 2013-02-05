@@ -20,7 +20,7 @@ jQuery ->
       next = patterns[patterns.length - 1]
       index = patterns.length
     parent.data('current-index', index-1)
-    current = parent.css('background-image').split('"')[1].split('/')
+    current = parent.css('background-image').replace('url','').replace('(','').replace('"','').replace(')','').split('/')
     current[current.length - 1] = next
     parent.attr('style', "background: url('#{current.join('/')}');")
     $("#user_theme_background_pattern").val(next)
@@ -34,7 +34,7 @@ jQuery ->
       next = patterns[0]
       index = -1
     parent.data('current-index', index+1)
-    current = parent.css('background-image').split('"')[1].split('/')
+    current = parent.css('background-image').replace('url','').replace('(','').replace('"','').replace(')','').split('/')
     current[current.length - 1] = next
     parent.attr('style', "background: url('#{current.join('/')}');")
     $("#user_theme_background_pattern").val(next)
