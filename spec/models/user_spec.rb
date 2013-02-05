@@ -6,7 +6,6 @@
 #  avatar                 :string(255)
 #  bio                    :text
 #  birthday               :date
-#  color_theme            :string(255)
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
@@ -25,10 +24,11 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string(255)
-#  roles                  :string_array(255 default("{}")
+#  roles                  :string_array(255
 #  sign_in_count          :integer          default(0)
 #  slug                   :string(255)
 #  status                 :string(255)      default("active")
+#  theme_data             :hstore
 #  time_zone              :string(255)      default("Eastern Time (US & Canada)")
 #  unconfirmed_email      :string(255)
 #  updated_at             :datetime         not null

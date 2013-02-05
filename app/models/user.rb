@@ -6,7 +6,6 @@
 #  avatar                 :string(255)
 #  bio                    :text
 #  birthday               :date
-#  color_theme            :string(255)
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
@@ -25,10 +24,11 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string(255)
-#  roles                  :string_array(255 default("{}")
+#  roles                  :string_array(255
 #  sign_in_count          :integer          default(0)
 #  slug                   :string(255)
 #  status                 :string(255)      default("active")
+#  theme_data             :hstore
 #  time_zone              :string(255)      default("Eastern Time (US & Canada)")
 #  unconfirmed_email      :string(255)
 #  updated_at             :datetime         not null
@@ -39,6 +39,8 @@
 
 class User < ActiveRecord::Base
   include ActionView::Helpers::TextHelper
+
+  serialize :theme_data, ActiveRecord::Coders::Hstore
 
   extend FriendlyId
   friendly_id :username, :use => :slugged
@@ -59,23 +61,70 @@ class User < ActiveRecord::Base
 
   attr_accessor :login
   attr_accessible :username, :name, :email, :password, :password_confirmation, :remember_me,
-                  :login, :bio, :avatar, :cover_photo
+                  :login, :bio, :avatar, :cover_photo, :theme_header_color, :theme_header_height, :theme_background_pattern
 
   validates :username, :length => { :minimum => 3, :maximum => 15 }, :uniqueness => true
   validates :name, :length => { :minimum => 3, :maximum => 50 }
   validates :bio, :length => { :maximum => 250, :message => 'Bio has a max length of 250' }
   validate :username_change
 
-  before_create :set_color_theme
+  before_create :set_theme
   after_create :send_welcome_email, :send_personal_email
   after_update :update_denorms
   before_destroy :disconnect
 
-  def set_color_theme
-    self.color_theme = %w(#8C2300 #661A00 #8C4600 #B25900 #698C00 #4C6600 #1A6600 #00661A #008C46
-                          #00664C #006666 #008C8C #00698C #004C66 #003366 #00468C #001A66 #1A0066 #46008C #660066 #660066
-                          #8A8A7B #79796A #686859 #646473 #313140).sample
+  # START THEMES
+  def set_theme
+    self.theme_header_color = %w(#8C2300 #661A00 #8C4600 #B25900 #698C00 #4C6600 #1A6600 #00661A #008C46
+                            #00664C #006666 #008C8C #00698C #004C66 #003366 #00468C #001A66 #1A0066 #46008C #660066 #660066
+                            #8A8A7B #79796A #686859 #646473 #313140).sample
+    self.theme_background_pattern = 'cross_scratches.png'
   end
+
+  def theme_header_color=(color)
+    self.theme_data ||= {}
+    self.theme_data['header_color'] = color
+  end
+
+  def theme_header_color
+    theme_data['header_color']
+  end
+
+  def theme_header_height=(height)
+    self.theme_data ||= {}
+    self.theme_data['header_height'] = height
+  end
+
+  def theme_header_height
+    theme_data['header_height']
+  end
+
+  def theme_background_pattern=(pattern)
+    self.theme_data ||= {}
+    self.theme_data['background_pattern'] = pattern
+  end
+
+  def theme_background_pattern_path
+    "/assets/images/backgrounds/#{theme_background_pattern}"
+  end
+
+  def theme_background_pattern
+    theme_data['background_pattern']
+  end
+
+  def self.theme_background_patterns
+    [
+        'cross_scratches.png','escheresque_ste.png','black_lozenge.png','kindajean.png','tileable_wood_texture.png','paper_fibers.png','dark_fish_skin.png','pw_maze_white.png',
+        'subtle_zebra_3d.png','texturetastic_gray.png','purty_wood.png','classy_fabric.png','vintage_speckles.png','vertical_cloth.png','darkdenim3.png','subtle_grunge.png',
+        'grey_jean.png','linedpaper.png','white_wall2.png','creampaper.png','debut_dark.png','debut_light.png','scribble_light.png','clean_textile.png','gplaypattern.png',
+        'weave.png','lil_fiber.png','white_tiles.png','tex2res5.png','tex2res3.png','tex2res4.png','lightmesh.png','hexellence.png','dark_Tire.png','frenchstucco.png',
+        'light_wool.png','rough_diagonal.png','daimond_eyes.png','honey_im_subtle.png','furley_bg.png','blizzard.png','farmer.png','satinweave.png','dark_matter.png',
+        'fabric_plaid.png','irongrip.png','foggy_birds.png','denim.png','wood_pattern.png','ravenna.png','nasty_fabric.png','otis_redding.png','wild_oliva.png',
+        'connect.png','old_wall.png','px_by_Gre3g.png','diagmonds.png','polonez_car.png','dark_wood.png','project_papper.png','green-fibers.png','bright_squares.png',
+        'wood_1.png'
+    ]
+  end
+  # END THEMES
 
   def is_active?
     status == 'active'

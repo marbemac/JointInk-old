@@ -8,14 +8,53 @@
   }
 }
 
-.user-circle-image {
+#colorSelector {
+  height: 32px;
+  width: 32px;
+  position: relative;
+  border: 1px solid #CCC;
+  border: 1px solid rgba(0,0,0,.1);
 
+  >div {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
 }
 
+#patternSelector {
+  height: 150px;
+  width: 100%;
+  border: 1px solid #CCC;
+  border: 1px solid rgba(0,0,0,.1);
+  background-repeat: repeat;
+  position: relative;
 
-
-
-
+  .prev,
+  .next {
+    @include opacity(0.3);
+    position: absolute;
+    bottom: 0;
+    padding: 8px 12px;
+    font-size: 18px;
+    color: #EFEFEF;
+    background: #000;
+    background: rgba(0,0,0,.8);
+    cursor: pointer;
+  }
+  .prev {
+    left: 0;
+  }
+  .next {
+    right: 0;
+  }
+  &:hover {
+    .prev,
+    .next {
+      @include opacity(1);
+    }
+  }
+}
 
 
 

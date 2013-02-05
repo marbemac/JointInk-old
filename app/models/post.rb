@@ -13,6 +13,7 @@
 #  photo_width     :integer
 #  post_subtype    :string(255)      default("article")
 #  post_type       :string(255)      default("text")
+#  published_at    :datetime
 #  slug            :string(255)
 #  status          :string(255)      default("active")
 #  style           :string(255)      default("default")
