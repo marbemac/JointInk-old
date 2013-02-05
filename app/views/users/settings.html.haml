@@ -20,6 +20,6 @@
       = f.error :avatar
 
       = f.input :name, :label => false, :input_html => {:placeholder => @user.name, :autocomplete => 'off'}
-      = f.input :bio, :label => false, :input_html => {:placeholder => 'My Bio', :autocomplete => 'off', :rows => 5}
+      = f.input :bio, :label => false, :input_html => {:placeholder => 'My Bio', :autocomplete => 'off', :rows => 3}
 
       = f.button :submit, :class => 'medium action submit button', :value => @user.avatar.present? ? 'Save Changes' : 'Save Changes'
