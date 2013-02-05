@@ -1,7 +1,7 @@
 #settings.tt-form
   .section
-    %h1.san-serif Settings
-    %h4.san-serif.subheader
+    %h1.sans-serif Settings
+    %h4.sans-serif.subheader
       This is where you set them.
 
   .section.basic
@@ -61,16 +61,16 @@
       = f.error_notification
       = f.error :base
 
-      %h3 Email me when...
-      .line
+      %h3.sans-serif Email me when...
+      .line.smaller
         .name Someone recommends my post
         .content.checkbox-wrap
           = f.check_box :email_recommended, :class => "checkbox"
-      .line
+      .line.smaller
         .name Someone posts in my channel
         .content.checkbox-wrap
           = f.check_box :email_channel_post, :class => "checkbox"
-      .line
+      .line.smaller
         .name ThisThat has new features
         .content.checkbox-wrap
           = f.check_box :email_newsletter, :class => "checkbox"

@@ -1,10 +1,10 @@
 - content_for :header do
   %header
     %hrgroup
-      %h1.san-serif= @user.name
+      %h1.sans-serif= @user.name
 
       - if @user.bio && !@user.bio.blank?
-        %h3.subheader.san-serif= @user.bio
+        %h3.subheader.sans-serif= @user.bio
 
       -#.extra You can find me @marbemac.
 

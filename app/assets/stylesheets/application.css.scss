@@ -751,7 +751,7 @@ blockquote {
   form {
     margin-bottom: 0;
   }
-  h1 {
+  h1, h2, h3, h4 {
     text-align: center;
     margin: 0 0 10px 0;
     cursor: default;
@@ -791,6 +791,9 @@ blockquote {
       @include clearfix();
       margin: 0 0 40px 0;
 
+      &.smaller {
+        margin: 0 0 20px;
+      }
       .name {
         display: inline-block;
         text-transform: uppercase;
