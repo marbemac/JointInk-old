@@ -8,6 +8,7 @@
 #  id          :integer          not null, primary key
 #  name        :string(255)
 #  photo       :string(255)
+#  posts_count :integer
 #  privacy     :string(255)      default("public")
 #  slug        :string(255)
 #  status      :string(255)      default("active")

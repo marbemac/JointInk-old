@@ -16,11 +16,11 @@ jQuery ->
 
     $(window).scroll ->
       if !clearedScroll && $("#post-body").offset().top + $("#post-body").height() <= $(window).scrollTop() + $(window).height()
-        $('.recommend').tooltip('show')
         clearedScroll = true
         sendRequest() if clearedTime
 
     $('.posts-c.text').trigger('start-stat')
 
   sendRequest = ->
+    $('.recommend').tooltip('show')
     $.post "#{$('#post-data').data('d').url}/read_post"

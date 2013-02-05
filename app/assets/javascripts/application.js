@@ -26,6 +26,7 @@
 //= require jquery.cookie
 //= require jquery.autocomplete
 //= require jquery.jplayer
+//= require colorpicker
 //= require bootstrap.tooltips
 
 //= require_tree ./global
