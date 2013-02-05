@@ -40,7 +40,7 @@
 
       .line
         .name
-          %div Background Pattern
+          .inside-name Background Pattern
           .subheader
             Patterns courtesy of
             %a{:href => 'http://subtlepatterns.com/', :target => '_blank'} Subtle Patterns.
@@ -61,15 +61,18 @@
       = f.error_notification
       = f.error :base
 
-      %h3 Email me when...
+      %h3 Email me...
       .line
-        .name
-          %label{:for => "checkbox1"} Someone recommends my post
-        .content
-          .btn-group{ "data-toggle" => "buttons-radio" }
-            %input{:type => "checkbox", :id => "checkbox1", :style => "display: none;"}
-            %span{:class => "custom checkbox"} Label for Checkbox
-            -#%button{:type => "button", :class => "btn btn-primary #{"active" if @user.email_recommended}"} On
-            -#%button{:type => "button", :class => "btn btn-primary #{"active" unless @user.email_recommended}"} Off
+        .name Someone recommends my post
+        .content.checkbox-wrap
+          = f.check_box :email_recommended, :class => "checkbox"
+      .line
+        .name Someone posts in my channel
+        .content.checkbox-wrap
+          = f.check_box :email_channel_post, :class => "checkbox"
+      .line
+        .name ThisThat has new features
+        .content.checkbox-wrap
+          = f.check_box :email_newsletter, :class => "checkbox"
 
       = f.button :submit, :class => 'medium action submit button', :value => 'Save Theme'
