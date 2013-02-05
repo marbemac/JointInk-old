@@ -70,7 +70,7 @@ class Post < ActiveRecord::Base
     if status == "active" && published_at_was.nil?
       UserMailer.post_admin(id).deliver
       channels.each do |c|
-        unless c.user_id == user_id
+        if c.user_id != user_id && user.email_channel_post
           UserMailer.posted_in_channel(id, c.id).deliver
         end
       end
