@@ -1579,7 +1579,8 @@ var RLANG = {
 				param = '<' + param + '>';
 			}
 
-			this.document.execCommand(cmd, false, param);
+            this.document.execCommand("StyleWithCSS", false, false);
+            this.document.execCommand(cmd, false, param);
 
             if (cmd === 'insertorderedlist')
             {
