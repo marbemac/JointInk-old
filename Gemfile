@@ -31,7 +31,6 @@ gem "switch_user"
 gem 'annotate'
 gem 'activerecord-postgres-hstore'
 gem 'ar_pg_array'
-#gem 'activerecord-postgres-array'
 gem "friendly_id", "~> 4.0.9"
 
 gem 'carrierwave'
