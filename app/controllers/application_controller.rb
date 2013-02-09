@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
       render_error 500, exception
     end)
     rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, :with => (lambda do |exception|
-      notify_honeybadger(exception)
+      #notify_honeybadger(exception) # getting exceptions for 404s is kind of excessive
       logger.error"\n#{exception.class} (#{exception.message}):\n"
       render_error 404, exception
     end)
