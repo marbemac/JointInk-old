@@ -122,8 +122,8 @@ class User < ActiveRecord::Base
     [
         'cross_scratches.png','escheresque_ste.png','black_lozenge.png','kindajean.png','tileable_wood_texture.png','paper_fibers.png','dark_fish_skin.png','pw_maze_white.png',
         'subtle_zebra_3d.png','texturetastic_gray.png','purty_wood.png','classy_fabric.png','vintage_speckles.png','vertical_cloth.png','darkdenim3.png','subtle_grunge.png',
-        'grey_jean.png','linedpaper.png','white_wall2.png','creampaper.png','debut_dark.png','debut_light.png','scribble_light.png','clean_textile.png','gplaypattern.png',
-        'weave.png','lil_fiber.png','white_tiles.png','tex2res5.png','tex2res3.png','tex2res4.png','lightmesh.png','hexellence.png','dark_Tire.png','frenchstucco.png',
+        'gray_jean.png','linedpaper.png','white_wall2.png','creampaper.png','debut_dark.png','debut_light.png','scribble_light.png','clean_textile.png','gplaypattern.png',
+        'weave.png','lil_fiber.png','white_tiles.png','tex2res5.png','tex2res3.png','tex2res4.png','lghtmesh.png','hexellence.png','dark_Tire.png','frenchstucco.png',
         'light_wool.png','rough_diagonal.png','daimond_eyes.png','honey_im_subtle.png','furley_bg.png','blizzard.png','farmer.png','satinweave.png','dark_matter.png',
         'fabric_plaid.png','irongrip.png','foggy_birds.png','denim.png','wood_pattern.png','ravenna.png','nasty_fabric.png','otis_redding.png','wild_oliva.png',
         'connect.png','old_wall.png','px_by_Gre3g.png','diagmonds.png','polonez_car.png','dark_wood.png','project_papper.png','green-fibers.png','bright_squares.png',
