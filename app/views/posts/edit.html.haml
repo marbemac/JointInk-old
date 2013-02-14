@@ -27,7 +27,6 @@
     #channel-autocomplete
       %input{:type => 'text', :placeholder => 'Channel name...', :autocomplete => 'off'}
 
-
   .section.post-style
     - if @post.post_type == 'text'
       .head Article Style
@@ -74,7 +73,25 @@
             %i.icon-remove{:title => 'Remove audio.'}
 
 #right-panel
+  .title Extras
+  .section.attribution
+    .head
+      Attribution
+      #add-attribution.plus
+        %i.icon-plus{:title => 'Link to the original post.'}
+    .clear
 
+    .content
+      %ul
+        %li{:class => "#{'hide' if @post.attribution_link.blank?}"}
+          %a{:href => @post.attribution_link, :target => '_blank', 'data-skip-pjax' => true}
+            %i.icon.icon-double-angle-left
+            %span.name= @post.attribution_link
+          %a.remove{:href => post_path(:id => @post.id)}
+            %i.icon-remove{:title => 'Remove this link.'}
+      #attribution-form
+        %input{:type => 'text', :placeholder => 'Original Link...', :autocomplete => 'off'}
+        .button.small.action.submit.expand-me Submit
 
 #post-editor
 
