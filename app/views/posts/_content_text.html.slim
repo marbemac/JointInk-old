@@ -1,0 +1,48 @@
+- if defined?(@editing) || @post.photo.present?
+  #picture-wrapper
+    .show-editing.fileinput-button
+      .upload-help
+        | click to upload a picture
+        span.loading
+        input type='file' name='post[photo]' data-url=post_update_photo_url(@post.id, :subdomain => Rails.env == 'production' ? 'www' : false)
+
+    - if @post.style == 'full-page' || defined?(@editing)
+      #post-picture-title
+        h1.copy-over data-target='#post-title'
+          == !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
+        .divider
+        .post-top-meta
+          = ' by '
+          a.post-author href=user_url(:subdomain => @post.user.username) rel='author' = @post.user.username
+          = ' in '
+          - if @post.primary_channel
+            a.post-channel href=channel_url(@post.primary_channel, :subdomain => false) = @post.primary_channel.name
+          - else
+            a.post-channel href='#' None
+
+    div style="background-image: url('#{@post.photo_url}')" class="image #{@post.photo_ratio >= 1.4 ? 'cover-image' : 'contain-image'}"
+
+div class="white-wrap #{defined?(@editing) || @post.photo.present? ? 'with-photo' : ''}"
+  .content-wrapper
+    - cache @post do
+      - if defined?(@editing) || @post.style != 'full-page'
+        .post-top-meta
+          a.post-author href=user_url(:subdomain => @post.user.username) rel='author' = @post.user.username
+          = ' in '
+          - if @post.primary_channel
+            a.post-channel href=channel_url(@post.primary_channel, :subdomain => false) = @post.primary_channel.name
+          - else
+            a.post-channel href='#' None
+
+        h1#post-title.copy-over data-target='#post-picture-title h1'
+          == !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
+
+      #post-body
+        == !@post.content.blank? ? @post.content : '<p>Content... (click to edit)</p>'
+
+    .action-bar.hide-editing
+      = render "posts/recommend_btn"
+      - if @post.status == 'active'
+        = render "posts/share_btns"
+      - if can? :update, @post
+        = render "posts/admin_btns"

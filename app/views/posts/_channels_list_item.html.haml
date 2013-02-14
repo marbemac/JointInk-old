@@ -1,6 +1,0 @@
-%li
-  %a{:href => channel_path(channel), :target => '_blank', 'data-skip-pjax' => true}
-    %i.icon.icon-double-angle-right
-    %span.name= channel.name
-  %a.remove{:href => post_remove_channel_path(:id => @post.id, :channel_id => channel.id), 'data-skip-pjax' => true}
-    %i.icon-remove{:title => 'Remove this channel.'}

@@ -1,9 +1,0 @@
-%div{:id => "posts-#{post.id}", :class => "post tile #{defined?(@channel) && @channel != nil ? 'channel-page' : ''} #{defined?(@user) && @user != nil ? 'user-page' : ''}"}
-
-  = yield
-
-  .bottom
-    = render "posts/tile_bottom", :post => post
-
-  - if can?(:update, post) && !defined?(editing)
-    = render "posts/tile_actions", :post => post

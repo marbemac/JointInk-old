@@ -1,0 +1,7 @@
+.recommend.has-tooltip data-placement='bottom' title="Did you like this post? #{signed_in? ? '' : 'Anonymous recommendations welcome.'}"
+  span data-url=post_vote_path(@post.id) class="medium button #{@post.voted?(current_user, request) ? 'gray' : 'action'}"
+    - if @post.voted?(current_user, request)
+      | Recommended
+    - else
+      | Recommend
+  span.count= @post.votes_count
