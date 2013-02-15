@@ -12,13 +12,18 @@
           != !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
         .divider
         .post-top-meta
-          by
-          %a.post-author{:href => user_url(:subdomain => @post.user.username), :rel => 'author'}= @post.user.name
-          in
-          - if @post.primary_channel
-            %a.post-channel{:href => channel_url(@post.primary_channel, :subdomain => false)}= @post.primary_channel.name
-          - else
-            %a.post-channel{:href => '#'} None
+          .meta-one
+            by
+            %a.post-author{:href => user_url(:subdomain => @post.user.username), :rel => 'author'}= @post.user.name
+            in
+            - if @post.primary_channel
+              %a.post-channel{:href => channel_url(@post.primary_channel, :subdomain => false)}= @post.primary_channel.name
+            - else
+              %a.post-channel{:href => '#'} None
+          - if @post.attribution_link
+            .meta-two
+              Originally posted at
+              %a.post-attribution{:href => @post.attribution_link}= @post.attribution_link
 
     %div{:style => "background-image: url('#{@post.photo_url}')", :class => "image #{@post.photo_ratio >= 1.4 ? 'cover-image' : 'contain-image'}"}
 
@@ -27,12 +32,17 @@
     - cache @post do
       - if defined?(@editing) || @post.style != 'full-page'
         .post-top-meta
-          %a.post-author{:href => user_url(:subdomain => @post.user.username), :rel => 'author'}= @post.user.name
-          in
-          - if @post.primary_channel
-            %a.post-channel{:href => channel_url(@post.primary_channel, :subdomain => false)}= @post.primary_channel.name
-          - else
-            %a.post-channel{:href => '#'} None
+          .meta-one
+            %a.post-author{:href => user_url(:subdomain => @post.user.username), :rel => 'author'}= @post.user.name
+            in
+            - if @post.primary_channel
+              %a.post-channel{:href => channel_url(@post.primary_channel, :subdomain => false)}= @post.primary_channel.name
+            - else
+              %a.post-channel{:href => '#'} None
+          - if @post.attribution_link
+            .meta-two
+              Originally posted at
+              %a.post-attribution{:href => @post.attribution_link}= @post.attribution_link
 
         %h1#post-title.copy-over{'data-target' => '#post-picture-title h1'}
           != !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'

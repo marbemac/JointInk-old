@@ -4,12 +4,17 @@
       != !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
 
     .post-top-meta
-      %a.post-author{:href => user_url(:subdomain => @post.user.username), :rel => 'author'}= @post.user.name
-      in
-      - if @post.primary_channel
-        %a.post-channel{:href => channel_url(@post.primary_channel, :subdomain => false)}= @post.primary_channel.name
-      - else
-        %a.post-channel{:href => '#'} None
+      .meta-one
+        %a.post-author{:href => user_url(:subdomain => @post.user.username), :rel => 'author'}= @post.user.name
+        in
+        - if @post.primary_channel
+          %a.post-channel{:href => channel_url(@post.primary_channel, :subdomain => false)}= @post.primary_channel.name
+        - else
+          %a.post-channel{:href => '#'} None
+      - if @post.attribution_link
+        .meta-two
+          Originally posted at
+          %a.post-attribution{:href => @post.attribution_link}= @post.attribution_link
 
   .action-bar.hide-editing
     - if can? :update, @post

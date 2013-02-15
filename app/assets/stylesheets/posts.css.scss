@@ -324,6 +324,10 @@
         margin: 0 0 2rem 0;
         font-size: 16px;
         font-size: 1.6rem;
+        .meta {
+          width: 100%;
+          overflow: hidden;
+        }
       }
     }
 
@@ -480,7 +484,17 @@
   }
 }
 
+.meta-one,
+.meta-two {
+  overflow: hidden;
+  white-space: nowrap;
+}
 
+.meta-two {
+  font-size: 11px;
+  margin-top: 5px;
+  line-height: 14px;
+}
 
 
 
@@ -583,10 +597,17 @@
     font-size: 16px;
     font-size: 1.6rem;
 
-    .post-author,
-    .post-channel {
-      text-transform: uppercase;
-      color: #A6A6A6;
+    .meta-one {
+      .post-author,
+      .post-channel {
+        text-transform: uppercase;
+        color: #A6A6A6;
+      }
+    }
+    .meta-two {
+      .post-attribution {
+        color: #A6A6A6;
+      }
     }
     a {
       white-space: nowrap;
