@@ -127,4 +127,8 @@ module ApplicationHelper
   def time_ago(datetime)
     "<span class='timeago' title='#{datetime}'>#{datetime.strftime("%B %d, %Y")}</span>".html_safe
   end
+
+  def sim_format(string)
+    simple_format(string).gsub("<p>", "").gsub("</p>", "").html_safe
+  end
 end

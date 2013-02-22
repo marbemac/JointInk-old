@@ -37,4 +37,8 @@
 
         = f.input :privacy, :as => :hidden, :label => false, :input_html => { :value => @channel.persisted? ? @channel.privacy : 'public' }
 
+    .section.info
+      .help.show-for-touch information, rules, or suggestions
+      = f.input :info, :label => false, :input_html => {:placeholder => 'Channel Info', :autocomplete => 'off', :rows => 3}
+
     = f.button :submit, :class => 'large action submit button', :value => @channel.persisted? ? 'Update Channel' : 'Create Channel'
