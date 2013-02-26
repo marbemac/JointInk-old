@@ -709,7 +709,8 @@ blockquote {
     padding: 0 0 60px 0;
     padding: 0 0 6rem 0;
   }
-  .login {
+  .login,
+  .more-channels {
     @include single-text-shadow(rgba(0, 0, 0, 0.8), 1px, 2px, 5px);
     color: #FFF;
     font-size: 20px;
@@ -722,6 +723,16 @@ blockquote {
       &:hover {
         text-decoration: underline;
       }
+    }
+  }
+  .more-channels {
+    margin-top: 20px;
+  }
+  .channels {
+    @include transition();
+    @include opacity(0.65);
+    &:hover {
+      @include opacity(1);
     }
   }
 }

@@ -164,6 +164,8 @@ jQuery ->
       duration: 300
       easing:'easeInOutCubic'
 
+  ### CHANNELS ###
+
   # toggle channel autocomplete
   $('#left-panel .channels .icon-plus').click (e) ->
     $('#left-panel .channels').tooltip('destroy')
@@ -205,4 +207,37 @@ jQuery ->
       success: (data, textStatus, jqXHR) ->
         self.parents('li:first').remove()
         updatePostChannel()
+    false
+
+  ### ATTRIBUTION ###
+
+  # toggle attribution field
+  $('#right-panel .attribution .icon-plus').click (e) ->
+    $('#right-panel .attribution').tooltip('destroy')
+    $('.attribution #attribution-form').animate {width: 'toggle'}, 200, ->
+      $('.attribution input').focus()
+
+  $('.attribution .submit').click (e) ->
+    $.ajax
+      url: "#{$('#post-data').data('d').url}"
+      type: 'PUT'
+      dataType: 'json'
+      data: {post: {attribution_link: $('.attribution input').val()}}
+      success: (data, textStatus, jqXHR) ->
+        link = data.post.post.attribution_link
+        $('#right-panel .attribution li').show()
+        $('#right-panel .attribution li .name').text(link).parent("a").attr("href", link)
+        $('#right-panel .attribution .icon-plus').click()
+        $('#right-panel .attribution input').val('')
+
+  $('#right-panel .attribution').on 'click', '.remove', (e) ->
+    e.preventDefault()
+    self = $(@)
+    $.ajax
+      url: $(@).attr('href')
+      type: 'PUT'
+      dataType: 'json'
+      data: {post: {attribution_link: null}}
+      success: (data, textStatus, jqXHR) ->
+        self.parents('li:first').hide()
     false

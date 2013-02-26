@@ -11,8 +11,13 @@ $panel-width: 175px;
     z-index: 2000;
 
     .button {
+      margin: 0 2px;
+
       a {
         color: #FFF;
+      }
+      i {
+        margin: 0 5px 0 0;
       }
       &.editor-discard {
         &:hover {
@@ -84,7 +89,6 @@ $panel-width: 175px;
       .plus {
         position: absolute;
         top: 9px;
-        right: -25px;
         font-size: 16px;
         color: #EFEFEF;
         cursor: pointer;
@@ -96,10 +100,8 @@ $panel-width: 175px;
       }
     }
     .content {
-      margin: 15px 10px 15px 0;
       li {
         margin: 2px 0;
-        padding: 5px 10px 5px 20px;
         font-size: 13px;
         position: relative;
         white-space: nowrap;
@@ -107,20 +109,19 @@ $panel-width: 175px;
 
         a {
           color: #EFEFEF;
+          display: block;
+          overflow: hidden;
         }
         .icon {
           position: absolute;
           top: 9px;
-          left: 2px;
           font-size: 12px;
         }
         .icon-remove {
           position: absolute;
           top: 4px;
-          right: -10px;
           color: #EFEFEF;
           padding: 4px 10px;
-          border-left: 1px solid #666;
           background: #222;
           display: none;
           cursor: pointer;
@@ -156,9 +157,52 @@ $panel-width: 175px;
 }
 #left-panel {
   left: 0;
+  .section {
+    .head {
+      .plus {
+        right: -25px;
+      }
+    }
+    .content {
+      margin: 15px 10px 15px 0;
+      li {
+        padding: 5px 10px 5px 20px;
+        .icon {
+          left: 2px;
+        }
+        .icon-remove {
+          right: -10px;
+          border-left: 1px solid #666;
+
+        }
+      }
+    }
+  }
 }
 #right-panel {
   right: 0;
+  text-align: right;
+  .section {
+    .head {
+      //@include clearfix();
+      .plus {
+        left: -25px;
+      }
+    }
+    .content {
+      margin: 15px 0 15px 10px;
+      li {
+        padding: 5px 20px 5px 10px;
+        .icon {
+          right: 2px;
+        }
+        .icon-remove {
+          left: -10px;
+          border-right: 1px solid #666;
+        }
+      }
+    }
+  }
 }
 
 #post-editor {
@@ -182,8 +226,27 @@ $panel-width: 175px;
     font-size: 16px;
   }
 }
+
 .autocomplete-suggestions {
   border-width: 2px !important;
+}
+
+#attribution-form {
+  position: absolute;
+  top: -2px;
+  right: 155px;
+  width: 250px;
+  display: none;
+
+  input {
+    border: 2px solid #222;
+    font-size: 16px;
+  }
+  .button {
+    margin-top: 5px;
+    border: 2px solid #222;
+    float: right;
+  }
 }
 
 #audio-upload {

@@ -47,7 +47,7 @@ gem 'sanitize'
 gem 'pg_search'
 #gem 'turbo-sprockets-rails3' # speed up asset compiling
 
-gem 'newrelic_rpm', '~> 3.5.4'
+gem 'newrelic_rpm', '~> 3.5.7'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.5'

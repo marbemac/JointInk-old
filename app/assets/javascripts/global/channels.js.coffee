@@ -9,5 +9,6 @@ jQuery ->
       reader.readAsDataURL(@.files[0])
 
   $('#channel_form .permissions .option').click (e) ->
-    $('#channel_form .permissions .option').toggleClass('on')
-    $('#channel_privacy').val($('#channel_form .permissions .option.on').data('value'))
+    unless $(@).hasClass('on')
+      $('#channel_form .permissions .option').toggleClass('on')
+      $('#channel_privacy').val($('#channel_form .permissions .option.on').data('value'))

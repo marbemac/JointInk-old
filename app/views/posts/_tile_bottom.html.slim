@@ -7,5 +7,10 @@
   - else
     a.channel href='#' = ' None'
 
-  - if post.audio.present?
-    i.icon-volume-up title='This post includes audio.'
+  .i-wrapper
+    - unless post.attribution_link.blank?
+      a href=post.attribution_link target="_blank"
+        i.icon-external-link title='This post was originally published elsewhere.'
+
+    - if post.audio.present?
+      i.icon-volume-up title='This post includes audio.'
