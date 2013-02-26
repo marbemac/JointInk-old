@@ -6,7 +6,6 @@ gem 'bundler', '~> 1.2'
 gem 'rails', '~> 3.2.12'
 
 gem 'jquery-rails'
-gem "haml-rails" #deprecated
 gem "slim-rails"
 gem 'pg'
 gem 'honeybadger' # Exception notification
