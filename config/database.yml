@@ -1,0 +1,29 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: thisthat_development
+  host: localhost
+  pool: 10
+  username: Marc
+  password:
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: thisthat_test
+  host: localhost
+  pool: 5
+  username: Marc
+  password:
+
+staging:
+  adapter: postgresql
+  uri: <%= ENV["DATABASE_URL"] %>
+  encoding: unicode
+  pool: 10
+
+production:
+  adapter: postgresql
+  uri: <%= ENV["DATABASE_URL"] %>
+  encoding: unicode
+  pool: 25
