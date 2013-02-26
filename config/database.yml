@@ -18,12 +18,18 @@ test:
 
 staging:
   adapter: postgresql
-  uri: <%= ENV["DATABASE_URL"] %>
   encoding: unicode
+  database: <%= ENV["DATABASE_DB"] %>
+  host: <%= ENV["DATABASE_HOST"] %>
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
   pool: 10
 
 production:
   adapter: postgresql
-  uri: <%= ENV["DATABASE_URL"] %>
   encoding: unicode
+  database: <%= ENV["DATABASE_DB"] %>
+  host: <%= ENV["DATABASE_HOST"] %>
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
   pool: 25
