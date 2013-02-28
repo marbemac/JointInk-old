@@ -44,7 +44,6 @@ gem 'hirefire-resource'
 gem 'simple_form'
 gem 'sanitize'
 gem 'pg_search'
-#gem 'turbo-sprockets-rails3' # speed up asset compiling
 
 gem 'newrelic_rpm', '~> 3.5.7'
 

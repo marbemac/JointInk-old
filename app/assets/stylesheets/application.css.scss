@@ -12,6 +12,7 @@
  //= require font-awesome
  //= require bootstrap.tooltips
  //= require colorpicker
+ //= require jquery-ui
  *= require_self
 */
 
@@ -179,6 +180,9 @@ blockquote {
       cursor: progress;
       background: $grayLighter;
     }
+  }
+  &.small {
+    padding: 8px 14px 7px 14px;
   }
   &.medium {
     padding: 16px 25px 14px 25px;
@@ -993,6 +997,32 @@ blockquote {
     a {
       color: #000;
       font-weight: bold;
+    }
+  }
+}
+
+.reveal-modal-bg {
+  z-index: 2000;
+}
+.reveal-modal {
+  z-index: 2001;
+  padding: 0;
+
+  .title {
+    font-size: 20px;
+    padding: 20px 40px 19px 30px;
+    background: #EFEFEF;
+    border-bottom: 1px solid #CCC;
+  }
+  .content {
+    padding: 30px;
+  }
+  .close-reveal-modal {
+    &:not(.button)  {
+      position: absolute;
+      top: 24px;
+      right: 20px;
+      font-weight: normal;
     }
   }
 }

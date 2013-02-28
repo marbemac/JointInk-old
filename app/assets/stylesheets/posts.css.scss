@@ -304,6 +304,67 @@
     }
   }
 
+  .inline-image {
+    position: relative;
+    margin: 0 0 25px 0;
+
+    img {
+      width: 100%;
+      display: block;
+    }
+    p {
+      text-align: center;
+      font-size: 13px !important;
+      font-style: italic;
+      margin: 5px 0 0 0;
+      display: none;
+    }
+    .options {
+      @include opacity(0.5);
+      position: absolute;
+      top: 0px;
+      left: 10px;
+      display: none;
+
+      >.button {
+        float: left;
+        margin: 10px 7px 0 0;
+      }
+      .button-group {
+        margin: 10px 0 0 0;
+        white-space: nowrap;
+        list-style: none;
+        float: left;
+
+        li {
+          padding: 0;
+          font-size: 11px;
+        }
+        .center {
+          margin: 0 2px;
+        }
+      }
+    }
+    &:hover {
+      .options {
+        @include opacity(1);
+      }
+    }
+    &.left {
+      float: left;
+      margin-right: 25px;
+    }
+    &.right {
+      float: right;
+      margin-left: 25px;
+    }
+    &.show-caption {
+      p {
+        display: block;
+      }
+    }
+  }
+
   // Post Types
   &.text {
     .action-bar {

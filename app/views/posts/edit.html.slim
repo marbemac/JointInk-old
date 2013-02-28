@@ -96,4 +96,15 @@
 #post-editor
 
   #editor-submit-url data-url=post_path(@post.id)
+
+  #inline-image-edit.reveal-modal.medium
+    .close-reveal-modal x
+    .title Add Inline Image
+    .content
+      .options
+        .fileinput-button.medium.upload.button
+          | Upload Image
+          span.loading
+          input type='file' name='post[photo]' data-url=post_add_inline_photo_url(@post.id, :subdomain => Rails.env == 'production' ? 'www' : false)
+
   = render :partial => "content_#{@post.post_type}", :layout => 'content'

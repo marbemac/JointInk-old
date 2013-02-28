@@ -27,6 +27,12 @@ $panel-width: 175px;
     }
   }
 
+  .inline-image {
+    .options {
+      display: block;
+    }
+  }
+
   &.picture {
     padding-top: 0;
     padding-bottom: 0;

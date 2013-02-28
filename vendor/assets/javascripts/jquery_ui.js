@@ -1,57 +1,4174 @@
-/*! jQuery UI - v1.8.23 - 2012-08-15
- * https://github.com/jquery/jquery-ui
- * Includes: jquery.ui.core.js
- * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
-(function(a,b){function c(b,c){var e=b.nodeName.toLowerCase();if("area"===e){var f=b.parentNode,g=f.name,h;return!b.href||!g||f.nodeName.toLowerCase()!=="map"?!1:(h=a("img[usemap=#"+g+"]")[0],!!h&&d(h))}return(/input|select|textarea|button|object/.test(e)?!b.disabled:"a"==e?b.href||c:c)&&d(b)}function d(b){return!a(b).parents().andSelf().filter(function(){return a.curCSS(this,"visibility")==="hidden"||a.expr.filters.hidden(this)}).length}a.ui=a.ui||{};if(a.ui.version)return;a.extend(a.ui,{version:"1.8.23",keyCode:{ALT:18,BACKSPACE:8,CAPS_LOCK:20,COMMA:188,COMMAND:91,COMMAND_LEFT:91,COMMAND_RIGHT:93,CONTROL:17,DELETE:46,DOWN:40,END:35,ENTER:13,ESCAPE:27,HOME:36,INSERT:45,LEFT:37,MENU:93,NUMPAD_ADD:107,NUMPAD_DECIMAL:110,NUMPAD_DIVIDE:111,NUMPAD_ENTER:108,NUMPAD_MULTIPLY:106,NUMPAD_SUBTRACT:109,PAGE_DOWN:34,PAGE_UP:33,PERIOD:190,RIGHT:39,SHIFT:16,SPACE:32,TAB:9,UP:38,WINDOWS:91}}),a.fn.extend({propAttr:a.fn.prop||a.fn.attr,_focus:a.fn.focus,focus:function(b,c){return typeof b=="number"?this.each(function(){var d=this;setTimeout(function(){a(d).focus(),c&&c.call(d)},b)}):this._focus.apply(this,arguments)},scrollParent:function(){var b;return a.browser.msie&&/(static|relative)/.test(this.css("position"))||/absolute/.test(this.css("position"))?b=this.parents().filter(function(){return/(relative|absolute|fixed)/.test(a.curCSS(this,"position",1))&&/(auto|scroll)/.test(a.curCSS(this,"overflow",1)+a.curCSS(this,"overflow-y",1)+a.curCSS(this,"overflow-x",1))}).eq(0):b=this.parents().filter(function(){return/(auto|scroll)/.test(a.curCSS(this,"overflow",1)+a.curCSS(this,"overflow-y",1)+a.curCSS(this,"overflow-x",1))}).eq(0),/fixed/.test(this.css("position"))||!b.length?a(document):b},zIndex:function(c){if(c!==b)return this.css("zIndex",c);if(this.length){var d=a(this[0]),e,f;while(d.length&&d[0]!==document){e=d.css("position");if(e==="absolute"||e==="relative"||e==="fixed"){f=parseInt(d.css("zIndex"),10);if(!isNaN(f)&&f!==0)return f}d=d.parent()}}return 0},disableSelection:function(){return this.bind((a.support.selectstart?"selectstart":"mousedown")+".ui-disableSelection",function(a){a.preventDefault()})},enableSelection:function(){return this.unbind(".ui-disableSelection")}}),a("<a>").outerWidth(1).jquery||a.each(["Width","Height"],function(c,d){function h(b,c,d,f){return a.each(e,function(){c-=parseFloat(a.curCSS(b,"padding"+this,!0))||0,d&&(c-=parseFloat(a.curCSS(b,"border"+this+"Width",!0))||0),f&&(c-=parseFloat(a.curCSS(b,"margin"+this,!0))||0)}),c}var e=d==="Width"?["Left","Right"]:["Top","Bottom"],f=d.toLowerCase(),g={innerWidth:a.fn.innerWidth,innerHeight:a.fn.innerHeight,outerWidth:a.fn.outerWidth,outerHeight:a.fn.outerHeight};a.fn["inner"+d]=function(c){return c===b?g["inner"+d].call(this):this.each(function(){a(this).css(f,h(this,c)+"px")})},a.fn["outer"+d]=function(b,c){return typeof b!="number"?g["outer"+d].call(this,b):this.each(function(){a(this).css(f,h(this,b,!0,c)+"px")})}}),a.extend(a.expr[":"],{data:a.expr.createPseudo?a.expr.createPseudo(function(b){return function(c){return!!a.data(c,b)}}):function(b,c,d){return!!a.data(b,d[3])},focusable:function(b){return c(b,!isNaN(a.attr(b,"tabindex")))},tabbable:function(b){var d=a.attr(b,"tabindex"),e=isNaN(d);return(e||d>=0)&&c(b,!e)}}),a(function(){var b=document.body,c=b.appendChild(c=document.createElement("div"));c.offsetHeight,a.extend(c.style,{minHeight:"100px",height:"auto",padding:0,borderWidth:0}),a.support.minHeight=c.offsetHeight===100,a.support.selectstart="onselectstart"in c,b.removeChild(c).style.display="none"}),a.curCSS||(a.curCSS=a.css),a.extend(a.ui,{plugin:{add:function(b,c,d){var e=a.ui[b].prototype;for(var f in d)e.plugins[f]=e.plugins[f]||[],e.plugins[f].push([c,d[f]])},call:function(a,b,c){var d=a.plugins[b];if(!d||!a.element[0].parentNode)return;for(var e=0;e<d.length;e++)a.options[d[e][0]]&&d[e][1].apply(a.element,c)}},contains:function(a,b){return document.compareDocumentPosition?a.compareDocumentPosition(b)&16:a!==b&&a.contains(b)},hasScroll:function(b,c){if(a(b).css("overflow")==="hidden")return!1;var d=c&&c==="left"?"scrollLeft":"scrollTop",e=!1;return b[d]>0?!0:(b[d]=1,e=b[d]>0,b[d]=0,e)},isOverAxis:function(a,b,c){return a>b&&a<b+c},isOver:function(b,c,d,e,f,g){return a.ui.isOverAxis(b,d,f)&&a.ui.isOverAxis(c,e,g)}})})(jQuery);;/*! jQuery UI - v1.8.23 - 2012-08-15
- * https://github.com/jquery/jquery-ui
- * Includes: jquery.ui.widget.js
- * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
-(function(a,b){if(a.cleanData){var c=a.cleanData;a.cleanData=function(b){for(var d=0,e;(e=b[d])!=null;d++)try{a(e).triggerHandler("remove")}catch(f){}c(b)}}else{var d=a.fn.remove;a.fn.remove=function(b,c){return this.each(function(){return c||(!b||a.filter(b,[this]).length)&&a("*",this).add([this]).each(function(){try{a(this).triggerHandler("remove")}catch(b){}}),d.call(a(this),b,c)})}}a.widget=function(b,c,d){var e=b.split(".")[0],f;b=b.split(".")[1],f=e+"-"+b,d||(d=c,c=a.Widget),a.expr[":"][f]=function(c){return!!a.data(c,b)},a[e]=a[e]||{},a[e][b]=function(a,b){arguments.length&&this._createWidget(a,b)};var g=new c;g.options=a.extend(!0,{},g.options),a[e][b].prototype=a.extend(!0,g,{namespace:e,widgetName:b,widgetEventPrefix:a[e][b].prototype.widgetEventPrefix||b,widgetBaseClass:f},d),a.widget.bridge(b,a[e][b])},a.widget.bridge=function(c,d){a.fn[c]=function(e){var f=typeof e=="string",g=Array.prototype.slice.call(arguments,1),h=this;return e=!f&&g.length?a.extend.apply(null,[!0,e].concat(g)):e,f&&e.charAt(0)==="_"?h:(f?this.each(function(){var d=a.data(this,c),f=d&&a.isFunction(d[e])?d[e].apply(d,g):d;if(f!==d&&f!==b)return h=f,!1}):this.each(function(){var b=a.data(this,c);b?b.option(e||{})._init():a.data(this,c,new d(e,this))}),h)}},a.Widget=function(a,b){arguments.length&&this._createWidget(a,b)},a.Widget.prototype={widgetName:"widget",widgetEventPrefix:"",options:{disabled:!1},_createWidget:function(b,c){a.data(c,this.widgetName,this),this.element=a(c),this.options=a.extend(!0,{},this.options,this._getCreateOptions(),b);var d=this;this.element.bind("remove."+this.widgetName,function(){d.destroy()}),this._create(),this._trigger("create"),this._init()},_getCreateOptions:function(){return a.metadata&&a.metadata.get(this.element[0])[this.widgetName]},_create:function(){},_init:function(){},destroy:function(){this.element.unbind("."+this.widgetName).removeData(this.widgetName),this.widget().unbind("."+this.widgetName).removeAttr("aria-disabled").removeClass(this.widgetBaseClass+"-disabled "+"ui-state-disabled")},widget:function(){return this.element},option:function(c,d){var e=c;if(arguments.length===0)return a.extend({},this.options);if(typeof c=="string"){if(d===b)return this.options[c];e={},e[c]=d}return this._setOptions(e),this},_setOptions:function(b){var c=this;return a.each(b,function(a,b){c._setOption(a,b)}),this},_setOption:function(a,b){return this.options[a]=b,a==="disabled"&&this.widget()[b?"addClass":"removeClass"](this.widgetBaseClass+"-disabled"+" "+"ui-state-disabled").attr("aria-disabled",b),this},enable:function(){return this._setOption("disabled",!1)},disable:function(){return this._setOption("disabled",!0)},_trigger:function(b,c,d){var e,f,g=this.options[b];d=d||{},c=a.Event(c),c.type=(b===this.widgetEventPrefix?b:this.widgetEventPrefix+b).toLowerCase(),c.target=this.element[0],f=c.originalEvent;if(f)for(e in f)e in c||(c[e]=f[e]);return this.element.trigger(c,d),!(a.isFunction(g)&&g.call(this.element[0],c,d)===!1||c.isDefaultPrevented())}}})(jQuery);;/*! jQuery UI - v1.8.23 - 2012-08-15
- * https://github.com/jquery/jquery-ui
- * Includes: jquery.ui.mouse.js
- * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
-(function(a,b){var c=!1;a(document).mouseup(function(a){c=!1}),a.widget("ui.mouse",{options:{cancel:":input,option",distance:1,delay:0},_mouseInit:function(){var b=this;this.element.bind("mousedown."+this.widgetName,function(a){return b._mouseDown(a)}).bind("click."+this.widgetName,function(c){if(!0===a.data(c.target,b.widgetName+".preventClickEvent"))return a.removeData(c.target,b.widgetName+".preventClickEvent"),c.stopImmediatePropagation(),!1}),this.started=!1},_mouseDestroy:function(){this.element.unbind("."+this.widgetName),this._mouseMoveDelegate&&a(document).unbind("mousemove."+this.widgetName,this._mouseMoveDelegate).unbind("mouseup."+this.widgetName,this._mouseUpDelegate)},_mouseDown:function(b){if(c)return;this._mouseStarted&&this._mouseUp(b),this._mouseDownEvent=b;var d=this,e=b.which==1,f=typeof this.options.cancel=="string"&&b.target.nodeName?a(b.target).closest(this.options.cancel).length:!1;if(!e||f||!this._mouseCapture(b))return!0;this.mouseDelayMet=!this.options.delay,this.mouseDelayMet||(this._mouseDelayTimer=setTimeout(function(){d.mouseDelayMet=!0},this.options.delay));if(this._mouseDistanceMet(b)&&this._mouseDelayMet(b)){this._mouseStarted=this._mouseStart(b)!==!1;if(!this._mouseStarted)return b.preventDefault(),!0}return!0===a.data(b.target,this.widgetName+".preventClickEvent")&&a.removeData(b.target,this.widgetName+".preventClickEvent"),this._mouseMoveDelegate=function(a){return d._mouseMove(a)},this._mouseUpDelegate=function(a){return d._mouseUp(a)},a(document).bind("mousemove."+this.widgetName,this._mouseMoveDelegate).bind("mouseup."+this.widgetName,this._mouseUpDelegate),b.preventDefault(),c=!0,!0},_mouseMove:function(b){return!a.browser.msie||document.documentMode>=9||!!b.button?this._mouseStarted?(this._mouseDrag(b),b.preventDefault()):(this._mouseDistanceMet(b)&&this._mouseDelayMet(b)&&(this._mouseStarted=this._mouseStart(this._mouseDownEvent,b)!==!1,this._mouseStarted?this._mouseDrag(b):this._mouseUp(b)),!this._mouseStarted):this._mouseUp(b)},_mouseUp:function(b){return a(document).unbind("mousemove."+this.widgetName,this._mouseMoveDelegate).unbind("mouseup."+this.widgetName,this._mouseUpDelegate),this._mouseStarted&&(this._mouseStarted=!1,b.target==this._mouseDownEvent.target&&a.data(b.target,this.widgetName+".preventClickEvent",!0),this._mouseStop(b)),!1},_mouseDistanceMet:function(a){return Math.max(Math.abs(this._mouseDownEvent.pageX-a.pageX),Math.abs(this._mouseDownEvent.pageY-a.pageY))>=this.options.distance},_mouseDelayMet:function(a){return this.mouseDelayMet},_mouseStart:function(a){},_mouseDrag:function(a){},_mouseStop:function(a){},_mouseCapture:function(a){return!0}})})(jQuery);;/*! jQuery UI - v1.8.23 - 2012-08-15
- * https://github.com/jquery/jquery-ui
- * Includes: jquery.ui.draggable.js
- * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
-(function(a,b){a.widget("ui.draggable",a.ui.mouse,{widgetEventPrefix:"drag",options:{addClasses:!0,appendTo:"parent",axis:!1,connectToSortable:!1,containment:!1,cursor:"auto",cursorAt:!1,grid:!1,handle:!1,helper:"original",iframeFix:!1,opacity:!1,refreshPositions:!1,revert:!1,revertDuration:500,scope:"default",scroll:!0,scrollSensitivity:20,scrollSpeed:20,snap:!1,snapMode:"both",snapTolerance:20,stack:!1,zIndex:!1},_create:function(){this.options.helper=="original"&&!/^(?:r|a|f)/.test(this.element.css("position"))&&(this.element[0].style.position="relative"),this.options.addClasses&&this.element.addClass("ui-draggable"),this.options.disabled&&this.element.addClass("ui-draggable-disabled"),this._mouseInit()},destroy:function(){if(!this.element.data("draggable"))return;return this.element.removeData("draggable").unbind(".draggable").removeClass("ui-draggable ui-draggable-dragging ui-draggable-disabled"),this._mouseDestroy(),this},_mouseCapture:function(b){var c=this.options;return this.helper||c.disabled||a(b.target).is(".ui-resizable-handle")?!1:(this.handle=this._getHandle(b),this.handle?(c.iframeFix&&a(c.iframeFix===!0?"iframe":c.iframeFix).each(function(){a('<div class="ui-draggable-iframeFix" style="background: #fff;"></div>').css({width:this.offsetWidth+"px",height:this.offsetHeight+"px",position:"absolute",opacity:"0.001",zIndex:1e3}).css(a(this).offset()).appendTo("body")}),!0):!1)},_mouseStart:function(b){var c=this.options;return this.helper=this._createHelper(b),this.helper.addClass("ui-draggable-dragging"),this._cacheHelperProportions(),a.ui.ddmanager&&(a.ui.ddmanager.current=this),this._cacheMargins(),this.cssPosition=this.helper.css("position"),this.scrollParent=this.helper.scrollParent(),this.offset=this.positionAbs=this.element.offset(),this.offset={top:this.offset.top-this.margins.top,left:this.offset.left-this.margins.left},a.extend(this.offset,{click:{left:b.pageX-this.offset.left,top:b.pageY-this.offset.top},parent:this._getParentOffset(),relative:this._getRelativeOffset()}),this.originalPosition=this.position=this._generatePosition(b),this.originalPageX=b.pageX,this.originalPageY=b.pageY,c.cursorAt&&this._adjustOffsetFromHelper(c.cursorAt),c.containment&&this._setContainment(),this._trigger("start",b)===!1?(this._clear(),!1):(this._cacheHelperProportions(),a.ui.ddmanager&&!c.dropBehaviour&&a.ui.ddmanager.prepareOffsets(this,b),this._mouseDrag(b,!0),a.ui.ddmanager&&a.ui.ddmanager.dragStart(this,b),!0)},_mouseDrag:function(b,c){this.position=this._generatePosition(b),this.positionAbs=this._convertPositionTo("absolute");if(!c){var d=this._uiHash();if(this._trigger("drag",b,d)===!1)return this._mouseUp({}),!1;this.position=d.position}if(!this.options.axis||this.options.axis!="y")this.helper[0].style.left=this.position.left+"px";if(!this.options.axis||this.options.axis!="x")this.helper[0].style.top=this.position.top+"px";return a.ui.ddmanager&&a.ui.ddmanager.drag(this,b),!1},_mouseStop:function(b){var c=!1;a.ui.ddmanager&&!this.options.dropBehaviour&&(c=a.ui.ddmanager.drop(this,b)),this.dropped&&(c=this.dropped,this.dropped=!1);var d=this.element[0],e=!1;while(d&&(d=d.parentNode))d==document&&(e=!0);if(!e&&this.options.helper==="original")return!1;if(this.options.revert=="invalid"&&!c||this.options.revert=="valid"&&c||this.options.revert===!0||a.isFunction(this.options.revert)&&this.options.revert.call(this.element,c)){var f=this;a(this.helper).animate(this.originalPosition,parseInt(this.options.revertDuration,10),function(){f._trigger("stop",b)!==!1&&f._clear()})}else this._trigger("stop",b)!==!1&&this._clear();return!1},_mouseUp:function(b){return this.options.iframeFix===!0&&a("div.ui-draggable-iframeFix").each(function(){this.parentNode.removeChild(this)}),a.ui.ddmanager&&a.ui.ddmanager.dragStop(this,b),a.ui.mouse.prototype._mouseUp.call(this,b)},cancel:function(){return this.helper.is(".ui-draggable-dragging")?this._mouseUp({}):this._clear(),this},_getHandle:function(b){var c=!this.options.handle||!a(this.options.handle,this.element).length?!0:!1;return a(this.options.handle,this.element).find("*").andSelf().each(function(){this==b.target&&(c=!0)}),c},_createHelper:function(b){var c=this.options,d=a.isFunction(c.helper)?a(c.helper.apply(this.element[0],[b])):c.helper=="clone"?this.element.clone().removeAttr("id"):this.element;return d.parents("body").length||d.appendTo(c.appendTo=="parent"?this.element[0].parentNode:c.appendTo),d[0]!=this.element[0]&&!/(fixed|absolute)/.test(d.css("position"))&&d.css("position","absolute"),d},_adjustOffsetFromHelper:function(b){typeof b=="string"&&(b=b.split(" ")),a.isArray(b)&&(b={left:+b[0],top:+b[1]||0}),"left"in b&&(this.offset.click.left=b.left+this.margins.left),"right"in b&&(this.offset.click.left=this.helperProportions.width-b.right+this.margins.left),"top"in b&&(this.offset.click.top=b.top+this.margins.top),"bottom"in b&&(this.offset.click.top=this.helperProportions.height-b.bottom+this.margins.top)},_getParentOffset:function(){this.offsetParent=this.helper.offsetParent();var b=this.offsetParent.offset();this.cssPosition=="absolute"&&this.scrollParent[0]!=document&&a.ui.contains(this.scrollParent[0],this.offsetParent[0])&&(b.left+=this.scrollParent.scrollLeft(),b.top+=this.scrollParent.scrollTop());if(this.offsetParent[0]==document.body||this.offsetParent[0].tagName&&this.offsetParent[0].tagName.toLowerCase()=="html"&&a.browser.msie)b={top:0,left:0};return{top:b.top+(parseInt(this.offsetParent.css("borderTopWidth"),10)||0),left:b.left+(parseInt(this.offsetParent.css("borderLeftWidth"),10)||0)}},_getRelativeOffset:function(){if(this.cssPosition=="relative"){var a=this.element.position();return{top:a.top-(parseInt(this.helper.css("top"),10)||0)+this.scrollParent.scrollTop(),left:a.left-(parseInt(this.helper.css("left"),10)||0)+this.scrollParent.scrollLeft()}}return{top:0,left:0}},_cacheMargins:function(){this.margins={left:parseInt(this.element.css("marginLeft"),10)||0,top:parseInt(this.element.css("marginTop"),10)||0,right:parseInt(this.element.css("marginRight"),10)||0,bottom:parseInt(this.element.css("marginBottom"),10)||0}},_cacheHelperProportions:function(){this.helperProportions={width:this.helper.outerWidth(),height:this.helper.outerHeight()}},_setContainment:function(){var b=this.options;b.containment=="parent"&&(b.containment=this.helper[0].parentNode);if(b.containment=="document"||b.containment=="window")this.containment=[b.containment=="document"?0:a(window).scrollLeft()-this.offset.relative.left-this.offset.parent.left,b.containment=="document"?0:a(window).scrollTop()-this.offset.relative.top-this.offset.parent.top,(b.containment=="document"?0:a(window).scrollLeft())+a(b.containment=="document"?document:window).width()-this.helperProportions.width-this.margins.left,(b.containment=="document"?0:a(window).scrollTop())+(a(b.containment=="document"?document:window).height()||document.body.parentNode.scrollHeight)-this.helperProportions.height-this.margins.top];if(!/^(document|window|parent)$/.test(b.containment)&&b.containment.constructor!=Array){var c=a(b.containment),d=c[0];if(!d)return;var e=c.offset(),f=a(d).css("overflow")!="hidden";this.containment=[(parseInt(a(d).css("borderLeftWidth"),10)||0)+(parseInt(a(d).css("paddingLeft"),10)||0),(parseInt(a(d).css("borderTopWidth"),10)||0)+(parseInt(a(d).css("paddingTop"),10)||0),(f?Math.max(d.scrollWidth,d.offsetWidth):d.offsetWidth)-(parseInt(a(d).css("borderLeftWidth"),10)||0)-(parseInt(a(d).css("paddingRight"),10)||0)-this.helperProportions.width-this.margins.left-this.margins.right,(f?Math.max(d.scrollHeight,d.offsetHeight):d.offsetHeight)-(parseInt(a(d).css("borderTopWidth"),10)||0)-(parseInt(a(d).css("paddingBottom"),10)||0)-this.helperProportions.height-this.margins.top-this.margins.bottom],this.relative_container=c}else b.containment.constructor==Array&&(this.containment=b.containment)},_convertPositionTo:function(b,c){c||(c=this.position);var d=b=="absolute"?1:-1,e=this.options,f=this.cssPosition=="absolute"&&(this.scrollParent[0]==document||!a.ui.contains(this.scrollParent[0],this.offsetParent[0]))?this.offsetParent:this.scrollParent,g=/(html|body)/i.test(f[0].tagName);return{top:c.top+this.offset.relative.top*d+this.offset.parent.top*d-(a.browser.safari&&a.browser.version<526&&this.cssPosition=="fixed"?0:(this.cssPosition=="fixed"?-this.scrollParent.scrollTop():g?0:f.scrollTop())*d),left:c.left+this.offset.relative.left*d+this.offset.parent.left*d-(a.browser.safari&&a.browser.version<526&&this.cssPosition=="fixed"?0:(this.cssPosition=="fixed"?-this.scrollParent.scrollLeft():g?0:f.scrollLeft())*d)}},_generatePosition:function(b){var c=this.options,d=this.cssPosition=="absolute"&&(this.scrollParent[0]==document||!a.ui.contains(this.scrollParent[0],this.offsetParent[0]))?this.offsetParent:this.scrollParent,e=/(html|body)/i.test(d[0].tagName),f=b.pageX,g=b.pageY;if(this.originalPosition){var h;if(this.containment){if(this.relative_container){var i=this.relative_container.offset();h=[this.containment[0]+i.left,this.containment[1]+i.top,this.containment[2]+i.left,this.containment[3]+i.top]}else h=this.containment;b.pageX-this.offset.click.left<h[0]&&(f=h[0]+this.offset.click.left),b.pageY-this.offset.click.top<h[1]&&(g=h[1]+this.offset.click.top),b.pageX-this.offset.click.left>h[2]&&(f=h[2]+this.offset.click.left),b.pageY-this.offset.click.top>h[3]&&(g=h[3]+this.offset.click.top)}if(c.grid){var j=c.grid[1]?this.originalPageY+Math.round((g-this.originalPageY)/c.grid[1])*c.grid[1]:this.originalPageY;g=h?j-this.offset.click.top<h[1]||j-this.offset.click.top>h[3]?j-this.offset.click.top<h[1]?j+c.grid[1]:j-c.grid[1]:j:j;var k=c.grid[0]?this.originalPageX+Math.round((f-this.originalPageX)/c.grid[0])*c.grid[0]:this.originalPageX;f=h?k-this.offset.click.left<h[0]||k-this.offset.click.left>h[2]?k-this.offset.click.left<h[0]?k+c.grid[0]:k-c.grid[0]:k:k}}return{top:g-this.offset.click.top-this.offset.relative.top-this.offset.parent.top+(a.browser.safari&&a.browser.version<526&&this.cssPosition=="fixed"?0:this.cssPosition=="fixed"?-this.scrollParent.scrollTop():e?0:d.scrollTop()),left:f-this.offset.click.left-this.offset.relative.left-this.offset.parent.left+(a.browser.safari&&a.browser.version<526&&this.cssPosition=="fixed"?0:this.cssPosition=="fixed"?-this.scrollParent.scrollLeft():e?0:d.scrollLeft())}},_clear:function(){this.helper.removeClass("ui-draggable-dragging"),this.helper[0]!=this.element[0]&&!this.cancelHelperRemoval&&this.helper.remove(),this.helper=null,this.cancelHelperRemoval=!1},_trigger:function(b,c,d){return d=d||this._uiHash(),a.ui.plugin.call(this,b,[c,d]),b=="drag"&&(this.positionAbs=this._convertPositionTo("absolute")),a.Widget.prototype._trigger.call(this,b,c,d)},plugins:{},_uiHash:function(a){return{helper:this.helper,position:this.position,originalPosition:this.originalPosition,offset:this.positionAbs}}}),a.extend(a.ui.draggable,{version:"1.8.23"}),a.ui.plugin.add("draggable","connectToSortable",{start:function(b,c){var d=a(this).data("draggable"),e=d.options,f=a.extend({},c,{item:d.element});d.sortables=[],a(e.connectToSortable).each(function(){var c=a.data(this,"sortable");c&&!c.options.disabled&&(d.sortables.push({instance:c,shouldRevert:c.options.revert}),c.refreshPositions(),c._trigger("activate",b,f))})},stop:function(b,c){var d=a(this).data("draggable"),e=a.extend({},c,{item:d.element});a.each(d.sortables,function(){this.instance.isOver?(this.instance.isOver=0,d.cancelHelperRemoval=!0,this.instance.cancelHelperRemoval=!1,this.shouldRevert&&(this.instance.options.revert=!0),this.instance._mouseStop(b),this.instance.options.helper=this.instance.options._helper,d.options.helper=="original"&&this.instance.currentItem.css({top:"auto",left:"auto"})):(this.instance.cancelHelperRemoval=!1,this.instance._trigger("deactivate",b,e))})},drag:function(b,c){var d=a(this).data("draggable"),e=this,f=function(b){var c=this.offset.click.top,d=this.offset.click.left,e=this.positionAbs.top,f=this.positionAbs.left,g=b.height,h=b.width,i=b.top,j=b.left;return a.ui.isOver(e+c,f+d,i,j,g,h)};a.each(d.sortables,function(f){this.instance.positionAbs=d.positionAbs,this.instance.helperProportions=d.helperProportions,this.instance.offset.click=d.offset.click,this.instance._intersectsWith(this.instance.containerCache)?(this.instance.isOver||(this.instance.isOver=1,this.instance.currentItem=a(e).clone().removeAttr("id").appendTo(this.instance.element).data("sortable-item",!0),this.instance.options._helper=this.instance.options.helper,this.instance.options.helper=function(){return c.helper[0]},b.target=this.instance.currentItem[0],this.instance._mouseCapture(b,!0),this.instance._mouseStart(b,!0,!0),this.instance.offset.click.top=d.offset.click.top,this.instance.offset.click.left=d.offset.click.left,this.instance.offset.parent.left-=d.offset.parent.left-this.instance.offset.parent.left,this.instance.offset.parent.top-=d.offset.parent.top-this.instance.offset.parent.top,d._trigger("toSortable",b),d.dropped=this.instance.element,d.currentItem=d.element,this.instance.fromOutside=d),this.instance.currentItem&&this.instance._mouseDrag(b)):this.instance.isOver&&(this.instance.isOver=0,this.instance.cancelHelperRemoval=!0,this.instance.options.revert=!1,this.instance._trigger("out",b,this.instance._uiHash(this.instance)),this.instance._mouseStop(b,!0),this.instance.options.helper=this.instance.options._helper,this.instance.currentItem.remove(),this.instance.placeholder&&this.instance.placeholder.remove(),d._trigger("fromSortable",b),d.dropped=!1)})}}),a.ui.plugin.add("draggable","cursor",{start:function(b,c){var d=a("body"),e=a(this).data("draggable").options;d.css("cursor")&&(e._cursor=d.css("cursor")),d.css("cursor",e.cursor)},stop:function(b,c){var d=a(this).data("draggable").options;d._cursor&&a("body").css("cursor",d._cursor)}}),a.ui.plugin.add("draggable","opacity",{start:function(b,c){var d=a(c.helper),e=a(this).data("draggable").options;d.css("opacity")&&(e._opacity=d.css("opacity")),d.css("opacity",e.opacity)},stop:function(b,c){var d=a(this).data("draggable").options;d._opacity&&a(c.helper).css("opacity",d._opacity)}}),a.ui.plugin.add("draggable","scroll",{start:function(b,c){var d=a(this).data("draggable");d.scrollParent[0]!=document&&d.scrollParent[0].tagName!="HTML"&&(d.overflowOffset=d.scrollParent.offset())},drag:function(b,c){var d=a(this).data("draggable"),e=d.options,f=!1;if(d.scrollParent[0]!=document&&d.scrollParent[0].tagName!="HTML"){if(!e.axis||e.axis!="x")d.overflowOffset.top+d.scrollParent[0].offsetHeight-b.pageY<e.scrollSensitivity?d.scrollParent[0].scrollTop=f=d.scrollParent[0].scrollTop+e.scrollSpeed:b.pageY-d.overflowOffset.top<e.scrollSensitivity&&(d.scrollParent[0].scrollTop=f=d.scrollParent[0].scrollTop-e.scrollSpeed);if(!e.axis||e.axis!="y")d.overflowOffset.left+d.scrollParent[0].offsetWidth-b.pageX<e.scrollSensitivity?d.scrollParent[0].scrollLeft=f=d.scrollParent[0].scrollLeft+e.scrollSpeed:b.pageX-d.overflowOffset.left<e.scrollSensitivity&&(d.scrollParent[0].scrollLeft=f=d.scrollParent[0].scrollLeft-e.scrollSpeed)}else{if(!e.axis||e.axis!="x")b.pageY-a(document).scrollTop()<e.scrollSensitivity?f=a(document).scrollTop(a(document).scrollTop()-e.scrollSpeed):a(window).height()-(b.pageY-a(document).scrollTop())<e.scrollSensitivity&&(f=a(document).scrollTop(a(document).scrollTop()+e.scrollSpeed));if(!e.axis||e.axis!="y")b.pageX-a(document).scrollLeft()<e.scrollSensitivity?f=a(document).scrollLeft(a(document).scrollLeft()-e.scrollSpeed):a(window).width()-(b.pageX-a(document).scrollLeft())<e.scrollSensitivity&&(f=a(document).scrollLeft(a(document).scrollLeft()+e.scrollSpeed))}f!==!1&&a.ui.ddmanager&&!e.dropBehaviour&&a.ui.ddmanager.prepareOffsets(d,b)}}),a.ui.plugin.add("draggable","snap",{start:function(b,c){var d=a(this).data("draggable"),e=d.options;d.snapElements=[],a(e.snap.constructor!=String?e.snap.items||":data(draggable)":e.snap).each(function(){var b=a(this),c=b.offset();this!=d.element[0]&&d.snapElements.push({item:this,width:b.outerWidth(),height:b.outerHeight(),top:c.top,left:c.left})})},drag:function(b,c){var d=a(this).data("draggable"),e=d.options,f=e.snapTolerance,g=c.offset.left,h=g+d.helperProportions.width,i=c.offset.top,j=i+d.helperProportions.height;for(var k=d.snapElements.length-1;k>=0;k--){var l=d.snapElements[k].left,m=l+d.snapElements[k].width,n=d.snapElements[k].top,o=n+d.snapElements[k].height;if(!(l-f<g&&g<m+f&&n-f<i&&i<o+f||l-f<g&&g<m+f&&n-f<j&&j<o+f||l-f<h&&h<m+f&&n-f<i&&i<o+f||l-f<h&&h<m+f&&n-f<j&&j<o+f)){d.snapElements[k].snapping&&d.options.snap.release&&d.options.snap.release.call(d.element,b,a.extend(d._uiHash(),{snapItem:d.snapElements[k].item})),d.snapElements[k].snapping=!1;continue}if(e.snapMode!="inner"){var p=Math.abs(n-j)<=f,q=Math.abs(o-i)<=f,r=Math.abs(l-h)<=f,s=Math.abs(m-g)<=f;p&&(c.position.top=d._convertPositionTo("relative",{top:n-d.helperProportions.height,left:0}).top-d.margins.top),q&&(c.position.top=d._convertPositionTo("relative",{top:o,left:0}).top-d.margins.top),r&&(c.position.left=d._convertPositionTo("relative",{top:0,left:l-d.helperProportions.width}).left-d.margins.left),s&&(c.position.left=d._convertPositionTo("relative",{top:0,left:m}).left-d.margins.left)}var t=p||q||r||s;if(e.snapMode!="outer"){var p=Math.abs(n-i)<=f,q=Math.abs(o-j)<=f,r=Math.abs(l-g)<=f,s=Math.abs(m-h)<=f;p&&(c.position.top=d._convertPositionTo("relative",{top:n,left:0}).top-d.margins.top),q&&(c.position.top=d._convertPositionTo("relative",{top:o-d.helperProportions.height,left:0}).top-d.margins.top),r&&(c.position.left=d._convertPositionTo("relative",{top:0,left:l}).left-d.margins.left),s&&(c.position.left=d._convertPositionTo("relative",{top:0,left:m-d.helperProportions.width}).left-d.margins.left)}!d.snapElements[k].snapping&&(p||q||r||s||t)&&d.options.snap.snap&&d.options.snap.snap.call(d.element,b,a.extend(d._uiHash(),{snapItem:d.snapElements[k].item})),d.snapElements[k].snapping=p||q||r||s||t}}}),a.ui.plugin.add("draggable","stack",{start:function(b,c){var d=a(this).data("draggable").options,e=a.makeArray(a(d.stack)).sort(function(b,c){return(parseInt(a(b).css("zIndex"),10)||0)-(parseInt(a(c).css("zIndex"),10)||0)});if(!e.length)return;var f=parseInt(e[0].style.zIndex)||0;a(e).each(function(a){this.style.zIndex=f+a}),this[0].style.zIndex=f+e.length}}),a.ui.plugin.add("draggable","zIndex",{start:function(b,c){var d=a(c.helper),e=a(this).data("draggable").options;d.css("zIndex")&&(e._zIndex=d.css("zIndex")),d.css("zIndex",e.zIndex)},stop:function(b,c){var d=a(this).data("draggable").options;d._zIndex&&a(c.helper).css("zIndex",d._zIndex)}})})(jQuery);;/*! jQuery UI - v1.8.23 - 2012-08-15
- * https://github.com/jquery/jquery-ui
- * Includes: jquery.ui.droppable.js
- * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
-(function(a,b){a.widget("ui.droppable",{widgetEventPrefix:"drop",options:{accept:"*",activeClass:!1,addClasses:!0,greedy:!1,hoverClass:!1,scope:"default",tolerance:"intersect"},_create:function(){var b=this.options,c=b.accept;this.isover=0,this.isout=1,this.accept=a.isFunction(c)?c:function(a){return a.is(c)},this.proportions={width:this.element[0].offsetWidth,height:this.element[0].offsetHeight},a.ui.ddmanager.droppables[b.scope]=a.ui.ddmanager.droppables[b.scope]||[],a.ui.ddmanager.droppables[b.scope].push(this),b.addClasses&&this.element.addClass("ui-droppable")},destroy:function(){var b=a.ui.ddmanager.droppables[this.options.scope];for(var c=0;c<b.length;c++)b[c]==this&&b.splice(c,1);return this.element.removeClass("ui-droppable ui-droppable-disabled").removeData("droppable").unbind(".droppable"),this},_setOption:function(b,c){b=="accept"&&(this.accept=a.isFunction(c)?c:function(a){return a.is(c)}),a.Widget.prototype._setOption.apply(this,arguments)},_activate:function(b){var c=a.ui.ddmanager.current;this.options.activeClass&&this.element.addClass(this.options.activeClass),c&&this._trigger("activate",b,this.ui(c))},_deactivate:function(b){var c=a.ui.ddmanager.current;this.options.activeClass&&this.element.removeClass(this.options.activeClass),c&&this._trigger("deactivate",b,this.ui(c))},_over:function(b){var c=a.ui.ddmanager.current;if(!c||(c.currentItem||c.element)[0]==this.element[0])return;this.accept.call(this.element[0],c.currentItem||c.element)&&(this.options.hoverClass&&this.element.addClass(this.options.hoverClass),this._trigger("over",b,this.ui(c)))},_out:function(b){var c=a.ui.ddmanager.current;if(!c||(c.currentItem||c.element)[0]==this.element[0])return;this.accept.call(this.element[0],c.currentItem||c.element)&&(this.options.hoverClass&&this.element.removeClass(this.options.hoverClass),this._trigger("out",b,this.ui(c)))},_drop:function(b,c){var d=c||a.ui.ddmanager.current;if(!d||(d.currentItem||d.element)[0]==this.element[0])return!1;var e=!1;return this.element.find(":data(droppable)").not(".ui-draggable-dragging").each(function(){var b=a.data(this,"droppable");if(b.options.greedy&&!b.options.disabled&&b.options.scope==d.options.scope&&b.accept.call(b.element[0],d.currentItem||d.element)&&a.ui.intersect(d,a.extend(b,{offset:b.element.offset()}),b.options.tolerance))return e=!0,!1}),e?!1:this.accept.call(this.element[0],d.currentItem||d.element)?(this.options.activeClass&&this.element.removeClass(this.options.activeClass),this.options.hoverClass&&this.element.removeClass(this.options.hoverClass),this._trigger("drop",b,this.ui(d)),this.element):!1},ui:function(a){return{draggable:a.currentItem||a.element,helper:a.helper,position:a.position,offset:a.positionAbs}}}),a.extend(a.ui.droppable,{version:"1.8.23"}),a.ui.intersect=function(b,c,d){if(!c.offset)return!1;var e=(b.positionAbs||b.position.absolute).left,f=e+b.helperProportions.width,g=(b.positionAbs||b.position.absolute).top,h=g+b.helperProportions.height,i=c.offset.left,j=i+c.proportions.width,k=c.offset.top,l=k+c.proportions.height;switch(d){case"fit":return i<=e&&f<=j&&k<=g&&h<=l;case"intersect":return i<e+b.helperProportions.width/2&&f-b.helperProportions.width/2<j&&k<g+b.helperProportions.height/2&&h-b.helperProportions.height/2<l;case"pointer":var m=(b.positionAbs||b.position.absolute).left+(b.clickOffset||b.offset.click).left,n=(b.positionAbs||b.position.absolute).top+(b.clickOffset||b.offset.click).top,o=a.ui.isOver(n,m,k,i,c.proportions.height,c.proportions.width);return o;case"touch":return(g>=k&&g<=l||h>=k&&h<=l||g<k&&h>l)&&(e>=i&&e<=j||f>=i&&f<=j||e<i&&f>j);default:return!1}},a.ui.ddmanager={current:null,droppables:{"default":[]},prepareOffsets:function(b,c){var d=a.ui.ddmanager.droppables[b.options.scope]||[],e=c?c.type:null,f=(b.currentItem||b.element).find(":data(droppable)").andSelf();g:for(var h=0;h<d.length;h++){if(d[h].options.disabled||b&&!d[h].accept.call(d[h].element[0],b.currentItem||b.element))continue;for(var i=0;i<f.length;i++)if(f[i]==d[h].element[0]){d[h].proportions.height=0;continue g}d[h].visible=d[h].element.css("display")!="none";if(!d[h].visible)continue;e=="mousedown"&&d[h]._activate.call(d[h],c),d[h].offset=d[h].element.offset(),d[h].proportions={width:d[h].element[0].offsetWidth,height:d[h].element[0].offsetHeight}}},drop:function(b,c){var d=!1;return a.each(a.ui.ddmanager.droppables[b.options.scope]||[],function(){if(!this.options)return;!this.options.disabled&&this.visible&&a.ui.intersect(b,this,this.options.tolerance)&&(d=this._drop.call(this,c)||d),!this.options.disabled&&this.visible&&this.accept.call(this.element[0],b.currentItem||b.element)&&(this.isout=1,this.isover=0,this._deactivate.call(this,c))}),d},dragStart:function(b,c){b.element.parents(":not(body,html)").bind("scroll.droppable",function(){b.options.refreshPositions||a.ui.ddmanager.prepareOffsets(b,c)})},drag:function(b,c){b.options.refreshPositions&&a.ui.ddmanager.prepareOffsets(b,c),a.each(a.ui.ddmanager.droppables[b.options.scope]||[],function(){if(this.options.disabled||this.greedyChild||!this.visible)return;var d=a.ui.intersect(b,this,this.options.tolerance),e=!d&&this.isover==1?"isout":d&&this.isover==0?"isover":null;if(!e)return;var f;if(this.options.greedy){var g=this.element.parents(":data(droppable):eq(0)");g.length&&(f=a.data(g[0],"droppable"),f.greedyChild=e=="isover"?1:0)}f&&e=="isover"&&(f.isover=0,f.isout=1,f._out.call(f,c)),this[e]=1,this[e=="isout"?"isover":"isout"]=0,this[e=="isover"?"_over":"_out"].call(this,c),f&&e=="isout"&&(f.isout=0,f.isover=1,f._over.call(f,c))})},dragStop:function(b,c){b.element.parents(":not(body,html)").unbind("scroll.droppable"),b.options.refreshPositions||a.ui.ddmanager.prepareOffsets(b,c)}}})(jQuery);;/*! jQuery UI - v1.8.23 - 2012-08-15
- * https://github.com/jquery/jquery-ui
- * Includes: jquery.effects.core.js
- * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
-jQuery.effects||function(a,b){function c(b){var c;return b&&b.constructor==Array&&b.length==3?b:(c=/rgb\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*\)/.exec(b))?[parseInt(c[1],10),parseInt(c[2],10),parseInt(c[3],10)]:(c=/rgb\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*\)/.exec(b))?[parseFloat(c[1])*2.55,parseFloat(c[2])*2.55,parseFloat(c[3])*2.55]:(c=/#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})/.exec(b))?[parseInt(c[1],16),parseInt(c[2],16),parseInt(c[3],16)]:(c=/#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/.exec(b))?[parseInt(c[1]+c[1],16),parseInt(c[2]+c[2],16),parseInt(c[3]+c[3],16)]:(c=/rgba\(0, 0, 0, 0\)/.exec(b))?e.transparent:e[a.trim(b).toLowerCase()]}function d(b,d){var e;do{e=(a.curCSS||a.css)(b,d);if(e!=""&&e!="transparent"||a.nodeName(b,"body"))break;d="backgroundColor"}while(b=b.parentNode);return c(e)}function h(){var a=document.defaultView?document.defaultView.getComputedStyle(this,null):this.currentStyle,b={},c,d;if(a&&a.length&&a[0]&&a[a[0]]){var e=a.length;while(e--)c=a[e],typeof a[c]=="string"&&(d=c.replace(/\-(\w)/g,function(a,b){return b.toUpperCase()}),b[d]=a[c])}else for(c in a)typeof a[c]=="string"&&(b[c]=a[c]);return b}function i(b){var c,d;for(c in b)d=b[c],(d==null||a.isFunction(d)||c in g||/scrollbar/.test(c)||!/color/i.test(c)&&isNaN(parseFloat(d)))&&delete b[c];return b}function j(a,b){var c={_:0},d;for(d in b)a[d]!=b[d]&&(c[d]=b[d]);return c}function k(b,c,d,e){typeof b=="object"&&(e=c,d=null,c=b,b=c.effect),a.isFunction(c)&&(e=c,d=null,c={});if(typeof c=="number"||a.fx.speeds[c])e=d,d=c,c={};return a.isFunction(d)&&(e=d,d=null),c=c||{},d=d||c.duration,d=a.fx.off?0:typeof d=="number"?d:d in a.fx.speeds?a.fx.speeds[d]:a.fx.speeds._default,e=e||c.complete,[b,c,d,e]}function l(b){return!b||typeof b=="number"||a.fx.speeds[b]?!0:typeof b=="string"&&!a.effects[b]?!0:!1}a.effects={},a.each(["backgroundColor","borderBottomColor","borderLeftColor","borderRightColor","borderTopColor","borderColor","color","outlineColor"],function(b,e){a.fx.step[e]=function(a){a.colorInit||(a.start=d(a.elem,e),a.end=c(a.end),a.colorInit=!0),a.elem.style[e]="rgb("+Math.max(Math.min(parseInt(a.pos*(a.end[0]-a.start[0])+a.start[0],10),255),0)+","+Math.max(Math.min(parseInt(a.pos*(a.end[1]-a.start[1])+a.start[1],10),255),0)+","+Math.max(Math.min(parseInt(a.pos*(a.end[2]-a.start[2])+a.start[2],10),255),0)+")"}});var e={aqua:[0,255,255],azure:[240,255,255],beige:[245,245,220],black:[0,0,0],blue:[0,0,255],brown:[165,42,42],cyan:[0,255,255],darkblue:[0,0,139],darkcyan:[0,139,139],darkgrey:[169,169,169],darkgreen:[0,100,0],darkkhaki:[189,183,107],darkmagenta:[139,0,139],darkolivegreen:[85,107,47],darkorange:[255,140,0],darkorchid:[153,50,204],darkred:[139,0,0],darksalmon:[233,150,122],darkviolet:[148,0,211],fuchsia:[255,0,255],gold:[255,215,0],green:[0,128,0],indigo:[75,0,130],khaki:[240,230,140],lightblue:[173,216,230],lightcyan:[224,255,255],lightgreen:[144,238,144],lightgrey:[211,211,211],lightpink:[255,182,193],lightyellow:[255,255,224],lime:[0,255,0],magenta:[255,0,255],maroon:[128,0,0],navy:[0,0,128],olive:[128,128,0],orange:[255,165,0],pink:[255,192,203],purple:[128,0,128],violet:[128,0,128],red:[255,0,0],silver:[192,192,192],white:[255,255,255],yellow:[255,255,0],transparent:[255,255,255]},f=["add","remove","toggle"],g={border:1,borderBottom:1,borderColor:1,borderLeft:1,borderRight:1,borderTop:1,borderWidth:1,margin:1,padding:1};a.effects.animateClass=function(b,c,d,e){return a.isFunction(d)&&(e=d,d=null),this.queue(function(){var g=a(this),k=g.attr("style")||" ",l=i(h.call(this)),m,n=g.attr("class")||"";a.each(f,function(a,c){b[c]&&g[c+"Class"](b[c])}),m=i(h.call(this)),g.attr("class",n),g.animate(j(l,m),{queue:!1,duration:c,easing:d,complete:function(){a.each(f,function(a,c){b[c]&&g[c+"Class"](b[c])}),typeof g.attr("style")=="object"?(g.attr("style").cssText="",g.attr("style").cssText=k):g.attr("style",k),e&&e.apply(this,arguments),a.dequeue(this)}})})},a.fn.extend({_addClass:a.fn.addClass,addClass:function(b,c,d,e){return c?a.effects.animateClass.apply(this,[{add:b},c,d,e]):this._addClass(b)},_removeClass:a.fn.removeClass,removeClass:function(b,c,d,e){return c?a.effects.animateClass.apply(this,[{remove:b},c,d,e]):this._removeClass(b)},_toggleClass:a.fn.toggleClass,toggleClass:function(c,d,e,f,g){return typeof d=="boolean"||d===b?e?a.effects.animateClass.apply(this,[d?{add:c}:{remove:c},e,f,g]):this._toggleClass(c,d):a.effects.animateClass.apply(this,[{toggle:c},d,e,f])},switchClass:function(b,c,d,e,f){return a.effects.animateClass.apply(this,[{add:c,remove:b},d,e,f])}}),a.extend(a.effects,{version:"1.8.23",save:function(a,b){for(var c=0;c<b.length;c++)b[c]!==null&&a.data("ec.storage."+b[c],a[0].style[b[c]])},restore:function(a,b){for(var c=0;c<b.length;c++)b[c]!==null&&a.css(b[c],a.data("ec.storage."+b[c]))},setMode:function(a,b){return b=="toggle"&&(b=a.is(":hidden")?"show":"hide"),b},getBaseline:function(a,b){var c,d;switch(a[0]){case"top":c=0;break;case"middle":c=.5;break;case"bottom":c=1;break;default:c=a[0]/b.height}switch(a[1]){case"left":d=0;break;case"center":d=.5;break;case"right":d=1;break;default:d=a[1]/b.width}return{x:d,y:c}},createWrapper:function(b){if(b.parent().is(".ui-effects-wrapper"))return b.parent();var c={width:b.outerWidth(!0),height:b.outerHeight(!0),"float":b.css("float")},d=a("<div></div>").addClass("ui-effects-wrapper").css({fontSize:"100%",background:"transparent",border:"none",margin:0,padding:0}),e=document.activeElement;try{e.id}catch(f){e=document.body}return b.wrap(d),(b[0]===e||a.contains(b[0],e))&&a(e).focus(),d=b.parent(),b.css("position")=="static"?(d.css({position:"relative"}),b.css({position:"relative"})):(a.extend(c,{position:b.css("position"),zIndex:b.css("z-index")}),a.each(["top","left","bottom","right"],function(a,d){c[d]=b.css(d),isNaN(parseInt(c[d],10))&&(c[d]="auto")}),b.css({position:"relative",top:0,left:0,right:"auto",bottom:"auto"})),d.css(c).show()},removeWrapper:function(b){var c,d=document.activeElement;return b.parent().is(".ui-effects-wrapper")?(c=b.parent().replaceWith(b),(b[0]===d||a.contains(b[0],d))&&a(d).focus(),c):b},setTransition:function(b,c,d,e){return e=e||{},a.each(c,function(a,c){var f=b.cssUnit(c);f[0]>0&&(e[c]=f[0]*d+f[1])}),e}}),a.fn.extend({effect:function(b,c,d,e){var f=k.apply(this,arguments),g={options:f[1],duration:f[2],callback:f[3]},h=g.options.mode,i=a.effects[b];return a.fx.off||!i?h?this[h](g.duration,g.callback):this.each(function(){g.callback&&g.callback.call(this)}):i.call(this,g)},_show:a.fn.show,show:function(a){if(l(a))return this._show.apply(this,arguments);var b=k.apply(this,arguments);return b[1].mode="show",this.effect.apply(this,b)},_hide:a.fn.hide,hide:function(a){if(l(a))return this._hide.apply(this,arguments);var b=k.apply(this,arguments);return b[1].mode="hide",this.effect.apply(this,b)},__toggle:a.fn.toggle,toggle:function(b){if(l(b)||typeof b=="boolean"||a.isFunction(b))return this.__toggle.apply(this,arguments);var c=k.apply(this,arguments);return c[1].mode="toggle",this.effect.apply(this,c)},cssUnit:function(b){var c=this.css(b),d=[];return a.each(["em","px","%","pt"],function(a,b){c.indexOf(b)>0&&(d=[parseFloat(c),b])}),d}});var m={};a.each(["Quad","Cubic","Quart","Quint","Expo"],function(a,b){m[b]=function(b){return Math.pow(b,a+2)}}),a.extend(m,{Sine:function(a){return 1-Math.cos(a*Math.PI/2)},Circ:function(a){return 1-Math.sqrt(1-a*a)},Elastic:function(a){return a===0||a===1?a:-Math.pow(2,8*(a-1))*Math.sin(((a-1)*80-7.5)*Math.PI/15)},Back:function(a){return a*a*(3*a-2)},Bounce:function(a){var b,c=4;while(a<((b=Math.pow(2,--c))-1)/11);return 1/Math.pow(4,3-c)-7.5625*Math.pow((b*3-2)/22-a,2)}}),a.each(m,function(b,c){a.easing["easeIn"+b]=c,a.easing["easeOut"+b]=function(a){return 1-c(1-a)},a.easing["easeInOut"+b]=function(a){return a<.5?c(a*2)/2:c(a*-2+2)/-2+1}})}(jQuery);;/*! jQuery UI - v1.8.23 - 2012-08-15
- * https://github.com/jquery/jquery-ui
- * Includes: jquery.effects.blind.js
- * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
-(function(a,b){a.effects.blind=function(b){return this.queue(function(){var c=a(this),d=["position","top","bottom","left","right"],e=a.effects.setMode(c,b.options.mode||"hide"),f=b.options.direction||"vertical";a.effects.save(c,d),c.show();var g=a.effects.createWrapper(c).css({overflow:"hidden"}),h=f=="vertical"?"height":"width",i=f=="vertical"?g.height():g.width();e=="show"&&g.css(h,0);var j={};j[h]=e=="show"?i:0,g.animate(j,b.duration,b.options.easing,function(){e=="hide"&&c.hide(),a.effects.restore(c,d),a.effects.removeWrapper(c),b.callback&&b.callback.apply(c[0],arguments),c.dequeue()})})}})(jQuery);;/*! jQuery UI - v1.8.23 - 2012-08-15
- * https://github.com/jquery/jquery-ui
- * Includes: jquery.effects.fade.js
- * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
-(function(a,b){a.effects.fade=function(b){return this.queue(function(){var c=a(this),d=a.effects.setMode(c,b.options.mode||"hide");c.animate({opacity:d},{queue:!1,duration:b.duration,easing:b.options.easing,complete:function(){b.callback&&b.callback.apply(this,arguments),c.dequeue()}})})}})(jQuery);;/*! jQuery UI - v1.8.23 - 2012-08-15
- * https://github.com/jquery/jquery-ui
- * Includes: jquery.effects.highlight.js
- * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
-(function(a,b){a.effects.highlight=function(b){return this.queue(function(){var c=a(this),d=["backgroundImage","backgroundColor","opacity"],e=a.effects.setMode(c,b.options.mode||"show"),f={backgroundColor:c.css("backgroundColor")};e=="hide"&&(f.opacity=0),a.effects.save(c,d),c.show().css({backgroundImage:"none",backgroundColor:b.options.color||"#ffff99"}).animate(f,{queue:!1,duration:b.duration,easing:b.options.easing,complete:function(){e=="hide"&&c.hide(),a.effects.restore(c,d),e=="show"&&!a.support.opacity&&this.style.removeAttribute("filter"),b.callback&&b.callback.apply(this,arguments),c.dequeue()}})})}})(jQuery);;/*! jQuery UI - v1.8.23 - 2012-08-15
- * https://github.com/jquery/jquery-ui
- * Includes: jquery.effects.pulsate.js
- * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
-(function(a,b){a.effects.pulsate=function(b){return this.queue(function(){var c=a(this),d=a.effects.setMode(c,b.options.mode||"show"),e=(b.options.times||5)*2-1,f=b.duration?b.duration/2:a.fx.speeds._default/2,g=c.is(":visible"),h=0;g||(c.css("opacity",0).show(),h=1),(d=="hide"&&g||d=="show"&&!g)&&e--;for(var i=0;i<e;i++)c.animate({opacity:h},f,b.options.easing),h=(h+1)%2;c.animate({opacity:h},f,b.options.easing,function(){h==0&&c.hide(),b.callback&&b.callback.apply(this,arguments)}),c.queue("fx",function(){c.dequeue()}).dequeue()})}})(jQuery);;/*! jQuery UI - v1.8.23 - 2012-08-15
- * https://github.com/jquery/jquery-ui
- * Includes: jquery.effects.scale.js
- * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
-(function(a,b){a.effects.puff=function(b){return this.queue(function(){var c=a(this),d=a.effects.setMode(c,b.options.mode||"hide"),e=parseInt(b.options.percent,10)||150,f=e/100,g={height:c.height(),width:c.width()};a.extend(b.options,{fade:!0,mode:d,percent:d=="hide"?e:100,from:d=="hide"?g:{height:g.height*f,width:g.width*f}}),c.effect("scale",b.options,b.duration,b.callback),c.dequeue()})},a.effects.scale=function(b){return this.queue(function(){var c=a(this),d=a.extend(!0,{},b.options),e=a.effects.setMode(c,b.options.mode||"effect"),f=parseInt(b.options.percent,10)||(parseInt(b.options.percent,10)==0?0:e=="hide"?0:100),g=b.options.direction||"both",h=b.options.origin;e!="effect"&&(d.origin=h||["middle","center"],d.restore=!0);var i={height:c.height(),width:c.width()};c.from=b.options.from||(e=="show"?{height:0,width:0}:i);var j={y:g!="horizontal"?f/100:1,x:g!="vertical"?f/100:1};c.to={height:i.height*j.y,width:i.width*j.x},b.options.fade&&(e=="show"&&(c.from.opacity=0,c.to.opacity=1),e=="hide"&&(c.from.opacity=1,c.to.opacity=0)),d.from=c.from,d.to=c.to,d.mode=e,c.effect("size",d,b.duration,b.callback),c.dequeue()})},a.effects.size=function(b){return this.queue(function(){var c=a(this),d=["position","top","bottom","left","right","width","height","overflow","opacity"],e=["position","top","bottom","left","right","overflow","opacity"],f=["width","height","overflow"],g=["fontSize"],h=["borderTopWidth","borderBottomWidth","paddingTop","paddingBottom"],i=["borderLeftWidth","borderRightWidth","paddingLeft","paddingRight"],j=a.effects.setMode(c,b.options.mode||"effect"),k=b.options.restore||!1,l=b.options.scale||"both",m=b.options.origin,n={height:c.height(),width:c.width()};c.from=b.options.from||n,c.to=b.options.to||n;if(m){var p=a.effects.getBaseline(m,n);c.from.top=(n.height-c.from.height)*p.y,c.from.left=(n.width-c.from.width)*p.x,c.to.top=(n.height-c.to.height)*p.y,c.to.left=(n.width-c.to.width)*p.x}var q={from:{y:c.from.height/n.height,x:c.from.width/n.width},to:{y:c.to.height/n.height,x:c.to.width/n.width}};if(l=="box"||l=="both")q.from.y!=q.to.y&&(d=d.concat(h),c.from=a.effects.setTransition(c,h,q.from.y,c.from),c.to=a.effects.setTransition(c,h,q.to.y,c.to)),q.from.x!=q.to.x&&(d=d.concat(i),c.from=a.effects.setTransition(c,i,q.from.x,c.from),c.to=a.effects.setTransition(c,i,q.to.x,c.to));(l=="content"||l=="both")&&q.from.y!=q.to.y&&(d=d.concat(g),c.from=a.effects.setTransition(c,g,q.from.y,c.from),c.to=a.effects.setTransition(c,g,q.to.y,c.to)),a.effects.save(c,k?d:e),c.show(),a.effects.createWrapper(c),c.css("overflow","hidden").css(c.from);if(l=="content"||l=="both")h=h.concat(["marginTop","marginBottom"]).concat(g),i=i.concat(["marginLeft","marginRight"]),f=d.concat(h).concat(i),c.find("*[width]").each(function(){var c=a(this);k&&a.effects.save(c,f);var d={height:c.height(),width:c.width()};c.from={height:d.height*q.from.y,width:d.width*q.from.x},c.to={height:d.height*q.to.y,width:d.width*q.to.x},q.from.y!=q.to.y&&(c.from=a.effects.setTransition(c,h,q.from.y,c.from),c.to=a.effects.setTransition(c,h,q.to.y,c.to)),q.from.x!=q.to.x&&(c.from=a.effects.setTransition(c,i,q.from.x,c.from),c.to=a.effects.setTransition(c,i,q.to.x,c.to)),c.css(c.from),c.animate(c.to,b.duration,b.options.easing,function(){k&&a.effects.restore(c,f)})});c.animate(c.to,{queue:!1,duration:b.duration,easing:b.options.easing,complete:function(){c.to.opacity===0&&c.css("opacity",c.from.opacity),j=="hide"&&c.hide(),a.effects.restore(c,k?d:e),a.effects.removeWrapper(c),b.callback&&b.callback.apply(this,arguments),c.dequeue()}})})}})(jQuery);;/*! jQuery UI - v1.8.23 - 2012-08-15
- * https://github.com/jquery/jquery-ui
- * Includes: jquery.effects.shake.js
- * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
-(function(a,b){a.effects.shake=function(b){return this.queue(function(){var c=a(this),d=["position","top","bottom","left","right"],e=a.effects.setMode(c,b.options.mode||"effect"),f=b.options.direction||"left",g=b.options.distance||20,h=b.options.times||3,i=b.duration||b.options.duration||140;a.effects.save(c,d),c.show(),a.effects.createWrapper(c);var j=f=="up"||f=="down"?"top":"left",k=f=="up"||f=="left"?"pos":"neg",l={},m={},n={};l[j]=(k=="pos"?"-=":"+=")+g,m[j]=(k=="pos"?"+=":"-=")+g*2,n[j]=(k=="pos"?"-=":"+=")+g*2,c.animate(l,i,b.options.easing);for(var p=1;p<h;p++)c.animate(m,i,b.options.easing).animate(n,i,b.options.easing);c.animate(m,i,b.options.easing).animate(l,i/2,b.options.easing,function(){a.effects.restore(c,d),a.effects.removeWrapper(c),b.callback&&b.callback.apply(this,arguments)}),c.queue("fx",function(){c.dequeue()}),c.dequeue()})}})(jQuery);;/*! jQuery UI - v1.8.23 - 2012-08-15
- * https://github.com/jquery/jquery-ui
- * Includes: jquery.effects.slide.js
- * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
-(function(a,b){a.effects.slide=function(b){return this.queue(function(){var c=a(this),d=["position","top","bottom","left","right"],e=a.effects.setMode(c,b.options.mode||"show"),f=b.options.direction||"left";a.effects.save(c,d),c.show(),a.effects.createWrapper(c).css({overflow:"hidden"});var g=f=="up"||f=="down"?"top":"left",h=f=="up"||f=="left"?"pos":"neg",i=b.options.distance||(g=="top"?c.outerHeight(!0):c.outerWidth(!0));e=="show"&&c.css(g,h=="pos"?isNaN(i)?"-"+i:-i:i);var j={};j[g]=(e=="show"?h=="pos"?"+=":"-=":h=="pos"?"-=":"+=")+i,c.animate(j,{queue:!1,duration:b.duration,easing:b.options.easing,complete:function(){e=="hide"&&c.hide(),a.effects.restore(c,d),a.effects.removeWrapper(c),b.callback&&b.callback.apply(this,arguments),c.dequeue()}})})}})(jQuery);;/*! jQuery UI - v1.8.23 - 2012-08-15
- * https://github.com/jquery/jquery-ui
- * Includes: jquery.effects.transfer.js
- * Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
-(function(a,b){a.effects.transfer=function(b){return this.queue(function(){var c=a(this),d=a(b.options.to),e=d.offset(),f={top:e.top,left:e.left,height:d.innerHeight(),width:d.innerWidth()},g=c.offset(),h=a('<div class="ui-effects-transfer"></div>').appendTo(document.body).addClass(b.options.className).css({top:g.top,left:g.left,height:c.innerHeight(),width:c.innerWidth(),position:"absolute"}).animate(f,b.duration,b.options.easing,function(){h.remove(),b.callback&&b.callback.apply(c[0],arguments),c.dequeue()})})}})(jQuery);;
+/*! jQuery UI - v1.10.1 - 2013-02-28
+ * http://jqueryui.com
+ * Includes: jquery.ui.core.js, jquery.ui.widget.js, jquery.ui.mouse.js, jquery.ui.resizable.js, jquery.ui.effect.js, jquery.ui.effect-blind.js, jquery.ui.effect-bounce.js, jquery.ui.effect-clip.js, jquery.ui.effect-drop.js, jquery.ui.effect-explode.js, jquery.ui.effect-fade.js, jquery.ui.effect-fold.js, jquery.ui.effect-highlight.js, jquery.ui.effect-pulsate.js, jquery.ui.effect-scale.js, jquery.ui.effect-shake.js, jquery.ui.effect-slide.js, jquery.ui.effect-transfer.js
+ * Copyright (c) 2013 jQuery Foundation and other contributors Licensed MIT */
+
+(function( $, undefined ) {
+
+    var uuid = 0,
+        runiqueId = /^ui-id-\d+$/;
+
+// prevent duplicate loading
+// this is only a problem because we proxy existing functions
+// and we don't want to double proxy them
+    $.ui = $.ui || {};
+    if ( $.ui.version ) {
+        return;
+    }
+
+    $.extend( $.ui, {
+        version: "1.10.1",
+
+        keyCode: {
+            BACKSPACE: 8,
+            COMMA: 188,
+            DELETE: 46,
+            DOWN: 40,
+            END: 35,
+            ENTER: 13,
+            ESCAPE: 27,
+            HOME: 36,
+            LEFT: 37,
+            NUMPAD_ADD: 107,
+            NUMPAD_DECIMAL: 110,
+            NUMPAD_DIVIDE: 111,
+            NUMPAD_ENTER: 108,
+            NUMPAD_MULTIPLY: 106,
+            NUMPAD_SUBTRACT: 109,
+            PAGE_DOWN: 34,
+            PAGE_UP: 33,
+            PERIOD: 190,
+            RIGHT: 39,
+            SPACE: 32,
+            TAB: 9,
+            UP: 38
+        }
+    });
+
+// plugins
+    $.fn.extend({
+        _focus: $.fn.focus,
+        focus: function( delay, fn ) {
+            return typeof delay === "number" ?
+                this.each(function() {
+                    var elem = this;
+                    setTimeout(function() {
+                        $( elem ).focus();
+                        if ( fn ) {
+                            fn.call( elem );
+                        }
+                    }, delay );
+                }) :
+                this._focus.apply( this, arguments );
+        },
+
+        scrollParent: function() {
+            var scrollParent;
+            if (($.ui.ie && (/(static|relative)/).test(this.css("position"))) || (/absolute/).test(this.css("position"))) {
+                scrollParent = this.parents().filter(function() {
+                    return (/(relative|absolute|fixed)/).test($.css(this,"position")) && (/(auto|scroll)/).test($.css(this,"overflow")+$.css(this,"overflow-y")+$.css(this,"overflow-x"));
+                }).eq(0);
+            } else {
+                scrollParent = this.parents().filter(function() {
+                    return (/(auto|scroll)/).test($.css(this,"overflow")+$.css(this,"overflow-y")+$.css(this,"overflow-x"));
+                }).eq(0);
+            }
+
+            return (/fixed/).test(this.css("position")) || !scrollParent.length ? $(document) : scrollParent;
+        },
+
+        zIndex: function( zIndex ) {
+            if ( zIndex !== undefined ) {
+                return this.css( "zIndex", zIndex );
+            }
+
+            if ( this.length ) {
+                var elem = $( this[ 0 ] ), position, value;
+                while ( elem.length && elem[ 0 ] !== document ) {
+                    // Ignore z-index if position is set to a value where z-index is ignored by the browser
+                    // This makes behavior of this function consistent across browsers
+                    // WebKit always returns auto if the element is positioned
+                    position = elem.css( "position" );
+                    if ( position === "absolute" || position === "relative" || position === "fixed" ) {
+                        // IE returns 0 when zIndex is not specified
+                        // other browsers return a string
+                        // we ignore the case of nested elements with an explicit value of 0
+                        // <div style="z-index: -10;"><div style="z-index: 0;"></div></div>
+                        value = parseInt( elem.css( "zIndex" ), 10 );
+                        if ( !isNaN( value ) && value !== 0 ) {
+                            return value;
+                        }
+                    }
+                    elem = elem.parent();
+                }
+            }
+
+            return 0;
+        },
+
+        uniqueId: function() {
+            return this.each(function() {
+                if ( !this.id ) {
+                    this.id = "ui-id-" + (++uuid);
+                }
+            });
+        },
+
+        removeUniqueId: function() {
+            return this.each(function() {
+                if ( runiqueId.test( this.id ) ) {
+                    $( this ).removeAttr( "id" );
+                }
+            });
+        }
+    });
+
+// selectors
+    function focusable( element, isTabIndexNotNaN ) {
+        var map, mapName, img,
+            nodeName = element.nodeName.toLowerCase();
+        if ( "area" === nodeName ) {
+            map = element.parentNode;
+            mapName = map.name;
+            if ( !element.href || !mapName || map.nodeName.toLowerCase() !== "map" ) {
+                return false;
+            }
+            img = $( "img[usemap=#" + mapName + "]" )[0];
+            return !!img && visible( img );
+        }
+        return ( /input|select|textarea|button|object/.test( nodeName ) ?
+            !element.disabled :
+            "a" === nodeName ?
+                element.href || isTabIndexNotNaN :
+                isTabIndexNotNaN) &&
+            // the element and all of its ancestors must be visible
+            visible( element );
+    }
+
+    function visible( element ) {
+        return $.expr.filters.visible( element ) &&
+            !$( element ).parents().addBack().filter(function() {
+                return $.css( this, "visibility" ) === "hidden";
+            }).length;
+    }
+
+    $.extend( $.expr[ ":" ], {
+        data: $.expr.createPseudo ?
+            $.expr.createPseudo(function( dataName ) {
+                return function( elem ) {
+                    return !!$.data( elem, dataName );
+                };
+            }) :
+            // support: jQuery <1.8
+            function( elem, i, match ) {
+                return !!$.data( elem, match[ 3 ] );
+            },
+
+        focusable: function( element ) {
+            return focusable( element, !isNaN( $.attr( element, "tabindex" ) ) );
+        },
+
+        tabbable: function( element ) {
+            var tabIndex = $.attr( element, "tabindex" ),
+                isTabIndexNaN = isNaN( tabIndex );
+            return ( isTabIndexNaN || tabIndex >= 0 ) && focusable( element, !isTabIndexNaN );
+        }
+    });
+
+// support: jQuery <1.8
+    if ( !$( "<a>" ).outerWidth( 1 ).jquery ) {
+        $.each( [ "Width", "Height" ], function( i, name ) {
+            var side = name === "Width" ? [ "Left", "Right" ] : [ "Top", "Bottom" ],
+                type = name.toLowerCase(),
+                orig = {
+                    innerWidth: $.fn.innerWidth,
+                    innerHeight: $.fn.innerHeight,
+                    outerWidth: $.fn.outerWidth,
+                    outerHeight: $.fn.outerHeight
+                };
+
+            function reduce( elem, size, border, margin ) {
+                $.each( side, function() {
+                    size -= parseFloat( $.css( elem, "padding" + this ) ) || 0;
+                    if ( border ) {
+                        size -= parseFloat( $.css( elem, "border" + this + "Width" ) ) || 0;
+                    }
+                    if ( margin ) {
+                        size -= parseFloat( $.css( elem, "margin" + this ) ) || 0;
+                    }
+                });
+                return size;
+            }
+
+            $.fn[ "inner" + name ] = function( size ) {
+                if ( size === undefined ) {
+                    return orig[ "inner" + name ].call( this );
+                }
+
+                return this.each(function() {
+                    $( this ).css( type, reduce( this, size ) + "px" );
+                });
+            };
+
+            $.fn[ "outer" + name] = function( size, margin ) {
+                if ( typeof size !== "number" ) {
+                    return orig[ "outer" + name ].call( this, size );
+                }
+
+                return this.each(function() {
+                    $( this).css( type, reduce( this, size, true, margin ) + "px" );
+                });
+            };
+        });
+    }
+
+// support: jQuery <1.8
+    if ( !$.fn.addBack ) {
+        $.fn.addBack = function( selector ) {
+            return this.add( selector == null ?
+                this.prevObject : this.prevObject.filter( selector )
+            );
+        };
+    }
+
+// support: jQuery 1.6.1, 1.6.2 (http://bugs.jquery.com/ticket/9413)
+    if ( $( "<a>" ).data( "a-b", "a" ).removeData( "a-b" ).data( "a-b" ) ) {
+        $.fn.removeData = (function( removeData ) {
+            return function( key ) {
+                if ( arguments.length ) {
+                    return removeData.call( this, $.camelCase( key ) );
+                } else {
+                    return removeData.call( this );
+                }
+            };
+        })( $.fn.removeData );
+    }
+
+
+
+
+
+// deprecated
+    $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
+
+    $.support.selectstart = "onselectstart" in document.createElement( "div" );
+    $.fn.extend({
+        disableSelection: function() {
+            return this.bind( ( $.support.selectstart ? "selectstart" : "mousedown" ) +
+                ".ui-disableSelection", function( event ) {
+                event.preventDefault();
+            });
+        },
+
+        enableSelection: function() {
+            return this.unbind( ".ui-disableSelection" );
+        }
+    });
+
+    $.extend( $.ui, {
+        // $.ui.plugin is deprecated.  Use the proxy pattern instead.
+        plugin: {
+            add: function( module, option, set ) {
+                var i,
+                    proto = $.ui[ module ].prototype;
+                for ( i in set ) {
+                    proto.plugins[ i ] = proto.plugins[ i ] || [];
+                    proto.plugins[ i ].push( [ option, set[ i ] ] );
+                }
+            },
+            call: function( instance, name, args ) {
+                var i,
+                    set = instance.plugins[ name ];
+                if ( !set || !instance.element[ 0 ].parentNode || instance.element[ 0 ].parentNode.nodeType === 11 ) {
+                    return;
+                }
+
+                for ( i = 0; i < set.length; i++ ) {
+                    if ( instance.options[ set[ i ][ 0 ] ] ) {
+                        set[ i ][ 1 ].apply( instance.element, args );
+                    }
+                }
+            }
+        },
+
+        // only used by resizable
+        hasScroll: function( el, a ) {
+
+            //If overflow is hidden, the element might have extra content, but the user wants to hide it
+            if ( $( el ).css( "overflow" ) === "hidden") {
+                return false;
+            }
+
+            var scroll = ( a && a === "left" ) ? "scrollLeft" : "scrollTop",
+                has = false;
+
+            if ( el[ scroll ] > 0 ) {
+                return true;
+            }
+
+            // TODO: determine which cases actually cause this to happen
+            // if the element doesn't have the scroll set, see if it's possible to
+            // set the scroll
+            el[ scroll ] = 1;
+            has = ( el[ scroll ] > 0 );
+            el[ scroll ] = 0;
+            return has;
+        }
+    });
+
+})( jQuery );
+(function( $, undefined ) {
+
+    var uuid = 0,
+        slice = Array.prototype.slice,
+        _cleanData = $.cleanData;
+    $.cleanData = function( elems ) {
+        for ( var i = 0, elem; (elem = elems[i]) != null; i++ ) {
+            try {
+                $( elem ).triggerHandler( "remove" );
+                // http://bugs.jquery.com/ticket/8235
+            } catch( e ) {}
+        }
+        _cleanData( elems );
+    };
+
+    $.widget = function( name, base, prototype ) {
+        var fullName, existingConstructor, constructor, basePrototype,
+        // proxiedPrototype allows the provided prototype to remain unmodified
+        // so that it can be used as a mixin for multiple widgets (#8876)
+            proxiedPrototype = {},
+            namespace = name.split( "." )[ 0 ];
+
+        name = name.split( "." )[ 1 ];
+        fullName = namespace + "-" + name;
+
+        if ( !prototype ) {
+            prototype = base;
+            base = $.Widget;
+        }
+
+        // create selector for plugin
+        $.expr[ ":" ][ fullName.toLowerCase() ] = function( elem ) {
+            return !!$.data( elem, fullName );
+        };
+
+        $[ namespace ] = $[ namespace ] || {};
+        existingConstructor = $[ namespace ][ name ];
+        constructor = $[ namespace ][ name ] = function( options, element ) {
+            // allow instantiation without "new" keyword
+            if ( !this._createWidget ) {
+                return new constructor( options, element );
+            }
+
+            // allow instantiation without initializing for simple inheritance
+            // must use "new" keyword (the code above always passes args)
+            if ( arguments.length ) {
+                this._createWidget( options, element );
+            }
+        };
+        // extend with the existing constructor to carry over any static properties
+        $.extend( constructor, existingConstructor, {
+            version: prototype.version,
+            // copy the object used to create the prototype in case we need to
+            // redefine the widget later
+            _proto: $.extend( {}, prototype ),
+            // track widgets that inherit from this widget in case this widget is
+            // redefined after a widget inherits from it
+            _childConstructors: []
+        });
+
+        basePrototype = new base();
+        // we need to make the options hash a property directly on the new instance
+        // otherwise we'll modify the options hash on the prototype that we're
+        // inheriting from
+        basePrototype.options = $.widget.extend( {}, basePrototype.options );
+        $.each( prototype, function( prop, value ) {
+            if ( !$.isFunction( value ) ) {
+                proxiedPrototype[ prop ] = value;
+                return;
+            }
+            proxiedPrototype[ prop ] = (function() {
+                var _super = function() {
+                        return base.prototype[ prop ].apply( this, arguments );
+                    },
+                    _superApply = function( args ) {
+                        return base.prototype[ prop ].apply( this, args );
+                    };
+                return function() {
+                    var __super = this._super,
+                        __superApply = this._superApply,
+                        returnValue;
+
+                    this._super = _super;
+                    this._superApply = _superApply;
+
+                    returnValue = value.apply( this, arguments );
+
+                    this._super = __super;
+                    this._superApply = __superApply;
+
+                    return returnValue;
+                };
+            })();
+        });
+        constructor.prototype = $.widget.extend( basePrototype, {
+            // TODO: remove support for widgetEventPrefix
+            // always use the name + a colon as the prefix, e.g., draggable:start
+            // don't prefix for widgets that aren't DOM-based
+            widgetEventPrefix: existingConstructor ? basePrototype.widgetEventPrefix : name
+        }, proxiedPrototype, {
+            constructor: constructor,
+            namespace: namespace,
+            widgetName: name,
+            widgetFullName: fullName
+        });
+
+        // If this widget is being redefined then we need to find all widgets that
+        // are inheriting from it and redefine all of them so that they inherit from
+        // the new version of this widget. We're essentially trying to replace one
+        // level in the prototype chain.
+        if ( existingConstructor ) {
+            $.each( existingConstructor._childConstructors, function( i, child ) {
+                var childPrototype = child.prototype;
+
+                // redefine the child widget using the same prototype that was
+                // originally used, but inherit from the new version of the base
+                $.widget( childPrototype.namespace + "." + childPrototype.widgetName, constructor, child._proto );
+            });
+            // remove the list of existing child constructors from the old constructor
+            // so the old child constructors can be garbage collected
+            delete existingConstructor._childConstructors;
+        } else {
+            base._childConstructors.push( constructor );
+        }
+
+        $.widget.bridge( name, constructor );
+    };
+
+    $.widget.extend = function( target ) {
+        var input = slice.call( arguments, 1 ),
+            inputIndex = 0,
+            inputLength = input.length,
+            key,
+            value;
+        for ( ; inputIndex < inputLength; inputIndex++ ) {
+            for ( key in input[ inputIndex ] ) {
+                value = input[ inputIndex ][ key ];
+                if ( input[ inputIndex ].hasOwnProperty( key ) && value !== undefined ) {
+                    // Clone objects
+                    if ( $.isPlainObject( value ) ) {
+                        target[ key ] = $.isPlainObject( target[ key ] ) ?
+                            $.widget.extend( {}, target[ key ], value ) :
+                            // Don't extend strings, arrays, etc. with objects
+                            $.widget.extend( {}, value );
+                        // Copy everything else by reference
+                    } else {
+                        target[ key ] = value;
+                    }
+                }
+            }
+        }
+        return target;
+    };
+
+    $.widget.bridge = function( name, object ) {
+        var fullName = object.prototype.widgetFullName || name;
+        $.fn[ name ] = function( options ) {
+            var isMethodCall = typeof options === "string",
+                args = slice.call( arguments, 1 ),
+                returnValue = this;
+
+            // allow multiple hashes to be passed on init
+            options = !isMethodCall && args.length ?
+                $.widget.extend.apply( null, [ options ].concat(args) ) :
+                options;
+
+            if ( isMethodCall ) {
+                this.each(function() {
+                    var methodValue,
+                        instance = $.data( this, fullName );
+                    if ( !instance ) {
+                        return $.error( "cannot call methods on " + name + " prior to initialization; " +
+                            "attempted to call method '" + options + "'" );
+                    }
+                    if ( !$.isFunction( instance[options] ) || options.charAt( 0 ) === "_" ) {
+                        return $.error( "no such method '" + options + "' for " + name + " widget instance" );
+                    }
+                    methodValue = instance[ options ].apply( instance, args );
+                    if ( methodValue !== instance && methodValue !== undefined ) {
+                        returnValue = methodValue && methodValue.jquery ?
+                            returnValue.pushStack( methodValue.get() ) :
+                            methodValue;
+                        return false;
+                    }
+                });
+            } else {
+                this.each(function() {
+                    var instance = $.data( this, fullName );
+                    if ( instance ) {
+                        instance.option( options || {} )._init();
+                    } else {
+                        $.data( this, fullName, new object( options, this ) );
+                    }
+                });
+            }
+
+            return returnValue;
+        };
+    };
+
+    $.Widget = function( /* options, element */ ) {};
+    $.Widget._childConstructors = [];
+
+    $.Widget.prototype = {
+        widgetName: "widget",
+        widgetEventPrefix: "",
+        defaultElement: "<div>",
+        options: {
+            disabled: false,
+
+            // callbacks
+            create: null
+        },
+        _createWidget: function( options, element ) {
+            element = $( element || this.defaultElement || this )[ 0 ];
+            this.element = $( element );
+            this.uuid = uuid++;
+            this.eventNamespace = "." + this.widgetName + this.uuid;
+            this.options = $.widget.extend( {},
+                this.options,
+                this._getCreateOptions(),
+                options );
+
+            this.bindings = $();
+            this.hoverable = $();
+            this.focusable = $();
+
+            if ( element !== this ) {
+                $.data( element, this.widgetFullName, this );
+                this._on( true, this.element, {
+                    remove: function( event ) {
+                        if ( event.target === element ) {
+                            this.destroy();
+                        }
+                    }
+                });
+                this.document = $( element.style ?
+                    // element within the document
+                    element.ownerDocument :
+                    // element is window or document
+                    element.document || element );
+                this.window = $( this.document[0].defaultView || this.document[0].parentWindow );
+            }
+
+            this._create();
+            this._trigger( "create", null, this._getCreateEventData() );
+            this._init();
+        },
+        _getCreateOptions: $.noop,
+        _getCreateEventData: $.noop,
+        _create: $.noop,
+        _init: $.noop,
+
+        destroy: function() {
+            this._destroy();
+            // we can probably remove the unbind calls in 2.0
+            // all event bindings should go through this._on()
+            this.element
+                .unbind( this.eventNamespace )
+                // 1.9 BC for #7810
+                // TODO remove dual storage
+                .removeData( this.widgetName )
+                .removeData( this.widgetFullName )
+                // support: jquery <1.6.3
+                // http://bugs.jquery.com/ticket/9413
+                .removeData( $.camelCase( this.widgetFullName ) );
+            this.widget()
+                .unbind( this.eventNamespace )
+                .removeAttr( "aria-disabled" )
+                .removeClass(
+                    this.widgetFullName + "-disabled " +
+                        "ui-state-disabled" );
+
+            // clean up events and states
+            this.bindings.unbind( this.eventNamespace );
+            this.hoverable.removeClass( "ui-state-hover" );
+            this.focusable.removeClass( "ui-state-focus" );
+        },
+        _destroy: $.noop,
+
+        widget: function() {
+            return this.element;
+        },
+
+        option: function( key, value ) {
+            var options = key,
+                parts,
+                curOption,
+                i;
+
+            if ( arguments.length === 0 ) {
+                // don't return a reference to the internal hash
+                return $.widget.extend( {}, this.options );
+            }
+
+            if ( typeof key === "string" ) {
+                // handle nested keys, e.g., "foo.bar" => { foo: { bar: ___ } }
+                options = {};
+                parts = key.split( "." );
+                key = parts.shift();
+                if ( parts.length ) {
+                    curOption = options[ key ] = $.widget.extend( {}, this.options[ key ] );
+                    for ( i = 0; i < parts.length - 1; i++ ) {
+                        curOption[ parts[ i ] ] = curOption[ parts[ i ] ] || {};
+                        curOption = curOption[ parts[ i ] ];
+                    }
+                    key = parts.pop();
+                    if ( value === undefined ) {
+                        return curOption[ key ] === undefined ? null : curOption[ key ];
+                    }
+                    curOption[ key ] = value;
+                } else {
+                    if ( value === undefined ) {
+                        return this.options[ key ] === undefined ? null : this.options[ key ];
+                    }
+                    options[ key ] = value;
+                }
+            }
+
+            this._setOptions( options );
+
+            return this;
+        },
+        _setOptions: function( options ) {
+            var key;
+
+            for ( key in options ) {
+                this._setOption( key, options[ key ] );
+            }
+
+            return this;
+        },
+        _setOption: function( key, value ) {
+            this.options[ key ] = value;
+
+            if ( key === "disabled" ) {
+                this.widget()
+                    .toggleClass( this.widgetFullName + "-disabled ui-state-disabled", !!value )
+                    .attr( "aria-disabled", value );
+                this.hoverable.removeClass( "ui-state-hover" );
+                this.focusable.removeClass( "ui-state-focus" );
+            }
+
+            return this;
+        },
+
+        enable: function() {
+            return this._setOption( "disabled", false );
+        },
+        disable: function() {
+            return this._setOption( "disabled", true );
+        },
+
+        _on: function( suppressDisabledCheck, element, handlers ) {
+            var delegateElement,
+                instance = this;
+
+            // no suppressDisabledCheck flag, shuffle arguments
+            if ( typeof suppressDisabledCheck !== "boolean" ) {
+                handlers = element;
+                element = suppressDisabledCheck;
+                suppressDisabledCheck = false;
+            }
+
+            // no element argument, shuffle and use this.element
+            if ( !handlers ) {
+                handlers = element;
+                element = this.element;
+                delegateElement = this.widget();
+            } else {
+                // accept selectors, DOM elements
+                element = delegateElement = $( element );
+                this.bindings = this.bindings.add( element );
+            }
+
+            $.each( handlers, function( event, handler ) {
+                function handlerProxy() {
+                    // allow widgets to customize the disabled handling
+                    // - disabled as an array instead of boolean
+                    // - disabled class as method for disabling individual parts
+                    if ( !suppressDisabledCheck &&
+                        ( instance.options.disabled === true ||
+                            $( this ).hasClass( "ui-state-disabled" ) ) ) {
+                        return;
+                    }
+                    return ( typeof handler === "string" ? instance[ handler ] : handler )
+                        .apply( instance, arguments );
+                }
+
+                // copy the guid so direct unbinding works
+                if ( typeof handler !== "string" ) {
+                    handlerProxy.guid = handler.guid =
+                        handler.guid || handlerProxy.guid || $.guid++;
+                }
+
+                var match = event.match( /^(\w+)\s*(.*)$/ ),
+                    eventName = match[1] + instance.eventNamespace,
+                    selector = match[2];
+                if ( selector ) {
+                    delegateElement.delegate( selector, eventName, handlerProxy );
+                } else {
+                    element.bind( eventName, handlerProxy );
+                }
+            });
+        },
+
+        _off: function( element, eventName ) {
+            eventName = (eventName || "").split( " " ).join( this.eventNamespace + " " ) + this.eventNamespace;
+            element.unbind( eventName ).undelegate( eventName );
+        },
+
+        _delay: function( handler, delay ) {
+            function handlerProxy() {
+                return ( typeof handler === "string" ? instance[ handler ] : handler )
+                    .apply( instance, arguments );
+            }
+            var instance = this;
+            return setTimeout( handlerProxy, delay || 0 );
+        },
+
+        _hoverable: function( element ) {
+            this.hoverable = this.hoverable.add( element );
+            this._on( element, {
+                mouseenter: function( event ) {
+                    $( event.currentTarget ).addClass( "ui-state-hover" );
+                },
+                mouseleave: function( event ) {
+                    $( event.currentTarget ).removeClass( "ui-state-hover" );
+                }
+            });
+        },
+
+        _focusable: function( element ) {
+            this.focusable = this.focusable.add( element );
+            this._on( element, {
+                focusin: function( event ) {
+                    $( event.currentTarget ).addClass( "ui-state-focus" );
+                },
+                focusout: function( event ) {
+                    $( event.currentTarget ).removeClass( "ui-state-focus" );
+                }
+            });
+        },
+
+        _trigger: function( type, event, data ) {
+            var prop, orig,
+                callback = this.options[ type ];
+
+            data = data || {};
+            event = $.Event( event );
+            event.type = ( type === this.widgetEventPrefix ?
+                type :
+                this.widgetEventPrefix + type ).toLowerCase();
+            // the original event may come from any element
+            // so we need to reset the target on the new event
+            event.target = this.element[ 0 ];
+
+            // copy original event properties over to the new event
+            orig = event.originalEvent;
+            if ( orig ) {
+                for ( prop in orig ) {
+                    if ( !( prop in event ) ) {
+                        event[ prop ] = orig[ prop ];
+                    }
+                }
+            }
+
+            this.element.trigger( event, data );
+            return !( $.isFunction( callback ) &&
+                callback.apply( this.element[0], [ event ].concat( data ) ) === false ||
+                event.isDefaultPrevented() );
+        }
+    };
+
+    $.each( { show: "fadeIn", hide: "fadeOut" }, function( method, defaultEffect ) {
+        $.Widget.prototype[ "_" + method ] = function( element, options, callback ) {
+            if ( typeof options === "string" ) {
+                options = { effect: options };
+            }
+            var hasOptions,
+                effectName = !options ?
+                    method :
+                    options === true || typeof options === "number" ?
+                        defaultEffect :
+                        options.effect || defaultEffect;
+            options = options || {};
+            if ( typeof options === "number" ) {
+                options = { duration: options };
+            }
+            hasOptions = !$.isEmptyObject( options );
+            options.complete = callback;
+            if ( options.delay ) {
+                element.delay( options.delay );
+            }
+            if ( hasOptions && $.effects && $.effects.effect[ effectName ] ) {
+                element[ method ]( options );
+            } else if ( effectName !== method && element[ effectName ] ) {
+                element[ effectName ]( options.duration, options.easing, callback );
+            } else {
+                element.queue(function( next ) {
+                    $( this )[ method ]();
+                    if ( callback ) {
+                        callback.call( element[ 0 ] );
+                    }
+                    next();
+                });
+            }
+        };
+    });
+
+})( jQuery );
+(function( $, undefined ) {
+
+    var mouseHandled = false;
+    $( document ).mouseup( function() {
+        mouseHandled = false;
+    });
+
+    $.widget("ui.mouse", {
+        version: "1.10.1",
+        options: {
+            cancel: "input,textarea,button,select,option",
+            distance: 1,
+            delay: 0
+        },
+        _mouseInit: function() {
+            var that = this;
+
+            this.element
+                .bind("mousedown."+this.widgetName, function(event) {
+                    return that._mouseDown(event);
+                })
+                .bind("click."+this.widgetName, function(event) {
+                    if (true === $.data(event.target, that.widgetName + ".preventClickEvent")) {
+                        $.removeData(event.target, that.widgetName + ".preventClickEvent");
+                        event.stopImmediatePropagation();
+                        return false;
+                    }
+                });
+
+            this.started = false;
+        },
+
+        // TODO: make sure destroying one instance of mouse doesn't mess with
+        // other instances of mouse
+        _mouseDestroy: function() {
+            this.element.unbind("."+this.widgetName);
+            if ( this._mouseMoveDelegate ) {
+                $(document)
+                    .unbind("mousemove."+this.widgetName, this._mouseMoveDelegate)
+                    .unbind("mouseup."+this.widgetName, this._mouseUpDelegate);
+            }
+        },
+
+        _mouseDown: function(event) {
+            // don't let more than one widget handle mouseStart
+            if( mouseHandled ) { return; }
+
+            // we may have missed mouseup (out of window)
+            (this._mouseStarted && this._mouseUp(event));
+
+            this._mouseDownEvent = event;
+
+            var that = this,
+                btnIsLeft = (event.which === 1),
+            // event.target.nodeName works around a bug in IE 8 with
+            // disabled inputs (#7620)
+                elIsCancel = (typeof this.options.cancel === "string" && event.target.nodeName ? $(event.target).closest(this.options.cancel).length : false);
+            if (!btnIsLeft || elIsCancel || !this._mouseCapture(event)) {
+                return true;
+            }
+
+            this.mouseDelayMet = !this.options.delay;
+            if (!this.mouseDelayMet) {
+                this._mouseDelayTimer = setTimeout(function() {
+                    that.mouseDelayMet = true;
+                }, this.options.delay);
+            }
+
+            if (this._mouseDistanceMet(event) && this._mouseDelayMet(event)) {
+                this._mouseStarted = (this._mouseStart(event) !== false);
+                if (!this._mouseStarted) {
+                    event.preventDefault();
+                    return true;
+                }
+            }
+
+            // Click event may never have fired (Gecko & Opera)
+            if (true === $.data(event.target, this.widgetName + ".preventClickEvent")) {
+                $.removeData(event.target, this.widgetName + ".preventClickEvent");
+            }
+
+            // these delegates are required to keep context
+            this._mouseMoveDelegate = function(event) {
+                return that._mouseMove(event);
+            };
+            this._mouseUpDelegate = function(event) {
+                return that._mouseUp(event);
+            };
+            $(document)
+                .bind("mousemove."+this.widgetName, this._mouseMoveDelegate)
+                .bind("mouseup."+this.widgetName, this._mouseUpDelegate);
+
+            event.preventDefault();
+
+            mouseHandled = true;
+            return true;
+        },
+
+        _mouseMove: function(event) {
+            // IE mouseup check - mouseup happened when mouse was out of window
+            if ($.ui.ie && ( !document.documentMode || document.documentMode < 9 ) && !event.button) {
+                return this._mouseUp(event);
+            }
+
+            if (this._mouseStarted) {
+                this._mouseDrag(event);
+                return event.preventDefault();
+            }
+
+            if (this._mouseDistanceMet(event) && this._mouseDelayMet(event)) {
+                this._mouseStarted =
+                    (this._mouseStart(this._mouseDownEvent, event) !== false);
+                (this._mouseStarted ? this._mouseDrag(event) : this._mouseUp(event));
+            }
+
+            return !this._mouseStarted;
+        },
+
+        _mouseUp: function(event) {
+            $(document)
+                .unbind("mousemove."+this.widgetName, this._mouseMoveDelegate)
+                .unbind("mouseup."+this.widgetName, this._mouseUpDelegate);
+
+            if (this._mouseStarted) {
+                this._mouseStarted = false;
+
+                if (event.target === this._mouseDownEvent.target) {
+                    $.data(event.target, this.widgetName + ".preventClickEvent", true);
+                }
+
+                this._mouseStop(event);
+            }
+
+            return false;
+        },
+
+        _mouseDistanceMet: function(event) {
+            return (Math.max(
+                Math.abs(this._mouseDownEvent.pageX - event.pageX),
+                Math.abs(this._mouseDownEvent.pageY - event.pageY)
+            ) >= this.options.distance
+                );
+        },
+
+        _mouseDelayMet: function(/* event */) {
+            return this.mouseDelayMet;
+        },
+
+        // These are placeholder methods, to be overriden by extending plugin
+        _mouseStart: function(/* event */) {},
+        _mouseDrag: function(/* event */) {},
+        _mouseStop: function(/* event */) {},
+        _mouseCapture: function(/* event */) { return true; }
+    });
+
+})(jQuery);
+(function( $, undefined ) {
+
+    function num(v) {
+        return parseInt(v, 10) || 0;
+    }
+
+    function isNumber(value) {
+        return !isNaN(parseInt(value, 10));
+    }
+
+    $.widget("ui.resizable", $.ui.mouse, {
+        version: "1.10.1",
+        widgetEventPrefix: "resize",
+        options: {
+            alsoResize: false,
+            animate: false,
+            animateDuration: "slow",
+            animateEasing: "swing",
+            aspectRatio: false,
+            autoHide: false,
+            containment: false,
+            ghost: false,
+            grid: false,
+            handles: "e,s,se",
+            helper: false,
+            maxHeight: null,
+            maxWidth: null,
+            minHeight: 10,
+            minWidth: 10,
+            // See #7960
+            zIndex: 90,
+
+            // callbacks
+            resize: null,
+            start: null,
+            stop: null
+        },
+        _create: function() {
+
+            var n, i, handle, axis, hname,
+                that = this,
+                o = this.options;
+            this.element.addClass("ui-resizable");
+
+            $.extend(this, {
+                _aspectRatio: !!(o.aspectRatio),
+                aspectRatio: o.aspectRatio,
+                originalElement: this.element,
+                _proportionallyResizeElements: [],
+                _helper: o.helper || o.ghost || o.animate ? o.helper || "ui-resizable-helper" : null
+            });
+
+            //Wrap the element if it cannot hold child nodes
+            if(this.element[0].nodeName.match(/canvas|textarea|input|select|button|img/i)) {
+
+                //Create a wrapper element and set the wrapper to the new current internal element
+                this.element.wrap(
+                    $("<div class='ui-wrapper' style='overflow: hidden;'></div>").css({
+                        position: this.element.css("position"),
+                        width: this.element.outerWidth(),
+                        height: this.element.outerHeight(),
+                        top: this.element.css("top"),
+                        left: this.element.css("left")
+                    })
+                );
+
+                //Overwrite the original this.element
+                this.element = this.element.parent().data(
+                    "ui-resizable", this.element.data("ui-resizable")
+                );
+
+                this.elementIsWrapper = true;
+
+                //Move margins to the wrapper
+                this.element.css({ marginLeft: this.originalElement.css("marginLeft"), marginTop: this.originalElement.css("marginTop"), marginRight: this.originalElement.css("marginRight"), marginBottom: this.originalElement.css("marginBottom") });
+                this.originalElement.css({ marginLeft: 0, marginTop: 0, marginRight: 0, marginBottom: 0});
+
+                //Prevent Safari textarea resize
+                this.originalResizeStyle = this.originalElement.css("resize");
+                this.originalElement.css("resize", "none");
+
+                //Push the actual element to our proportionallyResize internal array
+                this._proportionallyResizeElements.push(this.originalElement.css({ position: "static", zoom: 1, display: "block" }));
+
+                // avoid IE jump (hard set the margin)
+                this.originalElement.css({ margin: this.originalElement.css("margin") });
+
+                // fix handlers offset
+                this._proportionallyResize();
+
+            }
+
+            this.handles = o.handles || (!$(".ui-resizable-handle", this.element).length ? "e,s,se" : { n: ".ui-resizable-n", e: ".ui-resizable-e", s: ".ui-resizable-s", w: ".ui-resizable-w", se: ".ui-resizable-se", sw: ".ui-resizable-sw", ne: ".ui-resizable-ne", nw: ".ui-resizable-nw" });
+            if(this.handles.constructor === String) {
+
+                if ( this.handles === "all") {
+                    this.handles = "n,e,s,w,se,sw,ne,nw";
+                }
+
+                n = this.handles.split(",");
+                this.handles = {};
+
+                for(i = 0; i < n.length; i++) {
+
+                    handle = $.trim(n[i]);
+                    hname = "ui-resizable-"+handle;
+                    axis = $("<div class='ui-resizable-handle " + hname + "'></div>");
+
+                    // Apply zIndex to all handles - see #7960
+                    axis.css({ zIndex: o.zIndex });
+
+                    //TODO : What's going on here?
+                    if ("se" === handle) {
+                        axis.addClass("ui-icon ui-icon-gripsmall-diagonal-se");
+                    }
+
+                    //Insert into internal handles object and append to element
+                    this.handles[handle] = ".ui-resizable-"+handle;
+                    this.element.append(axis);
+                }
+
+            }
+
+            this._renderAxis = function(target) {
+
+                var i, axis, padPos, padWrapper;
+
+                target = target || this.element;
+
+                for(i in this.handles) {
+
+                    if(this.handles[i].constructor === String) {
+                        this.handles[i] = $(this.handles[i], this.element).show();
+                    }
+
+                    //Apply pad to wrapper element, needed to fix axis position (textarea, inputs, scrolls)
+                    if (this.elementIsWrapper && this.originalElement[0].nodeName.match(/textarea|input|select|button/i)) {
+
+                        axis = $(this.handles[i], this.element);
+
+                        //Checking the correct pad and border
+                        padWrapper = /sw|ne|nw|se|n|s/.test(i) ? axis.outerHeight() : axis.outerWidth();
+
+                        //The padding type i have to apply...
+                        padPos = [ "padding",
+                            /ne|nw|n/.test(i) ? "Top" :
+                                /se|sw|s/.test(i) ? "Bottom" :
+                                    /^e$/.test(i) ? "Right" : "Left" ].join("");
+
+                        target.css(padPos, padWrapper);
+
+                        this._proportionallyResize();
+
+                    }
+
+                    //TODO: What's that good for? There's not anything to be executed left
+                    if(!$(this.handles[i]).length) {
+                        continue;
+                    }
+                }
+            };
+
+            //TODO: make renderAxis a prototype function
+            this._renderAxis(this.element);
+
+            this._handles = $(".ui-resizable-handle", this.element)
+                .disableSelection();
+
+            //Matching axis name
+            this._handles.mouseover(function() {
+                if (!that.resizing) {
+                    if (this.className) {
+                        axis = this.className.match(/ui-resizable-(se|sw|ne|nw|n|e|s|w)/i);
+                    }
+                    //Axis, default = se
+                    that.axis = axis && axis[1] ? axis[1] : "se";
+                }
+            });
+
+            //If we want to auto hide the elements
+            if (o.autoHide) {
+                this._handles.hide();
+                $(this.element)
+                    .addClass("ui-resizable-autohide")
+                    .mouseenter(function() {
+                        if (o.disabled) {
+                            return;
+                        }
+                        $(this).removeClass("ui-resizable-autohide");
+                        that._handles.show();
+                    })
+                    .mouseleave(function(){
+                        if (o.disabled) {
+                            return;
+                        }
+                        if (!that.resizing) {
+                            $(this).addClass("ui-resizable-autohide");
+                            that._handles.hide();
+                        }
+                    });
+            }
+
+            //Initialize the mouse interaction
+            this._mouseInit();
+
+        },
+
+        _destroy: function() {
+
+            this._mouseDestroy();
+
+            var wrapper,
+                _destroy = function(exp) {
+                    $(exp).removeClass("ui-resizable ui-resizable-disabled ui-resizable-resizing")
+                        .removeData("resizable").removeData("ui-resizable").unbind(".resizable").find(".ui-resizable-handle").remove();
+                };
+
+            //TODO: Unwrap at same DOM position
+            if (this.elementIsWrapper) {
+                _destroy(this.element);
+                wrapper = this.element;
+                this.originalElement.css({
+                    position: wrapper.css("position"),
+                    width: wrapper.outerWidth(),
+                    height: wrapper.outerHeight(),
+                    top: wrapper.css("top"),
+                    left: wrapper.css("left")
+                }).insertAfter( wrapper );
+                wrapper.remove();
+            }
+
+            this.originalElement.css("resize", this.originalResizeStyle);
+            _destroy(this.originalElement);
+
+            return this;
+        },
+
+        _mouseCapture: function(event) {
+            var i, handle,
+                capture = false;
+
+            for (i in this.handles) {
+                handle = $(this.handles[i])[0];
+                if (handle === event.target || $.contains(handle, event.target)) {
+                    capture = true;
+                }
+            }
+
+            return !this.options.disabled && capture;
+        },
+
+        _mouseStart: function(event) {
+
+            var curleft, curtop, cursor,
+                o = this.options,
+                iniPos = this.element.position(),
+                el = this.element;
+
+            this.resizing = true;
+
+            // bugfix for http://dev.jquery.com/ticket/1749
+            if ( (/absolute/).test( el.css("position") ) ) {
+                el.css({ position: "absolute", top: el.css("top"), left: el.css("left") });
+            } else if (el.is(".ui-draggable")) {
+                el.css({ position: "absolute", top: iniPos.top, left: iniPos.left });
+            }
+
+            this._renderProxy();
+
+            curleft = num(this.helper.css("left"));
+            curtop = num(this.helper.css("top"));
+
+            if (o.containment) {
+                curleft += $(o.containment).scrollLeft() || 0;
+                curtop += $(o.containment).scrollTop() || 0;
+            }
+
+            //Store needed variables
+            this.offset = this.helper.offset();
+            this.position = { left: curleft, top: curtop };
+            this.size = this._helper ? { width: el.outerWidth(), height: el.outerHeight() } : { width: el.width(), height: el.height() };
+            this.originalSize = this._helper ? { width: el.outerWidth(), height: el.outerHeight() } : { width: el.width(), height: el.height() };
+            this.originalPosition = { left: curleft, top: curtop };
+            this.sizeDiff = { width: el.outerWidth() - el.width(), height: el.outerHeight() - el.height() };
+            this.originalMousePosition = { left: event.pageX, top: event.pageY };
+
+            //Aspect Ratio
+            this.aspectRatio = (typeof o.aspectRatio === "number") ? o.aspectRatio : ((this.originalSize.width / this.originalSize.height) || 1);
+
+            cursor = $(".ui-resizable-" + this.axis).css("cursor");
+            $("body").css("cursor", cursor === "auto" ? this.axis + "-resize" : cursor);
+
+            el.addClass("ui-resizable-resizing");
+            this._propagate("start", event);
+            return true;
+        },
+
+        _mouseDrag: function(event) {
+
+            //Increase performance, avoid regex
+            var data,
+                el = this.helper, props = {},
+                smp = this.originalMousePosition,
+                a = this.axis,
+                prevTop = this.position.top,
+                prevLeft = this.position.left,
+                prevWidth = this.size.width,
+                prevHeight = this.size.height,
+                dx = (event.pageX-smp.left)||0,
+                dy = (event.pageY-smp.top)||0,
+                trigger = this._change[a];
+
+            if (!trigger) {
+                return false;
+            }
+
+            // Calculate the attrs that will be change
+            data = trigger.apply(this, [event, dx, dy]);
+
+            // Put this in the mouseDrag handler since the user can start pressing shift while resizing
+            this._updateVirtualBoundaries(event.shiftKey);
+            if (this._aspectRatio || event.shiftKey) {
+                data = this._updateRatio(data, event);
+            }
+
+            data = this._respectSize(data, event);
+
+            this._updateCache(data);
+
+            // plugins callbacks need to be called first
+            this._propagate("resize", event);
+
+            if (this.position.top !== prevTop) {
+                props.top = this.position.top + "px";
+            }
+            if (this.position.left !== prevLeft) {
+                props.left = this.position.left + "px";
+            }
+            if (this.size.width !== prevWidth) {
+                props.width = this.size.width + "px";
+            }
+            if (this.size.height !== prevHeight) {
+                props.height = this.size.height + "px";
+            }
+            el.css(props);
+
+            if (!this._helper && this._proportionallyResizeElements.length) {
+                this._proportionallyResize();
+            }
+
+            // Call the user callback if the element was resized
+            if ( ! $.isEmptyObject(props) ) {
+                this._trigger("resize", event, this.ui());
+            }
+
+            return false;
+        },
+
+        _mouseStop: function(event) {
+
+            this.resizing = false;
+            var pr, ista, soffseth, soffsetw, s, left, top,
+                o = this.options, that = this;
+
+            if(this._helper) {
+
+                pr = this._proportionallyResizeElements;
+                ista = pr.length && (/textarea/i).test(pr[0].nodeName);
+                soffseth = ista && $.ui.hasScroll(pr[0], "left") /* TODO - jump height */ ? 0 : that.sizeDiff.height;
+                soffsetw = ista ? 0 : that.sizeDiff.width;
+
+                s = { width: (that.helper.width()  - soffsetw), height: (that.helper.height() - soffseth) };
+                left = (parseInt(that.element.css("left"), 10) + (that.position.left - that.originalPosition.left)) || null;
+                top = (parseInt(that.element.css("top"), 10) + (that.position.top - that.originalPosition.top)) || null;
+
+                if (!o.animate) {
+                    this.element.css($.extend(s, { top: top, left: left }));
+                }
+
+                that.helper.height(that.size.height);
+                that.helper.width(that.size.width);
+
+                if (this._helper && !o.animate) {
+                    this._proportionallyResize();
+                }
+            }
+
+            $("body").css("cursor", "auto");
+
+            this.element.removeClass("ui-resizable-resizing");
+
+            this._propagate("stop", event);
+
+            if (this._helper) {
+                this.helper.remove();
+            }
+
+            return false;
+
+        },
+
+        _updateVirtualBoundaries: function(forceAspectRatio) {
+            var pMinWidth, pMaxWidth, pMinHeight, pMaxHeight, b,
+                o = this.options;
+
+            b = {
+                minWidth: isNumber(o.minWidth) ? o.minWidth : 0,
+                maxWidth: isNumber(o.maxWidth) ? o.maxWidth : Infinity,
+                minHeight: isNumber(o.minHeight) ? o.minHeight : 0,
+                maxHeight: isNumber(o.maxHeight) ? o.maxHeight : Infinity
+            };
+
+            if(this._aspectRatio || forceAspectRatio) {
+                // We want to create an enclosing box whose aspect ration is the requested one
+                // First, compute the "projected" size for each dimension based on the aspect ratio and other dimension
+                pMinWidth = b.minHeight * this.aspectRatio;
+                pMinHeight = b.minWidth / this.aspectRatio;
+                pMaxWidth = b.maxHeight * this.aspectRatio;
+                pMaxHeight = b.maxWidth / this.aspectRatio;
+
+                if(pMinWidth > b.minWidth) {
+                    b.minWidth = pMinWidth;
+                }
+                if(pMinHeight > b.minHeight) {
+                    b.minHeight = pMinHeight;
+                }
+                if(pMaxWidth < b.maxWidth) {
+                    b.maxWidth = pMaxWidth;
+                }
+                if(pMaxHeight < b.maxHeight) {
+                    b.maxHeight = pMaxHeight;
+                }
+            }
+            this._vBoundaries = b;
+        },
+
+        _updateCache: function(data) {
+            this.offset = this.helper.offset();
+            if (isNumber(data.left)) {
+                this.position.left = data.left;
+            }
+            if (isNumber(data.top)) {
+                this.position.top = data.top;
+            }
+            if (isNumber(data.height)) {
+                this.size.height = data.height;
+            }
+            if (isNumber(data.width)) {
+                this.size.width = data.width;
+            }
+        },
+
+        _updateRatio: function( data ) {
+
+            var cpos = this.position,
+                csize = this.size,
+                a = this.axis;
+
+            if (isNumber(data.height)) {
+                data.width = (data.height * this.aspectRatio);
+            } else if (isNumber(data.width)) {
+                data.height = (data.width / this.aspectRatio);
+            }
+
+            if (a === "sw") {
+                data.left = cpos.left + (csize.width - data.width);
+                data.top = null;
+            }
+            if (a === "nw") {
+                data.top = cpos.top + (csize.height - data.height);
+                data.left = cpos.left + (csize.width - data.width);
+            }
+
+            return data;
+        },
+
+        _respectSize: function( data ) {
+
+            var o = this._vBoundaries,
+                a = this.axis,
+                ismaxw = isNumber(data.width) && o.maxWidth && (o.maxWidth < data.width), ismaxh = isNumber(data.height) && o.maxHeight && (o.maxHeight < data.height),
+                isminw = isNumber(data.width) && o.minWidth && (o.minWidth > data.width), isminh = isNumber(data.height) && o.minHeight && (o.minHeight > data.height),
+                dw = this.originalPosition.left + this.originalSize.width,
+                dh = this.position.top + this.size.height,
+                cw = /sw|nw|w/.test(a), ch = /nw|ne|n/.test(a);
+            if (isminw) {
+                data.width = o.minWidth;
+            }
+            if (isminh) {
+                data.height = o.minHeight;
+            }
+            if (ismaxw) {
+                data.width = o.maxWidth;
+            }
+            if (ismaxh) {
+                data.height = o.maxHeight;
+            }
+
+            if (isminw && cw) {
+                data.left = dw - o.minWidth;
+            }
+            if (ismaxw && cw) {
+                data.left = dw - o.maxWidth;
+            }
+            if (isminh && ch) {
+                data.top = dh - o.minHeight;
+            }
+            if (ismaxh && ch) {
+                data.top = dh - o.maxHeight;
+            }
+
+            // fixing jump error on top/left - bug #2330
+            if (!data.width && !data.height && !data.left && data.top) {
+                data.top = null;
+            } else if (!data.width && !data.height && !data.top && data.left) {
+                data.left = null;
+            }
+
+            return data;
+        },
+
+        _proportionallyResize: function() {
+
+            if (!this._proportionallyResizeElements.length) {
+                return;
+            }
+
+            var i, j, borders, paddings, prel,
+                element = this.helper || this.element;
+
+            for ( i=0; i < this._proportionallyResizeElements.length; i++) {
+
+                prel = this._proportionallyResizeElements[i];
+
+                if (!this.borderDif) {
+                    this.borderDif = [];
+                    borders = [prel.css("borderTopWidth"), prel.css("borderRightWidth"), prel.css("borderBottomWidth"), prel.css("borderLeftWidth")];
+                    paddings = [prel.css("paddingTop"), prel.css("paddingRight"), prel.css("paddingBottom"), prel.css("paddingLeft")];
+
+                    for ( j = 0; j < borders.length; j++ ) {
+                        this.borderDif[ j ] = ( parseInt( borders[ j ], 10 ) || 0 ) + ( parseInt( paddings[ j ], 10 ) || 0 );
+                    }
+                }
+
+                prel.css({
+                    height: (element.height() - this.borderDif[0] - this.borderDif[2]) || 0,
+                    width: (element.width() - this.borderDif[1] - this.borderDif[3]) || 0
+                });
+
+            }
+
+        },
+
+        _renderProxy: function() {
+
+            var el = this.element, o = this.options;
+            this.elementOffset = el.offset();
+
+            if(this._helper) {
+
+                this.helper = this.helper || $("<div style='overflow:hidden;'></div>");
+
+                this.helper.addClass(this._helper).css({
+                    width: this.element.outerWidth() - 1,
+                    height: this.element.outerHeight() - 1,
+                    position: "absolute",
+                    left: this.elementOffset.left +"px",
+                    top: this.elementOffset.top +"px",
+                    zIndex: ++o.zIndex //TODO: Don't modify option
+                });
+
+                this.helper
+                    .appendTo("body")
+                    .disableSelection();
+
+            } else {
+                this.helper = this.element;
+            }
+
+        },
+
+        _change: {
+            e: function(event, dx) {
+                return { width: this.originalSize.width + dx };
+            },
+            w: function(event, dx) {
+                var cs = this.originalSize, sp = this.originalPosition;
+                return { left: sp.left + dx, width: cs.width - dx };
+            },
+            n: function(event, dx, dy) {
+                var cs = this.originalSize, sp = this.originalPosition;
+                return { top: sp.top + dy, height: cs.height - dy };
+            },
+            s: function(event, dx, dy) {
+                return { height: this.originalSize.height + dy };
+            },
+            se: function(event, dx, dy) {
+                return $.extend(this._change.s.apply(this, arguments), this._change.e.apply(this, [event, dx, dy]));
+            },
+            sw: function(event, dx, dy) {
+                return $.extend(this._change.s.apply(this, arguments), this._change.w.apply(this, [event, dx, dy]));
+            },
+            ne: function(event, dx, dy) {
+                return $.extend(this._change.n.apply(this, arguments), this._change.e.apply(this, [event, dx, dy]));
+            },
+            nw: function(event, dx, dy) {
+                return $.extend(this._change.n.apply(this, arguments), this._change.w.apply(this, [event, dx, dy]));
+            }
+        },
+
+        _propagate: function(n, event) {
+            $.ui.plugin.call(this, n, [event, this.ui()]);
+            (n !== "resize" && this._trigger(n, event, this.ui()));
+        },
+
+        plugins: {},
+
+        ui: function() {
+            return {
+                originalElement: this.originalElement,
+                element: this.element,
+                helper: this.helper,
+                position: this.position,
+                size: this.size,
+                originalSize: this.originalSize,
+                originalPosition: this.originalPosition
+            };
+        }
+
+    });
+
+    /*
+     * Resizable Extensions
+     */
+
+    $.ui.plugin.add("resizable", "animate", {
+
+        stop: function( event ) {
+            var that = $(this).data("ui-resizable"),
+                o = that.options,
+                pr = that._proportionallyResizeElements,
+                ista = pr.length && (/textarea/i).test(pr[0].nodeName),
+                soffseth = ista && $.ui.hasScroll(pr[0], "left") /* TODO - jump height */ ? 0 : that.sizeDiff.height,
+                soffsetw = ista ? 0 : that.sizeDiff.width,
+                style = { width: (that.size.width - soffsetw), height: (that.size.height - soffseth) },
+                left = (parseInt(that.element.css("left"), 10) + (that.position.left - that.originalPosition.left)) || null,
+                top = (parseInt(that.element.css("top"), 10) + (that.position.top - that.originalPosition.top)) || null;
+
+            that.element.animate(
+                $.extend(style, top && left ? { top: top, left: left } : {}), {
+                    duration: o.animateDuration,
+                    easing: o.animateEasing,
+                    step: function() {
+
+                        var data = {
+                            width: parseInt(that.element.css("width"), 10),
+                            height: parseInt(that.element.css("height"), 10),
+                            top: parseInt(that.element.css("top"), 10),
+                            left: parseInt(that.element.css("left"), 10)
+                        };
+
+                        if (pr && pr.length) {
+                            $(pr[0]).css({ width: data.width, height: data.height });
+                        }
+
+                        // propagating resize, and updating values for each animation step
+                        that._updateCache(data);
+                        that._propagate("resize", event);
+
+                    }
+                }
+            );
+        }
+
+    });
+
+    $.ui.plugin.add("resizable", "containment", {
+
+        start: function() {
+            var element, p, co, ch, cw, width, height,
+                that = $(this).data("ui-resizable"),
+                o = that.options,
+                el = that.element,
+                oc = o.containment,
+                ce = (oc instanceof $) ? oc.get(0) : (/parent/.test(oc)) ? el.parent().get(0) : oc;
+
+            if (!ce) {
+                return;
+            }
+
+            that.containerElement = $(ce);
+
+            if (/document/.test(oc) || oc === document) {
+                that.containerOffset = { left: 0, top: 0 };
+                that.containerPosition = { left: 0, top: 0 };
+
+                that.parentData = {
+                    element: $(document), left: 0, top: 0,
+                    width: $(document).width(), height: $(document).height() || document.body.parentNode.scrollHeight
+                };
+            }
+
+            // i'm a node, so compute top, left, right, bottom
+            else {
+                element = $(ce);
+                p = [];
+                $([ "Top", "Right", "Left", "Bottom" ]).each(function(i, name) { p[i] = num(element.css("padding" + name)); });
+
+                that.containerOffset = element.offset();
+                that.containerPosition = element.position();
+                that.containerSize = { height: (element.innerHeight() - p[3]), width: (element.innerWidth() - p[1]) };
+
+                co = that.containerOffset;
+                ch = that.containerSize.height;
+                cw = that.containerSize.width;
+                width = ($.ui.hasScroll(ce, "left") ? ce.scrollWidth : cw );
+                height = ($.ui.hasScroll(ce) ? ce.scrollHeight : ch);
+
+                that.parentData = {
+                    element: ce, left: co.left, top: co.top, width: width, height: height
+                };
+            }
+        },
+
+        resize: function( event ) {
+            var woset, hoset, isParent, isOffsetRelative,
+                that = $(this).data("ui-resizable"),
+                o = that.options,
+                co = that.containerOffset, cp = that.position,
+                pRatio = that._aspectRatio || event.shiftKey,
+                cop = { top:0, left:0 }, ce = that.containerElement;
+
+            if (ce[0] !== document && (/static/).test(ce.css("position"))) {
+                cop = co;
+            }
+
+            if (cp.left < (that._helper ? co.left : 0)) {
+                that.size.width = that.size.width + (that._helper ? (that.position.left - co.left) : (that.position.left - cop.left));
+                if (pRatio) {
+                    that.size.height = that.size.width / that.aspectRatio;
+                }
+                that.position.left = o.helper ? co.left : 0;
+            }
+
+            if (cp.top < (that._helper ? co.top : 0)) {
+                that.size.height = that.size.height + (that._helper ? (that.position.top - co.top) : that.position.top);
+                if (pRatio) {
+                    that.size.width = that.size.height * that.aspectRatio;
+                }
+                that.position.top = that._helper ? co.top : 0;
+            }
+
+            that.offset.left = that.parentData.left+that.position.left;
+            that.offset.top = that.parentData.top+that.position.top;
+
+            woset = Math.abs( (that._helper ? that.offset.left - cop.left : (that.offset.left - cop.left)) + that.sizeDiff.width );
+            hoset = Math.abs( (that._helper ? that.offset.top - cop.top : (that.offset.top - co.top)) + that.sizeDiff.height );
+
+            isParent = that.containerElement.get(0) === that.element.parent().get(0);
+            isOffsetRelative = /relative|absolute/.test(that.containerElement.css("position"));
+
+            if(isParent && isOffsetRelative) {
+                woset -= that.parentData.left;
+            }
+
+            if (woset + that.size.width >= that.parentData.width) {
+                that.size.width = that.parentData.width - woset;
+                if (pRatio) {
+                    that.size.height = that.size.width / that.aspectRatio;
+                }
+            }
+
+            if (hoset + that.size.height >= that.parentData.height) {
+                that.size.height = that.parentData.height - hoset;
+                if (pRatio) {
+                    that.size.width = that.size.height * that.aspectRatio;
+                }
+            }
+        },
+
+        stop: function(){
+            var that = $(this).data("ui-resizable"),
+                o = that.options,
+                co = that.containerOffset,
+                cop = that.containerPosition,
+                ce = that.containerElement,
+                helper = $(that.helper),
+                ho = helper.offset(),
+                w = helper.outerWidth() - that.sizeDiff.width,
+                h = helper.outerHeight() - that.sizeDiff.height;
+
+            if (that._helper && !o.animate && (/relative/).test(ce.css("position"))) {
+                $(this).css({ left: ho.left - cop.left - co.left, width: w, height: h });
+            }
+
+            if (that._helper && !o.animate && (/static/).test(ce.css("position"))) {
+                $(this).css({ left: ho.left - cop.left - co.left, width: w, height: h });
+            }
+
+        }
+    });
+
+    $.ui.plugin.add("resizable", "alsoResize", {
+
+        start: function () {
+            var that = $(this).data("ui-resizable"),
+                o = that.options,
+                _store = function (exp) {
+                    $(exp).each(function() {
+                        var el = $(this);
+                        el.data("ui-resizable-alsoresize", {
+                            width: parseInt(el.width(), 10), height: parseInt(el.height(), 10),
+                            left: parseInt(el.css("left"), 10), top: parseInt(el.css("top"), 10)
+                        });
+                    });
+                };
+
+            if (typeof(o.alsoResize) === "object" && !o.alsoResize.parentNode) {
+                if (o.alsoResize.length) { o.alsoResize = o.alsoResize[0]; _store(o.alsoResize); }
+                else { $.each(o.alsoResize, function (exp) { _store(exp); }); }
+            }else{
+                _store(o.alsoResize);
+            }
+        },
+
+        resize: function (event, ui) {
+            var that = $(this).data("ui-resizable"),
+                o = that.options,
+                os = that.originalSize,
+                op = that.originalPosition,
+                delta = {
+                    height: (that.size.height - os.height) || 0, width: (that.size.width - os.width) || 0,
+                    top: (that.position.top - op.top) || 0, left: (that.position.left - op.left) || 0
+                },
+
+                _alsoResize = function (exp, c) {
+                    $(exp).each(function() {
+                        var el = $(this), start = $(this).data("ui-resizable-alsoresize"), style = {},
+                            css = c && c.length ? c : el.parents(ui.originalElement[0]).length ? ["width", "height"] : ["width", "height", "top", "left"];
+
+                        $.each(css, function (i, prop) {
+                            var sum = (start[prop]||0) + (delta[prop]||0);
+                            if (sum && sum >= 0) {
+                                style[prop] = sum || null;
+                            }
+                        });
+
+                        el.css(style);
+                    });
+                };
+
+            if (typeof(o.alsoResize) === "object" && !o.alsoResize.nodeType) {
+                $.each(o.alsoResize, function (exp, c) { _alsoResize(exp, c); });
+            }else{
+                _alsoResize(o.alsoResize);
+            }
+        },
+
+        stop: function () {
+            $(this).removeData("resizable-alsoresize");
+        }
+    });
+
+    $.ui.plugin.add("resizable", "ghost", {
+
+        start: function() {
+
+            var that = $(this).data("ui-resizable"), o = that.options, cs = that.size;
+
+            that.ghost = that.originalElement.clone();
+            that.ghost
+                .css({ opacity: 0.25, display: "block", position: "relative", height: cs.height, width: cs.width, margin: 0, left: 0, top: 0 })
+                .addClass("ui-resizable-ghost")
+                .addClass(typeof o.ghost === "string" ? o.ghost : "");
+
+            that.ghost.appendTo(that.helper);
+
+        },
+
+        resize: function(){
+            var that = $(this).data("ui-resizable");
+            if (that.ghost) {
+                that.ghost.css({ position: "relative", height: that.size.height, width: that.size.width });
+            }
+        },
+
+        stop: function() {
+            var that = $(this).data("ui-resizable");
+            if (that.ghost && that.helper) {
+                that.helper.get(0).removeChild(that.ghost.get(0));
+            }
+        }
+
+    });
+
+    $.ui.plugin.add("resizable", "grid", {
+
+        resize: function() {
+            var that = $(this).data("ui-resizable"),
+                o = that.options,
+                cs = that.size,
+                os = that.originalSize,
+                op = that.originalPosition,
+                a = that.axis,
+                grid = typeof o.grid === "number" ? [o.grid, o.grid] : o.grid,
+                gridX = (grid[0]||1),
+                gridY = (grid[1]||1),
+                ox = Math.round((cs.width - os.width) / gridX) * gridX,
+                oy = Math.round((cs.height - os.height) / gridY) * gridY,
+                newWidth = os.width + ox,
+                newHeight = os.height + oy,
+                isMaxWidth = o.maxWidth && (o.maxWidth < newWidth),
+                isMaxHeight = o.maxHeight && (o.maxHeight < newHeight),
+                isMinWidth = o.minWidth && (o.minWidth > newWidth),
+                isMinHeight = o.minHeight && (o.minHeight > newHeight);
+
+            o.grid = grid;
+
+            if (isMinWidth) {
+                newWidth = newWidth + gridX;
+            }
+            if (isMinHeight) {
+                newHeight = newHeight + gridY;
+            }
+            if (isMaxWidth) {
+                newWidth = newWidth - gridX;
+            }
+            if (isMaxHeight) {
+                newHeight = newHeight - gridY;
+            }
+
+            if (/^(se|s|e)$/.test(a)) {
+                that.size.width = newWidth;
+                that.size.height = newHeight;
+            } else if (/^(ne)$/.test(a)) {
+                that.size.width = newWidth;
+                that.size.height = newHeight;
+                that.position.top = op.top - oy;
+            } else if (/^(sw)$/.test(a)) {
+                that.size.width = newWidth;
+                that.size.height = newHeight;
+                that.position.left = op.left - ox;
+            } else {
+                that.size.width = newWidth;
+                that.size.height = newHeight;
+                that.position.top = op.top - oy;
+                that.position.left = op.left - ox;
+            }
+        }
+
+    });
+
+})(jQuery);
+;(jQuery.effects || (function($, undefined) {
+
+    var dataSpace = "ui-effects-";
+
+    $.effects = {
+        effect: {}
+    };
+
+    /*!
+     * jQuery Color Animations v2.1.2
+     * https://github.com/jquery/jquery-color
+     *
+     * Copyright 2013 jQuery Foundation and other contributors
+     * Released under the MIT license.
+     * http://jquery.org/license
+     *
+     * Date: Wed Jan 16 08:47:09 2013 -0600
+     */
+    (function( jQuery, undefined ) {
+
+        var stepHooks = "backgroundColor borderBottomColor borderLeftColor borderRightColor borderTopColor color columnRuleColor outlineColor textDecorationColor textEmphasisColor",
+
+        // plusequals test for += 100 -= 100
+            rplusequals = /^([\-+])=\s*(\d+\.?\d*)/,
+        // a set of RE's that can match strings and generate color tuples.
+            stringParsers = [{
+                re: /rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*(?:,\s*(\d?(?:\.\d+)?)\s*)?\)/,
+                parse: function( execResult ) {
+                    return [
+                        execResult[ 1 ],
+                        execResult[ 2 ],
+                        execResult[ 3 ],
+                        execResult[ 4 ]
+                    ];
+                }
+            }, {
+                re: /rgba?\(\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*(?:,\s*(\d?(?:\.\d+)?)\s*)?\)/,
+                parse: function( execResult ) {
+                    return [
+                        execResult[ 1 ] * 2.55,
+                        execResult[ 2 ] * 2.55,
+                        execResult[ 3 ] * 2.55,
+                        execResult[ 4 ]
+                    ];
+                }
+            }, {
+                // this regex ignores A-F because it's compared against an already lowercased string
+                re: /#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})/,
+                parse: function( execResult ) {
+                    return [
+                        parseInt( execResult[ 1 ], 16 ),
+                        parseInt( execResult[ 2 ], 16 ),
+                        parseInt( execResult[ 3 ], 16 )
+                    ];
+                }
+            }, {
+                // this regex ignores A-F because it's compared against an already lowercased string
+                re: /#([a-f0-9])([a-f0-9])([a-f0-9])/,
+                parse: function( execResult ) {
+                    return [
+                        parseInt( execResult[ 1 ] + execResult[ 1 ], 16 ),
+                        parseInt( execResult[ 2 ] + execResult[ 2 ], 16 ),
+                        parseInt( execResult[ 3 ] + execResult[ 3 ], 16 )
+                    ];
+                }
+            }, {
+                re: /hsla?\(\s*(\d+(?:\.\d+)?)\s*,\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*(?:,\s*(\d?(?:\.\d+)?)\s*)?\)/,
+                space: "hsla",
+                parse: function( execResult ) {
+                    return [
+                        execResult[ 1 ],
+                        execResult[ 2 ] / 100,
+                        execResult[ 3 ] / 100,
+                        execResult[ 4 ]
+                    ];
+                }
+            }],
+
+        // jQuery.Color( )
+            color = jQuery.Color = function( color, green, blue, alpha ) {
+                return new jQuery.Color.fn.parse( color, green, blue, alpha );
+            },
+            spaces = {
+                rgba: {
+                    props: {
+                        red: {
+                            idx: 0,
+                            type: "byte"
+                        },
+                        green: {
+                            idx: 1,
+                            type: "byte"
+                        },
+                        blue: {
+                            idx: 2,
+                            type: "byte"
+                        }
+                    }
+                },
+
+                hsla: {
+                    props: {
+                        hue: {
+                            idx: 0,
+                            type: "degrees"
+                        },
+                        saturation: {
+                            idx: 1,
+                            type: "percent"
+                        },
+                        lightness: {
+                            idx: 2,
+                            type: "percent"
+                        }
+                    }
+                }
+            },
+            propTypes = {
+                "byte": {
+                    floor: true,
+                    max: 255
+                },
+                "percent": {
+                    max: 1
+                },
+                "degrees": {
+                    mod: 360,
+                    floor: true
+                }
+            },
+            support = color.support = {},
+
+        // element for support tests
+            supportElem = jQuery( "<p>" )[ 0 ],
+
+        // colors = jQuery.Color.names
+            colors,
+
+        // local aliases of functions called often
+            each = jQuery.each;
+
+// determine rgba support immediately
+        supportElem.style.cssText = "background-color:rgba(1,1,1,.5)";
+        support.rgba = supportElem.style.backgroundColor.indexOf( "rgba" ) > -1;
+
+// define cache name and alpha properties
+// for rgba and hsla spaces
+        each( spaces, function( spaceName, space ) {
+            space.cache = "_" + spaceName;
+            space.props.alpha = {
+                idx: 3,
+                type: "percent",
+                def: 1
+            };
+        });
+
+        function clamp( value, prop, allowEmpty ) {
+            var type = propTypes[ prop.type ] || {};
+
+            if ( value == null ) {
+                return (allowEmpty || !prop.def) ? null : prop.def;
+            }
+
+            // ~~ is an short way of doing floor for positive numbers
+            value = type.floor ? ~~value : parseFloat( value );
+
+            // IE will pass in empty strings as value for alpha,
+            // which will hit this case
+            if ( isNaN( value ) ) {
+                return prop.def;
+            }
+
+            if ( type.mod ) {
+                // we add mod before modding to make sure that negatives values
+                // get converted properly: -10 -> 350
+                return (value + type.mod) % type.mod;
+            }
+
+            // for now all property types without mod have min and max
+            return 0 > value ? 0 : type.max < value ? type.max : value;
+        }
+
+        function stringParse( string ) {
+            var inst = color(),
+                rgba = inst._rgba = [];
+
+            string = string.toLowerCase();
+
+            each( stringParsers, function( i, parser ) {
+                var parsed,
+                    match = parser.re.exec( string ),
+                    values = match && parser.parse( match ),
+                    spaceName = parser.space || "rgba";
+
+                if ( values ) {
+                    parsed = inst[ spaceName ]( values );
+
+                    // if this was an rgba parse the assignment might happen twice
+                    // oh well....
+                    inst[ spaces[ spaceName ].cache ] = parsed[ spaces[ spaceName ].cache ];
+                    rgba = inst._rgba = parsed._rgba;
+
+                    // exit each( stringParsers ) here because we matched
+                    return false;
+                }
+            });
+
+            // Found a stringParser that handled it
+            if ( rgba.length ) {
+
+                // if this came from a parsed string, force "transparent" when alpha is 0
+                // chrome, (and maybe others) return "transparent" as rgba(0,0,0,0)
+                if ( rgba.join() === "0,0,0,0" ) {
+                    jQuery.extend( rgba, colors.transparent );
+                }
+                return inst;
+            }
+
+            // named colors
+            return colors[ string ];
+        }
+
+        color.fn = jQuery.extend( color.prototype, {
+            parse: function( red, green, blue, alpha ) {
+                if ( red === undefined ) {
+                    this._rgba = [ null, null, null, null ];
+                    return this;
+                }
+                if ( red.jquery || red.nodeType ) {
+                    red = jQuery( red ).css( green );
+                    green = undefined;
+                }
+
+                var inst = this,
+                    type = jQuery.type( red ),
+                    rgba = this._rgba = [];
+
+                // more than 1 argument specified - assume ( red, green, blue, alpha )
+                if ( green !== undefined ) {
+                    red = [ red, green, blue, alpha ];
+                    type = "array";
+                }
+
+                if ( type === "string" ) {
+                    return this.parse( stringParse( red ) || colors._default );
+                }
+
+                if ( type === "array" ) {
+                    each( spaces.rgba.props, function( key, prop ) {
+                        rgba[ prop.idx ] = clamp( red[ prop.idx ], prop );
+                    });
+                    return this;
+                }
+
+                if ( type === "object" ) {
+                    if ( red instanceof color ) {
+                        each( spaces, function( spaceName, space ) {
+                            if ( red[ space.cache ] ) {
+                                inst[ space.cache ] = red[ space.cache ].slice();
+                            }
+                        });
+                    } else {
+                        each( spaces, function( spaceName, space ) {
+                            var cache = space.cache;
+                            each( space.props, function( key, prop ) {
+
+                                // if the cache doesn't exist, and we know how to convert
+                                if ( !inst[ cache ] && space.to ) {
+
+                                    // if the value was null, we don't need to copy it
+                                    // if the key was alpha, we don't need to copy it either
+                                    if ( key === "alpha" || red[ key ] == null ) {
+                                        return;
+                                    }
+                                    inst[ cache ] = space.to( inst._rgba );
+                                }
+
+                                // this is the only case where we allow nulls for ALL properties.
+                                // call clamp with alwaysAllowEmpty
+                                inst[ cache ][ prop.idx ] = clamp( red[ key ], prop, true );
+                            });
+
+                            // everything defined but alpha?
+                            if ( inst[ cache ] && jQuery.inArray( null, inst[ cache ].slice( 0, 3 ) ) < 0 ) {
+                                // use the default of 1
+                                inst[ cache ][ 3 ] = 1;
+                                if ( space.from ) {
+                                    inst._rgba = space.from( inst[ cache ] );
+                                }
+                            }
+                        });
+                    }
+                    return this;
+                }
+            },
+            is: function( compare ) {
+                var is = color( compare ),
+                    same = true,
+                    inst = this;
+
+                each( spaces, function( _, space ) {
+                    var localCache,
+                        isCache = is[ space.cache ];
+                    if (isCache) {
+                        localCache = inst[ space.cache ] || space.to && space.to( inst._rgba ) || [];
+                        each( space.props, function( _, prop ) {
+                            if ( isCache[ prop.idx ] != null ) {
+                                same = ( isCache[ prop.idx ] === localCache[ prop.idx ] );
+                                return same;
+                            }
+                        });
+                    }
+                    return same;
+                });
+                return same;
+            },
+            _space: function() {
+                var used = [],
+                    inst = this;
+                each( spaces, function( spaceName, space ) {
+                    if ( inst[ space.cache ] ) {
+                        used.push( spaceName );
+                    }
+                });
+                return used.pop();
+            },
+            transition: function( other, distance ) {
+                var end = color( other ),
+                    spaceName = end._space(),
+                    space = spaces[ spaceName ],
+                    startColor = this.alpha() === 0 ? color( "transparent" ) : this,
+                    start = startColor[ space.cache ] || space.to( startColor._rgba ),
+                    result = start.slice();
+
+                end = end[ space.cache ];
+                each( space.props, function( key, prop ) {
+                    var index = prop.idx,
+                        startValue = start[ index ],
+                        endValue = end[ index ],
+                        type = propTypes[ prop.type ] || {};
+
+                    // if null, don't override start value
+                    if ( endValue === null ) {
+                        return;
+                    }
+                    // if null - use end
+                    if ( startValue === null ) {
+                        result[ index ] = endValue;
+                    } else {
+                        if ( type.mod ) {
+                            if ( endValue - startValue > type.mod / 2 ) {
+                                startValue += type.mod;
+                            } else if ( startValue - endValue > type.mod / 2 ) {
+                                startValue -= type.mod;
+                            }
+                        }
+                        result[ index ] = clamp( ( endValue - startValue ) * distance + startValue, prop );
+                    }
+                });
+                return this[ spaceName ]( result );
+            },
+            blend: function( opaque ) {
+                // if we are already opaque - return ourself
+                if ( this._rgba[ 3 ] === 1 ) {
+                    return this;
+                }
+
+                var rgb = this._rgba.slice(),
+                    a = rgb.pop(),
+                    blend = color( opaque )._rgba;
+
+                return color( jQuery.map( rgb, function( v, i ) {
+                    return ( 1 - a ) * blend[ i ] + a * v;
+                }));
+            },
+            toRgbaString: function() {
+                var prefix = "rgba(",
+                    rgba = jQuery.map( this._rgba, function( v, i ) {
+                        return v == null ? ( i > 2 ? 1 : 0 ) : v;
+                    });
+
+                if ( rgba[ 3 ] === 1 ) {
+                    rgba.pop();
+                    prefix = "rgb(";
+                }
+
+                return prefix + rgba.join() + ")";
+            },
+            toHslaString: function() {
+                var prefix = "hsla(",
+                    hsla = jQuery.map( this.hsla(), function( v, i ) {
+                        if ( v == null ) {
+                            v = i > 2 ? 1 : 0;
+                        }
+
+                        // catch 1 and 2
+                        if ( i && i < 3 ) {
+                            v = Math.round( v * 100 ) + "%";
+                        }
+                        return v;
+                    });
+
+                if ( hsla[ 3 ] === 1 ) {
+                    hsla.pop();
+                    prefix = "hsl(";
+                }
+                return prefix + hsla.join() + ")";
+            },
+            toHexString: function( includeAlpha ) {
+                var rgba = this._rgba.slice(),
+                    alpha = rgba.pop();
+
+                if ( includeAlpha ) {
+                    rgba.push( ~~( alpha * 255 ) );
+                }
+
+                return "#" + jQuery.map( rgba, function( v ) {
+
+                    // default to 0 when nulls exist
+                    v = ( v || 0 ).toString( 16 );
+                    return v.length === 1 ? "0" + v : v;
+                }).join("");
+            },
+            toString: function() {
+                return this._rgba[ 3 ] === 0 ? "transparent" : this.toRgbaString();
+            }
+        });
+        color.fn.parse.prototype = color.fn;
+
+// hsla conversions adapted from:
+// https://code.google.com/p/maashaack/source/browse/packages/graphics/trunk/src/graphics/colors/HUE2RGB.as?r=5021
+
+        function hue2rgb( p, q, h ) {
+            h = ( h + 1 ) % 1;
+            if ( h * 6 < 1 ) {
+                return p + (q - p) * h * 6;
+            }
+            if ( h * 2 < 1) {
+                return q;
+            }
+            if ( h * 3 < 2 ) {
+                return p + (q - p) * ((2/3) - h) * 6;
+            }
+            return p;
+        }
+
+        spaces.hsla.to = function ( rgba ) {
+            if ( rgba[ 0 ] == null || rgba[ 1 ] == null || rgba[ 2 ] == null ) {
+                return [ null, null, null, rgba[ 3 ] ];
+            }
+            var r = rgba[ 0 ] / 255,
+                g = rgba[ 1 ] / 255,
+                b = rgba[ 2 ] / 255,
+                a = rgba[ 3 ],
+                max = Math.max( r, g, b ),
+                min = Math.min( r, g, b ),
+                diff = max - min,
+                add = max + min,
+                l = add * 0.5,
+                h, s;
+
+            if ( min === max ) {
+                h = 0;
+            } else if ( r === max ) {
+                h = ( 60 * ( g - b ) / diff ) + 360;
+            } else if ( g === max ) {
+                h = ( 60 * ( b - r ) / diff ) + 120;
+            } else {
+                h = ( 60 * ( r - g ) / diff ) + 240;
+            }
+
+            // chroma (diff) == 0 means greyscale which, by definition, saturation = 0%
+            // otherwise, saturation is based on the ratio of chroma (diff) to lightness (add)
+            if ( diff === 0 ) {
+                s = 0;
+            } else if ( l <= 0.5 ) {
+                s = diff / add;
+            } else {
+                s = diff / ( 2 - add );
+            }
+            return [ Math.round(h) % 360, s, l, a == null ? 1 : a ];
+        };
+
+        spaces.hsla.from = function ( hsla ) {
+            if ( hsla[ 0 ] == null || hsla[ 1 ] == null || hsla[ 2 ] == null ) {
+                return [ null, null, null, hsla[ 3 ] ];
+            }
+            var h = hsla[ 0 ] / 360,
+                s = hsla[ 1 ],
+                l = hsla[ 2 ],
+                a = hsla[ 3 ],
+                q = l <= 0.5 ? l * ( 1 + s ) : l + s - l * s,
+                p = 2 * l - q;
+
+            return [
+                Math.round( hue2rgb( p, q, h + ( 1 / 3 ) ) * 255 ),
+                Math.round( hue2rgb( p, q, h ) * 255 ),
+                Math.round( hue2rgb( p, q, h - ( 1 / 3 ) ) * 255 ),
+                a
+            ];
+        };
+
+
+        each( spaces, function( spaceName, space ) {
+            var props = space.props,
+                cache = space.cache,
+                to = space.to,
+                from = space.from;
+
+            // makes rgba() and hsla()
+            color.fn[ spaceName ] = function( value ) {
+
+                // generate a cache for this space if it doesn't exist
+                if ( to && !this[ cache ] ) {
+                    this[ cache ] = to( this._rgba );
+                }
+                if ( value === undefined ) {
+                    return this[ cache ].slice();
+                }
+
+                var ret,
+                    type = jQuery.type( value ),
+                    arr = ( type === "array" || type === "object" ) ? value : arguments,
+                    local = this[ cache ].slice();
+
+                each( props, function( key, prop ) {
+                    var val = arr[ type === "object" ? key : prop.idx ];
+                    if ( val == null ) {
+                        val = local[ prop.idx ];
+                    }
+                    local[ prop.idx ] = clamp( val, prop );
+                });
+
+                if ( from ) {
+                    ret = color( from( local ) );
+                    ret[ cache ] = local;
+                    return ret;
+                } else {
+                    return color( local );
+                }
+            };
+
+            // makes red() green() blue() alpha() hue() saturation() lightness()
+            each( props, function( key, prop ) {
+                // alpha is included in more than one space
+                if ( color.fn[ key ] ) {
+                    return;
+                }
+                color.fn[ key ] = function( value ) {
+                    var vtype = jQuery.type( value ),
+                        fn = ( key === "alpha" ? ( this._hsla ? "hsla" : "rgba" ) : spaceName ),
+                        local = this[ fn ](),
+                        cur = local[ prop.idx ],
+                        match;
+
+                    if ( vtype === "undefined" ) {
+                        return cur;
+                    }
+
+                    if ( vtype === "function" ) {
+                        value = value.call( this, cur );
+                        vtype = jQuery.type( value );
+                    }
+                    if ( value == null && prop.empty ) {
+                        return this;
+                    }
+                    if ( vtype === "string" ) {
+                        match = rplusequals.exec( value );
+                        if ( match ) {
+                            value = cur + parseFloat( match[ 2 ] ) * ( match[ 1 ] === "+" ? 1 : -1 );
+                        }
+                    }
+                    local[ prop.idx ] = value;
+                    return this[ fn ]( local );
+                };
+            });
+        });
+
+// add cssHook and .fx.step function for each named hook.
+// accept a space separated string of properties
+        color.hook = function( hook ) {
+            var hooks = hook.split( " " );
+            each( hooks, function( i, hook ) {
+                jQuery.cssHooks[ hook ] = {
+                    set: function( elem, value ) {
+                        var parsed, curElem,
+                            backgroundColor = "";
+
+                        if ( value !== "transparent" && ( jQuery.type( value ) !== "string" || ( parsed = stringParse( value ) ) ) ) {
+                            value = color( parsed || value );
+                            if ( !support.rgba && value._rgba[ 3 ] !== 1 ) {
+                                curElem = hook === "backgroundColor" ? elem.parentNode : elem;
+                                while (
+                                    (backgroundColor === "" || backgroundColor === "transparent") &&
+                                        curElem && curElem.style
+                                    ) {
+                                    try {
+                                        backgroundColor = jQuery.css( curElem, "backgroundColor" );
+                                        curElem = curElem.parentNode;
+                                    } catch ( e ) {
+                                    }
+                                }
+
+                                value = value.blend( backgroundColor && backgroundColor !== "transparent" ?
+                                    backgroundColor :
+                                    "_default" );
+                            }
+
+                            value = value.toRgbaString();
+                        }
+                        try {
+                            elem.style[ hook ] = value;
+                        } catch( e ) {
+                            // wrapped to prevent IE from throwing errors on "invalid" values like 'auto' or 'inherit'
+                        }
+                    }
+                };
+                jQuery.fx.step[ hook ] = function( fx ) {
+                    if ( !fx.colorInit ) {
+                        fx.start = color( fx.elem, hook );
+                        fx.end = color( fx.end );
+                        fx.colorInit = true;
+                    }
+                    jQuery.cssHooks[ hook ].set( fx.elem, fx.start.transition( fx.end, fx.pos ) );
+                };
+            });
+
+        };
+
+        color.hook( stepHooks );
+
+        jQuery.cssHooks.borderColor = {
+            expand: function( value ) {
+                var expanded = {};
+
+                each( [ "Top", "Right", "Bottom", "Left" ], function( i, part ) {
+                    expanded[ "border" + part + "Color" ] = value;
+                });
+                return expanded;
+            }
+        };
+
+// Basic color names only.
+// Usage of any of the other color names requires adding yourself or including
+// jquery.color.svg-names.js.
+        colors = jQuery.Color.names = {
+            // 4.1. Basic color keywords
+            aqua: "#00ffff",
+            black: "#000000",
+            blue: "#0000ff",
+            fuchsia: "#ff00ff",
+            gray: "#808080",
+            green: "#008000",
+            lime: "#00ff00",
+            maroon: "#800000",
+            navy: "#000080",
+            olive: "#808000",
+            purple: "#800080",
+            red: "#ff0000",
+            silver: "#c0c0c0",
+            teal: "#008080",
+            white: "#ffffff",
+            yellow: "#ffff00",
+
+            // 4.2.3. "transparent" color keyword
+            transparent: [ null, null, null, 0 ],
+
+            _default: "#ffffff"
+        };
+
+    })( jQuery );
+
+
+    /******************************************************************************/
+    /****************************** CLASS ANIMATIONS ******************************/
+    /******************************************************************************/
+    (function() {
+
+        var classAnimationActions = [ "add", "remove", "toggle" ],
+            shorthandStyles = {
+                border: 1,
+                borderBottom: 1,
+                borderColor: 1,
+                borderLeft: 1,
+                borderRight: 1,
+                borderTop: 1,
+                borderWidth: 1,
+                margin: 1,
+                padding: 1
+            };
+
+        $.each([ "borderLeftStyle", "borderRightStyle", "borderBottomStyle", "borderTopStyle" ], function( _, prop ) {
+            $.fx.step[ prop ] = function( fx ) {
+                if ( fx.end !== "none" && !fx.setAttr || fx.pos === 1 && !fx.setAttr ) {
+                    jQuery.style( fx.elem, prop, fx.end );
+                    fx.setAttr = true;
+                }
+            };
+        });
+
+        function getElementStyles( elem ) {
+            var key, len,
+                style = elem.ownerDocument.defaultView ?
+                    elem.ownerDocument.defaultView.getComputedStyle( elem, null ) :
+                    elem.currentStyle,
+                styles = {};
+
+            if ( style && style.length && style[ 0 ] && style[ style[ 0 ] ] ) {
+                len = style.length;
+                while ( len-- ) {
+                    key = style[ len ];
+                    if ( typeof style[ key ] === "string" ) {
+                        styles[ $.camelCase( key ) ] = style[ key ];
+                    }
+                }
+                // support: Opera, IE <9
+            } else {
+                for ( key in style ) {
+                    if ( typeof style[ key ] === "string" ) {
+                        styles[ key ] = style[ key ];
+                    }
+                }
+            }
+
+            return styles;
+        }
+
+
+        function styleDifference( oldStyle, newStyle ) {
+            var diff = {},
+                name, value;
+
+            for ( name in newStyle ) {
+                value = newStyle[ name ];
+                if ( oldStyle[ name ] !== value ) {
+                    if ( !shorthandStyles[ name ] ) {
+                        if ( $.fx.step[ name ] || !isNaN( parseFloat( value ) ) ) {
+                            diff[ name ] = value;
+                        }
+                    }
+                }
+            }
+
+            return diff;
+        }
+
+// support: jQuery <1.8
+        if ( !$.fn.addBack ) {
+            $.fn.addBack = function( selector ) {
+                return this.add( selector == null ?
+                    this.prevObject : this.prevObject.filter( selector )
+                );
+            };
+        }
+
+        $.effects.animateClass = function( value, duration, easing, callback ) {
+            var o = $.speed( duration, easing, callback );
+
+            return this.queue( function() {
+                var animated = $( this ),
+                    baseClass = animated.attr( "class" ) || "",
+                    applyClassChange,
+                    allAnimations = o.children ? animated.find( "*" ).addBack() : animated;
+
+                // map the animated objects to store the original styles.
+                allAnimations = allAnimations.map(function() {
+                    var el = $( this );
+                    return {
+                        el: el,
+                        start: getElementStyles( this )
+                    };
+                });
+
+                // apply class change
+                applyClassChange = function() {
+                    $.each( classAnimationActions, function(i, action) {
+                        if ( value[ action ] ) {
+                            animated[ action + "Class" ]( value[ action ] );
+                        }
+                    });
+                };
+                applyClassChange();
+
+                // map all animated objects again - calculate new styles and diff
+                allAnimations = allAnimations.map(function() {
+                    this.end = getElementStyles( this.el[ 0 ] );
+                    this.diff = styleDifference( this.start, this.end );
+                    return this;
+                });
+
+                // apply original class
+                animated.attr( "class", baseClass );
+
+                // map all animated objects again - this time collecting a promise
+                allAnimations = allAnimations.map(function() {
+                    var styleInfo = this,
+                        dfd = $.Deferred(),
+                        opts = $.extend({}, o, {
+                            queue: false,
+                            complete: function() {
+                                dfd.resolve( styleInfo );
+                            }
+                        });
+
+                    this.el.animate( this.diff, opts );
+                    return dfd.promise();
+                });
+
+                // once all animations have completed:
+                $.when.apply( $, allAnimations.get() ).done(function() {
+
+                    // set the final class
+                    applyClassChange();
+
+                    // for each animated element,
+                    // clear all css properties that were animated
+                    $.each( arguments, function() {
+                        var el = this.el;
+                        $.each( this.diff, function(key) {
+                            el.css( key, "" );
+                        });
+                    });
+
+                    // this is guarnteed to be there if you use jQuery.speed()
+                    // it also handles dequeuing the next anim...
+                    o.complete.call( animated[ 0 ] );
+                });
+            });
+        };
+
+        $.fn.extend({
+            _addClass: $.fn.addClass,
+            addClass: function( classNames, speed, easing, callback ) {
+                return speed ?
+                    $.effects.animateClass.call( this,
+                        { add: classNames }, speed, easing, callback ) :
+                    this._addClass( classNames );
+            },
+
+            _removeClass: $.fn.removeClass,
+            removeClass: function( classNames, speed, easing, callback ) {
+                return arguments.length > 1 ?
+                    $.effects.animateClass.call( this,
+                        { remove: classNames }, speed, easing, callback ) :
+                    this._removeClass.apply( this, arguments );
+            },
+
+            _toggleClass: $.fn.toggleClass,
+            toggleClass: function( classNames, force, speed, easing, callback ) {
+                if ( typeof force === "boolean" || force === undefined ) {
+                    if ( !speed ) {
+                        // without speed parameter
+                        return this._toggleClass( classNames, force );
+                    } else {
+                        return $.effects.animateClass.call( this,
+                            (force ? { add: classNames } : { remove: classNames }),
+                            speed, easing, callback );
+                    }
+                } else {
+                    // without force parameter
+                    return $.effects.animateClass.call( this,
+                        { toggle: classNames }, force, speed, easing );
+                }
+            },
+
+            switchClass: function( remove, add, speed, easing, callback) {
+                return $.effects.animateClass.call( this, {
+                    add: add,
+                    remove: remove
+                }, speed, easing, callback );
+            }
+        });
+
+    })();
+
+    /******************************************************************************/
+    /*********************************** EFFECTS **********************************/
+    /******************************************************************************/
+
+    (function() {
+
+        $.extend( $.effects, {
+            version: "1.10.1",
+
+            // Saves a set of properties in a data storage
+            save: function( element, set ) {
+                for( var i=0; i < set.length; i++ ) {
+                    if ( set[ i ] !== null ) {
+                        element.data( dataSpace + set[ i ], element[ 0 ].style[ set[ i ] ] );
+                    }
+                }
+            },
+
+            // Restores a set of previously saved properties from a data storage
+            restore: function( element, set ) {
+                var val, i;
+                for( i=0; i < set.length; i++ ) {
+                    if ( set[ i ] !== null ) {
+                        val = element.data( dataSpace + set[ i ] );
+                        // support: jQuery 1.6.2
+                        // http://bugs.jquery.com/ticket/9917
+                        // jQuery 1.6.2 incorrectly returns undefined for any falsy value.
+                        // We can't differentiate between "" and 0 here, so we just assume
+                        // empty string since it's likely to be a more common value...
+                        if ( val === undefined ) {
+                            val = "";
+                        }
+                        element.css( set[ i ], val );
+                    }
+                }
+            },
+
+            setMode: function( el, mode ) {
+                if (mode === "toggle") {
+                    mode = el.is( ":hidden" ) ? "show" : "hide";
+                }
+                return mode;
+            },
+
+            // Translates a [top,left] array into a baseline value
+            // this should be a little more flexible in the future to handle a string & hash
+            getBaseline: function( origin, original ) {
+                var y, x;
+                switch ( origin[ 0 ] ) {
+                    case "top": y = 0; break;
+                    case "middle": y = 0.5; break;
+                    case "bottom": y = 1; break;
+                    default: y = origin[ 0 ] / original.height;
+                }
+                switch ( origin[ 1 ] ) {
+                    case "left": x = 0; break;
+                    case "center": x = 0.5; break;
+                    case "right": x = 1; break;
+                    default: x = origin[ 1 ] / original.width;
+                }
+                return {
+                    x: x,
+                    y: y
+                };
+            },
+
+            // Wraps the element around a wrapper that copies position properties
+            createWrapper: function( element ) {
+
+                // if the element is already wrapped, return it
+                if ( element.parent().is( ".ui-effects-wrapper" )) {
+                    return element.parent();
+                }
+
+                // wrap the element
+                var props = {
+                        width: element.outerWidth(true),
+                        height: element.outerHeight(true),
+                        "float": element.css( "float" )
+                    },
+                    wrapper = $( "<div></div>" )
+                        .addClass( "ui-effects-wrapper" )
+                        .css({
+                            fontSize: "100%",
+                            background: "transparent",
+                            border: "none",
+                            margin: 0,
+                            padding: 0
+                        }),
+                // Store the size in case width/height are defined in % - Fixes #5245
+                    size = {
+                        width: element.width(),
+                        height: element.height()
+                    },
+                    active = document.activeElement;
+
+                // support: Firefox
+                // Firefox incorrectly exposes anonymous content
+                // https://bugzilla.mozilla.org/show_bug.cgi?id=561664
+                try {
+                    active.id;
+                } catch( e ) {
+                    active = document.body;
+                }
+
+                element.wrap( wrapper );
+
+                // Fixes #7595 - Elements lose focus when wrapped.
+                if ( element[ 0 ] === active || $.contains( element[ 0 ], active ) ) {
+                    $( active ).focus();
+                }
+
+                wrapper = element.parent(); //Hotfix for jQuery 1.4 since some change in wrap() seems to actually lose the reference to the wrapped element
+
+                // transfer positioning properties to the wrapper
+                if ( element.css( "position" ) === "static" ) {
+                    wrapper.css({ position: "relative" });
+                    element.css({ position: "relative" });
+                } else {
+                    $.extend( props, {
+                        position: element.css( "position" ),
+                        zIndex: element.css( "z-index" )
+                    });
+                    $.each([ "top", "left", "bottom", "right" ], function(i, pos) {
+                        props[ pos ] = element.css( pos );
+                        if ( isNaN( parseInt( props[ pos ], 10 ) ) ) {
+                            props[ pos ] = "auto";
+                        }
+                    });
+                    element.css({
+                        position: "relative",
+                        top: 0,
+                        left: 0,
+                        right: "auto",
+                        bottom: "auto"
+                    });
+                }
+                element.css(size);
+
+                return wrapper.css( props ).show();
+            },
+
+            removeWrapper: function( element ) {
+                var active = document.activeElement;
+
+                if ( element.parent().is( ".ui-effects-wrapper" ) ) {
+                    element.parent().replaceWith( element );
+
+                    // Fixes #7595 - Elements lose focus when wrapped.
+                    if ( element[ 0 ] === active || $.contains( element[ 0 ], active ) ) {
+                        $( active ).focus();
+                    }
+                }
+
+
+                return element;
+            },
+
+            setTransition: function( element, list, factor, value ) {
+                value = value || {};
+                $.each( list, function( i, x ) {
+                    var unit = element.cssUnit( x );
+                    if ( unit[ 0 ] > 0 ) {
+                        value[ x ] = unit[ 0 ] * factor + unit[ 1 ];
+                    }
+                });
+                return value;
+            }
+        });
+
+// return an effect options object for the given parameters:
+        function _normalizeArguments( effect, options, speed, callback ) {
+
+            // allow passing all options as the first parameter
+            if ( $.isPlainObject( effect ) ) {
+                options = effect;
+                effect = effect.effect;
+            }
+
+            // convert to an object
+            effect = { effect: effect };
+
+            // catch (effect, null, ...)
+            if ( options == null ) {
+                options = {};
+            }
+
+            // catch (effect, callback)
+            if ( $.isFunction( options ) ) {
+                callback = options;
+                speed = null;
+                options = {};
+            }
+
+            // catch (effect, speed, ?)
+            if ( typeof options === "number" || $.fx.speeds[ options ] ) {
+                callback = speed;
+                speed = options;
+                options = {};
+            }
+
+            // catch (effect, options, callback)
+            if ( $.isFunction( speed ) ) {
+                callback = speed;
+                speed = null;
+            }
+
+            // add options to effect
+            if ( options ) {
+                $.extend( effect, options );
+            }
+
+            speed = speed || options.duration;
+            effect.duration = $.fx.off ? 0 :
+                typeof speed === "number" ? speed :
+                    speed in $.fx.speeds ? $.fx.speeds[ speed ] :
+                        $.fx.speeds._default;
+
+            effect.complete = callback || options.complete;
+
+            return effect;
+        }
+
+        function standardSpeed( speed ) {
+            // valid standard speeds
+            if ( !speed || typeof speed === "number" || $.fx.speeds[ speed ] ) {
+                return true;
+            }
+
+            // invalid strings - treat as "normal" speed
+            return typeof speed === "string" && !$.effects.effect[ speed ];
+        }
+
+        $.fn.extend({
+            effect: function( /* effect, options, speed, callback */ ) {
+                var args = _normalizeArguments.apply( this, arguments ),
+                    mode = args.mode,
+                    queue = args.queue,
+                    effectMethod = $.effects.effect[ args.effect ];
+
+                if ( $.fx.off || !effectMethod ) {
+                    // delegate to the original method (e.g., .show()) if possible
+                    if ( mode ) {
+                        return this[ mode ]( args.duration, args.complete );
+                    } else {
+                        return this.each( function() {
+                            if ( args.complete ) {
+                                args.complete.call( this );
+                            }
+                        });
+                    }
+                }
+
+                function run( next ) {
+                    var elem = $( this ),
+                        complete = args.complete,
+                        mode = args.mode;
+
+                    function done() {
+                        if ( $.isFunction( complete ) ) {
+                            complete.call( elem[0] );
+                        }
+                        if ( $.isFunction( next ) ) {
+                            next();
+                        }
+                    }
+
+                    // if the element is hiddden and mode is hide,
+                    // or element is visible and mode is show
+                    if ( elem.is( ":hidden" ) ? mode === "hide" : mode === "show" ) {
+                        done();
+                    } else {
+                        effectMethod.call( elem[0], args, done );
+                    }
+                }
+
+                return queue === false ? this.each( run ) : this.queue( queue || "fx", run );
+            },
+
+            _show: $.fn.show,
+            show: function( speed ) {
+                if ( standardSpeed( speed ) ) {
+                    return this._show.apply( this, arguments );
+                } else {
+                    var args = _normalizeArguments.apply( this, arguments );
+                    args.mode = "show";
+                    return this.effect.call( this, args );
+                }
+            },
+
+            _hide: $.fn.hide,
+            hide: function( speed ) {
+                if ( standardSpeed( speed ) ) {
+                    return this._hide.apply( this, arguments );
+                } else {
+                    var args = _normalizeArguments.apply( this, arguments );
+                    args.mode = "hide";
+                    return this.effect.call( this, args );
+                }
+            },
+
+            // jQuery core overloads toggle and creates _toggle
+            __toggle: $.fn.toggle,
+            toggle: function( speed ) {
+                if ( standardSpeed( speed ) || typeof speed === "boolean" || $.isFunction( speed ) ) {
+                    return this.__toggle.apply( this, arguments );
+                } else {
+                    var args = _normalizeArguments.apply( this, arguments );
+                    args.mode = "toggle";
+                    return this.effect.call( this, args );
+                }
+            },
+
+            // helper functions
+            cssUnit: function(key) {
+                var style = this.css( key ),
+                    val = [];
+
+                $.each( [ "em", "px", "%", "pt" ], function( i, unit ) {
+                    if ( style.indexOf( unit ) > 0 ) {
+                        val = [ parseFloat( style ), unit ];
+                    }
+                });
+                return val;
+            }
+        });
+
+    })();
+
+    /******************************************************************************/
+    /*********************************** EASING ***********************************/
+    /******************************************************************************/
+
+    (function() {
+
+// based on easing equations from Robert Penner (http://www.robertpenner.com/easing)
+
+        var baseEasings = {};
+
+        $.each( [ "Quad", "Cubic", "Quart", "Quint", "Expo" ], function( i, name ) {
+            baseEasings[ name ] = function( p ) {
+                return Math.pow( p, i + 2 );
+            };
+        });
+
+        $.extend( baseEasings, {
+            Sine: function ( p ) {
+                return 1 - Math.cos( p * Math.PI / 2 );
+            },
+            Circ: function ( p ) {
+                return 1 - Math.sqrt( 1 - p * p );
+            },
+            Elastic: function( p ) {
+                return p === 0 || p === 1 ? p :
+                    -Math.pow( 2, 8 * (p - 1) ) * Math.sin( ( (p - 1) * 80 - 7.5 ) * Math.PI / 15 );
+            },
+            Back: function( p ) {
+                return p * p * ( 3 * p - 2 );
+            },
+            Bounce: function ( p ) {
+                var pow2,
+                    bounce = 4;
+
+                while ( p < ( ( pow2 = Math.pow( 2, --bounce ) ) - 1 ) / 11 ) {}
+                return 1 / Math.pow( 4, 3 - bounce ) - 7.5625 * Math.pow( ( pow2 * 3 - 2 ) / 22 - p, 2 );
+            }
+        });
+
+        $.each( baseEasings, function( name, easeIn ) {
+            $.easing[ "easeIn" + name ] = easeIn;
+            $.easing[ "easeOut" + name ] = function( p ) {
+                return 1 - easeIn( 1 - p );
+            };
+            $.easing[ "easeInOut" + name ] = function( p ) {
+                return p < 0.5 ?
+                    easeIn( p * 2 ) / 2 :
+                    1 - easeIn( p * -2 + 2 ) / 2;
+            };
+        });
+
+    })();
+
+})(jQuery));
+(function( $, undefined ) {
+
+    var rvertical = /up|down|vertical/,
+        rpositivemotion = /up|left|vertical|horizontal/;
+
+    $.effects.effect.blind = function( o, done ) {
+        // Create element
+        var el = $( this ),
+            props = [ "position", "top", "bottom", "left", "right", "height", "width" ],
+            mode = $.effects.setMode( el, o.mode || "hide" ),
+            direction = o.direction || "up",
+            vertical = rvertical.test( direction ),
+            ref = vertical ? "height" : "width",
+            ref2 = vertical ? "top" : "left",
+            motion = rpositivemotion.test( direction ),
+            animation = {},
+            show = mode === "show",
+            wrapper, distance, margin;
+
+        // if already wrapped, the wrapper's properties are my property. #6245
+        if ( el.parent().is( ".ui-effects-wrapper" ) ) {
+            $.effects.save( el.parent(), props );
+        } else {
+            $.effects.save( el, props );
+        }
+        el.show();
+        wrapper = $.effects.createWrapper( el ).css({
+            overflow: "hidden"
+        });
+
+        distance = wrapper[ ref ]();
+        margin = parseFloat( wrapper.css( ref2 ) ) || 0;
+
+        animation[ ref ] = show ? distance : 0;
+        if ( !motion ) {
+            el
+                .css( vertical ? "bottom" : "right", 0 )
+                .css( vertical ? "top" : "left", "auto" )
+                .css({ position: "absolute" });
+
+            animation[ ref2 ] = show ? margin : distance + margin;
+        }
+
+        // start at 0 if we are showing
+        if ( show ) {
+            wrapper.css( ref, 0 );
+            if ( ! motion ) {
+                wrapper.css( ref2, margin + distance );
+            }
+        }
+
+        // Animate
+        wrapper.animate( animation, {
+            duration: o.duration,
+            easing: o.easing,
+            queue: false,
+            complete: function() {
+                if ( mode === "hide" ) {
+                    el.hide();
+                }
+                $.effects.restore( el, props );
+                $.effects.removeWrapper( el );
+                done();
+            }
+        });
+
+    };
+
+})(jQuery);
+(function( $, undefined ) {
+
+    $.effects.effect.bounce = function( o, done ) {
+        var el = $( this ),
+            props = [ "position", "top", "bottom", "left", "right", "height", "width" ],
+
+        // defaults:
+            mode = $.effects.setMode( el, o.mode || "effect" ),
+            hide = mode === "hide",
+            show = mode === "show",
+            direction = o.direction || "up",
+            distance = o.distance,
+            times = o.times || 5,
+
+        // number of internal animations
+            anims = times * 2 + ( show || hide ? 1 : 0 ),
+            speed = o.duration / anims,
+            easing = o.easing,
+
+        // utility:
+            ref = ( direction === "up" || direction === "down" ) ? "top" : "left",
+            motion = ( direction === "up" || direction === "left" ),
+            i,
+            upAnim,
+            downAnim,
+
+        // we will need to re-assemble the queue to stack our animations in place
+            queue = el.queue(),
+            queuelen = queue.length;
+
+        // Avoid touching opacity to prevent clearType and PNG issues in IE
+        if ( show || hide ) {
+            props.push( "opacity" );
+        }
+
+        $.effects.save( el, props );
+        el.show();
+        $.effects.createWrapper( el ); // Create Wrapper
+
+        // default distance for the BIGGEST bounce is the outer Distance / 3
+        if ( !distance ) {
+            distance = el[ ref === "top" ? "outerHeight" : "outerWidth" ]() / 3;
+        }
+
+        if ( show ) {
+            downAnim = { opacity: 1 };
+            downAnim[ ref ] = 0;
+
+            // if we are showing, force opacity 0 and set the initial position
+            // then do the "first" animation
+            el.css( "opacity", 0 )
+                .css( ref, motion ? -distance * 2 : distance * 2 )
+                .animate( downAnim, speed, easing );
+        }
+
+        // start at the smallest distance if we are hiding
+        if ( hide ) {
+            distance = distance / Math.pow( 2, times - 1 );
+        }
+
+        downAnim = {};
+        downAnim[ ref ] = 0;
+        // Bounces up/down/left/right then back to 0 -- times * 2 animations happen here
+        for ( i = 0; i < times; i++ ) {
+            upAnim = {};
+            upAnim[ ref ] = ( motion ? "-=" : "+=" ) + distance;
+
+            el.animate( upAnim, speed, easing )
+                .animate( downAnim, speed, easing );
+
+            distance = hide ? distance * 2 : distance / 2;
+        }
+
+        // Last Bounce when Hiding
+        if ( hide ) {
+            upAnim = { opacity: 0 };
+            upAnim[ ref ] = ( motion ? "-=" : "+=" ) + distance;
+
+            el.animate( upAnim, speed, easing );
+        }
+
+        el.queue(function() {
+            if ( hide ) {
+                el.hide();
+            }
+            $.effects.restore( el, props );
+            $.effects.removeWrapper( el );
+            done();
+        });
+
+        // inject all the animations we just queued to be first in line (after "inprogress")
+        if ( queuelen > 1) {
+            queue.splice.apply( queue,
+                [ 1, 0 ].concat( queue.splice( queuelen, anims + 1 ) ) );
+        }
+        el.dequeue();
+
+    };
+
+})(jQuery);
+(function( $, undefined ) {
+
+    $.effects.effect.clip = function( o, done ) {
+        // Create element
+        var el = $( this ),
+            props = [ "position", "top", "bottom", "left", "right", "height", "width" ],
+            mode = $.effects.setMode( el, o.mode || "hide" ),
+            show = mode === "show",
+            direction = o.direction || "vertical",
+            vert = direction === "vertical",
+            size = vert ? "height" : "width",
+            position = vert ? "top" : "left",
+            animation = {},
+            wrapper, animate, distance;
+
+        // Save & Show
+        $.effects.save( el, props );
+        el.show();
+
+        // Create Wrapper
+        wrapper = $.effects.createWrapper( el ).css({
+            overflow: "hidden"
+        });
+        animate = ( el[0].tagName === "IMG" ) ? wrapper : el;
+        distance = animate[ size ]();
+
+        // Shift
+        if ( show ) {
+            animate.css( size, 0 );
+            animate.css( position, distance / 2 );
+        }
+
+        // Create Animation Object:
+        animation[ size ] = show ? distance : 0;
+        animation[ position ] = show ? 0 : distance / 2;
+
+        // Animate
+        animate.animate( animation, {
+            queue: false,
+            duration: o.duration,
+            easing: o.easing,
+            complete: function() {
+                if ( !show ) {
+                    el.hide();
+                }
+                $.effects.restore( el, props );
+                $.effects.removeWrapper( el );
+                done();
+            }
+        });
+
+    };
+
+})(jQuery);
+(function( $, undefined ) {
+
+    $.effects.effect.drop = function( o, done ) {
+
+        var el = $( this ),
+            props = [ "position", "top", "bottom", "left", "right", "opacity", "height", "width" ],
+            mode = $.effects.setMode( el, o.mode || "hide" ),
+            show = mode === "show",
+            direction = o.direction || "left",
+            ref = ( direction === "up" || direction === "down" ) ? "top" : "left",
+            motion = ( direction === "up" || direction === "left" ) ? "pos" : "neg",
+            animation = {
+                opacity: show ? 1 : 0
+            },
+            distance;
+
+        // Adjust
+        $.effects.save( el, props );
+        el.show();
+        $.effects.createWrapper( el );
+
+        distance = o.distance || el[ ref === "top" ? "outerHeight": "outerWidth" ]( true ) / 2;
+
+        if ( show ) {
+            el
+                .css( "opacity", 0 )
+                .css( ref, motion === "pos" ? -distance : distance );
+        }
+
+        // Animation
+        animation[ ref ] = ( show ?
+            ( motion === "pos" ? "+=" : "-=" ) :
+            ( motion === "pos" ? "-=" : "+=" ) ) +
+            distance;
+
+        // Animate
+        el.animate( animation, {
+            queue: false,
+            duration: o.duration,
+            easing: o.easing,
+            complete: function() {
+                if ( mode === "hide" ) {
+                    el.hide();
+                }
+                $.effects.restore( el, props );
+                $.effects.removeWrapper( el );
+                done();
+            }
+        });
+    };
+
+})(jQuery);
+(function( $, undefined ) {
+
+    $.effects.effect.explode = function( o, done ) {
+
+        var rows = o.pieces ? Math.round( Math.sqrt( o.pieces ) ) : 3,
+            cells = rows,
+            el = $( this ),
+            mode = $.effects.setMode( el, o.mode || "hide" ),
+            show = mode === "show",
+
+        // show and then visibility:hidden the element before calculating offset
+            offset = el.show().css( "visibility", "hidden" ).offset(),
+
+        // width and height of a piece
+            width = Math.ceil( el.outerWidth() / cells ),
+            height = Math.ceil( el.outerHeight() / rows ),
+            pieces = [],
+
+        // loop
+            i, j, left, top, mx, my;
+
+        // children animate complete:
+        function childComplete() {
+            pieces.push( this );
+            if ( pieces.length === rows * cells ) {
+                animComplete();
+            }
+        }
+
+        // clone the element for each row and cell.
+        for( i = 0; i < rows ; i++ ) { // ===>
+            top = offset.top + i * height;
+            my = i - ( rows - 1 ) / 2 ;
+
+            for( j = 0; j < cells ; j++ ) { // |||
+                left = offset.left + j * width;
+                mx = j - ( cells - 1 ) / 2 ;
+
+                // Create a clone of the now hidden main element that will be absolute positioned
+                // within a wrapper div off the -left and -top equal to size of our pieces
+                el
+                    .clone()
+                    .appendTo( "body" )
+                    .wrap( "<div></div>" )
+                    .css({
+                        position: "absolute",
+                        visibility: "visible",
+                        left: -j * width,
+                        top: -i * height
+                    })
+
+                    // select the wrapper - make it overflow: hidden and absolute positioned based on
+                    // where the original was located +left and +top equal to the size of pieces
+                    .parent()
+                    .addClass( "ui-effects-explode" )
+                    .css({
+                        position: "absolute",
+                        overflow: "hidden",
+                        width: width,
+                        height: height,
+                        left: left + ( show ? mx * width : 0 ),
+                        top: top + ( show ? my * height : 0 ),
+                        opacity: show ? 0 : 1
+                    }).animate({
+                        left: left + ( show ? 0 : mx * width ),
+                        top: top + ( show ? 0 : my * height ),
+                        opacity: show ? 1 : 0
+                    }, o.duration || 500, o.easing, childComplete );
+            }
+        }
+
+        function animComplete() {
+            el.css({
+                visibility: "visible"
+            });
+            $( pieces ).remove();
+            if ( !show ) {
+                el.hide();
+            }
+            done();
+        }
+    };
+
+})(jQuery);
+(function( $, undefined ) {
+
+    $.effects.effect.fade = function( o, done ) {
+        var el = $( this ),
+            mode = $.effects.setMode( el, o.mode || "toggle" );
+
+        el.animate({
+            opacity: mode
+        }, {
+            queue: false,
+            duration: o.duration,
+            easing: o.easing,
+            complete: done
+        });
+    };
+
+})( jQuery );
+(function( $, undefined ) {
+
+    $.effects.effect.fold = function( o, done ) {
+
+        // Create element
+        var el = $( this ),
+            props = [ "position", "top", "bottom", "left", "right", "height", "width" ],
+            mode = $.effects.setMode( el, o.mode || "hide" ),
+            show = mode === "show",
+            hide = mode === "hide",
+            size = o.size || 15,
+            percent = /([0-9]+)%/.exec( size ),
+            horizFirst = !!o.horizFirst,
+            widthFirst = show !== horizFirst,
+            ref = widthFirst ? [ "width", "height" ] : [ "height", "width" ],
+            duration = o.duration / 2,
+            wrapper, distance,
+            animation1 = {},
+            animation2 = {};
+
+        $.effects.save( el, props );
+        el.show();
+
+        // Create Wrapper
+        wrapper = $.effects.createWrapper( el ).css({
+            overflow: "hidden"
+        });
+        distance = widthFirst ?
+            [ wrapper.width(), wrapper.height() ] :
+            [ wrapper.height(), wrapper.width() ];
+
+        if ( percent ) {
+            size = parseInt( percent[ 1 ], 10 ) / 100 * distance[ hide ? 0 : 1 ];
+        }
+        if ( show ) {
+            wrapper.css( horizFirst ? {
+                height: 0,
+                width: size
+            } : {
+                height: size,
+                width: 0
+            });
+        }
+
+        // Animation
+        animation1[ ref[ 0 ] ] = show ? distance[ 0 ] : size;
+        animation2[ ref[ 1 ] ] = show ? distance[ 1 ] : 0;
+
+        // Animate
+        wrapper
+            .animate( animation1, duration, o.easing )
+            .animate( animation2, duration, o.easing, function() {
+                if ( hide ) {
+                    el.hide();
+                }
+                $.effects.restore( el, props );
+                $.effects.removeWrapper( el );
+                done();
+            });
+
+    };
+
+})(jQuery);
+(function( $, undefined ) {
+
+    $.effects.effect.highlight = function( o, done ) {
+        var elem = $( this ),
+            props = [ "backgroundImage", "backgroundColor", "opacity" ],
+            mode = $.effects.setMode( elem, o.mode || "show" ),
+            animation = {
+                backgroundColor: elem.css( "backgroundColor" )
+            };
+
+        if (mode === "hide") {
+            animation.opacity = 0;
+        }
+
+        $.effects.save( elem, props );
+
+        elem
+            .show()
+            .css({
+                backgroundImage: "none",
+                backgroundColor: o.color || "#ffff99"
+            })
+            .animate( animation, {
+                queue: false,
+                duration: o.duration,
+                easing: o.easing,
+                complete: function() {
+                    if ( mode === "hide" ) {
+                        elem.hide();
+                    }
+                    $.effects.restore( elem, props );
+                    done();
+                }
+            });
+    };
+
+})(jQuery);
+(function( $, undefined ) {
+
+    $.effects.effect.pulsate = function( o, done ) {
+        var elem = $( this ),
+            mode = $.effects.setMode( elem, o.mode || "show" ),
+            show = mode === "show",
+            hide = mode === "hide",
+            showhide = ( show || mode === "hide" ),
+
+        // showing or hiding leaves of the "last" animation
+            anims = ( ( o.times || 5 ) * 2 ) + ( showhide ? 1 : 0 ),
+            duration = o.duration / anims,
+            animateTo = 0,
+            queue = elem.queue(),
+            queuelen = queue.length,
+            i;
+
+        if ( show || !elem.is(":visible")) {
+            elem.css( "opacity", 0 ).show();
+            animateTo = 1;
+        }
+
+        // anims - 1 opacity "toggles"
+        for ( i = 1; i < anims; i++ ) {
+            elem.animate({
+                opacity: animateTo
+            }, duration, o.easing );
+            animateTo = 1 - animateTo;
+        }
+
+        elem.animate({
+            opacity: animateTo
+        }, duration, o.easing);
+
+        elem.queue(function() {
+            if ( hide ) {
+                elem.hide();
+            }
+            done();
+        });
+
+        // We just queued up "anims" animations, we need to put them next in the queue
+        if ( queuelen > 1 ) {
+            queue.splice.apply( queue,
+                [ 1, 0 ].concat( queue.splice( queuelen, anims + 1 ) ) );
+        }
+        elem.dequeue();
+    };
+
+})(jQuery);
+(function( $, undefined ) {
+
+    $.effects.effect.puff = function( o, done ) {
+        var elem = $( this ),
+            mode = $.effects.setMode( elem, o.mode || "hide" ),
+            hide = mode === "hide",
+            percent = parseInt( o.percent, 10 ) || 150,
+            factor = percent / 100,
+            original = {
+                height: elem.height(),
+                width: elem.width(),
+                outerHeight: elem.outerHeight(),
+                outerWidth: elem.outerWidth()
+            };
+
+        $.extend( o, {
+            effect: "scale",
+            queue: false,
+            fade: true,
+            mode: mode,
+            complete: done,
+            percent: hide ? percent : 100,
+            from: hide ?
+                original :
+            {
+                height: original.height * factor,
+                width: original.width * factor,
+                outerHeight: original.outerHeight * factor,
+                outerWidth: original.outerWidth * factor
+            }
+        });
+
+        elem.effect( o );
+    };
+
+    $.effects.effect.scale = function( o, done ) {
+
+        // Create element
+        var el = $( this ),
+            options = $.extend( true, {}, o ),
+            mode = $.effects.setMode( el, o.mode || "effect" ),
+            percent = parseInt( o.percent, 10 ) ||
+                ( parseInt( o.percent, 10 ) === 0 ? 0 : ( mode === "hide" ? 0 : 100 ) ),
+            direction = o.direction || "both",
+            origin = o.origin,
+            original = {
+                height: el.height(),
+                width: el.width(),
+                outerHeight: el.outerHeight(),
+                outerWidth: el.outerWidth()
+            },
+            factor = {
+                y: direction !== "horizontal" ? (percent / 100) : 1,
+                x: direction !== "vertical" ? (percent / 100) : 1
+            };
+
+        // We are going to pass this effect to the size effect:
+        options.effect = "size";
+        options.queue = false;
+        options.complete = done;
+
+        // Set default origin and restore for show/hide
+        if ( mode !== "effect" ) {
+            options.origin = origin || ["middle","center"];
+            options.restore = true;
+        }
+
+        options.from = o.from || ( mode === "show" ? {
+            height: 0,
+            width: 0,
+            outerHeight: 0,
+            outerWidth: 0
+        } : original );
+        options.to = {
+            height: original.height * factor.y,
+            width: original.width * factor.x,
+            outerHeight: original.outerHeight * factor.y,
+            outerWidth: original.outerWidth * factor.x
+        };
+
+        // Fade option to support puff
+        if ( options.fade ) {
+            if ( mode === "show" ) {
+                options.from.opacity = 0;
+                options.to.opacity = 1;
+            }
+            if ( mode === "hide" ) {
+                options.from.opacity = 1;
+                options.to.opacity = 0;
+            }
+        }
+
+        // Animate
+        el.effect( options );
+
+    };
+
+    $.effects.effect.size = function( o, done ) {
+
+        // Create element
+        var original, baseline, factor,
+            el = $( this ),
+            props0 = [ "position", "top", "bottom", "left", "right", "width", "height", "overflow", "opacity" ],
+
+        // Always restore
+            props1 = [ "position", "top", "bottom", "left", "right", "overflow", "opacity" ],
+
+        // Copy for children
+            props2 = [ "width", "height", "overflow" ],
+            cProps = [ "fontSize" ],
+            vProps = [ "borderTopWidth", "borderBottomWidth", "paddingTop", "paddingBottom" ],
+            hProps = [ "borderLeftWidth", "borderRightWidth", "paddingLeft", "paddingRight" ],
+
+        // Set options
+            mode = $.effects.setMode( el, o.mode || "effect" ),
+            restore = o.restore || mode !== "effect",
+            scale = o.scale || "both",
+            origin = o.origin || [ "middle", "center" ],
+            position = el.css( "position" ),
+            props = restore ? props0 : props1,
+            zero = {
+                height: 0,
+                width: 0,
+                outerHeight: 0,
+                outerWidth: 0
+            };
+
+        if ( mode === "show" ) {
+            el.show();
+        }
+        original = {
+            height: el.height(),
+            width: el.width(),
+            outerHeight: el.outerHeight(),
+            outerWidth: el.outerWidth()
+        };
+
+        if ( o.mode === "toggle" && mode === "show" ) {
+            el.from = o.to || zero;
+            el.to = o.from || original;
+        } else {
+            el.from = o.from || ( mode === "show" ? zero : original );
+            el.to = o.to || ( mode === "hide" ? zero : original );
+        }
+
+        // Set scaling factor
+        factor = {
+            from: {
+                y: el.from.height / original.height,
+                x: el.from.width / original.width
+            },
+            to: {
+                y: el.to.height / original.height,
+                x: el.to.width / original.width
+            }
+        };
+
+        // Scale the css box
+        if ( scale === "box" || scale === "both" ) {
+
+            // Vertical props scaling
+            if ( factor.from.y !== factor.to.y ) {
+                props = props.concat( vProps );
+                el.from = $.effects.setTransition( el, vProps, factor.from.y, el.from );
+                el.to = $.effects.setTransition( el, vProps, factor.to.y, el.to );
+            }
+
+            // Horizontal props scaling
+            if ( factor.from.x !== factor.to.x ) {
+                props = props.concat( hProps );
+                el.from = $.effects.setTransition( el, hProps, factor.from.x, el.from );
+                el.to = $.effects.setTransition( el, hProps, factor.to.x, el.to );
+            }
+        }
+
+        // Scale the content
+        if ( scale === "content" || scale === "both" ) {
+
+            // Vertical props scaling
+            if ( factor.from.y !== factor.to.y ) {
+                props = props.concat( cProps ).concat( props2 );
+                el.from = $.effects.setTransition( el, cProps, factor.from.y, el.from );
+                el.to = $.effects.setTransition( el, cProps, factor.to.y, el.to );
+            }
+        }
+
+        $.effects.save( el, props );
+        el.show();
+        $.effects.createWrapper( el );
+        el.css( "overflow", "hidden" ).css( el.from );
+
+        // Adjust
+        if (origin) { // Calculate baseline shifts
+            baseline = $.effects.getBaseline( origin, original );
+            el.from.top = ( original.outerHeight - el.outerHeight() ) * baseline.y;
+            el.from.left = ( original.outerWidth - el.outerWidth() ) * baseline.x;
+            el.to.top = ( original.outerHeight - el.to.outerHeight ) * baseline.y;
+            el.to.left = ( original.outerWidth - el.to.outerWidth ) * baseline.x;
+        }
+        el.css( el.from ); // set top & left
+
+        // Animate
+        if ( scale === "content" || scale === "both" ) { // Scale the children
+
+            // Add margins/font-size
+            vProps = vProps.concat([ "marginTop", "marginBottom" ]).concat(cProps);
+            hProps = hProps.concat([ "marginLeft", "marginRight" ]);
+            props2 = props0.concat(vProps).concat(hProps);
+
+            el.find( "*[width]" ).each( function(){
+                var child = $( this ),
+                    c_original = {
+                        height: child.height(),
+                        width: child.width(),
+                        outerHeight: child.outerHeight(),
+                        outerWidth: child.outerWidth()
+                    };
+                if (restore) {
+                    $.effects.save(child, props2);
+                }
+
+                child.from = {
+                    height: c_original.height * factor.from.y,
+                    width: c_original.width * factor.from.x,
+                    outerHeight: c_original.outerHeight * factor.from.y,
+                    outerWidth: c_original.outerWidth * factor.from.x
+                };
+                child.to = {
+                    height: c_original.height * factor.to.y,
+                    width: c_original.width * factor.to.x,
+                    outerHeight: c_original.height * factor.to.y,
+                    outerWidth: c_original.width * factor.to.x
+                };
+
+                // Vertical props scaling
+                if ( factor.from.y !== factor.to.y ) {
+                    child.from = $.effects.setTransition( child, vProps, factor.from.y, child.from );
+                    child.to = $.effects.setTransition( child, vProps, factor.to.y, child.to );
+                }
+
+                // Horizontal props scaling
+                if ( factor.from.x !== factor.to.x ) {
+                    child.from = $.effects.setTransition( child, hProps, factor.from.x, child.from );
+                    child.to = $.effects.setTransition( child, hProps, factor.to.x, child.to );
+                }
+
+                // Animate children
+                child.css( child.from );
+                child.animate( child.to, o.duration, o.easing, function() {
+
+                    // Restore children
+                    if ( restore ) {
+                        $.effects.restore( child, props2 );
+                    }
+                });
+            });
+        }
+
+        // Animate
+        el.animate( el.to, {
+            queue: false,
+            duration: o.duration,
+            easing: o.easing,
+            complete: function() {
+                if ( el.to.opacity === 0 ) {
+                    el.css( "opacity", el.from.opacity );
+                }
+                if( mode === "hide" ) {
+                    el.hide();
+                }
+                $.effects.restore( el, props );
+                if ( !restore ) {
+
+                    // we need to calculate our new positioning based on the scaling
+                    if ( position === "static" ) {
+                        el.css({
+                            position: "relative",
+                            top: el.to.top,
+                            left: el.to.left
+                        });
+                    } else {
+                        $.each([ "top", "left" ], function( idx, pos ) {
+                            el.css( pos, function( _, str ) {
+                                var val = parseInt( str, 10 ),
+                                    toRef = idx ? el.to.left : el.to.top;
+
+                                // if original was "auto", recalculate the new value from wrapper
+                                if ( str === "auto" ) {
+                                    return toRef + "px";
+                                }
+
+                                return val + toRef + "px";
+                            });
+                        });
+                    }
+                }
+
+                $.effects.removeWrapper( el );
+                done();
+            }
+        });
+
+    };
+
+})(jQuery);
+(function( $, undefined ) {
+
+    $.effects.effect.shake = function( o, done ) {
+
+        var el = $( this ),
+            props = [ "position", "top", "bottom", "left", "right", "height", "width" ],
+            mode = $.effects.setMode( el, o.mode || "effect" ),
+            direction = o.direction || "left",
+            distance = o.distance || 20,
+            times = o.times || 3,
+            anims = times * 2 + 1,
+            speed = Math.round(o.duration/anims),
+            ref = (direction === "up" || direction === "down") ? "top" : "left",
+            positiveMotion = (direction === "up" || direction === "left"),
+            animation = {},
+            animation1 = {},
+            animation2 = {},
+            i,
+
+        // we will need to re-assemble the queue to stack our animations in place
+            queue = el.queue(),
+            queuelen = queue.length;
+
+        $.effects.save( el, props );
+        el.show();
+        $.effects.createWrapper( el );
+
+        // Animation
+        animation[ ref ] = ( positiveMotion ? "-=" : "+=" ) + distance;
+        animation1[ ref ] = ( positiveMotion ? "+=" : "-=" ) + distance * 2;
+        animation2[ ref ] = ( positiveMotion ? "-=" : "+=" ) + distance * 2;
+
+        // Animate
+        el.animate( animation, speed, o.easing );
+
+        // Shakes
+        for ( i = 1; i < times; i++ ) {
+            el.animate( animation1, speed, o.easing ).animate( animation2, speed, o.easing );
+        }
+        el
+            .animate( animation1, speed, o.easing )
+            .animate( animation, speed / 2, o.easing )
+            .queue(function() {
+                if ( mode === "hide" ) {
+                    el.hide();
+                }
+                $.effects.restore( el, props );
+                $.effects.removeWrapper( el );
+                done();
+            });
+
+        // inject all the animations we just queued to be first in line (after "inprogress")
+        if ( queuelen > 1) {
+            queue.splice.apply( queue,
+                [ 1, 0 ].concat( queue.splice( queuelen, anims + 1 ) ) );
+        }
+        el.dequeue();
+
+    };
+
+})(jQuery);
+(function( $, undefined ) {
+
+    $.effects.effect.slide = function( o, done ) {
+
+        // Create element
+        var el = $( this ),
+            props = [ "position", "top", "bottom", "left", "right", "width", "height" ],
+            mode = $.effects.setMode( el, o.mode || "show" ),
+            show = mode === "show",
+            direction = o.direction || "left",
+            ref = (direction === "up" || direction === "down") ? "top" : "left",
+            positiveMotion = (direction === "up" || direction === "left"),
+            distance,
+            animation = {};
+
+        // Adjust
+        $.effects.save( el, props );
+        el.show();
+        distance = o.distance || el[ ref === "top" ? "outerHeight" : "outerWidth" ]( true );
+
+        $.effects.createWrapper( el ).css({
+            overflow: "hidden"
+        });
+
+        if ( show ) {
+            el.css( ref, positiveMotion ? (isNaN(distance) ? "-" + distance : -distance) : distance );
+        }
+
+        // Animation
+        animation[ ref ] = ( show ?
+            ( positiveMotion ? "+=" : "-=") :
+            ( positiveMotion ? "-=" : "+=")) +
+            distance;
+
+        // Animate
+        el.animate( animation, {
+            queue: false,
+            duration: o.duration,
+            easing: o.easing,
+            complete: function() {
+                if ( mode === "hide" ) {
+                    el.hide();
+                }
+                $.effects.restore( el, props );
+                $.effects.removeWrapper( el );
+                done();
+            }
+        });
+    };
+
+})(jQuery);
+(function( $, undefined ) {
+
+    $.effects.effect.transfer = function( o, done ) {
+        var elem = $( this ),
+            target = $( o.to ),
+            targetFixed = target.css( "position" ) === "fixed",
+            body = $("body"),
+            fixTop = targetFixed ? body.scrollTop() : 0,
+            fixLeft = targetFixed ? body.scrollLeft() : 0,
+            endPosition = target.offset(),
+            animation = {
+                top: endPosition.top - fixTop ,
+                left: endPosition.left - fixLeft ,
+                height: target.innerHeight(),
+                width: target.innerWidth()
+            },
+            startPosition = elem.offset(),
+            transfer = $( "<div class='ui-effects-transfer'></div>" )
+                .appendTo( document.body )
+                .addClass( o.className )
+                .css({
+                    top: startPosition.top - fixTop ,
+                    left: startPosition.left - fixLeft ,
+                    height: elem.innerHeight(),
+                    width: elem.innerWidth(),
+                    position: targetFixed ? "fixed" : "absolute"
+                })
+                .animate( animation, o.duration, o.easing, function() {
+                    transfer.remove();
+                    done();
+                });
+    };
+
+})(jQuery);

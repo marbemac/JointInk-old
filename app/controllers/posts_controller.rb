@@ -75,6 +75,14 @@ class PostsController < ApplicationController
     end
   end
 
+  def add_inline_photo
+    @post = Post.find(params[:id])
+    authorize! :update, @post
+    photo = Cloudinary::Uploader.upload(params[:post][:photo], {:tags => ["post-#{@post.id}"], :format => 'jpg', :transformation => {:crop => :limit, :width => 1400, :height => 1400, :quality => 80}})
+    url = Cloudinary::Utils.cloudinary_url("v#{photo['version']}/#{photo['public_id']}.jpg", {:crop => :limit, :width => 700})
+    render :text => "{\"url\" : \"#{url}\", \"photo\" : \"v#{photo['version']}/#{photo['public_id']}.jpg\", \"id\" : \"#{photo['public_id']}\"}", :content_type => "text/plain"
+  end
+
   def update_photo
     @post = Post.find(params[:id])
     authorize! :update, @post
