@@ -125,7 +125,7 @@ jQuery ->
   # inline image resizing
   $('.inline-image').livequery ->
     $(@).resizable
-      handles: 'e,w'
+      handles: 'e'
       minWidth: 220
       containment: $('#post-body')
 
