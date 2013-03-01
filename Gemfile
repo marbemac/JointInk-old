@@ -1,6 +1,6 @@
 source :rubygems
 
-ruby '1.9.3'
+ruby '2.0.0'
 
 gem 'bundler', '~> 1.2'
 gem 'rails', '~> 3.2.12'
@@ -45,6 +45,7 @@ gem 'simple_form'
 gem 'sanitize'
 gem 'pg_search'
 
+gem 'action_dispatch-gz_static'
 gem 'newrelic_rpm', '~> 3.5.7'
 
 group :assets do

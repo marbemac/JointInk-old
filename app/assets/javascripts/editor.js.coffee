@@ -53,6 +53,8 @@ jQuery ->
         customimage:
           title: 'Add Inline Image'
           callback: (obj, event, key) ->
+
+            # insert the placeholder element, clean up any extra empty markup
             pasteHtmlAtCaret('<div class="inline-image-placeholder hide"></div>')
             target = $('.inline-image-placeholder')
             parent = target.closest('p,div:not(.inline-image-placeholder)')
@@ -208,9 +210,11 @@ jQuery ->
         if self.hasClass('editor-publish')
           window.location = data.url
       complete: ->
-        $('.editor-save, .editor-publish').removeClass('disabled')
-        $('.editor-save .name').text('Save As Idea')
-        $('.editor-publish .name').text('Publish')
+        if self.hasClass('editor-save')
+          $('.editor-save').removeClass('disabled')
+          $('.editor-save .name').text('Save As Idea')
+        else
+          $('.editor-publish .name').text('Published! Loading..')
       error: (jqXHR, textStatus, errorThrown) ->
         data = $.parseJSON(jqXHR.responseText)
         if data.errors && data.errors.primary_channel
