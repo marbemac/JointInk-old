@@ -55,8 +55,13 @@ jQuery ->
           callback: (obj, event, key) ->
             pasteHtmlAtCaret('<div class="inline-image-placeholder hide"></div>')
             target = $('.inline-image-placeholder')
-            content = target.parent().html()
-            if target.parent().is('p') && $.trim(content.replace('<div class="inline-image-placeholder hide"></div>','').replace('<br />','').replace('<br>','')) == ''
+            parent = target.closest('p,div:not(.inline-image-placeholder)')
+            content = parent.clone()
+            removed = 1
+            while removed > 0
+              removed = content.find('*').filter(-> $.trim(@.innerHTML) == '').remove().length
+
+            if parent.parent().attr('id') == 'post-body' && $.trim(content.html()) == ''
               $('.inline-image-placeholder').unwrap()
               $('#inline-image-edit').reveal
                 closed: ->
