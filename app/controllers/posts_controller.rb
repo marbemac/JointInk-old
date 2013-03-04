@@ -195,6 +195,12 @@ class PostsController < ApplicationController
         format.js { render :json => {:status => 'error'}, :status => 400 }
       end
     end
-
   end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:title, :content, :photo, :status, :post_type, :post_subtype, :style, :attribution_link)
+  end
+
 end

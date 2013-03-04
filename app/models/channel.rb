@@ -34,9 +34,7 @@ class Channel < ActiveRecord::Base
   validates :photo, :presence => true
   validates :privacy, :inclusion => { :in => ['public', 'invite'] }
 
-  attr_accessible :name, :photo, :cover_photo, :description, :privacy
-
-  scope :active, where(:status => 'active')
+  scope :active, -> { where(:status => 'active') }
 
   after_update :update_denorms
   before_destroy :disconnect

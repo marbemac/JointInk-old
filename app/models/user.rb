@@ -65,9 +65,6 @@ class User < ActiveRecord::Base
   has_many :channels
 
   attr_accessor :login
-  attr_accessible :username, :name, :email, :password, :password_confirmation, :remember_me,
-                  :login, :bio, :avatar, :cover_photo, :theme_header_color, :theme_header_height,
-                  :theme_background_pattern, :email_recommended, :email_channel_post, :email_newsletter
 
   validates :username, :length => { :minimum => 3, :maximum => 15 }, :uniqueness => true
   validates :name, :length => { :minimum => 3, :maximum => 50 }

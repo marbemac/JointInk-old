@@ -123,4 +123,13 @@ class UsersController < ApplicationController
   def settings
     @user = current_user
   end
+
+  private
+
+  def user_params
+    params.require(:post).permit(:username, :name, :email, :password, :password_confirmation, :remember_me,
+                                 :login, :bio, :avatar, :cover_photo, :theme_header_color, :theme_header_height,
+                                 :theme_background_pattern, :email_recommended, :email_channel_post, :email_newsletter)
+  end
+
 end

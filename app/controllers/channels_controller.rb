@@ -66,4 +66,10 @@ class ChannelsController < ApplicationController
 
   end
 
+  private
+
+  def channel_params
+    params.require(:channel).permit(:name, :photo, :cover_photo, :description, :privacy)
+  end
+
 end

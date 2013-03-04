@@ -1,9 +1,11 @@
-source :rubygems
+source 'https://rubygems.org'
 
 ruby '2.0.0'
 
 gem 'bundler', '~> 1.2'
-gem 'rails', '~> 3.2.12'
+
+#gem 'rails', '~> 3.2.12'
+gem 'rails', :git => "git@github.com:rails/rails.git"
 
 gem 'jquery-rails'
 gem "slim-rails"
@@ -21,7 +23,7 @@ gem 'twitter' # twitter api support
 gem 'chronic' # Date/Time management
 
 gem 'memcachier' # modify ENV variables to make dalli work with memcachier
-gem 'dalli', '2.6.0' # memcache
+gem 'dalli'
 
 gem 'rack-pjax'
 
@@ -49,8 +51,8 @@ gem 'action_dispatch-gz_static'
 gem 'newrelic_rpm', '~> 3.5.7'
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.5'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails',   '~> 4.0.0.beta1'
+  gem 'coffee-rails', '~> 4.0.0.beta1'
   gem 'uglifier'
   gem 'compass-rails'
   gem 'zurb-foundation', '~> 3.2.5'
@@ -71,6 +73,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
+  gem 'protected_attributes'
 end
 
 group :test do
