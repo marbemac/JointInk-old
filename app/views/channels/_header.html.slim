@@ -1,0 +1,50 @@
+- content_for :header do
+  header
+    hrgroup
+      h1.sans-serif= @channel.name
+
+      h3.subheader.sans-serif= @channel.description
+
+      .extra
+        = 'Created by '
+        a href=user_url(:subdomain => @channel.user.username) #{@channel.user.username}
+
+- content_for :page_nav do
+  nav
+    ul.left
+      li class=(params[:action] == 'show' ? 'on' : '')
+        a href=channel_url(@channel, :subdomain => false)
+          = pluralize(@channel.posts_count, 'Post')
+          i.icon-caret-up
+
+    .circle-image style="background-image: url('#{channel_photo_path(@channel, :width => 120, :height => 120, :crop => :thumb)}')"
+      .ring
+
+    .circle-dot &bull;
+
+    ul.right
+      - if can? :post, @channel || !signed_in?
+        - if can? :update, @channel
+          li
+            .dropdown.text-dropdown
+              .name
+                | Admin
+              .menu.down
+                i.icon-caret-up
+                ul
+                  li
+                    a href=edit_channel_url(@channel.id, :subdomain => false) data-skip-pjax=true Edit Channel
+            li
+              | &bull;
+
+        li.action
+          .dropdown.text-dropdown
+            .name
+              | Contribute
+            .menu.down
+              i.icon-caret-up
+              ul
+                li
+                  a href=new_channel_post_url(@channel, 'text', 'article', :subdomain => false) data-skip-pjax=true +New Article
+                li
+                  a href=new_channel_post_url(@channel, 'picture', 'caption', :subdomain => false) data-skip-pjax=true +New Picture

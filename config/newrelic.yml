@@ -100,6 +100,9 @@ common: &default_settings
   #     ex: ignored_params: credit_card, ssn, password
   capture_params: false
 
+  browser_monitoring:
+    auto_instrument: false
+
   # Transaction tracer captures deep information about slow
   # transactions and sends this to the New Relic service once a
   # minute. Included in the transaction is the exact call sequence of

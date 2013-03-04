@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 
 
+//= require jquery_ui
 //= require jquery_ujs
 //= require jquery.pjax
 //= require jquery.livequery

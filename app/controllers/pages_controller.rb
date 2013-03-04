@@ -6,15 +6,9 @@ class PagesController < ApplicationController
     @channels = Channel.active.order("posts_count DESC").limit(3)
     if signed_in?
       redirect_to root_url(:subdomain => current_user.username)
+    else
+      render
     end
-  end
-
-  def about
-    @title = 'About'
-  end
-
-  def faq
-    @title = 'FAQ'
   end
 
 end

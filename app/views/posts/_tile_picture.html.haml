@@ -1,7 +1,0 @@
-- cache post do
-  .picture
-
-    %a.top{:href => post.primary_channel ? post_via_channel_url(post.primary_channel, post, :subdomain => post.user.username) : post_url(post.id, :subdomain => false)}
-      .image.cover-image{:style => "background-image: url('#{post_photo_path(post, :width => 400, :height => 400, :crop => :limit)}')"}
-      .bg
-        .caption= post.title

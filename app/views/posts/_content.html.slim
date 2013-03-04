@@ -1,0 +1,8 @@
+- if @post.status == 'idea' && !defined?(@editing)
+  .notice.idea This post is an idea. It is only viewable by you until you publish it!
+
+div class="post-full #{defined?(@editing) ? 'editor' : ''}"
+  = yield
+
+= render 'posts/audio_player'
+#post-data  data-d={:id => @post.id, :url => post_url(@post.id)}.to_json status=@post.status

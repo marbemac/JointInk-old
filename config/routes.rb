@@ -17,6 +17,8 @@ ThisThat::Application.routes.draw do
       post 'update-photo' => 'posts#update_photo', :as => :post_update_photo
       put 'remove-photo' => 'posts#remove_photo', :as => :post_remove_photo
 
+      post 'add-inline-photo' => 'posts#add_inline_photo', :as => :post_add_inline_photo
+
       put 'update-audio' => 'posts#update_audio', :as => :post_update_audio
       put 'remove-audio' => 'posts#remove_audio', :as => :post_remove_audio
 

@@ -2,7 +2,7 @@ atom_feed do |feed|
   feed.title "#{@user.name}'s #{@channel ? @channel.name : ''} #{@page}"
   feed.updated @posts.maximum(:updated_at)
 
-  @posts.all.each do |post|
+  @posts.scoped.each do |post|
     feed.entry(post) do |entry|
       entry.title post.title
       entry.content post.description ? post.description : 'No description.', :type => 'html'

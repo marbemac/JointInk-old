@@ -1,0 +1,110 @@
+.editor-actions
+  a.home.gray.button href=root_url(:subdomain => current_user.username) data-skip-pjax=true
+    i.icon-home
+
+  .editor-publish.action.button.has-tooltip data-placement='bottom' title='Publishing makes your post live for other people to view.'
+    i.icon-upload
+    span.name Publish
+
+  .editor-save.gray.button.has-tooltip data-placement='bottom' title='Ideas function as draft posts. Save it for later.'
+    i.icon-save
+    span.name Save As Idea
+
+  .editor-discard.gray.button
+    a href=post_path(@post) data-method='delete' data-confirm='Are you sure you want to discard this post?' data-skip-pjax=true
+      i.icon-remove
+      | Discard
+
+#left-panel
+  .title= @post.post_type == 'text' ? 'Article' : @post.post_type
+  .section.channels
+    .head
+      | Channels
+      i.icon-plus.plus title='Add a channel to this post.'
+    .content
+      = render "posts/channels_list"
+
+    #channel-autocomplete
+      input type='text' placeholder='Channel name...' autocomplete='off'
+
+  .section.post-style
+    - if @post.post_type == 'text'
+      .head Article Style
+      .content
+        ul
+          li data-value='default' class=(@post.style == 'default' ? 'on' : '')
+            i.icon.icon-double-angle-right
+            | No Image
+          li data-value='small-image' class=(@post.style == 'small-image' ? 'on' : '')
+            i.icon.icon-double-angle-right
+            | Small Image
+          li data-value='half-page' class=(@post.style == 'half-page' ? 'on' : '')
+            i.icon.icon-double-angle-right
+            | Half Page
+          li data-value='full-page' class=(@post.style == 'full-page' ? 'on' : '')
+            i.icon.icon-double-angle-right
+            | Full Page
+    - else
+      .head Picture Style
+      .content
+        ul
+          li data-value='default' class=(@post.style == 'default' ? 'on' : '')
+            i.icon.icon-double-angle-right
+            | Contain Image
+          li data-value='cover-image' class=(@post.style == 'cover-image' ? 'on' : '')
+            i.icon.icon-double-angle-right
+            | Cover Image
+
+  .section.audio
+    .head
+      | Audio
+      #audio-upload.plus
+        i.icon-plus title='Add audio this post.'
+        .fileinput-button
+          input type='file' data-url=post_update_audio_path(@post.id) name='post[audio]'
+        span.loading
+
+    .content
+      ul
+        li
+          i.icon.icon-double-angle-right
+          span.name= @post.audio.present? ? @post.audio_name : 'None'
+          a.remove href=post_remove_audio_path(:id => @post.id) data-skip-pjax=true
+            i.icon-remove title='Remove audio.'
+
+#right-panel
+  .title Extras
+  .section.attribution
+    .head
+      | Attribution
+      #add-attribution.plus
+        i.icon-plus title='Link to the original post.'
+    .clear
+
+    .content
+      ul
+        li class=(@post.attribution_link.blank? ? 'hide' : '')
+          a href=@post.attribution_link target='_blank' data-skip-pjax=true
+            i.icon.icon-double-angle-left
+            span.name= @post.attribution_link
+          a.remove href=post_path(:id => @post.id)
+            i.icon-remove title='Remove this link.'
+      #attribution-form
+        input type='text' placeholder='Original Link...' autocomplete='off'
+        .button.small.action.submit.expand-me Submit
+
+#post-editor
+
+  #editor-submit-url data-url=post_path(@post.id)
+
+  #inline-image-edit.reveal-modal.medium
+    .close-reveal-modal x
+    .title Add Inline Image
+    .content
+      .options
+        .fileinput-button.medium.upload.button
+          | Upload Image
+          span.loading
+          input type='file' name='post[photo]' data-url=post_add_inline_photo_url(@post.id, :subdomain => Rails.env == 'production' ? 'www' : false)
+
+  = render :partial => "content_#{@post.post_type}", :layout => 'content'

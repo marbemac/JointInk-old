@@ -11,14 +11,25 @@ $panel-width: 175px;
     z-index: 2000;
 
     .button {
+      margin: 0 2px;
+
       a {
         color: #FFF;
+      }
+      i {
+        margin: 0 5px 0 0;
       }
       &.editor-discard {
         &:hover {
           background: $red;
         }
       }
+    }
+  }
+
+  .inline-image {
+    .options {
+      display: block;
     }
   }
 
@@ -254,4 +265,8 @@ $panel-width: 175px;
     top: 0;
     bottom: 0;
   }
+}
+
+body .redactor_toolbar li a.redactor_btn_customimage  {
+  background: image-url('redactor-image-icon.png') no-repeat;
 }

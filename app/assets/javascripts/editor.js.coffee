@@ -2,22 +2,82 @@ jQuery ->
 
   $('#post-picture-title h1, #post-title, #post-body').attr('contenteditable', true)
 
+  `
+  function pasteHtmlAtCaret(html) {
+    var sel, range;
+    if (window.getSelection) {
+      // IE9 and non-IE
+      sel = window.getSelection();
+      if (sel.getRangeAt && sel.rangeCount) {
+      range = sel.getRangeAt(0);
+        range.deleteContents();
+
+        // Range.createContextualFragment() would be useful here but is
+        // non-standard and not supported in all browsers (IE9, for one)
+        var el = document.createElement("div");
+        el.innerHTML = html;
+        var frag = document.createDocumentFragment(), node, lastNode;
+        while ( (node = el.firstChild) ) {
+        lastNode = frag.appendChild(node);
+        }
+        range.insertNode(frag);
+
+        // Preserve the selection
+        if (lastNode) {
+        range = range.cloneRange();
+          range.setStartAfter(lastNode);
+          range.collapse(true);
+          sel.removeAllRanges();
+          sel.addRange(range);
+        }
+      }
+    } else if (document.selection && document.selection.type != "Control") {
+    // IE < 9
+    document.selection.createRange().pasteHTML(html);
+    }
+  }
+  `
+
   # start the redactor editor
   if $('#post-body').length
     $('#post-body').redactor
       fixed: true
       fixedBox: true
       fixedTop: 20
-      buttons: ['formatting','bold','italic','|','unorderedlist','orderedlist','link']
-      allowedTags: ["a", "p", "b", "i", "img", "blockquote", "ul", "ol", "li", "h3", "h4"]
+      buttons: ['formatting','bold','italic','|','unorderedlist','orderedlist','link','customimage']
+      allowedTags: ["a", "p", "b", "i", "img", "blockquote", "ul", "ol", "li", "h3", "h4", "div"]
       formattingTags: ['h3','h4','p','blockquote']
+      observeImages: false
+      convertDivs: false
+      buttonsCustom:
+        customimage:
+          title: 'Add Inline Image'
+          callback: (obj, event, key) ->
+
+            # insert the placeholder element, clean up any extra empty markup
+            pasteHtmlAtCaret('<div class="inline-image-placeholder hide"></div>')
+            target = $('.inline-image-placeholder')
+            parent = target.closest('p,div:not(.inline-image-placeholder)')
+            content = parent.clone()
+            removed = 1
+            while removed > 0
+              removed = content.find('*').filter(-> $.trim(@.innerHTML) == '').remove().length
+
+            if parent.parent().attr('id') == 'post-body' && $.trim(content.html()) == ''
+              $('.inline-image-placeholder').unwrap()
+              $('#inline-image-edit').reveal
+                closed: ->
+                  $('#post-body .inline-image-placeholder').remove()
+            else
+              $('.inline-image-placeholder').remove()
+              alert('You can only add images on new, blank lines.')
 
   # prompt them before they leave the page, unless they are publishing or discarding
   $(window).bind 'beforeunload', ->
     unless $('.editor-publish,.editor-discard').hasClass('disabled')
       return 'Are you sure you want to leave?'
 
-  # handle photo uploads
+  # handle main photo uploads
   $('#picture-wrapper .fileinput-button input').fileupload
     dataType: "text"
     type: 'POST'
@@ -36,6 +96,45 @@ jQuery ->
       result = $.parseJSON(data.result)
       $('#picture-wrapper .fileinput-button .loading').text('')
       $('#picture-wrapper .image').css('background-image', "url(#{result.url})").removeClass('cover-image contain-image').addClass(result.class)
+
+  # handle inline photo uploads
+  $('#inline-image-edit .fileinput-button input').livequery ->
+    self = $(@).parents('#inline-image-edit:first')
+    $(@).fileupload
+      dataType: "text"
+      type: 'POST'
+      paramName: 'post[photo]'
+      add: (e,data) ->
+        types = /(\.|\/)(gif|jpe?g|png)$/i
+        file = data.files[0]
+        if types.test(file.type) || types.test(file.name)
+          data.submit()
+        else
+          alert("#{file.name} is not a gif, jpeg, or png image file")
+      progress: (e, data) ->
+        progress = parseInt(data.loaded / data.total * 100, 10)
+        self.find('.fileinput-button .loading').text(" #{progress}%")
+      done: (e,data) ->
+        result = $.parseJSON(data.result)
+        self.find('.fileinput-button .loading').text('')
+        $('#post-body .inline-image-placeholder').after("<div class='inline-image'><img src='#{result.url}' /><p>Caption...</p><div class='options' contenteditable='false'><div class='small caption button'>Toggle Caption</div><div class='small remove button'>Remove Image</div><div class='button-group'><div class='small align button' data-value='left'>Left</div><div class='small align center button' data-value='center'>Center</div><div class='small align button' data-value='right'>Right</div></div></div></div>")
+        $('#post-body').find('br').remove()
+        self.trigger('reveal:close')
+
+  # inline images edit options
+  $('#post-body').on 'click', '.inline-image .remove', (e) ->
+    $(@).parents('.inline-image:first').remove()
+  $('#post-body').on 'click', '.inline-image .caption', (e) ->
+    $(@).parents('.inline-image:first').toggleClass('show-caption')
+  $('#post-body').on 'click', '.inline-image .align', (e) ->
+    $(@).parents('.inline-image:first').removeClass('left center right').addClass($(@).data('value'))
+
+  # inline image resizing
+  $('.inline-image').livequery ->
+    $(@).resizable
+      handles: 'e'
+      minWidth: 220
+      containment: $('#post-body')
 
   updatePostAudio = (data) ->
     if data
@@ -88,7 +187,11 @@ jQuery ->
     else
       data['post']['title'] = $.trim($('#post-picture-title h1').text())
 
-    data['post']['content'] = $.trim($('#post-body').html())
+    # remove jquery-ui resizing classes and markup
+    content = $('#post-body').clone()
+    content.find('.ui-resizable').removeClass('ui-resizable').find('.ui-resizable-handle').remove()
+    data['post']['content'] = $.trim(content.html())
+
     data['post']['style'] = $('#left-panel .post-style .content li.on').data('value')
 
     if $(@).hasClass('editor-publish')
@@ -107,9 +210,11 @@ jQuery ->
         if self.hasClass('editor-publish')
           window.location = data.url
       complete: ->
-        $('.editor-save, .editor-publish').removeClass('disabled')
-        $('.editor-save .name').text('Save As Idea')
-        $('.editor-publish .name').text('Publish')
+        if self.hasClass('editor-save')
+          $('.editor-save').removeClass('disabled')
+          $('.editor-save .name').text('Save As Idea')
+        else
+          $('.editor-publish .name').text('Published! Loading..')
       error: (jqXHR, textStatus, errorThrown) ->
         data = $.parseJSON(jqXHR.responseText)
         if data.errors && data.errors.primary_channel

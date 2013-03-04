@@ -91,7 +91,7 @@ module ApplicationHelper
 
     script = "
     <!-- JQUERY -->
-    <script src='http://code.jquery.com/jquery-1.9.0.js'></script>
+    <script src='http://code.jquery.com/jquery-1.9.1.js'></script>
     <script src='http://code.jquery.com/jquery-migrate-1.0.0.js'></script>
     <script>window.jQuery || document.write('<script src=\"/offline/javascripts/jquery1.9.js\"><\\/script>')</script>
     "

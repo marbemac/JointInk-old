@@ -1,0 +1,6 @@
+- content_for :og_tags do
+  meta property='og:image' content=channel_photo_path(@channel, :width => 400, :height => 400, :crop => :limit)
+
+= render "header"
+
+= render "posts/collection", :posts => @posts

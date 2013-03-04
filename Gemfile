@@ -1,12 +1,12 @@
 source :rubygems
 
-ruby '1.9.3'
+ruby '2.0.0'
 
 gem 'bundler', '~> 1.2'
-gem 'rails', '~> 3.2.11'
+gem 'rails', '~> 3.2.12'
 
 gem 'jquery-rails'
-gem "haml-rails"
+gem "slim-rails"
 gem 'pg'
 gem 'honeybadger' # Exception notification
 gem 'devise' # Authentication
@@ -39,22 +39,21 @@ gem 'fog'
 gem 'kaminari'
 gem 'sidekiq' # background jobs
 gem 'sinatra' # for sidekiq
-gem 'slim' # for sidekiq
 gem 'cache_digests'
 gem 'hirefire-resource'
 gem 'simple_form'
 gem 'sanitize'
 gem 'pg_search'
-#gem 'turbo-sprockets-rails3' # speed up asset compiling
 
-gem 'newrelic_rpm', '~> 3.5.4'
+gem 'action_dispatch-gz_static'
+gem 'newrelic_rpm', '~> 3.5.7'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.5'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier'
   gem 'compass-rails'
-  gem 'zurb-foundation'
+  gem 'zurb-foundation', '~> 3.2.5'
   gem 'font-awesome-rails'
   gem 'jquery-fileupload-rails'
 end

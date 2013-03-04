@@ -97,10 +97,12 @@ class Post < ActiveRecord::Base
     end
     # only allow some tags on content
     if content_changed?
-      self.content = Sanitize.clean(content, :elements => ['b','i','strong','em','blockquote','p','br','a','h3','h4','ol','ul','li'],
+      self.content = Sanitize.clean(content, :elements => ['b','i','strong','em','blockquote','p','br','a','h3','h4','ol','ul','li','div','img'],
                                              :protocols => {'a' => {'href' => ['http', 'https', 'mailto']}},
                                              :attributes => {
                                                  'a'          => ['href'],
+                                                 'div'        => ['class','contenteditable','style','data-value'],
+                                                 'img'        => ['src','width','height']
                                              },
                                              :add_attributes => {
                                                  'a' => {'rel' => 'nofollow', 'target' => '_blank'}
