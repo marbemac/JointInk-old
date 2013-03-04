@@ -1,6 +1,14 @@
 GIT
+  remote: git@github.com:cloudinary/cloudinary_gem.git
+  revision: 49a3fe7f88510593002808250ce2a8f1599590aa
+  specs:
+    cloudinary (1.0.44)
+      aws_cf_signer
+      rest-client
+
+GIT
   remote: git@github.com:rails/rails.git
-  revision: 54f9b7584dc145963e2b9bffb0963c9f45ff8528
+  revision: 5807513048b16a278bd10f26cb0fc5b3a0bacbec
   specs:
     actionmailer (4.0.0.beta1)
       actionpack (= 4.0.0.beta1)
@@ -86,9 +94,6 @@ GEM
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.9.1)
     chunky_png (1.2.7)
-    cloudinary (1.0.45)
-      aws_cf_signer
-      rest-client
     coderay (1.0.9)
     coffee-rails (4.0.0.beta1)
       coffee-script (>= 2.2.0)
@@ -398,7 +403,7 @@ DEPENDENCIES
   capybara (>= 1.1.2)
   carrierwave
   chronic
-  cloudinary
+  cloudinary!
   coffee-rails (~> 4.0.0.beta1)
   compass-rails
   dalli

@@ -11,7 +11,7 @@ gem 'jquery-rails'
 gem "slim-rails"
 gem 'pg'
 gem 'honeybadger' # Exception notification
-gem 'devise' # Authentication
+gem 'devise', :git => 'git@github.com:plataformatec/devise.git' # Authentication
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'yajl-ruby' # json
@@ -28,7 +28,7 @@ gem 'dalli'
 gem 'rack-pjax'
 
 gem 'mixpanel' # analytics
-gem 'cloudinary'
+gem 'cloudinary', :git => "git@github.com:cloudinary/cloudinary_gem.git"
 gem "switch_user"
 gem 'annotate'
 gem 'activerecord-postgres-hstore'
