@@ -48,6 +48,8 @@ gem 'pg_search'
 gem 'action_dispatch-gz_static'
 gem 'newrelic_rpm', '~> 3.5.7'
 
+gem 'mechanize'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.5'
   gem 'coffee-rails', '~> 3.2.1'

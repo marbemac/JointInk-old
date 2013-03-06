@@ -1027,6 +1027,24 @@ blockquote {
   }
 }
 
+#testing-new_outreach {
+  .blog-post-link {
+    margin: 3px 0;
+    i {
+      margin-right: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  }
+  .message {
+    margin: 20px 0 30px;
+    p {
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+  }
+}
+
 @import "channels";
 @import "users";
 @import "posts";

@@ -79,6 +79,9 @@ ThisThat::Application.routes.draw do
 
   # Testing
   get 'testing' => 'testing#test', :as => :test
+  get 'outreaches/new' => 'testing#new_outreach', :as => :new_outreach_path
+  get 'outreaches' => 'testing#create_outreach', :as => :outreach_path
+
 
   scope 'accounts' do
     put ':id/deauth' => 'users#account_deauth', :as => :account_deauth

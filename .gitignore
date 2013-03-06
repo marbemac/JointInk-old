@@ -71,3 +71,4 @@ ThisThat.iml
 /dump.rdb
 /.rvmrc
 /ThisThat.iml
+/config/database.yml

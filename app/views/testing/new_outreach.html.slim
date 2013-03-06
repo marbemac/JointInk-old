@@ -1,0 +1,20 @@
+h3
+  a href=params[:url] target="_blank" =params[:url]
+
+- @timeago_links.each do |t|
+  .blog-post-link
+    i.icon-caret-down
+    a href=t.attr('href') target="_blank" =t.attr('href')
+- @note_links.each do |t|
+  div.blog-post-link
+    i.icon-caret-down
+    a href=t.href target="_blank" =t.href
+
+.message
+  | Hi, my name's Matt McCormick. I'm a Co-Founder of ThisThat (getthisthat.com), a startup that's like Reddit for blogging. We organize posts in "channels". Readers discover posts from many authors in one channel, and you benefit from exposure to new readers. If you're interested, just email me at matt@getthisthat.com. We're looking for bloggers interested in gaining exposure
+  span.recent-post
+  | .
+
+iframe src="http://#{URI.parse(params[:url]).host}/ask" style="width: 100%; min-height: 400px;"
+  p No URL provided. Idiot.
+
