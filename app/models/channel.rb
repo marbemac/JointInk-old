@@ -6,6 +6,7 @@
 #  created_at  :datetime
 #  description :string(255)
 #  id          :integer          not null, primary key
+#  info        :string(255)
 #  name        :string(255)
 #  photo       :string(255)
 #  posts_count :integer
@@ -34,7 +35,7 @@ class Channel < ActiveRecord::Base
   validates :photo, :presence => true
   validates :privacy, :inclusion => { :in => ['public', 'invite'] }
 
-  attr_accessible :name, :photo, :cover_photo, :description, :privacy
+  attr_accessible :name, :photo, :cover_photo, :description, :privacy, :info
 
   scope :active, where(:status => 'active')
 
