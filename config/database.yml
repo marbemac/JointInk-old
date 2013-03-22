@@ -13,5 +13,5 @@ production:
   database: thisthat_production
   host: localhost
   username: postgres
-  password: <%= ENV["DB_PASSWORD"] %>
+  password: PU3eBEwrUw89uRa
   pool: 25

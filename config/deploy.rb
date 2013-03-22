@@ -6,7 +6,7 @@ ssh_options[:forward_agent] = true
 set :rack_env, "production"
 set :domain, '198.211.117.17'
 set :application, 'thisthat'
-set :repository,  'https://github.com/evario/foobar.git'
+set :repository,  'https://marbemac@github.com/evario/foobar.git'
 set :branch,  'master'
 set :deploy_to, "/var/www/#{application}"
 
