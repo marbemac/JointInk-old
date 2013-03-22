@@ -3,7 +3,7 @@ source :rubygems
 ruby '2.0.0'
 
 gem 'bundler'
-gem 'rails', '~> 3.2.13.rc2'
+gem 'rails', '~> 3.2.13'
 
 gem 'jquery-rails'
 gem "slim-rails"
@@ -19,8 +19,7 @@ gem 'koala', '1.6' # facebook graph api support
 gem 'twitter' # twitter api support
 gem 'chronic' # Date/Time management
 
-gem 'memcachier' # modify ENV variables to make dalli work with memcachier
-gem 'dalli', '2.6.0' # memcache
+gem 'dalli' # memcache
 
 gem 'rack-contrib', '1.1.0'
 gem 'rack-pjax'
@@ -37,16 +36,15 @@ gem 'carrierwave'
 gem 'fog'
 
 gem 'kaminari'
-gem 'sidekiq' # background jobs
-gem 'sinatra' # for sidekiq
 gem 'cache_digests'
-gem 'hirefire-resource'
 gem 'simple_form'
 gem 'sanitize'
 gem 'pg_search'
 
-gem 'action_dispatch-gz_static'
-gem 'newrelic_rpm', '~> 3.5.8'
+gem 'newrelic_rpm'
+
+gem 'capistrano'
+gem 'foreman'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.5'
@@ -60,14 +58,12 @@ end
 
 group :production, :staging do
   gem "rack-timeout"
-  gem 'unicorn'
 end
 
 group :development do
   gem 'rack-mini-profiler'
   gem 'foreman'
   gem 'pry-rails'
-  gem 'thin'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
