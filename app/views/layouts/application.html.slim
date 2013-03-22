@@ -6,7 +6,7 @@ html
 
     #data-pjax-container data-pjax-container=true
 
-      div id="#{params[:controller]}-#{params[:action]}" class="page-wrapper #{params[:controller]}-c #{@body_class} #{@fullscreen ? 'fullscreen' : ''}" style=(params[:controller] == 'users' && params[:action] == 'show' && defined?(@user) ? "background: url('#{@user.theme_background_pattern_path}');" : '')
+      div id="#{params[:controller]}-#{params[:action]}" class="page-wrapper #{params[:controller]}-c #{@body_class} #{@fullscreen ? 'fullscreen' : ''}" style=(params[:controller] == 'users' && params[:action] == 'show' && defined?(@user) ? "background: url('#{image_path(@user.theme_background_pattern_path)}');" : '')
 
         - if content_for?(:header)
           #mast-header style="#{defined?(@user) ? 'background-color: ' + @user.theme_data['header_color'] + ';' : ''}"
