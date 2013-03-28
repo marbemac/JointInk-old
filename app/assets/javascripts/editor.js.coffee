@@ -209,26 +209,19 @@ jQuery ->
       success: (data, textStatus, jqXHR) ->
         if self.hasClass('editor-publish')
           window.location = data.url
-      complete: ->
+          $('.editor-publish .name').text('Published! Loading..')
+
         if self.hasClass('editor-save')
           $('.editor-save,.editor-publish').removeClass('disabled')
           $('.editor-save .name').text('Save As Idea')
-        else
-          $('.editor-publish .name').text('Published! Loading..')
       error: (jqXHR, textStatus, errorThrown) ->
+        $('.editor-save,.editor-publish').removeClass('disabled')
+        $('.editor-publish .name').text('Publish')
+        $('.editor-save .name').text('Save As Idea')
+
         data = $.parseJSON(jqXHR.responseText)
         if data.errors && data.errors.primary_channel
-          $('#left-panel .channels').tooltip
-            placement: 'right'
-            html: true
-            title: "
-                You must add a channel before publishing.
-                Click the + to the left to choose an existing channel. <a href='/channels/new' data-skip-pjax='true' target='_blank'>Click here</a> to create a new one, and then add it with the + to the left.
-              "
-            trigger: 'manual'
-            classes: 'error'
-            width: 200
-          $('#left-panel .channels').tooltip('show')
+          $('#left-panel .channels').trigger('tooltip-show')
 
   # auto save the post every x seconds
   $('.editor').livequery ->
@@ -273,7 +266,7 @@ jQuery ->
 
   # toggle channel autocomplete
   $('#left-panel .channels .icon-plus').click (e) ->
-    $('#left-panel .channels').tooltip('destroy')
+    $('#left-panel .channels').trigger('tooltip-hide')
     $('#channel-autocomplete').animate {width: 'toggle'}, 200, ->
       $('#channel-autocomplete input').focus()
       $('.autocomplete-suggestions').css('width': $('#channel-autocomplete').css('width'))
@@ -318,7 +311,7 @@ jQuery ->
 
   # toggle attribution field
   $('#right-panel .attribution .icon-plus').click (e) ->
-    $('#right-panel .attribution').tooltip('destroy')
+    $('#right-panel .attribution').trigger('tooltip-hide')
     $('.attribution #attribution-form').animate {width: 'toggle'}, 200, ->
       $('.attribution input').focus()
 

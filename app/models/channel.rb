@@ -25,6 +25,7 @@ class Channel < ActiveRecord::Base
   friendly_id :name, :use => :slugged
 
   mount_uploader :photo, ImageUploader
+  mount_uploader :cover_photo, ImageUploader
 
   belongs_to :user, :touch => true
   has_and_belongs_to_many :posts

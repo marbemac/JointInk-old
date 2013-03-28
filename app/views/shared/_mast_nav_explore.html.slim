@@ -1,0 +1,15 @@
+.section class=(defined?(page_nav) ? 'hidden' : '')
+  .name Explore
+  ul
+    li class=(params[:action] == 'index' && params[:controller] == 'posts' ? 'on' : '')
+      a href=root_url(:subdomain => false)
+        i.icon.icon-pencil
+        | Posts
+    li class=(params[:action] == 'index' && params[:controller] == 'channels' ? 'on' : '')
+      a href=channels_url(:subdomain => false)
+        i.icon.icon-circle-blank
+        | Channels
+    li.last
+      a href='#'
+        i.icon.icon-info-sign
+        | About ThisThat

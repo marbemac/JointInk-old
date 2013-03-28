@@ -11,20 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130222185224) do
-
-  create_table "accounts", :force => true do |t|
-    t.string  "username",                       :null => false
-    t.string  "provider"
-    t.string  "uid"
-    t.string  "token"
-    t.string  "secret"
-    t.string  "status",   :default => "active"
-    t.integer "user_id"
-  end
-
-  add_index "accounts", ["provider", "uid"], :name => "index_accounts_on_provider_and_uid", :unique => true
-  add_index "accounts", ["user_id"], :name => "index_accounts_on_user_id"
+ActiveRecord::Schema.define(:version => 20130326144730) do
 
   create_table "channels", :force => true do |t|
     t.string   "name"
@@ -100,16 +87,6 @@ ActiveRecord::Schema.define(:version => 20130222185224) do
   add_index "posts", ["slug"], :name => "index_posts_on_slug", :unique => true
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
   add_index "posts", ["votes_count"], :name => "index_posts_on_votes_count"
-
-  create_table "relationships", :force => true do |t|
-    t.integer  "follower_id"
-    t.integer  "followed_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "relationships", ["followed_id"], :name => "index_relationships_on_followed_id"
-  add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
 
   create_table "users", :force => true do |t|
     t.string       "email"

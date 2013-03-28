@@ -25,7 +25,3 @@ jQuery ->
   # toggle target element
   $('.toggler').live 'click', (e) ->
     $($(@).data('target')).toggle()
-
-  # tooltips
-  $('.has-tooltip').livequery ->
-    $(@).tooltip()

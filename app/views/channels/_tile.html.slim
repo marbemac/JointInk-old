@@ -2,5 +2,14 @@
   .channel.tile
 
     a href=channel_url(channel, :subdomain => false)
-      .image.cover-image style="background-image: url('#{channel.photo_url(:medium)}')"
-      h4.name= channel.name
+      h4.name.sans-serif= channel.name
+
+      - if channel.photo.present?
+        img.badge src=channel_photo_path(channel, :width => 125, :height => 125, :crop => :thumb, :radius => '1000', :format => 'png', :border => {:width => 4, :color => '#FFF'})
+
+      - if channel.cover_photo.present?
+        .cover-image style="background-image: url('#{cover_photo_path(channel, :width => 250, :crop => :limit)}')"
+      - else
+        .squares
+
+      .bg

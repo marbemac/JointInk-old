@@ -20,4 +20,25 @@ module UserHelper
     end
   end
 
+  def user_mast_nav_options(user)
+    options = {
+        :name => user.name,
+        :page_nav => 'users/mast_nav_section'
+    }
+
+    if user.bio && !user.bio.blank?
+      options[:subheader] = user.bio
+    end
+
+    if user.avatar.present?
+      options[:badge_url] = user_avatar_path(user, :width => 125, :height => 125, :crop => :thumb, :gravity => :face, :radius => '1000', :border => {:width => 3, :color => '#333'})
+    end
+
+    if user.cover_photo.present?
+      options[:cover_photo_url] = cover_photo_path(user, :width => 450, :crop => :limit)
+    end
+
+    options
+  end
+
 end

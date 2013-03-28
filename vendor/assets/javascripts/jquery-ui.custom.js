@@ -1,23 +1,18 @@
-/*! jQuery UI - v1.10.1 - 2013-02-28
+/*! jQuery UI - v1.10.2 - 2013-03-27
  * http://jqueryui.com
- * Includes: jquery.ui.core.js, jquery.ui.widget.js, jquery.ui.mouse.js, jquery.ui.resizable.js, jquery.ui.effect.js, jquery.ui.effect-blind.js, jquery.ui.effect-bounce.js, jquery.ui.effect-clip.js, jquery.ui.effect-drop.js, jquery.ui.effect-explode.js, jquery.ui.effect-fade.js, jquery.ui.effect-fold.js, jquery.ui.effect-highlight.js, jquery.ui.effect-pulsate.js, jquery.ui.effect-scale.js, jquery.ui.effect-shake.js, jquery.ui.effect-slide.js, jquery.ui.effect-transfer.js
- * Copyright (c) 2013 jQuery Foundation and other contributors Licensed MIT */
+ * Includes: jquery.ui.core.js, jquery.ui.widget.js, jquery.ui.mouse.js, jquery.ui.resizable.js, jquery.ui.effect.js, jquery.ui.effect-explode.js, jquery.ui.effect-shake.js
+ * Copyright 2013 jQuery Foundation and other contributors Licensed MIT */
 
 (function( $, undefined ) {
 
     var uuid = 0,
         runiqueId = /^ui-id-\d+$/;
 
-// prevent duplicate loading
-// this is only a problem because we proxy existing functions
-// and we don't want to double proxy them
+// $.ui might exist from components with no dependencies, e.g., $.ui.position
     $.ui = $.ui || {};
-    if ( $.ui.version ) {
-        return;
-    }
 
     $.extend( $.ui, {
-        version: "1.10.1",
+        version: "1.10.2",
 
         keyCode: {
             BACKSPACE: 8,
@@ -47,20 +42,21 @@
 
 // plugins
     $.fn.extend({
-        _focus: $.fn.focus,
-        focus: function( delay, fn ) {
-            return typeof delay === "number" ?
-                this.each(function() {
-                    var elem = this;
-                    setTimeout(function() {
-                        $( elem ).focus();
-                        if ( fn ) {
-                            fn.call( elem );
-                        }
-                    }, delay );
-                }) :
-                this._focus.apply( this, arguments );
-        },
+        focus: (function( orig ) {
+            return function( delay, fn ) {
+                return typeof delay === "number" ?
+                    this.each(function() {
+                        var elem = this;
+                        setTimeout(function() {
+                            $( elem ).focus();
+                            if ( fn ) {
+                                fn.call( elem );
+                            }
+                        }, delay );
+                    }) :
+                    orig.apply( this, arguments );
+            };
+        })( $.fn.focus ),
 
         scrollParent: function() {
             var scrollParent;
@@ -836,7 +832,7 @@
     });
 
     $.widget("ui.mouse", {
-        version: "1.10.1",
+        version: "1.10.2",
         options: {
             cancel: "input,textarea,button,select,option",
             distance: 1,
@@ -995,7 +991,7 @@
     }
 
     $.widget("ui.resizable", $.ui.mouse, {
-        version: "1.10.1",
+        version: "1.10.2",
         widgetEventPrefix: "resize",
         options: {
             alsoResize: false,
@@ -1937,7 +1933,7 @@
     });
 
 })(jQuery);
-;(jQuery.effects || (function($, undefined) {
+(function($, undefined) {
 
     var dataSpace = "ui-effects-";
 
@@ -2768,39 +2764,42 @@
         };
 
         $.fn.extend({
-            _addClass: $.fn.addClass,
-            addClass: function( classNames, speed, easing, callback ) {
-                return speed ?
-                    $.effects.animateClass.call( this,
-                        { add: classNames }, speed, easing, callback ) :
-                    this._addClass( classNames );
-            },
+            addClass: (function( orig ) {
+                return function( classNames, speed, easing, callback ) {
+                    return speed ?
+                        $.effects.animateClass.call( this,
+                            { add: classNames }, speed, easing, callback ) :
+                        orig.apply( this, arguments );
+                };
+            })( $.fn.addClass ),
 
-            _removeClass: $.fn.removeClass,
-            removeClass: function( classNames, speed, easing, callback ) {
-                return arguments.length > 1 ?
-                    $.effects.animateClass.call( this,
-                        { remove: classNames }, speed, easing, callback ) :
-                    this._removeClass.apply( this, arguments );
-            },
+            removeClass: (function( orig ) {
+                return function( classNames, speed, easing, callback ) {
+                    return arguments.length > 1 ?
+                        $.effects.animateClass.call( this,
+                            { remove: classNames }, speed, easing, callback ) :
+                        orig.apply( this, arguments );
+                };
+            })( $.fn.removeClass ),
 
-            _toggleClass: $.fn.toggleClass,
-            toggleClass: function( classNames, force, speed, easing, callback ) {
-                if ( typeof force === "boolean" || force === undefined ) {
-                    if ( !speed ) {
-                        // without speed parameter
-                        return this._toggleClass( classNames, force );
+            toggleClass: (function( orig ) {
+                return function( classNames, force, speed, easing, callback ) {
+                    if ( typeof force === "boolean" || force === undefined ) {
+                        if ( !speed ) {
+                            // without speed parameter
+                            return orig.apply( this, arguments );
+                        } else {
+                            return $.effects.animateClass.call( this,
+                                (force ? { add: classNames } : { remove: classNames }),
+                                speed, easing, callback );
+                        }
                     } else {
+                        // without force parameter
                         return $.effects.animateClass.call( this,
-                            (force ? { add: classNames } : { remove: classNames }),
-                            speed, easing, callback );
+                            { toggle: classNames }, force, speed, easing );
                     }
-                } else {
-                    // without force parameter
-                    return $.effects.animateClass.call( this,
-                        { toggle: classNames }, force, speed, easing );
-                }
-            },
+                };
+            })( $.fn.toggleClass ),
 
             switchClass: function( remove, add, speed, easing, callback) {
                 return $.effects.animateClass.call( this, {
@@ -2819,7 +2818,7 @@
     (function() {
 
         $.extend( $.effects, {
-            version: "1.10.1",
+            version: "1.10.2",
 
             // Saves a set of properties in a data storage
             save: function( element, set ) {
@@ -3035,14 +3034,29 @@
             return effect;
         }
 
-        function standardSpeed( speed ) {
-            // valid standard speeds
-            if ( !speed || typeof speed === "number" || $.fx.speeds[ speed ] ) {
+        function standardAnimationOption( option ) {
+            // Valid standard speeds (nothing, number, named speed)
+            if ( !option || typeof option === "number" || $.fx.speeds[ option ] ) {
                 return true;
             }
 
-            // invalid strings - treat as "normal" speed
-            return typeof speed === "string" && !$.effects.effect[ speed ];
+            // Invalid strings - treat as "normal" speed
+            if ( typeof option === "string" && !$.effects.effect[ option ] ) {
+                return true;
+            }
+
+            // Complete callback
+            if ( $.isFunction( option ) ) {
+                return true;
+            }
+
+            // Options hash (but not naming an effect)
+            if ( typeof option === "object" && !option.effect ) {
+                return true;
+            }
+
+            // Didn't match any standard API
+            return false;
         }
 
         $.fn.extend({
@@ -3079,9 +3093,10 @@
                         }
                     }
 
-                    // if the element is hiddden and mode is hide,
-                    // or element is visible and mode is show
+                    // If the element already has the correct final state, delegate to
+                    // the core methods so the internal tracking of "olddisplay" works.
                     if ( elem.is( ":hidden" ) ? mode === "hide" : mode === "show" ) {
+                        elem[ mode ]();
                         done();
                     } else {
                         effectMethod.call( elem[0], args, done );
@@ -3091,39 +3106,41 @@
                 return queue === false ? this.each( run ) : this.queue( queue || "fx", run );
             },
 
-            _show: $.fn.show,
-            show: function( speed ) {
-                if ( standardSpeed( speed ) ) {
-                    return this._show.apply( this, arguments );
-                } else {
-                    var args = _normalizeArguments.apply( this, arguments );
-                    args.mode = "show";
-                    return this.effect.call( this, args );
-                }
-            },
+            show: (function( orig ) {
+                return function( option ) {
+                    if ( standardAnimationOption( option ) ) {
+                        return orig.apply( this, arguments );
+                    } else {
+                        var args = _normalizeArguments.apply( this, arguments );
+                        args.mode = "show";
+                        return this.effect.call( this, args );
+                    }
+                };
+            })( $.fn.show ),
 
-            _hide: $.fn.hide,
-            hide: function( speed ) {
-                if ( standardSpeed( speed ) ) {
-                    return this._hide.apply( this, arguments );
-                } else {
-                    var args = _normalizeArguments.apply( this, arguments );
-                    args.mode = "hide";
-                    return this.effect.call( this, args );
-                }
-            },
+            hide: (function( orig ) {
+                return function( option ) {
+                    if ( standardAnimationOption( option ) ) {
+                        return orig.apply( this, arguments );
+                    } else {
+                        var args = _normalizeArguments.apply( this, arguments );
+                        args.mode = "hide";
+                        return this.effect.call( this, args );
+                    }
+                };
+            })( $.fn.hide ),
 
-            // jQuery core overloads toggle and creates _toggle
-            __toggle: $.fn.toggle,
-            toggle: function( speed ) {
-                if ( standardSpeed( speed ) || typeof speed === "boolean" || $.isFunction( speed ) ) {
-                    return this.__toggle.apply( this, arguments );
-                } else {
-                    var args = _normalizeArguments.apply( this, arguments );
-                    args.mode = "toggle";
-                    return this.effect.call( this, args );
-                }
-            },
+            toggle: (function( orig ) {
+                return function( option ) {
+                    if ( standardAnimationOption( option ) || typeof option === "boolean" ) {
+                        return orig.apply( this, arguments );
+                    } else {
+                        var args = _normalizeArguments.apply( this, arguments );
+                        args.mode = "toggle";
+                        return this.effect.call( this, args );
+                    }
+                };
+            })( $.fn.toggle ),
 
             // helper functions
             cssUnit: function(key) {
@@ -3193,281 +3210,6 @@
         });
 
     })();
-
-})(jQuery));
-(function( $, undefined ) {
-
-    var rvertical = /up|down|vertical/,
-        rpositivemotion = /up|left|vertical|horizontal/;
-
-    $.effects.effect.blind = function( o, done ) {
-        // Create element
-        var el = $( this ),
-            props = [ "position", "top", "bottom", "left", "right", "height", "width" ],
-            mode = $.effects.setMode( el, o.mode || "hide" ),
-            direction = o.direction || "up",
-            vertical = rvertical.test( direction ),
-            ref = vertical ? "height" : "width",
-            ref2 = vertical ? "top" : "left",
-            motion = rpositivemotion.test( direction ),
-            animation = {},
-            show = mode === "show",
-            wrapper, distance, margin;
-
-        // if already wrapped, the wrapper's properties are my property. #6245
-        if ( el.parent().is( ".ui-effects-wrapper" ) ) {
-            $.effects.save( el.parent(), props );
-        } else {
-            $.effects.save( el, props );
-        }
-        el.show();
-        wrapper = $.effects.createWrapper( el ).css({
-            overflow: "hidden"
-        });
-
-        distance = wrapper[ ref ]();
-        margin = parseFloat( wrapper.css( ref2 ) ) || 0;
-
-        animation[ ref ] = show ? distance : 0;
-        if ( !motion ) {
-            el
-                .css( vertical ? "bottom" : "right", 0 )
-                .css( vertical ? "top" : "left", "auto" )
-                .css({ position: "absolute" });
-
-            animation[ ref2 ] = show ? margin : distance + margin;
-        }
-
-        // start at 0 if we are showing
-        if ( show ) {
-            wrapper.css( ref, 0 );
-            if ( ! motion ) {
-                wrapper.css( ref2, margin + distance );
-            }
-        }
-
-        // Animate
-        wrapper.animate( animation, {
-            duration: o.duration,
-            easing: o.easing,
-            queue: false,
-            complete: function() {
-                if ( mode === "hide" ) {
-                    el.hide();
-                }
-                $.effects.restore( el, props );
-                $.effects.removeWrapper( el );
-                done();
-            }
-        });
-
-    };
-
-})(jQuery);
-(function( $, undefined ) {
-
-    $.effects.effect.bounce = function( o, done ) {
-        var el = $( this ),
-            props = [ "position", "top", "bottom", "left", "right", "height", "width" ],
-
-        // defaults:
-            mode = $.effects.setMode( el, o.mode || "effect" ),
-            hide = mode === "hide",
-            show = mode === "show",
-            direction = o.direction || "up",
-            distance = o.distance,
-            times = o.times || 5,
-
-        // number of internal animations
-            anims = times * 2 + ( show || hide ? 1 : 0 ),
-            speed = o.duration / anims,
-            easing = o.easing,
-
-        // utility:
-            ref = ( direction === "up" || direction === "down" ) ? "top" : "left",
-            motion = ( direction === "up" || direction === "left" ),
-            i,
-            upAnim,
-            downAnim,
-
-        // we will need to re-assemble the queue to stack our animations in place
-            queue = el.queue(),
-            queuelen = queue.length;
-
-        // Avoid touching opacity to prevent clearType and PNG issues in IE
-        if ( show || hide ) {
-            props.push( "opacity" );
-        }
-
-        $.effects.save( el, props );
-        el.show();
-        $.effects.createWrapper( el ); // Create Wrapper
-
-        // default distance for the BIGGEST bounce is the outer Distance / 3
-        if ( !distance ) {
-            distance = el[ ref === "top" ? "outerHeight" : "outerWidth" ]() / 3;
-        }
-
-        if ( show ) {
-            downAnim = { opacity: 1 };
-            downAnim[ ref ] = 0;
-
-            // if we are showing, force opacity 0 and set the initial position
-            // then do the "first" animation
-            el.css( "opacity", 0 )
-                .css( ref, motion ? -distance * 2 : distance * 2 )
-                .animate( downAnim, speed, easing );
-        }
-
-        // start at the smallest distance if we are hiding
-        if ( hide ) {
-            distance = distance / Math.pow( 2, times - 1 );
-        }
-
-        downAnim = {};
-        downAnim[ ref ] = 0;
-        // Bounces up/down/left/right then back to 0 -- times * 2 animations happen here
-        for ( i = 0; i < times; i++ ) {
-            upAnim = {};
-            upAnim[ ref ] = ( motion ? "-=" : "+=" ) + distance;
-
-            el.animate( upAnim, speed, easing )
-                .animate( downAnim, speed, easing );
-
-            distance = hide ? distance * 2 : distance / 2;
-        }
-
-        // Last Bounce when Hiding
-        if ( hide ) {
-            upAnim = { opacity: 0 };
-            upAnim[ ref ] = ( motion ? "-=" : "+=" ) + distance;
-
-            el.animate( upAnim, speed, easing );
-        }
-
-        el.queue(function() {
-            if ( hide ) {
-                el.hide();
-            }
-            $.effects.restore( el, props );
-            $.effects.removeWrapper( el );
-            done();
-        });
-
-        // inject all the animations we just queued to be first in line (after "inprogress")
-        if ( queuelen > 1) {
-            queue.splice.apply( queue,
-                [ 1, 0 ].concat( queue.splice( queuelen, anims + 1 ) ) );
-        }
-        el.dequeue();
-
-    };
-
-})(jQuery);
-(function( $, undefined ) {
-
-    $.effects.effect.clip = function( o, done ) {
-        // Create element
-        var el = $( this ),
-            props = [ "position", "top", "bottom", "left", "right", "height", "width" ],
-            mode = $.effects.setMode( el, o.mode || "hide" ),
-            show = mode === "show",
-            direction = o.direction || "vertical",
-            vert = direction === "vertical",
-            size = vert ? "height" : "width",
-            position = vert ? "top" : "left",
-            animation = {},
-            wrapper, animate, distance;
-
-        // Save & Show
-        $.effects.save( el, props );
-        el.show();
-
-        // Create Wrapper
-        wrapper = $.effects.createWrapper( el ).css({
-            overflow: "hidden"
-        });
-        animate = ( el[0].tagName === "IMG" ) ? wrapper : el;
-        distance = animate[ size ]();
-
-        // Shift
-        if ( show ) {
-            animate.css( size, 0 );
-            animate.css( position, distance / 2 );
-        }
-
-        // Create Animation Object:
-        animation[ size ] = show ? distance : 0;
-        animation[ position ] = show ? 0 : distance / 2;
-
-        // Animate
-        animate.animate( animation, {
-            queue: false,
-            duration: o.duration,
-            easing: o.easing,
-            complete: function() {
-                if ( !show ) {
-                    el.hide();
-                }
-                $.effects.restore( el, props );
-                $.effects.removeWrapper( el );
-                done();
-            }
-        });
-
-    };
-
-})(jQuery);
-(function( $, undefined ) {
-
-    $.effects.effect.drop = function( o, done ) {
-
-        var el = $( this ),
-            props = [ "position", "top", "bottom", "left", "right", "opacity", "height", "width" ],
-            mode = $.effects.setMode( el, o.mode || "hide" ),
-            show = mode === "show",
-            direction = o.direction || "left",
-            ref = ( direction === "up" || direction === "down" ) ? "top" : "left",
-            motion = ( direction === "up" || direction === "left" ) ? "pos" : "neg",
-            animation = {
-                opacity: show ? 1 : 0
-            },
-            distance;
-
-        // Adjust
-        $.effects.save( el, props );
-        el.show();
-        $.effects.createWrapper( el );
-
-        distance = o.distance || el[ ref === "top" ? "outerHeight": "outerWidth" ]( true ) / 2;
-
-        if ( show ) {
-            el
-                .css( "opacity", 0 )
-                .css( ref, motion === "pos" ? -distance : distance );
-        }
-
-        // Animation
-        animation[ ref ] = ( show ?
-            ( motion === "pos" ? "+=" : "-=" ) :
-            ( motion === "pos" ? "-=" : "+=" ) ) +
-            distance;
-
-        // Animate
-        el.animate( animation, {
-            queue: false,
-            duration: o.duration,
-            easing: o.easing,
-            complete: function() {
-                if ( mode === "hide" ) {
-                    el.hide();
-                }
-                $.effects.restore( el, props );
-                $.effects.removeWrapper( el );
-                done();
-            }
-        });
-    };
 
 })(jQuery);
 (function( $, undefined ) {
@@ -3556,478 +3298,6 @@
 })(jQuery);
 (function( $, undefined ) {
 
-    $.effects.effect.fade = function( o, done ) {
-        var el = $( this ),
-            mode = $.effects.setMode( el, o.mode || "toggle" );
-
-        el.animate({
-            opacity: mode
-        }, {
-            queue: false,
-            duration: o.duration,
-            easing: o.easing,
-            complete: done
-        });
-    };
-
-})( jQuery );
-(function( $, undefined ) {
-
-    $.effects.effect.fold = function( o, done ) {
-
-        // Create element
-        var el = $( this ),
-            props = [ "position", "top", "bottom", "left", "right", "height", "width" ],
-            mode = $.effects.setMode( el, o.mode || "hide" ),
-            show = mode === "show",
-            hide = mode === "hide",
-            size = o.size || 15,
-            percent = /([0-9]+)%/.exec( size ),
-            horizFirst = !!o.horizFirst,
-            widthFirst = show !== horizFirst,
-            ref = widthFirst ? [ "width", "height" ] : [ "height", "width" ],
-            duration = o.duration / 2,
-            wrapper, distance,
-            animation1 = {},
-            animation2 = {};
-
-        $.effects.save( el, props );
-        el.show();
-
-        // Create Wrapper
-        wrapper = $.effects.createWrapper( el ).css({
-            overflow: "hidden"
-        });
-        distance = widthFirst ?
-            [ wrapper.width(), wrapper.height() ] :
-            [ wrapper.height(), wrapper.width() ];
-
-        if ( percent ) {
-            size = parseInt( percent[ 1 ], 10 ) / 100 * distance[ hide ? 0 : 1 ];
-        }
-        if ( show ) {
-            wrapper.css( horizFirst ? {
-                height: 0,
-                width: size
-            } : {
-                height: size,
-                width: 0
-            });
-        }
-
-        // Animation
-        animation1[ ref[ 0 ] ] = show ? distance[ 0 ] : size;
-        animation2[ ref[ 1 ] ] = show ? distance[ 1 ] : 0;
-
-        // Animate
-        wrapper
-            .animate( animation1, duration, o.easing )
-            .animate( animation2, duration, o.easing, function() {
-                if ( hide ) {
-                    el.hide();
-                }
-                $.effects.restore( el, props );
-                $.effects.removeWrapper( el );
-                done();
-            });
-
-    };
-
-})(jQuery);
-(function( $, undefined ) {
-
-    $.effects.effect.highlight = function( o, done ) {
-        var elem = $( this ),
-            props = [ "backgroundImage", "backgroundColor", "opacity" ],
-            mode = $.effects.setMode( elem, o.mode || "show" ),
-            animation = {
-                backgroundColor: elem.css( "backgroundColor" )
-            };
-
-        if (mode === "hide") {
-            animation.opacity = 0;
-        }
-
-        $.effects.save( elem, props );
-
-        elem
-            .show()
-            .css({
-                backgroundImage: "none",
-                backgroundColor: o.color || "#ffff99"
-            })
-            .animate( animation, {
-                queue: false,
-                duration: o.duration,
-                easing: o.easing,
-                complete: function() {
-                    if ( mode === "hide" ) {
-                        elem.hide();
-                    }
-                    $.effects.restore( elem, props );
-                    done();
-                }
-            });
-    };
-
-})(jQuery);
-(function( $, undefined ) {
-
-    $.effects.effect.pulsate = function( o, done ) {
-        var elem = $( this ),
-            mode = $.effects.setMode( elem, o.mode || "show" ),
-            show = mode === "show",
-            hide = mode === "hide",
-            showhide = ( show || mode === "hide" ),
-
-        // showing or hiding leaves of the "last" animation
-            anims = ( ( o.times || 5 ) * 2 ) + ( showhide ? 1 : 0 ),
-            duration = o.duration / anims,
-            animateTo = 0,
-            queue = elem.queue(),
-            queuelen = queue.length,
-            i;
-
-        if ( show || !elem.is(":visible")) {
-            elem.css( "opacity", 0 ).show();
-            animateTo = 1;
-        }
-
-        // anims - 1 opacity "toggles"
-        for ( i = 1; i < anims; i++ ) {
-            elem.animate({
-                opacity: animateTo
-            }, duration, o.easing );
-            animateTo = 1 - animateTo;
-        }
-
-        elem.animate({
-            opacity: animateTo
-        }, duration, o.easing);
-
-        elem.queue(function() {
-            if ( hide ) {
-                elem.hide();
-            }
-            done();
-        });
-
-        // We just queued up "anims" animations, we need to put them next in the queue
-        if ( queuelen > 1 ) {
-            queue.splice.apply( queue,
-                [ 1, 0 ].concat( queue.splice( queuelen, anims + 1 ) ) );
-        }
-        elem.dequeue();
-    };
-
-})(jQuery);
-(function( $, undefined ) {
-
-    $.effects.effect.puff = function( o, done ) {
-        var elem = $( this ),
-            mode = $.effects.setMode( elem, o.mode || "hide" ),
-            hide = mode === "hide",
-            percent = parseInt( o.percent, 10 ) || 150,
-            factor = percent / 100,
-            original = {
-                height: elem.height(),
-                width: elem.width(),
-                outerHeight: elem.outerHeight(),
-                outerWidth: elem.outerWidth()
-            };
-
-        $.extend( o, {
-            effect: "scale",
-            queue: false,
-            fade: true,
-            mode: mode,
-            complete: done,
-            percent: hide ? percent : 100,
-            from: hide ?
-                original :
-            {
-                height: original.height * factor,
-                width: original.width * factor,
-                outerHeight: original.outerHeight * factor,
-                outerWidth: original.outerWidth * factor
-            }
-        });
-
-        elem.effect( o );
-    };
-
-    $.effects.effect.scale = function( o, done ) {
-
-        // Create element
-        var el = $( this ),
-            options = $.extend( true, {}, o ),
-            mode = $.effects.setMode( el, o.mode || "effect" ),
-            percent = parseInt( o.percent, 10 ) ||
-                ( parseInt( o.percent, 10 ) === 0 ? 0 : ( mode === "hide" ? 0 : 100 ) ),
-            direction = o.direction || "both",
-            origin = o.origin,
-            original = {
-                height: el.height(),
-                width: el.width(),
-                outerHeight: el.outerHeight(),
-                outerWidth: el.outerWidth()
-            },
-            factor = {
-                y: direction !== "horizontal" ? (percent / 100) : 1,
-                x: direction !== "vertical" ? (percent / 100) : 1
-            };
-
-        // We are going to pass this effect to the size effect:
-        options.effect = "size";
-        options.queue = false;
-        options.complete = done;
-
-        // Set default origin and restore for show/hide
-        if ( mode !== "effect" ) {
-            options.origin = origin || ["middle","center"];
-            options.restore = true;
-        }
-
-        options.from = o.from || ( mode === "show" ? {
-            height: 0,
-            width: 0,
-            outerHeight: 0,
-            outerWidth: 0
-        } : original );
-        options.to = {
-            height: original.height * factor.y,
-            width: original.width * factor.x,
-            outerHeight: original.outerHeight * factor.y,
-            outerWidth: original.outerWidth * factor.x
-        };
-
-        // Fade option to support puff
-        if ( options.fade ) {
-            if ( mode === "show" ) {
-                options.from.opacity = 0;
-                options.to.opacity = 1;
-            }
-            if ( mode === "hide" ) {
-                options.from.opacity = 1;
-                options.to.opacity = 0;
-            }
-        }
-
-        // Animate
-        el.effect( options );
-
-    };
-
-    $.effects.effect.size = function( o, done ) {
-
-        // Create element
-        var original, baseline, factor,
-            el = $( this ),
-            props0 = [ "position", "top", "bottom", "left", "right", "width", "height", "overflow", "opacity" ],
-
-        // Always restore
-            props1 = [ "position", "top", "bottom", "left", "right", "overflow", "opacity" ],
-
-        // Copy for children
-            props2 = [ "width", "height", "overflow" ],
-            cProps = [ "fontSize" ],
-            vProps = [ "borderTopWidth", "borderBottomWidth", "paddingTop", "paddingBottom" ],
-            hProps = [ "borderLeftWidth", "borderRightWidth", "paddingLeft", "paddingRight" ],
-
-        // Set options
-            mode = $.effects.setMode( el, o.mode || "effect" ),
-            restore = o.restore || mode !== "effect",
-            scale = o.scale || "both",
-            origin = o.origin || [ "middle", "center" ],
-            position = el.css( "position" ),
-            props = restore ? props0 : props1,
-            zero = {
-                height: 0,
-                width: 0,
-                outerHeight: 0,
-                outerWidth: 0
-            };
-
-        if ( mode === "show" ) {
-            el.show();
-        }
-        original = {
-            height: el.height(),
-            width: el.width(),
-            outerHeight: el.outerHeight(),
-            outerWidth: el.outerWidth()
-        };
-
-        if ( o.mode === "toggle" && mode === "show" ) {
-            el.from = o.to || zero;
-            el.to = o.from || original;
-        } else {
-            el.from = o.from || ( mode === "show" ? zero : original );
-            el.to = o.to || ( mode === "hide" ? zero : original );
-        }
-
-        // Set scaling factor
-        factor = {
-            from: {
-                y: el.from.height / original.height,
-                x: el.from.width / original.width
-            },
-            to: {
-                y: el.to.height / original.height,
-                x: el.to.width / original.width
-            }
-        };
-
-        // Scale the css box
-        if ( scale === "box" || scale === "both" ) {
-
-            // Vertical props scaling
-            if ( factor.from.y !== factor.to.y ) {
-                props = props.concat( vProps );
-                el.from = $.effects.setTransition( el, vProps, factor.from.y, el.from );
-                el.to = $.effects.setTransition( el, vProps, factor.to.y, el.to );
-            }
-
-            // Horizontal props scaling
-            if ( factor.from.x !== factor.to.x ) {
-                props = props.concat( hProps );
-                el.from = $.effects.setTransition( el, hProps, factor.from.x, el.from );
-                el.to = $.effects.setTransition( el, hProps, factor.to.x, el.to );
-            }
-        }
-
-        // Scale the content
-        if ( scale === "content" || scale === "both" ) {
-
-            // Vertical props scaling
-            if ( factor.from.y !== factor.to.y ) {
-                props = props.concat( cProps ).concat( props2 );
-                el.from = $.effects.setTransition( el, cProps, factor.from.y, el.from );
-                el.to = $.effects.setTransition( el, cProps, factor.to.y, el.to );
-            }
-        }
-
-        $.effects.save( el, props );
-        el.show();
-        $.effects.createWrapper( el );
-        el.css( "overflow", "hidden" ).css( el.from );
-
-        // Adjust
-        if (origin) { // Calculate baseline shifts
-            baseline = $.effects.getBaseline( origin, original );
-            el.from.top = ( original.outerHeight - el.outerHeight() ) * baseline.y;
-            el.from.left = ( original.outerWidth - el.outerWidth() ) * baseline.x;
-            el.to.top = ( original.outerHeight - el.to.outerHeight ) * baseline.y;
-            el.to.left = ( original.outerWidth - el.to.outerWidth ) * baseline.x;
-        }
-        el.css( el.from ); // set top & left
-
-        // Animate
-        if ( scale === "content" || scale === "both" ) { // Scale the children
-
-            // Add margins/font-size
-            vProps = vProps.concat([ "marginTop", "marginBottom" ]).concat(cProps);
-            hProps = hProps.concat([ "marginLeft", "marginRight" ]);
-            props2 = props0.concat(vProps).concat(hProps);
-
-            el.find( "*[width]" ).each( function(){
-                var child = $( this ),
-                    c_original = {
-                        height: child.height(),
-                        width: child.width(),
-                        outerHeight: child.outerHeight(),
-                        outerWidth: child.outerWidth()
-                    };
-                if (restore) {
-                    $.effects.save(child, props2);
-                }
-
-                child.from = {
-                    height: c_original.height * factor.from.y,
-                    width: c_original.width * factor.from.x,
-                    outerHeight: c_original.outerHeight * factor.from.y,
-                    outerWidth: c_original.outerWidth * factor.from.x
-                };
-                child.to = {
-                    height: c_original.height * factor.to.y,
-                    width: c_original.width * factor.to.x,
-                    outerHeight: c_original.height * factor.to.y,
-                    outerWidth: c_original.width * factor.to.x
-                };
-
-                // Vertical props scaling
-                if ( factor.from.y !== factor.to.y ) {
-                    child.from = $.effects.setTransition( child, vProps, factor.from.y, child.from );
-                    child.to = $.effects.setTransition( child, vProps, factor.to.y, child.to );
-                }
-
-                // Horizontal props scaling
-                if ( factor.from.x !== factor.to.x ) {
-                    child.from = $.effects.setTransition( child, hProps, factor.from.x, child.from );
-                    child.to = $.effects.setTransition( child, hProps, factor.to.x, child.to );
-                }
-
-                // Animate children
-                child.css( child.from );
-                child.animate( child.to, o.duration, o.easing, function() {
-
-                    // Restore children
-                    if ( restore ) {
-                        $.effects.restore( child, props2 );
-                    }
-                });
-            });
-        }
-
-        // Animate
-        el.animate( el.to, {
-            queue: false,
-            duration: o.duration,
-            easing: o.easing,
-            complete: function() {
-                if ( el.to.opacity === 0 ) {
-                    el.css( "opacity", el.from.opacity );
-                }
-                if( mode === "hide" ) {
-                    el.hide();
-                }
-                $.effects.restore( el, props );
-                if ( !restore ) {
-
-                    // we need to calculate our new positioning based on the scaling
-                    if ( position === "static" ) {
-                        el.css({
-                            position: "relative",
-                            top: el.to.top,
-                            left: el.to.left
-                        });
-                    } else {
-                        $.each([ "top", "left" ], function( idx, pos ) {
-                            el.css( pos, function( _, str ) {
-                                var val = parseInt( str, 10 ),
-                                    toRef = idx ? el.to.left : el.to.top;
-
-                                // if original was "auto", recalculate the new value from wrapper
-                                if ( str === "auto" ) {
-                                    return toRef + "px";
-                                }
-
-                                return val + toRef + "px";
-                            });
-                        });
-                    }
-                }
-
-                $.effects.removeWrapper( el );
-                done();
-            }
-        });
-
-    };
-
-})(jQuery);
-(function( $, undefined ) {
-
     $.effects.effect.shake = function( o, done ) {
 
         var el = $( this ),
@@ -4084,91 +3354,6 @@
         }
         el.dequeue();
 
-    };
-
-})(jQuery);
-(function( $, undefined ) {
-
-    $.effects.effect.slide = function( o, done ) {
-
-        // Create element
-        var el = $( this ),
-            props = [ "position", "top", "bottom", "left", "right", "width", "height" ],
-            mode = $.effects.setMode( el, o.mode || "show" ),
-            show = mode === "show",
-            direction = o.direction || "left",
-            ref = (direction === "up" || direction === "down") ? "top" : "left",
-            positiveMotion = (direction === "up" || direction === "left"),
-            distance,
-            animation = {};
-
-        // Adjust
-        $.effects.save( el, props );
-        el.show();
-        distance = o.distance || el[ ref === "top" ? "outerHeight" : "outerWidth" ]( true );
-
-        $.effects.createWrapper( el ).css({
-            overflow: "hidden"
-        });
-
-        if ( show ) {
-            el.css( ref, positiveMotion ? (isNaN(distance) ? "-" + distance : -distance) : distance );
-        }
-
-        // Animation
-        animation[ ref ] = ( show ?
-            ( positiveMotion ? "+=" : "-=") :
-            ( positiveMotion ? "-=" : "+=")) +
-            distance;
-
-        // Animate
-        el.animate( animation, {
-            queue: false,
-            duration: o.duration,
-            easing: o.easing,
-            complete: function() {
-                if ( mode === "hide" ) {
-                    el.hide();
-                }
-                $.effects.restore( el, props );
-                $.effects.removeWrapper( el );
-                done();
-            }
-        });
-    };
-
-})(jQuery);
-(function( $, undefined ) {
-
-    $.effects.effect.transfer = function( o, done ) {
-        var elem = $( this ),
-            target = $( o.to ),
-            targetFixed = target.css( "position" ) === "fixed",
-            body = $("body"),
-            fixTop = targetFixed ? body.scrollTop() : 0,
-            fixLeft = targetFixed ? body.scrollLeft() : 0,
-            endPosition = target.offset(),
-            animation = {
-                top: endPosition.top - fixTop ,
-                left: endPosition.left - fixLeft ,
-                height: target.innerHeight(),
-                width: target.innerWidth()
-            },
-            startPosition = elem.offset(),
-            transfer = $( "<div class='ui-effects-transfer'></div>" )
-                .appendTo( document.body )
-                .addClass( o.className )
-                .css({
-                    top: startPosition.top - fixTop ,
-                    left: startPosition.left - fixLeft ,
-                    height: elem.innerHeight(),
-                    width: elem.innerWidth(),
-                    position: targetFixed ? "fixed" : "absolute"
-                })
-                .animate( animation, o.duration, o.easing, function() {
-                    transfer.remove();
-                    done();
-                });
     };
 
 })(jQuery);

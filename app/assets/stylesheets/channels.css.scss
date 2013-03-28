@@ -1,80 +1,59 @@
-.channel-badge {
-  img {
-    vertical-align: middle;
-  }
-  .text {
-    display: inline-block;
-    margin: 0 0 0 10px;
-  }
-  .name {
-    font-weight: 700;
-    color: #222;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-  .description {
-
-  }
-}
-
-.channels-c {
-  #page-nav {
-    nav {
-      border-top: 1px solid #AAA;
-    }
-  }
-}
-
 .channel.tile {
+  @include border-radius(2px);
   display: inline-block;
   vertical-align: top;
   padding: 0;
   position: relative;
-  background-color: #000;
+  background-color: #FFF;
   margin: 0 -2px;
+  width: 250px;
+  height: 300px;
+  overflow: hidden;
+  margin: 0 20px 20px 0;
+  position: relative;
 
-  .image {
-    @include opacity(0.7);
-    width: 300px;
-    height: 300px;
-    background-color: #EFEFEF;
+  a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
   }
   .name {
     @include text-shadow(black 0 1px 3px);
     position: absolute;
-    bottom: 5%;
-    left: 5%;
-    right: 5%;
+    top: 7%;
+    left: 8%;
+    right: 8%;
+    margin: 0;
+    z-index: 10;
     color: #FFF;
-    text-align: center;
+    line-height: 30px;
+    font-weight: normal;
   }
-  .subheader {
-    margin: 3px 0 0 0;
+  img {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 125px;
+    height: 125px;
+  }
+  .bg {
+    @include box-shadow(0 70px 70px -20px rgba(0, 0, 0, 0.65) inset);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+  }
+  .squares {
+    background: image-url('squaresBG.png');
+    background-color: #222;
+    width: 100%;
+    height: 100%;
   }
   &:hover {
-    .image {
-      @include opacity(0.5);
-    }
-  }
-
-  &.blank {
-    a {
-      width: 300px;
-      height: 300px;
-      display: block;
-      background: #222;
-    }
-    .name {
-      @include text-shadow(none);
-      line-height: 270px;
-      margin: 0;
-      color: #EFEFEF;
-    }
-    &:hover {
-      a {
-        background: #444;
-      }
+    .bg {
+      @include box-shadow(0 70px 70px -20px rgba(0, 0, 0, 0.85) inset);
     }
   }
 }

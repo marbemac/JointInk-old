@@ -6,34 +6,28 @@ html
 
     #data-pjax-container data-pjax-container=true
 
-      div id="#{params[:controller]}-#{params[:action]}" class="page-wrapper #{params[:controller]}-c #{@body_class} #{@fullscreen ? 'fullscreen' : ''}" style=(params[:controller] == 'users' && params[:action] == 'show' && defined?(@user) ? "background: url('#{image_path(@user.theme_background_pattern_path)}');" : '')
+      div id="#{params[:controller]}-#{params[:action]}" class="page-wrapper #{params[:controller]}-c #{@body_class} #{@fullscreen ? 'fullscreen' : ''}"
 
-        - if content_for?(:header)
-          #mast-header style="#{defined?(@user) ? 'background-color: ' + @user.theme_data['header_color'] + ';' : ''}"
-            = yield :header
+        - if content_for?(:mast_nav)
+          #mast-nav-padder
+          #mast-nav
+            = yield :mast_nav
 
-        #page-nav
-          = yield :page_nav
-
-        #container
+        #container class=(content_for?(:mast_nav) ? 'with-mast-nav' : '')
 
           = render 'layouts/messages'
-
-          .page-header
-            = yield :page_header
 
           #main role='main'
             = yield
 
           #loader Loading...
 
-        - unless params[:controller] == 'posts' && (params[:action] == 'new' || params[:action] == 'edit')
-          = render 'layouts/nav'
+        /- unless params[:controller] == 'posts' && (params[:action] == 'new' || params[:action] == 'edit')
+        /  = render 'layouts/nav'
 
     == common_js
 
     script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js'
-    script src='//cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/javascripts/foundation.min.js'
 
     = javascript_include_tag "application"
 

@@ -17,7 +17,7 @@
 
 #left-panel
   .title= @post.post_type == 'text' ? 'Article' : @post.post_type
-  .section.channels
+  .section.channels.has-tip.manual-tip data-theme='alert' data-position='fixed' data-placement='right' title="You must add a channel before publishing. Click the + button to the left to choose an existing channel. <a href='#{new_channel_path}' data-skip-pjax='true' target='_blank'>Click here</a> to create a new one, and then add it with + the to the left."
     .head
       | Channels
       i.icon-plus.plus title='Add a channel to this post.'

@@ -12,17 +12,23 @@ $tt-color: #666;
 $accent-color: yellow;
 $action-color: #3ea1cd;
 $secondary-color: #51A351;
+$blue-gray-color: #6A7180;
 
 // Site structure
 // --------------------------------------------------
 
 $site-vertical-padding: 55px;
 $site-horizontal-padding: 15px;
-$header-height: 400px;
-$post-width: 400px;
+$mast-nav-height: 400px;
+$mast-nav-width: 33%;
+$mast-nav-max-width: 420px;
 $post-margin: 20px;
 $post-height: 449px;
 $post-article-max-width: 650px;
+$body-bg-color: #EFEFEF;
+
+// deprecated
+$header-height: 400px;
 
 // Grays
 // -------------------------
@@ -32,6 +38,7 @@ $grayDark:              #333 !default;
 $gray:                  #555 !default;
 $grayLight:             #AAA !default;
 $grayLighter:           #eee !default;
+$grayLightest:          #D7D8D9 !default;
 $white:                 #fff !default;
 
 

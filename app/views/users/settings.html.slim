@@ -1,3 +1,5 @@
+= render "shared/mast_nav", user_mast_nav_options(@user)
+
 #settings.tt-form
   .section
     h1.sans-serif Settings
@@ -11,10 +13,10 @@
       = f.error_notification
       = f.error :base
 
-      .fileinput-button
+      .fileinput-button.circle
         span.prompt Choose Photo
         div
-          img src=(@user.avatar.present? ? user_avatar_path(@user, :width => 200, :height => 200, :crop => :fit) : '')
+          img src=(@user.avatar.present? ? user_avatar_path(@user, :width => 200, :height => 200, :crop => :thumb, :gravity => :face) : '')
           = f.hidden_field :avatar_cache
         = f.file_field :avatar, :tabindex => '-1'
       = f.error :avatar
@@ -31,28 +33,17 @@
       = f.error :base
 
       .line
-        .name
-          | Top Header Color
+        .name Cover Photo
         .content
-          #colorSelector
-            div style="background-color: #{@user.theme_header_color};"
-          = f.input :theme_header_color, :as => :hidden
+          .fileinput-button.rectangle
+            span.prompt Choose Photo
+            div
+              img src=(@user.cover_photo.present? ? cover_photo_path(@user, :width => 200, :height => 250, :crop => :fit) : '')
+              = f.hidden_field :cover_photo_cache
+            = f.file_field :cover_photo, :tabindex => '-1'
+          = f.error :cover_photo
 
-      .line
-        .name
-          .inside-name Background Pattern
-          .subheader
-            | Patterns courtesy of
-            a href='http://subtlepatterns.com/' target='_blank'
-        .content
-          #patternSelector style="background: url(#{image_path(@user.theme_background_pattern_path)});" data-patterns=User.theme_background_patterns.to_json data-current-index=User.theme_background_patterns.index(@user.theme_background_pattern)
-            .prev title='Previous pattern.'
-              i.icon-arrow-left
-            .next title='Next pattern.'
-              i.icon-arrow-right
-          = f.input :theme_background_pattern, :as => :hidden
-
-      = f.button :submit, :class => 'medium action submit button', :value => 'Save Theme'
+      = f.button :submit, :class => 'medium action submit button', :value => 'Save Cover Photo'
 
 
   .section.email

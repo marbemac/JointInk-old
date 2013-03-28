@@ -47,11 +47,11 @@ gem 'capistrano'
 gem 'foreman'
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.5'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails',   '~> 3.2.6'
+  gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier'
   gem 'compass-rails'
-  gem 'zurb-foundation', '~> 3.2.5'
+  gem 'zurb-foundation'
   gem 'font-awesome-rails'
   gem 'jquery-fileupload-rails'
 end
@@ -65,8 +65,9 @@ group :development do
   gem 'foreman'
   gem 'pry-rails'
   gem 'better_errors'
-  gem 'binding_of_caller'
+  #gem 'binding_of_caller'
   gem 'meta_request'
+  gem 'rails-dev-tweaks'
 end
 
 group :test do

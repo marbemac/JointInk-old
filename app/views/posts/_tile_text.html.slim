@@ -1,9 +1,13 @@
 - cache post do
-  div class="article #{post.photo_url ? 'with-photo' : ''}"
-
-    a.top href=(post.primary_channel ? post_via_channel_url(post.primary_channel, post, :subdomain => post.user.username) : post_url(post.id, :subdomain => false))
-      - if post.photo_url
-        .image.cover-image style="background-image: url('#{post_photo_path(post, :width => 400, :height => 300, :crop => :limit)}')"
-      .text
-        h1= post.title
-        p= truncate(post.content_clean, :length => 500)
+  a href=(post.primary_channel ? post_via_channel_url(post.primary_channel, post, :subdomain => post.user.username) : post_url(post.id, :subdomain => false))
+    - if post.photo_url && post.style == 'full-page'
+      img.full-image src=post_photo_path(post, :width => 560, :crop => :limit)
+      .bg
+        h2= post.title
+    - elsif post.photo_url && post.style != 'default'
+      .half-image.cover-image style="background-image: url('#{post_photo_path(post, :width => 500, :crop => :limit)}')"
+      h2= post.title
+      p= truncate(post.content_clean, :length => 300)
+    - else
+      h2= post.title
+      p= truncate(post.content_clean, :length => 500)

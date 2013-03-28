@@ -1,124 +1,105 @@
+$max-post-width: 700px;
+$post-top-padding: 0px;
+$post-right-padding: 70px;
+$post-left-padding: 0px;
+$post-bottom-margin: 50px;
+
 .post.tile {
-  @include box-shadow(rgba(0, 0, 0, 0.20) 0 1px 2px);
-  $top-vertical-padding: 25px;
-  $horizontal-padding: 25px;
-  $bottom-height: 54px;
-  $bottom-vertical-padding: 20px;
 
-  width: $post-width;
-  height: $post-height - $bottom-height;
-  display: inline-block;
-  background: #FFF;
+  max-width: $max-post-width;
+  width: 100%;
   position: relative;
-  padding: 0 0 $bottom-height 0;
-  text-align: left;
-  margin: 15px;
-  vertical-align: top;
+  padding: $post-top-padding $post-right-padding 0 $post-left-padding;
+  margin: 0 0 $post-bottom-margin;
 
-  .top {
-    display: block;
-    height: $post-height - $bottom-height - ($top-vertical-padding * 3) +5;
-    overflow: hidden;
+  .content {
+    @include border-radius(2px);
+
     position: relative;
+    display: block;
+    background: #FCFCFC;
+    overflow: hidden;
+    border: 1px solid #DDD;
 
-    .image {
-      background-position: 50% center;
-      background-repeat: no-repeat;
-      background-size: cover;
+    .full-image {
+      width: 100%;
       display: block;
-      height: 192px;
     }
-    .text {
-      padding-left: 20px;
-      padding-right: 20px;
-      padding-top: 18px;
-      padding-top: 1.8rem;
+    .half-image {
+      width: 100%;
+      height: 200px;
+    }
+    h2 {
+      margin: 0;
+      font-size: 26px;
+      font-size: 2.6rem;
+      line-height: 34px;
+      line-height: 3.4rem;
+      font-weight: 700;
+      padding: 20px 0 20px 25px;
+    }
+    p {
+      font-size: 16px;
+      color: #222;
+      padding: 0px 25px 20px 25px;
+      margin: -5px 0 0 0;
+    }
+    &:hover {
+      border-color: #CCC;
 
-      h1 {
-        margin: 0;
-        font-size: 26px;
-        font-size: 2.6rem;
-        line-height: 34px;
-        line-height: 3.4rem;
-        font-weight: 700;
-      }
-      p {
-        font-size: 16px;
-        margin-top: 15px;
-        color: #222;
+      .actions {
+        display: block;
       }
     }
   }
-  .bottom {
+  .bg {
     position: absolute;
+    top: 0;
+    left: 0;
     bottom: 0;
-    left: 20px;
-    right: 20px;
-    padding: $bottom-vertical-padding $horizontal-padding $bottom-vertical-padding 0;
-    border-top: 1px solid #EEE;
-    height: $bottom-height;
-    font-size: 12px;
+    right: 0;
+
+    h2 {
+      color: #FFF;
+    }
+  }
+  .meta {
+    position: absolute;
+    right: 0;
+    top: $post-top-padding + 1;
+    width: 65px;
 
     a {
-      color: #333;
-      &:hover {
-        text-decoration: underline;
+      display: block;
+    }
+    img {
+      @include border-radius(2px);
+      display: block;
+    }
+    .user {
+      display: block;
+      margin: 0 0 20px 0;
+      img {
+        width: 65px;
       }
     }
-    .channel {
-      font-weight: bold;
-    }
-    .icon-double-angle-right {
-      display: none;
-    }
-    .i-wrapper {
-      position: absolute;
-      top: 17px;
-      right: 0px;
-      font-size: 20px;
-      font-size: 2rem;
-      cursor: default;
-      >i, >a {
-        float: right;
-        margin-left: 15px;
-        color: #999;
-        text-decoration: none;
+    .channels {
+      img {
+        width: 65px;
+      }
+      li {
+        margin: 0 0 5px 0;
       }
     }
   }
-  .with-photo {
-    .top {
-      .text {
-        padding-bottom: 18px;
-        padding-bottom: 1.8rem;
-
-        h1 {
-          font-size: 22px;
-          font-size: 2.2rem;
-          line-height: 28px;
-          line-height: 2.8rem;
-        }
-        p {
-          margin-top: 10px;
-        }
-      }
+  .article {
+    .bg {
+      @include box-shadow(0 70px 70px -20px rgba(0, 0, 0, 0.65) inset);
     }
   }
   .picture {
-    height: 100%;
-    .top {
-      height: 100%;
-    }
-    .image {
-      height: 100%;
-    }
     .bg {
       @include box-shadow(0 -70px 70px -20px rgba(0, 0, 0, 0.65) inset);
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
     }
     .caption {
       position: absolute;
@@ -126,7 +107,7 @@
       left: 0;
       color: #FFF;
       font-style: italic;
-      padding: 20px 25px;
+      padding: 25px 30px;
       width: 100%;
       font-weight: 500;
       line-height: 16px;
@@ -134,11 +115,10 @@
     }
   }
   .actions {
-    @include box-shadow(rgba(0, 0, 0, 0.1) 0 1px 2px);
     background: $action-color;
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
     padding: 7px 10px;
     display: none;
 
@@ -166,75 +146,31 @@
       }
     }
   }
-  &.channel-page {
-    .bottom {
-      .in,
-      .channel {
-        display: none;
-      }
-    }
-  }
+
   &.user-page {
-    .bottom {
-      .in,
+    .meta {
       .user {
         display: none;
       }
-      .icon-double-angle-right {
-        display: inline;
-      }
     }
   }
-
-  &.blank {
-    @include box-shadow(none);
-    text-align: center;
-    background: #222;
-    border: none;
-
-    .title {
-      font-size: 34px;
-      font-size: 3.4rem;
-      margin: 50px 0 5px 0;
-      cursor: default;
-      font-weight: bold;
-      color: #EFEFEF;
-    }
-    p {
-      color: #CCC;
-      font-size: 16px;
-      padding: 0 20px;
-      line-height: 22px;
-    }
-    .buttons {
-      margin: 40px 0 0 0;
-
-      a {
-        margin: 10px 0 0 0;
-        width: 170px;
-      }
-    }
-    &:hover {
-      @include box-shadow(none);
-    }
-  }
-
-  &:hover {
-    @include box-shadow(rgba(0, 0, 0, 0.3) 0 1px 2px);
-
-    .actions {
-      display: block;
-    }
-    .bottom {
-      border-top: 1px solid #DDD;
-    }
+  &.channel-page {
   }
 }
 
 #post-collection {
-  @include clearfix();
-  position: relative;
-  text-align: center;
+  display: inline-block;
+
+  .end {
+    text-align: center;
+    color: $blue-gray-color;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 60px 0;
+    padding: 0 $post-right-padding 0 0;
+    cursor: default;
+    text-transform: uppercase;
+  }
 }
 
 #posts-show,
@@ -252,6 +188,7 @@
   }
   #container,
   #header {
+    display: block;
     width: 100%;
     padding: 0;
   }

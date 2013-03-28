@@ -11,7 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 
 
-//= require jquery_ui
+//= require jquery-ui.custom.js
 //= require jquery_ujs
 //= require jquery.pjax
 //= require jquery.livequery
@@ -27,7 +27,6 @@
 //= require jquery.cookie
 //= require jquery.autocomplete
 //= require jquery.jplayer
-//= require colorpicker
-//= require bootstrap.tooltips
+//= require foundation.reveal
 
 //= require_tree ./global

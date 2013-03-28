@@ -8,26 +8,51 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- //= require foundation_and_overrides
  //= require font-awesome
- //= require bootstrap.tooltips
- //= require colorpicker
- //= require jquery-ui
  *= require_self
 */
 
-@import "compass";
+@import "normalize";
+@import "foundation/foundation-global";
+
+// Foundation Components
+@import
+"foundation/components/global",
+"foundation/components/visibility",
+"foundation/components/type",
+"foundation/components/buttons",
+"foundation/components/forms",
+"foundation/components/reveal",
+"foundation/components/alert-boxes";
+
+// Compass compontents
+@import "compass/css3/border-radius";
+@import "compass/css3/transition";
+@import "compass/css3/text-shadow";
+@import "compass/css3/opacity";
+@import "compass/css3/images";
+@import "compass/css3/box-shadow";
+@import "compass/utilities/general";
+
+// Custom variables
 @import "variables";
+
+@import "tooltips";
 
 /* apply a natural box layout model to all elements */
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; margin:0; padding:0; }
 
+body, div, dl, dt, dd, ul, ol, li, p {
+  font-size: 14px;
+}
+
 html {
   height: 100%;
+  font-size: 62.5%;
 }
 
 body {
-  background: #f3f3ed;
+  background: $body-bg-color;
   height: 100%;
 }
 
@@ -130,11 +155,14 @@ blockquote {
 }
 
 .button {
-  @include transition();
+  @include transition(0.25s);
   @include box-shadow(none);
   border: none;
   text-transform: uppercase;
 
+  .icon {
+    margin: 0 5px 0 0;
+  }
   &.red {
     background: $red;
     border-color: darken($red, 10%);
@@ -146,6 +174,48 @@ blockquote {
     background: $grayLight;
     &:hover {
       background: darken($grayLight, 10%);
+    }
+  }
+  &.light-gray {
+    background: #FAFBFB;
+    border: 1px solid $grayLightest;
+    color: $blue-gray-color;
+
+    a {
+      color: $blue-gray-color;
+    }
+    .icon {
+      color: #AAAAAA;
+    }
+    &:hover {
+      background: $action-color;
+      color: #FFF;
+      border-color: $action-color;
+      a,
+      .icon {
+        color: #FFF;
+      }
+    }
+  }
+  &.dark-gray {
+    background: #222;
+    border: none;
+    color: #FCFCFC;
+
+    a {
+      color: #FCFCFC;
+    }
+    .icon {
+      color: #FCFCFC;
+    }
+    &:hover {
+      background: $action-color;
+      color: #FFF;
+      border-color: $action-color;
+      a,
+      .icon {
+        color: #FFF;
+      }
     }
   }
   &.white {
@@ -327,13 +397,14 @@ blockquote {
 }
 
 #container {
-  padding: $site-vertical-padding $site-horizontal-padding;
+  padding: 0;
   height: 100%;
-}
-#container,
-#mast-header header {
-  width: 1360px;
-  margin: auto;
+  display: inline-block;
+  width: 99 - $mast-nav-width;
+
+  &.with-mast-nav {
+    padding: 0 10px 0 5%;
+  }
 }
 
 #main {
@@ -370,16 +441,28 @@ blockquote {
   }
 }
 
-#mast-header {
-  max-height: $header-height;
-  padding: 25px 0 80px 0;
+#mast-nav-padder {
+  width: $mast-nav-width;
+  max-width: $mast-nav-max-width;
+  display: inline-block;
+  height: 100%;
+}
+#mast-nav {
   position: relative;
   background-color: #FFF;
-  background-image: image-url('squaresBG.png');
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: $mast-nav-width;
+  max-width: $mast-nav-max-width;
+  border-right: 1px solid $grayLightest;
+  overflow: hidden;
 
   header {
     position: relative;
-    text-align: center;
+    min-height: 100px;
+    padding: 0 130px 20px 0;
 
     h1,
     .subheader {
@@ -387,208 +470,144 @@ blockquote {
       padding: 0;
     }
     h1 {
-      margin-top: 5px;
+      margin: 25px 0 0 20px;
+      font-size: 24px;
     }
     .subheader {
       font-weight: 300;
+      font-size: 16px;
+      margin: 5px 0 0 20px;
     }
     .extra {
       font-weight: 300;
-      font-size: 18px;
-      margin-top: 30px;
+      font-size: 13px;
+      margin: 20px 0 0 20px;
+      color: #6F6F6F;
       a {
-        color: inherit;
-        &:hover {
-          text-decoration: underline;
+        color: darken(#6F6F6F, 10%);
+        font-weight: bold;
+      }
+    }
+  }
+
+  .badge {
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    width: 125px;
+    height: 125px;
+  }
+
+  nav {
+    position: relative;
+    margin: 20px 0 0 0;
+
+    .section {
+      margin: 50px 0 0 0;
+      position: relative;
+
+      .name {
+        display: none;
+        font-weight: bold;
+        font-size: 16px;
+        position: absolute;
+        top: -22px;
+        right: 15px;
+      }
+      ul {
+        border-top: 1px solid $grayLightest;
+        border-bottom: 1px solid $grayLightest;
+      }
+      li {
+        display: none;
+        border-top: 1px solid transparent;
+
+        a {
+          color: $blue-gray-color;
+          font-size: 16px;
+          padding: 6px 20px;
+          display: block;
+          background: #FAFBFB;
+
+          &:hover {
+            background: #FFF;
+          }
+        }
+        .icon {
+          margin: 0 7px 0 0;
+          font-size: 13px;
+          position: relative;
+          top: -1px;
+          color: #AAA;
+        }
+        &.on {
+          display: block;
+
+          a {
+            font-weight: bold;
+          }
+        }
+      }
+      &.first {
+        margin: 0 0 0 0;
+      }
+      &.hidden {
+        display: none;
+      }
+    }
+    .icon-caret-down {
+      position: absolute;
+      top: 13px;
+      right: 15px;
+      font-size: 16px;
+      color: #6A7180;
+    }
+    &:hover {
+      .icon-caret-down {
+        display: none;
+      }
+      .name {
+        display: block;
+      }
+      .section {
+        display: block;
+      }
+      li {
+        display: block;
+        border-bottom: 1px solid #F0F1F5;
+        border-top-color:  #FFF;
+
+        &.last {
+          border-bottom: none;
+        }
+        &.on {
+          a {
+            background: transparent;
+          }
         }
       }
     }
-    img {
-      position: absolute;
-      top: -20px;
-      left: 10px;
-    }
-  }
-}
-
-#mast-nav {
-  @include opacity(0.75);
-  position: fixed;
-  top: 5px;
-  right: 5px;
-  z-index: 1000;
-
-  .home {
-    background: #222;
-    font-size: 24px;
-    font-size: 2.4rem;
-    padding: 8px 12px 0 12px;
-    color: #FFF;
-    height: 42px;
-    float: left;
-    margin-right: 3px;
-
-    &:hover {
-      color: $accent-color;
-    }
-  }
-  .dropdown {
-    float: left;
-    height: 50px;
-
-    .name {
-      background: #222;
-      font-size: 24px;
-      font-size: 2.4rem;
-      color: #FFF;
-      padding: 8px 35px 0 12px;
-      position: relative;
-      height: 42px;
-
-      .icon-chevron-down {
-        position: absolute;
-        font-size: 16px;
-        font-size: 1.6rem;
-        top: 13px;
-        right: 10px;
-      }
-    }
-    .menu {
-      position: absolute;
-      top: 40px;
-      right: 0px;
-      margin-top: 5px;
-      background: #222;
-      width: 100%;
-      display: none;
-    }
-    .divider {
-      border-bottom: 1px solid #FFF;
-      margin: 5px 0;
-    }
-    &:hover {
-      .name {
-        cursor: default;
-        color: $accent-color;
-      }
-      .menu {
-        display: block;
-      }
-    }
-  }
-  &:hover {
-    @include opacity(1);
   }
 }
 
 #page-nav {
-  nav {
-    $link-color: #8A8A7A;
+  @include clearfix();
+  padding: 30px 0;
 
-    background: #FFF;
-    border-top: 1px solid transparent;
-    border-bottom: 1px solid #AAA;
-    text-align: center;
-    padding: 6px 0;
-    position: relative;
-    height: 42px;
-    margin-top: -1px;
+  .button {
+    @include border-radius(2px);
+  }
 
-    .left,
-    .right {
-      position: absolute;
-
-      >li {
-        display: inline-block;
-        font-size: 18px;
-        font-weight: 300;
-        margin: 0 5px 0;
-        color: $link-color;
-
-        >a {
-          color: $link-color;
-          position: relative;
-          padding: 10px 0;
-          .icon-caret-up {
-            position: absolute;
-            bottom: -6px;
-            left: 50%;
-            margin-left: -13px;
-            font-size: 20px;
-            color: #AAA;
-            display: none;
-          }
-        }
-        &.action {
-          color: $action-color;
-        }
-        &:hover {
-          a {
-            color: darken($link-color, 10%);
-          }
-          .icon-caret-up {
-            display: block;
-          }
-        }
-        &.on {
-          a {
-            color: darken($link-color, 10%);
-            font-weight: bold;
-          }
-          .icon-caret-up {
-            display: block;
-          }
-        }
-      }
-    }
-    .left {
-      right: 50%;
-      margin-right: 75px;
-    }
-    .right {
-      left: 50%;
-      margin-left: 75px;
-    }
-    .circle-image {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      top: -50px;
-      left: 50%;
-      margin-left: -60px;
-    }
-    .circle-dot {
-      color: $link-color;
-      font-size: 18px;
-      margin: 0 5px;
-      display: none;
+  .left-box {
+    float: left;
+    .button {
+      margin: 0 5px 0 0;
     }
   }
-  .text-dropdown {
-    .name {
-      font-size: 18px;
-      cursor: default;
-    }
-    .menu {
-      background: #222;
-    }
-    .icon-caret-up {
-      color: #222 !important;
-    }
-    ul {
-      margin: 0;
-      text-align: left;
-    }
-    li {
-      text-align: left;
-      margin: 0;
-      font-size: 14px;
-      a {
-        color: #FFF !important;
-        &:hover {
-          color: #222 !important;
-        }
-      }
+  .right-box {
+    float: right;
+    .button {
+      margin: 0 0 0 5px;
     }
   }
 }
@@ -763,6 +782,18 @@ blockquote {
   }
 }
 
+.left-sections {
+  .section {
+    margin-bottom: 100px;
+
+    .head {
+      font-weight: 300;
+      margin: 30px 0 10px 0;
+      cursor: default;
+    }
+  }
+}
+
 .tt-form {
   max-width: 575px;
   margin: -25px auto 50px auto;
@@ -912,31 +943,43 @@ blockquote {
     color: #8F8F8F;
   }
   .fileinput-button {
-    @include border-radius(1000px);
     cursor: pointer;
-    width: 125px;
-    height: 125px;
     background: transparent;
     border: 1px solid #999;
-    margin: 0 auto 20px auto;
     text-align: center;
     position: relative;
     cursor: pointer;
 
     .prompt {
-      margin: 56px 5px 0 5px;
+      position: absolute;
+      padding-top: 56px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      text-align: center;
       font-size: 13px;
       color: #999;
       display: block;
     }
     img {
-      @include border-radius(1000px);
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
-      height: 100%;
       cursor: pointer;
+    }
+    &.circle {
+      @include border-radius(1000px);
+      width: 125px;
+      height: 125px;
+      margin: 0 auto 20px auto;
+
+      img {
+        @include border-radius(1000px);
+        height: 100%;
+      }
+    }
+    &.rectangle {
+      width: 200px;
+      height: 250px;
     }
   }
   .alert {
@@ -973,31 +1016,6 @@ blockquote {
     border: 6px solid rgba(255,255,255,0.3);
     height: 100%;
     width: 100%;
-  }
-}
-
-.tooltip {
-  background: none;
-  font-weight: normal;
-  line-height: 18px;
-  .tooltip-inner {
-    @include border-radius(0);
-    padding: 8px;
-  }
-  &.in {
-    @include opacity(0.9);
-  }
-  &.error {
-    .tooltip-inner {
-      background-color: $red;
-    }
-    .tooltip-arrow {
-      border-right-color: $red;
-    }
-    a {
-      color: #000;
-      font-weight: bold;
-    }
   }
 }
 

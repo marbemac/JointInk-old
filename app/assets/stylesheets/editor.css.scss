@@ -18,6 +18,10 @@ $panel-width: 175px;
       }
       i {
         margin: 0 5px 0 0;
+
+        &.icon-home {
+          margin: 0;
+        }
       }
       &.editor-discard {
         &:hover {

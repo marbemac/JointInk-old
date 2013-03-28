@@ -1,17 +1,9 @@
-- content_for :header do
-  header
-    hrgroup
-      h1.sans-serif Channels
+= render "shared/mast_nav", home_mast_nav_options
 
-      h3.subheader.sans-serif
-        = ["We haz them.", "The best idea since sliced bread.", "You likey?", "They're for surfing.", "Not to be confused with 'Chanel'."][rand(5)]
+.left-sections
+  = render "users/channels_page_nav"
 
-.centered-sections
   .section
-    h3.sans-serif.head
-      = "#{@channels.count} Channels"
-    i.icon-caret-down
     .content
-      = render "channels/create_channel_tile"
-      - for channel in @channels
+      - @channels.each do |channel|
         = render "channels/tile", :channel => channel
