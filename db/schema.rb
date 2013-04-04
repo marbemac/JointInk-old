@@ -13,6 +13,19 @@
 
 ActiveRecord::Schema.define(:version => 20130326144730) do
 
+  create_table "accounts", :force => true do |t|
+    t.string  "username",                       :null => false
+    t.string  "provider"
+    t.string  "uid"
+    t.string  "token"
+    t.string  "secret"
+    t.string  "status",   :default => "active"
+    t.integer "user_id"
+  end
+
+  add_index "accounts", ["provider", "uid"], :name => "index_accounts_on_provider_and_uid", :unique => true
+  add_index "accounts", ["user_id"], :name => "index_accounts_on_user_id"
+
   create_table "channels", :force => true do |t|
     t.string   "name"
     t.string   "slug"

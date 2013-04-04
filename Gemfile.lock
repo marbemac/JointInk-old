@@ -43,6 +43,8 @@ GEM
     better_errors (0.7.2)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
+    binding_of_caller (0.7.1)
+      debug_inspector (>= 0.0.1)
     builder (3.0.4)
     cache_digests (0.2.0)
       actionpack (>= 3.2)
@@ -53,18 +55,9 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    capybara (2.0.3)
-      mime-types (>= 1.16)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      selenium-webdriver (~> 2.0)
-      xpath (~> 1.0.0)
     carrierwave (0.8.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
-    childprocess (0.3.9)
-      ffi (~> 1.0, >= 1.0.11)
     chronic (0.9.1)
     chunky_png (1.2.7)
     cloudinary (1.0.50)
@@ -85,33 +78,19 @@ GEM
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
     dalli (2.6.2)
-    database_cleaner (0.9.1)
+    debug_inspector (0.0.2)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
-    diff-lcs (1.2.1)
-    em-websocket (0.5.0)
-      eventmachine (>= 0.12.9)
-      http_parser.rb (~> 0.5.3)
-    email_spec (1.4.0)
-      launchy (~> 2.1)
-      mail (~> 2.2)
     erubis (2.7.0)
     escape (0.0.4)
-    eventmachine (1.0.3)
     excon (0.20.1)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    factory_girl (4.2.0)
-      activesupport (>= 3.0.0)
-    factory_girl_rails (4.2.1)
-      factory_girl (~> 4.2.0)
-      railties (>= 3.0.0)
     faraday (0.8.7)
       multipart-post (~> 1.1)
-    ffi (1.6.0)
     fog (1.10.0)
       builder
       excon (~> 0.14)
@@ -129,25 +108,11 @@ GEM
     formatador (0.2.4)
     friendly_id (4.0.9)
     fssm (0.2.10)
-    guard (1.6.2)
-      listen (>= 0.6.0)
-      lumberjack (>= 1.0.2)
-      pry (>= 0.9.10)
-      terminal-table (>= 1.4.3)
-      thor (>= 0.14.6)
-    guard-livereload (1.1.3)
-      em-websocket (>= 0.2.0)
-      guard (>= 1.5.0)
-      multi_json (~> 1.0)
-    guard-rspec (2.5.1)
-      guard (>= 1.1)
-      rspec (~> 2.11)
     hashie (1.2.0)
     highline (1.6.16)
     hike (1.2.1)
     honeybadger (1.6.1)
       json
-    http_parser.rb (0.5.3)
     httpauth (0.2.0)
     i18n (0.6.1)
     journey (1.0.4)
@@ -167,10 +132,6 @@ GEM
       addressable (~> 2.2)
       faraday (~> 0.8)
       multi_json (~> 1.3)
-    launchy (2.2.0)
-      addressable (~> 2.3)
-    listen (0.7.3)
-    lumberjack (1.0.3)
     mail (2.5.3)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -267,23 +228,7 @@ GEM
       json (~> 1.4)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rspec (2.13.0)
-      rspec-core (~> 2.13.0)
-      rspec-expectations (~> 2.13.0)
-      rspec-mocks (~> 2.13.0)
-    rspec-core (2.13.1)
-    rspec-expectations (2.13.0)
-      diff-lcs (>= 1.1.3, < 2.0)
-    rspec-mocks (2.13.0)
-    rspec-rails (2.13.0)
-      actionpack (>= 3.0)
-      activesupport (>= 3.0)
-      railties (>= 3.0)
-      rspec-core (~> 2.13.0)
-      rspec-expectations (~> 2.13.0)
-      rspec-mocks (~> 2.13.0)
     ruby-hmac (0.4.0)
-    rubyzip (0.9.9)
     sanitize (2.0.3)
       nokogiri (>= 1.4.4, < 1.6)
     sass (3.2.7)
@@ -291,11 +236,6 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    selenium-webdriver (2.31.0)
-      childprocess (>= 0.2.5)
-      multi_json (~> 1.0)
-      rubyzip
-      websocket (~> 1.0.4)
     sendgrid (1.1.0)
       json
       json
@@ -319,7 +259,6 @@ GEM
       tilt (~> 1.1, != 1.3.0)
     switch_user (0.9.1)
     temple (0.5.5)
-    terminal-table (1.4.5)
     thor (0.18.0)
     tilt (1.3.6)
     treetop (1.4.12)
@@ -335,9 +274,6 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.1)
       rack (>= 1.0)
-    websocket (1.0.7)
-    xpath (1.0.0)
-      nokogiri (~> 1.3)
     yajl-ruby (1.1.0)
     zurb-foundation (4.0.9)
       sass (>= 3.2.0)
@@ -350,33 +286,27 @@ DEPENDENCIES
   annotate
   ar_pg_array
   better_errors
+  binding_of_caller
   bundler
   cache_digests
   cancan (>= 1.6.8)
   capistrano
-  capybara (>= 1.1.2)
   carrierwave
   chronic
   cloudinary
   coffee-rails (~> 3.2.2)
   compass-rails
   dalli
-  database_cleaner
   devise
-  email_spec (>= 1.2.1)
-  factory_girl_rails (>= 4.0.0)
   fog
   font-awesome-rails
   foreman
   friendly_id (~> 4.0.9)
-  guard-livereload
-  guard-rspec
   honeybadger
   jquery-fileupload-rails
   jquery-rails
   kaminari
   koala (= 1.6)
-  launchy (>= 2.1.2)
   meta_request
   mixpanel
   newrelic_rpm
@@ -391,7 +321,6 @@ DEPENDENCIES
   rack-timeout
   rails (~> 3.2.13)
   rails-dev-tweaks
-  rspec-rails (>= 2.12.2)
   sanitize
   sass-rails (~> 3.2.6)
   sendgrid

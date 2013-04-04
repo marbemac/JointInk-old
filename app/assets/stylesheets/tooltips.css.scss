@@ -17,12 +17,24 @@
     position: absolute;
     color: #111;
     font-size: 20px;
-    top: 50%;
-    margin-top: -10px;
   }
 
   &.transition {
     @include transition(.1s);
+  }
+  &.tip-top,
+  &.tip-bottom {
+    .caret {
+      left: 50%;
+      margin-left: -5.5px;
+    }
+  }
+  &.tip-left,
+  &.tip-right {
+    .caret {
+      top: 50%;
+      margin-top: -10px;
+    }
   }
   &.tip-left {
     .caret {
@@ -36,12 +48,12 @@
   }
   &.tip-top {
     .caret {
-      bottom: -6px;
+      bottom: -13px;
     }
   }
   &.tip-bottom {
     .caret {
-      top: -6px;
+      top: -13px;
     }
   }
   &.tip-absolute {

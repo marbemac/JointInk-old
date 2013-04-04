@@ -1,7 +1,7 @@
 = render "shared/mast_nav", user_mast_nav_options(@user)
 
 .left-sections
-  = render "users/channels_page_nav"
+  = render "users/channels_page_nav" if signed_in? && current_user.id == @user.id
 
   .section
     .content

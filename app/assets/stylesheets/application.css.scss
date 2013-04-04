@@ -159,6 +159,7 @@ blockquote {
   @include box-shadow(none);
   border: none;
   text-transform: uppercase;
+  margin: 0;
 
   .icon {
     margin: 0 5px 0 0;
@@ -592,7 +593,7 @@ blockquote {
 
 #page-nav {
   @include clearfix();
-  padding: 30px 0;
+  padding: 0 0 30px 0;
 
   .button {
     @include border-radius(2px);
@@ -783,6 +784,8 @@ blockquote {
 }
 
 .left-sections {
+  padding: 40px 0 0 0;
+
   .section {
     margin-bottom: 100px;
 

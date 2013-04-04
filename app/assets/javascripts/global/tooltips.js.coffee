@@ -60,7 +60,7 @@ jQuery ->
         $offsetRight = $(document).width() - $offsetLeft + 10
         $offsetLeft = 'auto'
 
-    $tooltip.removeClass($themes.join(',')+$placements.join(',')+$positions.join(',')).addClass("#{$position} #{$theme} #{$placement}")
+    $tooltip.removeClass("#{$themes.join(' ')} #{$placements.join(' ')} #{$positions.join(' ')}").addClass("#{$position} #{$theme} #{$placement}")
     $tooltip.find('.caret').removeClass('icon-caret-up,icon-caret-right,icon-caret-down,icon-caret-left').addClass($iconClass)
 
     unless $new

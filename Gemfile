@@ -62,21 +62,9 @@ end
 
 group :development do
   gem 'rack-mini-profiler'
-  gem 'foreman'
   gem 'pry-rails'
   gem 'better_errors'
-  #gem 'binding_of_caller'
+  gem 'binding_of_caller'
   gem 'meta_request'
   gem 'rails-dev-tweaks'
-end
-
-group :test do
-  gem "rspec-rails", ">= 2.12.2"
-  gem "capybara", ">= 1.1.2"
-  gem "email_spec", ">= 1.2.1"
-  gem "launchy", ">= 2.1.2"
-  gem "factory_girl_rails", ">= 4.0.0"
-  gem 'guard-rspec'
-  gem 'guard-livereload'
-  gem 'database_cleaner'
 end

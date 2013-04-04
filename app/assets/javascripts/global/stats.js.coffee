@@ -22,5 +22,5 @@ jQuery ->
     $('.posts-c.text').trigger('start-stat')
 
   sendRequest = ->
-    $('.recommend').tooltip('show')
+    $('.recommend').trigger('tooltip-show')
     $.post "#{$('#post-data').data('d').url}/read_post"
