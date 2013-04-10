@@ -1,3 +1,7 @@
+#= require to-markdown
+#= require showdown
+#= require_self
+
 jQuery ->
 
   $('#post-picture-title h1, #post-title, #post-body').attr('contenteditable', true)
@@ -44,33 +48,96 @@ jQuery ->
       fixed: true
       fixedBox: true
       fixedTop: 20
-      buttons: ['formatting','bold','italic','|','unorderedlist','orderedlist','link','customimage']
-      allowedTags: ["a", "p", "b", "i", "img", "blockquote", "ul", "ol", "li", "h3", "h4", "div"]
+      buttons: ['formatting','bold','italic','|','unorderedlist','orderedlist','link','image','html']
+      allowedTags: ["a", "p", "b", "i", "img", "blockquote", "ul", "ol", "li", "h3", "h4", "pre", "code"]
       formattingTags: ['h3','h4','p','blockquote']
       observeImages: false
-      convertDivs: false
+      convertDivs: true
       buttonsCustom:
-        customimage:
+        image:
           title: 'Add Inline Image'
           callback: (obj, event, key) ->
 
             # insert the placeholder element, clean up any extra empty markup
-            pasteHtmlAtCaret('<div class="inline-image-placeholder hide"></div>')
+            pasteHtmlAtCaret('<img src="" class="inline-image-placeholder hide" />')
             target = $('.inline-image-placeholder')
-            parent = target.closest('p,div:not(.inline-image-placeholder)')
+            parent = target.closest('p')
             content = parent.clone()
             removed = 1
             while removed > 0
               removed = content.find('*').filter(-> $.trim(@.innerHTML) == '').remove().length
 
             if parent.parent().attr('id') == 'post-body' && $.trim(content.html()) == ''
-              $('.inline-image-placeholder').unwrap()
               $('#inline-image-edit').reveal
                 closed: ->
                   $('#post-body .inline-image-placeholder').remove()
             else
               $('.inline-image-placeholder').remove()
               alert('You can only add images on new, blank lines.')
+
+        html:
+          title: 'View Markdown / Distraction Free Mode'
+          callback: (obj, event, key) ->
+            # change the button title
+            if $('.redactor_btn_html').data('old-title')
+              title = $('.redactor_btn_html').data('old-title')
+              $('.redactor_btn_html').data('old-title', $('.redactor_btn_html').attr('title'))
+              $('.redactor_btn_html').attr('title', title)
+            else
+              $('.redactor_btn_html').data('old-title', $('.redactor_btn_html').attr('title'))
+              $('.redactor_btn_html').attr('title', 'Exit Distraction Free Mode')
+
+            # toggle showing the markdown editor versus the normal post editor
+            $('#post-editor').toggleClass('markdown-on')
+            if $('#post-markdown').is(':visible')
+              $('#post-markdown').fadeOut 500, ->
+                setTimeout ->
+                  $('.redactor_toolbar li,#left-panel,#right-panel,.editor-actions,#picture-wrapper,.post-top-meta,#post-title,#post-body').fadeIn 500
+                  $('.redactor_btn_html').parent().show()
+                , 100
+            else
+              $('.redactor_toolbar li,#left-panel,#right-panel,.editor-actions,#picture-wrapper,.post-top-meta,#post-title,#post-body').fadeOut 500, ->
+                setTimeout ->
+                  $('#post-markdown').fadeIn(500)
+                  $('.redactor_btn_html').parent().show()
+                , 100
+            $('#post-markdown textarea').trigger('autosize')
+            $.scrollTo(0, 400)
+
+    # Method that converts the HTML contents to Markdown
+    markdownize = (content) ->
+      html = content.split("\n").map($.trim).filter (line) ->
+        line != ""
+      .join("\n")
+      toMarkdown(html)
+
+    htmlToMarkdown = (content) ->
+      markdown = markdownize(content)
+      if ($('#post-markdown textarea').get(0).value == markdown)
+        return
+      $('#post-markdown textarea').get(0).value = markdown
+
+    # Update Markdown every time content is modified
+    $('#post-body').bind 'keyup', (event) ->
+      htmlToMarkdown($(@).html())
+
+    # Update html when markdown content is modified
+    converter = new Showdown.converter();
+    $('#post-markdown textarea').bind 'keyup', (event) ->
+      $('#post-body').html(converter.makeHtml($(@).val()))
+
+    htmlToMarkdown($('#post-body').html())
+
+    # auto resize the markdown textarea
+    $('#post-markdown textarea').autosize()
+
+    # refresh the markdown whenever redactor is interacted with
+    $('.post-full').on 'click', '.redactor_toolbar > li', (e) ->
+      htmlToMarkdown($('#post-body').html())
+
+  # toggle markdown hints
+  $('.markdown-help .head span,.markdown-help .hide-hints').click (e) ->
+    $('.markdown-help .content').toggle()
 
   # prompt them before they leave the page, unless they are publishing or discarding
   $(window).bind 'beforeunload', ->
@@ -117,24 +184,10 @@ jQuery ->
       done: (e,data) ->
         result = $.parseJSON(data.result)
         self.find('.fileinput-button .loading').text('')
-        $('#post-body .inline-image-placeholder').after("<div class='inline-image'><img src='#{result.url}' /><p>Caption...</p><div class='options' contenteditable='false'><div class='small caption button'>Toggle Caption</div><div class='small remove button'>Remove Image</div><div class='button-group'><div class='small align button' data-value='left'>Left</div><div class='small align center button' data-value='center'>Center</div><div class='small align button' data-value='right'>Right</div></div></div></div>")
+        $('#post-body .inline-image-placeholder').attr('src', result.url).removeClass('inline-image-placeholder hide')
         $('#post-body').find('br').remove()
+        htmlToMarkdown($('#post-body').html())
         self.trigger('reveal:close')
-
-  # inline images edit options
-  $('#post-body').on 'click', '.inline-image .remove', (e) ->
-    $(@).parents('.inline-image:first').remove()
-  $('#post-body').on 'click', '.inline-image .caption', (e) ->
-    $(@).parents('.inline-image:first').toggleClass('show-caption')
-  $('#post-body').on 'click', '.inline-image .align', (e) ->
-    $(@).parents('.inline-image:first').removeClass('left center right').addClass($(@).data('value'))
-
-  # inline image resizing
-  $('.inline-image').livequery ->
-    $(@).resizable
-      handles: 'e'
-      minWidth: 220
-      containment: $('#post-body')
 
   updatePostAudio = (data) ->
     if data
@@ -188,10 +241,7 @@ jQuery ->
       data['post']['title'] = $.trim($('#post-picture-title h1').text())
 
     # remove jquery-ui resizing classes and markup
-    content = $('#post-body').clone()
-    content.find('.ui-resizable').removeClass('ui-resizable').find('.ui-resizable-handle').remove()
-    data['post']['content'] = $.trim(content.html())
-
+    data['post']['content'] = $.trim($('#post-markdown textarea').val())
     data['post']['style'] = $('#left-panel .post-style .content li.on').data('value')
 
     if $(@).hasClass('editor-publish')

@@ -27,6 +27,7 @@
 
 class Post < ActiveRecord::Base
   include ActionView::Helpers::TextHelper
+  include PostHelper
 
   serialize :photo_exif, ActiveRecord::Coders::Hstore
 
@@ -97,22 +98,32 @@ class Post < ActiveRecord::Base
     end
     # only allow some tags on content
     if content_changed?
-      self.content = Sanitize.clean(content, :elements => ['b','i','strong','em','blockquote','p','br','a','h3','h4','ol','ul','li','div','img'],
-                                             :protocols => {'a' => {'href' => ['http', 'https', 'mailto']}},
-                                             :attributes => {
-                                                 'a'          => ['href'],
-                                                 'div'        => ['class','contenteditable','style','data-value'],
-                                                 'img'        => ['src','width','height']
-                                             },
-                                             :add_attributes => {
-                                                 'a' => {'rel' => 'nofollow', 'target' => '_blank'}
-                                             }
-      )
+      #self.content = Sanitize.clean(content, :elements => ['b','i','strong','em','blockquote','p','br','a','h3','h4','ol','ul','li','div','img'],
+      #                                       :protocols => {'a' => {'href' => ['http', 'https', 'mailto']}},
+      #                                       :attributes => {
+      #                                           'a'          => ['href'],
+      #                                           'div'        => ['class','contenteditable','style','data-value'],
+      #                                           'img'        => ['src','width','height']
+      #                                       },
+      #                                       :add_attributes => {
+      #                                           'a' => {'rel' => 'nofollow', 'target' => '_blank'}
+      #                                       }
+      #)
     end
   end
 
-  def content_clean
-    ActionView::Base.full_sanitizer.sanitize(content && !content.blank? ? content.gsub('<p></p>', '').gsub('</p>', '. ').gsub('..', '.') : content)
+  # removes images from content
+  def content_short
+    if content.blank?
+      content
+    else
+      content.gsub /\!\[.*\]\(.*\)/, ''
+    end
+  end
+
+  # returns content in plain text
+  def content_plain
+    ActionView::Base.full_sanitizer.sanitize(markdown(content_short))
   end
 
   def photo_ratio
@@ -148,7 +159,7 @@ class Post < ActiveRecord::Base
   end
 
   def og_description
-    truncate(content_clean, :length => 100, :separator => ' ', :omission => '...')
+    truncate(content_plain, :length => 100, :separator => ' ', :omission => '...')
   end
 
   def og_type

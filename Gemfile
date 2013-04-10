@@ -32,6 +32,7 @@ gem 'activerecord-postgres-hstore'
 gem 'ar_pg_array'
 gem "friendly_id", "~> 4.0.9"
 
+gem 'redcarpet'
 gem 'carrierwave'
 gem 'fog'
 

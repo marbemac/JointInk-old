@@ -27,6 +27,8 @@
 
     div style="background-image: url('#{@post.photo_url}')" class="image #{@post.photo_ratio >= 1.4 ? 'cover-image' : 'contain-image'}"
 
+.post-full-placeholder
+
 div class="white-wrap #{defined?(@editing) || @post.photo.present? ? 'with-photo' : ''}"
   .content-wrapper
     - cache @post do
@@ -48,11 +50,60 @@ div class="white-wrap #{defined?(@editing) || @post.photo.present? ? 'with-photo
           == !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
 
       #post-body
-        == !@post.content.blank? ? @post.content : '<p>Content... (click to edit)</p>'
+        == markdown(@post.content)
 
-    .action-bar.hide-editing
-      = render "posts/recommend_btn"
-      - if @post.status == 'active'
-        = render "posts/share_btns"
-      - if can? :update, @post
-        = render "posts/admin_btns"
+    - unless defined?(@editing)
+      .action-bar
+        = render "posts/recommend_btn"
+        - if @post.status == 'active'
+          = render "posts/share_btns"
+        - if can? :update, @post
+          = render "posts/admin_btns"
+
+- if defined?(@editing)
+  #post-markdown
+    .markdown-help
+      .head
+        = 'You are viewing the '
+        a href='http://en.wikipedia.org/wiki/Markdown' target='_blank' rel='nofollow' markdown
+        = ' version of your post. '
+        span Click here for formatting hints.
+      .content
+        .hide-hints hide hints
+        ul.rules
+          li
+            div # A First Level Header
+          li
+            div ## A Second Level Header
+          li
+            div Paragraphs are surrounded by blank lines above and below
+          li
+            div For a line break, add two spaces to the end of the previous line
+          li
+            div = '**bold**'
+          li
+            div _italic_
+          li
+            .name Link
+            div [link text](http://example.com/)
+          li
+            .name Image
+            div ![optional caption](http://example.com/image.png)
+          li
+            .name Bullet List
+            div * Bullet 1
+            div * Bullet 2
+          li
+            .name Numbered List
+            div 1. Item 1
+            div 2. Item 2
+          li
+            .name Blockquote
+            div > This is a blockquote.
+            div >
+            div > This is the second paragraph in the blockquote.
+            div >
+            div > ## This is a second level header in a blockquote
+        .hide-hints hide hints
+
+    textarea value=@post.content

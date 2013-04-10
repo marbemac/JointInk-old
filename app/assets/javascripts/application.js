@@ -21,6 +21,7 @@
 //= require jquery-fileupload/vendor/tmpl
 //= require jquery.easing
 //= require jquery.timer
+//= require jquery.autosize
 // require jquery.timeago
 //= require jquery.hotkeys
 //= require jquery.scrollTo
