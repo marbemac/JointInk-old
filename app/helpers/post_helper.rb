@@ -10,7 +10,8 @@ module PostHelper
   end
 
   def markdown(text)
-    renderer = Redcarpet::Render::HTML.new(hard_wrap: false, filter_html: true, prettify: true, no_styles: true)
+    return '<p>Write content here..</p>'.html_safe unless text
+    renderer = Redcarpet::Render::HTML.new(hard_wrap: false, filter_html: true, prettify: true, no_styles: true, :link_attributes => {:rel => 'nofollow'})
     options = {
         autolink: true,
         no_intra_emphasis: true,

@@ -144,7 +144,7 @@ jQuery ->
     , 1000
 
   # inline image titles
-  $('#post-body img').livequery ->
-    if $(@).attr('title') && !$('.post-full').hasClass('editor')
-      title = $('<div/>').addClass('inline-image-title').text($(@).attr($(@).attr('title')))
-      $(@).after(title)
+#  $('#post-body img').livequery ->
+#    if $(@).attr('alt') && !$('.post-full').hasClass('editor')
+#      title = $('<div/>').addClass('inline-image-title').text($(@).attr($(@).attr('alt')))
+#      $(@).after(title)

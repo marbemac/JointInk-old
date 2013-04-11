@@ -1,4 +1,4 @@
-#= require to-markdown
+#= require global/to-markdown
 #= require showdown
 #= require_self
 
@@ -47,9 +47,9 @@ jQuery ->
     $('#post-body').redactor
       fixed: true
       fixedBox: true
-      fixedTop: 20
+      fixedTop: 40
       buttons: ['formatting','bold','italic','|','unorderedlist','orderedlist','link','image','html']
-      allowedTags: ["a", "p", "b", "i", "img", "blockquote", "ul", "ol", "li", "h3", "h4", "pre", "code"]
+      allowedTags: ["a", "p", "b", "i", "img", "blockquote", "ul", "ol", "li", "h3", "h4"]
       formattingTags: ['h3','h4','p','blockquote']
       observeImages: false
       convertDivs: true
