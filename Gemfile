@@ -42,6 +42,8 @@ gem 'simple_form'
 gem 'sanitize'
 gem 'pg_search'
 
+gem 'truncate_html'
+
 gem 'newrelic_rpm'
 
 gem 'capistrano'

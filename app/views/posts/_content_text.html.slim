@@ -22,8 +22,8 @@
               a.post-channel href='#' None
         - if @post.attribution_link
           .meta-two
-            = 'Originally posted at '
-            a.post-attribution href=@post.attribution_link = @post.attribution_link
+            = 'Originally published at '
+            a.post-attribution href=@post.attribution_link = URI.parse(@post.attribution_link).host
 
     div style="background-image: url('#{@post.photo_url}')" class="image #{@post.photo_ratio >= 1.4 ? 'cover-image' : 'contain-image'}"
 
@@ -43,8 +43,8 @@ div class="white-wrap #{defined?(@editing) || @post.photo.present? ? 'with-photo
               a.post-channel href='#' None
           - if @post.attribution_link
             .meta-two
-              = 'Originally posted at '
-              a.post-attribution href=@post.attribution_link = @post.attribution_link
+              = 'Originally published at '
+              a.post-attribution href=@post.attribution_link = URI.parse(@post.attribution_link).host
 
         h1#post-title.copy-over data-target='#post-picture-title h1'
           == !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'

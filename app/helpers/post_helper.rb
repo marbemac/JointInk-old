@@ -9,9 +9,16 @@ module PostHelper
     end
   end
 
-  def markdown(text)
+  def markdown(text, render_options={})
     return '<p>Write content here..</p>'.html_safe unless text
-    renderer = Redcarpet::Render::HTML.new(hard_wrap: false, filter_html: true, prettify: true, no_styles: true, :link_attributes => {:rel => 'nofollow'})
+
+    if render_options[:no_links]
+      text.gsub! /\[([^\]]+)\]\(([^)]+)\)/, '\1'
+    end
+
+    render_options = render_options.merge(hard_wrap: false, filter_html: true, prettify: true, no_styles: true, :link_attributes => {:rel => 'nofollow'})
+
+    renderer = Redcarpet::Render::HTML.new(render_options)
     options = {
         autolink: true,
         no_intra_emphasis: true,

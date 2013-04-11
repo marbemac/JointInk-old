@@ -13,8 +13,8 @@
           a.post-channel href='#' None
       - if @post.attribution_link
         .meta-two
-          = 'Originally posted at '
-          a.post-attribution href=@post.attribution_link = @post.attribution_link
+          = 'Originally published at '
+          a.post-attribution href=@post.attribution_link = URI.parse(@post.attribution_link).host
 
   .action-bar.hide-editing
     - if can? :update, @post
