@@ -1,0 +1,121 @@
+body, div, dl, dt, dd, ul, ol, p {
+  font-size: 13px;
+  font-size: 1.3rem;
+  line-height: 17px;
+  line-height: 1.7rem;
+}
+h1,h2,h3,h4,h5,h6 {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 28px;
+  font-size: 2.8rem;
+}
+
+h2 {
+  font-size: 22px;
+  font-size: 2.2rem;
+}
+
+h3 {
+  font-size: 18.7px;
+  font-size: 1.87rem;
+}
+
+h4 {
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+
+h5 {
+  font-size: 13.2px;
+  font-size: 1.32rem;
+}
+
+h6 {
+  font-size: 10.7px;
+  font-size: 1.07rem;
+}
+
+a {
+  outline: 0;
+  color: $action-color;
+
+  &:focus {
+    @include box-shadow(none);
+    outline: 0;
+  }
+}
+
+p,ul,ol {
+  margin: 0 0 15px 0;
+  margin: 0 0 1.5rem 0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+}
+
+blockquote {
+  font-style: italic;
+  max-width: 500px;
+  margin: 0 0 25px -20px;
+  margin: 0 0 2.5rem -2rem;
+  padding: 0 0 0 20px;
+  padding: 0 0 0 2rem;
+  border-left: 5px solid $action-color;
+  border-left: 0.5rem solid $action-color;
+  position: relative;
+
+  p {
+    padding: 7px 0;
+    margin: 0;
+  }
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+textarea,
+select {
+  @include border-radius(0);
+  @include single-box-shadow(none);
+  border: 1px solid #999;
+  height: auto;
+  margin: 0;
+
+  &:focus {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+}
+
+label {
+  cursor: default;
+}
+
+form {
+  margin: 25px;
+  max-width: 500px;
+
+  label {
+    font-weight: bold;
+    padding: 0 0 2px 2px;
+  }
+  input {
+    max-width: 250px;
+  }
+  .submit {
+    margin: 25px 0 0 0;
+  }
+}

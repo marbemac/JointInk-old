@@ -1,24 +1,34 @@
-- content_for :mast_nav do
-  header
-    h1.sans-serif= name
-
-    - if defined? subheader
-      h3.subheader.sans-serif= subheader
-
-  - if defined? badge_url
-    img.badge src=badge_url
-
-  nav
-
-    - if defined? page_nav
-      = render page_nav
-
-    - if defined? page_nav
-      = render "shared/mast_nav_explore", :page_nav => page_nav
-    - else
-      = render "shared/mast_nav_explore"
-
-    i.icon-caret-down
-
-  - if defined? cover_photo_url
-    .bg.cover-image style="background-image: url('#{cover_photo_url}')"
+#mast-nav
+  .handle
+    i.icon-reorder
+  ul.menu
+    li
+      a href=new_channel_url(:subdomain => false) data-skip-pjax=true
+        i.icon.icon-circle-blank
+        | Channel
+    li
+      a href=new_post_url('text', 'article', :subdomain => false) data-skip-pjax=true
+        i.icon.icon-pencil
+        | Article
+    li
+      a href=new_post_url('picture', 'caption', :subdomain => false) data-skip-pjax=true
+        i.icon.icon-camera-retro
+        | Picture
+    - if signed_in?
+      li.divider
+      li
+        a href=user_url(:subdomain => current_user.username)
+          i.icon.icon-user
+          | My Page
+      li
+        a href=user_ideas_url(:subdomain => current_user.username)
+          i.icon.icon-lightbulb
+          = pluralize(@user.ideas_count, "Idea")
+      li
+        a href=settings_url(:subdomain => current_user.username)
+          i.icon.icon-cog
+          | Settings
+      li
+        a href=destroy_user_session_url(:subdomain => false) data-skip-pjax=true
+          i.icon.icon-off
+          | Logout

@@ -20,10 +20,10 @@ module UserHelper
     end
   end
 
-  def user_mast_nav_options(user)
+  def user_page_nav_options(user)
     options = {
         :name => user.name,
-        :page_nav => 'users/mast_nav_section'
+        :page_nav => 'users/page_nav_links'
     }
 
     if user.bio && !user.bio.blank?
@@ -31,7 +31,7 @@ module UserHelper
     end
 
     if user.avatar.present?
-      options[:badge_url] = user_avatar_path(user, :width => 125, :height => 125, :crop => :thumb, :gravity => :face, :radius => '1000', :border => {:width => 3, :color => '#333'})
+      options[:badge_url] = user_avatar_path(user, :width => 125, :height => 125, :crop => :thumb, :gravity => :face, :radius => '1000', :border => {:width => 3, :color => '#CCC'})
     end
 
     if user.cover_photo.present?

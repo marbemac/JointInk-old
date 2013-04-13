@@ -1,17 +1,18 @@
-div id="posts-#{post.id}" class="post-tile #{defined?(@channel) && @channel != nil ? 'channel-page' : ''} #{defined?(@user) && @user != nil ? 'user-page' : ''}"
+div id="posts-#{post.id}" class="post-tile"
 
-  div class="wrapper"
-    - cache post do
-      a class="post-tile-content #{post.post_type} #{post.post_subtype}" href=(post.primary_channel ? post_via_channel_url(post.primary_channel, post, :subdomain => post.user.username) : post_url(post.id, :subdomain => false))
-        = yield
+  - cache post do
+    a class="post-tile-content #{post.post_type} #{post.post_subtype} #{post.style}" href=(post.primary_channel ? post_via_channel_url(post.primary_channel, post, :subdomain => post.user.username) : post_url(post.id, :subdomain => false))
+      = yield
+
+  - if can? :update, post
     = render "posts/tile_actions", :post => post
 
-  .meta
-    a.user.has-tip href=user_path(:subdomain => post.user.username) title=post.user.username data-placement='left'
-      img src=user_avatar_path(post.user, :width => 75, :height => 75, :crop => :thumb, :gravity => :face)
-
-    ul.channels
-      - post.channels.each do |channel|
-        li
-          a.has-tip href=channel_url(channel, :subdomain => false) title=channel.name data-placement='left'
-            img src=channel_photo_path(channel, :width => 75, :height => 75, :crop => :thumb)
+  /.meta
+  /  a.user.has-tip href=user_path(:subdomain => post.user.username) title=post.user.username data-placement='left'
+  /    img src=user_avatar_path(post.user, :width => 75, :height => 75, :crop => :thumb, :gravity => :face)
+  /
+  /  ul.channels
+  /    - post.channels.each do |channel|
+  /      li
+  /        a.has-tip href=channel_url(channel, :subdomain => false) title=channel.name data-placement='left'
+  /          img src=channel_photo_path(channel, :width => 75, :height => 75, :crop => :thumb)

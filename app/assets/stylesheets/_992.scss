@@ -2,11 +2,61 @@
 
 // 1. ROOT 					==============================
 
-#container,
-#mast-header header {
-  width: 620px;
+
+// TRANSITION TO SIDEBAR LAYOUT
+#mast-nav {
+  bottom: auto;
+  top: 0;
+  right: 25px;
+
+  ul {
+    bottom: auto;
+    top: 100%;
+    right: -25px;
+  }
 }
+
+#page-nav-padder {
+  width: $mast-nav-width;
+  max-width: $mast-nav-max-width;
+  display: inline-block;
+  height: 100%;
+}
+
+#page-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: $mast-nav-width;
+  max-width: $mast-nav-max-width;
+  border-right: 1px solid $grayLightest;
+}
+
+#main-content-wrapper {
+  padding: 0;
+  height: 100%;
+  display: inline-block;
+  width: 99 - $mast-nav-width;
+
+  &.with-page-nav {
+    padding: 0 10px 0 5%;
+  }
+}
+
+#post-collection {
+  padding-top: 45px;
+  padding-top: 4.5rem;
+}
+// END TRANSITION TO SIDEBAR LAYOUT
+
+
 // 2. TYPOGRAPHY 			==============================
+
+html {
+  font-size: 80%;
+}
+
 // 3. COLOUR 				==============================
 // 4. TEXTURE 				==============================
 // 5. ELEMENTS 				==============================

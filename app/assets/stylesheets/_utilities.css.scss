@@ -1,0 +1,295 @@
+.hide {
+  display: none;
+}
+
+.clear {
+  clear: both;
+}
+
+.alert {
+  padding: 15px;
+  font-size: 20px;
+  font-size: 2.0rem;
+  font-weight: bold;
+  background: #FFF;
+  position: relative;
+  z-index: 1000;
+  text-align: center;
+  margin-bottom: 15px;
+
+  &.alert-success {
+    color: #FFF;
+    background: $green;
+  }
+  &.alert-error {
+    color: #FFF;
+    background: $red;
+  }
+}
+.error {
+  margin: 5px 0;
+  color: $red;
+  font-weight: bold;
+  font-size: 14px;
+  display: block;
+}
+
+.cover-image {
+  background-position: 50% center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.contain-image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.text-thin {
+  font-weight: 300;
+}
+
+.button {
+  @include transition(0.25s);
+  @include box-shadow(none);
+  border: none;
+  text-transform: uppercase;
+  margin: 0;
+
+  .icon {
+    margin: 0 5px 0 0;
+  }
+  &.red {
+    background: $red;
+    border-color: darken($red, 10%);
+    &:hover {
+      background: darken($red, 10%);
+    }
+  }
+  &.gray {
+    background: $grayLight;
+    &:hover {
+      background: darken($grayLight, 10%);
+    }
+  }
+  &.light-gray {
+    background: #FAFBFB;
+    border: 1px solid $grayLightest;
+    color: $blue-gray-color;
+
+    a {
+      color: $blue-gray-color;
+    }
+    .icon {
+      color: #AAAAAA;
+    }
+    &:hover {
+      background: $action-color;
+      color: #FFF;
+      border-color: $action-color;
+      a,
+      .icon {
+        color: #FFF;
+      }
+    }
+  }
+  &.dark-gray {
+    background: #222;
+    border: none;
+    color: #FCFCFC;
+
+    a {
+      color: #FCFCFC;
+    }
+    .icon {
+      color: #FCFCFC;
+    }
+    &:hover {
+      background: $action-color;
+      color: #FFF;
+      border-color: $action-color;
+      a,
+      .icon {
+        color: #FFF;
+      }
+    }
+  }
+  &.white {
+    background: #EFEFEF;
+    color: #222;
+    &:hover {
+      color: #EFEFEF;
+      background: darken($action-color, 10%);
+    }
+  }
+  &.secondary {
+    background: $secondary-color;
+    border-color: darken($secondary-color, 10%);
+    color: #FFF;
+    &:hover {
+      background: darken($secondary-color, 10%);
+    }
+  }
+  &.action {
+    background: $action-color;
+    border-color: darken($action-color, 10%);
+    color: #FFF;
+    &:hover {
+      background: darken($action-color, 10%);
+    }
+  }
+  &.disabled {
+    background: $grayLighter;
+    border-color: darken($grayLighter, 10%);
+    color: #333;
+    &:hover {
+      cursor: progress;
+      background: $grayLighter;
+    }
+  }
+  &.small {
+    padding: 8px 14px 7px 14px;
+  }
+  &.medium {
+    padding: 16px 25px 14px 25px;
+    font-size: 12px;
+  }
+  &.large {
+    padding: 18px 30px !important;
+    font-size: 16px;
+  }
+}
+
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  opacity: 0;
+  height: 100%;
+  filter: alpha(opacity=0);
+  transform: translate(-300px, 0) scale(4);
+  font-size: 23px;
+  direction: ltr;
+  cursor: pointer;
+}
+
+//.dropdown {
+//  .menu {
+//    padding: 5px 0;
+//  }
+//  li {
+//    a {
+//      padding: 5px 10px;
+//      display: block;
+//      border-left: 3px solid transparent;
+//      border-right: 3px solid transparent;
+//      color: #FFF;
+//
+//      &:hover {
+//        color: #222;
+//        background: #F9F9F9;
+//        border-color: $action-color;
+//      }
+//    }
+//  }
+//}
+//.text-dropdown,
+//.btn-dropdown {
+//  position: relative;
+//
+//  .menu {
+//    position: absolute;
+//    width: 140px;
+//    left: 50%;
+//    margin-left: -70px;
+//    z-index: 500;
+//    display: none;
+//
+//    &.up {
+//      bottom: 55px;
+//    }
+//    &.down {
+//      top: 55px;
+//    }
+//  }
+//  .icon-caret-down,
+//  .icon-caret-up {
+//    position: absolute;
+//    left: 50%;
+//    margin-left: -16px;
+//    font-size: 26px;
+//    color: #DDD;
+//    width: 32px;
+//  }
+//  .icon-caret-down {
+//    bottom: -16px;
+//  }
+//  .icon-caret-up {
+//    top: -16px;
+//  }
+//  li {
+//    display: block;
+//  }
+//  &:hover {
+//    .menu {
+//      display: block;
+//    }
+//  }
+//}
+//
+//.btn-dropdown {
+//  .button {
+//    cursor: default;
+//
+//    .icon-chevron-down {
+//      margin: 0 0 0 10px;
+//      font-size: 0.9em;
+//    }
+//  }
+//  .menu {
+//    background: #DDD;
+//  }
+//  .icon-caret-down,
+//  .icon-caret-up {
+//    color: #DDD;
+//  }
+//  li {
+//    a {
+//      color: #222;
+//
+//      &:hover {
+//        background: #222;
+//        color: #FFF;
+//      }
+//    }
+//  }
+//}
+//
+//.text-dropdown {
+//  .name {
+//    cursor: default;
+//  }
+//  .menu {
+//    &.down {
+//      top: 30px;
+//    }
+//    .icon-caret-up {
+//      top: -14px;
+//    }
+//  }
+//}

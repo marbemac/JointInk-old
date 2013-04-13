@@ -1,12 +1,9 @@
 $max-post-width: 700px;
-$post-top-padding: 0px;
-$post-right-padding: 70px;
-$post-left-padding: 0px;
-$post-bottom-margin: 50px;
 
 #post-collection {
   display: inline-block;
-  padding: 40px 0 0 0;
+  padding-top: 30px;
+  padding-top: 3rem;
 
   .end {
     text-align: center;
@@ -14,7 +11,7 @@ $post-bottom-margin: 50px;
     font-size: 16px;
     font-weight: bold;
     margin: 60px 0;
-    padding: 0 $post-right-padding 0 0;
+    padding: 0;
     cursor: default;
     text-transform: uppercase;
   }
@@ -24,38 +21,13 @@ $post-bottom-margin: 50px;
   max-width: $max-post-width;
   width: 100%;
   position: relative;
-  padding: $post-top-padding $post-right-padding 0 $post-left-padding;
-  margin: 0 0 $post-bottom-margin;
+  padding: 0 5px;
+  margin: 0 0 20px 0;
 
-  .wrapper {
-    @include border-radius(2px);
-    position: relative;
-    display: block;
-    background: #FCFCFC;
-    overflow: hidden;
-    border: 1px solid #DDD;
-    &:hover {
-      border-color: #CCC;
-      .actions {
-        display: block;
-      }
-    }
-  }
-  .bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-
-    h2 {
-      color: #FFF;
-    }
-  }
   .meta {
     position: absolute;
     right: 0;
-    top: $post-top-padding + 1;
+    top: 1;
     width: 65px;
 
     a {
@@ -81,38 +53,21 @@ $post-bottom-margin: 50px;
       }
     }
   }
-  .article {
-    .bg {
-      @include box-shadow(0 70px 70px -20px rgba(0, 0, 0, 0.65) inset);
-    }
-  }
-  .picture {
-    .bg {
-      @include box-shadow(0 -70px 70px -20px rgba(0, 0, 0, 0.65) inset);
-    }
-    .caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      color: #FFF;
-      font-style: italic;
-      padding: 25px 30px;
-      width: 100%;
-      font-weight: 500;
-      line-height: 16px;
-      line-height: 1.6rem;
-    }
-  }
   .actions {
     background: $action-color;
     position: absolute;
     top: 0;
-    right: 0;
+    right: 5px;
     padding: 7px 10px;
-    display: none;
+    font-size: 12px;
+    font-size: 1.2rem;
 
-    .icon-chevron-down {
+    .icon-chevron-down,
+    .icon-cog {
       color: #FFF;
+    }
+    .icon-cog {
+      margin-right: 5px;
     }
     ul {
       display: none;
@@ -137,29 +92,21 @@ $post-bottom-margin: 50px;
   }
 
   &.user-page {
-    .meta {
-      .user {
-        display: none;
-      }
-    }
   }
   &.channel-page {
+  }
+  &:hover {
+    .actions {
+      display: block !important;
+    }
   }
 }
 
 #post-body,
-.post-tile-content {
-  > p {
-    font-size: 18px;
-    font-size: 1.8rem;
-    line-height: 28px;
-    line-height: 2.8rem;
-  }
+.post-tile-content .content {
   > ol,
   > ul {
     margin: 0 0 25px -5px;
-    font-size: 18px;
-    font-size: 1.8rem;
     color: #222;
   }
   > ul {
@@ -174,54 +121,146 @@ $post-bottom-margin: 50px;
 }
 
 .post-tile-content {
-  .full-image {
+  @include border-radius(2px);
+  position: relative;
+  display: block;
+  background: #FCFCFC;
+  overflow: hidden;
+  border: 1px solid #DDD;
+  color: $body-text-color;
+
+  .title {
+    padding: 15px;
+    padding: 1.5rem;
+  }
+
+  img {
     width: 100%;
     display: block;
   }
-  .half-image {
-    width: 100%;
-    height: 200px;
+
+  .content {
+    padding: 0 15px;
+    padding: 0 1.5rem;
+
+    > ul {
+      margin-left: 15px;
+    }
+    > ol {
+      margin-left: 15px;
+    }
+    //blockquote {
+    //  font-size: 16px;
+    //  font-size: 1.6rem;
+    //  margin-left: 25px;
+    //}
   }
-  h2 {
-    margin: 0;
-    font-size: 26px;
-    font-size: 2.6rem;
-    line-height: 34px;
-    line-height: 3.4rem;
-    font-weight: 700;
-    padding: 20px 0 20px 25px;
-  }
-  > ul,
-  > ol {
-    font-size: 16px;
-    font-size: 1.6rem;
-  }
-  > ul {
-    margin-left: 40px;
-    li {
-      padding-left: 11px;
+
+  &.full-page,
+  &.picture {
+    .bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+
+      .title {
+        color: #FFF;
+      }
     }
   }
-  > ol {
-    margin-left: 45px;
+  &.article {
+    &.full-page {
+      border: none;
+      .bg {
+        @include box-shadow(0 70px 70px -20px rgba(0, 0, 0, 0.65) inset);
+      }
+    }
   }
-  > p {
-    color: #222;
-    padding: 0px 25px 20px 25px;
-    margin: -5px 0 0 0;
-    line-height: 24px;
-    line-height: 2.4rem;
+  &.picture {
+    border: none;
+
+    .bg {
+      @include box-shadow(0 -70px 70px -20px rgba(0, 0, 0, 0.65) inset);
+    }
+    .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      color: #FFF;
+      font-style: italic;
+      padding: 15px;
+      padding: 1.5rem;
+      width: 100%;
+      font-weight: 500;
+      line-height: 16px;
+      line-height: 1.6rem;
+    }
   }
-  p {
-    font-size: 16px;
-    font-size: 1.6rem;
-  }
-  blockquote {
-    font-size: 16px;
-    font-size: 1.6rem;
-    margin-left: 25px;
+  &:hover {
+    border-color: #CCC;
+    color: $body-text-color;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #posts-show,
 #posts-edit {

@@ -6,24 +6,20 @@ html
 
     #data-pjax-container data-pjax-container=true
 
-      div id="#{params[:controller]}-#{params[:action]}" class="page-wrapper #{params[:controller]}-c #{@body_class} #{@fullscreen ? 'fullscreen' : ''}"
+      div id="page-wrapper" class="#{params[:controller]}-#{params[:action]} #{params[:controller]}-c #{@fullscreen ? 'fullscreen' : ''}"
 
-        - if content_for?(:mast_nav)
-          #mast-nav-padder
-          #mast-nav
-            = yield :mast_nav
+        = yield :page_nav
 
-        #container class=(content_for?(:mast_nav) ? 'with-mast-nav' : '')
+        #main-content-wrapper class=(content_for?(:page_nav) ? 'with-page-nav' : '')
 
           = render 'layouts/messages'
 
-          #main role='main'
+          #main-content role='main'
             = yield
 
           #loader Loading...
 
-        /- unless params[:controller] == 'posts' && (params[:action] == 'new' || params[:action] == 'edit')
-        /  = render 'layouts/nav'
+      = render "shared/mast_nav"
 
     == common_js
 

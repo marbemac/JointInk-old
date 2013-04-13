@@ -1,11 +1,12 @@
-- if post.photo_url && post.style == 'full-page'
-  img.full-image src=post_photo_path(post, :width => 560, :crop => :limit)
-  .bg
-    h2= post.title
-- elsif post.photo_url && post.style != 'default'
-  .half-image.cover-image style="background-image: url('#{post_photo_path(post, :width => 500, :crop => :limit)}')"
-  h2= post.title
-  = truncate_html(markdown(post.content_short, {:no_links => true}), :length => 300)
-- else
-  h2= post.title
-  = truncate_html(markdown(post.content_short, {:no_links => true}), :length => 500)
+- if post.style != 'default' && post.photo_url
+  img src=post_photo_path(post, :width => 560, :crop => :limit)
+
+.bg
+  h3.title= post.title
+
+- if post.style != 'full-page'
+  .content
+    - if post.photo_url
+      = truncate_html(markdown(post.content_short, {:no_links => true}), :length => 500)
+    - else
+      = truncate_html(markdown(post.content_short, {:no_links => true}), :length => 300)
