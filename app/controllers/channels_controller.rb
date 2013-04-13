@@ -7,11 +7,13 @@ class ChannelsController < ApplicationController
 
   def new
     @channel = Channel.new
+    @fullscreen = true
     authorize! :create, @channel
   end
 
   def edit
     @channel = Channel.find(params[:id])
+    @fullscreen = true
     authorize! :update, @channel
   end
 
