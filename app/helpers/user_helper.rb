@@ -31,7 +31,7 @@ module UserHelper
     end
 
     if user.avatar.present?
-      options[:badge_url] = user_avatar_path(user, :width => 125, :height => 125, :crop => :thumb, :gravity => :face, :radius => '1000', :border => {:width => 3, :color => '#CCC'})
+      options[:badge_url] = user_avatar_path(user, :width => 125, :height => 125, :crop => :thumb, :gravity => :face)
     end
 
     if user.cover_photo.present?
