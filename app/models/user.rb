@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
   end
 
   def theme_background_pattern_path
-    "/assets/images/backgrounds/#{theme_background_pattern}"
+    "backgrounds/#{theme_background_pattern}"
   end
 
   def theme_background_pattern

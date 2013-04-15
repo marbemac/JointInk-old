@@ -1,0 +1,37 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: thisthat_development
+  host: localhost
+  pool: 10
+  username: matt
+  password:
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: thisthat_test
+  host: localhost
+  pool: 5
+  username: matt
+  password:
+
+staging:
+  adapter: postgresql
+  encoding: unicode
+  database: <%= ENV["DATABASE_DB"] %>
+  host: <%= ENV["DATABASE_HOST"] %>
+  port: <%= ENV["DATABASE_PORT"] %>
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
+  pool: 10
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: <%= ENV["DATABASE_DB"] %>
+  host: <%= ENV["DATABASE_HOST"] %>
+  port: <%= ENV["DATABASE_PORT"] %>
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
+  pool: 25

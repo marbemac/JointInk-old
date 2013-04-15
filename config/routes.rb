@@ -47,13 +47,13 @@ ThisThat::Application.routes.draw do
   get 'about' => 'pages#about', :as => :about
   get 'faq' => 'pages#faq', :as => :faq
 
-  admin_constraint = lambda do |request|
+  #admin_constraint = lambda do |request|
     #request.env['warden'].authenticate? and request.env['warden'].user.role?('admin')
-    true
-  end
-  constraints admin_constraint do
-    mount Sidekiq::Web, :at => '/a/workers'
-  end
+    #true
+  #end
+  #constraints admin_constraint do
+    #mount Sidekiq::Web, :at => '/a/workers'
+  #end
 
   # users
   scope 'u/:id' do

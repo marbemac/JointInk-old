@@ -211,7 +211,7 @@ jQuery ->
           window.location = data.url
       complete: ->
         if self.hasClass('editor-save')
-          $('.editor-save').removeClass('disabled')
+          $('.editor-save,.editor-publish').removeClass('disabled')
           $('.editor-save .name').text('Save As Idea')
         else
           $('.editor-publish .name').text('Published! Loading..')

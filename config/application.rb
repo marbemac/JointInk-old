@@ -2,7 +2,6 @@ require File.expand_path('../boot', __FILE__)
 
 require "rails/all"
 require "yajl"
-require 'sidekiq/web'
 require 'modular-scale'
 
 if defined?(Bundler)
