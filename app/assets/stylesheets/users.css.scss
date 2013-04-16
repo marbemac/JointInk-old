@@ -1,62 +1,4 @@
-.users-c {
-  #mast-header {
-    h1,
-    .subheader,
-    .extra {
-      color: #FFF;
-    }
-  }
-}
-
-#colorSelector {
-  height: 32px;
-  width: 32px;
-  position: relative;
-  border: 1px solid #CCC;
-  border: 1px solid rgba(0,0,0,.1);
-
-  >div {
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-  }
-}
-
-#patternSelector {
-  height: 150px;
-  width: 100%;
-  border: 1px solid #CCC;
-  border: 1px solid rgba(0,0,0,.1);
-  background-repeat: repeat;
-  position: relative;
-
-  .prev,
-  .next {
-    @include opacity(0.3);
-    position: absolute;
-    bottom: 0;
-    padding: 8px 12px;
-    font-size: 18px;
-    color: #EFEFEF;
-    background: #000;
-    background: rgba(0,0,0,.8);
-    cursor: pointer;
-  }
-  .prev {
-    left: 0;
-  }
-  .next {
-    right: 0;
-  }
-  &:hover {
-    .prev,
-    .next {
-      @include opacity(1);
-    }
-  }
-}
-
-#users-settings {
+.users-settings {
   .tt-form {
     .section {
       padding: 30px 0;
@@ -67,119 +9,128 @@
     margin: 0 0 20px;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.user-badge {
-  img {
-    vertical-align: middle;
-  }
-  .text {
-    display: inline-block;
-    margin: 0 0 0 10px;
-  }
-  .name {
-    font-weight: 700;
-    color: #222;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
-
-#signup,
-#signin {
-  h1 {
-    text-align: center;
-  }
-  .center-screen {
-    margin: 60px auto 20px auto;
-    margin: 6rem auto 2rem auto;
-    max-width: 330px;
-    max-width: 33rem;
-  }
-  form {
-    @include box-shadow(rgba(0, 0, 0, 0.8) 1px 2px 4px);
-    background: #EFEFEF;
-    background: rgba(255,255,255,.85);
-    padding: 25px;
-    padding: 2.5rem;
-  }
-  label {
-    font-weight: bold;
-  }
-  input {
-    margin: 5px 0 15px 0;
-    margin: 0.5rem 0 1.5rem 0;
-    max-width: 300px;
-    max-width: 30rem;
-  }
-  .submit {
-    margin-bottom: 0;
-  }
-  .error {
-    margin: -10px 0 15px 0;
-    margin: -1rem 0 1.5rem 0;
-  }
-  a {
-    display: block;
-    margin: 20px 0 0 0;
-    margin: 2rem 0 0 0;
-  }
-}
-#signup {
-  .url {
-    @include clearfix();
-    margin: 0 0 15px 0;
-    margin: 0 0 1.5rem 0;
-
-    .head {
-      font-weight: bold;
-      margin: 0 0 5px 0;
-      margin: 0 0 0.5rem 0;
-    }
-    .root,
-    .username {
-      float: left;
-      cursor: default;
-      font-size: 16px;
-      font-size: 1.6rem;
-    }
-    .root {
-      color: #999;
-    }
-    .username {
-      font-weight: bold;
-    }
-  }
-}
+//
+//.users-c {
+//  #mast-header {
+//    h1,
+//    .subheader,
+//    .extra {
+//      color: #FFF;
+//    }
+//  }
+//}
+//
+//#colorSelector {
+//  height: 32px;
+//  width: 32px;
+//  position: relative;
+//  border: 1px solid #CCC;
+//  border: 1px solid rgba(0,0,0,.1);
+//
+//  >div {
+//    width: 30px;
+//    height: 30px;
+//    cursor: pointer;
+//  }
+//}
+//
+//#patternSelector {
+//  height: 150px;
+//  width: 100%;
+//  border: 1px solid #CCC;
+//  border: 1px solid rgba(0,0,0,.1);
+//  background-repeat: repeat;
+//  position: relative;
+//
+//  .prev,
+//  .next {
+//    @include opacity(0.3);
+//    position: absolute;
+//    bottom: 0;
+//    padding: 8px 12px;
+//    font-size: 18px;
+//    color: #EFEFEF;
+//    background: #000;
+//    background: rgba(0,0,0,.8);
+//    cursor: pointer;
+//  }
+//  .prev {
+//    left: 0;
+//  }
+//  .next {
+//    right: 0;
+//  }
+//  &:hover {
+//    .prev,
+//    .next {
+//      @include opacity(1);
+//    }
+//  }
+//}
+//
+//#signup,
+//#signin {
+//  h1 {
+//    text-align: center;
+//  }
+//  .center-screen {
+//    margin: 60px auto 20px auto;
+//    margin: 6rem auto 2rem auto;
+//    max-width: 330px;
+//    max-width: 33rem;
+//  }
+//  form {
+//    @include box-shadow(rgba(0, 0, 0, 0.8) 1px 2px 4px);
+//    background: #EFEFEF;
+//    background: rgba(255,255,255,.85);
+//    padding: 25px;
+//    padding: 2.5rem;
+//  }
+//  label {
+//    font-weight: bold;
+//  }
+//  input {
+//    margin: 5px 0 15px 0;
+//    margin: 0.5rem 0 1.5rem 0;
+//    max-width: 300px;
+//    max-width: 30rem;
+//  }
+//  .submit {
+//    margin-bottom: 0;
+//  }
+//  .error {
+//    margin: -10px 0 15px 0;
+//    margin: -1rem 0 1.5rem 0;
+//  }
+//  a {
+//    display: block;
+//    margin: 20px 0 0 0;
+//    margin: 2rem 0 0 0;
+//  }
+//}
+//#signup {
+//  .url {
+//    @include clearfix();
+//    margin: 0 0 15px 0;
+//    margin: 0 0 1.5rem 0;
+//
+//    .head {
+//      font-weight: bold;
+//      margin: 0 0 5px 0;
+//      margin: 0 0 0.5rem 0;
+//    }
+//    .root,
+//    .username {
+//      float: left;
+//      cursor: default;
+//      font-size: 16px;
+//      font-size: 1.6rem;
+//    }
+//    .root {
+//      color: #999;
+//    }
+//    .username {
+//      font-weight: bold;
+//    }
+//  }
+//}

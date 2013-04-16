@@ -7,6 +7,9 @@
       - if defined? subheader
         h4.subheader.text-thin.sans-serif= subheader
 
+      - if defined? social_links
+        = render social_links
+
       - if defined? badge_url
         .badge
           img src=badge_url

@@ -149,12 +149,30 @@ body,
     h1 {
       font-size: 22px;
       font-size: 2.2rem;
-      font-size: 2.2rem;
       line-height: 23px;
       line-height: 2.3rem;
     }
     .subheader {
       margin-top: 0.5rem;
+    }
+    .social-links {
+      margin: 5px 0 0 -3px;
+      margin: 0.5rem 0 0 -0.3rem;
+      font-size: 22px;
+      font-size: 2.2rem;
+      overflow: hidden;
+      clear: both;
+      li {
+        margin-right: 5px;
+        margin-right: 0.5rem;
+        float: left;
+        a {
+          color: #CCC;
+          &:hover {
+            color: #999;
+          }
+        }
+      }
     }
   }
 
@@ -640,7 +658,7 @@ body,
 @import "users";
 @import "foundation_overrides";
 //@import "channels";
-//@import "users";
+@import "users";
 @import "posts";
 //@import "editor";
 @import "media_queries";

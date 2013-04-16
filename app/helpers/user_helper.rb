@@ -38,7 +38,26 @@ module UserHelper
       options[:cover_photo_url] = cover_photo_path(user, :width => 450, :crop => :limit)
     end
 
+    unless user.social_links.empty?
+      options[:social_links] = 'users/page_nav_social_links'
+    end
+
     options
+  end
+
+  def user_social_icon(link)
+    match = /facebook|twitter|linkedin|pinterest|google|github/.match(link)
+    if %w(facebook twitter linkedin pinterest @).include? match.to_s
+      "icon-#{match.to_s}-sign"
+    elsif match.to_s == "google"
+      "icon-google-plus-sign"
+    elsif match.to_s == "github"
+      "icon-github"
+    elsif match.to_s == "@"
+      "icon-envelope-alt"
+    else
+      "icon-external-link"
+    end
   end
 
 end
