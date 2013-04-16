@@ -9,16 +9,16 @@ module ChannelHelper
     cl_image_path(target, options)
   end
 
-  def channel_mast_nav_options(channel)
+  def channel_page_nav_options(channel)
     options = {
         :name => channel.name,
-        :page_nav => 'channels/mast_nav_section'
+        :page_nav => 'channels/page_nav_links'
     }
 
     options[:subheader] = channel.description
 
     if channel.photo.present?
-      options[:badge_url] = channel_photo_path(channel, :width => 125, :height => 125, :crop => :thumb, :radius => '1000', :border => {:width => 3, :color => '#333'})
+      options[:badge_url] = channel_photo_path(channel, :width => 125, :height => 125, :crop => :thumb)
     end
 
     if channel.cover_photo.present?
