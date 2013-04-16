@@ -8,25 +8,17 @@
         span.loading
         input type='file' data-url=post_update_photo_url(@post.id, :subdomain => (Rails.env == 'production' ? 'www' : false)) name='post[photo]'
 
-.info-strip
+.post-full-footer
   - cache @post do
-    h1#post-title
+    h1.post-title
       == !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
 
-    .post-top-meta
-      .meta-one
-        a.post-author href=user_url(:subdomain => @post.user.username) rel='author' = @post.user.username
-        = ' in '
-        - if @post.primary_channel
-          a.post-channel href=channel_url(@post.primary_channel, :subdomain => false) = @post.primary_channel.name
-        - else
-          a.post-channel href='#' None
-      - if @post.attribution_link
-        .meta-two
-          = 'Originally published at '
-          a.post-attribution href=@post.attribution_link = URI.parse(@post.attribution_link).host
+    = render "top_meta", :post => @post
 
-  .action-bar.hide-editing
-    - if can? :update, @post
-      = render "posts/admin_btns"
-    = render "posts/recommend_btn"
+  - unless defined?(@editing)
+    .post-full-actions
+      - if can? :update, @post
+        = render "posts/admin_btns"
+      = render "posts/recommend_btn"
+      - if @post.status == 'active'
+        = render "posts/share_btns"
