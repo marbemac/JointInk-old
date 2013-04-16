@@ -297,7 +297,7 @@ jQuery ->
 
   # toggle text post styles
   $('.post-style .content li').click (e) ->
-    $('.post-full').removeClass('default small-image half-page full-page').addClass($(@).data('value'))
+    $('.post-full').removeClass('default small-image half-page full-page cover-image contain-image').addClass($(@).data('value'))
     $('.post-style .content li').removeClass('on')
     $(@).addClass('on')
     $.scrollTo '0',

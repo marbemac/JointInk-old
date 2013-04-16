@@ -265,6 +265,11 @@ $top-padding: 60px;
       }
     }
   }
+  &.picture {
+    .post-full-top-meta {
+      border-bottom: none;
+    }
+  }
 }
 
 .post-full-markdown {
