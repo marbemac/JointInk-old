@@ -19,20 +19,7 @@
         h1.post-title
           == !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
 
-        .post-full-top-meta
-          .meta-one
-            = 'By '
-            a.post-full-author href=user_url(:subdomain => @post.user.username) rel='author' = @post.user.username
-            = ' in '
-            - if @post.primary_channel
-              a.post-full-channel href=channel_url(@post.primary_channel, :subdomain => false) = @post.primary_channel.name
-            - else
-              a.post-full-channel href='#' None
-
-          - if @post.attribution_link
-            .meta-two
-              = 'Originally published at '
-              a.post-full-attribution href=@post.attribution_link = URI.parse(@post.attribution_link).host
+        = render "top_meta", :post => @post
 
 .post-full-content-wrapper
   .post-full-content
