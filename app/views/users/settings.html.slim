@@ -45,6 +45,17 @@
 
       = f.button :submit, :class => 'medium action submit button', :value => 'Save Cover Photo'
 
+  .section.links
+    = simple_form_for @user, :url => user_url(:subdomain => @user.username) do |f|
+      - (@user.social_links + [""]).each_with_index do |s, i|
+        .line.smaller
+          - if i == 0
+            .name My links (Facebook, Blog, etc)
+          .content
+            input name="user[social_links][]" type="text" value=s
+      .more-social.button.small Add More
+      = f.button :submit, :class => 'medium action submit button', :value => 'Save Links'
+
 
   .section.email
     = simple_form_for @user, :url => user_url(:subdomain => @user.username), :html => {:class => "custom"} do |f|
@@ -66,4 +77,4 @@
         .content.checkbox-wrap
           = f.check_box :email_newsletter, :class => "checkbox"
 
-      = f.button :submit, :class => 'medium action submit button', :value => 'Save Theme'
+      = f.button :submit, :class => 'medium action submit button', :value => 'Save Settings'

@@ -49,6 +49,8 @@ gem 'newrelic_rpm'
 gem 'capistrano'
 gem 'foreman'
 
+gem 'mechanize'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.6'
   gem 'coffee-rails', '~> 3.2.2'

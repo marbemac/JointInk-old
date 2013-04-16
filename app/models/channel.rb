@@ -6,7 +6,7 @@
 #  created_at  :datetime
 #  description :string(255)
 #  id          :integer          not null, primary key
-#  info        :string(255)
+#  info        :text
 #  name        :string(255)
 #  photo       :string(255)
 #  posts_count :integer

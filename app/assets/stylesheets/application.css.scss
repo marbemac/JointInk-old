@@ -401,6 +401,7 @@ body,
         padding: 3px 10px 0 0;
         cursor: default;
         vertical-align: top;
+
         .inside-name {
           font-size: 16px;
         }
@@ -416,6 +417,7 @@ body,
         width: 49%;
         text-align: left;
         padding-left: 10px;
+        float: right;
       }
     }
     &.permissions {
@@ -538,6 +540,7 @@ body,
   .action {
     margin: 10px auto 0 auto;
     display: block;
+    clear: both;
   }
   .checkbox-wrap {
     padding: 4px 0 0;
@@ -547,6 +550,95 @@ body,
   }
 }
 
+.circle-image {
+  @extend .cover-image;
+  @include border-radius(1000px);
+  background-position: 50% center;
+  position: relative;
+  background-color: #FFF;
+
+  .ring {
+    @include border-radius(1000px);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    border: 6px solid #EFEFEF;
+    border: 6px solid rgba(255,255,255,0.3);
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.tooltip {
+  background: none;
+  font-weight: normal;
+  line-height: 18px;
+  .tooltip-inner {
+    @include border-radius(0);
+    padding: 8px;
+  }
+  &.in {
+    @include opacity(0.9);
+  }
+  &.error {
+    .tooltip-inner {
+      background-color: $red;
+    }
+    .tooltip-arrow {
+      border-right-color: $red;
+    }
+    a {
+      color: #000;
+      font-weight: bold;
+    }
+  }
+}
+
+.reveal-modal-bg {
+  z-index: 2000;
+}
+.reveal-modal {
+  z-index: 2001;
+  padding: 0;
+
+  .title {
+    font-size: 20px;
+    padding: 20px 40px 19px 30px;
+    background: #EFEFEF;
+    border-bottom: 1px solid #CCC;
+  }
+  .content {
+    padding: 30px;
+  }
+  .close-reveal-modal {
+    &:not(.button)  {
+      position: absolute;
+      top: 24px;
+      right: 20px;
+      font-weight: normal;
+    }
+  }
+}
+
+#testing-new_outreach {
+  .blog-post-link {
+    margin: 3px 0;
+    i {
+      margin-right: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  }
+  .message {
+    margin: 20px 0 30px;
+    p {
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+@import "channels";
+@import "users";
 @import "foundation_overrides";
 //@import "channels";
 //@import "users";
