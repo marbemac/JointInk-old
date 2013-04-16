@@ -1,3 +1,13 @@
+.post-full-picture
+  .image style="background-image: url('#{@post.photo_url}')"
+
+  - if defined?(@editing)
+    .show-editing.fileinput-button
+      .upload-help
+        | click to upload a picture
+        span.loading
+        input type='file' data-url=post_update_photo_url(@post.id, :subdomain => (Rails.env == 'production' ? 'www' : false)) name='post[photo]'
+
 .info-strip
   - cache @post do
     h1#post-title
@@ -20,11 +30,3 @@
     - if can? :update, @post
       = render "posts/admin_btns"
     = render "posts/recommend_btn"
-
-#picture-wrapper
-  .show-editing.fileinput-button
-    .upload-help
-      | click to upload a picture
-      span.loading
-      input type='file' data-url=post_update_photo_url(@post.id, :subdomain => (Rails.env == 'production' ? 'www' : false)) name='post[photo]'
-  div class="image" style="background-image: url('#{@post.photo_url}')"

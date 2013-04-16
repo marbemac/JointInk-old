@@ -12,23 +12,18 @@
 // 1. ROOT 					==============================
 
 .post-full {
-  &.half-page {
-    .post-full-picture {
-      height: 300px;
-    }
-  }
   &.full-page {
     .post-full-picture {
       position: fixed;
       left: 0;
       right: 0;
       top: 0;
-      height: 500px;
       z-index: 10;
+      height: 80%;
     }
-    .post-full-placeholder {
-      width: 100%;
-      height: 500px;
+    .post-full-picture-placeholder {
+      display: block;
+      height: 80%;
     }
     .post-full-header-wrapper {
       position: fixed;

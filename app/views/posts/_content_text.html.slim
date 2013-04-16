@@ -10,7 +10,7 @@
           span.loading
           input type='file' name='post[photo]' data-url=post_update_photo_url(@post.id, :subdomain => Rails.env == 'production' ? 'www' : false)
 
-.post-full-placeholder
+.post-full-picture-placeholder
 
 - cache @post do
   .post-full-header-wrapper

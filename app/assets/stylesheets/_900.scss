@@ -50,22 +50,6 @@
 }
 // END TRANSITION TO SIDEBAR LAYOUT
 
-.post-full {
-  &.half-page {
-    .post-full-picture {
-      height: 450px;
-    }
-  }
-  &.full-page {
-    .post-full-picture {
-      height: 900px;
-    }
-    .post-full-placeholder {
-      height: 900px;
-    }
-  }
-}
-
 // 2. TYPOGRAPHY 			==============================
 
 html {
