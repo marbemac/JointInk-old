@@ -58,8 +58,7 @@ module ApplicationHelper
   def common_js
     script = "
     <!-- JQUERY -->
-    <script src='http://code.jquery.com/jquery-1.9.1.js'></script>
-    <script src='http://code.jquery.com/jquery-migrate-1.1.1.js'></script>
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
     <script>window.jQuery || document.write('<script src=\"/offline/javascripts/jquery1.9.js\"><\\/script>')</script>
     "
 

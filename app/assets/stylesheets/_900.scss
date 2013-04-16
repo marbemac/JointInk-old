@@ -36,11 +36,11 @@
 #main-content-wrapper {
   padding: 0;
   height: 100%;
-  display: inline-block;
-  width: 99 - $mast-nav-width;
 
   &.with-page-nav {
     padding: 0 10px 0 5%;
+    display: inline-block;
+    width: 99 - $mast-nav-width;
   }
 }
 
@@ -50,6 +50,21 @@
 }
 // END TRANSITION TO SIDEBAR LAYOUT
 
+.post-full {
+  &.half-page {
+    .post-full-picture {
+      height: 450px;
+    }
+  }
+  &.full-page {
+    .post-full-picture {
+      height: 900px;
+    }
+    .post-full-placeholder {
+      height: 900px;
+    }
+  }
+}
 
 // 2. TYPOGRAPHY 			==============================
 

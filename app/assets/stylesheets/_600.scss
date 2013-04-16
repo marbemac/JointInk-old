@@ -11,89 +11,56 @@
 
 // 1. ROOT 					==============================
 
-html {
-  font-size: 60%;
-}
-
-#container {
-  width: 100%;
-  padding: 0 0 25px 0;
-}
-
-#mast-header header {
-  width: 100%;
-  margin: 70px 0 0 0;
-}
-
-#page-nav {
-  nav {
-    .circle-image {
-      display: none;
-    }
-    .circle-dot {
-      display: inline;
-    }
-    .left,
-    .right {
-      float: none;
-      display: inline;
-      position: static;
-      margin-right: 0;
-      margin-left: 0;
+.post-full {
+  &.half-page {
+    .post-full-picture {
+      height: 300px;
     }
   }
-}
+  &.full-page {
+    .post-full-picture {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 500px;
+      z-index: 10;
+    }
+    .post-full-placeholder {
+      width: 100%;
+      height: 500px;
+    }
+    .post-full-header-wrapper {
+      position: fixed;
+      top: 15%;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      background: transparent;
+    }
+    .post-full-header {
+      .post-full-header-inner {
+        padding: 3% 7% 3% 4%;
+        background: rgba(255,255,255,0.8);
+        max-width: 500px;
+        display: inline-block;
+        border: 1px solid #222;
+      }
+      .post-full-top-meta {
+        padding-bottom: 0;
+        border-bottom: none;
+        color: #666;
 
-#main {
-  width: 100%;
-  margin-top: 50px;
-}
-
-.fullscreen {
-  #main {
-    overflow: visible;
-  }
-  .info {
-    height: auto !important;
-    overflow: visible !important;
-    position: static !important;
-    width: auto !important;
-    margin: 10px 0 0 0 !important;
-    float: none !important;
-    clear: both;
-  }
-}
-
-#posts-show {
-  .info-strip {
-    padding: 25px 15px !important;
-    text-align: center;
-  }
-  .white-wrap {
-    padding: 25px 15px !important;
-    width: auto;
-  }
-}
-
-.post-tile {
-  margin: 20px auto;
-  float: none;
-  width: 100%;
-  max-width: 420px;
-}
-
-#posts-show {
-  &.fullscreen {
-    &.picture {
-      #header {
-        width: 100%;
-        position: static;
-        margin-bottom: 5px;
+        a {
+          color: #333;
+        }
       }
     }
+    .post-full-content {
+      padding-top: 3rem;
+    }
   }
 }
-
 
 // 2. TYPOGRAPHY 			==============================
 // 3. COLOUR 				==============================

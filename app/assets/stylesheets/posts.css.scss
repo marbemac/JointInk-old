@@ -102,7 +102,7 @@ $max-post-width: 700px;
   }
 }
 
-#post-body,
+.post-full-body,
 .post-tile-content .content {
   > ol,
   > ul {
@@ -204,519 +204,81 @@ $max-post-width: 700px;
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#posts-show,
-#posts-edit {
-  .idea {
-    background: #666;
-    color: #FFF;
-    font-size: 17px;
-    padding: 10px;
-    text-align: center;
-    margin: 0 0 23px 0;
-    width: 100%;
-    position: relative;
-    z-index: 500;
-  }
-  #container,
-  #header {
-    display: block;
-    width: 100%;
-    padding: 0;
-  }
-  #header {
-    margin-bottom: 20px;
-  }
-  .white-wrap {
-    width: 100%;
-
-    &.with-photo {
-      margin-top: 0;
-    }
-  }
-  #post-picture-title {
-    display: none;
-  }
-
-  &.fullscreen {
-    #container {
-      width: auto;
-      max-width: none;
-    }
-  }
-
-  .recommend,
-  .share-btns,
-  .admin-btns {
-    display: inline-block;
-    margin-right: 15px;
-    .icon-caret-up,
-    .icon-caret-down {
-      margin-left: -8px;
-    }
-  }
-
-  .recommend {
-    position: relative;
-
-    .count {
-      display: inline-block;
-      font-weight: bold;
-      padding: 16px 15px 14px 15px;
-      background: darken($action-color, 10%);
-      color: #EFEFEF;
-      font-size: 12px;
-      margin-left: 0;
-      cursor: default;
-    }
-  }
-
-  .inline-image {
-    position: relative;
-    margin: 0 0 25px 0;
-
-    img {
-      width: 100%;
-      display: block;
-    }
-    p {
-      text-align: center;
-      font-size: 13px !important;
-      font-style: italic;
-      margin: 5px 0 0 0;
-      display: none;
-    }
-    .options {
-      @include opacity(0.5);
-      position: absolute;
-      top: 0px;
-      left: 10px;
-      display: none;
-
-      >.button {
-        float: left;
-        margin: 10px 7px 0 0;
-      }
-      .button-group {
-        margin: 10px 0 0 0;
-        white-space: nowrap;
-        list-style: none;
-        float: left;
-
-        li {
-          padding: 0;
-          font-size: 11px;
-        }
-        .center {
-          margin: 0 2px;
-        }
-      }
-    }
-    &:hover {
-      .options {
-        @include opacity(1);
-      }
-    }
-    &.left {
-      float: left;
-      margin-right: 25px;
-    }
-    &.right {
-      float: right;
-      margin-left: 25px;
-    }
-    &.show-caption {
-      p {
-        display: block;
-      }
-    }
-  }
-
-  .post-full-placeholder {
-    width: 100%;
-    height: 100%;
-    display: none;
-  }
-
-  // Post Types
-  &.text {
-    .action-bar {
-      margin: 100px 0;
-    }
-
-    // Post Subtypes
-    &.article {
-      .post-full {
-        max-width: $post-article-max-width;
-        margin: 0 auto;
-      }
-      .post-top-meta {
-        border-bottom: 1px solid #DDD;
-        padding: 0 0 20px 0;
-        padding: 0 0 2rem 0;
-        margin: 20px 0 20px 0;
-        margin: 2rem 0 2rem 0;
-        font-size: 16px;
-        font-size: 1.6rem;
-        .meta {
-          width: 100%;
-          overflow: hidden;
-        }
-      }
-    }
-
-    // Post Styles
-    &.default {
-      #picture-wrapper {
-        display: none;
-      }
-    }
-    &.small-image {
-      #picture-wrapper {
-        height: 300px;
-        margin: 0 0 22px 0;
-        .image {
-          @extend .cover-image;
-        }
-      }
-      .white-wrap {
-        padding-top: 0px;
-      }
-    }
-    &.half-page {
-      $picture-height: 475px;
-      #picture-wrapper {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: $picture-height;
-        z-index: 50;
-        .image {
-          background-size: cover;
-        }
-      }
-      .white-wrap {
-        padding-top: $picture-height + 21px;
-      }
-    }
-    &.full-page {
-      max-width: none;
-      width: 100%;
-
-      .post-full-placeholder {
-        display: block;
-      }
-      .post-full {
-        max-width: none;
-      }
-      #picture-wrapper {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 0;
-        z-index: 5;
-
-        .image {
-          background-size: cover;
-        }
-      }
-      .white-wrap {
-        background: $body-bg-color;
-        padding: 35px 0;
-        position: relative;
-        z-index: 10;
-      }
-      .content-wrapper {
-        margin: 0 auto;
-        max-width: $post-article-max-width;
-
-        .post-top-meta,
-        #post-title {
-          display: none;
-        }
-      }
-      #post-picture-title {
-        position: absolute;
-        top: 30%;
-        left: 15%;
-        z-index: 1500;
-        max-width: 450px;
-        padding: 25px;
-        background: #EFEFEF;
-        background: rgba(255,255,255,.75);
-        text-align: left;
-
-        h1 {
-          @include single-text-shadow(rgba(0, 0, 0, 0.3), 1px, 2px, 5px);
-          font-size: 40px;
-          font-size: 4rem;
-          line-height: 48px;
-          line-height: 4.8rem;
-          margin: 0;
-          padding: 0;
-        }
-        .divider {
-          width: 75px;
-          height: 3px;
-          background: #333;
-          margin: 25px 0 33px 0;
-        }
-        .post-top-meta, a {
-          @include single-text-shadow(rgba(0, 0, 0, 0.3), 1px, 2px, 5px);
-          color: #000;
-          font-size: 14px;
-          font-size: 1.4rem;
-          margin: 0;
-          padding: 0;
-          border: none;
-        }
-      }
-    }
-  }
-  &.picture {
-    #header {
-      max-width: none;
-      width: 100%;
-      margin: 0;
-    }
-    #post-title {
-      font-size: 30px;
-      font-size: 3rem;
-      margin: 0 0 8px 0;
-    }
-    .info-strip {
-      position: relative;
-      padding: 25px 175px 25px 25px;
-
-      .action-bar {
-        position: absolute;
-        right: 25px;
-        top: 100%;
-        margin-top: 25px;
-        z-index: 150;
-
-        .button,
-        .btn-dropdown {
-          margin: 0;
-        }
-      }
-    }
-    // Post Styles
-    &.default {
-      #picture-wrapper {
-        .image {
-          @extend .contain-image;
-        }
-      }
-    }
-    &.cover-image {
-      #picture-wrapper {
-        .image {
-          @extend .cover-image;
-        }
-      }
-    }
-  }
-}
-
-.meta-one,
-.meta-two {
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.meta-two {
-  font-size: 11px;
-  margin-top: 5px;
-  line-height: 14px;
-}
-
+// POST SHOW PAGES
 .post-full {
   height: 100%;
 
-  h3 {
-    margin: 45px 0 25px 0;
-    margin: 4.5rem 0 2.5rem 0;
-    font-size: 26px;
-    font-size: 2.6rem;
-  }
-  h4 {
-    margin: 35px 0 20px 0;
-    margin: 3.5rem 0 2rem 0;
-    font-size: 20px;
-    font-size: 2rem;
-  }
-  .post {
-    width: 100%;
-    height: 100%;
-  }
-  #picture-wrapper {
-    position: relative;
-    z-index: 100;
-    text-align: center;
-    height: 100%;
-    width: 100%;
-    background: #222;
-
-    .show-editing {
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      z-index: 150;
-      background-color: rgba(0, 0, 0, 0.3);
-    }
-    .upload-help {
-      @include single-text-shadow(rgba(0, 0, 0, 0.8), 1px, 2px, 5px);
-      color: #FFF;
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      font-size: 40px;
-      font-size: 4rem;
-      cursor: pointer;
-      padding: 90px 0 0 0;
-    }
-    .image {
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      z-index: 100;
-    }
-    .remove-image {
-      @include single-text-shadow(rgba(0, 0, 0, 0.8), 1px, 2px, 5px);
-      color: #FFF;
-      font-size: 18px;
-      font-size: 1.8rem;
-      position: absolute;
-      top: 80%;
-      left: 50%;
-      cursor: pointer;
-      margin: 0 0 0 -74px;
-
-      &:hover {
-        color: #E3E3E3;
+  // POST STYLES
+  &.small-image {
+    .post-full-picture {
+      img.image {
+        display: block;
       }
     }
   }
-  #post-title {
-    margin: 25px 0;
-    margin: 2.5rem 0;
-    font-size: 34px;
-    font-size: 3.4rem;
-    font-weight: normal;
-    position: relative;
-    z-index: 200;
+  &.half-page,
+  &.full-page {
+    .post-full-picture {
+      height: 240px;
 
-    span {
-      font-weight: bold;
+      div.image {
+        display: block;
+      }
     }
   }
-  .post-top-meta {
-    color: #A6A6A6;
-    font-size: 16px;
-    font-size: 1.6rem;
+  &.default {
 
-    .meta-one {
-      .post-author,
-      .post-channel {
-        text-transform: uppercase;
-        color: #A6A6A6;
-      }
-    }
-    .meta-two {
-      .post-attribution {
-        color: #A6A6A6;
-      }
-    }
-    a {
-      white-space: nowrap;
-      &:hover {
-        text-decoration: underline;
-      }
-    }
   }
-  .show-editing {
-    display: none;
-  }
-  &.editor {
-    #post-body {
-      cursor: text;
-    }
-    .hide-editing {
-      display: none;
-    }
-    .show-editing {
-      display: block;
-    }
-  }
+  // END POST STYLES
 }
 
-#post-body {
+.post-full-picture {
+  div.image {
+    display: none;
+    width: 100%;
+  }
+  img.image {
+    display: none;
+    max-width: $post-article-max-width;
+    width: 100%;
+    margin: auto;
+  }
+}
+.post-full-content-wrapper,
+.post-full-header-wrapper {
+  background: $body-bg-color;
+}
+.post-full-content-wrapper {
+  position: relative;
+  z-index: 30;
+}
+.post-full-header {
+  padding: 15px;
+  max-width: $post-article-max-width;
+  margin: 0 auto 15px auto;
+}
+.post-full-content {
+  padding: 15px;
+  max-width: $post-article-max-width;
+  margin: auto;
+}
+.post-full-top-meta {
+  color: #999;
+  border-bottom: 1px solid #DDD;
+  padding: 10px 0 12px 0;
+
+  a {
+    color: #666;
+  }
+  .meta-one,
+  .meta-two {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+.post-full-title {
+}
+.post-full-body {
   background: transparent;
   outline: none;
   border: none;
@@ -725,3 +287,43 @@ $max-post-width: 700px;
     width: 100%;
   }
 }
+.post-full-actions {
+  margin: 50px 0 75px 0;
+
+  .recommend {
+    position: relative;
+    float: left;
+
+    .count {
+      display: inline-block;
+      font-weight: bold;
+      padding: inherit;
+      background: darken($action-color, 10%);
+      color: #EFEFEF;
+      margin-left: 0;
+      cursor: default;
+      padding: 12px 10px 10px 10px;
+      padding: 1.2rem 1rem 1rem 1rem;
+      font-size: 12px;
+      font-size: 1.2rem;
+      line-height: 1;
+      margin-right: 15px;
+    }
+  }
+  .admin-action {
+    margin: 0 15px 15px 0;
+  }
+  .share {
+    float: right;
+    padding: 12px 0 10px 14px;
+    padding: 1.2rem 0 1rem 1.4rem;
+    font-size: 12px;
+    font-size: 1.2rem;
+    line-height: 1;
+
+    i {
+      margin: 0 5px 0 0;
+    }
+  }
+}
+// END POST SHOW PAGE

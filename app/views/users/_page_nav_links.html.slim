@@ -7,3 +7,16 @@ ul
     a href=user_channels_url(:subdomain => @user.username)
       i.icon.icon-circle-blank
       = pluralize(@user.channels_count, "Channel")
+  - if signed_in?
+    li class=(params[:action] == 'ideas' ? 'on' : '')
+      a href=user_ideas_url(:subdomain => current_user.username)
+        i.icon.icon-lightbulb
+        = pluralize(current_user.ideas_count, "Idea")
+    li class=(params[:action] == 'settings' ? 'on' : '')
+      a href=settings_url(:subdomain => current_user.username)
+        i.icon.icon-cog
+        | Settings
+    li
+      a href=destroy_user_session_url(:subdomain => false) data-skip-pjax=true
+        i.icon.icon-off
+        | Logout

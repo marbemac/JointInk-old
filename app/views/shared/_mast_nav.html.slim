@@ -23,7 +23,7 @@
       li
         a href=user_ideas_url(:subdomain => current_user.username)
           i.icon.icon-lightbulb
-          = pluralize(@user.ideas_count, "Idea")
+          = pluralize(current_user.ideas_count, "Idea")
       li
         a href=settings_url(:subdomain => current_user.username)
           i.icon.icon-cog

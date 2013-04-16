@@ -10,7 +10,34 @@
 /* 768 =================================================== */
 
 // 1. ROOT 					==============================
+
+.post-full-content-wrapper {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.post-full {
+  &.half-page {
+    .post-full-picture {
+      height: 375px;
+    }
+  }
+  &.full-page {
+    .post-full-picture {
+      height: 700px;
+    }
+    .post-full-placeholder {
+      height: 700px;
+    }
+  }
+}
+
 // 2. TYPOGRAPHY 			==============================
+
+html {
+  font-size: 73%;
+}
+
 // 3. COLOUR 				==============================
 // 4. TEXTURE 				==============================
 // 5. ELEMENTS 				==============================
