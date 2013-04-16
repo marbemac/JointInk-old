@@ -26,6 +26,7 @@ jQuery ->
   $('.recommend').livequery ->
     $(@).find('.count').css('background-color', recommendButtonColor($(@).find('.count')))
 
+  # handle recommends
   $('body').on 'click', '.recommend .button', (e) ->
     self = $(@)
 
@@ -61,8 +62,7 @@ jQuery ->
 
   # full page article cover photo sizing and handling
   updateFullPageArticle = ->
-    $('#picture-wrapper').height($(window).height())
-    $('.white-wrap').css('margin-top', $(window).height())
+    $('#picture-wrapper,.post-full-placeholder').height($(window).height())
 
   $('#posts-show.text.full-page,#posts-edit.text.full-page').livequery ->
     picture = $('#picture-wrapper')
@@ -142,3 +142,9 @@ jQuery ->
         duration: 3000
         easing: 'easeInOutCubic'
     , 1000
+
+  # inline image titles
+#  $('#post-body img').livequery ->
+#    if $(@).attr('alt') && !$('.post-full').hasClass('editor')
+#      title = $('<div/>').addClass('inline-image-title').text($(@).attr($(@).attr('alt')))
+#      $(@).after(title)

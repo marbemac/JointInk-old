@@ -1347,7 +1347,7 @@ var RLANG = {
 				if (this.opts.fixedBox)
 				{
 //					left = this.$box.offset().left;
-					left = this.$box.offset().left - 50;
+					left = this.$box.offset().left - 70;
 					width = this.$box.innerWidth();
 				}
 
@@ -1359,7 +1359,7 @@ var RLANG = {
 			{
 				this.fixed = false;
 //				this.$toolbar.css({ position: 'relative', width: 'auto', zIndex: 1, top: 0, left: left });
-				this.$toolbar.css({ position: 'absolute', zIndex: 1, top: 0, left: '-50px' });
+				this.$toolbar.css({ position: 'absolute', zIndex: 1, top: 0, left: '-70px' });
 			}
 		},
 
@@ -1517,13 +1517,13 @@ var RLANG = {
 				{
                     parent = this.getParentNode();
 
-					if ($(parent).get(0).tagName === 'PRE')
+                    if ($(parent).get(0).tagName === 'PRE')
 					{
-						$(parent).replaceWith('<p>' +  this.encodeEntities($(parent).text()) + '</p>');
+                    	$(parent).replaceWith('<p>' +  this.encodeEntities($(parent).text()) + '</p>');
 					}
 					else
 					{
-						this.execRun(cmd, param);
+                        this.execRun(cmd, param);
 					}
 				}
 				else

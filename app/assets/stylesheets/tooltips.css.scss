@@ -1,0 +1,77 @@
+.has-tip {
+
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 100000;
+
+  .tooltip-wrapper {
+    background: #111;
+    padding: 11px 15px 10px 15px;
+    color: #FFF;
+    max-width: 250px;
+    line-height: 18px;
+  }
+  .caret {
+    position: absolute;
+    color: #111;
+    font-size: 20px;
+  }
+
+  &.transition {
+    @include transition(.1s);
+  }
+  &.tip-top,
+  &.tip-bottom {
+    .caret {
+      left: 50%;
+      margin-left: -5.5px;
+    }
+  }
+  &.tip-left,
+  &.tip-right {
+    .caret {
+      top: 50%;
+      margin-top: -10px;
+    }
+  }
+  &.tip-left {
+    .caret {
+      right: -6px;
+    }
+  }
+  &.tip-right {
+    .caret {
+      left: -6px;
+    }
+  }
+  &.tip-top {
+    .caret {
+      bottom: -13px;
+    }
+  }
+  &.tip-bottom {
+    .caret {
+      top: -13px;
+    }
+  }
+  &.tip-absolute {
+    position: absolute;
+  }
+  &.tip-fixed {
+    position: fixed;
+  }
+  &.tip-alert {
+    .tooltip-wrapper {
+      background-color: $red;
+    }
+    .caret {
+      color: $red;
+    }
+    a {
+      color: #000;
+      font-weight: bold;
+    }
+  }
+}

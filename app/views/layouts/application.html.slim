@@ -6,34 +6,24 @@ html
 
     #data-pjax-container data-pjax-container=true
 
-      div id="#{params[:controller]}-#{params[:action]}" class="page-wrapper #{params[:controller]}-c #{@body_class} #{@fullscreen ? 'fullscreen' : ''}" style=(params[:controller] == 'users' && params[:action] == 'show' && defined?(@user) ? "background: url('#{image_path(@user.theme_background_pattern_path)}');" : '')
+      div id="page-wrapper" class="#{params[:controller]}-#{params[:action]} #{params[:controller]}-c #{@fullscreen ? 'fullscreen' : ''}"
 
-        - if content_for?(:header)
-          #mast-header style="#{defined?(@user) ? 'background-color: ' + @user.theme_data['header_color'] + ';' : ''}"
-            = yield :header
+        = yield :page_nav
 
-        #page-nav
-          = yield :page_nav
-
-        #container
+        #main-content-wrapper class=(content_for?(:page_nav) ? 'with-page-nav' : '')
 
           = render 'layouts/messages'
 
-          .page-header
-            = yield :page_header
-
-          #main role='main'
+          #main-content role='main'
             = yield
 
           #loader Loading...
 
-        - unless params[:controller] == 'posts' && (params[:action] == 'new' || params[:action] == 'edit')
-          = render 'layouts/nav'
+      = render "shared/mast_nav"
 
     == common_js
 
     script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js'
-    script src='//cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/javascripts/foundation.min.js'
 
     = javascript_include_tag "application"
 

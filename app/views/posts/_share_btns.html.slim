@@ -1,16 +1,7 @@
-.dropdown.btn-dropdown.share-btns
-  .medium.gray.button
-    | Share
-  .menu.up
-    i.icon-caret-down
-    ul
-      li
-        a href="http://twitter.com/share?text=#{@post.title}&url=#{@post.permalink}" data-skip-pjax=true target='_blank' Twitter
-      li
-        a href="https://www.facebook.com/dialog/feed?app_id=468940663116634&redirect_uri=#{request.protocol}#{request.host_with_port}#{request.path}&link=#{@post.permalink}" data-skip-pjax=true target='_blank' Facebook
-      li
-        a href="http://reddit.com/submit?url=#{@post.permalink}&title=#{@post.title}" data-skip-pjax=true target='_blank' Reddit
-      li
-        a href="http://www.stumbleupon.com/submit?url=#{@post.permalink}&title=#{@post.title}" data-skip-pjax=true target='_blank' StumbleUpon
-      /%li
-      /  %a{:href => "http://news.ycombinator.com/submitlink?u=#{@post.permalink}&t=#{@post.title}", 'data-skip-pjax' => true, :target => '_blank'} Hacker News
+a.share.share-twitter href="http://twitter.com/share?text=#{@post.title}&url=#{@post.permalink}" data-skip-pjax=true target='_blank'
+  i.icon-twitter
+  | Tweet
+
+a.share.share-facebook href="https://www.facebook.com/dialog/feed?app_id=468940663116634&redirect_uri=#{request.protocol}#{request.host_with_port}#{request.path}&link=#{@post.permalink}" data-skip-pjax=true target='_blank'
+  i.icon-facebook
+  | Share

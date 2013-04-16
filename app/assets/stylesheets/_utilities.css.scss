@@ -1,0 +1,205 @@
+.hide {
+  display: none;
+}
+
+.clear {
+  clear: both;
+}
+
+.alert {
+  padding: 15px;
+  font-size: 20px;
+  font-size: 2.0rem;
+  font-weight: bold;
+  background: #FFF;
+  position: relative;
+  z-index: 1000;
+  text-align: center;
+  margin-bottom: 15px;
+
+  &.alert-success {
+    color: #FFF;
+    background: $green;
+  }
+  &.alert-error {
+    color: #FFF;
+    background: $red;
+  }
+}
+.error {
+  margin: 5px 0;
+  color: $red;
+  font-weight: bold;
+  font-size: 14px;
+  display: block;
+}
+
+.cover-image {
+  background-position: 50% center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.contain-image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.notice {
+  padding: 10px 15px 8px 15px;
+  background: #DDD;
+  border-bottom: 2px solid #CCC;
+  text-align: center;
+  font-size: 14px;
+  font-size: 1.4rem;
+}
+
+.text-thin {
+  font-weight: 300;
+}
+
+.button {
+  @include transition(0.25s);
+  @include box-shadow(none);
+  border: none;
+  text-transform: uppercase;
+  margin: 0;
+
+  .icon {
+    margin: 0 5px 0 0;
+  }
+  &.red {
+    background: $red;
+    border-color: darken($red, 10%);
+    &:hover {
+      background: darken($red, 10%);
+    }
+  }
+  &.gray {
+    background: $grayLight;
+    &:hover {
+      background: darken($grayLight, 10%);
+    }
+  }
+  &.light-gray {
+    background: #FAFBFB;
+    border: 1px solid $grayLightest;
+    color: $blue-gray-color;
+
+    a {
+      color: $blue-gray-color;
+    }
+    .icon {
+      color: #AAAAAA;
+    }
+    &:hover {
+      background: $action-color;
+      color: #FFF;
+      border-color: $action-color;
+      a,
+      .icon {
+        color: #FFF;
+      }
+    }
+  }
+  &.dark-gray {
+    background: #222;
+    border: none;
+    color: #FCFCFC;
+
+    a {
+      color: #FCFCFC;
+    }
+    .icon {
+      color: #FCFCFC;
+    }
+    &:hover {
+      background: $action-color;
+      color: #FFF;
+      border-color: $action-color;
+      a,
+      .icon {
+        color: #FFF;
+      }
+    }
+  }
+  &.white {
+    background: #EFEFEF;
+    color: #222;
+    &:hover {
+      color: #EFEFEF;
+      background: darken($action-color, 10%);
+    }
+  }
+  &.secondary {
+    background: $secondary-color;
+    border-color: darken($secondary-color, 10%);
+    color: #FFF;
+    &:hover {
+      background: darken($secondary-color, 10%);
+    }
+  }
+  &.action {
+    background: $action-color;
+    border-color: darken($action-color, 10%);
+    color: #FFF;
+    &:hover {
+      background: darken($action-color, 10%);
+    }
+  }
+  &.disabled {
+    background: $grayLighter;
+    border-color: darken($grayLighter, 10%);
+    color: #333;
+    &:hover {
+      cursor: progress;
+      background: $grayLighter;
+    }
+  }
+  &.small {
+    padding: 9px 8px 7px 8px;
+    padding: 0.9rem 0.8rem 0.7rem 0.8rem;
+    font-size: 10px;
+    font-size: 1rem;
+  }
+  &.medium {
+    padding: 12px 10px 10px 10px;
+    padding: 1.2rem 1rem 1rem 1rem;
+    font-size: 12px;
+    font-size: 1.2rem;
+  }
+  &.large {
+    padding: 16px 25px 14px 25px;
+    padding: 1.6rem 2.5rem 1.4rem 2.5rem;
+    font-size: 16px;
+    font-size: 1.6rem;
+  }
+}
+
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  opacity: 0;
+  height: 100%;
+  filter: alpha(opacity=0);
+  transform: translate(-300px, 0) scale(4);
+  font-size: 23px;
+  direction: ltr;
+  cursor: pointer;
+}

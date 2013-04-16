@@ -1,6 +1,6 @@
 - content_for :og_tags do
   meta property='og:image' content=user_avatar_path(@user, :width => 400, :height => 400, :crop => :limit, :gravity => :face)
 
-= render "header"
+= render "shared/page_nav", user_page_nav_options(@user)
 
 = render "posts/collection", :posts => @posts

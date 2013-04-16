@@ -1,10 +1,11 @@
 jQuery ->
 
-  $('#channel_photo,#user_avatar').change (e) ->
+  $('.tt-form input[type="file"]').change (e) ->
+    $self = $(@)
     if (@.files && @.files[0])
       reader = new FileReader()
       reader.onload = (e) ->
-        $('#channel_form .fileinput-button img,#settings .fileinput-button img').attr('src', e.target.result)
+        $self.parents('.fileinput-button:first').find('img').attr('src', e.target.result)
 
       reader.readAsDataURL(@.files[0])
 

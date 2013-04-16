@@ -11,7 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 
 
-//= require jquery_ui
+//= require jquery-ui.custom.js
 //= require jquery_ujs
 //= require jquery.pjax
 //= require jquery.livequery
@@ -21,13 +21,13 @@
 //= require jquery-fileupload/vendor/tmpl
 //= require jquery.easing
 //= require jquery.timer
+//= require jquery.autosize
 // require jquery.timeago
 //= require jquery.hotkeys
 //= require jquery.scrollTo
 //= require jquery.cookie
 //= require jquery.autocomplete
 //= require jquery.jplayer
-//= require colorpicker
-//= require bootstrap.tooltips
+//= require foundation.reveal
 
 //= require_tree ./global

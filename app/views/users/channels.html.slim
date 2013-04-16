@@ -1,25 +1,9 @@
-= render "header"
+= render "shared/page_nav", user_page_nav_options(@user)
 
-.centered-sections
-  .section
-    h3.sans-serif.head
-      = @user.created_channels_count
-      b = ' Created'
-      = ' by '
-      = current_user == @user ? 'You' : @user.first_name
-    i.icon-caret-down
-    .content
-      - @created_channels.each do |channel|
-        = render "channels/tile", :channel => channel
-      = render "channels/create_channel_tile"
+.left-sections
+  = render "users/channels_page_nav" if signed_in? && current_user.id == @user.id
 
   .section
-    h3.sans-serif.head
-      = @user.contributed_channels_count
-      b = ' Contributed'
-      = ' To '
-    i.icon-caret-down
     .content
-      - @contributed_channels.each do |channel|
+      - @user.channels.each do |channel|
         = render "channels/tile", :channel => channel
-      = render "channels/browse_channel_tile"

@@ -23,9 +23,5 @@ jQuery ->
     $($(@).data('target')).text(value)
 
   # toggle target element
-  $('.toggler').live 'click', (e) ->
+  $('body').on 'click', '.toggler', (e) ->
     $($(@).data('target')).toggle()
-
-  # tooltips
-  $('.has-tooltip').livequery ->
-    $(@).tooltip()

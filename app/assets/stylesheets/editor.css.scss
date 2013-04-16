@@ -18,6 +18,10 @@ $panel-width: 175px;
       }
       i {
         margin: 0 5px 0 0;
+
+        &.icon-home {
+          margin: 0;
+        }
       }
       &.editor-discard {
         &:hover {
@@ -49,14 +53,14 @@ $panel-width: 175px;
     }
   }
   &.text {
+    .white-wrap {
+      padding-bottom: 250px !important;
+    }
     &.full-page {
       #picture-wrapper {
         width: auto;
         left: $panel-width;
         right: $panel-width;
-      }
-      .white-wrap {
-        padding-bottom: 250px !important;
       }
     }
   }
@@ -218,6 +222,17 @@ $panel-width: 175px;
   .post {
     float: none;
   }
+  &.markdown-on {
+    .post-full-placeholder {
+      display: none !important;
+    }
+    .white-wrap {
+      padding: 0 !important;
+    }
+    .post-full {
+      max-width: $post-article-max-width !important;
+    }
+  }
 }
 
 #channel-autocomplete {
@@ -264,6 +279,67 @@ $panel-width: 175px;
     right: 0;
     top: 0;
     bottom: 0;
+  }
+}
+
+#post-markdown {
+  display: none;
+  margin: 0 0 100px 0;
+
+  .markdown-help {
+    margin: 0 0 30px 0;
+
+    .head {
+      color: #999;
+      a,span {
+        color: #666;
+        cursor: pointer;
+        font-weight: bold;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    .hide-hints {
+      font-size: 12px;
+      color: $linkColor;
+      cursor: pointer;
+      padding: 10px 25px;
+    }
+    .content {
+      background: #FFF;
+      border: 1px solid #CCC;
+      padding: 10px 0;
+      margin: 25px 0 0 0;
+      display: none;
+    }
+    .rules {
+
+      li {
+        margin: 10px 0;
+        font-size: 12px;
+      }
+      div {
+        font-size: 12px;
+        padding: 0 25px;
+      }
+      .name {
+        padding: 10px 25px;
+        border-top: 1px dotted #DDD;
+      }
+    }
+  }
+  textarea {
+    font-size: 18px;
+    font-size: 1.8rem;
+    line-height: 28px;
+    line-height: 2.8rem;
+    min-height: 200px;
+    background: transparent;
+    overflow: hidden;
+    border: none;
+    padding: 0;
+    resize: none;
   }
 }
 

@@ -1,6 +1,6 @@
 - content_for :og_tags do
   meta property='og:image' content=channel_photo_path(@channel, :width => 400, :height => 400, :crop => :limit)
 
-= render "header"
+= render "shared/mast_nav", channel_mast_nav_options(@channel)
 
 = render "posts/collection", :posts => @posts

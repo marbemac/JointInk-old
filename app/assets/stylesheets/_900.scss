@@ -1,0 +1,65 @@
+/* 992 =================================================== */
+
+// 1. ROOT 					==============================
+
+
+// TRANSITION TO SIDEBAR LAYOUT
+#mast-nav {
+  bottom: auto;
+  top: 0;
+  right: 25px;
+
+  ul {
+    bottom: auto;
+    top: -4px;
+    right: -29px;
+  }
+}
+
+#page-nav-padder {
+  width: $mast-nav-width;
+  max-width: $mast-nav-max-width;
+  display: inline-block;
+  height: 100%;
+}
+
+#page-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: $mast-nav-width;
+  max-width: $mast-nav-max-width;
+  border-right: 1px solid $grayLightest;
+}
+
+#main-content-wrapper {
+  padding: 0;
+  height: 100%;
+
+  &.with-page-nav {
+    padding: 0 10px 0 5%;
+    display: inline-block;
+    width: 99 - $mast-nav-width;
+  }
+}
+
+#post-collection {
+  padding-top: 45px;
+  padding-top: 4.5rem;
+}
+// END TRANSITION TO SIDEBAR LAYOUT
+
+// 2. TYPOGRAPHY 			==============================
+
+html {
+  font-size: 80%;
+}
+
+// 3. COLOUR 				==============================
+// 4. TEXTURE 				==============================
+// 5. ELEMENTS 				==============================
+// 6. LAYOUT 				==============================
+// 7. VENDOR-SPECIFIC 		==============================
+// 8. MODERNIZR 			==============================
+// 9. TEMPLATE SPECIFICS 	==============================

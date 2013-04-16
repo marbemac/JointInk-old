@@ -1,46 +1,47 @@
-nav#mast-nav
-  a.home href=root_url(:subdomain => false)
-    i.icon-home
+#mast-nav
+  nav
+    a.home href=root_url(:subdomain => false)
+      i.icon-home
 
-  .dropdown
-    .name
-      - if signed_in?
-        = "Hi #{current_user.first_name}"
-      - else
-        | Hi Stranger
-      i.icon-chevron-down
-    .menu
-      ul
+    .dropdown
+      .name
         - if signed_in?
-          li
-            a href=new_channel_url(:subdomain => false) data-skip-pjax=true
-              i.icon-plus
-              | New Channel
-          li
-            a href=new_post_url('text', 'article', :subdomain => false) data-skip-pjax=true
-              i.icon-plus
-              | New Article
-          li
-            a href=new_post_url('picture', 'caption', :subdomain => false) data-skip-pjax=true
-              i.icon-plus
-              | New Picture
-          li.divider
-          li
-            a href=user_url(:subdomain => current_user.username) My Profile
-          li
-            a href=user_ideas_url(:subdomain => current_user.username) My Ideas (#{current_user.ideas.count})
-          li
-            a href=settings_url(:subdomain => current_user.username) data-skip-pjax=true Settings
-          li.logout
-            a href=destroy_user_session_url(:subdomain => false) data-skip-pjax=true Logout
-          li.divider
+          = "Hi #{current_user.first_name}"
         - else
-          li
-            a href=signin_url(:subdomain => false) Sign In
-          li
-            a href=user_registration_url(:subdomain => false) Join Now
-          li.divider
+          | Hi Stranger
+        i.icon-chevron-down
+      .menu
+        ul
+          - if signed_in?
+            li
+              a href=new_channel_url(:subdomain => false) data-skip-pjax=true
+                i.icon-plus
+                | New Channel
+            li
+              a href=new_post_url('text', 'article', :subdomain => false) data-skip-pjax=true
+                i.icon-plus
+                | New Article
+            li
+              a href=new_post_url('picture', 'caption', :subdomain => false) data-skip-pjax=true
+                i.icon-plus
+                | New Picture
+            li.divider
+            li
+              a href=user_url(:subdomain => current_user.username) My Profile
+            li
+              a href=user_ideas_url(:subdomain => current_user.username) My Ideas (#{current_user.ideas.count})
+            li
+              a href=settings_url(:subdomain => current_user.username) data-skip-pjax=true Settings
+            li.logout
+              a href=destroy_user_session_url(:subdomain => false) data-skip-pjax=true Logout
+            li.divider
+          - else
+            li
+              a href=signin_url(:subdomain => false) Sign In
+            li
+              a href=user_registration_url(:subdomain => false) Join Now
+            li.divider
 
-        li
-          a href=channels_url(:subdomain => false) Browse Channels
-          a href="http://marc.getthisthat.com/about-thisthat/hello-world" About
+          li
+            a href=channels_url(:subdomain => false) Browse Channels
+            a href="http://marc.getthisthat.com/about-thisthat/hello-world" About

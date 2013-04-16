@@ -110,8 +110,6 @@ class UsersController < ApplicationController
 
   def channels
     @user = User.find(request.subdomain.downcase)
-    @created_channels = @user.created_channels
-    @contributed_channels = @user.contributed_channels
   end
 
   def signin

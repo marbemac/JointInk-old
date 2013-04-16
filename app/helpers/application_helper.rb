@@ -56,47 +56,14 @@ module ApplicationHelper
   end
 
   def common_js
-    #<!-- Facebook -->
-    #<div id='fb-root'></div>
-    #<script>
-    #  window.fbAsyncInit = function() {
-    #    // init the FB JS SDK
-    #FB.init({
-    #            appId      : '468940663116634', // App ID from the App Dashboard
-    #channelUrl : '//www.getthisthat.com/channel.html', // Channel File for x-domain communication
-    #status     : true, // check the login status upon init?
-    #cookie     : true, // set sessions cookies to allow your server to access the session?
-    #xfbml      : true  // parse XFBML tags on this page?
-    #    });
-    #
-    #    // Additional initialization code such as adding Event Listeners goes here
-    #
-    #};
-    #
-    #// Load the SDK's source Asynchronously
-    #  // Note that the debug version is being actively developed and might
-    #  // contain some type checks that are overly strict.
-    #  // Please report such bugs using the bugs tool.
-    #  (function(d, debug){
-    #     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-    #     if (d.getElementById(id)) {return;}
-    #     js = d.createElement('script'); js.id = id; js.async = true;
-    #     js.src = '//connect.facebook.net/en_US/all.js';
-    #     ref.parentNode.insertBefore(js, ref);
-    #   }(document, /*debug*/ false));
-    #</script>
-    #
-    #<!-- Twitter -->
-    #<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='//platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','twitter-wjs');</script>
-
     script = "
     <!-- JQUERY -->
-    <script src='http://code.jquery.com/jquery-1.9.1.js'></script>
-    <script src='http://code.jquery.com/jquery-migrate-1.0.0.js'></script>
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
     <script>window.jQuery || document.write('<script src=\"/offline/javascripts/jquery1.9.js\"><\\/script>')</script>
     "
 
     if Rails.env == 'production'
+      # google analytics
       script += "
       <script type='text/javascript'>
 
@@ -113,15 +80,66 @@ module ApplicationHelper
 
       </script>
       "
+      # customer.io
+      script += "
+        <script type='text/javascript'>
+          var _cio = _cio || [];
+          (function() {
+            var a,b,c;a=function(f){return function(){_cio.push([f].
+            concat(Array.prototype.slice.call(arguments,0)))}};b=['identify',
+            'track'];for(c=0;c<b.length;c++){_cio[b[c]]=a(b[c])};
+            var t = document.createElement('script'),
+                s = document.getElementsByTagName('script')[0];
+            t.async = true;
+            t.id    = 'cio-tracker';
+            t.setAttribute('data-site-id', 'f7f518502623577ea722');
+            t.src = 'https://assets.customer.io/assets/track.js';
+            s.parentNode.insertBefore(t, s);
+          })();
+        </script>
+      "
+    elsif Rails.env == 'development'
+      #customer.io
+      script += "
+        <script type='text/javascript'>
+          var _cio = _cio || [];
+          (function() {
+            var a,b,c;a=function(f){return function(){_cio.push([f].
+            concat(Array.prototype.slice.call(arguments,0)))}};b=['identify',
+            'track'];for(c=0;c<b.length;c++){_cio[b[c]]=a(b[c])};
+            var t = document.createElement('script'),
+                s = document.getElementsByTagName('script')[0];
+            t.async = true;
+            t.id    = 'cio-tracker';
+            t.setAttribute('data-site-id', '04361354fb0b5fe0d1b9');
+            t.src = 'https://assets.customer.io/assets/track.js';
+            s.parentNode.insertBefore(t, s);
+          })();
+        </script>
+      "
+    end
+
+    if current_user
+      # add customer.io data
+      script += "
+        <script type='text/javascript'>
+          _cio.identify({
+            // Required attributes
+            id: 'user_#{current_user.id}',
+            email: '#{current_user.email}',
+            created_at: #{current_user.created_at.to_i},
+
+            // Optional (these are examples. You can name attributes what you wish)
+
+            username: '#{current_user.username}',
+            first_name: '#{current_user.first_name}',
+            last_sign_in: '#{current_user.last_sign_in_at.to_i}'
+          });
+        </script>
+      "
     end
 
     script
-  end
-
-  def google_analytics
-    "
-
-    "
   end
 
   def time_ago(datetime)
@@ -131,4 +149,24 @@ module ApplicationHelper
   def sim_format(string)
     simple_format(string).gsub("<p>", "").gsub("</p>", "").html_safe
   end
+
+  # helper to generate channel/user cover photo URLs
+  def cover_photo_path(target, options={})
+    update_image_options(options)
+
+    if target.cover_photo.present?
+      cl_image_path(target.cover_photo, options)
+    end
+  end
+
+  # options for the master nav on the homepage
+  def home_mast_nav_options
+    options = {
+        :name => 'ThisThat',
+        :subheader => 'Yeehaw'
+    }
+
+    options
+  end
+
 end

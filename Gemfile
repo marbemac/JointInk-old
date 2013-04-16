@@ -32,6 +32,7 @@ gem 'activerecord-postgres-hstore'
 gem 'ar_pg_array'
 gem "friendly_id", "~> 4.0.9"
 
+gem 'redcarpet'
 gem 'carrierwave'
 gem 'fog'
 
@@ -41,6 +42,8 @@ gem 'simple_form'
 gem 'sanitize'
 gem 'pg_search'
 
+gem 'truncate_html'
+
 gem 'newrelic_rpm'
 
 gem 'capistrano'
@@ -49,11 +52,11 @@ gem 'foreman'
 gem 'mechanize'
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.5'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails',   '~> 3.2.6'
+  gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier'
   gem 'compass-rails'
-  gem 'zurb-foundation', '~> 3.2.5'
+  gem 'zurb-foundation'
   gem 'font-awesome-rails'
   gem 'jquery-fileupload-rails'
 end
@@ -64,20 +67,9 @@ end
 
 group :development do
   gem 'rack-mini-profiler'
-  gem 'foreman'
   gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
-end
-
-group :test do
-  gem "rspec-rails", ">= 2.12.2"
-  gem "capybara", ">= 1.1.2"
-  gem "email_spec", ">= 1.2.1"
-  gem "launchy", ">= 2.1.2"
-  gem "factory_girl_rails", ">= 4.0.0"
-  gem 'guard-rspec'
-  gem 'guard-livereload'
-  gem 'database_cleaner'
+  gem 'rails-dev-tweaks'
 end

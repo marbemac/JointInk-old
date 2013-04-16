@@ -12,7 +12,7 @@
       = f.error_notification
       = f.error :base
 
-      .fileinput-button
+      .fileinput-button.circle
         span.prompt Choose Photo
         img src=(@channel.persisted? ? channel_photo_path(@channel, :width => 200, :height => 200, :crop => :fit) : '')
         = f.hidden_field :photo_cache
@@ -22,6 +22,18 @@
 
       = f.input :name, :label => false, :input_html => {:placeholder => 'Channel Name', :autocomplete => 'off'}
       = f.input :description, :label => false, :input_html => {:placeholder => 'Channel Description', :autocomplete => 'off'}
+
+    .section
+      .line
+        .name Cover Photo
+        .content
+          .fileinput-button.rectangle
+            span.prompt Choose Photo
+            div
+              img src=(@channel.cover_photo.present? ? cover_photo_path(@channel, :width => 200, :height => 250, :crop => :fit) : '')
+              = f.hidden_field :cover_photo_cache
+            = f.file_field :cover_photo, :tabindex => '-1'
+          = f.error :cover_photo
 
     - if current_user.role? "admin"
       .section.permissions

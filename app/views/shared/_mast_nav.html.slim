@@ -1,0 +1,34 @@
+#mast-nav
+  .handle
+    i.icon-reorder
+  ul.menu
+    li
+      a href=new_channel_url(:subdomain => false) data-skip-pjax=true
+        i.icon.icon-circle-blank
+        | Channel
+    li
+      a href=new_post_url('text', 'article', :subdomain => false) data-skip-pjax=true
+        i.icon.icon-pencil
+        | Article
+    li
+      a href=new_post_url('picture', 'caption', :subdomain => false) data-skip-pjax=true
+        i.icon.icon-camera-retro
+        | Picture
+    - if signed_in?
+      li.divider
+      li
+        a href=user_url(:subdomain => current_user.username)
+          i.icon.icon-user
+          | My Page
+      li
+        a href=user_ideas_url(:subdomain => current_user.username)
+          i.icon.icon-lightbulb
+          = pluralize(current_user.ideas_count, "Idea")
+      li
+        a href=settings_url(:subdomain => current_user.username)
+          i.icon.icon-cog
+          | Settings
+      li
+        a href=destroy_user_session_url(:subdomain => false) data-skip-pjax=true
+          i.icon.icon-off
+          | Logout
