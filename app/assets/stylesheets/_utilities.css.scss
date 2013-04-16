@@ -170,8 +170,8 @@
     font-size: 1rem;
   }
   &.medium {
-    padding: 12px 10px 10px 10px;
-    padding: 1.2rem 1rem 1rem 1rem;
+    padding: 11px 10px 10px 10px;
+    padding: 1.1rem 1rem 1rem 1rem;
     font-size: 12px;
     font-size: 1.2rem;
   }
@@ -189,6 +189,7 @@
   cursor: pointer;
 }
 .fileinput-button input {
+  @include opacity(0);
   position: absolute;
   top: 0;
   right: 0;
@@ -197,9 +198,32 @@
   margin: 0;
   opacity: 0;
   height: 100%;
-  filter: alpha(opacity=0);
   transform: translate(-300px, 0) scale(4);
-  font-size: 23px;
+  font-size: 500px;
   direction: ltr;
   cursor: pointer;
+}
+
+.small-screen-cover {
+  background: rgba(0,0,0,0.95);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #FFF;
+  cursor: default;
+  z-index: 100000;
+
+
+  >div {
+    font-size: 20px;
+    font-size: 2rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    margin-top: -1rem;
+    text-align: center;
+  }
 }

@@ -1,6 +1,10 @@
+@import "variables";
+
 $panel-width: 175px;
-#posts-edit {
-  padding: 60px $panel-width 0 $panel-width;
+$top-padding: 60px;
+
+.posts-edit {
+  padding: $top-padding $panel-width 0 $panel-width;
 
   .editor-actions {
     text-align: center;
@@ -27,40 +31,6 @@ $panel-width: 175px;
         &:hover {
           background: $red;
         }
-      }
-    }
-  }
-
-  .inline-image {
-    .options {
-      display: block;
-    }
-  }
-
-  &.picture {
-    padding-top: 0;
-    padding-bottom: 0;
-
-    .editor-actions {
-      position: absolute;
-      top: 36px;
-      right: 200px;
-      left: auto;
-      text-align: right;
-    }
-    .info-strip {
-      padding-right: 475px;
-    }
-  }
-  &.text {
-    .white-wrap {
-      padding-bottom: 250px !important;
-    }
-    &.full-page {
-      #picture-wrapper {
-        width: auto;
-        left: $panel-width;
-        right: $panel-width;
       }
     }
   }
@@ -219,9 +189,6 @@ $panel-width: 175px;
   height: 100%;
   position: relative;
 
-  .post {
-    float: none;
-  }
   &.markdown-on {
     .post-full-placeholder {
       display: none !important;
@@ -282,15 +249,43 @@ $panel-width: 175px;
   }
 }
 
-#post-markdown {
+.post-full {
+  &.article {
+    .post-full-header-wrapper,
+    .post-full-content-wrapper {
+      padding-left: 80px;
+      padding-right: 25px;
+    }
+
+    &.full-page {
+      .post-full-picture {
+        top: $top-padding;
+        left: $panel-width;
+        right: $panel-width;
+      }
+    }
+  }
+  &.picture {
+    .post-full-top-meta {
+      border-bottom: none;
+    }
+  }
+}
+
+.post-full-markdown {
   display: none;
-  margin: 0 0 100px 0;
+  margin: -77px 0 100px 60px;
+  position: relative;
+  z-index: 100;
 
   .markdown-help {
     margin: 0 0 30px 0;
 
     .head {
       color: #999;
+      font-size: 11px;
+      font-size: 1.1rem;
+
       a,span {
         color: #666;
         cursor: pointer;
@@ -330,19 +325,16 @@ $panel-width: 175px;
     }
   }
   textarea {
-    font-size: 18px;
-    font-size: 1.8rem;
-    line-height: 28px;
-    line-height: 2.8rem;
+    font-size: 13px;
+    font-size: 1.3rem;
+    line-height: 18px;
+    line-height: 1.8rem;
     min-height: 200px;
     background: transparent;
-    overflow: hidden;
+    overflow: hidden !important;
     border: none;
     padding: 0;
     resize: none;
+    width: 100%;
   }
-}
-
-body .redactor_toolbar li a.redactor_btn_customimage  {
-  background: image-url('redactor-image-icon.png') no-repeat;
 }

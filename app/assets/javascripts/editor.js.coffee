@@ -4,7 +4,7 @@
 
 jQuery ->
 
-  $('#post-picture-title h1, #post-title, #post-body').attr('contenteditable', true)
+  $('.post-title, .post-full-body').attr('contenteditable', true)
 
   `
   function pasteHtmlAtCaret(html) {
@@ -43,8 +43,8 @@ jQuery ->
   `
 
   # start the redactor editor
-  if $('#post-body').length
-    $('#post-body').redactor
+  if $('.post-full-body').length
+    $('.post-full-body').redactor
       fixed: true
       fixedBox: true
       fixedTop: 40
@@ -70,7 +70,7 @@ jQuery ->
             if parent.parent().attr('id') == 'post-body' && $.trim(content.html()) == ''
               $('#inline-image-edit').reveal
                 closed: ->
-                  $('#post-body .inline-image-placeholder').remove()
+                  $('.post-full-body .inline-image-placeholder').remove()
             else
               $('.inline-image-placeholder').remove()
               alert('You can only add images on new, blank lines.')
@@ -89,19 +89,19 @@ jQuery ->
 
             # toggle showing the markdown editor versus the normal post editor
             $('#post-editor').toggleClass('markdown-on')
-            if $('#post-markdown').is(':visible')
-              $('#post-markdown').fadeOut 500, ->
+            if $('.post-full-markdown').is(':visible')
+              $('.post-full-markdown').fadeOut 500, ->
                 setTimeout ->
-                  $('.redactor_toolbar li,#left-panel,#right-panel,.editor-actions,#picture-wrapper,.post-top-meta,#post-title,#post-body').fadeIn 500
+                  $('.redactor_toolbar li,#left-panel,#right-panel,.editor-actions,.post-full-picture,.post-full-picture-placeholder,.post-full-header-wrapper,.post-full-body').fadeIn 500
                   $('.redactor_btn_html').parent().show()
                 , 100
             else
-              $('.redactor_toolbar li,#left-panel,#right-panel,.editor-actions,#picture-wrapper,.post-top-meta,#post-title,#post-body').fadeOut 500, ->
+              $('.redactor_toolbar li,#left-panel,#right-panel,.editor-actions,.post-full-picture,.post-full-picture-placeholder,.post-full-header-wrapper,.post-full-body').fadeOut 500, ->
                 setTimeout ->
-                  $('#post-markdown').fadeIn(500)
+                  $('.post-full-markdown').fadeIn(500)
                   $('.redactor_btn_html').parent().show()
                 , 100
-            $('#post-markdown textarea').trigger('autosize')
+            $('.post-full-markdown textarea').trigger('autosize')
             $.scrollTo(0, 400)
 
     # Method that converts the HTML contents to Markdown
@@ -113,27 +113,27 @@ jQuery ->
 
     htmlToMarkdown = (content) ->
       markdown = markdownize(content)
-      if ($('#post-markdown textarea').get(0).value == markdown)
+      if ($('.post-full-markdown textarea').get(0).value == markdown)
         return
-      $('#post-markdown textarea').get(0).value = markdown
+      $('.post-full-markdown textarea').get(0).value = markdown
 
     # Update Markdown every time content is modified
-    $('#post-body').bind 'keyup', (event) ->
+    $('.post-full-body').bind 'keyup', (event) ->
       htmlToMarkdown($(@).html())
 
     # Update html when markdown content is modified
     converter = new Showdown.converter();
-    $('#post-markdown textarea').bind 'keyup', (event) ->
-      $('#post-body').html(converter.makeHtml($(@).val()))
+    $('.post-full-markdown textarea').bind 'keyup', (event) ->
+      $('.post-full-body').html(converter.makeHtml($(@).val()))
 
-    htmlToMarkdown($('#post-body').html())
+    htmlToMarkdown($('.post-full-body').html())
 
     # auto resize the markdown textarea
-    $('#post-markdown textarea').autosize()
+    $('.post-full-markdown textarea').autosize()
 
     # refresh the markdown whenever redactor is interacted with
     $('.post-full').on 'click', '.redactor_toolbar > li', (e) ->
-      htmlToMarkdown($('#post-body').html())
+      htmlToMarkdown($('.post-full-body').html())
 
   # toggle markdown hints
   $('.markdown-help .head span,.markdown-help .hide-hints').click (e) ->
@@ -145,7 +145,7 @@ jQuery ->
       return 'Are you sure you want to leave?'
 
   # handle main photo uploads
-  $('#picture-wrapper .fileinput-button input').fileupload
+  $('.post-full-picture .fileinput-button input').fileupload
     dataType: "text"
     type: 'POST'
     paramName: 'post[photo]'
@@ -158,11 +158,12 @@ jQuery ->
         alert("#{file.name} is not a gif, jpeg, or png image file")
     progress: (e, data) ->
       progress = parseInt(data.loaded / data.total * 100, 10)
-      $('#picture-wrapper .fileinput-button .loading').text("#{progress}%")
+      $('.post-full-picture .fileinput-button .loading').text("#{progress}%")
     done: (e,data) ->
       result = $.parseJSON(data.result)
-      $('#picture-wrapper .fileinput-button .loading').text('')
-      $('#picture-wrapper .image').css('background-image', "url(#{result.url})").removeClass('cover-image contain-image').addClass(result.class)
+      $('.post-full-picture .fileinput-button .loading').text('')
+      $('.post-full-picture div.image').css('background-image', "url(#{result.url})").removeClass('cover-image contain-image').addClass(result.class)
+      $('.post-full-picture img.image').attr('src', result.url)
 
   # handle inline photo uploads
   $('#inline-image-edit .fileinput-button input').livequery ->
@@ -184,9 +185,9 @@ jQuery ->
       done: (e,data) ->
         result = $.parseJSON(data.result)
         self.find('.fileinput-button .loading').text('')
-        $('#post-body .inline-image-placeholder').attr('src', result.url).removeClass('inline-image-placeholder hide')
-        $('#post-body').find('br').remove()
-        htmlToMarkdown($('#post-body').html())
+        $('.post-full-body .inline-image-placeholder').attr('src', result.url).removeClass('inline-image-placeholder hide')
+        $('.post-full-body').find('br').remove()
+        htmlToMarkdown($('.post-full-body').html())
         self.trigger('reveal:close')
 
   updatePostAudio = (data) ->
@@ -235,13 +236,9 @@ jQuery ->
     $('.editor-save, .editor-publish').addClass('disabled')
 
     data = {'post':{}}
-    if $('#post-title:visible').length
-      data['post']['title'] = $.trim($('#post-title').text())
-    else
-      data['post']['title'] = $.trim($('#post-picture-title h1').text())
+    data['post']['title'] = $.trim($('.post-title').text())
 
-    # remove jquery-ui resizing classes and markup
-    data['post']['content'] = $.trim($('#post-markdown textarea').val())
+    data['post']['content'] = $.trim($('.post-full-markdown textarea').val())
     data['post']['style'] = $('#left-panel .post-style .content li.on').data('value')
 
     if $(@).hasClass('editor-publish')
@@ -280,34 +277,29 @@ jQuery ->
         $('.editor-save').click()
 
   # save on ctrl + s
-  $('body,#post-title,#post-body').bind 'keydown.ctrl_s', (e) ->
+  $('body,.post-title,.post-full-body').bind 'keydown.ctrl_s', (e) ->
     e.preventDefault()
     $('.editor-save').click()
     false
-
   # save on command (mac) + s
-  $('body,#post-title,#post-body').bind 'keydown.meta_s', (e) ->
+  .bind 'keydown.meta_s', (e) ->
     e.preventDefault()
     $('.editor-save').click()
     false
-
   # capture ctrl + left
-  $('body,#post-title,#post-body').bind 'keydown.ctrl_left', (e) ->
+  .bind 'keydown.ctrl_left', (e) ->
     e.preventDefault()
     false
-
   # capture command (mac) + left
-  $('body,#post-title,#post-body').bind 'keydown.meta_left', (e) ->
+  .bind 'keydown.meta_left', (e) ->
     e.preventDefault()
     false
 
   # toggle text post styles
   $('.post-style .content li').click (e) ->
-    $('#posts-edit').removeClass('default small-image half-page full-page').addClass($(@).data('value'))
+    $('.post-full').removeClass('default small-image half-page full-page cover-image contain-image').addClass($(@).data('value'))
     $('.post-style .content li').removeClass('on')
     $(@).addClass('on')
-    unless $(@).data('value') == 'full-page'
-      $('#picture-wrapper,.white-wrap,#post-picture-title').removeAttr('style')
     $.scrollTo '0',
       duration: 300
       easing:'easeInOutCubic'
@@ -324,9 +316,9 @@ jQuery ->
   updatePostChannel = ->
     if $('#left-panel .channels li').length > 0
       target = $('#left-panel .channels li:first a:not(.remove)')
-      $('.post-full .post-channel').attr('href': target.attr('href')).text(target.find('.name').text())
+      $('.post-full-channel').attr('href': target.attr('href')).text(target.find('.name').text())
     else
-      $('.post-full .post-channel').attr('href', '#').text('none')
+      $('.post-full-channel').attr('href', '#').text('none')
 
   $('#channel-autocomplete input').autocomplete
     serviceUrl: '/search/channels'

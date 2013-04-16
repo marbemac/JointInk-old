@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130326144730) do
+ActiveRecord::Schema.define(:version => 20130415225943) do
 
   create_table "accounts", :force => true do |t|
     t.string  "username",                       :null => false
@@ -55,6 +55,11 @@ ActiveRecord::Schema.define(:version => 20130326144730) do
   add_index "channels_posts", ["channel_id"], :name => "index_channels_posts_on_channel_id"
   add_index "channels_posts", ["post_id", "channel_id"], :name => "index_channels_posts_on_post_id_and_channel_id", :unique => true
   add_index "channels_posts", ["post_id"], :name => "index_channels_posts_on_post_id"
+
+  create_table "outreaches", :force => true do |t|
+    t.text   "content"
+    t.string "url"
+  end
 
   create_table "post_stats", :force => true do |t|
     t.string   "stat_type"
@@ -137,6 +142,7 @@ ActiveRecord::Schema.define(:version => 20130326144730) do
     t.boolean      "email_recommended",      :default => true
     t.boolean      "email_channel_post",     :default => true
     t.boolean      "email_newsletter",       :default => true
+    t.text         "social_links",           :default => "[]"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

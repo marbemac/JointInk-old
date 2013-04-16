@@ -70,7 +70,7 @@ module ThisThat
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.assets.precompile += ['errors.css','editor.js','redactor.js','redactor.css','modernizr.js']
+    config.assets.precompile += ['errors.css','editor.js','editor.css','redactor.js','redactor.css','modernizr.js']
 
     # pjax
     config.middleware.use Rack::Pjax
