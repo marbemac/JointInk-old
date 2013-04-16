@@ -38,3 +38,10 @@ jQuery ->
     current[current.length - 1] = next
     parent.attr('style', "background: url('#{current.join('/')}');")
     $("#user_theme_background_pattern").val(next)
+
+  $('#users-settings').on "click", ".more-social", (e) ->
+    self = e.target
+    new_line = $(self).closest('form').find('.line').first().clone()
+    new_line.find('input').val('')
+    new_line.insertBefore(self)
+    new_line.find('.name').remove()

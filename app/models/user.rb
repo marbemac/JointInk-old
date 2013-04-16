@@ -46,6 +46,7 @@ class User < ActiveRecord::Base
   include ActionView::Helpers::TextHelper
 
   serialize :theme_data, ActiveRecord::Coders::Hstore
+  serialize :social_links, JSON
 
   extend FriendlyId
   friendly_id :username, :use => :slugged
@@ -67,7 +68,8 @@ class User < ActiveRecord::Base
   attr_accessor :login
   attr_accessible :username, :name, :email, :password, :password_confirmation, :remember_me,
                   :login, :bio, :avatar, :cover_photo, :theme_header_color, :theme_header_height,
-                  :theme_background_pattern, :email_recommended, :email_channel_post, :email_newsletter
+                  :theme_background_pattern, :email_recommended, :email_channel_post, :email_newsletter,
+                  :social_links
 
   validates :username, :length => { :minimum => 3, :maximum => 15 }, :uniqueness => true
   validates :name, :length => { :minimum => 3, :maximum => 50 }

@@ -85,6 +85,8 @@ class UsersController < ApplicationController
     @user = current_user
     authorize! :update, @user
 
+    params[:user][:social_links].reject! {|l| l.blank?} if params[:user][:social_links]
+
     respond_to do |format|
       current_user.update_attributes(params[:user])
       if current_user.save
