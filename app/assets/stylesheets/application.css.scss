@@ -70,6 +70,7 @@ body,
   position: fixed;
   bottom: 0px;
   right: 5px;
+  z-index: 100;
 
   .handle {
     @include box-shadow(rgba(0, 0, 0, 0.5) 0 0 3px);
@@ -550,7 +551,6 @@ body,
 //@import "channels";
 //@import "users";
 @import "posts";
-//@import "editor";
 @import "media_queries";
-//@import "jquery.autocomplete";
-//@import "jquery.jplayer";
+@import "jquery.autocomplete";
+@import "jquery.jplayer";

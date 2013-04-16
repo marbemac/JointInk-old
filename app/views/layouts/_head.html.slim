@@ -27,5 +27,6 @@ head
   / TODO: this is an ugly way of including the editor js files only on certain pages
   - if params[:controller] == 'posts' && ['edit','new','create','update'].include?(params[:action])
     = stylesheet_link_tag "redactor", :media => "all"
+    = stylesheet_link_tag "editor", :media => "all"
 
   = yield :head
