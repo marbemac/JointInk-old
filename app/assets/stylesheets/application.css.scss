@@ -135,6 +135,8 @@ body,
 
 #page-nav {
   background-color: #FFF;
+  max-width: $post-tile-max-width;
+  margin: auto;
 
   header {
     position: relative;
@@ -154,18 +156,16 @@ body,
       line-height: 2.3rem;
     }
     .subheader {
-      margin-top: 0.5rem;
+      margin: 1rem 0;
     }
     .social-links {
       margin: 5px 0 0 -3px;
       margin: 0.5rem 0 0 -0.3rem;
-      font-size: 22px;
-      font-size: 2.2rem;
+      font-size: 20px;
+      font-size: 2rem;
       overflow: hidden;
       clear: both;
       li {
-        margin-right: 5px;
-        margin-right: 0.5rem;
         float: left;
         a {
           color: #CCC;

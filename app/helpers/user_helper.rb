@@ -46,8 +46,8 @@ module UserHelper
   end
 
   def user_social_icon(link)
-    match = /facebook|twitter|linkedin|pinterest|google|github/.match(link)
-    if %w(facebook twitter linkedin pinterest @).include? match.to_s
+    match = /facebook|twitter|linkedin|pinterest|google|github|@/.match(link)
+    if %w(facebook twitter linkedin pinterest).include? match.to_s
       "icon-#{match.to_s}-sign"
     elsif match.to_s == "google"
       "icon-google-plus-sign"

@@ -7,6 +7,6 @@
 - if post.style != 'full-page'
   .content
     - if post.photo_url
-      = truncate_html(markdown(post.content_short, {:no_links => true}), :length => 500)
+      = truncate_html(markdown(post.content_short, {:no_links => true}), :length => 250)
     - else
-      = truncate_html(markdown(post.content_short, {:no_links => true}), :length => 300)
+      = truncate_html(markdown(post.content_short, {:no_links => true}), :length => 350)
