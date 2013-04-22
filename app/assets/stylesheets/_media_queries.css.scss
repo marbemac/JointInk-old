@@ -19,35 +19,6 @@
   @import "1100";
 }
 
-//
-//// 992px
-//@media only screen and (max-width: 992px) {
-//  @import "992";
-//}
-//
-//// 768px
-//@media only screen and (max-width: 768px) {
-//  @import "768";
-//}
-//
-//// 600px
-//@media only screen and (max-width: 600px) {
-//  @import "600";
-//}
-//
-//// 480px
-//@media only screen and (max-width: 480px) {
-//  @import "480";
-//}
-//
-//// 320px
-//@media only screen and (max-width: 320px) {
-//  @import "320";
-//}
-//
-//// 2x
-//@media
-//only screen and (-webkit-min-device-pixel-ratio: 1.5),
-//only screen and (min--moz-device-pixel-ratio: 1.5),
-//only screen and (min-device-pixel-ratio: 1.5) {
-//  @import "2x"; }
+@media only screen and (min-width: 1350px) {
+  @import "1350";
+}
