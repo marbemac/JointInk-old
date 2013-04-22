@@ -1,11 +1,11 @@
 #channel-collection {
   padding-top: 40px;
   padding-top: 4rem;
+  text-align: center;
 }
 
-.channel.tile {
+.channel-tile {
   @include border-radius(2px);
-  float: left;
   vertical-align: top;
   padding: 0;
   position: relative;
@@ -16,6 +16,8 @@
   overflow: hidden;
   margin: 0 20px 20px 0;
   position: relative;
+  text-align: left;
+  display: inline-block;
 
   a {
     display: inline-block;
