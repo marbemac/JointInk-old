@@ -7,7 +7,7 @@ ul
     a href=user_channels_url(:subdomain => @user.username)
       i.icon.icon-circle-blank
       = pluralize(@user.channels_count, "Channel")
-  - if signed_in?
+  - if signed_in? && current_user == @user
     li class=(params[:action] == 'ideas' ? 'on' : '')
       a href=user_ideas_url(:subdomain => current_user.username)
         i.icon.icon-lightbulb
