@@ -60,6 +60,13 @@ body,
   height: 100%;
 }
 
+#page-wrapper {
+  &.users-show,
+  &.channels-show {
+    max-width: 1250px;
+  }
+}
+
 #main-content-wrapper {
 }
 
@@ -278,96 +285,13 @@ body,
   display: none;
 }
 
-//.fullscreen_bg {
-//  @include clearfix();
-//  width: 100%;
-//  height: 100%;
-//  position: relative;
-//
-//  #mast-header {
-//    display: none;
-//  }
-//  #main {
-//    height: auto;
-//  }
-//  #bg {
-//    width: 100%;
-//    heigth: 100%;
-//    position: absolute;
-//    top: 0;
-//    bottom: 0;
-//    left: 0;
-//    right: 0;
-//    z-index: -1;
-//  }
-//  #container {
-//    width: 100%;
-//    height: 100%;
-//    padding: 0;
-//    margin: 0;
-//    overflow: auto;
-//    background: rgba(0,0,0,.3);
-//  }
-//  .center-screen {
-//    position: relative;
-//    z-index: 1;
-//    max-width: 550px;
-//    margin: 0 auto;
-//
-//    h1,h2 {
-//      @include single-text-shadow(rgba(0, 0, 0, 0.8), 1px, 2px, 5px);
-//      color: #fff;
-//      cursor: default;
-//    }
-//  }
-//}
-
-//.centered-sections {
-//  text-align: center;
-//
-//  .section {
-//    margin-bottom: 100px;
-//
-//    .head {
-//      font-weight: 300;
-//      margin: 30px 0 10px 0;
-//      cursor: default;
-//    }
-//    .icon-caret-down {
-//      display: block;
-//      color: #666;
-//      font-size: 40px;
-//      font-size: 4rem;
-//      margin: 0 0 15px 0;
-//      cursor: default;
-//    }
-//  }
-//}
-//
-//.left-sections {
-//  padding: 40px 0 0 0;
-//
-//  .section {
-//    margin-bottom: 100px;
-//
-//    .head {
-//      font-weight: 300;
-//      margin: 30px 0 10px 0;
-//      cursor: default;
-//    }
-//  }
-//}
-
 .tt-form {
   max-width: 575px;
-  margin: -25px auto 50px auto;
 
-  form {
-    margin-bottom: 0;
-  }
   h1, h2, h3, h4 {
     text-align: center;
-    margin: 0 0 10px 0;
+    margin: 0 0 30px 0;
+    margin: 0 0 3rem 0;
     cursor: default;
   }
   .subheader {
@@ -377,16 +301,19 @@ body,
   }
   .section {
     border-bottom: 4px solid #CCC;
-    padding: 55px 0;
+    padding: 35px 10px;
+    padding: 3.5rem 1rem;
     position: relative;
 
     .help {
-      font-size: 13px;
+      font-size: 12px;
+      font-size: 1.2rem;
       color: #999;
       cursor: default;
       text-align: center;
       position: absolute;
       top: 10px;
+      top: 1rem;
       left: 0;
       right: 0;
     }
@@ -403,25 +330,26 @@ body,
     }
     .line {
       @include clearfix();
-      margin: 0 0 40px 0;
+      margin: 0 0 20px 0;
+      margin: 0 0 2rem 0;
+      text-align: center;
 
       &.smaller {
         margin: 0 0 20px;
       }
       .name {
-        display: inline-block;
         text-transform: uppercase;
         color: #666;
         font-weight: bold;
-        text-align: right;
-        width: 49%;
         font-size: 16px;
-        padding: 3px 10px 0 0;
+        font-size: 1.6rem;
         cursor: default;
-        vertical-align: top;
+        margin: 0 0 15px 0;
+        margin: 0 0 1.5rem 0;
 
         .inside-name {
           font-size: 16px;
+          font-size: 1.6rem;
         }
       }
       .subheader {
@@ -432,10 +360,10 @@ body,
       }
       .content {
         display: inline-block;
-        width: 49%;
-        text-align: left;
-        padding-left: 10px;
-        float: right;
+
+        input {
+          min-width: 250px;
+        }
       }
     }
     &.permissions {
@@ -463,10 +391,9 @@ body,
       .option {
         border: 1px dashed #CCC;
         background: #FCFCFC;
-        padding: 20px;
-        padding: 2rem;
-        width: 170px;
-        width: 17rem;
+        padding: 15px;
+        padding: 1.5rem;
+        width: 100%;
         height: 160px;
         height: 16rem;
         text-align: left;
@@ -483,12 +410,14 @@ body,
         }
       }
       .head {
-        font-size: 20px;
-        font-size: 2rem;
-        margin: 0 0 15px 0;
+        font-size: 16px;
+        font-size: 1.6rem;
+        margin: 0 0 12px 0;
+        margin: 0 0 1.2rem 0;
       }
       p {
-        font-size: 13px;
+        font-size: 12px;
+        font-size: 1.2rem;
       }
     }
     &:hover {
@@ -501,7 +430,7 @@ body,
   #user_name {
     font-size: 28px;
     font-weight: bold;
-    margin: 0 0 5px 0;
+    margin: 0 auto 5px auto;
   }
   #channel_description,
   #user_bio {

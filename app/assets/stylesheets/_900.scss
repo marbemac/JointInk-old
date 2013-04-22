@@ -30,7 +30,7 @@
   bottom: 0;
   width: $mast-nav-width;
   max-width: $mast-nav-max-width;
-  border-right: 1px solid $grayLightest;
+  border-right: 1px solid #999;
 }
 
 #main-content-wrapper {
@@ -49,6 +49,32 @@
   padding-top: 4.5rem;
 }
 // END TRANSITION TO SIDEBAR LAYOUT
+
+.tt-form {
+  .section {
+    .line {
+      .name {
+        display: inline-block;
+        padding: 3px 10px 0 0;
+        padding: 0.3rem 1rem 0 0;
+        width: 49%;
+        vertical-align: top;
+        text-align: right;
+      }
+      .content {
+        width: 49%;
+        padding-left: 10px;
+        padding-left: 1rem;
+        display: block;
+        float: right;
+
+        input {
+          min-width: 100%;
+        }
+      }
+    }
+  }
+}
 
 .small-screen-cover {
   display: none;

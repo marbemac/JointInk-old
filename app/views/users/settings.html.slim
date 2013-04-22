@@ -1,11 +1,6 @@
 = render "shared/page_nav", user_page_nav_options(@user)
 
 #settings.tt-form
-  .section
-    h1.sans-serif Settings
-    h4.sans-serif.subheader
-      | This is where you set them.
-
   .section.basic
     = simple_form_for @user, :url => user_url(:subdomain => @user.username) do |f|
       .help.show-for-touch Click something to change it. Click "Save Changes" to... save changes.
@@ -47,10 +42,12 @@
 
   .section.links
     = simple_form_for @user, :url => user_url(:subdomain => @user.username) do |f|
+      .help.show-for-touch add links to your facebook, twitter, blog, email, etc
+
       - (@user.social_links + [""]).each_with_index do |s, i|
         .line.smaller
           - if i == 0
-            .name My links (Facebook, Blog, etc)
+            .name My links
           .content
             input name="user[social_links][]" type="text" value=s
       .more-social.button.small Add More

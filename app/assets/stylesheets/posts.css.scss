@@ -15,13 +15,12 @@
 }
 
 .post-tile {
-  max-width: $post-tile-max-width;
   width: 100%;
   position: relative;
   padding: 0 5px;
   margin: 0 0 20px 0;
 
-  .meta {
+  .right-meta {
     position: absolute;
     right: 0;
     top: 1;
@@ -88,9 +87,19 @@
     }
   }
 
-  &.user-page {
+  &.users-c {
+    .meta {
+      .author {
+        display: none;
+      }
+    }
   }
-  &.channel-page {
+  &.channels-c {
+    .meta {
+      .channel {
+        display: none;
+      }
+    }
   }
   &:hover {
     .actions {
@@ -125,10 +134,30 @@
   overflow: hidden;
   border: 1px solid #DDD;
   color: $body-text-color;
+  cursor: pointer;
 
   .title {
-    padding: 15px;
-    padding: 1.5rem;
+    padding: 15px 15px 0 15px;
+    padding: 1.5rem 1.5rem 0 1.5rem;
+  }
+
+  .meta {
+    @include clearfix();
+    padding: 0 15px 15px 15px;
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    margin: -5px 0 0 0;
+    margin: -0.5rem 0 0 0;
+    font-size: 11px;
+    font-size: 1.1rem;
+    color: #b5b5b5;
+
+    a {
+      color: #b5b5b5;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   img {
@@ -165,6 +194,12 @@
       .title {
         color: #FFF;
       }
+      .meta {
+        color: #FFF;
+        a {
+          color: #FFF;
+        }
+      }
     }
   }
   &.article {
@@ -181,14 +216,16 @@
     .bg {
       @include box-shadow(0 -70px 70px -20px rgba(0, 0, 0, 0.65) inset);
     }
-    .caption {
+    .caption-wrapper {
       position: absolute;
       bottom: 0;
       left: 0;
+    }
+    .caption {
       color: #FFF;
       font-style: italic;
-      padding: 15px;
-      padding: 1.5rem;
+      padding: 15px 15px 6px 15px;
+      padding: 1.5rem 1.5rem 0.6rem 1.5rem;
       width: 100%;
       font-weight: 500;
       line-height: 16px;

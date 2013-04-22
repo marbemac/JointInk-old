@@ -21,7 +21,7 @@
       = f.error :photo
 
       = f.input :name, :label => false, :input_html => {:placeholder => 'Channel Name', :autocomplete => 'off'}
-      = f.input :description, :label => false, :input_html => {:placeholder => 'Channel Description', :autocomplete => 'off'}
+      = f.input :description, :as => :text, :label => false, :input_html => {:placeholder => 'Channel Description', :autocomplete => 'off', :rows => 3}
 
     .section
       .line

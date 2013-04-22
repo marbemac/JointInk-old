@@ -4,8 +4,7 @@
 
 jQuery ->
 
-  $('.post-title, .post-full-body').attr('contenteditable', true)
-
+  # plain JS function we found on the internet
   `
   function pasteHtmlAtCaret(html) {
     var sel, range;
@@ -41,6 +40,8 @@ jQuery ->
     }
   }
   `
+
+  $('.post-title, .post-full-body').attr('contenteditable', true)
 
   # start the redactor editor
   if $('.post-full-body').length

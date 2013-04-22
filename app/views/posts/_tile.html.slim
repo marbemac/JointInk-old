@@ -1,8 +1,10 @@
-div id="posts-#{post.id}" class="post-tile"
+div id="posts-#{post.id}" class="post-tile #{params[:controller]}-c"
 
   - cache post do
-    a class="post-tile-content #{post.post_type} #{post.post_subtype} #{post.style}" href=(post.primary_channel ? post_via_channel_url(post.primary_channel, post, :subdomain => post.user.username) : post_url(post.id, :subdomain => false))
+    div class="post-tile-content #{post.post_type} #{post.post_subtype} #{post.style}"
       = yield
+
+    a.target-url href=(post.primary_channel ? post_via_channel_url(post.primary_channel, post, :subdomain => post.user.username) : post_url(post.id, :subdomain => false))
 
   - if can? :update, post
     = render "posts/tile_actions", :post => post
