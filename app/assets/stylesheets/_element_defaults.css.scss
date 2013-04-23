@@ -19,6 +19,8 @@ h1 {
 h2 {
   font-size: 22px;
   font-size: 2.2rem;
+  line-height: 26px;
+  line-height: 2.6rem;
 }
 
 h3 {
@@ -96,6 +98,8 @@ select {
   border: 1px solid #999;
   height: auto;
   margin: 0;
+  font-size: 14px;
+  font-size: 1.4rem;
 
   &:focus {
     box-shadow: none !important;
@@ -108,9 +112,6 @@ label {
 }
 
 form {
-  margin: 25px;
-  max-width: 500px;
-
   label {
     font-weight: bold;
     padding: 0 0 2px 2px;

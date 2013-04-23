@@ -39,6 +39,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :user, :touch => true
   has_and_belongs_to_many :channels
+  has_many :post_stats
 
   validates :title, :length => {:maximum => 250}
   validates :content, :length => {:maximum => 20000}

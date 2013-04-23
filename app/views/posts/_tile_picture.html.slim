@@ -1,3 +1,5 @@
 img.full-image src=post_photo_path(post, :width => 560, :crop => :limit)
 .bg
-  .caption= post.title
+  .caption-wrapper
+    .caption= post.title
+    = render "posts/tile_meta", :post => post
