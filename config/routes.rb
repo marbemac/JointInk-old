@@ -56,8 +56,12 @@ ThisThat::Application.routes.draw do
   #end
 
   # users
-  scope 'u/:id' do
-    get '' => 'users#show_redirect', :as => :user_permalink
+  scope 'u' do
+    get 'check_username' => 'users#check_username', :as => :check_username
+
+    scope '/:id' do
+      get '' => 'users#show_redirect', :as => :user_permalink
+    end
   end
   devise_for :users, :skip => [:sessions,:registrations], :controllers => {
                                                              :omniauth_callbacks => "omniauth_callbacks",

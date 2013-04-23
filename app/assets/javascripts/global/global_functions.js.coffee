@@ -35,3 +35,12 @@ jQuery ->
   # case insensitive contains selector
   jQuery.expr[':'].Contains = (a, i, m) ->
     return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0
+
+  # form error handling
+  $('form').bind 'reset-errors', ->
+    $(@).find('.errors').html('').hide()
+  .bind 'add-error', (e,error) ->
+    $(@).find('.errors').show().append("<li>#{error}</li>")
+  .bind 'add-errors', (e,errors) ->
+    for error in errors
+      $(@).trigger 'add-error', error

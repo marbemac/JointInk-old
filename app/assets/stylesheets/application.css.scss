@@ -586,12 +586,11 @@ body,
   }
 }
 
-@import "channels";
-@import "users";
 @import "foundation_overrides";
-//@import "channels";
 @import "users";
+@import "channels";
 @import "posts";
-@import "media_queries";
+@import "splash_page";
 @import "jquery.autocomplete";
 @import "jquery.jplayer";
+@import "media_queries";

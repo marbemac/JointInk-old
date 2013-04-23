@@ -1,17 +1,33 @@
-.center-screen
-  h1.sans-serif ThisThat
+.title-box
+  .titles
+    h1
+      | pen first
+      span .
+    h2 free, communal publishing
 
-  h2.sans-serif Publishing. Reimagined.
+.login-signup
 
-  .login
-    a href='http://marc.getthisthat.com/about-thisthat/hello-world' Learn More
-    | , &nbsp;
-    a href=signin_path Sign In
-    | , or &nbsp;
-    a href=user_registration_path Join Now
+  = simple_form_for('user', :url => user_registration_path) do |f|
+    ul.errors
 
-.centered-sections.channels
-  .section
-    - @channels.each do |channel|
-      = render "channels/tile", :channel => channel
-    .more-channels= link_to "...or browse more channels", channels_path
+    .username-input
+      = f.input :username, :label => false, :placeholder => 'username', :input_html => {:autocomplete => 'off'}
+      .url .#{request.host_with_port}
+
+    .extra
+      = f.input :name, :label => false, :placeholder => 'full name', :input_html => {:autocomplete => 'off'}
+      = f.input :email, :label => false, :placeholder => 'email', :input_html => {:autocomplete => 'off'}
+      = f.input :password, :label => false, :placeholder => 'password', :input_html => {:autocomplete => 'off'}
+
+    .step-1
+      .medium.action.submit.claim.button data-url=check_username_path Claim Username
+      .opposite or login
+    .step-2
+      = f.submit "Sign Up", :class => 'medium action submit button'
+
+  = simple_form_for('user', :url => user_session_path, :html => {:class => 'user hide'}) do |f|
+    = f.input :login, :label => false, :placeholder => 'username or email', :input_html => {:autocomplete => 'off'}
+    = f.input :password, :label => false, :placeholder => 'password', :input_html => {:autocomplete => 'off'}
+    .step-1
+      = f.submit "Sign In", :class => 'medium action submit button'
+      .opposite or register

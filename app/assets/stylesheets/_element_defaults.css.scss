@@ -122,4 +122,17 @@ form {
   .submit {
     margin: 25px 0 0 0;
   }
+  .errors {
+    background: #ffe2db;
+    border: 1px solid $red;
+    padding: 5px 10px;
+    padding: 0.5rem 1rem;
+    display: none;
+
+    li {
+      margin: 3px 0;
+      font-weight: bold;
+      color: $red;
+    }
+  }
 }

@@ -1,5 +1,5 @@
 class ConfirmationsController < Devise::RegistrationsController
-  layout 'fullscreen_bg'
+  layout 'splash_page'
 
   # GET /resource/confirmation/new
   def new
