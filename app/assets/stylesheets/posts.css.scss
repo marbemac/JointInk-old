@@ -91,7 +91,7 @@
     }
   }
 
-  &.users-c {
+  &.user-page {
     .meta {
       .author {
         display: none;
@@ -103,7 +103,7 @@
       }
     }
   }
-  &.channels-c {
+  &.channel-page {
     .meta {
       .channel {
         display: none;
@@ -159,8 +159,8 @@
     @include clearfix();
     padding: 0 15px 15px 15px;
     padding: 0 1.5rem 1.5rem 1.5rem;
-    margin: -5px 0 0 0;
-    margin: -0.5rem 0 0 0;
+    margin: -1px 0 0 0;
+    margin: -0.1rem 0 0 0;
     font-size: 11px;
     font-size: 1.1rem;
     color: #b5b5b5;
@@ -239,7 +239,7 @@
       color: #FFF;
       font-style: italic;
       padding: 15px 15px 6px 15px;
-      padding: 1.5rem 1.5rem 0.6rem 1.5rem;
+      padding: 1.5rem 1.5rem 0 1.5rem;
       width: 100%;
       font-weight: 500;
       line-height: 16px;

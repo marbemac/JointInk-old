@@ -62,8 +62,10 @@ body,
 
 #page-wrapper {
   &.users-show,
+  &.users-ideas,
+  &.users-recommendations,
   &.channels-show {
-    max-width: 1250px;
+    max-width: 1275px;
   }
 }
 

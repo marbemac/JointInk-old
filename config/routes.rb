@@ -90,6 +90,7 @@ ThisThat::Application.routes.draw do
   get 'home' => 'pages#home', :as => :home
   get 'settings' => 'users#settings', :as => :settings
   get 'ideas' => 'users#ideas', :as => :user_ideas
+  get 'recommendations' => 'users#recommendations', :as => :user_recommendations
 
   # Users
   scope 'users' do

@@ -100,7 +100,9 @@ jQuery ->
 
   # link entire post tile
   $('body').on 'click', '.post-tile-content', (e) ->
+    console.log 'fee'
     unless $(e.target).is('a,h3')
+      console.log $(@).siblings('.target-url')
       $(@).siblings('.target-url').click()
 
   # post audio

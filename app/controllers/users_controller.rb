@@ -32,9 +32,14 @@ class UsersController < ApplicationController
   def ideas
     @user = User.find(request.subdomain.downcase)
     authorize! :update, @user
-    @title = "Ideas"
     @page_title = "Your Ideas"
     @posts = @user.posts.ideas.page(params[:page]).order('created_at DESC')
+  end
+
+  def recommendations
+    @user = User.find(request.subdomain.downcase)
+    @page_title = @user.name + "'s Recommended Posts"
+    @posts = @user.recommendations.page(params[:page])
   end
 
   def add
