@@ -10,5 +10,10 @@
 
   - if post.attribution_link
     .meta-two
-      = 'Originally published at '
-      a.post-full-attribution href=post.attribution_link = URI.parse(post.attribution_link).host
+      - begin
+        - link = URI.parse(post.attribution_link).host
+      - rescue
+      - else
+        = 'Originally published at '
+        a.post-full-attribution href=post.attribution_link
+
