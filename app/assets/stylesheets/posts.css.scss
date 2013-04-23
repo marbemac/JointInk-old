@@ -282,9 +282,10 @@
     display: inline-block;
   }
 }
+.post-full,
 .post-full-content-wrapper,
 .post-full-header-wrapper {
-  background: $body-bg-color;
+  background: $body-bg-color-light;
 }
 .post-full-content-wrapper {
   position: relative;
@@ -294,7 +295,7 @@
   padding: 15px;
   padding: 1.5rem;
   max-width: $post-article-max-width;
-  margin: 0 auto 15px auto;
+  margin: 0 auto;
 }
 .post-full-content {
   padding: 15px;
@@ -305,8 +306,8 @@
 .post-full-top-meta {
   color: #999;
   border-bottom: 1px solid #DDD;
-  padding: 10px 0 12px 0;
-  padding: 1rem 0 1.2rem 0;
+  padding: 1px 0 12px 0;
+  padding: 0.1rem 0 1.2rem 0;
 
   a {
     color: #666;
