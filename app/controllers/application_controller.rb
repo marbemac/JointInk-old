@@ -34,11 +34,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Mixpanel
-  def track_mixpanel(name, params)
-    #resque.enqueue(MixpanelTrackEvent, name, params, request.env.select{|k,v| v.is_a?(String) || v.is_a?(Numeric) })
-  end
-
   def build_ajax_response(status, redirect=nil, flash=nil, errors=nil, extra=nil, object=nil)
     response = {:status => status, :event => "#{params[:controller]}_#{params[:action]}"}
     response[:redirect] = redirect if redirect

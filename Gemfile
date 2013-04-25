@@ -24,7 +24,6 @@ gem 'dalli' # memcache
 gem 'rack-contrib', '1.1.0'
 gem 'rack-pjax'
 
-gem 'mixpanel' # analytics
 gem 'cloudinary'
 gem "switch_user"
 gem 'annotate'
@@ -50,6 +49,8 @@ gem 'capistrano'
 gem 'foreman'
 
 gem 'mechanize'
+
+gem 'analytics-ruby'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.6'

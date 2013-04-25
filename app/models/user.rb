@@ -93,6 +93,10 @@ class User < ActiveRecord::Base
     name.split(' ').first
   end
 
+  def last_name
+    name.split(' ').last
+  end
+
   def avatar_image
     self['avatar'] ? self['avatar'].split('/').last : nil
   end
@@ -283,22 +287,6 @@ class User < ActiveRecord::Base
   # JSON
   ##########
 
-  def mixpanel_data(extra=nil)
-    {
-            :distinct_id => id,
-            "User#{extra if extra} Username" => username,
-            "User#{extra if extra} Birthday" => birthday,
-            "User#{extra if extra} accounted Twitter?" => twuid ? true : false,
-            "User#{extra if extra} accounted Facebook?" => fbuid ? true : false,
-            "User#{extra if extra} Origin" => origin,
-            "User#{extra if extra} Status" => status,
-            "User#{extra if extra} Sign Ins" => sign_in_count,
-            "User#{extra if extra} Last Sign In" => current_sign_in_at,
-            "User#{extra if extra} Created At" => created_at,
-            "User#{extra if extra} Confirmed At" => confirmed_at
-    }
-  end
-
   # return a specific account
   def account(name, status='active')
     accounts.where(:provider => name, :status => status).first
@@ -309,6 +297,10 @@ class User < ActiveRecord::Base
     conditions[:channel_id] = channel.id if channel
 
     posts.where(conditions).order("created_at DESC")
+  end
+
+  def analytics_data
+    { email: email, firstName: first_name, lastName: last_name, name: name, created: created_at.to_s }
   end
 
   ##########
@@ -401,15 +393,6 @@ class User < ActiveRecord::Base
 
     user.save if user
     account.save if account
-
-    if new_user && request_env
-      referer_hash = { "Referer" => referer, "Referer Host" => referer == "none" ? "none" : URI(referer).host }
-      #resque.enqueue(MixpanelTrackEvent, "Signup", user.mixpanel_data.merge!(referer_hash), request_env.select{|k,v| v.is_a?(String) || v.is_a?(Numeric) })
-    end
-
-    if login == true && request_env
-      #resque.enqueue(MixpanelTrackEvent, "Login", user.mixpanel_data.merge!("Login Method" => omniauth['provider']), request_env.select{|k,v| v.is_a?(String) || v.is_a?(Numeric) })
-    end
 
     return user, new_user
   end

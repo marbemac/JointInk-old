@@ -125,13 +125,6 @@ class Channel < ActiveRecord::Base
   # JSON
   ##########
 
-  def mixpanel_data(extra=nil)
-    {
-            "Channel Name" => name,
-            "Channel Created At" => created_at
-    }
-  end
-
   ##########
   # END JSON
   ##########

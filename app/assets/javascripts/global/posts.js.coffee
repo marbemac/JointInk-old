@@ -33,9 +33,6 @@ jQuery ->
     return if self.hasClass('disabled')
 
     console.log()
-    analytics.track('Recommended', {
-      postId: self.attr('data-id')
-    })
 
     $.ajax
       url: self.data('url')
@@ -52,6 +49,9 @@ jQuery ->
       success: (data, textStatus, jqXHR) ->
         if self.hasClass('action')
           self.text('Recommended')
+          analytics.track('Recommend', {
+            postId: self.attr('data-id')
+          })
         else
           self.text('Recommend')
 

@@ -120,23 +120,18 @@ module ApplicationHelper
     end
 
     if current_user
-      # add customer.io data
-      script += "
-        <script type='text/javascript'>
-          _cio.identify({
-            // Required attributes
-            id: 'user_#{current_user.id}',
-            email: '#{current_user.email}',
-            created_at: #{current_user.created_at.to_i},
+      "<script>"
+      if Rails.env == "production"
+        script += "<script>var analytics=analytics||[];analytics.load=function(e){var t=document.createElement('script');t.type='text/javascript',t.async=!0,t.src=('https:'===document.location.protocol?'https://':'http://')+'d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/'+e+'/analytics.min.js';var n=document.getElementsByTagName('script')[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=['identify','track','trackLink','trackForm','trackClick','trackSubmit','pageview','ab','alias','ready'];for(var s=0;s<i.length;s++)analytics[i[s]]=r(i[s])};
+        analytics.load('skwn597u0u');</script>"
+      else
+        script += "<script>var analytics=analytics||[];analytics.load=function(e){var t=document.createElement('script');t.type='text/javascript',t.async=!0,t.src=('https:'===document.location.protocol?'https://':'http://')+'d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/'+e+'/analytics.min.js';var n=document.getElementsByTagName('script')[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=['identify','track','trackLink','trackForm','trackClick','trackSubmit','pageview','ab','alias','ready'];for(var s=0;s<i.length;s++)analytics[i[s]]=r(i[s])};
+        analytics.load('xjuij9ltao');</script>"
+      end
 
-            // Optional (these are examples. You can name attributes what you wish)
-
-            username: '#{current_user.username}',
-            first_name: '#{current_user.first_name}',
-            last_sign_in: '#{current_user.last_sign_in_at.to_i}'
-          });
-        </script>
-      "
+      if current_user
+        script += "<script>analytics.identify(#{ current_user.id }, #{current_user.analytics_data.to_json.gsub('"', "'")})</script>"
+      end
     end
 
     script

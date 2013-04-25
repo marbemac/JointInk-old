@@ -16,7 +16,6 @@ class SessionsController < Devise::SessionsController
   def create
     resource = warden.authenticate!(auth_options)
     sign_in(resource_name, resource)
-    track_mixpanel("Login", resource.mixpanel_data)
     respond_with resource, :location => after_sign_in_path_for(resource)
   end
 

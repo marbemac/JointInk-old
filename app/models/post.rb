@@ -180,13 +180,6 @@ class Post < ActiveRecord::Base
   # JSON
   ##########
 
-  def mixpanel_data(extra=nil)
-    {
-            "Post Type" => _type,
-            "Post Created At" => created_at,
-    }
-  end
-
   def json_video(w=680, h=480, autoplay=nil)
     unless type != 'Video' || embed_html.blank?
       Video.video_embed(sources[0], w, h, nil, nil, embed_html, autoplay)
