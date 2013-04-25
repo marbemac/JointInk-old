@@ -43,7 +43,6 @@ class Post < ActiveRecord::Base
 
   validates :title, :length => {:maximum => 250}
   validates :content, :length => {:maximum => 20000}
-  validates :primary_channel, :presence => true, :if => lambda { |post| post.is_active? }
   validates :post_type, :presence => true, :if => lambda { |post| post.is_active? }
   validates :photo, :presence => true, :if => lambda { |post| post.is_active? && post.post_type == 'picture' }
 

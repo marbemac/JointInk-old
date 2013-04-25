@@ -266,10 +266,7 @@ jQuery ->
         $('.editor-save,.editor-publish').removeClass('disabled')
         $('.editor-publish .name').text('Publish')
         $('.editor-save .name').text('Save As Idea')
-
         data = $.parseJSON(jqXHR.responseText)
-        if data.errors && data.errors.primary_channel
-          $('#left-panel .channels').trigger('tooltip-show')
 
   # auto save the post every x seconds
   $('.editor').livequery ->
