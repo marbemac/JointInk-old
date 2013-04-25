@@ -84,6 +84,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # for segment.io
+  def analytics_context
+    context = {
+        userAgent: request.env['HTTP_USER_AGENT'],
+        ip: request.remote_ip
+    }
+    if cookies[:_ga]
+      context['Google Analytics'] = {
+          :clientId => cookies[:_ga]
+      }
+    end
+    context
+  end
+
   def render_error(status, exception)
     respond_to do |format|
       format.html { render template: "errors/error_#{status}", layout: 'layouts/error', status: status }

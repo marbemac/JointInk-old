@@ -54,6 +54,9 @@ jQuery ->
           })
         else
           self.text('Recommend')
+          analytics.track('Remove Recommend', {
+            postId: self.attr('data-id')
+          })
 
         self.toggleClass('action gray')
 

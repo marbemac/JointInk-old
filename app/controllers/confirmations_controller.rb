@@ -27,8 +27,8 @@ class ConfirmationsController < Devise::RegistrationsController
     self.resource = resource_class.confirm_by_token(params[:confirmation_token])
 
     if resource.errors.empty?
-      Analytics.identify(user_id: resource.id, traits: resource.analytics_data)
-      Analytics.track(user_id: resource.id, event: "Confirmation")
+      Analytics.identify(user_id: resource.id, traits: resource.analytics_data, context: analytics_context)
+      Analytics.track(user_id: resource.id, event: "Confirmation", context: analytics_context)
       set_flash_message(:notice, :confirmed) if is_navigational_format?
       sign_in(resource_name, resource)
       respond_with_navigational(resource){ redirect_to after_confirmation_path_for(resource_name, resource) }
