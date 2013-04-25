@@ -15,3 +15,6 @@ div id="posts-#{post.id}" class="post-tile #{params[:controller] == 'users' && [
               img src=channel_photo_path(channel, :width => 75, :height => 75, :crop => :thumb)
 
     a.target-url href=(post.primary_channel ? post_via_channel_url(post.primary_channel, post, :subdomain => post.user.username) : post_url(post.id, :subdomain))
+
+  - if can? :update, post
+    = render "posts/tile_actions", :post => post
