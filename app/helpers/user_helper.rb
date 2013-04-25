@@ -31,7 +31,10 @@ module UserHelper
     end
 
     if user.avatar.present?
-      options[:badge_url] = user_avatar_path(user, :width => 125, :height => 125, :crop => :thumb, :gravity => :face)
+      options[:badge_url] = user_avatar_path(user, :width => 250, :height => 250, :crop => :thumb, :gravity => :face)
+    else
+      hash = Digest::MD5.hexdigest(user.email.downcase)
+      options[:badge_url] = "http://www.gravatar.com/avatar/#{hash}?s=250&d=mm"
     end
 
     if user.cover_photo.present?

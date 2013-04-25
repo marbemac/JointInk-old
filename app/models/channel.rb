@@ -39,6 +39,8 @@ class Channel < ActiveRecord::Base
   attr_accessible :name, :photo, :cover_photo, :description, :privacy, :info
 
   scope :active, where(:status => 'active')
+  scope :public, where(:privacy => 'public')
+  scope :private, where(:privacy => 'invite')
 
   after_update :update_denorms
   before_destroy :disconnect
@@ -135,6 +137,10 @@ class Channel < ActiveRecord::Base
   ##########
   # END JSON
   ##########
+
+  def self.popular(limit=10)
+    Channel.active.public.joins(:posts).select("channels.*, COUNT(posts.id) as counter").group("channels.id").order("counter DESC").limit(limit)
+  end
 
   def self.search_or_create(name, creator)
     topic = Channel.where(:name => name).first

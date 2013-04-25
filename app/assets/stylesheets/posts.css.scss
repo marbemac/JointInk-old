@@ -22,6 +22,7 @@
   padding: 0 5px;
   margin: 0 0 20px 0;
   margin: 0 0 2rem 0;
+  max-width: $post-tile-max-width;
 
   .right-meta {
     position: absolute;
@@ -124,6 +125,7 @@
 
 .post-tile-blank {
   width: 100%;
+  max-width: 600px;
   position: relative;
   padding: 0 5px;
   padding: 0 0.5rem;
@@ -148,6 +150,47 @@
     background: #F9F9F9;
     border-bottom: 1px solid #F6F6F6;
     color: #6e6e6e;
+  }
+  .body {
+    padding: 15px;
+    padding: 1.5rem;
+  }
+  .channel-suggestions {
+    margin: 25px 0 -10px 0;
+    margin: 2.5rem 0 -1rem 0;
+
+    li {
+      margin: 10px 0;
+      margin: 1rem 0;
+
+      a {
+        @include box-shadow(rgba(0, 0, 0, 0.3) 0 0 2px);
+        @include clearfix();
+        display: block;
+        background: #F9F9F9;
+
+        &:hover {
+          background: #F3F3F3;
+        }
+      }
+      img {
+        width: 50px;
+        height: 50px;
+        vertical-align: middle;
+        float: left;
+      }
+      .name {
+        float: left;
+        margin: 0 0 0 15px;
+        margin: 0 0 0 1.5rem;
+        font-size: 15px;
+        font-size: 1.5rem;
+        line-height: 50px;
+        white-space: nowrap;
+        overflow: hidden;
+        color: #6e6e6e;
+      }
+    }
   }
 }
 

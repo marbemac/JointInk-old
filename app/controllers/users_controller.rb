@@ -22,6 +22,10 @@ class UsersController < ApplicationController
     build_og_tags(@user.og_title, @user.og_type, @user.permalink, @user.og_description)
 
     @posts = @user.sharing(@channel).page(params[:page]).order('created_at DESC')
+
+    if @posts.length == 0
+      @channel_suggestions = Channel.popular(5)
+    end
   end
 
   def show_redirect
