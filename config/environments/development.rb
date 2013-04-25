@@ -29,7 +29,7 @@ ThisThat::Application.configure do
   # Setup for development - deliveries, errors raised
   ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor)
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => 'localhost:3001' }
+  config.action_mailer.default_url_options = { :host => 'lvh.me:3001' }
   Rails.application.routes.default_url_options = config.action_mailer.default_url_options # because this is what Resque looks for
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true

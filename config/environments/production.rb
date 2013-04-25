@@ -84,16 +84,4 @@ ThisThat::Application.configure do
     user_name: ENV["SENDGRID_USERNAME"],
     password: ENV["SENDGRID_PASSWORD"]
   }
-
-  # For Passenger, because Analytics.init spawns a different thread, which is not properly copied and run between separate processes.
-  if defined?(PhusionPassenger)
-    PhusionPassenger.on_event(:starting_worker_process) do |forked|
-
-      if forked # We're in smart spawning mode.
-        Analytics.init(secret: 'YOUR_API_SECRET'))
-      else
-        # We're in direct spawning mode. We don't need to do anything.
-      end
-    end
-  end
 end
