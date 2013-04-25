@@ -48,8 +48,6 @@ gem 'newrelic_rpm'
 gem 'capistrano'
 gem 'foreman'
 
-gem 'mechanize'
-
 gem 'analytics-ruby'
 
 group :assets do

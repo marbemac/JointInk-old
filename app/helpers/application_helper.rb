@@ -63,75 +63,17 @@ module ApplicationHelper
     "
 
     if Rails.env == 'production'
-      # google analytics
-      script += "
-      <script type='text/javascript'>
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-36765363-1']);
-        _gaq.push(['_setDomainName', 'getthisthat.com']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-
-      </script>
-      "
-      # customer.io
-      script += "
-        <script type='text/javascript'>
-          var _cio = _cio || [];
-          (function() {
-            var a,b,c;a=function(f){return function(){_cio.push([f].
-            concat(Array.prototype.slice.call(arguments,0)))}};b=['identify',
-            'track'];for(c=0;c<b.length;c++){_cio[b[c]]=a(b[c])};
-            var t = document.createElement('script'),
-                s = document.getElementsByTagName('script')[0];
-            t.async = true;
-            t.id    = 'cio-tracker';
-            t.setAttribute('data-site-id', 'f7f518502623577ea722');
-            t.src = 'https://assets.customer.io/assets/track.js';
-            s.parentNode.insertBefore(t, s);
-          })();
-        </script>
-      "
+      # segment.io
+      script += "<script>var analytics=analytics||[];analytics.load=function(e){var t=document.createElement('script');t.type='text/javascript',t.async=!0,t.src=('https:'===document.location.protocol?'https://':'http://')+'d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/'+e+'/analytics.min.js';var n=document.getElementsByTagName('script')[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=['identify','track','trackLink','trackForm','trackClick','trackSubmit','pageview','ab','alias','ready'];for(var s=0;s<i.length;s++)analytics[i[s]]=r(i[s])};
+      analytics.load('skwn597u0u');</script>"
     elsif Rails.env == 'development'
-      #customer.io
-      script += "
-        <script type='text/javascript'>
-          var _cio = _cio || [];
-          (function() {
-            var a,b,c;a=function(f){return function(){_cio.push([f].
-            concat(Array.prototype.slice.call(arguments,0)))}};b=['identify',
-            'track'];for(c=0;c<b.length;c++){_cio[b[c]]=a(b[c])};
-            var t = document.createElement('script'),
-                s = document.getElementsByTagName('script')[0];
-            t.async = true;
-            t.id    = 'cio-tracker';
-            t.setAttribute('data-site-id', '04361354fb0b5fe0d1b9');
-            t.src = 'https://assets.customer.io/assets/track.js';
-            s.parentNode.insertBefore(t, s);
-          })();
-        </script>
-      "
+      # segment.io
+      script += "<script>var analytics=analytics||[];analytics.load=function(e){var t=document.createElement('script');t.type='text/javascript',t.async=!0,t.src=('https:'===document.location.protocol?'https://':'http://')+'d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/'+e+'/analytics.min.js';var n=document.getElementsByTagName('script')[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=['identify','track','trackLink','trackForm','trackClick','trackSubmit','pageview','ab','alias','ready'];for(var s=0;s<i.length;s++)analytics[i[s]]=r(i[s])};
+      analytics.load('xjuij9ltao');</script>"
     end
 
     if current_user
-      "<script>"
-      if Rails.env == "production"
-        script += "<script>var analytics=analytics||[];analytics.load=function(e){var t=document.createElement('script');t.type='text/javascript',t.async=!0,t.src=('https:'===document.location.protocol?'https://':'http://')+'d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/'+e+'/analytics.min.js';var n=document.getElementsByTagName('script')[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=['identify','track','trackLink','trackForm','trackClick','trackSubmit','pageview','ab','alias','ready'];for(var s=0;s<i.length;s++)analytics[i[s]]=r(i[s])};
-        analytics.load('skwn597u0u');</script>"
-      else
-        script += "<script>var analytics=analytics||[];analytics.load=function(e){var t=document.createElement('script');t.type='text/javascript',t.async=!0,t.src=('https:'===document.location.protocol?'https://':'http://')+'d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/'+e+'/analytics.min.js';var n=document.getElementsByTagName('script')[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=['identify','track','trackLink','trackForm','trackClick','trackSubmit','pageview','ab','alias','ready'];for(var s=0;s<i.length;s++)analytics[i[s]]=r(i[s])};
-        analytics.load('xjuij9ltao');</script>"
-      end
-
-      if current_user
-        script += "<script>analytics.identify(#{ current_user.id }, #{current_user.analytics_data.to_json.gsub('"', "'")})</script>"
-      end
+      script += "<script>analytics.identify(#{ current_user.id }, #{current_user.analytics_data.to_json.gsub('"', "'")})</script>"
     end
 
     script
