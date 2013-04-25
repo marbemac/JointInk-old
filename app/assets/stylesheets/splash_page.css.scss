@@ -7,49 +7,8 @@ body {
   background: #F9F9F9;
 }
 
-.pages-home {
-  .title-box {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    position: relative;
-    z-index: -1;
-
-    .titles {
-      position: absolute;
-      top: 50%;
-      margin-top: -100px;
-      margin-top: -10rem;
-      width: 100%;
-    }
-    h1,
-    h2 {
-      font-family: SpecialElite;
-    }
-    h1 {
-      font-size: 46px;
-      font-size: 4.6rem;
-      margin: 0 0 25px 0;
-      margin: 0 0 2.5rem 0;
-      span {
-        color: #555555;
-      }
-    }
-    h2 {
-      font-size: 24px;
-      font-size: 2.4rem;
-      line-height: 26px;
-      line-height: 2.6rem;
-      font-weight: normal;
-    }
-  }
-  .login-signup {
-    padding: 0 10px;
-    padding: 0 1rem;
-  }
-}
-
-.simple_form.user {
+.signup-form,
+.signin-form {
   background: #F6F6F6;
   margin: 0 auto 20px auto;
   border: 1px solid #E5E5DE;
@@ -91,6 +50,7 @@ body {
     @include clearfix();
   }
   .step-2 {
+    @include clearfix();
     display: none;
   }
   .opposite {
@@ -109,5 +69,171 @@ body {
     line-height: 1.2rem;
     font-size: 12px;
     font-size: 1.2rem;
+  }
+}
+
+.pages-home {
+  .title-box {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    position: relative;
+    z-index: -1;
+
+    .titles {
+      position: absolute;
+      top: 50%;
+      margin-top: -100px;
+      margin-top: -10rem;
+      width: 100%;
+    }
+    h1,
+    h2 {
+      font-family: SpecialElite;
+    }
+    h1 {
+      font-size: 46px;
+      font-size: 4.6rem;
+      margin: 0 0 25px 0;
+      margin: 0 0 2.5rem 0;
+      span {
+        color: #555555;
+      }
+    }
+    h2 {
+      font-size: 24px;
+      font-size: 2.4rem;
+      line-height: 26px;
+      line-height: 2.6rem;
+      font-weight: normal;
+    }
+  }
+  .login-signup {
+    padding: 0 10px;
+    padding: 0 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .section {
+    padding: 50px 10px;
+    padding: 5rem 1rem;
+    text-align: center;
+
+    .inner {
+      margin: 0 auto;
+      max-width: 900px;
+    }
+    h2 {
+      color: #545454;
+    }
+    h4 {
+      font-weight: 300;
+      color: #AAAAAA;
+      margin: 5px 0 25px 0;
+      margin: 0.5rem 0 2.5rem 0;
+    }
+    .caption {
+      color: #535353;
+      font-weight: 300;
+      margin: 0 0 8px 5px;
+      margin: 0 0 0.8rem 0.5rem;
+    }
+    .full,
+    .half {
+      text-align: left;
+      margin: 20px 0 0 0;
+      margin: 2rem 0 0 0;
+
+      img {
+        @include box-shadow(rgba(0, 0, 0, 0.5) 0 0 6px);
+      }
+      &.responsive {
+        img {
+          @include box-shadow(none);
+        }
+      }
+    }
+    ul {
+      li {
+        position: relative;
+        padding: 5px 0 5px 50px;
+        padding: 0.5rem 0 0.5rem 5rem;
+        text-align: left;
+      }
+      .head {
+        font-size: 16px;
+        font-size: 1.6rem;
+        margin: 0 0 5px 0;
+        font-weight: bold;
+        color: #525252;
+      }
+      p {
+        font-size: 14px;
+        font-size: 1.4rem;
+        font-weight: 300;
+        color: #525252
+      }
+      i {
+        position: absolute;
+        top: 5px;
+        left: 0;
+        font-size: 30px;
+        font-size: 3rem;
+        color: #525252;
+      }
+    }
+    &.dark {
+      background: #2B2B2B;
+
+      h2 {
+        color: #F6F6F6;
+      }
+      h4 {
+        color: #C0C0C0;
+      }
+      .caption {
+        color: #F6F6F6;
+      }
+    }
+  }
+}
+
+#signup,
+#signin {
+  text-align: center;
+  padding: 0 10px;
+
+  .title-box {
+    padding: 50px 0;
+    padding: 5rem 0;
+
+    h1,
+    h2 {
+      font-family: SpecialElite;
+    }
+    h1 {
+      font-size: 42px;
+      font-size: 4.2rem;
+      margin: 0 0 10px 0;
+    }
+    h2 {
+      font-weight: normal;
+    }
+  }
+
+  form {
+    max-width: 500px;
+    text-align: left;
+
+    .input {
+      .error {
+        display: block;
+        font-size: 10px;
+        font-size: 1rem;
+        line-height: 13px;
+        line-height: 1.3rem;
+        margin: -5px 0 15px 5px;
+      }
+    }
   }
 }

@@ -1,12 +1,12 @@
 #signin
-  .center-screen
-    h1.sans-serif Sign In
+  = render 'pages/splash_title_box'
 
-    = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'signup-form'}) do |f|
+    ul.errors
 
-      = f.input :login, :label => 'Username or Email', :input_html => {:autocomplete => 'off'}
-      = f.input :password, :input_html => {:autocomplete => 'off'}
+    = f.input :login, :label => false, :placeholder => 'username or email', :input_html => {:autocomplete => 'off'}
+    = f.input :password, :label => false, :placeholder => 'password', :input_html => {:autocomplete => 'off'}
 
+    .step-1
       = f.submit "Sign In", :class => 'medium action submit button'
-
-      a href=(user_registration_path)
+      a.opposite href=user_registration_path or sign up

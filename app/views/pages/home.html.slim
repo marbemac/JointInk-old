@@ -1,13 +1,8 @@
-.title-box
-  .titles
-    h1
-      | pen first
-      span .
-    h2 free, communal publishing
+= render "pages/splash_title_box"
 
 .login-signup
 
-  = simple_form_for('user', :url => user_registration_path) do |f|
+  = simple_form_for('user', :url => user_registration_path, :html => {:class => 'signup-form'}) do |f|
     ul.errors
 
     .username-input
@@ -25,9 +20,65 @@
     .step-2
       = f.submit "Sign Up", :class => 'medium action submit button'
 
-  = simple_form_for('user', :url => user_session_path, :html => {:class => 'user hide'}) do |f|
+  = simple_form_for('user', :url => user_session_path, :html => {:class => 'signin-form hide'}) do |f|
     = f.input :login, :label => false, :placeholder => 'username or email', :input_html => {:autocomplete => 'off'}
     = f.input :password, :label => false, :placeholder => 'password', :input_html => {:autocomplete => 'off'}
     .step-1
       = f.submit "Sign In", :class => 'medium action submit button'
       .opposite or register
+
+.section
+  .inner
+    h2.sans-serif Publishing
+    h4.sans-serif Dressed Up
+
+    .full
+      .caption Retina support, multiple post styles, and a minimalistic design make your content stand out.
+      img src=image_path('splash-1.jpg')
+
+    .full.responsive
+      .caption Look good on every device.
+      img src=image_path('splash-2.png')
+
+.section.dark
+  .inner
+    h2.sans-serif Editing
+    h4.sans-serif Top notch, easy post editor.
+
+    .full
+      .caption
+        = 'What you see is what you '
+        b really
+        = ' get.'
+      img src=image_path('splash-3.jpg')
+
+    .half.first
+      .caption Optionally use markdown, distraction free.
+      img src=image_path('splash-4.jpg')
+
+    .half.second
+      .caption Multiple post styles.
+      img src=image_path('splash-5.jpg')
+
+.section
+  .inner
+    h2.sans-serif MOARR
+    h4.sans-serif Because we love you.
+
+    ul
+      li
+        .head Free Hosting
+        p Let us take care of hosting and securing your content, for free. No page view limits and no ads.
+        i.icon-cloud
+      li
+        .head Ideas
+        p Jot down ideas before publishing them. Easily share ideas privately with friends to get feedback.
+        i.icon-lightbulb
+      li
+        .head RSS & JSON
+        p Automatic RSS and JSON for every feed, from your personal feed to channel feeds.
+        i.icon-rss
+      li
+        .head Social Ready
+        p Built in Facebook and Twitter sharing. Facebook open graph ready.
+        i.icon-twitter

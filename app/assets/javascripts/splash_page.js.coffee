@@ -13,10 +13,10 @@ jQuery ->
   $('.login-signup .claim').click (e) ->
     self = $(@)
     username = $.trim($('.username-input input').val())
-    $('.simple_form.user').trigger('reset-errors')
+    $('.signup-form').trigger('reset-errors')
 
     unless username
-      $('.simple_form.user').trigger('add-error', 'please input a username')
+      $('.signup-form').trigger('add-error', 'please input a username')
       return
 
     $.ajax
@@ -26,15 +26,15 @@ jQuery ->
       dataType: 'JSON'
       success: (data, textStatus, jqXHR) ->
         if data.available == false
-          $('.simple_form.user').trigger('add-error', 'that username is already taken')
+          $('.signup-form').trigger('add-error', 'that username is already taken')
           return
 
-        $('.simple_form.user .extra,.simple_form.user .step-1,.simple_form.user .step-2').toggle()
+        $('.signup-form .extra,.signup-form .step-1,.signup-form .step-2').toggle()
 
-  $('.simple_form.user').submit (e) ->
+  $('.signup-form').submit (e) ->
     if $(@).find('.claim:visible').length
       $(@).find('.claim').click()
       e.preventDefault()
 
-  $('.simple_form.user .opposite').click (e) ->
-    $('.simple_form.user').toggle()
+  $('.signup-form .opposite,.signin-form .opposite').click (e) ->
+    $('.signup-form,.signin-form').toggle()
