@@ -3,4 +3,7 @@
 
 = render "shared/page_nav", user_page_nav_options(@user)
 
-= render "posts/collection", :posts => @posts
+- if @posts.length > 0
+  = render "posts/collection", :posts => @posts
+- else
+  = render "posts/tile_blank_user"

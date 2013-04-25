@@ -19,7 +19,7 @@
 #page-nav-padder {
   width: $mast-nav-width;
   max-width: $mast-nav-max-width;
-  display: inline-block;
+  float: left;
   height: 100%;
 }
 
