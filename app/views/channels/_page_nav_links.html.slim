@@ -2,10 +2,10 @@ ul
   li class=(params[:action] == 'show' ? 'on' : '')
     a href=channel_url(@channel, :subdomain => false)
       i.icon.icon-pencil
-      = pluralize(@channel.posts_count, "Post")
+      span.name = pluralize(@channel.posts_count, "Post")
 
   - if can? :update, @channel
     li class=(params[:action] == 'edit' ? 'on' : '')
       a href=edit_channel_url(@channel.id, :subdomain => false) data-skip-pjax=true
         i.icon.icon-cog
-        | Edit Channel
+        span.name Edit Channel

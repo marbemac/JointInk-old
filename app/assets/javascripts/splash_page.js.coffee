@@ -6,6 +6,7 @@
 jQuery ->
 
   if $('.login-signup').length > 0
+    $(window).scrollTop(0)
     setTimeout ->
       $('.login-signup').animate({'margin-top':"-#{$('.login-signup').height()}px"}, 1000, 'easeOutBounce')
     , 700
@@ -30,6 +31,9 @@ jQuery ->
           return
 
         $('.signup-form .extra,.signup-form .step-1,.signup-form .step-2').toggle()
+        setTimeout ->
+          $(window).scrollTop($('.signup-form').height())
+        , 1
 
   $('.signup-form').submit (e) ->
     if $(@).find('.claim:visible').length
@@ -38,3 +42,6 @@ jQuery ->
 
   $('.signup-form .opposite,.signin-form .opposite').click (e) ->
     $('.signup-form,.signin-form').toggle()
+    setTimeout ->
+      $(window).scrollTop($('.signup-form:visible,.signin-form:visible').height())
+    , 1

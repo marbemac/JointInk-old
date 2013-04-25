@@ -3,6 +3,8 @@
 
 = render "shared/page_nav", user_page_nav_options(@user)
 
+h4#page-header.sans-serif Posts
+
 - if @posts.length > 0
   = render "posts/collection", :posts => @posts
 - else

@@ -1,3 +1,5 @@
+$post-background-color: #FCFCFC;
+
 #post-collection {
   padding-top: 20px;
   padding-top: 2rem;
@@ -216,7 +218,7 @@
   @include border-radius(2px);
   position: relative;
   display: block;
-  background: #FCFCFC;
+  background: $post-background-color;
   overflow: hidden;
   border: 1px solid #DDD;
   color: $body-text-color;
@@ -501,6 +503,7 @@
     .post-full-footer {
       padding: 15px;
       padding: 1.5rem;
+      background: $post-background-color;
     }
     .post-full-actions {
       margin-top: 15px;

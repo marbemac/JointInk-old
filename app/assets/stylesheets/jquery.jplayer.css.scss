@@ -28,6 +28,7 @@
   background-color: #222;
   border: 1px solid #EFEFEF;
   border-bottom: none;
+  margin-bottom: 0;
 
   .jp-play,
   .jp-pause {
@@ -55,8 +56,11 @@
     background-color: #222;
   }
   .jp-play-bar {
-    background-color: #EFEFEF;
+    background-color: $action-color;
     width:0px;
     height:100%;
   }
+}
+.jp-time-holder {
+  display: none;
 }

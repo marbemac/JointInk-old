@@ -145,7 +145,6 @@ body,
 #page-nav {
   max-width: $post-tile-max-width;
   margin: auto;
-  background: #FFF;
 
   header {
     position: relative;
@@ -173,6 +172,8 @@ body,
       margin: 0;
     }
     .bg {
+      @include box-shadow(0 70px 70px 10px rgba(0, 0, 0, 0.45) inset);
+      @include box-shadow(0 7rem 7rem 1rem rgba(0, 0, 0, 0.45) inset);
       position: absolute;
       top: 0;
       bottom: 0;
@@ -181,8 +182,6 @@ body,
       z-index: -1;
     }
     &.with-cover-photo {
-      @include box-shadow(0 70px 70px 10px rgba(0, 0, 0, 0.45) inset);
-      @include box-shadow(0 7rem 7rem 1rem rgba(0, 0, 0, 0.45) inset);
       h1 {
         color: #FFF;
       }
@@ -285,9 +284,6 @@ body,
       .icon-caret-down {
         display: none;
       }
-      .name {
-        display: block;
-      }
       li {
         display: block;
         border-bottom: 1px solid #F0F1F5;
@@ -304,6 +300,10 @@ body,
       }
     }
   }
+}
+
+#page-header {
+  display: none;
 }
 
 #loader {

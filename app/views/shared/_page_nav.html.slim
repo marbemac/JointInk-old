@@ -1,6 +1,6 @@
 - content_for :page_nav do
   #page-nav-padder
-  #page-nav
+  #page-nav class="#{params[:controller]}-c"
     header class=(defined?(cover_photo_url) ? 'with-cover-photo' : '')
       .inner
         h1.sans-serif= name

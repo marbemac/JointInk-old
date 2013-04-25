@@ -17,10 +17,6 @@ module ChannelHelper
 
     options[:subheader] = channel.description
 
-    if channel.photo.present?
-      options[:badge_url] = channel_photo_path(channel, :width => 125, :height => 125, :crop => :thumb)
-    end
-
     if channel.cover_photo.present?
       options[:cover_photo_url] = cover_photo_path(channel, :width => 450, :crop => :limit)
     end

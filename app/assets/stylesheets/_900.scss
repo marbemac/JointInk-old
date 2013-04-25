@@ -31,6 +31,7 @@
   width: $mast-nav-width;
   max-width: $mast-nav-max-width;
   border-right: 1px solid $grayLightest;
+  background: #FFF;
 
   header {
     height: 35%;
@@ -90,6 +91,34 @@
       display: none;
     }
   }
+
+  &.channels-c {
+    header {
+      height: 100%;
+    }
+    nav {
+      @include opacity(0.9);
+      position: absolute;
+      top: 20%;
+      left: 0;
+      z-index: 100;
+
+      i {
+        font-size: 15px;
+      }
+      .name {
+        display: none;
+      }
+    }
+    &:hover {
+      nav {
+        @include opacity(1);
+        .name {
+          display: inline;
+        }
+      }
+    }
+  }
 }
 
 #main-content-wrapper {
@@ -107,6 +136,20 @@
 #post-collection {
   padding-top: 45px;
   padding-top: 4.5rem;
+}
+
+#page-header {
+  @include box-shadow(rgba(0, 0, 0, 0.5) 0 0 3px);
+  display: inline-block;
+  background: #222;
+  color: #FFF;
+  font-size: 12px;
+  font-size: 1.2rem;
+  padding: 6px 12px;
+  padding: 0.6rem 1.2rem;
+  text-transform: uppercase;
+  font-weight: 300;
+  cursor: default;
 }
 // END TRANSITION TO SIDEBAR LAYOUT
 
