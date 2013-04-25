@@ -1,19 +1,17 @@
 #signup
-  .center-screen
-    h1.sans-serif Sign Up
+  = render 'pages/splash_title_box'
 
-    = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+  = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'signup-form'}) do |f|
+    ul.errors
 
-      = f.input :name, :label => 'Full Name', :input_html => {:autocomplete => 'off'}
-      = f.input :username, :input_html => {:class => 'copy-over', 'data-target' => '.url .username', :autocomplete => 'off'}
-      = f.input :email, :input_html => {:autocomplete => 'off'}
-      = f.input :password, :input_html => {:autocomplete => 'off'}
+    .username-input
+      = f.input :username, :label => false, :placeholder => 'username', :input_html => {:autocomplete => 'off'}
+      .url .#{request.host_with_port}
 
-      .url
-        .head Your URL
-        .username= resource.username && !resource.username.blank? ? resource.username : 'username'
-        .root .#{request.host_with_port}
+    = f.input :name, :label => false, :placeholder => 'full name', :input_html => {:autocomplete => 'off'}
+    = f.input :email, :label => false, :placeholder => 'email', :input_html => {:autocomplete => 'off'}
+    = f.input :password, :label => false, :placeholder => 'password', :input_html => {:autocomplete => 'off'}
 
+    .step-1
       = f.submit "Sign Up", :class => 'medium action submit button'
-
-      a href=user_session_path
+      a.opposite href=user_session_path or login

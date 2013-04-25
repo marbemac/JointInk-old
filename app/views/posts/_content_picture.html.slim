@@ -1,5 +1,5 @@
 .post-full-picture
-  .image style="background-image: url('#{@post.photo_url}')"
+  .image class=@post.style style="background-image: url('#{@post.photo_url}')"
 
   - if defined?(@editing)
     .show-editing.fileinput-button

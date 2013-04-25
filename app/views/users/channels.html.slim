@@ -1,5 +1,7 @@
 = render "shared/page_nav", user_page_nav_options(@user)
 
+h4#page-header.sans-serif Channels
+
 #channel-collection
   - @user.channels.each do |channel|
     = render "channels/tile", :channel => channel

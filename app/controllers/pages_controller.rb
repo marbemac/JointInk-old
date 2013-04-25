@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  layout 'fullscreen_bg', :only => [:home]
+  layout 'splash_page', :only => [:home]
 
   def home
     @fullscreen = true

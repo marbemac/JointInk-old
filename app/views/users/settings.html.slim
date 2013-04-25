@@ -1,5 +1,7 @@
 = render "shared/page_nav", user_page_nav_options(@user)
 
+h4#page-header.sans-serif Settings
+
 #settings.tt-form
   .section.basic
     = simple_form_for @user, :url => user_url(:subdomain => @user.username) do |f|

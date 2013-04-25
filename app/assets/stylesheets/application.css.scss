@@ -143,69 +143,99 @@ body,
 }
 
 #page-nav {
-  background-color: #FFF;
   max-width: $post-tile-max-width;
   margin: auto;
 
   header {
     position: relative;
-    padding: 15px 100px 15px 15px;
-    padding: 1.5rem 10rem 1.5rem 1.5rem;
-    overflow: hidden;
+    border-bottom: 1px solid $grayLightest;
+    text-align: center;
+    min-height: 20px;
 
+    .inner {
+      padding: 15px 15px 65px 15px;
+      padding: 1.5rem 1.5rem 12.5rem 1.5rem;
+    }
     h1,
     .subheader {
       margin: 0;
       padding: 0;
     }
     h1 {
-      font-size: 22px;
-      font-size: 2.2rem;
-      line-height: 23px;
-      line-height: 2.3rem;
+      font-size: 26px;
+      font-size: 2.6rem;
+      line-height: 28px;
+      line-height: 2.8rem;
+      color: #222;
     }
     .subheader {
-      margin: 1rem 0;
+      margin: 0;
     }
-    .social-links {
-      margin: 5px 0 0 -3px;
-      margin: 0.5rem 0 0 -0.3rem;
-      font-size: 20px;
-      font-size: 2rem;
-      overflow: hidden;
-      clear: both;
-      li {
-        float: left;
-        a {
-          color: #CCC;
-          &:hover {
-            color: #999;
-          }
+    .bg {
+      @include box-shadow(0 70px 70px 10px rgba(0, 0, 0, 0.45) inset);
+      @include box-shadow(0 7rem 7rem 1rem rgba(0, 0, 0, 0.45) inset);
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: -1;
+    }
+    &.with-cover-photo {
+      h1 {
+        color: #FFF;
+      }
+      .subheader {
+        color: #F3F3F3;
+      }
+    }
+  }
+
+  .social-links {
+    margin: 5px 0 0 -3px;
+    margin: 0.5rem 0 0 -0.3rem;
+    font-size: 20px;
+    font-size: 2rem;
+    overflow: hidden;
+    clear: both;
+    display: none;
+
+    li {
+      float: left;
+      a {
+        color: #CCC;
+        &:hover {
+          color: #999;
         }
       }
     }
   }
 
   .badge {
-    @include box-shadow(rgba(0, 0, 0, 0.5) 0 0 3px);
+    @include box-shadow(rgba(0, 0, 0, 0.7) 0 0 3px);
     @include border-radius(1000px);
     position: absolute;
-    bottom: -22px;
-    right: -10px;
+    bottom: 10px;
+    bottom: 1rem;
+    left: 50%;
+    margin-left: -50px;
+    margin-left: -5rem;
+    z-index: 100;
+
     overflow: hidden;
 
     img {
       width: 10rem;
       height: 10rem;
+      display: block;
     }
   }
 
   nav {
     position: relative;
+    border-bottom: 1px solid $grayLightest;
 
     ul {
-      border-top: 1px solid $grayLightest;
-      border-bottom: 1px solid $grayLightest;
       margin: 0;
     }
     li {
@@ -254,9 +284,6 @@ body,
       .icon-caret-down {
         display: none;
       }
-      .name {
-        display: block;
-      }
       li {
         display: block;
         border-bottom: 1px solid #F0F1F5;
@@ -267,12 +294,16 @@ body,
         }
         &.on {
           a {
-            background: transparent;
+            background: #FFF;
           }
         }
       }
     }
   }
+}
+
+#page-header {
+  display: none;
 }
 
 #loader {
@@ -586,12 +617,11 @@ body,
   }
 }
 
-@import "channels";
-@import "users";
 @import "foundation_overrides";
-//@import "channels";
 @import "users";
+@import "channels";
 @import "posts";
-@import "media_queries";
+@import "splash_page";
 @import "jquery.autocomplete";
 @import "jquery.jplayer";
+@import "media_queries";

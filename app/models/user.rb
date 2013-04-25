@@ -73,6 +73,7 @@ class User < ActiveRecord::Base
                   :social_links
 
   validates :username, :length => { :minimum => 3, :maximum => 15 }, :uniqueness => true
+  validates_format_of :username, :with => /^[a-zA-Z][a-zA-Z\d_]*$/, :message => "You must start with a letter, and may only use letters, digits, and underscores"
   validates :name, :length => { :minimum => 3, :maximum => 50 }
   validates :bio, :length => { :maximum => 250, :message => 'Bio has a max length of 250' }
   validate :username_change

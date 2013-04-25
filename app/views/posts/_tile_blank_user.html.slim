@@ -1,0 +1,13 @@
+.post-tile-blank
+  .inner
+    .content
+      .head Your First Post
+      .body
+        p Posts on ThisThat can be published into Channels.
+        p Channels are collections of posts connected by a theme, idea, or prompt.
+        ul.channel-suggestions
+          - for channel in @channel_suggestions
+            li
+              a href=new_channel_post_url(channel, 'text', 'article', :subdomain => false) data-skip-pjax=true
+                img src=cover_photo_path(channel, :width => 50, :height => 50, :crop => :fill)
+                .name = channel.name

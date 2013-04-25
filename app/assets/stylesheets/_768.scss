@@ -27,6 +27,35 @@
   border-right: 1px solid #CCC;
 }
 
+.pages-home {
+  .section {
+    @include clearfix();
+
+    .half {
+      width: 50%;
+      float: left;
+
+      &.first {
+        padding-right: 2%;
+      }
+      &.second {
+        padding-left: 2%;
+      }
+    }
+    ul {
+      max-width: 700px;
+      margin: auto;
+
+      li {
+        float: left;
+        width: 46%;
+        margin-left: 2%;
+        margin-right: 2%;
+      }
+    }
+  }
+}
+
 // 2. TYPOGRAPHY 			==============================
 
 html {

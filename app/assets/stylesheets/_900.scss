@@ -19,7 +19,7 @@
 #page-nav-padder {
   width: $mast-nav-width;
   max-width: $mast-nav-max-width;
-  display: inline-block;
+  float: left;
   height: 100%;
 }
 
@@ -30,7 +30,95 @@
   bottom: 0;
   width: $mast-nav-width;
   max-width: $mast-nav-max-width;
-  border-right: 1px solid #999;
+  border-right: 1px solid $grayLightest;
+  background: #FFF;
+
+  header {
+    height: 35%;
+    margin-bottom: 80px;
+    margin-bottom: 8rem;
+    text-align: left;
+    border-bottom: 1px solid $grayLightest;
+
+    .inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 10;
+    }
+    h1 {
+      font-size: 32px;
+      font-size: 3.2rem;
+      line-height: 34px;
+      line-height: 3.4rem;
+    }
+    .badge {
+      left: -10px;
+      left: -1rem;
+      bottom: -40px;
+      bottom: -4rem;
+      margin-left: 0;
+    }
+    .bg {
+      z-index: 5;
+    }
+  }
+  .social-links {
+    margin: -70px 0 50px 100px;
+    margin: -7rem 0 5rem 10rem;
+    display: block;
+  }
+  nav {
+    border-top: 1px solid $grayLightest;
+
+    li {
+      display: block;
+      border-bottom: 1px solid #F0F1F5;
+      border-top-color:  #FFF;
+
+      &.last {
+        border-bottom: none;
+      }
+      &.on {
+        a {
+          background: #FFF;
+        }
+      }
+    }
+    .icon-caret-down {
+      display: none;
+    }
+  }
+
+  &.channels-c {
+    header {
+      height: 100%;
+    }
+    nav {
+      @include opacity(0.9);
+      position: absolute;
+      top: 20%;
+      left: 0;
+      z-index: 100;
+
+      i {
+        font-size: 15px;
+      }
+      .name {
+        display: none;
+      }
+    }
+    &:hover {
+      nav {
+        @include opacity(1);
+        .name {
+          display: inline;
+        }
+      }
+    }
+  }
 }
 
 #main-content-wrapper {
@@ -48,6 +136,20 @@
 #post-collection {
   padding-top: 45px;
   padding-top: 4.5rem;
+}
+
+#page-header {
+  @include box-shadow(rgba(0, 0, 0, 0.5) 0 0 3px);
+  display: inline-block;
+  background: #222;
+  color: #FFF;
+  font-size: 12px;
+  font-size: 1.2rem;
+  padding: 6px 12px;
+  padding: 0.6rem 1.2rem;
+  text-transform: uppercase;
+  font-weight: 300;
+  cursor: default;
 }
 // END TRANSITION TO SIDEBAR LAYOUT
 
@@ -93,6 +195,7 @@
 .post-tile {
   margin-left: 0;
   margin-right: 0;
+  max-width: none;
 }
 
 // 2. TYPOGRAPHY 			==============================

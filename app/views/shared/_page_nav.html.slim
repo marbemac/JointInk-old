@@ -1,18 +1,22 @@
 - content_for :page_nav do
   #page-nav-padder
-  #page-nav
-    header
-      h1.sans-serif= name
+  #page-nav class="#{params[:controller]}-c"
+    header class=(defined?(cover_photo_url) ? 'with-cover-photo' : '')
+      .inner
+        h1.sans-serif= name
 
-      - if defined? subheader
-        h4.subheader.text-thin.sans-serif= subheader
+        - if defined? subheader
+          h4.subheader.text-thin.sans-serif= subheader
 
-      - if defined? social_links
-        = render social_links
+        - if defined? badge_url
+          .badge
+            img src=badge_url
 
-      - if defined? badge_url
-        .badge
-          img src=badge_url
+      - if defined? cover_photo_url
+        .bg.cover-image style="background-image: url('#{cover_photo_url}')"
+
+    - if defined? social_links
+      = render social_links
 
     nav
 
@@ -20,6 +24,3 @@
         = render page_nav
 
       i.icon-caret-down
-
-    - if defined? cover_photo_url
-      .bg.cover-image style="background-image: url('#{cover_photo_url}')"

@@ -1,5 +1,5 @@
 class SessionsController < Devise::SessionsController
-  layout 'fullscreen_bg'
+  layout 'splash_page'
 
   prepend_before_filter :require_no_authentication, :only => [ :new, :create ]
   prepend_before_filter :allow_params_authentication!, :only => :create

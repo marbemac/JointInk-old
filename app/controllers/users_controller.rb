@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :show, :channels]
+  before_filter :authenticate_user!, :except => [:index,:show,:channels,:check_username]
 
   def index
 
@@ -22,6 +22,10 @@ class UsersController < ApplicationController
     build_og_tags(@user.og_title, @user.og_type, @user.permalink, @user.og_description)
 
     @posts = @user.sharing(@channel).page(params[:page]).order('created_at DESC')
+
+    if @posts.length == 0
+      @channel_suggestions = Channel.popular(5)
+    end
   end
 
   def show_redirect
@@ -42,48 +46,8 @@ class UsersController < ApplicationController
     @posts = @user.recommendations.page(params[:page])
   end
 
-  def add
-    @user = User.find(params[:user_id])
-    @channel = params[:channel_id] ? Channel.find(params[:channel_id]) : nil
-
-    authorize! :update, @user
-    authorize! :read, @channel
-
-    current_user.add(@user, @channel)
-
-    respond_to do |format|
-      format.html {
-        redirect_to :back, :notice => "#{@user.name} successfully added to your feed."
-      }
-    end
-  end
-
-  def remove
-    @user = User.find(params[:user_id])
-    @channel = params[:channel_id] ? Channel.find(params[:channel_id]) : nil
-
-    authorize! :update, @user
-    authorize! :read, @channel
-
-    current_user.remove(@user, @channel)
-
-    respond_to do |format|
-      format.html {
-        redirect_to :back, :notice => "#{@user.name} successfully remove from your feed."
-      }
-    end
-  end
-
-  def basic_settings
-
-  end
-
-  def social_settings
-
-  end
-
-  def email_settings
-
+  def settings
+    @user = current_user
   end
 
   def update
@@ -104,15 +68,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def account_deauth
-    account = Account.find(params[:id])
-    if account.user_id = current_user.id
-      account.status = 'disabled'
-      account.save
-    end
-    redirect_to :back, :notice => 'Account successfully removed'
-  end
-
   def channels
     @user = User.find(request.subdomain.downcase)
   end
@@ -125,7 +80,57 @@ class UsersController < ApplicationController
 
   end
 
-  def settings
-    @user = current_user
+  def check_username
+    user = User.where(:slug => params[:username].downcase).first
+    if user
+      render json: {:status => :ok, :available => false}
+    else
+      render json: {:status => :ok, :available => true}
+    end
   end
+
+  # not currently in use
+  def add
+    @user = User.find(params[:user_id])
+    @channel = params[:channel_id] ? Channel.find(params[:channel_id]) : nil
+
+    authorize! :update, @user
+    authorize! :read, @channel
+
+    current_user.add(@user, @channel)
+
+    respond_to do |format|
+      format.html {
+        redirect_to :back, :notice => "#{@user.name} successfully added to your feed."
+      }
+    end
+  end
+
+  # not currently in use
+  def remove
+    @user = User.find(params[:user_id])
+    @channel = params[:channel_id] ? Channel.find(params[:channel_id]) : nil
+
+    authorize! :update, @user
+    authorize! :read, @channel
+
+    current_user.remove(@user, @channel)
+
+    respond_to do |format|
+      format.html {
+        redirect_to :back, :notice => "#{@user.name} successfully remove from your feed."
+      }
+    end
+  end
+
+  # not currently in use
+  def account_deauth
+    account = Account.find(params[:id])
+    if account.user_id = current_user.id
+      account.status = 'disabled'
+      account.save
+    end
+    redirect_to :back, :notice => 'Account successfully removed'
+  end
+
 end

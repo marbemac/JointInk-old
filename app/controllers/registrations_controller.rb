@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  layout 'fullscreen_bg'
+  layout 'splash_page'
 
   def new
     @fullscreen = true

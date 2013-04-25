@@ -3,4 +3,9 @@
 
 = render "shared/page_nav", user_page_nav_options(@user)
 
-= render "posts/collection", :posts => @posts
+h4#page-header.sans-serif Posts
+
+- if @posts.length > 0
+  = render "posts/collection", :posts => @posts
+- else
+  = render "posts/tile_blank_user"

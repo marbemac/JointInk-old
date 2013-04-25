@@ -107,8 +107,11 @@ jQuery ->
   $('body').on 'click', '.post-tile-content', (e) ->
     console.log 'fee'
     unless $(e.target).is('a,h3')
-      console.log $(@).siblings('.target-url')
-      $(@).siblings('.target-url').click()
+      target = $(@).siblings('.target-url')
+      if window.location.host.toLowerCase().indexOf(target.attr('href').toLowerCase().split('/')[2]) != -1
+        target.click()
+      else
+        window.location = target.attr('href')
 
   # post audio
   $('body').bind 'reset-audio-player', ->
