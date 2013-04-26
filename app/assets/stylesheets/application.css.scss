@@ -149,6 +149,7 @@ body,
     border-bottom: 2px solid $primary-color-darker;
     text-align: center;
     min-height: 20px;
+    background: #FFF;
 
     .inner {
       padding: 15px 15px 65px 15px;
@@ -215,7 +216,7 @@ body,
   }
 
   .badge {
-    @include box-shadow(rgba(0, 0, 0, 0.7) 0 0 3px);
+    @include box-shadow(rgba(0, 0, 0, 0.7) 0 0 2px);
     @include border-radius(1000px);
     position: absolute;
     bottom: 10px;
@@ -306,7 +307,6 @@ body,
 }
 
 #page-header {
-  @include box-shadow(rgba(0, 0, 0, 0.5) 0 0 3px);
   display: none;
   background: $primary-color-darker;
   color: #FFF;

@@ -9,7 +9,7 @@ jQuery ->
     $(window).scrollTop(0)
     setTimeout ->
       $('.login-signup').animate({'margin-top':"-#{$('.login-signup').height()}px"}, 1000, 'easeOutBounce')
-    , 700
+    , 1000
 
   $('.login-signup .claim').click (e) ->
     self = $(@)
@@ -44,4 +44,5 @@ jQuery ->
     $('.signup-form,.signin-form').toggle()
     setTimeout ->
       $(window).scrollTop($('.signup-form:visible,.signin-form:visible').height())
+      $('.signup-form:visible input:visible:first,.signin-form:visible input:visible:first').focus()
     , 1
