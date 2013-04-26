@@ -1,12 +1,26 @@
+/* apply a natural box layout model to all elements */
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; margin:0; padding:0; }
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background: $body-bg-color;
+  min-height: 100%;
+}
+
 body, div, dl, dt, dd, ul, ol, p {
   font-size: 14px;
   font-size: 1.4rem;
   line-height: 20px;
   line-height: 2rem;
+  color: $body-text-color;
 }
 h1,h2,h3,h4,h5,h6 {
   margin: 0;
   padding: 0;
+  color: $body-text-color;
 }
 
 h1 {
@@ -47,11 +61,14 @@ h6 {
 
 a {
   outline: 0;
-  color: $action-color;
+  color: $primary-color;
 
   &:focus {
     @include box-shadow(none);
     outline: 0;
+  }
+  &:hover {
+    color: $primary-color-darker;
   }
 }
 
@@ -71,8 +88,8 @@ blockquote {
   margin: 0 0 2.5rem -2rem;
   padding: 0 0 0 20px;
   padding: 0 0 0 2rem;
-  border-left: 5px solid $action-color;
-  border-left: 0.5rem solid $action-color;
+  border-left: 5px solid $primary-color;
+  border-left: 0.5rem solid $primary-color;
   position: relative;
 
   p {

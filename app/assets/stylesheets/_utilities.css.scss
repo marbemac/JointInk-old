@@ -91,18 +91,18 @@
   &.light-gray {
     background: #FAFBFB;
     border: 1px solid $grayLightest;
-    color: $blue-gray-color;
+    color: $tertiary-color-darker;
 
     a {
-      color: $blue-gray-color;
+      color: $tertiary-color-darker;
     }
     .icon {
       color: #AAAAAA;
     }
     &:hover {
-      background: $action-color;
+      background: $primary-color;
       color: #FFF;
-      border-color: $action-color;
+      border-color: $primary-color;
       a,
       .icon {
         color: #FFF;
@@ -121,9 +121,9 @@
       color: #FCFCFC;
     }
     &:hover {
-      background: $action-color;
+      background: $primary-color;
       color: #FFF;
-      border-color: $action-color;
+      border-color: $primary-color;
       a,
       .icon {
         color: #FFF;
@@ -135,7 +135,7 @@
     color: #222;
     &:hover {
       color: #EFEFEF;
-      background: darken($action-color, 10%);
+      background: darken($primary-color, 10%);
     }
   }
   &.secondary {
@@ -147,11 +147,11 @@
     }
   }
   &.action {
-    background: $action-color;
-    border-color: darken($action-color, 10%);
+    background: $primary-color;
+    border-color: darken($primary-color, 10%);
     color: #FFF;
     &:hover {
-      background: darken($action-color, 10%);
+      background: darken($primary-color, 10%);
     }
   }
   &.disabled {

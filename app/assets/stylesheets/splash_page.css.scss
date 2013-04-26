@@ -3,22 +3,17 @@
   src: url('/assets/fonts/SpecialElite.ttf');
 }
 
-body {
-  background: #F9F9F9;
-}
-
 .signup-form,
 .signin-form {
-  background: #F6F6F6;
+  background: $secondary-color;
   margin: 0 auto 20px auto;
-  border: 1px solid #E5E5DE;
   padding: 10px;
   padding: 1rem;
 
   input {
     font-size: 16px;
     font-size: 1.6rem;
-    border-color: #BDBDAD;
+    border: none;
     width: 100%;
     max-width: none;
     margin: 0 0 10px 0;
@@ -35,12 +30,11 @@ body {
     .url {
       width: 50%;
       float: left;
-      background: #BDBDAD;
+      background: $secondary-color-darker;
       color: #FFF;
       font-size: 16px;
       font-size: 1.6rem;
       padding: 10px;
-      border: 1px solid #BDBDAD;
     }
   }
   .extra {
@@ -56,14 +50,15 @@ body {
   .opposite {
     float: left;
     padding: 7px 25px;
-    color: #565656;
+    padding: 0.7rem 2.5rem;
+    color: #FFF;
     cursor: pointer;
     font-weight: bold;
   }
   .submit {
     float: left;
     width: 50%;
-    background: #565656;
+    background: $primary-color;
     margin: 0;
     line-height: 12px;
     line-height: 1.2rem;
@@ -223,7 +218,6 @@ body {
       font-weight: normal;
     }
   }
-
   form {
     max-width: 500px;
     text-align: left;
@@ -236,6 +230,7 @@ body {
         line-height: 13px;
         line-height: 1.3rem;
         margin: -5px 0 15px 5px;
+        color: #ffd5d1;
       }
     }
   }
