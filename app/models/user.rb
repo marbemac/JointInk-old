@@ -301,7 +301,7 @@ class User < ActiveRecord::Base
   end
 
   def analytics_data
-    { email: email, firstName: first_name, lastName: last_name, name: name, username: username, created: created_at.to_s }
+    { email: email, firstName: first_name, lastName: last_name, name: name, username: username, created: created_at.iso8601 }
   end
 
   ##########
