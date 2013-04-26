@@ -1,0 +1,17 @@
+development:
+ adapter: postgresql
+ encoding: unicode
+ database: thisthat_development
+ host: localhost
+ pool: 10
+ username: matt
+ password:
+
+production:
+ adapter: postgresql
+ encoding: unicode
+ database: thisthat_production
+ host: localhost
+ username: postgres
+ password: PU3eBEwrUw89uRa
+ pool: 50

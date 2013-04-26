@@ -30,6 +30,15 @@ html
     script
       = yield :javascript
 
+      / Hack for getting user info in the track requests.
+      - if session[:signed_up]
+        - session[:signed_up] = nil
+        | analytics.track('Sign Up')
+      - if session[:confirmed]
+        - session[:confirmed] = nil
+        | analytics.track('Confirmation')
+
+
     / TODO: this is an ugly way of including the editor js files only on certain pages
     - if params[:controller] == 'posts' && ['edit','new','create','update'].include?(params[:action])
       = javascript_include_tag "redactor"

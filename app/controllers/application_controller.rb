@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
   end
 
   # for segment.io
-  def analytics_context
+  def analytics_context(user=nil)
     context = {
         userAgent: request.env['HTTP_USER_AGENT'],
         ip: request.remote_ip
@@ -94,6 +94,9 @@ class ApplicationController < ActionController::Base
       context['Google Analytics'] = {
           :clientId => cookies[:_ga]
       }
+    end
+    if user
+      context[:traits] = user.analytics_data
     end
     context
   end
