@@ -6,14 +6,30 @@
 // Global values
 // --------------------------------------------------
 
+// external colors
 $fb-color: #3B5998;
 $tw-color: #00C0F7;
 $tt-color: #666;
-$accent-color: yellow;
-$action-color: #3ea1cd;
-$secondary-color: #51A351;
+
+// body
+$body-bg-color: #F1F1F1;
+$body-bg-color-lighter: #FDFDFD;
+$body-text-color: #333;
+
+// misc
 $blue-gray-color: #6A7180;
-$body-text-color: #222;
+
+// action/attention color
+$primary-color: #3498db;
+$primary-color-darker: #2980b9;
+
+// darker color
+$secondary-color: #34495e;
+$secondary-color-darker: #2c3e50;
+
+// lighter color
+$tertiary-color: #ecf0f1;
+$tertiary-color-darker: #bdc3c7;
 
 // Site structure
 // --------------------------------------------------
@@ -26,11 +42,6 @@ $mast-nav-max-width: 475px;
 $post-margin: 20px;
 $post-tile-max-width: 700px;
 $post-article-max-width: 650px;
-$body-bg-color: #EFEFEF;
-$body-bg-color-light: #FCFCFC;
-
-// deprecated
-$header-height: 400px;
 
 // Grays
 // -------------------------
