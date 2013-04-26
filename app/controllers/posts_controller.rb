@@ -24,6 +24,9 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
+        if @post.published_at_changed?
+          set_session_analytics("Publish", {:postId => @post.id})
+        end
         @post.update_photo_attributes
         @post.save
         format.html { redirect_to @post.primary_channel ? post_via_channel_url(@post.primary_channel, @post, :subdomain => @post.user.username) : post_url(@post.id, :subdomain => false)}

@@ -107,4 +107,9 @@ class ApplicationController < ActionController::Base
       format.all { render nothing: true, status: status }
     end
   end
+
+  # Sets a temporary
+  def set_session_analytics(event, properties={})
+    session[:analytics] = {:event => event, :properties => properties}
+  end
 end

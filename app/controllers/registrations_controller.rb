@@ -12,7 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
     build_resource
 
     if resource.save
-      session[:signed_up] = true
+      set_session_analytics("Sign Up")
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_in(resource_name, resource)

@@ -27,17 +27,13 @@ html
 
     = javascript_include_tag "application"
 
-    script
+    script class='foo'
       = yield :javascript
 
       / Hack for getting user info in the track requests.
-      - if session[:signed_up]
-        - session[:signed_up] = nil
-        | analytics.track('Sign Up')
-      - if session[:confirmed]
-        - session[:confirmed] = nil
-        | analytics.track('Confirmation')
-
+      - if session[:analytics]
+        | analytics.track('#{session[:analytics][:event]}', #{session[:analytics][:properties]})
+        - session[:analytics] = nil
 
     / TODO: this is an ugly way of including the editor js files only on certain pages
     - if params[:controller] == 'posts' && ['edit','new','create','update'].include?(params[:action])
