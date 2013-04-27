@@ -6,7 +6,7 @@
       .upload-help
         | click to upload a picture
         span.loading
-        input type='file' data-url=post_update_photo_url(@post.id, :subdomain => (Rails.env == 'production' ? 'www' : false)) name='post[photo]'
+        input type='file' data-url=post_update_photo_url(@post.token, :subdomain => (Rails.env == 'production' ? 'www' : false)) name='post[photo]'
 
 .post-full-footer
   - cache @post do

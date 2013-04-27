@@ -13,7 +13,6 @@
 #  created_at             :datetime         not null
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string(255)
-#  domain                 :string(255)
 #  email                  :string(255)
 #  email_channel_post     :boolean          default(TRUE)
 #  email_newsletter       :boolean          default(TRUE)
@@ -24,7 +23,6 @@
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string(255)
 #  name                   :string(255)
-#  oneliner               :string(255)
 #  origin                 :string(255)
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
@@ -32,6 +30,7 @@
 #  roles                  :string_array(255
 #  sign_in_count          :integer          default(0)
 #  slug                   :string(255)
+#  social_links           :text             default("[]")
 #  status                 :string(255)      default("active")
 #  theme_data             :hstore
 #  time_zone              :string(255)      default("Eastern Time (US & Canada)")

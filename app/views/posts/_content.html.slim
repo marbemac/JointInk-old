@@ -5,4 +5,4 @@ div class="post-full #{@post.post_type} #{@post.post_subtype} #{@post.style} #{d
   = yield
 
 = render 'posts/audio_player'
-#post-data  data-d={:id => @post.id, :url => post_url(@post.id)}.to_json status=@post.status
+#post-data  data-d={:id => @post.id, :url => post_url(@post.token)}.to_json status=@post.status

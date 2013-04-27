@@ -2,7 +2,7 @@
   img src=post_photo_path(post, :width => 560, :crop => :limit)
 
 .bg
-  a href=(post.primary_channel ? post_via_channel_url(post.primary_channel, post, :subdomain => post.user.username) : post_url(post.id, :subdomain => false))
+  a href=(post.primary_channel ? post_via_channel_url(post.primary_channel, post, :subdomain => post.user.username) : post_url(post.token, :subdomain => false))
     h2.title= post.title
   = render "posts/tile_meta", :post => post
 
