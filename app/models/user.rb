@@ -251,7 +251,7 @@ class User < ActiveRecord::Base
   end
 
   def permalink
-    "http://www.getthisthat.com/u/#{id}"
+    "http://jointink.com/u/#{id}"
   end
 
   #################

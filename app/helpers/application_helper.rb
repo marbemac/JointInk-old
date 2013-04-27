@@ -1,6 +1,6 @@
 module ApplicationHelper
   def title
-    base_title = "ThisThat"
+    base_title = "Joint Ink"
     title = truncate(@title, :length => 60, :separator => ' ', :omission => '...')
     if @title.nil?
       base_title
@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def description
-    @description.nil? ? "ThisThat is a new type of publishing platform." : truncate(@description, :length => 150, :separator => ' ', :omission => '...')
+    @description.nil? ? "Joint Ink is a new type of publishing platform." : truncate(@description, :length => 150, :separator => ' ', :omission => '...')
   end
 
   def site_host
@@ -20,7 +20,7 @@ module ApplicationHelper
       when 'staging'
         'foobar-staging.herokuapp.com'
       when 'production'
-        'www.getthisthat.com'
+        'jointink.com'
     end
   end
 
@@ -64,12 +64,12 @@ module ApplicationHelper
 
     if Rails.env == 'production'
       # segment.io
-      script += "<script>var analytics=analytics||[];analytics.load=function(e){var t=document.createElement('script');t.type='text/javascript',t.async=!0,t.src=('https:'===document.location.protocol?'https://':'http://')+'d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/'+e+'/analytics.min.js';var n=document.getElementsByTagName('script')[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=['identify','track','trackLink','trackForm','trackClick','trackSubmit','pageview','ab','alias','ready'];for(var s=0;s<i.length;s++)analytics[i[s]]=r(i[s])};
-      analytics.load('skwn597u0u');</script>"
+      script += "var analytics=analytics||[];analytics.load=function(e){var t=document.createElement('script');t.type='text/javascript',t.async=!0,t.src=('https:'===document.location.protocol?'https://':'http://')+'d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/'+e+'/analytics.min.js';var n=document.getElementsByTagName('script')[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=['identify','track','trackLink','trackForm','trackClick','trackSubmit','pageview','ab','alias','ready'];for(var s=0;s<i.length;s++)analytics[i[s]]=r(i[s])};
+                 analytics.load('zioyk6zfq7');"
     elsif Rails.env == 'development'
       # segment.io
       script += "<script>var analytics=analytics||[];analytics.load=function(e){var t=document.createElement('script');t.type='text/javascript',t.async=!0,t.src=('https:'===document.location.protocol?'https://':'http://')+'d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/'+e+'/analytics.min.js';var n=document.getElementsByTagName('script')[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=['identify','track','trackLink','trackForm','trackClick','trackSubmit','pageview','ab','alias','ready'];for(var s=0;s<i.length;s++)analytics[i[s]]=r(i[s])};
-      analytics.load('xjuij9ltao');</script>"
+                 analytics.load('qlnuv1pca2');</script>"
     end
 
     if current_user
@@ -99,7 +99,7 @@ module ApplicationHelper
   # options for the master nav on the homepage
   def home_mast_nav_options
     options = {
-        :name => 'ThisThat',
+        :name => 'Joint Ink',
         :subheader => 'Yeehaw'
     }
 

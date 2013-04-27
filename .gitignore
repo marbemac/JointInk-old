@@ -65,10 +65,10 @@ tmp/*
 /.idea
 
 # intellij file
-ThisThat.iml
+JointInk.iml
 
 # Uploaded files
 /dump.rdb
 /.rvmrc
-/ThisThat.iml
+/JointInk.iml
 /out/

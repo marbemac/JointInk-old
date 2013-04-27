@@ -35,9 +35,10 @@ jQuery ->
           $(window).scrollTop($('.signup-form').height())
         , 1
 
-  $('.signup-form').submit (e) ->
-    if $(@).find('.claim:visible').length
-      $(@).find('.claim').click()
+  $('.signup-form #user_username').keypress (e) ->
+    keycode = if e.keyCode then e.keyCode else e.which
+    if keycode == 13
+      $('.claim').click()
       e.preventDefault()
 
   $('.signup-form .opposite,.signin-form .opposite').click (e) ->

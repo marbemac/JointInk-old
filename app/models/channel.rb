@@ -120,7 +120,7 @@ class Channel < ActiveRecord::Base
   end
 
   def permalink
-    "http://www.getthisthat.com/c/#{id}"
+    "http://jointink.com/c/#{id}"
   end
 
   ##########

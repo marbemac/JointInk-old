@@ -2,16 +2,16 @@ include ActionView::Helpers::TextHelper
 
 class UserMailer < ActionMailer::Base
   layout 'email', :except => [:matt_welcome, :marc_welcome]
-  default :from => "ThisThat <founders@getthisthat.com>"
+  default :from => "Joint Ink <founders@jointink.com>"
 
   def welcome_email(user_id)
     @user = User.find(user_id)
-    mail(:to => "#{@user.name} <#{@user.email}>", :subject => "#{@user.first_name}, welcome to ThisThat")
+    mail(:to => "#{@user.name} <#{@user.email}>", :subject => "#{@user.first_name}, welcome to Joint Ink")
   end
 
   def welcome_email_admins(user_id)
     user = User.find(user_id)
-    mail(:to => 'founders@getthisthat.com', :reply_to => user.email, :subject => "[ThisThat signup] #{user.name ? user.name + '(' + user.username + ')' : user.username} signed up!")
+    mail(:to => 'founders@jointink.com', :reply_to => user.email, :subject => "[Joint Ink signup] #{user.name ? user.name + '(' + user.username + ')' : user.username} signed up!")
   end
 
   def post_admin(post_id)
@@ -34,13 +34,13 @@ class UserMailer < ActionMailer::Base
 
   #def matt_welcome(user_id)
   #  @user = User.find(user_id)
-  #  mail(:from => "Matt <matt@getthisthat.com>", :to => "#{@user.username} <#{@user.email}>", :subject => "Thanks")
+  #  mail(:from => "Matt <matt@jointink.com>", :to => "#{@user.username} <#{@user.email}>", :subject => "Thanks")
   #end
   #
   #def marc_welcome(user_id, today_or_yesterday)
   #  @user = User.find(user_id)
   #  @today_or_yesterday = today_or_yesterday
-  #  mail(:from => "Marc <marc@getthisthat.com>", :to => "#{@user.username} <#{@user.email}>", :subject => "Hi There")
+  #  mail(:from => "Marc <marc@jointink.com>", :to => "#{@user.username} <#{@user.email}>", :subject => "Hi There")
   #end
 
   def pending_reminder(user_id, pending_this_week, crowdsourced_this_week)

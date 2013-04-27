@@ -167,7 +167,7 @@ class Post < ActiveRecord::Base
   end
 
   def permalink
-    "http://www.getthisthat.com/p/#{id}"
+    "http://jointink.com/p/#{id}"
   end
 
   # has the user voted on this post?

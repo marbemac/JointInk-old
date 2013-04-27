@@ -1,4 +1,4 @@
-ThisThat::Application.configure do
+JointInk::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -67,7 +67,7 @@ ThisThat::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.action_mailer.default_url_options = { :host => 'www.getthisthat.com' }
+  config.action_mailer.default_url_options = { :host => 'jointink.com' }
   Rails.application.routes.default_url_options = config.action_mailer.default_url_options # because this is what Resque looks for
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
@@ -79,7 +79,7 @@ ThisThat::Application.configure do
   config.action_mailer.smtp_settings = {
     address: "smtp.sendgrid.net",
     port: 25,
-    domain: "getthisthat.com",
+    domain: "jointink.com",
     authentication: "plain",
     user_name: ENV["SENDGRID_USERNAME"],
     password: ENV["SENDGRID_PASSWORD"]

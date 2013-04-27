@@ -1,4 +1,4 @@
-ThisThat::Application.routes.draw do
+JointInk::Application.routes.draw do
 
   get 'switch_user', :controller => 'switch_user', :action => 'set_current_user'
 
