@@ -6,24 +6,16 @@
         | A channel is a place for people to express themselves around a common idea, theme, or prompt.
 
   = simple_form_for @channel do |f|
+
+    = f.error_notification
+    = f.error :base
+
     .section.basic
-      .help.show-for-touch click the text below to edit
-
-      = f.error_notification
-      = f.error :base
-
-      .fileinput-button.circle
-        span.prompt Choose Photo
-        img src=(@channel.persisted? ? channel_photo_path(@channel, :width => 200, :height => 200, :crop => :fit) : '')
-        = f.hidden_field :photo_cache
-        = f.file_field :photo, :tabindex => '-1'
-
-      = f.error :photo
+      .help.show-for-touch click the items below to edit
 
       = f.input :name, :label => false, :input_html => {:placeholder => 'Channel Name', :autocomplete => 'off'}
       = f.input :description, :as => :text, :label => false, :input_html => {:placeholder => 'Channel Description', :autocomplete => 'off', :rows => 3}
 
-    .section
       .line
         .name Cover Photo
         .content
@@ -40,11 +32,15 @@
         .help.show-for-touch choose permissions
         .option-wrapper.first
           div class=("option #{@channel.privacy == 'public' ? 'on' : ''}") data-value='public'
-            .head Public
+            .head
+              i.icon.icon-eye-open
+              | Public
             p Everybody can view posts. Everybody can contribute posts.
         .option-wrapper.second
           div class=("option #{@channel.privacy == 'invite' ? 'on' : ''}") data-value='invite'
-            .head Invite to Post
+            .head
+              i.icon.icon-eye-close
+              | Invite to Post
             p Everybody can view posts. Only those you invite can contribute posts.
 
         = f.input :privacy, :as => :hidden, :label => false, :input_html => { :value => @channel.persisted? ? @channel.privacy : 'public' }
