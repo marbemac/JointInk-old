@@ -275,21 +275,21 @@ jQuery ->
         $('.editor-save').click()
 
   # save on ctrl + s
-  $('body,.post-title,.post-full-body').bind 'keydown.ctrl_s', (e) ->
+  $('body,.post-title,.post-full-body').bind 'keydown', 'ctrl+s', (e) ->
     e.preventDefault()
     $('.editor-save').click()
     false
   # save on command (mac) + s
-  .bind 'keydown.meta_s', (e) ->
+  .bind 'keydown', 'meta+s', (e) ->
     e.preventDefault()
     $('.editor-save').click()
     false
   # capture ctrl + left
-  .bind 'keydown.ctrl_left', (e) ->
+  .bind 'keydown', 'ctrl+left', (e) ->
     e.preventDefault()
     false
   # capture command (mac) + left
-  .bind 'keydown.meta_left', (e) ->
+  .bind 'keydown', 'meta+left', (e) ->
     e.preventDefault()
     false
 
