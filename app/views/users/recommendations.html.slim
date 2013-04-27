@@ -2,4 +2,5 @@
 
 h4#page-header.sans-serif Recommended Posts
 
-= render "posts/collection", :posts => @posts
+- if @posts.length > 0
+  = render "posts/collection", :posts => @posts

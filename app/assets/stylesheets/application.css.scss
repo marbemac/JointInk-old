@@ -81,35 +81,42 @@ body,
   .handle {
     @include box-shadow(rgba(0, 0, 0, 0.5) 0 0 3px);
     color: #FFF;
-    background: $secondary-color-darker;
+    background: $secondary-color;
     padding: 6px 8px;
     padding: 0.6rem 0.8rem;
     font-size: 18px;
     font-size: 1.8rem;
     cursor: default;
-    margin: 2px solid $body-bg-color;
   }
   ul {
     position: absolute;
-    bottom: -4px;
-    right: -9px;
+    bottom: 0;
+    right: -5px;
     background: $secondary-color-darker;
-    padding: 3px 0;
+    padding: 0;
     display: none;
     margin: 0;
-    border: 4px solid $body-bg-color;
   }
   li {
     &:hover {
       a {
-        background: $tertiary-color;
-        border-color: $primary-color;
+        background: #FFF;
+        border-color: $primary-color-darker;
         color: $body-text-color;
       }
     }
-    &.divider {
-      border-bottom: 1px solid #FFFFFF;
-      margin: 4px 0;
+    &.spacer {
+      height: 5px;
+      height: 0.5rem;
+    }
+    &.head {
+      cursor: default;
+      background: $tertiary-color;
+      font-size: 12px;
+      font-size: 1.2rem;
+      padding: 3px 25px 3px 11px;
+      padding: 0.3rem 2.5rem 0.3rem 1.1rem;
+      border-left: 3px solid $primary-color-darker;
     }
   }
   a {
@@ -117,13 +124,15 @@ body,
     white-space: nowrap;
     border-left: 3px solid transparent;
     border-right: 3px solid transparent;
-    font-size: 12px;
-    font-size: 1.2rem;
+    font-size: 14px;
+    font-size: 1.4rem;
     padding: 3px 25px 3px 7px;
+    padding: 0.3rem 2.5rem 0.3rem 0.7rem;
     display: block;
   }
   .icon {
-    margin: 0 4px 0 0;
+    margin: 0 6px 0 0;
+    margin: 0 0.6rem 0 0;
     position: relative;
     top: -1px;
     font-size: 10px;

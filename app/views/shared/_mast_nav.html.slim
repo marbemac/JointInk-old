@@ -2,24 +2,21 @@
   .handle
     i.icon-reorder
   ul.menu
-    li
-      a href=new_channel_url(:subdomain => false) data-skip-pjax=true
-        i.icon.icon-circle-blank
-        | Channel
-    li
-      a href=new_post_url('text', 'article', :subdomain => false) data-skip-pjax=true
-        i.icon.icon-pencil
-        | Article
-    li
-      a href=new_post_url('picture', 'caption', :subdomain => false) data-skip-pjax=true
-        i.icon.icon-camera-retro
-        | Picture
     - if signed_in?
-      li.divider
+      li.head = current_user.first_name
+      li.spacer
       li
         a href=user_url(:subdomain => current_user.username)
           i.icon.icon-user
           | My Page
+      li
+        a href=user_channels_url(:subdomain => current_user.username)
+          i.icon.icon-circle-blank
+          span.name = pluralize(current_user.channels_count, "Channel")
+      li
+        a href=user_recommendations_url(:subdomain => current_user.username)
+          i.icon.icon-plus-sign
+          span.name = pluralize(current_user.recommendations_count, "Recommendation")
       li
         a href=user_ideas_url(:subdomain => current_user.username)
           i.icon.icon-lightbulb
@@ -32,3 +29,45 @@
         a href=destroy_user_session_url(:subdomain => false) data-skip-pjax=true
           i.icon.icon-off
           | Logout
+      li.spacer
+
+      li.head Create
+      li.spacer
+      li
+        a href=new_channel_url(:subdomain => false) data-skip-pjax=true
+          i.icon.icon-circle-blank
+          | Channel
+      li
+        a href=new_post_url('text', 'article', :subdomain => false) data-skip-pjax=true
+          i.icon.icon-pencil
+          | Article
+      li
+        a href=new_post_url('picture', 'caption', :subdomain => false) data-skip-pjax=true
+          i.icon.icon-camera-retro
+          | Picture
+      li.spacer
+
+    - else
+      li.head Think Ink
+      li.spacer
+      li
+        a href=root_url(:subdomain => false)
+          i.icon.icon-home
+          | Home
+      li
+        a href=user_registration_url(:subdomain => false)
+          i.icon.icon-heart
+          | Sign Up
+      li
+        a href=user_session_url(:subdomain => false)
+          i.icon.icon-user
+          | Sign In
+      li.spacer
+
+    li.head Explore
+    li.spacer
+    li
+      a href=channels_url(:subdomain => false)
+        i.icon.icon-circle-blank
+        | Channels
+    li.spacer
