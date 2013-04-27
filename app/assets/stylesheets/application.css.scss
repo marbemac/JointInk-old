@@ -173,14 +173,28 @@ body,
       margin: 0;
     }
     .bg {
-      @include box-shadow(0 70px 70px 10px rgba(0, 0, 0, 0.45) inset);
-      @include box-shadow(0 7rem 7rem 1rem rgba(0, 0, 0, 0.45) inset);
+      @include box-shadow(0 80px 70px 15px rgba(0, 0, 0, 0.45) inset);
+      @include box-shadow(0 8rem 7rem 1.5rem rgba(0, 0, 0, 0.45) inset);
       position: absolute;
       top: 0;
       bottom: 0;
       left: 0;
       right: 0;
       z-index: 1;
+    }
+    .created-by {
+      color: #F3F3F3;
+      border-top: 1px solid #F3F3F3;
+      padding: 10px 15px;
+      padding: 1rem 1.5rem;
+      margin-top: 10px;
+      margin-top: 1rem;
+      display: inline-block;
+      font-weight: 300;
+
+      a {
+        color: #F3F3F3;
+      }
     }
     &.with-cover-photo {
       h1 {
@@ -246,6 +260,8 @@ body,
       display: none;
 
       a {
+        @include transition(0.2s);
+
         color: $blue-gray-color;
         font-size: 14px;
         font-size: 1.4rem;
@@ -263,11 +279,13 @@ body,
         }
       }
       .icon {
-        margin-right: 10px;
-        margin-right: 1rem;
         font-size: 14px;
         font-size: 1.4rem;
         color: #95a5a6;
+      }
+      .name {
+        margin-left: 10px;
+        margin-left: 1rem;
       }
       &.on {
         display: block;
