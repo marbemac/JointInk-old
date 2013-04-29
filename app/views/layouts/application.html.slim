@@ -32,7 +32,7 @@ html
 
       / Hack for getting user info in the track requests.
       - if session[:analytics]
-        | analytics.track('#{session[:analytics][:event]}', #{session[:analytics][:properties]})
+        | analytics.track('#{session[:analytics][:event]}', #{session[:analytics][:properties].to_json.html_safe})
         - session[:analytics] = nil
 
     / TODO: this is an ugly way of including the editor js files only on certain pages
