@@ -14,15 +14,6 @@ jQuery ->
     $('body').stopTime 'show-loader'
     $('#loader').hide()
 
-  # Initiate timeago timestamps
-#  $(".timeago").livequery ->
-#    $(@).timeago()
-
-  # copy input to area
-  $('body').on 'keyup', '.copy-over', (e) ->
-    value = if $(@).is('input') then $(@).val() else $(@).text()
-    $($(@).data('target')).text(value)
-
   # toggle target element
   $('body').on 'click', '.toggler', (e) ->
     $($(@).data('target')).toggle()

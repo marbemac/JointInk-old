@@ -96,7 +96,7 @@ class Post < ActiveRecord::Base
   # generate a random token identifier
   def generate_token
     self.token = loop do
-      random_token = SecureRandom.urlsafe_base64(4)
+      random_token = SecureRandom.urlsafe_base64(3)
       break random_token unless Post.where(token: random_token).exists?
     end
   end

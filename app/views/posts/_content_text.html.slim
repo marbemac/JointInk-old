@@ -12,14 +12,13 @@
 
 .post-full-picture-placeholder
 
-- cache @post do
-  .post-full-header-wrapper
-    .post-full-header
-      .post-full-header-inner
-        h1.post-title
-          == !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
+.post-full-header-wrapper
+  .post-full-header
+    .post-full-header-inner
+      h1.post-title
+        == !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
 
-        = render "top_meta", :post => @post
+      = render "top_meta", :post => @post
 
 .post-full-content-wrapper
   .post-full-content
@@ -27,13 +26,7 @@
       .post-full-body
         == markdown(@post.content)
 
-    - unless defined?(@editing)
-      .post-full-actions
-        - if can? :update, @post
-          = render "posts/admin_btns"
-        = render "posts/recommend_btn"
-        - if @post.status == 'active'
-          = render "posts/share_btns"
+  = render "posts/author_box"
 
 - if defined?(@editing)
   .post-full-markdown

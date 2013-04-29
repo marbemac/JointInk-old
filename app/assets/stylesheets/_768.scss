@@ -11,17 +11,6 @@
 
 // 1. ROOT 					==============================
 
-.post-full-header,
-.post-full-content {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.post-tile {
-  padding-left: 0;
-  padding-right: 0;
-}
-
 #page-nav {
   border-left: 1px solid #CCC;
   border-right: 1px solid #CCC;
@@ -54,6 +43,32 @@
       }
     }
   }
+}
+
+.post-full {
+  &.article {
+    .post-full-actions {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .post-full-meta-section {
+      .inner {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+}
+
+.post-full-header,
+.post-full-content {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.post-tile {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 // 2. TYPOGRAPHY 			==============================

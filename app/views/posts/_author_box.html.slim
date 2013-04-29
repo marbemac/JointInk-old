@@ -1,0 +1,25 @@
+.post-full-actions
+  = render "posts/recommend_btn"
+  - if @post.status == 'active'
+    = render "posts/share_btns"
+
+.post-full-meta-section.author.dark
+  .inner
+    .head Author
+    a href=user_path(:subdomain => @post.user.username)
+      .content
+        img src=user_avatar_path(@post.user, :width => 170, :height => 170, :crop => :thumb, :gravity => :face)
+        .name = @post.user.name
+        .bio = @post.user.bio
+
+.post-full-meta-section.channels
+  .inner
+    .head Channels
+    .content
+      ul
+        - for channel in @post.channels
+          li
+            a href=new_channel_post_url(channel, 'text', 'article', :subdomain => false) data-skip-pjax=true
+              img src=cover_photo_path(channel, :width => 50, :height => 50, :crop => :fill)
+              .name = channel.name
+    .add-channel +Add

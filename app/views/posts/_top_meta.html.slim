@@ -8,12 +8,11 @@
     - else
       a.post-full-channel href='#'
 
-  - if post.attribution_link
-    .meta-two
-      - begin
-        - link = URI.parse(post.attribution_link).host
-      - rescue
-      - else
-        = 'Originally published at '
-        a.post-full-attribution href=post.attribution_link = link
-
+  /- if post.attribution_link
+  /  .meta-two
+  /    - begin
+  /      - link = URI.parse(post.attribution_link).host
+  /    - rescue
+  /    - else
+  /      = 'Originally published at '
+  /      a.post-full-attribution href=post.attribution_link = link

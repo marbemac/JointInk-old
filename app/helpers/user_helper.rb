@@ -10,6 +10,11 @@ module UserHelper
   end
 
   def user_avatar_path(user, options)
+    unless user.avatar.present?
+      hash = Digest::MD5.hexdigest(user.email.downcase)
+      return "http://www.gravatar.com/avatar/#{hash}?s=250&d=mm"
+    end
+
     update_image_options(options)
 
     if user.avatar.present?
@@ -30,12 +35,7 @@ module UserHelper
       options[:subheader] = user.bio
     end
 
-    if user.avatar.present?
-      options[:badge_url] = user_avatar_path(user, :width => 250, :height => 250, :crop => :thumb, :gravity => :face)
-    else
-      hash = Digest::MD5.hexdigest(user.email.downcase)
-      options[:badge_url] = "http://www.gravatar.com/avatar/#{hash}?s=250&d=mm"
-    end
+    options[:badge_url] = user_avatar_path(user, :width => 250, :height => 250, :crop => :thumb, :gravity => :face)
 
     if user.cover_photo.present?
       options[:cover_photo_url] = cover_photo_path(user, :width => 450, :crop => :limit)

@@ -32,8 +32,6 @@ jQuery ->
 
     return if self.hasClass('disabled')
 
-    console.log()
-
     $.ajax
       url: self.data('url')
       type: if self.hasClass('action') then 'PUT' else 'DELETE'
@@ -67,44 +65,6 @@ jQuery ->
         newCount.slideDown 500, 'easeOutBounce', ->
           oldCount.remove()
           newCount.css(position:'static','border-bottom':'none')
-
-#  # full page article cover photo sizing and handling
-#  updateFullPageArticle = ->
-#    $('#picture-wrapper,.post-full-placeholder').height($(window).height())
-#
-#  $('#posts-show.text.full-page,#posts-edit.text.full-page').livequery ->
-#    picture = $('#picture-wrapper')
-#    content = $('.white-wrap')
-#
-#    updateFullPageArticle()
-#
-#    setTimeout ->
-#      $('#post-picture-title').fadeIn(800)
-#    , 500
-#
-#    setTimeout ->
-#      if $(document).scrollTop() <= 60
-#        $.scrollTo '150',
-#          duration: 1500
-#          easing:'easeInOutCubic'
-#    , 1500
-#
-#    $(window).on 'scroll', ->
-#      unless $('#posts-show.text.full-page,#posts-edit.text.full-page').length > 0
-#        $(window).off 'scroll'
-#        return
-#
-#      distance = content.offset().top - $(document).scrollTop()
-#      height = $(window).height()
-#      $('#picture-wrapper').css(opacity: distance / height)
-#
-#    $(window).on 'resize', ->
-#      $('body').stopTime 'resize-full-page'
-#      $('body').oneTime 200, 'resize-full-page', ->
-#        unless $('#posts-show.text.full-page,#posts-edit.text.full-page').length > 0
-#          $(window).off 'resize'
-#          return
-#        updateFullPageArticle()
 
   # link entire post tile
   $('body').on 'click', '.post-tile-content', (e) ->
@@ -152,17 +112,3 @@ jQuery ->
 
   $("#jquery_jplayer_1").livequery ->
     $('body').trigger('reset-audio-player')
-
-  # scroll pictures slowly
-#  $(".posts-c.picture").livequery ->
-#    setTimeout ->
-#      $.scrollTo 'max',
-#        duration: 3000
-#        easing: 'easeInOutCubic'
-#    , 1000
-
-  # inline image titles
-#  $('#post-body img').livequery ->
-#    if $(@).attr('alt') && !$('.post-full').hasClass('editor')
-#      title = $('<div/>').addClass('inline-image-title').text($(@).attr($(@).attr('alt')))
-#      $(@).after(title)
