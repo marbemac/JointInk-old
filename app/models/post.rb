@@ -54,7 +54,7 @@ class Post < ActiveRecord::Base
   before_destroy :disconnect
 
   def to_param
-    "#{token}/#{title[0..40].parameterize}"
+    "#{token}#{title ? '/' + title[0..40].parameterize : ""}"
   end
 
   def is_active?
