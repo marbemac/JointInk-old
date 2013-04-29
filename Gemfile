@@ -48,8 +48,6 @@ gem 'newrelic_rpm'
 gem 'capistrano'
 gem 'foreman'
 
-gem 'analytics-ruby'
-
 group :assets do
   gem 'sass-rails',   '~> 3.2.6'
   gem 'coffee-rails', '~> 3.2.2'

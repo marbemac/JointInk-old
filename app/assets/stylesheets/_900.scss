@@ -11,7 +11,7 @@
 
   ul {
     bottom: auto;
-    top: -4px;
+    top: 0;
     right: -29px;
   }
 }
@@ -64,6 +64,9 @@
     .bg {
       z-index: 5;
     }
+    .created-by {
+      padding-left: 0;
+    }
   }
   .social-links {
     margin: -70px 0 50px 100px;
@@ -90,11 +93,15 @@
   &.channels-c {
     header {
       height: 100%;
+
+      .bg {
+        @include box-shadow(0 120px 70px 20px rgba(0, 0, 0, 0.45) inset);
+        @include box-shadow(0 12rem 7rem 2rem rgba(0, 0, 0, 0.45) inset);
+      }
     }
     nav {
-      @include opacity(0.9);
       position: absolute;
-      top: 20%;
+      top: 35%;
       left: 0;
       z-index: 100;
 
@@ -107,7 +114,6 @@
     }
     &:hover {
       nav {
-        @include opacity(1);
         .name {
           display: inline;
         }

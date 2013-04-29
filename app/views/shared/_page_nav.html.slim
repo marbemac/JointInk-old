@@ -8,6 +8,12 @@
         - if defined? subheader
           h4.subheader.text-thin.sans-serif= subheader
 
+        / this is ugly.. should probably refactor this entire page nav
+        - if params[:controller] == 'channels' && defined?(@channel)
+          .created-by
+            = 'created by '
+            a href=user_url(:subdomain => @channel.user.username) = @channel.user.name
+
         - if defined? badge_url
           .badge
             img src=badge_url

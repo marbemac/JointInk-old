@@ -33,7 +33,7 @@ class Channel < ActiveRecord::Base
   validates :user, :presence => true
   validates :name, :presence => true, :length => { :minimum => 2, :maximum => 50 }
   validates :description, :presence => true, :length => { :minimum => 2, :maximum => 200 }
-  validates :photo, :presence => true
+  validates :cover_photo, :presence => true
   validates :privacy, :inclusion => { :in => ['public', 'invite'] }
 
   attr_accessible :name, :photo, :cover_photo, :description, :privacy, :info
@@ -120,7 +120,7 @@ class Channel < ActiveRecord::Base
   end
 
   def permalink
-    "http://www.getthisthat.com/c/#{id}"
+    "http://jointink.com/c/#{id}"
   end
 
   ##########

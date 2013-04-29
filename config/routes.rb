@@ -1,4 +1,4 @@
-ThisThat::Application.routes.draw do
+JointInk::Application.routes.draw do
 
   get 'switch_user', :controller => 'switch_user', :action => 'set_current_user'
 
@@ -117,7 +117,7 @@ ThisThat::Application.routes.draw do
     get 'edit' => 'channels#edit', :as => :edit_channel
     get 'members' => 'channels#members', :as => :channel_members
     put '' => 'channels#update'
-    scope ':post_id' do
+    scope ':post_id(/:title)' do
       get '' => 'posts#show', :as => :post_via_channel
     end
     get '' => 'channels#show', :as => :channel

@@ -59,11 +59,11 @@ class ApplicationController < ActionController::Base
     @fullscreen = false
     @page_title = nil
     @og_tags = {
-        "og:site_name" => 'ThisThat',
-        "og:site_title" => "ThisThat",
+        "og:site_name" => 'Joint Ink',
+        "og:site_title" => "Joint Ink",
         "og:type" => "website",
         "og:url" => request.url,
-        "og:description" => "ThisThat is a new type of publishing platform."
+        "og:description" => "Joint Ink is a new type of publishing platform."
     }
   end
 

@@ -134,12 +134,12 @@ $post-background-color: #FCFCFC;
   margin: 5rem 0;
 
   .inner {
-    background: #E9E9E9;
+    background: $primary-color-darker;
     padding: 5px;
   }
   .content {
     background: #FFF;
-    border: 1px solid #cecece;
+    border: 1px solid $secondary-color;
   }
   .head {
     text-align: center;

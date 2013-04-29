@@ -31,9 +31,6 @@ class Post < ActiveRecord::Base
 
   serialize :photo_exif, ActiveRecord::Coders::Hstore
 
-  extend FriendlyId
-  friendly_id :title, :use => :slugged
-
   mount_uploader :photo, ImageUploader
   mount_uploader :audio, AudioUploader
 
@@ -53,7 +50,12 @@ class Post < ActiveRecord::Base
 
   before_save :sanitize, :set_published_at
   after_save :touch_channels, :email_after_published
+  before_create :generate_token
   before_destroy :disconnect
+
+  def to_param
+    "#{token}/#{title[0..40].parameterize}"
+  end
 
   def is_active?
     status == 'active'
@@ -88,6 +90,14 @@ class Post < ActiveRecord::Base
       channels.each do |c|
         c.touch
       end
+    end
+  end
+
+  # generate a random token identifier
+  def generate_token
+    self.token = loop do
+      random_token = SecureRandom.urlsafe_base64(4)
+      break random_token unless Post.where(token: random_token).exists?
     end
   end
 
@@ -167,7 +177,7 @@ class Post < ActiveRecord::Base
   end
 
   def permalink
-    "http://www.getthisthat.com/p/#{id}"
+    "http://jointink.com/p/#{token}"
   end
 
   # has the user voted on this post?

@@ -19,7 +19,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
+    @post = Post.find_by_token(params[:id])
     authorize! :update, @post
 
     respond_to do |format|
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:post_id])
+    @post = Post.find_by_token(params[:post_id])
     authorize! :read, @post
     @body_class = "#{@post.post_type} #{@post.post_subtype} #{@post.style}"
     @fullscreen = @post.post_type == 'picture' ? true : false
@@ -52,7 +52,7 @@ class PostsController < ApplicationController
   end
 
   def show_redirect
-    @post = Post.find(params[:id])
+    @post = Post.find_by_token(params[:id])
     if @post.primary_channel
       redirect_to post_via_channel_url(@post.primary_channel, @post, :subdomain => @post.user.username), :status => :moved_permanently
     else
@@ -61,7 +61,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = Post.find_by_token(params[:id])
     authorize! :update, @post
     @body_class = "#{@post.post_type} #{@post.post_subtype} #{@post.style}"
     @fullscreen = @post.post_type == 'picture' ? true : false
@@ -69,7 +69,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
+    @post = Post.find_by_token(params[:id])
     authorize! :destroy, @post
     @post.destroy
     respond_to do |format|
@@ -79,7 +79,7 @@ class PostsController < ApplicationController
   end
 
   def add_inline_photo
-    @post = Post.find(params[:id])
+    @post = Post.find_by_token(params[:id])
     authorize! :update, @post
     photo = Cloudinary::Uploader.upload(params[:post][:photo], {:tags => ["post-#{@post.id}"], :format => 'jpg', :transformation => {:crop => :limit, :width => 1400, :height => 1400, :quality => 80}})
     url = Cloudinary::Utils.cloudinary_url("v#{photo['version']}/#{photo['public_id']}.jpg", {:crop => :limit, :width => 700})
@@ -87,7 +87,7 @@ class PostsController < ApplicationController
   end
 
   def update_photo
-    @post = Post.find(params[:id])
+    @post = Post.find_by_token(params[:id])
     authorize! :update, @post
     @post.photo = params[:post][:photo]
     @post.save
@@ -98,7 +98,7 @@ class PostsController < ApplicationController
   end
 
   def remove_photo
-    @post = Post.find(params[:id])
+    @post = Post.find_by_token(params[:id])
     authorize! :update, @post
     @post.remove_photo!
     @post.update_photo_attributes
@@ -106,7 +106,7 @@ class PostsController < ApplicationController
   end
 
   def update_audio
-    @post = Post.find(params[:id])
+    @post = Post.find_by_token(params[:id])
     authorize! :update, @post
     @post.audio = params[:post][:audio]
     @post.save
@@ -117,7 +117,7 @@ class PostsController < ApplicationController
   end
 
   def remove_audio
-    @post = Post.find(params[:id])
+    @post = Post.find_by_token(params[:id])
     authorize! :update, @post
     @post.remove_audio!
     @post.save
@@ -125,7 +125,7 @@ class PostsController < ApplicationController
   end
 
   def create_vote
-    @post = Post.find(params[:id])
+    @post = Post.find_by_token(params[:id])
 
     # can't vote on your own posts
     if current_user && @post.user_id == current_user.id
@@ -140,7 +140,7 @@ class PostsController < ApplicationController
   end
 
   def destroy_vote
-    @post = Post.find(params[:id])
+    @post = Post.find_by_token(params[:id])
 
     stat = PostStat.retrieve(@post.id, 'vote', request.remote_ip, current_user ? current_user.id : nil)
     if stat
@@ -152,7 +152,7 @@ class PostsController < ApplicationController
   end
 
   def create_read
-    @post = Post.find(params[:id])
+    @post = Post.find_by_token(params[:id])
     user_id = current_user ? current_user.id : nil
 
     if @post.user_id == user_id || @post.status != 'active'
@@ -164,7 +164,7 @@ class PostsController < ApplicationController
   end
 
   def add_channel
-    @post = Post.find(params[:id])
+    @post = Post.find_by_token(params[:id])
     authorize! :destroy, @post
     @channel = Channel.find(params[:channel_id])
     authorize! :post, @channel
@@ -183,7 +183,7 @@ class PostsController < ApplicationController
   end
 
   def remove_channel
-    @post = Post.find(params[:id])
+    @post = Post.find_by_token(params[:id])
     authorize! :destroy, @post
     @channel = Channel.find(params[:channel_id])
     authorize! :post, @channel

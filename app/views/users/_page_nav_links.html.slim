@@ -10,7 +10,7 @@ ul
   li class=(params[:action] == 'recommendations' ? 'on' : '')
     a href=user_recommendations_url(:subdomain => @user.username)
       i.icon.icon-plus-sign
-      span.name = pluralize(@user.recommendations_count, "Recommendation")
+      span.name #{@user.recommendations_count} Recommended
   - if signed_in? && current_user == @user
     li class=(params[:action] == 'ideas' ? 'on' : '')
       a href=user_ideas_url(:subdomain => current_user.username)

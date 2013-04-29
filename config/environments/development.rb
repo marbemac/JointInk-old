@@ -1,4 +1,4 @@
-ThisThat::Application.configure do
+JointInk::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
@@ -29,13 +29,13 @@ ThisThat::Application.configure do
   # Setup for development - deliveries, errors raised
   ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor)
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => 'lvh.me:3001' }
+  config.action_mailer.default_url_options = { :host => 'lvh.me:3000' }
   Rails.application.routes.default_url_options = config.action_mailer.default_url_options # because this is what Resque looks for
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.smtp_settings = {
-      :domain => 'getthisthat.com',
+      :domain => 'jointink.com',
       :address => 'smtp.sendgrid.net',
       :port => 587,
       :authentication => :plain,

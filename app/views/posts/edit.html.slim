@@ -61,7 +61,7 @@
       #audio-upload.plus
         i.icon-plus title='Add audio this post.'
         .fileinput-button
-          input type='file' data-url=post_update_audio_path(@post.id) name='post[audio]'
+          input type='file' data-url=post_update_audio_path(@post.token) name='post[audio]'
         span.loading
 
     .content
@@ -69,7 +69,7 @@
         li
           i.icon.icon-double-angle-right
           span.name= @post.audio.present? ? @post.audio_name : 'None'
-          a.remove href=post_remove_audio_path(:id => @post.id) data-skip-pjax=true
+          a.remove href=post_remove_audio_path(:id => @post.token) data-skip-pjax=true
             i.icon-remove title='Remove audio.'
 
 #right-panel
@@ -87,7 +87,7 @@
           a href=@post.attribution_link target='_blank' data-skip-pjax=true
             i.icon.icon-double-angle-left
             span.name= @post.attribution_link
-          a.remove href=post_path(:id => @post.id)
+          a.remove href=post_path(:id => @post.token)
             i.icon-remove title='Remove this link.'
       #attribution-form
         input type='text' placeholder='Original Link...' autocomplete='off'
@@ -95,7 +95,7 @@
 
 #post-editor
 
-  #editor-submit-url data-url=post_path(@post.id)
+  #editor-submit-url data-url=post_path(@post.token)
 
   #inline-image-edit.reveal-modal.medium
     .close-reveal-modal x
@@ -105,7 +105,7 @@
         .fileinput-button.medium.upload.button
           | Upload Image
           span.loading
-          input type='file' name='post[photo]' data-url=post_add_inline_photo_url(@post.id, :subdomain => Rails.env == 'production' ? 'www' : false)
+          input type='file' name='post[photo]' data-url=post_add_inline_photo_url(@post.token, :subdomain => Rails.env == 'production' ? 'www' : false)
 
   = render :partial => "content_#{@post.post_type}", :layout => 'content'
 

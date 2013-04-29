@@ -9,7 +9,7 @@ jQuery ->
     $(window).scrollTop(0)
     setTimeout ->
       $('.login-signup').animate({'margin-top':"-#{$('.login-signup').height()}px"}, 1000, 'easeOutBounce')
-    , 700
+    , 1000
 
   $('.login-signup .claim').click (e) ->
     self = $(@)
@@ -35,13 +35,15 @@ jQuery ->
           $(window).scrollTop($('.signup-form').height())
         , 1
 
-  $('.signup-form').submit (e) ->
-    if $(@).find('.claim:visible').length
-      $(@).find('.claim').click()
+  $('.signup-form #user_username').keypress (e) ->
+    keycode = if e.keyCode then e.keyCode else e.which
+    if keycode == 13
+      $('.claim').click()
       e.preventDefault()
 
   $('.signup-form .opposite,.signin-form .opposite').click (e) ->
     $('.signup-form,.signin-form').toggle()
     setTimeout ->
       $(window).scrollTop($('.signup-form:visible,.signin-form:visible').height())
+      $('.signup-form:visible input:visible:first,.signin-form:visible input:visible:first').focus()
     , 1

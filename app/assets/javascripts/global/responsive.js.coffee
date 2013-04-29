@@ -2,7 +2,7 @@
 
 speedConnectionStatus = null
 #speedTestUri = 'http://foresightjs.appspot.com/speed-test/50K'
-speedTestUri = 'http://www.getthisthat.com/speed-test/50K.jpeg'
+speedTestUri = 'http://jointink.com/speed-test/50K.jpeg'
 speedTestKB = 50
 speedTestExpireMinutes = 60
 minKbpsForHighbandwith = 250

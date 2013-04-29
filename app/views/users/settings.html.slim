@@ -52,7 +52,7 @@ h4#page-header.sans-serif Settings
             .name My links
           .content
             input name="user[social_links][]" type="text" value=s
-      .more-social.button.small Add More
+      .more-social.action.button.small Add More
       = f.button :submit, :class => 'medium action submit button', :value => 'Save Links'
 
 
@@ -72,8 +72,8 @@ h4#page-header.sans-serif Settings
         .content.checkbox-wrap
           = f.check_box :email_channel_post, :class => "checkbox"
       .line.smaller
-        .name ThisThat has new features
+        .name Joint Ink has new features
         .content.checkbox-wrap
           = f.check_box :email_newsletter, :class => "checkbox"
 
-      = f.button :submit, :class => 'medium action submit button', :value => 'Save Settings'
+      = f.button :submit, :class => 'medium action submit button', :value => 'Save Email Settings'

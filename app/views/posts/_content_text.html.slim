@@ -8,7 +8,7 @@
         .upload-help
           = 'click to upload a picture '
           span.loading
-        input type='file' name='post[photo]' data-url=post_update_photo_url(@post.id, :subdomain => Rails.env == 'production' ? 'www' : false)
+        input type='file' name='post[photo]' data-url=post_update_photo_url(@post.token, :subdomain => Rails.env == 'production' ? 'www' : false)
 
 .post-full-picture-placeholder
 

@@ -1,4 +1,4 @@
-div id="posts-#{post.id}" class="post-tile #{params[:controller] == 'users' && ['show','ideas'].include?(params[:action]) ? 'user-page' : ''} #{params[:controller] == 'channels' ? 'channel-page' : ''}"
+div id="posts-#{post.token}" class="post-tile #{params[:controller] == 'users' && ['show','ideas'].include?(params[:action]) ? 'user-page' : ''} #{params[:controller] == 'channels' ? 'channel-page' : ''}"
 
   - cache post do
     div class="post-tile-content #{post.post_type} #{post.post_subtype} #{post.style}"
@@ -14,7 +14,7 @@ div id="posts-#{post.id}" class="post-tile #{params[:controller] == 'users' && [
             a.has-tip href=channel_url(channel, :subdomain => false) title=channel.name data-placement='left'
               img src=channel_photo_path(channel, :width => 75, :height => 75, :crop => :thumb)
 
-    a.target-url href=(post.primary_channel ? post_via_channel_url(post.primary_channel, post, :subdomain => post.user.username) : post_url(post.id, :subdomain))
+    a.target-url href=(post.primary_channel ? post_via_channel_url(post.primary_channel, post, :subdomain => post.user.username) : post_url(post.token, :subdomain))
 
   - if can? :update, post
     = render "posts/tile_actions", :post => post
