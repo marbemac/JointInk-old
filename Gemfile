@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 ruby '2.0.0'
 
@@ -55,7 +55,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier'
   gem 'compass-rails'
-  gem 'zurb-foundation'
+  gem 'zurb-foundation', '~> 4.1.3'
   gem 'font-awesome-rails'
   gem 'jquery-fileupload-rails'
 end
