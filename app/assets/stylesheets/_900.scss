@@ -194,6 +194,15 @@
   margin-left: -0.5rem;
 }
 
+.post-full-meta-section {
+  &.channels {
+    .add-channel {
+      left: 120px;
+      left: 12rem;
+    }
+  }
+}
+
 // 2. TYPOGRAPHY 			==============================
 
 html {

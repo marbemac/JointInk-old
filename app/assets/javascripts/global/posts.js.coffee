@@ -112,3 +112,6 @@ jQuery ->
 
   $("#jquery_jplayer_1").livequery ->
     $('body').trigger('reset-audio-player')
+
+  # add channels to posts
+  $('body').on 'click', '.add-channel', (e) ->
