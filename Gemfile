@@ -46,6 +46,7 @@ gem 'truncate_html'
 gem 'newrelic_rpm'
 
 gem 'capistrano'
+gem 'rvm-capistrano'
 gem 'foreman'
 
 group :assets do

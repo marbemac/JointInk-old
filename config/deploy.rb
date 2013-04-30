@@ -1,7 +1,12 @@
 require 'bundler/capistrano'
+require "rvm/capistrano"
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
+
+set :rvm_ruby_string, '2.0.0'
+set :rvm_type, :user
+set :rvm_require_role, :app
 
 set :application, 'joint_ink'
 set :rack_env, "production"
@@ -11,11 +16,11 @@ set :db1_domain, '96.126.111.109' # replace with db1.jointink.com when dns is se
 # roles (servers)
 role :web, app1_domain
 role :app, app1_domain
-role :db,  db1_domain, :primary => true
+role :db,  app1_domain, :primary => true
 
 set :scm, :git
 set :scm_verbose, true
-set :repository,  'https://github.com/evario/JointInk.git'
+set :repository,  'https://marbemac@github.com/evario/JointInk.git'
 set :branch,  'master'
 set :deploy_to, "/var/www/#{application}"
 set :deploy_via, :remote_cache
