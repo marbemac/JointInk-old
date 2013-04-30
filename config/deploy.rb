@@ -3,35 +3,25 @@ require 'bundler/capistrano'
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
+set :application, 'joint_ink'
 set :rack_env, "production"
-set :domain, '198.211.117.17'
-set :application, 'jointink'
-set :repository,  'https://marbemac@github.com/evario/foobar.git'
-set :branch,  'master'
-set :deploy_to, "/var/www/#{application}"
+set :app1_domain, '97.107.133.156' # replace with app1.jointink.com when dns is setup
+set :db1_domain, '96.126.111.109' # replace with db1.jointink.com when dns is setup
+
+# roles (servers)
+role :web, app1_domain
+role :app, app1_domain
+role :db,  db1_domain, :primary => true
 
 set :scm, :git
 set :scm_verbose, true
-
-# roles (servers)
-role :web, domain
-role :app, domain
-role :db,  domain, :primary => true
-
+set :repository,  'https://github.com/evario/JointInk.git'
+set :branch,  'master'
+set :deploy_to, "/var/www/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 set :keep_releases, 3
-set :user, 'root'
-
-set :bundle_without, [:development, :test]
-
-set :default_environment, {
-    'PATH' => "/usr/local/rvm/gems/ruby-2.0.0-p0@JointInk/bin:/usr/local/rvm/gems/ruby-2.0.0-p0@global/bin:/usr/local/rvm/rubies/ruby-2.0.0-p0/bin:/usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games",
-    'RUBY_VERSION' => 'ruby 2.0.0',
-    'GEM_HOME'     => '/usr/local/rvm/gems/ruby-2.0.0-p0@JointInk',
-    'GEM_PATH'     => '/usr/local/rvm/gems/ruby-2.0.0-p0@JointInk:/usr/local/rvm/gems/ruby-2.0.0-p0@global',
-    'BUNDLE_PATH'  => '/usr/local/rvm/gems/ruby-2.0.0-p0@JointInk'  # If you are using bundler.
-}
+set :user, 'deployer'
 
 namespace :deploy do
   desc "Restart Passenger"
