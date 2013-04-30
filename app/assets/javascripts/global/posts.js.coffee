@@ -1,9 +1,30 @@
 jQuery ->
 
-  # go back in browser history when user clicks escape on post show page
   $(document).on 'keyup', (e) ->
-    if (e.keyCode == 27 && $('.post-full').length > 0)
+    keycode = if e.keyCode then e.keyCode else e.which
+
+    # go back in browser history when user clicks escape on post show page
+    if keycode == 27 && $('.post-full').length > 0
       history.back();
+
+    if keycode == 37 && $('#prev-post').length > 0
+      $('#prev-post').click()
+
+    if keycode == 39 && $('#next-post').length > 0
+      $('#next-post').click()
+
+  # swiping posts
+  $('body').on 'swipeleft', (e) ->
+    if $('#prev-post').length > 0
+      $('#prev-post').click()
+  $('body').on 'swiperight', (e) ->
+    if $('#next-post').length > 0
+      $('#next-post').click()
+
+  # next/prev post buttons
+  $('body').on 'click', '#next-post,#prev-post', (e) ->
+    $(@).fadeTo(0,100).effect 'highlight', {}, 500
+
 
   # recommend buttons
   recommendButtonColor = (target) ->

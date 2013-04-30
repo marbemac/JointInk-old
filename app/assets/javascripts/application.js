@@ -12,6 +12,7 @@
 
 
 //= require jquery-ui.custom.js
+//= require jquery.mobile.custom.js
 //= require jquery_ujs
 //= require jquery.pjax
 //= require jquery.livequery

@@ -122,6 +122,16 @@ class Post < ActiveRecord::Base
     end
   end
 
+  def next_post
+    return nil unless published_at
+    Post.active.where('user_id = ? AND published_at < ?', user_id, published_at).order('published_at DESC').first
+  end
+
+  def previous_post
+    return nil unless published_at
+    Post.active.where('user_id = ? AND published_at > ?', user_id, published_at).order('published_at ASC').first
+  end
+
   # removes images from content
   def content_short
     if content.blank?

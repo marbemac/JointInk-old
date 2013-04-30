@@ -579,6 +579,50 @@ $post-full-padding-rem: 1.5rem;
   display: none;
 }
 
+#prev-post,
+#next-post {
+  @include opacity(0.5);
+
+  display: none;
+  overflow: hidden;
+  padding: 40px;
+  padding: 4rem;
+  position: fixed;
+  text-align: center;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  bottom: 80px;
+  bottom: 8rem;
+  white-space: nowrap;
+  width: 300px;
+  width: 30rem;
+  z-index: 100;
+  background: $body-bg-color-lighter;
+
+  .icon {
+    position: absolute;
+    right: 50%;
+    margin-right: -10px;
+    top: 25px;
+  }
+
+  &:hover {
+    @include opacity(1);
+  }
+}
+
+#prev-post {
+  @include rotate(-90deg);
+  left: -100px;
+  left: -10rem;
+}
+
+#next-post {
+  @include rotate(90deg);
+  right: -100px;
+  right: -10rem;
+}
+
 .post-full {
   height: 100%;
 
@@ -647,6 +691,10 @@ $post-full-padding-rem: 1.5rem;
       .inner {
         margin: 0;
       }
+    }
+    #prev-post,
+    #next-post {
+      display: none;
     }
     &.default {
       .image {

@@ -1,0 +1,9 @@
+- if @post.previous_post
+  a#prev-post href=post_pretty_url(@post.previous_post)
+    i.icon.icon-chevron-up
+    = @post.previous_post.title
+
+- if @post.next_post
+  a#next-post href=post_pretty_url(@post.next_post)
+    i.icon.icon-chevron-up
+    = @post.next_post.title

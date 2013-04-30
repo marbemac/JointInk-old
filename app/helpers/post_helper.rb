@@ -30,4 +30,8 @@ module PostHelper
     Redcarpet::Markdown.new(renderer, options).render(text).html_safe
   end
 
+  def post_pretty_url(post)
+    (post.primary_channel ? post_via_channel_url(post.primary_channel, post, :subdomain => post.user.username) : post_url(post.token, :subdomain => false))
+  end
+
 end

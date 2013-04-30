@@ -7,6 +7,8 @@
 div class="post-full #{@post.post_type} #{@post.post_subtype} #{@post.style} #{defined?(@editing) ? 'editing' : ''}"
   = yield
 
+  = render "posts/next_prev_buttons"
+
 - if @post.audio.present? || defined?(@editing)
   = render 'posts/audio_player'
 

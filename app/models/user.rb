@@ -296,7 +296,7 @@ class User < ActiveRecord::Base
     conditions = {:status => status}
     conditions[:channel_id] = channel.id if channel
 
-    posts.where(conditions).order("created_at DESC")
+    posts.where(conditions).order("published_at DESC")
   end
 
   def analytics_data

@@ -14,7 +14,7 @@ div id="posts-#{post.token}" class="post-tile #{params[:controller] == 'users' &
             a.has-tip href=channel_url(channel, :subdomain => false) title=channel.name data-placement='left'
               img src=channel_photo_path(channel, :width => 75, :height => 75, :crop => :thumb)
 
-    a.target-url href=(post.primary_channel ? post_via_channel_url(post.primary_channel, post, :subdomain => post.user.username) : post_url(post.token, :subdomain))
+    a.target-url href=post_pretty_url(post)
 
   - if can? :update, post
     = render "posts/tile_actions", :post => post

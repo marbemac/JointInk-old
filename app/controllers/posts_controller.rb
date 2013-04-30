@@ -47,8 +47,6 @@ class PostsController < ApplicationController
     @title = @post.title
     @description = @post.og_description
     build_og_tags(@post.og_title, @post.og_type, @post.permalink, @post.og_description)
-    user_id = current_user ? current_user.id : nil
-    PostStat.add(@post.id, request.remote_ip, 'view', request.referer, user_id)
   end
 
   def show_redirect
