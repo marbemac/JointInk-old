@@ -10,12 +10,13 @@ set :rvm_require_role, :app
 
 set :application, 'joint_ink'
 set :rack_env, "production"
-set :app1_domain, '97.107.133.156' # replace with app1.jointink.com when dns is setup
-set :db1_domain, '96.126.111.109' # replace with db1.jointink.com when dns is setup
+set :app1_domain, '97.107.133.156'
+set :app2_domain, '97.107.130.51'
+set :db1_domain, '96.126.111.109'
 
 # roles (servers)
-role :web, app1_domain
-role :app, app1_domain
+role :web, app1_domain, app2_domain
+role :app, app1_domain, app2_domain
 role :db,  app1_domain, :primary => true
 
 set :scm, :git

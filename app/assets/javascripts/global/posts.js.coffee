@@ -14,10 +14,10 @@ jQuery ->
       $('#next-post').click()
 
   # swiping posts
-  $('body').on 'swipeleft', (e) ->
+  $('body').on 'swiperight', (e) ->
     if $('#prev-post').length > 0
       $('#prev-post').click()
-  $('body').on 'swiperight', (e) ->
+  $('body').on 'swipeleft', (e) ->
     if $('#next-post').length > 0
       $('#next-post').click()
 
@@ -136,3 +136,5 @@ jQuery ->
 
   # add channels to posts
   $('body').on 'click', '.add-channel', (e) ->
+
+    passenger-install-nginx-module --extra-configure-flags="--with-http_gzip_static_module --with-http_spdy_module --with-http_realip_module --with-http_stub_status_module --with-http_ssl_module"
