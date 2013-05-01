@@ -2,10 +2,16 @@ head
 
   meta charset="utf-8"
   meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"
-  meta name="viewport" content="width=device-width,initial-scale=1.0"
+
   title= title
   meta content=description name="description"
   meta content="" name="author"
+
+  meta name="viewport" content="width=device-width,initial-scale=1.0"
+  meta name="apple-mobile-web-app-capable" content="yes"
+  meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"
+  link rel="apple-touch-icon" href="/mobile_badge_64.png"
+  link rel="apple-touch-icon-precomposed" href="/mobile_badge_64.png"
 
   - for k,v in @og_tags
     meta property=k content=v
