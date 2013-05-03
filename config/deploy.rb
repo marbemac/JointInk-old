@@ -21,13 +21,14 @@ role :db,  app1_domain, :primary => true
 
 set :scm, :git
 set :scm_verbose, true
-set :repository,  'https://marbemac@github.com/evario/JointInk.git'
+set :repository,  '.'
 set :branch,  'master'
 set :deploy_to, "/var/www/#{application}"
-set :deploy_via, :remote_cache
+set :deploy_via, :copy
 set :use_sudo, false
 set :keep_releases, 3
 set :user, 'deployer'
+set :ssh_options, {:forward_agent => true}
 
 namespace :deploy do
   desc "Restart Passenger"
