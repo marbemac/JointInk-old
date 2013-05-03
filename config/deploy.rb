@@ -21,10 +21,10 @@ role :db,  app1_domain, :primary => true
 
 set :scm, :git
 set :scm_verbose, true
-set :repository,  '.'
+set :repository,  'git@github.com:evario/JointInk.git'
 set :branch,  'master'
 set :deploy_to, "/var/www/#{application}"
-set :deploy_via, :copy
+set :deploy_via, :remote_cache
 set :use_sudo, false
 set :keep_releases, 3
 set :user, 'deployer'
