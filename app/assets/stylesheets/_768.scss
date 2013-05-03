@@ -74,6 +74,13 @@
 .post-tile {
   padding-left: 0;
   padding-right: 0;
+  margin-bottom: 50px;
+  margin-bottom: 5rem;
+}
+
+.post-tile-content {
+  border-top: 3px solid $secondary-color;
+  border-bottom: none;
 }
 
 // 2. TYPOGRAPHY 			==============================
