@@ -1,0 +1,9 @@
+- content_for :page_nav do
+  #page-nav-padder
+  #page-nav class="#{params[:controller]}-c"
+    header class=(defined?(cover_photo_url) || (params[:controller] == 'channels' && defined?(@channel)) ? 'with-cover-photo' : '')
+      .inner
+        h1.sans-serif Channels
+
+        h4.subheader.text-thin.sans-serif
+          | Foo

@@ -1,9 +1,9 @@
 = render "shared/mast_nav", home_mast_nav_options
 
+= render "channels/page_nav"
+
 .left-sections
   = render "users/channels_page_nav"
 
-  .section
-    .content
-      - @channels.each do |channel|
-        = render "channels/tile", :channel => channel
+- @channels.each do |channel|
+  = render "channels/tile", :channel => channel
