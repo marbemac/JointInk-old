@@ -68,10 +68,10 @@ jQuery ->
       success: (data, textStatus, jqXHR) ->
         if self.hasClass('action')
           self.text('Recommended')
-          analytics.track('Recommend', $('#analytics-data').data('d'))
+          analytics.track('Post Recommend', $('#analytics-data').data('d'))
         else
           self.text('Recommend')
-          analytics.track('Remove Recommend', $('#analytics-data').data('d'))
+          analytics.track('Post Remove Recommend', $('#analytics-data').data('d'))
 
         self.toggleClass('action gray')
 
@@ -131,6 +131,4 @@ jQuery ->
     $('body').trigger('reset-audio-player')
 
   # add channels to posts
-  $('body').on 'click', '.add-channel', (e) ->
-
-    passenger-install-nginx-module --extra-configure-flags="--with-http_gzip_static_module --with-http_spdy_module --with-http_realip_module --with-http_stub_status_module --with-http_ssl_module"
+#  $('body').on 'click', '.add-channel', (e) ->

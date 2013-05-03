@@ -301,6 +301,7 @@ class User < ActiveRecord::Base
 
   def analytics_data(key_prefix=nil)
     data = {
+        key_prefix ? "#{key_prefix}Id" : 'id' => id,
         key_prefix ? "#{key_prefix}Email" : 'email' => email,
         key_prefix ? "#{key_prefix}FirstName" : 'firstName' => first_name,
         key_prefix ? "#{key_prefix}LastName" : 'lastName' => last_name,

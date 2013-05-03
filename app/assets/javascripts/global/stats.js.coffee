@@ -1,30 +1,27 @@
 jQuery ->
 
-  $('.posts-c.text').livequery ->
+  $('.post-full.text:not(.editing)').livequery ->
     clearedTime = false
     clearedScroll = false
-    words = $.trim($('#post-body').text()).split(' ').length
+    words = $.trim($('.post-full-body').text()).split(' ').length
     console.log(words + " words")
     setTimeout ->
-      if $('.posts-c.text').length
-        if $(window).height() >= $("#post-body").height()
+      if $('.post-full.text').length
+        if $(window).height() >= $(".post-full-body").height()
           sendRequest()
         else
           clearedTime = true
           sendRequest() if clearedScroll
-    , (Math.max(words * 100, 5000))
+    , (Math.max(words * 100, 10000))
 
     $(window).scroll ->
-      if !clearedScroll && $("#post-body").offset().top + $("#post-body").height() <= $(window).scrollTop() + $(window).height()
+      if !clearedScroll && $(".post-full-body").offset().top + $(".post-full-body").height() <= $(window).scrollTop() + $(window).height()
         clearedScroll = true
         sendRequest() if clearedTime
 
-    $('.posts-c.text').trigger('start-stat')
+    $('.post-full.text').trigger('start-stat')
 
   sendRequest = ->
     $('.recommend').trigger('tooltip-show')
-    $.post "#{$('#post-data').data('d').url}/read_post"
-
-    analytics.track('Read', {
-      postId: $('#post-data').data('d').id
-    })
+#    $.post "#{$('#post-data').data('d').url}/read_post"
+    analytics.track('Post Read',$('#analytics-data').data('d'))
