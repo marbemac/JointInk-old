@@ -1,7 +1,7 @@
 - content_for :page_nav do
   #page-nav-padder
   #page-nav class="#{params[:controller]}-c"
-    header class=(defined?(cover_photo_url) ? 'with-cover-photo' : '')
+    header class=(defined?(cover_photo_url) || (params[:controller] == 'channels' && defined?(@channel)) ? 'with-cover-photo' : '')
       .inner
         h1.sans-serif= name
 
@@ -20,6 +20,8 @@
 
       - if defined? cover_photo_url
         .bg.cover-image style="background-image: url('#{cover_photo_url}')"
+      - elsif params[:controller] == 'channels' && defined?(@channel)
+        .squares
 
     - if defined? social_links
       = render social_links
