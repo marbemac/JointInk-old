@@ -3,7 +3,7 @@
 
 .bg
   a href=post_pretty_url(post)
-    h2.title= post.title
+    h1.title= post.title
   = render "posts/tile_meta", :post => post
 
 - if post.style != 'full-page'

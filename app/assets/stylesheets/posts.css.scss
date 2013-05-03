@@ -22,9 +22,6 @@ $post-full-padding-rem: 1.5rem;
 .post-tile {
   width: 100%;
   position: relative;
-  padding: 0 5px;
-  margin: 0 0 20px 0;
-  margin: 0 0 2rem 0;
   max-width: $post-tile-max-width;
 
   .right-meta {
@@ -61,7 +58,7 @@ $post-full-padding-rem: 1.5rem;
     background: $primary-color;
     position: absolute;
     top: 0;
-    right: 5px;
+    right: 0;
     padding: 7px 10px;
     font-size: 12px;
     font-size: 1.2rem;
@@ -219,6 +216,10 @@ $post-full-padding-rem: 1.5rem;
   > img {
     width: 100%;
   }
+  h1,h2,h3,h4,h5,h6 {
+    margin: 30px 0 10px;
+    margin: 3rem 0 1rem;
+  }
 }
 
 .post-tile-content {
@@ -228,6 +229,7 @@ $post-full-padding-rem: 1.5rem;
   background: #FFF;
   overflow: hidden;
   cursor: pointer;
+  border-bottom: 6px solid $secondary-color;
 
   .title {
     padding: 15px 15px 0 15px;
@@ -321,8 +323,7 @@ $post-full-padding-rem: 1.5rem;
     }
   }
   &:hover {
-    border-color: #CCC;
-    color: $body-text-color;
+    border-color: $primary-color;
   }
 }
 
@@ -405,10 +406,11 @@ $post-full-padding-rem: 1.5rem;
 }
 .post-full-actions {
   max-width: $post-article-max-width;
-  margin: 20px auto 80 auto;
-  margin: 2rem auto 8rem auto;
+  margin: 20px auto 50px auto;
+  margin: 2rem auto 5rem auto;
   padding: $post-full-padding-px;
   padding: $post-full-padding-rem;
+  background: $body-bg-color-lighter;
 
   .recommend {
     position: relative;
@@ -447,6 +449,50 @@ $post-full-padding-rem: 1.5rem;
   }
 }
 
+.post-full-author {
+  max-width: $post-article-max-width;
+  margin: auto;
+  position: relative;
+
+  .content {
+    padding-left: 90px;
+    padding-left: 9rem;
+    min-height: 75px;
+    min-height: 7.5rem;
+  }
+  a {
+    border-top: 1px solid #EEE;
+    display: block;
+    position: relative;
+    margin: 0 $post-full-padding-px;
+    margin: 0 $post-full-padding-rem;
+    padding: 30px 0 50px;
+    padding: 3rem 0 5rem;
+  }
+  img {
+    width: 75px;
+    height: 75px;
+    width: 7.5rem;
+    height: 7.5rem;
+    position: absolute;
+    top: 30px;
+    top: 3rem;
+    left: 0;
+  }
+  .name {
+    font-size: 16px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-top: 1rem;
+  }
+  .bio {
+    color: $body-text-color;
+    font-size: 12px;
+    font-size: 1.2rem;
+  }
+}
+
 .post-full-meta-section {
   background: $tertiary-color;
 
@@ -472,10 +518,9 @@ $post-full-padding-rem: 1.5rem;
   }
   .content {
     position: relative;
-
-    a {
-      color: $body-text-color;
-    }
+  }
+  a {
+    color: $body-text-color;
   }
 
   &.dark {
@@ -485,42 +530,11 @@ $post-full-padding-rem: 1.5rem;
       background: $secondary-color-darker;
       color: #FFF;
     }
+    a {
+      color: #FFF;
+    }
     .content {
       color: #FFF;
-      a {
-        color: #FFF;
-      }
-    }
-  }
-  &.author {
-    border-top: 4px solid $secondary-color-darker;
-
-    .content {
-      padding-left: 125px;
-      padding-left: 11.5rem;
-      min-height: 100px;
-      min-height: 10rem;
-    }
-    a {
-      display: block;
-    }
-    img {
-      width: 100px;
-      height: 100px;
-      width: 10rem;
-      height: 10rem;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-    .name {
-      font-size: 18px;
-      font-size: 1.8rem;
-      font-weight: bold;
-    }
-    .bio {
-      margin-top: 5px;
-      margin-top: 0.5rem;
     }
   }
   &.channels {
@@ -532,39 +546,19 @@ $post-full-padding-rem: 1.5rem;
       line-height: 35px;
       line-height: 3.5rem;
       cursor: pointer;
+      color: #FFF;
+
       &:hover {
         color: $primary-color;
       }
     }
     li {
-      margin: 10px 0;
-      margin: 1rem 0;
+      margin: 10px 30px 0 0;
+      margin: 1rem 3rem 0 0;
+      display: inline-block;
 
       a {
-        @include clearfix();
         display: block;
-        &:hover {
-          background: $tertiary-color-darker;
-        }
-      }
-      img {
-        width: 50px;
-        height: 50px;
-        width: 5rem;
-        height: 5rem;
-        vertical-align: middle;
-        float: left;
-      }
-      .name {
-        float: left;
-        margin: 0 0 0 15px;
-        margin: 0 0 0 1.5rem;
-        font-size: 18px;
-        font-size: 1.8rem;
-        line-height: 50px;
-        line-height: 5rem;
-        white-space: nowrap;
-        overflow: hidden;
       }
     }
   }

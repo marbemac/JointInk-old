@@ -15,7 +15,7 @@ class ChannelsController < ApplicationController
     @channel = Channel.find(params[:id])
     @fullscreen = true
     authorize! :update, @channel
-    add_page_entity(@channel)
+    add_page_entity('channel', @channel)
   end
 
   def create

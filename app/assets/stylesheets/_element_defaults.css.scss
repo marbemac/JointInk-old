@@ -11,12 +11,19 @@ body {
   color: $body-text-color;
 }
 
-body, div, dl, dt, dd, ul, ol, p {
+body {
   font-size: 14px;
   font-size: 1.4rem;
   line-height: 20px;
   line-height: 2rem;
 }
+ul, ol, p {
+  font-size: 15px;
+  font-size: 1.5rem;
+  line-height: 22px;
+  line-height: 2.2rem;
+}
+
 h1,h2,h3,h4,h5,h6 {
   margin: 0;
   padding: 0;

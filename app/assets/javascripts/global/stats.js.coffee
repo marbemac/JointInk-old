@@ -23,5 +23,4 @@ jQuery ->
 
   sendRequest = ->
     $('.recommend').trigger('tooltip-show')
-#    $.post "#{$('#post-data').data('d').url}/read_post"
     analytics.track('Post Read',$('#analytics-data').data('d'))
