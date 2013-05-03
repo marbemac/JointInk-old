@@ -26,26 +26,6 @@ ActiveRecord::Schema.define(:version => 20130427170050) do
   add_index "accounts", ["provider", "uid"], :name => "index_accounts_on_provider_and_uid", :unique => true
   add_index "accounts", ["user_id"], :name => "index_accounts_on_user_id"
 
-  create_table "amazing_facts", :force => true do |t|
-    t.text "content"
-  end
-
-  create_table "attachinary_files", :force => true do |t|
-    t.integer  "attachinariable_id"
-    t.string   "attachinariable_type"
-    t.string   "scope"
-    t.string   "public_id"
-    t.string   "version"
-    t.integer  "width"
-    t.integer  "height"
-    t.string   "format"
-    t.string   "resource_type"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
-  end
-
-  add_index "attachinary_files", ["attachinariable_type", "attachinariable_id", "scope"], :name => "by_scoped_parent"
-
   create_table "channels", :force => true do |t|
     t.string   "name"
     t.string   "slug"
@@ -57,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20130427170050) do
     t.string   "privacy",     :default => "public"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "posts_count"
+    t.integer  "posts_count", :default => 0
     t.text     "info"
   end
 
@@ -127,52 +107,6 @@ ActiveRecord::Schema.define(:version => 20130427170050) do
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
   add_index "posts", ["votes_count"], :name => "index_posts_on_votes_count"
 
-  create_table "share_actions", :force => true do |t|
-    t.text     "content"
-    t.string   "action_taken"
-    t.string   "social_id"
-    t.string   "social_url"
-    t.string   "social_privacy"
-    t.string   "provider"
-    t.integer  "share_id"
-    t.integer  "account_id"
-    t.hstore   "permissions"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
-  add_index "share_actions", ["account_id", "share_id"], :name => "index_share_actions_on_account_id_and_share_id", :unique => true
-  add_index "share_actions", ["account_id"], :name => "index_share_actions_on_account_id"
-  add_index "share_actions", ["share_id"], :name => "index_share_actions_on_share_id"
-
-  create_table "shares", :force => true do |t|
-    t.string   "status",       :default => "active"
-    t.boolean  "crowdsourced", :default => false
-    t.integer  "user_id"
-    t.integer  "account_id"
-    t.integer  "post_id"
-    t.integer  "channel_id"
-    t.integer  "topic_id"
-    t.hstore   "permissions"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-  end
-
-  add_index "shares", ["account_id", "post_id"], :name => "index_shares_on_account_id_and_post_id", :unique => true
-  add_index "shares", ["account_id"], :name => "index_shares_on_account_id"
-  add_index "shares", ["channel_id"], :name => "index_shares_on_channel_id"
-  add_index "shares", ["post_id"], :name => "index_shares_on_post_id"
-  add_index "shares", ["topic_id"], :name => "index_shares_on_topic_id"
-  add_index "shares", ["user_id"], :name => "index_shares_on_user_id"
-
-  create_table "sources", :force => true do |t|
-    t.string "name", :null => false
-    t.string "url",  :null => false
-    t.string "slug"
-  end
-
-  add_index "sources", ["slug"], :name => "index_sources_on_slug", :unique => true
-
   create_table "users", :force => true do |t|
     t.string       "email"
     t.string       "encrypted_password",     :default => "",                           :null => false
@@ -205,8 +139,6 @@ ActiveRecord::Schema.define(:version => 20130427170050) do
     t.string       "avatar"
     t.string       "cover_photo"
     t.string_array "roles"
-    t.string       "domain"
-    t.string       "oneliner"
     t.hstore       "theme_data"
     t.boolean      "email_recommended",      :default => true
     t.boolean      "email_channel_post",     :default => true
@@ -216,7 +148,6 @@ ActiveRecord::Schema.define(:version => 20130427170050) do
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
-  add_index "users", ["domain"], :name => "index_users_on_domain", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true

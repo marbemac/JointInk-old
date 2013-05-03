@@ -26,6 +26,8 @@ class UsersController < ApplicationController
     if @posts.length == 0
       @channel_suggestions = Channel.popular(5)
     end
+
+    add_page_entity('userViewed', @user)
   end
 
   def show_redirect
@@ -38,12 +40,14 @@ class UsersController < ApplicationController
     authorize! :update, @user
     @page_title = "Your Ideas"
     @posts = @user.posts.ideas.page(params[:page]).order('created_at DESC')
+    add_page_entity('channel', @channel)
   end
 
   def recommendations
     @user = User.find(request.subdomain.downcase)
     @page_title = @user.name + "'s Recommended Posts"
     @posts = @user.recommendations.page(params[:page])
+    add_page_entity('userViewed', @user)
   end
 
   def settings
@@ -70,6 +74,7 @@ class UsersController < ApplicationController
 
   def channels
     @user = User.find(request.subdomain.downcase)
+    add_page_entity('userViewed', @user)
   end
 
   def signin

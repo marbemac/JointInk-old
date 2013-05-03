@@ -68,14 +68,10 @@ jQuery ->
       success: (data, textStatus, jqXHR) ->
         if self.hasClass('action')
           self.text('Recommended')
-          analytics.track('Recommend', {
-            postId: self.attr('data-id')
-          })
+          analytics.track('Recommend', $('#analytics-data').data('d'))
         else
           self.text('Recommend')
-          analytics.track('Remove Recommend', {
-            postId: self.attr('data-id')
-          })
+          analytics.track('Remove Recommend', $('#analytics-data').data('d'))
 
         self.toggleClass('action gray')
 

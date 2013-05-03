@@ -6,7 +6,7 @@ gem 'bundler'
 gem 'rails', '~> 3.2.13'
 
 gem 'jquery-rails'
-gem "slim-rails"
+gem "slim-rails", '~> 1.1.1'
 gem 'pg'
 gem 'honeybadger' # Exception notification
 gem 'devise' # Authentication
@@ -32,6 +32,7 @@ gem 'ar_pg_array'
 gem "friendly_id", "~> 4.0.9"
 
 gem 'redcarpet'
+gem 'reverse_markdown'
 gem 'carrierwave'
 gem 'fog'
 

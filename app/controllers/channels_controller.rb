@@ -15,6 +15,7 @@ class ChannelsController < ApplicationController
     @channel = Channel.find(params[:id])
     @fullscreen = true
     authorize! :update, @channel
+    add_page_entity(@channel)
   end
 
   def create
@@ -61,6 +62,7 @@ class ChannelsController < ApplicationController
     @page_title = @channel.name
     @description = @channel.description
     build_og_tags(@channel.og_title, @channel.og_type, @channel.permalink, @channel.og_description)
+    add_page_entity('channel', @channel)
   end
 
   # invited members

@@ -47,6 +47,9 @@ class PostsController < ApplicationController
     @title = @post.title
     @description = @post.og_description
     build_og_tags(@post.og_title, @post.og_type, @post.permalink, @post.og_description)
+
+    add_page_entity('channel', @channel)
+    add_page_entity('post', @post)
   end
 
   def show_redirect
@@ -64,6 +67,7 @@ class PostsController < ApplicationController
     @body_class = "#{@post.post_type} #{@post.post_subtype} #{@post.style}"
     @fullscreen = @post.post_type == 'picture' ? true : false
     @editing = true
+    add_page_entity('post', @post)
   end
 
   def destroy

@@ -9,7 +9,7 @@
 #  info        :text
 #  name        :string(255)
 #  photo       :string(255)
-#  posts_count :integer
+#  posts_count :integer          default(0)
 #  privacy     :string(255)      default("public")
 #  slug        :string(255)
 #  status      :string(255)      default("active")
@@ -123,13 +123,16 @@ class Channel < ActiveRecord::Base
     "http://jointink.com/c/#{id}"
   end
 
-  ##########
-  # JSON
-  ##########
-
-  ##########
-  # END JSON
-  ##########
+  def analytics_data(key_prefix=nil)
+    data = {
+        key_prefix ? "#{key_prefix}Id" : 'id' => id,
+        key_prefix ? "#{key_prefix}Status" : 'status' => status,
+        key_prefix ? "#{key_prefix}Privacy" : 'privacy' => privacy,
+        key_prefix ? "#{key_prefix}Created" : 'created' => created_at.iso8601,
+        key_prefix ? "#{key_prefix}UserId" : 'userId' => user_id
+    }
+    data
+  end
 
   def self.popular(limit=10)
     Channel.active.public.joins(:posts).select("channels.*, COUNT(posts.id) as counter").group("channels.id").order("counter DESC").limit(limit)

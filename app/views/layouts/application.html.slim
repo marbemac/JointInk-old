@@ -21,13 +21,14 @@ html
 
       = render "shared/mast_nav"
 
-    == common_js
+      #analytics-data data-d=page_analytics_data.to_json
+      == keen_io_js
 
     script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js'
 
     = javascript_include_tag "application"
 
-    script class='foo'
+    script
       = yield :javascript
 
       / Hack for getting user info in the track requests.

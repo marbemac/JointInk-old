@@ -65,6 +65,7 @@ class ApplicationController < ActionController::Base
         "og:url" => request.url,
         "og:description" => "Joint Ink is a new type of publishing platform."
     }
+    @page_entities = []
   end
 
   def set_user_time_zone
@@ -99,6 +100,10 @@ class ApplicationController < ActionController::Base
       context[:traits] = user.analytics_data
     end
     context
+  end
+
+  def add_page_entity(entity_name, entity)
+    @page_entities << {'name' => entity_name, 'entity' => entity} if entity
   end
 
   def render_error(status, exception)

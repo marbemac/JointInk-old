@@ -55,6 +55,14 @@ module ApplicationHelper
     end
   end
 
+  def page_analytics_data
+    data = {}
+    @page_entities.each do |entity_data|
+      data.merge!(entity_data['entity'].analytics_data(entity_data['name']))
+    end
+    data
+  end
+
   def common_js
     script = "
     <!-- JQUERY -->
@@ -73,18 +81,18 @@ module ApplicationHelper
     end
 
     if current_user
-      script += "<script>analytics.identify(#{ current_user.id }, #{current_user.analytics_data.to_json.gsub('"', "'")})</script>"
+      script += "<script>
+                  $(document).ready(function () {
+                    analytics.identify(#{ current_user.id }, #{current_user.analytics_data.to_json});
+                  });
+                </script>"
     end
 
     script
   end
 
-  def time_ago(datetime)
-    "<span class='timeago' title='#{datetime}'>#{datetime.strftime("%B %d, %Y")}</span>".html_safe
-  end
-
-  def sim_format(string)
-    simple_format(string).gsub("<p>", "").gsub("</p>", "").html_safe
+  def keen_io_js
+    "<script>analytics.track('Loaded a Page', #{page_analytics_data.to_json}, {providers : {'All': false, 'Keen IO': true}})</script>"
   end
 
   # helper to generate channel/user cover photo URLs

@@ -299,8 +299,18 @@ class User < ActiveRecord::Base
     posts.where(conditions).order("published_at DESC")
   end
 
-  def analytics_data
-    { email: email, firstName: first_name, lastName: last_name, name: name, username: username, created: created_at.iso8601 }
+  def analytics_data(key_prefix=nil)
+    data = {
+        key_prefix ? "#{key_prefix}Email" : 'email' => email,
+        key_prefix ? "#{key_prefix}FirstName" : 'firstName' => first_name,
+        key_prefix ? "#{key_prefix}LastName" : 'lastName' => last_name,
+        key_prefix ? "#{key_prefix}Name" : 'name' => name,
+        key_prefix ? "#{key_prefix}Username" : 'username' => username,
+        key_prefix ? "#{key_prefix}Created" : 'created' => created_at.iso8601,
+        key_prefix ? "#{key_prefix}Birthday" : 'birthday' => birthday ? birthday.iso8601 : nil,
+        key_prefix ? "#{key_prefix}Gender" : 'gender' => gender
+    }
+    data
   end
 
   ##########

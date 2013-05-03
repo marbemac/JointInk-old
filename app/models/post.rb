@@ -15,10 +15,10 @@
 #  post_subtype     :string(255)      default("article")
 #  post_type        :string(255)      default("text")
 #  published_at     :datetime
-#  slug             :string(255)
 #  status           :string(255)      default("active")
 #  style            :string(255)      default("default")
 #  title            :string(255)
+#  token            :string(255)
 #  updated_at       :datetime         not null
 #  url              :text
 #  user_id          :integer
@@ -208,6 +208,21 @@ class Post < ActiveRecord::Base
   ##########
   # END JSON
   ##########
+
+  def analytics_data(key_prefix=nil)
+    data = {
+        key_prefix ? "#{key_prefix}Id" : 'id' => id,
+        key_prefix ? "#{key_prefix}Status" : 'status' => status,
+        key_prefix ? "#{key_prefix}Type" : 'type' => post_type,
+        key_prefix ? "#{key_prefix}Subtype" : 'subtype' => post_subtype,
+        key_prefix ? "#{key_prefix}Style" : 'style' => style,
+        key_prefix ? "#{key_prefix}WithPhoto" : 'withPhoto' => photo.present? ? true : false,
+        key_prefix ? "#{key_prefix}Created" : 'created' => created_at.iso8601,
+        key_prefix ? "#{key_prefix}PublishedAt" : 'publishedAt' => published_at ? published_at.iso8601 : nil,
+        key_prefix ? "#{key_prefix}UserId" : 'userId' => user_id
+    }
+    data
+  end
 
   def self.feed(channel=nil, status='active', params={})
     conditions = {:status => status}
