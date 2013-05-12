@@ -11,12 +11,4 @@ class TestingController < ApplicationController
     foo = 'bar'
   end
 
-  def new_outreach
-    authorize! :manage, :all
-  end
-
-  def create_outreach
-    authorize! :manage, :all
-  end
-
 end

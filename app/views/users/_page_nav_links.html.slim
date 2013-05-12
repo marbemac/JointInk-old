@@ -11,16 +11,3 @@ ul
     a href=user_recommendations_url(:subdomain => @user.username)
       i.icon.icon-plus-sign
       span.name #{@user.recommendations_count} Recommended
-  - if signed_in? && current_user == @user
-    li class=(params[:action] == 'ideas' ? 'on' : '')
-      a href=user_ideas_url(:subdomain => current_user.username)
-        i.icon.icon-lightbulb
-        span.name = pluralize(current_user.ideas_count, "Idea")
-    li class=(params[:action] == 'settings' ? 'on' : '')
-      a href=settings_url(:subdomain => current_user.username)
-        i.icon.icon-cog
-        span.name Settings
-    li
-      a href=destroy_user_session_url(:subdomain => false) data-skip-pjax=true
-        i.icon.icon-off
-        span.name Logout

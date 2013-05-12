@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   has_many :followed_accounts, :through => :relationships, :source => :followed
   has_many :accounts, :dependent => :destroy
   has_many :channels
-  has_many :post_stats
+  has_many :post_votes
 
   attr_accessor :login
   attr_accessible :username, :name, :email, :password, :password_confirmation, :remember_me,
@@ -157,7 +157,7 @@ class User < ActiveRecord::Base
   end
 
   def recommendations
-    Post.joins(:post_stats).where("post_stats.stat_type = ? AND post_stats.user_id = ?", 'vote', id)
+    Post.joins(:post_votes).where("post_votes.user_id = ?", id)
   end
 
   def recommendations_count

@@ -1,0 +1,33 @@
+.dashboard-section.double-h.double-w.post-views
+  .head
+    .first
+      .sum.big-number
+        = number_with_delimiter(@postViewsSum, :delimiter => ',')
+        span.name views
+      .change class=number_direction(@postViews7DayIncrease)
+        span #{number_symbol(@postViews7DayIncrease)} #{@postViews7DayIncrease}%
+        = ' change in the past 7 days'
+
+    .second
+      .sum.big-number
+        = number_with_delimiter(@postReadsSum, :delimiter => ',')
+        span.name reads
+      .change class=number_direction(@postReads7DayIncrease)
+        span #{number_symbol(@postReads7DayIncrease)} #{@postReads7DayIncrease}%
+        = ' change in the past 7 days'
+
+  #post-views-chart.column.chart data-data1=@postViews.to_json data-data2=@postReads.to_json
+
+.dashboard-section.post-recs
+  .head
+    .sum.big-number
+      = number_with_delimiter(@postRecsSum, :delimiter => ',')
+      span.name recommendations
+    .change class=number_direction(@postRecs7DayIncrease)
+      span #{number_symbol(@postRecs7DayIncrease)} #{@postRecs7DayIncrease}%
+      = ' change in the past 7 days'
+
+  #post-recs-chart.column.chart data-data=@postRecs.to_json
+
+.dashboard-section.post-referrals
+  #post-referrals-chart.column.donut data-data=@referalData.to_json

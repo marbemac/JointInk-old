@@ -40,6 +40,11 @@
 @import "utilities";
 @import "tooltips";
 
+@font-face {
+  font-family: SpecialElite;
+  src: url('/assets/fonts/SpecialElite.ttf');
+}
+
 html,
 body,
 #data-pjax-container,
@@ -79,72 +84,79 @@ body,
   right: 5px;
   z-index: 100;
 
-  .handle {
-    @include box-shadow(rgba(0, 0, 0, 0.5) 0 0 3px);
-    color: #FFF;
-    background: $secondary-color;
-    padding: 6px 8px;
-    padding: 0.6rem 0.8rem;
-    font-size: 18px;
-    font-size: 1.8rem;
-    cursor: default;
-  }
-  ul {
-    position: absolute;
-    bottom: 0;
-    right: -5px;
-    background: $secondary-color;
-    padding: 0;
+  .horizontal-menu {
     display: none;
-    margin: 0;
   }
-  li {
-    &:hover {
-      a {
-        background: #FFF;
-        border-color: $primary-color-darker;
-        color: $body-text-color;
-      }
-    }
-    &.spacer {
-      height: 5px;
-      height: 0.5rem;
-    }
-    &.head {
-      cursor: default;
-      background: $secondary-color-darker;
-      color: #FFF;
-      font-size: 12px;
-      font-size: 1.2rem;
-      padding: 3px 25px 3px 11px;
-      padding: 0.3rem 2.5rem 0.3rem 1.1rem;
-    }
-  }
-  a {
-    color: #FFF;
-    white-space: nowrap;
-    border-left: 3px solid transparent;
-    border-right: 3px solid transparent;
-    font-size: 14px;
-    font-size: 1.4rem;
-    padding: 3px 25px 3px 7px;
-    padding: 0.3rem 2.5rem 0.3rem 0.7rem;
-    display: block;
-  }
-  .icon {
-    margin: 0 6px 0 0;
-    margin: 0 0.6rem 0 0;
-    position: relative;
-    top: -1px;
-    font-size: 10px;
-    font-size: 1rem;
-  }
-  &:hover {
+  .vertical-menu {
     .handle {
-      @include box-shadow(none);
+      @include box-shadow(rgba(0, 0, 0, 0.5) 0 0 3px);
+      color: #FFF;
+      background: $secondary-color;
+      padding: 6px 8px;
+      padding: 0.6rem 0.8rem;
+      font-size: 18px;
+      font-size: 1.8rem;
+      cursor: default;
     }
     ul {
+      position: absolute;
+      bottom: 0;
+      right: -5px;
+      background: $secondary-color;
+      padding: 0;
+      display: none;
+      margin: 0;
+    }
+    li {
+      &:hover {
+        a {
+          background: #FFF;
+          border-color: $primary-color-darker;
+          color: $body-text-color;
+        }
+      }
+      &.spacer {
+        height: 5px;
+        height: 0.5rem;
+      }
+      &.head {
+        cursor: default;
+        background: $secondary-color-darker;
+        color: #FFF;
+        font-size: 12px;
+        font-size: 1.2rem;
+        padding: 3px 25px 3px 11px;
+        padding: 0.3rem 2.5rem 0.3rem 1.1rem;
+      }
+    }
+    a {
+      color: #FFF;
+      white-space: nowrap;
+      border-left: 3px solid transparent;
+      border-right: 3px solid transparent;
+      font-size: 14px;
+      font-size: 1.4rem;
+      padding: 3px 25px 3px 7px;
+      padding: 0.3rem 2.5rem 0.3rem 0.7rem;
       display: block;
+    }
+    .icon {
+      margin: 0 6px 0 0;
+      margin: 0 0.6rem 0 0;
+      position: relative;
+      top: -1px;
+      font-size: 10px;
+      font-size: 1rem;
+    }
+  }
+  &:hover {
+    .vertical-menu {
+      .handle {
+        @include box-shadow(none);
+      }
+      ul {
+        display: block;
+      }
     }
   }
 }
@@ -648,24 +660,6 @@ body,
       top: 24px;
       right: 20px;
       font-weight: normal;
-    }
-  }
-}
-
-#testing-new_outreach {
-  .blog-post-link {
-    margin: 3px 0;
-    i {
-      margin-right: 10px;
-      font-size: 18px;
-      cursor: pointer;
-    }
-  }
-  .message {
-    margin: 20px 0 30px;
-    p {
-      font-size: 12px;
-      margin-bottom: 5px;
     }
   }
 }

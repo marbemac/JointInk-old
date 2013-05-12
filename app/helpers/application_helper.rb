@@ -56,7 +56,10 @@ module ApplicationHelper
   end
 
   def page_analytics_data
-    data = {}
+    data = {
+        'pageReferer' => request.referer,
+        'pageRefererHost' => request.referer ? URI(request.referer).host : nil
+    }
     @page_entities.each do |entity_data|
       data.merge!(entity_data['entity'].analytics_data(entity_data['name']))
     end
@@ -65,6 +68,8 @@ module ApplicationHelper
 
   def common_js
     script = "
+    <script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js'></script>
+
     <!-- JQUERY -->
     <script src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
     <script>window.jQuery || document.write('<script src=\"/offline/javascripts/jquery1.9.js\"><\\/script>')</script>
@@ -80,6 +85,7 @@ module ApplicationHelper
                  analytics.load('qlnuv1pca2');</script>"
     end
 
+    # identify the current user for segment.io
     if current_user
       script += "<script>
                   $(document).ready(function () {
@@ -91,8 +97,12 @@ module ApplicationHelper
     script
   end
 
-  def keen_io_js
-    "<script>analytics.track('Loaded a Page', #{page_analytics_data.to_json}, {providers : {'All': false, 'Keen IO': true}})</script>"
+  def track_page_load
+    # do some dumb bot exclusion
+    # TODO: Make this bot filter more robust
+    unless request.env["HTTP_USER_AGENT"].match(/\(.*https?:\/\/.*\)/)
+      Stat.create_from_page_analytics('Page View', current_user, @page_entities.map{|e| e['entity']}, request.referer, request.remote_ip)
+    end
   end
 
   # helper to generate channel/user cover photo URLs
@@ -112,6 +122,24 @@ module ApplicationHelper
     }
 
     options
+  end
+
+  def number_direction(number)
+    return 'neutral' if !number || number == 0
+    if number.to_i > 0
+      'positive'
+    elsif number.to_i < 0
+      'negative'
+    end
+  end
+
+  def number_symbol(number)
+    return '' if !number || number == 0
+    if number.to_i > 0
+      '+'
+    elsif number.to_i < 0
+      ''
+    end
   end
 
 end

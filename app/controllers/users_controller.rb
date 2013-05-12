@@ -94,48 +94,92 @@ class UsersController < ApplicationController
     end
   end
 
-  # not currently in use
-  def add
-    @user = User.find(params[:user_id])
-    @channel = params[:channel_id] ? Channel.find(params[:channel_id]) : nil
+  def dashboard
+    filter = {:post_user_id => current_user.id}
+    @post = nil
+    if params[:post_id]
+      @post = Post.find(params[:post_id])
+      filter[:post_id] = params[:post_id]
+    end
 
-    authorize! :update, @user
-    authorize! :read, @channel
+    @postViews = Stat.retrieve_count('Page View', 30, 'day', filter)
+    @postViewsSum = @postViews ? @postViews.inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+    sevenDaySum = @postViews[22..29] ? @postViews[22..29].inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+    previousSevenDaySum = @postViews[15..21] ? @postViews[15..21].inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+    @postViews7DayIncrease =  previousSevenDaySum != 0 ? (((sevenDaySum - previousSevenDaySum).to_f / previousSevenDaySum.to_f) * 100).to_i : '--'
 
-    current_user.add(@user, @channel)
+    if @post && @post.post_type == 'picture'
+      @postReads = nil
+      @postReadsSum = '--'
+      @postReads7DayIncrease = '--'
+    else
+      @postReads = Stat.retrieve_count('Read', 30, 'day', filter)
+      @postReadsSum = @postReads ? @postReads.inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+      sevenDaySum = @postReads[22..29] ? @postReads[22..29].inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+      previousSevenDaySum = @postReads[15..21] ? @postReads[15..21].inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+      @postReads7DayIncrease =  previousSevenDaySum != 0 ? (((sevenDaySum - previousSevenDaySum).to_f / previousSevenDaySum.to_f) * 100).to_i : '--'
+    end
+
+    @postRecs = Stat.retrieve_count('Recommend', 30, 'day', filter)
+    @postRecsSum = @postRecs ? @postRecs.inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+    sevenDaySum = @postRecs[22..29] ? @postRecs[22..29].inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+    previousSevenDaySum = @postRecs[15..21] ? @postRecs[15..21].inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+    @postRecs7DayIncrease =  previousSevenDaySum != 0 ? (((sevenDaySum - previousSevenDaySum).to_f / previousSevenDaySum.to_f) * 100).to_i : '--'
+
+    @referalData = Stat.referal_data(10, 30, filter)
+
+    @posts = current_user.posts.active
 
     respond_to do |format|
-      format.html {
-        redirect_to :back, :notice => "#{@user.name} successfully added to your feed."
-      }
+      format.html
+      format.json do
+        render :partial => 'users/dashboard_post_analytics'
+      end
     end
   end
 
-  # not currently in use
-  def remove
-    @user = User.find(params[:user_id])
-    @channel = params[:channel_id] ? Channel.find(params[:channel_id]) : nil
-
-    authorize! :update, @user
-    authorize! :read, @channel
-
-    current_user.remove(@user, @channel)
-
-    respond_to do |format|
-      format.html {
-        redirect_to :back, :notice => "#{@user.name} successfully remove from your feed."
-      }
-    end
-  end
-
-  # not currently in use
-  def account_deauth
-    account = Account.find(params[:id])
-    if account.user_id = current_user.id
-      account.status = 'disabled'
-      account.save
-    end
-    redirect_to :back, :notice => 'Account successfully removed'
-  end
+  ## not currently in use
+  #def add
+  #  @user = User.find(params[:user_id])
+  #  @channel = params[:channel_id] ? Channel.find(params[:channel_id]) : nil
+  #
+  #  authorize! :update, @user
+  #  authorize! :read, @channel
+  #
+  #  current_user.add(@user, @channel)
+  #
+  #  respond_to do |format|
+  #    format.html {
+  #      redirect_to :back, :notice => "#{@user.name} successfully added to your feed."
+  #    }
+  #  end
+  #end
+  #
+  ## not currently in use
+  #def remove
+  #  @user = User.find(params[:user_id])
+  #  @channel = params[:channel_id] ? Channel.find(params[:channel_id]) : nil
+  #
+  #  authorize! :update, @user
+  #  authorize! :read, @channel
+  #
+  #  current_user.remove(@user, @channel)
+  #
+  #  respond_to do |format|
+  #    format.html {
+  #      redirect_to :back, :notice => "#{@user.name} successfully remove from your feed."
+  #    }
+  #  end
+  #end
+  #
+  ## not currently in use
+  #def account_deauth
+  #  account = Account.find(params[:id])
+  #  if account.user_id = current_user.id
+  #    account.status = 'disabled'
+  #    account.save
+  #  end
+  #  redirect_to :back, :notice => 'Account successfully removed'
+  #end
 
 end

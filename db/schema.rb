@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130427170050) do
+ActiveRecord::Schema.define(:version => 20130512194818) do
 
   create_table "accounts", :force => true do |t|
     t.string  "username",                       :null => false
@@ -57,13 +57,7 @@ ActiveRecord::Schema.define(:version => 20130427170050) do
   add_index "channels_posts", ["post_id", "channel_id"], :name => "index_channels_posts_on_post_id_and_channel_id", :unique => true
   add_index "channels_posts", ["post_id"], :name => "index_channels_posts_on_post_id"
 
-  create_table "outreaches", :force => true do |t|
-    t.text   "content"
-    t.string "url"
-  end
-
-  create_table "post_stats", :force => true do |t|
-    t.string   "stat_type"
+  create_table "post_votes", :force => true do |t|
     t.string   "value"
     t.string   "ip_address"
     t.string   "referral_url"
@@ -73,11 +67,10 @@ ActiveRecord::Schema.define(:version => 20130427170050) do
     t.datetime "updated_at",   :null => false
   end
 
-  add_index "post_stats", ["created_at"], :name => "index_post_stats_on_created_at"
-  add_index "post_stats", ["ip_address"], :name => "index_post_stats_on_ip_address"
-  add_index "post_stats", ["post_id"], :name => "index_post_stats_on_post_id"
-  add_index "post_stats", ["stat_type"], :name => "index_post_stats_on_stat_type"
-  add_index "post_stats", ["user_id"], :name => "index_post_stats_on_user_id"
+  add_index "post_votes", ["created_at"], :name => "index_post_stats_on_created_at"
+  add_index "post_votes", ["ip_address"], :name => "index_post_stats_on_ip_address"
+  add_index "post_votes", ["post_id"], :name => "index_post_stats_on_post_id"
+  add_index "post_votes", ["user_id"], :name => "index_post_stats_on_user_id"
 
   create_table "posts", :force => true do |t|
     t.datetime "created_at",                              :null => false
@@ -106,6 +99,32 @@ ActiveRecord::Schema.define(:version => 20130427170050) do
   add_index "posts", ["token"], :name => "index_posts_on_token"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
   add_index "posts", ["votes_count"], :name => "index_posts_on_votes_count"
+
+  create_table "stats", :force => true do |t|
+    t.integer  "channel_id"
+    t.datetime "channel_created"
+    t.string   "channel_privacy"
+    t.string   "channel_status"
+    t.integer  "channel_user_id"
+    t.integer  "post_id"
+    t.datetime "post_published_at"
+    t.string   "post_status"
+    t.string   "post_style"
+    t.string   "post_subtype"
+    t.string   "post_type"
+    t.integer  "post_user_id"
+    t.boolean  "post_with_photo"
+    t.integer  "user_id"
+    t.datetime "user_birthday"
+    t.datetime "user_created_at"
+    t.string   "user_gender"
+    t.string   "referer"
+    t.string   "referer_host"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "event"
+    t.string   "ip_address"
+  end
 
   create_table "users", :force => true do |t|
     t.string       "email"

@@ -36,7 +36,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :user, :touch => true
   has_and_belongs_to_many :channels
-  has_many :post_stats
+  has_many :post_votes
 
   validates :title, :length => {:maximum => 250}
   validates :content, :length => {:maximum => 20000}
@@ -192,7 +192,7 @@ class Post < ActiveRecord::Base
 
   # has the user voted on this post?
   def voted?(user, request)
-    PostStat.retrieve(id, 'vote', request.remote_ip, user ? user.id : nil)
+    PostVote.retrieve(id, request.remote_ip, user ? user.id : nil)
   end
 
   ##########

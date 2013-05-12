@@ -1,0 +1,23 @@
+.dashboard-section.post-views
+
+
+.dashboard-section.double-w.site-name
+  h1 Joint Ink.
+
+.dashboard-section.post-reads
+
+.dashboard-section.double-h.posts
+  ul
+    li.on data-url=user_dashboard_path
+      .name All Posts
+    - for post in @posts
+      li data-url=user_dashboard_path(:post_id => post.id)
+        - if post.post_type == 'text'
+          i.icon-pencil
+        - else
+          i.icon-camera
+
+        .name = post.title
+
+.post-analytics
+  = render 'dashboard_post_analytics'

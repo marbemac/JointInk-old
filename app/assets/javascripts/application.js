@@ -30,5 +30,6 @@
 //= require jquery.autocomplete
 //= require jquery.jplayer
 //= require foundation.reveal
+//= require highcharts.js
 
 //= require_tree ./global

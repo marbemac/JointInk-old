@@ -133,7 +133,7 @@ class PostsController < ApplicationController
     if current_user && @post.user_id == current_user.id
       render :json => {:status => 'error'}, status: :unprocessable_entity
     else
-      PostStat.add(@post.id, request.remote_ip, 'vote', request.referer, current_user ? current_user.id : nil)
+      PostVote.add(@post.id, request.remote_ip, current_user ? current_user.id : nil)
       if current_user && current_user.email_recommended
         UserMailer.recommended(@post.id, current_user.id).deliver
       end
@@ -144,7 +144,7 @@ class PostsController < ApplicationController
   def destroy_vote
     @post = Post.find_by_token(params[:id])
 
-    stat = PostStat.retrieve(@post.id, 'vote', request.remote_ip, current_user ? current_user.id : nil)
+    stat = PostVote.retrieve(@post.id, request.remote_ip, current_user ? current_user.id : nil)
     if stat
       stat.destroy
       render :json => {:status => 'success', :votes_count => @post.votes_count - 1}, status: 200
@@ -160,7 +160,7 @@ class PostsController < ApplicationController
     if @post.user_id == user_id || @post.status != 'active'
       render :json => {:status => 'success'}, status: 200
     else
-      PostStat.add(@post.id, request.remote_ip, 'read', request.referer, user_id)
+      Stat.create_from_page_analytics('Post Read', current_user, [@post], request.referer, request.remote_ip)
       render :json => {:status => 'success'}, status: 200
     end
   end

@@ -4,128 +4,138 @@
     margin: 0 0 20px;
   }
 }
-//
-//.users-c {
-//  #mast-header {
-//    h1,
-//    .subheader,
-//    .extra {
-//      color: #FFF;
-//    }
-//  }
-//}
-//
-//#colorSelector {
-//  height: 32px;
-//  width: 32px;
-//  position: relative;
-//  border: 1px solid #CCC;
-//  border: 1px solid rgba(0,0,0,.1);
-//
-//  >div {
-//    width: 30px;
-//    height: 30px;
-//    cursor: pointer;
-//  }
-//}
-//
-//#patternSelector {
-//  height: 150px;
-//  width: 100%;
-//  border: 1px solid #CCC;
-//  border: 1px solid rgba(0,0,0,.1);
-//  background-repeat: repeat;
-//  position: relative;
-//
-//  .prev,
-//  .next {
-//    @include opacity(0.3);
-//    position: absolute;
-//    bottom: 0;
-//    padding: 8px 12px;
-//    font-size: 18px;
-//    color: #EFEFEF;
-//    background: #000;
-//    background: rgba(0,0,0,.8);
-//    cursor: pointer;
-//  }
-//  .prev {
-//    left: 0;
-//  }
-//  .next {
-//    right: 0;
-//  }
-//  &:hover {
-//    .prev,
-//    .next {
-//      @include opacity(1);
-//    }
-//  }
-//}
-//
-//#signup,
-//#signin {
-//  h1 {
-//    text-align: center;
-//  }
-//  .center-screen {
-//    margin: 60px auto 20px auto;
-//    margin: 6rem auto 2rem auto;
-//    max-width: 330px;
-//    max-width: 33rem;
-//  }
-//  form {
-//    @include box-shadow(rgba(0, 0, 0, 0.8) 1px 2px 4px);
-//    background: #EFEFEF;
-//    background: rgba(255,255,255,.85);
-//    padding: 25px;
-//    padding: 2.5rem;
-//  }
-//  label {
-//    font-weight: bold;
-//  }
-//  input {
-//    margin: 5px 0 15px 0;
-//    margin: 0.5rem 0 1.5rem 0;
-//    max-width: 300px;
-//    max-width: 30rem;
-//  }
-//  .submit {
-//    margin-bottom: 0;
-//  }
-//  .error {
-//    margin: -10px 0 15px 0;
-//    margin: -1rem 0 1.5rem 0;
-//  }
-//  a {
-//    display: block;
-//    margin: 20px 0 0 0;
-//    margin: 2rem 0 0 0;
-//  }
-//}
-//#signup {
-//  .url {
-//    @include clearfix();
-//    margin: 0 0 15px 0;
-//    margin: 0 0 1.5rem 0;
-//
-//    .head {
-//      font-weight: bold;
-//      margin: 0 0 5px 0;
-//      margin: 0 0 0.5rem 0;
-//    }
-//    .root,
-//    .username {
-//      float: left;
-//      cursor: default;
-//      font-size: 16px;
-//      font-size: 1.6rem;
-//    }
-//    .root {
-//      color: #999;
-//    }
-//    .username {
-//      font-weight: bold;
-//    }
-//  }
-//}
+
+.users-dashboard {
+  @include clearfix();
+  background: $body-bg-color;
+}
+
+.dashboard-section {
+  background: #FFF;
+  position: relative;
+  float: left;
+  height: 0;
+  width: 29%;
+  padding-bottom: 17%;
+  margin: 0.5%;
+
+  .head {
+    @include clearfix();
+    padding: 25px 25px 5px 25px;
+    padding: 2.5rem 2.5rem 0.5rem 2.5rem;
+  }
+  .big-number {
+    font-size: 36px;
+    font-size: 3.6rem;
+    font-weight: bold;
+
+    .name {
+      font-size: 160px;
+      font-size: 1.6rem;
+      font-weight: normal;
+      color: #BBB;
+      margin-left: 8px;
+      margin-left: 0.8rem;
+    }
+  }
+  .change {
+    font-size: 12px;
+    font-size: 1.2rem;
+
+    span {
+      font-weight: bold;
+    }
+
+    &.positive {
+      span {
+        color: $green;
+      }
+    }
+    &.negative {
+      span {
+        color: $red;
+      }
+    }
+    &.neutral {
+      span {
+        color: #999;
+      }
+    }
+  }
+  .chart {
+    &.column {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+  &.double-h {
+    padding-bottom: 35%;
+  }
+  &.double-w {
+    width: 39%;
+  }
+  &.site-name {
+    background: $secondary-color-darker;
+    h1 {
+      color: #FFF;
+      font-family: SpecialElite;
+      text-align: center;
+      margin-top: 19%;
+      cursor: default;
+    }
+  }
+  &.post-views {
+    .first {
+      float: left;
+    }
+    .second {
+      float: right;
+    }
+  }
+  &.posts {
+    overflow: auto;
+
+    ul {
+
+    }
+    li {
+      padding: 5px 10px 5px 30px;
+      padding: 0.5rem 1rem 0.5rem 3rem;
+      position: relative;
+      border-bottom: 1px solid #EEE;
+      line-height: 20px;
+      line-height: 2rem;
+      cursor: pointer;
+
+      i {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        font-size: 12px;
+        font-size: 1.2rem;
+        margin-top: -0.6rem;
+        color: #CCC;
+      }
+
+      &:hover {
+        background: $primary-color;
+        color: #FFF;
+
+        i {
+          color: #FFF;
+        }
+      }
+      &.on {
+        background: $primary-color-darker;
+        color: #FFF;
+        cursor: default;
+
+        i {
+          color: #FFF;
+        }
+      }
+    }
+  }
+}

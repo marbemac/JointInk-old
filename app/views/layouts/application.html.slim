@@ -8,23 +8,24 @@ html
 
       div id="page-wrapper" class="#{params[:controller]}-#{params[:action]} #{params[:controller]}-c #{@fullscreen ? 'fullscreen' : ''}"
 
+        = render 'layouts/messages'
+
+        = render "shared/mast_nav"
+
         = yield :page_nav
 
         #main-content-wrapper class=(content_for?(:page_nav) ? 'with-page-nav' : '')
-
-          = render 'layouts/messages'
 
           #main-content role='main'
             = yield
 
           #loader Loading...
 
-      = render "shared/mast_nav"
-
       #analytics-data data-d=page_analytics_data.to_json
-      == keen_io_js
+      - if ['users','channels','posts'].include?(params[:controller]) && ['show'].include?(params[:action])
+        == track_page_load
 
-    script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js'
+    == common_js
 
     = javascript_include_tag "application"
 
