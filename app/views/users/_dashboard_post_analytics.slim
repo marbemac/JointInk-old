@@ -1,5 +1,5 @@
 .dashboard-section.double-h.double-w.post-views
-  .head
+  .numbers
     .first
       .sum.big-number
         = number_with_delimiter(@postViewsSum, :delimiter => ',')
@@ -19,7 +19,7 @@
   #post-views-chart.column.chart data-data1=@postViews.to_json data-data2=@postReads.to_json
 
 .dashboard-section.post-recs
-  .head
+  .numbers
     .sum.big-number
       = number_with_delimiter(@postRecsSum, :delimiter => ',')
       span.name recommendations

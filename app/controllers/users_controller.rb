@@ -36,8 +36,13 @@ class UsersController < ApplicationController
   end
 
   def ideas
-    @user = User.find(request.subdomain.downcase)
-    authorize! :update, @user
+    if request.subdomain.blank?
+      @user = current_user
+    else
+      @user = User.find(request.subdomain.downcase)
+      authorize! :manage, @user
+    end
+
     @page_title = "Your Ideas"
     @posts = @user.posts.ideas.page(params[:page]).order('created_at DESC')
     add_page_entity('channel', @channel)
@@ -51,7 +56,12 @@ class UsersController < ApplicationController
   end
 
   def settings
-    @user = current_user
+    if request.subdomain.blank?
+      @user = current_user
+    else
+      @user = User.find(request.subdomain.downcase)
+      authorize! :manage, @user
+    end
   end
 
   def update
@@ -94,8 +104,17 @@ class UsersController < ApplicationController
     end
   end
 
+  # ugggglaayyy
   def dashboard
-    filter = {:post_user_id => current_user.id}
+
+    if request.subdomain.blank?
+      @user = current_user
+    else
+      @user = User.find(request.subdomain.downcase)
+      authorize! :manage, @user
+    end
+
+    filter = {:post_user_id => @user.id}
     @post = nil
     if params[:post_id]
       @post = Post.find(params[:post_id])
@@ -128,7 +147,7 @@ class UsersController < ApplicationController
 
     @referalData = Stat.referal_data(10, 30, filter)
 
-    @posts = current_user.posts.active
+    @posts = @user.posts.active
 
     respond_to do |format|
       format.html
@@ -137,49 +156,5 @@ class UsersController < ApplicationController
       end
     end
   end
-
-  ## not currently in use
-  #def add
-  #  @user = User.find(params[:user_id])
-  #  @channel = params[:channel_id] ? Channel.find(params[:channel_id]) : nil
-  #
-  #  authorize! :update, @user
-  #  authorize! :read, @channel
-  #
-  #  current_user.add(@user, @channel)
-  #
-  #  respond_to do |format|
-  #    format.html {
-  #      redirect_to :back, :notice => "#{@user.name} successfully added to your feed."
-  #    }
-  #  end
-  #end
-  #
-  ## not currently in use
-  #def remove
-  #  @user = User.find(params[:user_id])
-  #  @channel = params[:channel_id] ? Channel.find(params[:channel_id]) : nil
-  #
-  #  authorize! :update, @user
-  #  authorize! :read, @channel
-  #
-  #  current_user.remove(@user, @channel)
-  #
-  #  respond_to do |format|
-  #    format.html {
-  #      redirect_to :back, :notice => "#{@user.name} successfully remove from your feed."
-  #    }
-  #  end
-  #end
-  #
-  ## not currently in use
-  #def account_deauth
-  #  account = Account.find(params[:id])
-  #  if account.user_id = current_user.id
-  #    account.status = 'disabled'
-  #    account.save
-  #  end
-  #  redirect_to :back, :notice => 'Account successfully removed'
-  #end
 
 end

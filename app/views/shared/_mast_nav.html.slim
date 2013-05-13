@@ -1,27 +1,4 @@
 #mast-nav
-  .horizontal-menu
-    ul
-      li.dashboard class=(params[:action] == 'dashboard' ? 'on' : '')
-        a href=user_dashboard_url(:subdomain => current_user.username)
-          | Dashboard
-          .arrow.icon-caret-up
-      li.blog
-        a href=user_url(:subdomain => current_user.username)
-          | My Blog
-          .arrow.icon-caret-up
-      li.ideas
-        a href=user_ideas_url(:subdomain => current_user.username)
-          = pluralize(current_user.ideas_count, "Idea")
-          .arrow.icon-caret-up
-      li.settings
-        a href=settings_url(:subdomain => current_user.username)
-          | Settings
-          .arrow.icon-caret-up
-      li.logout
-        a href=destroy_user_session_url(:subdomain => false) data-skip-pjax=true
-          | Logout
-          .arrow.icon-caret-up
-
   .vertical-menu
     .handle
       i.icon-reorder
@@ -30,7 +7,7 @@
         li.head = current_user.first_name
         li.spacer
         li.dashboard
-          a href=user_dashboard_url(:subdomain => current_user.username)
+          a href=user_dashboard_url(:subdomain => false)
             i.icon.icon-dashboard
             | Dashboard
         li.blog
@@ -38,11 +15,11 @@
             i.icon.icon-user
             | My Blog
         li.ideas
-          a href=user_ideas_url(:subdomain => current_user.username)
+          a href=user_ideas_url(:subdomain => false)
             i.icon.icon-lightbulb
             = pluralize(current_user.ideas_count, "Idea")
         li.settings
-          a href=settings_url(:subdomain => current_user.username)
+          a href=settings_url(:subdomain => false)
             i.icon.icon-cog
             | Settings
         li.logout
@@ -54,17 +31,17 @@
         li.head Create
         li.spacer
         li
-          a href=new_channel_url(:subdomain => false) data-skip-pjax=true
-            i.icon.icon-circle-blank
-            | Channel
-        li
           a href=new_post_url('text', 'article', :subdomain => false) data-skip-pjax=true
             i.icon.icon-pencil
             | Article
         li
           a href=new_post_url('picture', 'caption', :subdomain => false) data-skip-pjax=true
             i.icon.icon-camera-retro
-            | Picture
+            | Image
+        li
+          a href=new_channel_url(:subdomain => false) data-skip-pjax=true
+            i.icon.icon-circle-blank
+            | Channel
         li.spacer
 
       - else

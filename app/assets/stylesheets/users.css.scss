@@ -8,18 +8,30 @@
 .users-dashboard {
   @include clearfix();
   background: $body-bg-color;
+
+  #main-content-wrapper,
+  #main-content {
+    height: 100%;
+  }
 }
 
 .dashboard-section {
   background: #FFF;
   position: relative;
   float: left;
-  height: 0;
   width: 29%;
-  padding-bottom: 17%;
   margin: 0.5%;
+  height: 31.4%;
 
-  .head {
+  .header {
+    text-align: center;
+    h2 {
+      padding: 20px 0 10px 0;
+      padding: 2rem 0 1rem 0;
+      cursor: default;
+    }
+  }
+  .numbers {
     @include clearfix();
     padding: 25px 25px 5px 25px;
     padding: 2.5rem 2.5rem 0.5rem 2.5rem;
@@ -65,16 +77,52 @@
   .chart {
     &.column {
       position: absolute;
-      bottom: 0;
+      bottom: 1px;
       left: 0;
       right: 0;
     }
   }
   &.double-h {
-    padding-bottom: 35%;
+    height: 64.7%;
+  }
+  &.triple-h {
+    height: 98%;
   }
   &.double-w {
     width: 39%;
+  }
+  &.create {
+
+    ul {
+      text-align: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding-top: 22%;
+    }
+    li {
+      display: inline-block;
+      width: 30%;
+    }
+    a {
+      margin: 0 1.11%;
+      padding: 15px 0;
+      padding: 1.5rem 0;
+      color: #BBB;
+      display: block;
+
+      &:hover {
+        background: $primary-color;
+        color: #FFF;
+      }
+    }
+    .icon {
+      display: block;
+      margin: auto;
+      font-size: 5rem;
+    }
   }
   &.site-name {
     background: $secondary-color-darker;

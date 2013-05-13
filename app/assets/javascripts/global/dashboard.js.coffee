@@ -26,7 +26,7 @@ jQuery ->
         spacingRight: 0
         spacingBottom: 0
         spacingLeft: 0
-        height: ($container.parent().outerHeight() - $container.siblings('.head:first').outerHeight())
+        height: ($container.parent().outerHeight() - $container.siblings('.numbers:first').outerHeight())
       plotOptions:
         column:
           size: '100%'
@@ -73,7 +73,7 @@ jQuery ->
         spacingRight: 0
         spacingBottom: 0
         spacingLeft: 0
-        height: ($container.parent().outerHeight() - $container.siblings('.head:first').outerHeight())
+        height: ($container.parent().outerHeight() - $container.siblings('.numbers:first').outerHeight())
       plotOptions:
         line:
           size: '100%'
@@ -123,7 +123,7 @@ jQuery ->
         spacingRight: 0
         spacingBottom: 0
         spacingLeft: 0
-        height: ($container.parent().outerHeight() - $container.siblings('.head:first').height())
+        height: $container.parent().outerHeight()
       plotOptions:
         pie:
           shadow: false
@@ -179,3 +179,8 @@ jQuery ->
         $self.addClass('on')
         $('.post-analytics').html(data.responseText)
         drawCharts()
+
+
+  $.event.special.debouncedresize.threshold = 300;
+  $(window).on "debouncedresize", (event) ->
+    drawCharts()
