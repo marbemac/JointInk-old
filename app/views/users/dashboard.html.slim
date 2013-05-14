@@ -1,4 +1,6 @@
 .dashboard-section.triple-h.posts
+  - if @posts.empty?
+    .empty This is an analytics dashboard for your posts. Create something and watch it grow!
   ul
     li.on data-url=user_dashboard_path
       .name All Posts
