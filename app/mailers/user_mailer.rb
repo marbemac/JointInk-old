@@ -1,8 +1,14 @@
 include ActionView::Helpers::TextHelper
+include ActionView::Helpers::AssetTagHelper
 
 class UserMailer < ActionMailer::Base
-  layout 'email', :except => [:matt_welcome, :marc_welcome]
-  default :from => "Joint Ink <founders@jointink.com>"
+  layout 'email'#, :except => [:matt_welcome, :marc_welcome]
+  default :from => "Joint Ink <team@jointink.com>"
+  add_template_helper(ApplicationHelper)
+
+  #def initialize
+  #  @image_url = "#{request.protocol}#{request.host_with_port}#{asset_path('joint-ink-logo.gif')}"
+  #end
 
   def welcome_email(user_id)
     @user = User.find(user_id)
@@ -43,15 +49,15 @@ class UserMailer < ActionMailer::Base
   #  mail(:from => "Marc <marc@jointink.com>", :to => "#{@user.username} <#{@user.email}>", :subject => "Hi There")
   #end
 
-  def pending_reminder(user_id, pending_this_week, crowdsourced_this_week)
-    @user = User.find(user_id)
-    @pending_this_week = pending_this_week.to_i
-    @crowdsourced_this_week = crowdsourced_this_week.to_i
-    subject = "You have"
-    subject = subject + " #{pluralize(@user.pending_share_count.to_i, 'pending post') if @user.pending_share_count > 0}"
-    subject = subject + " and" if @user.pending_share_count > 0 && @crowdsourced_this_week > 0
-    subject = subject + " #{pluralize(@crowdsourced_this_week, 'auto-organized post')}" if @crowdsourced_this_week > 0
-    subject = subject + "!"
-    mail(:to => "#{@user.username} <#{@user.email}>", :subject => subject)
-  end
+  #def pending_reminder(user_id, pending_this_week, crowdsourced_this_week)
+  #  @user = User.find(user_id)
+  #  @pending_this_week = pending_this_week.to_i
+  #  @crowdsourced_this_week = crowdsourced_this_week.to_i
+  #  subject = "You have"
+  #  subject = subject + " #{pluralize(@user.pending_share_count.to_i, 'pending post') if @user.pending_share_count > 0}"
+  #  subject = subject + " and" if @user.pending_share_count > 0 && @crowdsourced_this_week > 0
+  #  subject = subject + " #{pluralize(@crowdsourced_this_week, 'auto-organized post')}" if @crowdsourced_this_week > 0
+  #  subject = subject + "!"
+  #  mail(:to => "#{@user.username} <#{@user.email}>", :subject => subject)
+  #end
 end

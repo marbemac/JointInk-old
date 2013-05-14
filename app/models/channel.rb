@@ -128,7 +128,7 @@ class Channel < ActiveRecord::Base
         key_prefix ? "#{key_prefix}Id" : 'id' => id,
         key_prefix ? "#{key_prefix}Status" : 'status' => status,
         key_prefix ? "#{key_prefix}Privacy" : 'privacy' => privacy,
-        key_prefix ? "#{key_prefix}Created" : 'created' => created_at.iso8601,
+        key_prefix ? "#{key_prefix}Created" : 'created' => (created_at ? created_at.iso8601 : nil),
         key_prefix ? "#{key_prefix}UserId" : 'userId' => user_id
     }
     data
