@@ -4,7 +4,7 @@
   - if can? :update, @post && !defined?(@editing)
     = render "posts/admin_btns"
 
-div class="post-full #{@post.post_type} #{@post.post_subtype} #{@post.style} #{defined?(@editing) ? 'editing' : ''}"
+div class="post-full #{@post.post_type} #{@post.post_subtype} #{@post.style.present? ? @post.style : 'default'} #{defined?(@editing) ? 'editing' : ''}"
   = yield
 
   = render "posts/next_prev_buttons"

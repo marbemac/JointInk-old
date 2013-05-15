@@ -343,15 +343,29 @@ $post-full-padding-rem: 1.5rem;
     bottom: 0;
     right: 0;
     left: 0;
+    background: $tertiary-color;
+    text-align: center;
+
+    &:hover {
+      background: darken($tertiary-color, 5%);
+    }
   }
   .upload-help {
     color: #FFF;
-    background: #222;
-    padding: 15px;
-    padding: 1.5rem;
-    font-size: 12px;
-    font-size: 1.2rem;
-    display: inline-block;
+    color: darken($tertiary-color, 25%);
+    font-size: 16px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    position: absolute;
+    bottom: 20px;
+    bottom: 2rem;
+    left: 0;
+    right: 0;
+    text-align: middle;
+
+    i {
+      margin: 0 15px 0 0;
+    }
   }
 }
 .post-full,
@@ -446,7 +460,7 @@ $post-full-padding-rem: 1.5rem;
   }
 }
 
-.post-full-author {
+.post-full-author-section {
   max-width: $post-article-max-width;
   margin: auto;
   position: relative;
@@ -618,9 +632,11 @@ $post-full-padding-rem: 1.5rem;
   height: 100%;
 
   // POST STYLES
-  &.small-image {
+  &.small-image,
+  &.default {
     .post-full-picture {
       max-width: $post-article-max-width;
+      min-height: 100px;
       margin-left: auto;
       margin-right: auto;
 
@@ -699,5 +715,13 @@ $post-full-padding-rem: 1.5rem;
     }
   }
   // END POST TYPES
+
+  &.editing {
+    .post-full-actions,
+    .post-full-author-section,
+    .post-full-meta-section {
+      display: none;
+    }
+  }
 }
 // END POST SHOW PAGE

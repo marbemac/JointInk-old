@@ -87,6 +87,11 @@
     &:hover {
       background: darken($grayLight, 10%);
     }
+    &.split {
+      span {
+        background: darken($grayLight, 10%);
+      }
+    }
   }
   &.light-gray {
     background: #FAFBFB;
@@ -146,10 +151,26 @@
       background: darken($secondary-color, 10%);
     }
   }
+  &.clear {
+    background: transparent;
+    border: none;
+
+    &.split {
+      padding-right: 45px;
+    }
+  }
   &.action {
     background: $primary-color;
     border-color: darken($primary-color, 10%);
     color: #FFF;
+    &.split {
+      span {
+        background: darken($primary-color, 15%);
+        &:hover {
+          background: darken($primary-color, 25%);
+        }
+      }
+    }
     &:hover {
       background: darken($primary-color, 10%);
     }
@@ -181,6 +202,19 @@
     font-size: 16px;
     font-size: 1.6rem;
   }
+  &.split {
+    padding-right: 55px;
+
+    span {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      padding: 15px 0 0 0;
+      width: 42px;
+      text-align: center;
+    }
+  }
 }
 
 .fileinput-button {
@@ -193,13 +227,8 @@
   position: absolute;
   top: 0;
   right: 0;
-  bottom: 0;
-  left: 0;
   margin: 0;
-  opacity: 0;
-  height: 100%;
-  transform: translate(-300px, 0) scale(4);
-  font-size: 500px;
+  transform: translate(-5000px, 330px) scale(25);
   direction: ltr;
   cursor: pointer;
 }

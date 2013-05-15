@@ -68,7 +68,7 @@ jQuery ->
             while removed > 0
               removed = content.find('*').filter(-> $.trim(@.innerHTML) == '').remove().length
 
-            if parent.parent().attr('id') == 'post-body' && $.trim(content.html()) == ''
+            if parent.parent().hasClass('post-full-body') && $.trim(content.html()) == ''
               $('#inline-image-edit').reveal
                 closed: ->
                   $('.post-full-body .inline-image-placeholder').remove()
@@ -89,19 +89,14 @@ jQuery ->
               $('.redactor_btn_html').attr('title', 'Exit Distraction Free Mode')
 
             # toggle showing the markdown editor versus the normal post editor
-            $('#post-editor').toggleClass('markdown-on')
             if $('.post-full-markdown').is(':visible')
-              $('.post-full-markdown').fadeOut 500, ->
-                setTimeout ->
-                  $('.redactor_toolbar li,#left-panel,#right-panel,.editor-actions,.post-full-picture,.post-full-picture-placeholder,.post-full-header-wrapper,.post-full-body').fadeIn 500
-                  $('.redactor_btn_html').parent().show()
-                , 100
+              $('.redactor_toolbar li,.editor-bar').show()
+              $('.redactor_btn_html').parent().show()
             else
-              $('.redactor_toolbar li,#left-panel,#right-panel,.editor-actions,.post-full-picture,.post-full-picture-placeholder,.post-full-header-wrapper,.post-full-body').fadeOut 500, ->
-                setTimeout ->
-                  $('.post-full-markdown').fadeIn(500)
-                  $('.redactor_btn_html').parent().show()
-                , 100
+              $('.redactor_toolbar li,.editor-bar').hide()
+              $('.redactor_btn_html').parent().show()
+            $('#post-editor').toggleClass('markdown-on')
+
             $('.post-full-markdown textarea').trigger('autosize')
             $.scrollTo(0, 400)
 
@@ -193,37 +188,45 @@ jQuery ->
 
   updatePostAudio = (data) ->
     if data
-      $('#jquery_jplayer_1').data('url', data.url)
-      $('#left-panel .audio .name').text(data.name)
+#      $('#jquery_jplayer_1').data('url', data.url)
+      $('.editor-audio .name').text("Audio: #{data.name}")
+      $('.editor-audio .editor-audio-add').hide()
+      $('.editor-audio .editor-audio-remove').show()
+      $('.editor-audio .display').removeClass('fileinput-button')
     else
-      $('#jquery_jplayer_1').data('url', null)
-      $('#left-panel .audio .name').text('None')
-    $('body').trigger('reset-audio-player')
+#      $('#jquery_jplayer_1').data('url', null)
+      $('.editor-audio .name').text('Audio: None')
+      $('.editor-audio .editor-audio-add').show()
+      $('.editor-audio .editor-audio-remove').hide()
+      $('.editor-audio .display').addClass('fileinput-button')
+#    $('body').trigger('reset-audio-player')
 
   # handle audio uploads
-  $('#audio-upload .fileinput-button input').fileupload
-    dataType: "json"
-    type: 'PUT'
-    maxFileSize: 10000000
-    add: (e,data) ->
-      types = /(\.|\/)(mp3|m4a|ogg)$/i
-      file = data.files[0]
-      if types.test(file.type) || types.test(file.name)
-        data.submit()
-      else
-        alert("#{file.name} is not a mp3, m4a, or ogg file")
-    progress: (e, data) ->
-      progress = parseInt(data.loaded / data.total * 100, 10)
-      $('#audio-upload .loading').text("#{progress}%")
-    done: (e,data) ->
-      $('#audio-upload .loading').text('')
-      updatePostAudio(data.result)
+  $('.editor-audio .fileinput-button input').livequery ->
+    return if $(@).hasClass('remove')
+
+    $(@).fileupload
+      dataType: "json"
+      type: 'PUT'
+      maxFileSize: 10000000
+      add: (e,data) ->
+        types = /(\.|\/)(mp3|m4a|ogg)$/i
+        file = data.files[0]
+        if types.test(file.type) || types.test(file.name)
+          data.submit()
+        else
+          alert("#{file.name} is not a mp3, m4a, or ogg file")
+      progress: (e, data) ->
+        progress = parseInt(data.loaded / data.total * 100, 10)
+        $('.editor-audio .name span').text("#{progress}%")
+      done: (e,data) ->
+        updatePostAudio(data.result)
 
   # handle audio remove
-  $('#left-panel .audio').on 'click', '.remove', (e) ->
+  $('.editor-audio').on 'click', '.display:not(.fileinput-button)', (e) ->
     e.preventDefault
     $.ajax
-      url: $(@).attr('href')
+      url: $(@).data('remove-url')
       type: 'PUT'
       dataType: 'json'
       success: (data, textStatus, jqXHR) ->
@@ -238,16 +241,13 @@ jQuery ->
 
     data = {'post':{}}
     data['post']['title'] = $.trim($('.post-title').text())
-
     data['post']['content'] = $.trim($('.post-full-markdown textarea').val())
     data['post']['style'] = $('#left-panel .post-style .content li.on').data('value')
 
     if $(@).hasClass('editor-publish')
       data['post']['status'] = 'active'
-      $(@).find('.name').text('Publishing')
     else
       data['post']['status'] = 'idea'
-      $(@).find('.name').text('Saving')
 
     $.ajax
       url: $('#editor-submit-url').data('url')
@@ -256,16 +256,14 @@ jQuery ->
       dataType: 'JSON'
       success: (data, textStatus, jqXHR) ->
         if self.hasClass('editor-publish')
+          $('.editor-actions .status').text('published')
           window.location = data.url
-          $('.editor-publish .name').text('Published! Loading..')
-
         if self.hasClass('editor-save')
+          $('.editor-actions .status').html("draft, saved <span title='#{new Date().toISOString()}'></span>")
+          $('.editor-actions .status span').timeago()
           $('.editor-save,.editor-publish').removeClass('disabled')
-          $('.editor-save .name').text('Save As Idea')
       error: (jqXHR, textStatus, errorThrown) ->
         $('.editor-save,.editor-publish').removeClass('disabled')
-        $('.editor-publish .name').text('Publish')
-        $('.editor-save .name').text('Save As Idea')
         data = $.parseJSON(jqXHR.responseText)
 
   # auto save the post every x seconds
@@ -294,10 +292,9 @@ jQuery ->
     false
 
   # toggle text post styles
-  $('.post-style .content li').click (e) ->
+  $('.editor-style-item').click (e) ->
     $('.post-full').removeClass('default small-image half-page full-page cover-image contain-image').addClass($(@).data('value'))
-    $('.post-style .content li').removeClass('on')
-    $(@).addClass('on')
+    $('.post-style .display .name').text($(@).text())
     $.scrollTo '0',
       duration: 300
       easing:'easeInOutCubic'
@@ -305,24 +302,26 @@ jQuery ->
   ### CHANNELS ###
 
   # toggle channel autocomplete
-  $('#left-panel .channels .icon-plus').click (e) ->
-    $('#left-panel .channels').trigger('tooltip-hide')
-    $('#channel-autocomplete').animate {width: 'toggle'}, 200, ->
-      $('#channel-autocomplete input').focus()
-      $('.autocomplete-suggestions').css('width': $('#channel-autocomplete').css('width'))
-
   updatePostChannel = ->
-    if $('#left-panel .channels li').length > 0
-      target = $('#left-panel .channels li:first a:not(.remove)')
-      $('.post-full-channel').attr('href': target.attr('href')).text(target.find('.name').text())
+    channel_count = $('.editor-channels .menu li').length
+    if channel_count
+      target = $('.editor-channels .menu li:first .name')
+      $('.post-full-channel').attr('href': target.attr('href')).text(target.text())
     else
       $('.post-full-channel').attr('href', '#').text('none')
 
-  $('#channel-autocomplete input').autocomplete
+    if channel_count == 1
+      $('.editor-channels .display .name').text('1 Channel')
+    else
+      $('.editor-channels .display .name').text("#{channel_count} Channels")
+
+  $('#editor-channel-autocomplete input').autocomplete
     serviceUrl: '/search/channels'
     minChars: 3
     deferRequestBy: 50
     noCache: false
+    appendTo: '.editor-channels .autocomplete'
+    position: 'static'
     onSelect: (suggestion) ->
       $.ajax
         url: "#{$('#post-data').data('d').url}/channels"
@@ -330,12 +329,11 @@ jQuery ->
         dataType: 'json'
         data: {channel_id: suggestion.data.id}
         success: (data, textStatus, jqXHR) ->
-          $('#left-panel .channels ul').append(data.channel.list_item)
-          $('#left-panel .channels .icon-plus').click()
-          $('#channel-autocomplete input').val('')
+          $('.editor-channels .menu ul').append(data.channel.list_item)
+          $('#editor-channel-autocomplete input').val('')
           updatePostChannel()
 
-  $('#left-panel .channels').on 'click', '.remove', (e) ->
+  $('body').on 'click', '.editor-channel-remove', (e) ->
     e.preventDefault()
     self = $(@)
     $.ajax
@@ -345,37 +343,4 @@ jQuery ->
       success: (data, textStatus, jqXHR) ->
         self.parents('li:first').remove()
         updatePostChannel()
-    false
-
-  ### ATTRIBUTION ###
-
-  # toggle attribution field
-  $('#right-panel .attribution .icon-plus').click (e) ->
-    $('#right-panel .attribution').trigger('tooltip-hide')
-    $('.attribution #attribution-form').animate {width: 'toggle'}, 200, ->
-      $('.attribution input').focus()
-
-  $('.attribution .submit').click (e) ->
-    $.ajax
-      url: "#{$('#post-data').data('d').url}"
-      type: 'PUT'
-      dataType: 'json'
-      data: {post: {attribution_link: $('.attribution input').val()}}
-      success: (data, textStatus, jqXHR) ->
-        link = data.post.post.attribution_link
-        $('#right-panel .attribution li').show()
-        $('#right-panel .attribution li .name').text(link).parent("a").attr("href", link)
-        $('#right-panel .attribution .icon-plus').click()
-        $('#right-panel .attribution input').val('')
-
-  $('#right-panel .attribution').on 'click', '.remove', (e) ->
-    e.preventDefault()
-    self = $(@)
-    $.ajax
-      url: $(@).attr('href')
-      type: 'PUT'
-      dataType: 'json'
-      data: {post: {attribution_link: null}}
-      success: (data, textStatus, jqXHR) ->
-        self.parents('li:first').hide()
     false

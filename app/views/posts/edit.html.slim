@@ -1,97 +1,75 @@
-.editor-actions
-  a.home.gray.medium.button href=root_url(:subdomain => current_user.username) data-skip-pjax=true
-    i.icon-home
+.editor-bar
+  .editor-bar-section.pull-left.first.with-menu.editor-style
+    .display
+      .medium.clear.button.split
+        .name Default Style
+        span
+          i.icon-chevron-up
+    .menu
+      ul
+        li.editor-style-item data-value='full-page' class=(@post.style == 'full-page' ? 'on' : '')
+          | Full Page Style
+        li.editor-style-item data-value='half-page' class=(@post.style == 'half-page' ? 'on' : '')
+          | Half Page Style
+        li.editor-style-item data-value='default' class=(@post.style == 'small-image' || @post.style == 'default' ? 'on' : '')
+          | Default Style
 
-  .editor-publish.medium.action.button.has-tooltip data-placement='bottom' title='Publishing makes your post live for other people to view.'
-    i.icon-upload
-    span.name Publish
-
-  .editor-save.gray.medium.button.has-tooltip data-placement='bottom' title='Ideas function as draft posts. Save it for later.'
-    i.icon-save
-    span.name Save As Idea
-
-  .editor-discard.gray.medium.button
-    a href=post_path(@post) data-method='delete' data-confirm='Are you sure you want to discard this post?' data-skip-pjax=true
-      i.icon-remove
-      | Discard
-
-#left-panel
-  .title= @post.post_type == 'text' ? 'Article' : @post.post_type
-  .section.channels.has-tip.manual-tip data-theme='alert' data-position='fixed' data-placement='right' title="You must add a channel before publishing. Click the + button to the left to choose an existing channel. <a href='#{new_channel_path}' data-skip-pjax='true' target='_blank'>Click here</a> to create a new one, and then add it with + the to the left."
-    .head
-      | Channels
-      i.icon-plus.plus title='Add a channel to this post.'
-    .content
+  .editor-bar-section.pull-left.with-menu.editor-channels
+    .display
+      .medium.clear.button.split
+        .name = pluralize(@post.channels.count, 'Channel')
+        span
+          i.icon-chevron-up
+    .menu
+      .autocomplete
+      #editor-channel-autocomplete
+        input type='text' placeholder='Channel name...' autocomplete='off'
+      .help
+        = 'search above or '
+        a href=new_channel_path target='_blank' data-skip-pjax=true create a new channel
       = render "posts/channels_list"
 
-    #channel-autocomplete
-      input type='text' placeholder='Channel name...' autocomplete='off'
+  .editor-bar-section.pull-left.editor-audio
+    .display class=(@post.audio.present? ? '' : 'fileinput-button') data-remove-url=post_remove_audio_path(:id => @post.token) data-skip-pjax=true
+      .medium.clear.button.split
+        .name
+          = 'Audio: '
+          = @post.audio.present? ? @post.audio_name : 'None'
+        span
+          i.icon-plus.editor-audio-add
+          i.icon-remove.editor-audio-remove.hide
 
-  .section.post-style
-    - if @post.post_type == 'text'
-      .head Article Style
-      .content
-        ul
-          li data-value='default' class=(@post.style == 'default' ? 'on' : '')
-            i.icon.icon-double-angle-right
-            | No Image
-          li data-value='small-image' class=(@post.style == 'small-image' ? 'on' : '')
-            i.icon.icon-double-angle-right
-            | Small Image
-          li data-value='half-page' class=(@post.style == 'half-page' ? 'on' : '')
-            i.icon.icon-double-angle-right
-            | Half Page
-          li data-value='full-page' class=(@post.style == 'full-page' ? 'on' : '')
-            i.icon.icon-double-angle-right
-            | Full Page
-    - else
-      .head Picture Style
-      .content
-        ul
-          li data-value='contain-image' class=(@post.style == 'default' ? 'on' : '')
-            i.icon.icon-double-angle-right
-            | Contain Image
-          li data-value='cover-image' class=(@post.style == 'cover' ? 'on' : '')
-            i.icon.icon-double-angle-right
-            | Cover Image
+      input type='file' data-url=post_update_audio_path(@post.token) name='post[audio]'
 
-  .section.audio
-    .head
-      | Audio
-      #audio-upload.plus
-        i.icon-plus title='Add audio this post.'
-        .fileinput-button
-          input type='file' data-url=post_update_audio_path(@post.token) name='post[audio]'
-        span.loading
-
-    .content
-      ul
-        li
-          i.icon.icon-double-angle-right
-          span.name= @post.audio.present? ? @post.audio_name : 'None'
-          a.remove href=post_remove_audio_path(:id => @post.token) data-skip-pjax=true
-            i.icon-remove title='Remove audio.'
-
-#right-panel
-  .title Extras
-  .section.attribution
-    .head
-      | Attribution
-      #add-attribution.plus
-        i.icon-plus title='Link to the original post.'
-    .clear
-
-    .content
-      ul
-        li class=(@post.attribution_link.blank? ? 'hide' : '')
-          a href=@post.attribution_link target='_blank' data-skip-pjax=true
-            i.icon.icon-double-angle-left
-            span.name= @post.attribution_link
-          a.remove href=post_path(:id => @post.token)
-            i.icon-remove title='Remove this link.'
-      #attribution-form
-        input type='text' placeholder='Original Link...' autocomplete='off'
-        .button.small.action.submit.expand-me Submit
+  .editor-bar-section.pull-right.editor-actions
+    .editor-actions.with-menu
+      .display
+        .status = (@post.status == 'active' ? 'published' : 'draft')
+        .medium.action.button.split class=(@post.status == 'active' ? 'editor-publish' : 'editor-save')
+          - if @post.status == 'active'
+            i.icon-upload
+            | Re-Publish Now
+          - else
+            i.icon-save
+            | Save Draft
+          span.caret
+            i.icon-chevron-up
+            .menu
+              ul
+                li
+                  a.editor-discard.gray.medium.button href=post_path(@post) data-method='delete' data-confirm='Are you sure you want to discard this post?' data-skip-pjax=true
+                    i.icon-remove
+                    | Discard
+                - if @post.status == 'active'
+                  li
+                    .editor-save.gray.medium.button
+                      i.icon-save
+                      | Save as Draft
+                - else
+                  li
+                    .editor-publish.gray.medium.button
+                      i.icon-upload
+                      | Publish Now
 
 #post-editor
 

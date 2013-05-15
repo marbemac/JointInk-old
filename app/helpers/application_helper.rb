@@ -101,7 +101,10 @@ module ApplicationHelper
     # do some dumb bot exclusion
     # TODO: Make this bot filter more robust
     unless request.env["HTTP_USER_AGENT"].match(/\(.*https?:\/\/.*\)/)
-      Stat.create_from_page_analytics('Page View', current_user, @page_entities.map{|e| e['entity']}, request.referer, request.remote_ip)
+      # don't track user page views on their own pages
+      unless current_user && defined?(@user) && current_user == @user
+        Stat.create_from_page_analytics('Page View', current_user, @page_entities.map{|e| e['entity']}, request.referer, request.remote_ip)
+      end
     end
   end
 

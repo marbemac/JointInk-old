@@ -6,7 +6,8 @@
     - if defined?(@editing)
       .fileinput-button
         .upload-help
-          = 'click to upload a picture '
+          i.icon-picture
+          = 'click to upload an image'
           span.loading
         input type='file' name='post[photo]' data-url=post_update_photo_url(@post.token, :subdomain => Rails.env == 'production' ? 'www' : false)
 

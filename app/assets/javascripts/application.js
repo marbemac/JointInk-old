@@ -24,7 +24,7 @@
 //= require jquery.timer
 //= require jquery.autosize
 //= require jquery.debouncedresize
-// require jquery.timeago
+//= require jquery.timeago
 //= require jquery.hotkeys
 //= require jquery.scrollTo
 //= require jquery.cookie

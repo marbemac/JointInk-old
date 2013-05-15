@@ -89,6 +89,7 @@
                 onSearchComplete: noop,
                 containerClass: 'autocomplete-suggestions',
                 tabDisabled: false,
+                position: 'bottom',
                 lookupFilter: function (suggestion, originalQuery, queryLowerCase) {
                     return suggestion.value.toLowerCase().indexOf(queryLowerCase) !== -1;
                 },
@@ -160,7 +161,7 @@
                 options.width = that.el.outerWidth();
             }
 
-            that.suggestionsContainer = Autocomplete.utils.createNode('<div class="' + options.containerClass + '" style="position: absolute; display: none;"></div>');
+            that.suggestionsContainer = Autocomplete.utils.createNode('<div class="' + options.containerClass + ' position-' + options.position + '" style="position: absolute; display: none;"></div>');
 
             container = $(that.suggestionsContainer);
 
@@ -277,7 +278,7 @@
             var that = this;
 
             // If suggestions are hidden and user presses arrow down, display suggestions:
-            if (!that.disabled && !that.visible && e.keyCode === keys.DOWN && that.currentValue) {
+            if (!that.disabled && !that.visible && (e.keyCode === keys.DOWN || e.keyCode === keys.UP) && that.currentValue) {
                 that.suggest();
                 return;
             }
@@ -531,14 +532,11 @@
             var that = this;
 
             if (that.selectedIndex === -1) {
-                return;
+                that.selectedIndex = $(that.suggestionsContainer).children().length
             }
 
             if (that.selectedIndex === 0) {
-                $(that.suggestionsContainer).children().first().removeClass(that.classes.selected);
-                that.selectedIndex = -1;
-                that.el.val(that.currentValue);
-                return;
+                that.selectedIndex = $(that.suggestionsContainer).children().length
             }
 
             that.adjustScroll(that.selectedIndex - 1);
@@ -548,7 +546,7 @@
             var that = this;
 
             if (that.selectedIndex === (that.suggestions.length - 1)) {
-                return;
+                that.selectedIndex = -1
             }
 
             that.adjustScroll(that.selectedIndex + 1);
