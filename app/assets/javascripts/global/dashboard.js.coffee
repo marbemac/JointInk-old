@@ -26,7 +26,7 @@ jQuery ->
         spacingRight: 0
         spacingBottom: 0
         spacingLeft: 0
-        height: ($container.parent().outerHeight() - $container.siblings('.numbers:first').outerHeight())
+        height: (if $(document).width() > 900 then ($container.parent().outerHeight() - $container.siblings('.numbers:first').outerHeight()) else $(document).width() * 0.6)
       plotOptions:
         column:
           size: '100%'
@@ -73,7 +73,7 @@ jQuery ->
         spacingRight: 0
         spacingBottom: 0
         spacingLeft: 0
-        height: ($container.parent().outerHeight() - $container.siblings('.numbers:first').outerHeight())
+        height: (if $(document).width() > 900 then ($container.parent().outerHeight() - $container.siblings('.numbers:first').outerHeight()) else $(document).width() * 0.6)
       plotOptions:
         line:
           size: '100%'
@@ -123,7 +123,7 @@ jQuery ->
         spacingRight: 0
         spacingBottom: 0
         spacingLeft: 0
-        height: $container.parent().outerHeight()
+        height: (if $(document).width() > 900 then $container.parent().outerHeight() else $(document).width() * 0.6)
       plotOptions:
         pie:
           shadow: false

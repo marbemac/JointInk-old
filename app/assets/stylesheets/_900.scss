@@ -146,6 +146,52 @@
 }
 // END TRANSITION TO SIDEBAR LAYOUT
 
+// DASHBOARD
+.dashboard-section {
+  float: left;
+  width: 32.3%;
+  margin: 0.5%;
+  height: 32%;
+  border-bottom: none;
+
+  .numbers {
+    padding: 20px 15px 3px;
+    padding: 2rem 1.5rem 0.3rem;
+  }
+  .chart {
+    &.column {
+      position: absolute;
+      bottom: 1px;
+      left: 0;
+      right: 0;
+    }
+  }
+
+  &.double-h {
+    height: 64.7%;
+  }
+  &.triple-h {
+    height: 98%;
+  }
+  &.double-w {
+    width: 65.5%;
+  }
+  &.posts {
+    max-height: none;
+  }
+  &.create {
+    display: none;
+    ul {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding-top: 22%;
+    }
+  }
+}
+
 .tt-form {
   .section {
     .line {
