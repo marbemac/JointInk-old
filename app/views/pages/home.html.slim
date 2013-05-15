@@ -2,7 +2,7 @@
 
 .login-signup
 
-  = simple_form_for('user', :url => user_registration_path, :html => {:class => 'signup-form'}) do |f|
+  = simple_form_for('user', :url => new_user_registration_path, :html => {:class => 'signup-form'}) do |f|
     ul.errors
 
     .username-input
