@@ -154,10 +154,11 @@ jQuery ->
         alert("#{file.name} is not a gif, jpeg, or png image file")
     progress: (e, data) ->
       progress = parseInt(data.loaded / data.total * 100, 10)
-      $('.post-full-picture .fileinput-button .loading').text("#{progress}%")
+      $('.post-full-picture .fileinput-button .loading').text(" #{progress}%")
     done: (e,data) ->
       result = $.parseJSON(data.result)
       $('.post-full-picture .fileinput-button .loading').text('')
+      $('.post-full-picture').addClass('has-image')
       $('.post-full-picture div.image').css('background-image', "url(#{result.url})").removeClass('cover-image contain-image').addClass(result.class)
       $('.post-full-picture img.image').attr('src', result.url)
 

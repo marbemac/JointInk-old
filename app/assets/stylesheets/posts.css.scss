@@ -367,6 +367,12 @@ $post-full-padding-rem: 1.5rem;
       margin: 0 15px 0 0;
     }
   }
+
+  &.has-image {
+    .fileinput-button {
+      background: transparent;
+    }
+  }
 }
 .post-full,
 .post-full-content-wrapper,
