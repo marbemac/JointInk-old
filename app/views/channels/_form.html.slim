@@ -1,10 +1,4 @@
 #channel_form.tt-form
-  - unless @channel.persisted?
-    .section
-      h1.sans-serif Create a Channel
-      h4.sans-serif.subheader
-        | A channel is a place for people to express themselves around a common idea, theme, or prompt.
-
   = simple_form_for @channel do |f|
 
     = f.error_notification

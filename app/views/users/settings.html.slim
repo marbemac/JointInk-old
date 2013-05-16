@@ -1,78 +1,79 @@
+.centered-head
+  h1.sans-serif Settings
 
-h4#page-header.sans-serif Settings
+.centered-page
+  #settings.tt-form
+    .section.basic
+      = simple_form_for @user, :url => user_url(:subdomain => @user.username) do |f|
+        .help.show-for-touch Click something to change it. Click "Save Changes" to... save changes.
 
-#settings.tt-form
-  .section.basic
-    = simple_form_for @user, :url => user_url(:subdomain => @user.username) do |f|
-      .help.show-for-touch Click something to change it. Click "Save Changes" to... save changes.
+        = f.error_notification
+        = f.error :base
 
-      = f.error_notification
-      = f.error :base
+        .fileinput-button.circle
+          span.prompt Choose Photo
+          div
+            img src=(@user.avatar.present? ? user_avatar_path(@user, :width => 200, :height => 200, :crop => :thumb, :gravity => :face) : '')
+            = f.hidden_field :avatar_cache
+          = f.file_field :avatar, :tabindex => '-1'
+        = f.error :avatar
 
-      .fileinput-button.circle
-        span.prompt Choose Photo
-        div
-          img src=(@user.avatar.present? ? user_avatar_path(@user, :width => 200, :height => 200, :crop => :thumb, :gravity => :face) : '')
-          = f.hidden_field :avatar_cache
-        = f.file_field :avatar, :tabindex => '-1'
-      = f.error :avatar
+        = f.input :name, :label => false, :input_html => {:placeholder => @user.name, :autocomplete => 'off'}
+        = f.input :bio, :label => false, :input_html => {:placeholder => 'My Bio', :autocomplete => 'off', :rows => 3}
 
-      = f.input :name, :label => false, :input_html => {:placeholder => @user.name, :autocomplete => 'off'}
-      = f.input :bio, :label => false, :input_html => {:placeholder => 'My Bio', :autocomplete => 'off', :rows => 3}
+        = f.button :submit, :class => 'medium action submit button', :value => 'Save Basic Info'
 
-      = f.button :submit, :class => 'medium action submit button', :value => 'Save Basic Info'
+    .section.theme
+      = simple_form_for @user, :url => user_url(:subdomain => @user.username) do |f|
 
-  .section.theme
-    = simple_form_for @user, :url => user_url(:subdomain => @user.username) do |f|
+        = f.error_notification
+        = f.error :base
 
-      = f.error_notification
-      = f.error :base
-
-      .line
-        .name Cover Photo
-        .content
-          .fileinput-button.rectangle
-            span.prompt Choose Photo
-            div
-              img src=(@user.cover_photo.present? ? cover_photo_path(@user, :width => 200, :height => 250, :crop => :fit) : '')
-              = f.hidden_field :cover_photo_cache
-            = f.file_field :cover_photo, :tabindex => '-1'
-          = f.error :cover_photo
-
-      = f.button :submit, :class => 'medium action submit button', :value => 'Save Cover Photo'
-
-  .section.links
-    = simple_form_for @user, :url => user_url(:subdomain => @user.username) do |f|
-      .help.show-for-touch add links to your facebook, twitter, blog, email, etc
-
-      - (@user.social_links + [""]).each_with_index do |s, i|
-        .line.smaller
-          - if i == 0
-            .name My links
+        .line
+          .name Cover Photo
           .content
-            input name="user[social_links][]" type="text" value=s
-      .more-social.action.button.small Add More
-      = f.button :submit, :class => 'medium action submit button', :value => 'Save Links'
+            .fileinput-button.rectangle
+              span.prompt Choose Photo
+              div
+                img src=(@user.cover_photo.present? ? cover_photo_path(@user, :width => 200, :height => 250, :crop => :fit) : '')
+                = f.hidden_field :cover_photo_cache
+              = f.file_field :cover_photo, :tabindex => '-1'
+            = f.error :cover_photo
+
+        = f.button :submit, :class => 'medium action submit button', :value => 'Save Cover Photo'
+
+    .section.links
+      = simple_form_for @user, :url => user_url(:subdomain => @user.username) do |f|
+        .help.show-for-touch add links to your facebook, twitter, blog, email, etc
+
+        - (@user.social_links + [""]).each_with_index do |s, i|
+          .line.smaller
+            - if i == 0
+              .name My links
+            .content
+              input name="user[social_links][]" type="text" value=s
+        .more-social.action.button.small Add More
+        = f.button :submit, :class => 'medium action submit button', :value => 'Save Links'
 
 
-  .section.email
-    = simple_form_for @user, :url => user_url(:subdomain => @user.username), :html => {:class => "custom"} do |f|
+    .section.email
+      = simple_form_for @user, :url => user_url(:subdomain => @user.username), :html => {:class => "custom"} do |f|
 
-      = f.error_notification
-      = f.error :base
+        = f.error_notification
+        = f.error :base
 
-      h3.sans-serif Email me when...
-      .line.smaller
-        .name Someone recommends my post
-        .content.checkbox-wrap
-          = f.check_box :email_recommended, :class => "checkbox"
-      .line.smaller
-        .name Someone posts in my channel
-        .content.checkbox-wrap
-          = f.check_box :email_channel_post, :class => "checkbox"
-      .line.smaller
-        .name Joint Ink has new features
-        .content.checkbox-wrap
-          = f.check_box :email_newsletter, :class => "checkbox"
+        h3.sans-serif Email me when...
+        .line.smaller
+          .name Someone recommends my post
+          .content.checkbox-wrap
+            = f.check_box :email_recommended, :class => "checkbox"
+        .line.smaller
+          .name Someone posts in my channel
+          .content.checkbox-wrap
+            = f.check_box :email_channel_post, :class => "checkbox"
+        .line.smaller
+          .name Joint Ink has new features
+          .content.checkbox-wrap
+            = f.check_box :email_newsletter, :class => "checkbox"
 
-      = f.button :submit, :class => 'medium action submit button', :value => 'Save Email Settings'
+        = f.button :submit, :class => 'medium action submit button', :value => 'Save Email Settings'

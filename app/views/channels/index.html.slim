@@ -1,9 +1,6 @@
-= render "shared/mast_nav", home_mast_nav_options
+.centered-head
+  h1.sans-serif Channels
 
-= render "channels/page_nav"
-
-.left-sections
-  = render "users/channels_page_nav"
-
-- @channels.each do |channel|
-  = render "channels/tile", :channel => channel
+.channels-list.centered-page
+  - @channels.each do |channel|
+    = render "channels/tile", :channel => channel

@@ -1,7 +1,10 @@
 #channel-collection {
   padding-top: 40px;
   padding-top: 4rem;
-  text-align: center;
+}
+.channels-list {
+  padding-top: 40px;
+  padding-top: 4rem;
 }
 
 .channel-tile {
@@ -65,10 +68,15 @@
   }
 }
 
+.centered-page {
+  .channel-tile {
+    margin: 0 10px 20px 10px;
+  }
+}
+
 #channel_form {
-  margin: 0 auto;
-  padding: 50px 0;
-  padding: 5rem 0;
+  padding-bottom: 50px;
+  padding-bottom: 5rem;
 
   .action {
     margin: 55px auto 0 auto;

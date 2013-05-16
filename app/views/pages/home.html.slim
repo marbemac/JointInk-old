@@ -2,7 +2,7 @@
 
 .login-signup
 
-  = simple_form_for('user', :url => new_user_registration_path, :html => {:class => 'signup-form'}) do |f|
+  = simple_form_for('user', :url => user_registration_path, :html => {:class => 'signup-form'}) do |f|
     ul.errors
 
     .username-input
@@ -20,7 +20,7 @@
     .step-2
       = f.submit "Sign Up", :class => 'medium action submit button'
 
-  = simple_form_for('user', :url => new_user_session_path, :html => {:class => 'signin-form hide'}) do |f|
+  = simple_form_for('user', :url => user_session_path, :html => {:class => 'signin-form hide'}) do |f|
     = f.input :login, :label => false, :placeholder => 'username or email', :input_html => {:autocomplete => 'off'}
     = f.input :password, :label => false, :placeholder => 'password', :input_html => {:autocomplete => 'off'}
     .step-1

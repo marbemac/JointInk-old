@@ -71,10 +71,10 @@ JointInk::Application.routes.draw do
                                                           }
   devise_scope :user do
     get 'sign-out' => 'sessions#destroy', :as => :destroy_user_session
-    get 'sign-in' => 'pages#home', :as => :new_user_session
+    get 'sign-in' => 'sessions#new', :as => :user_session
     post 'sign-in' => 'sessions#create', :as => :user_session
     get 'users/sign_in' => 'sessions#create' # stupid redirect after sign in if not confirmed
-    get 'sign-up' => 'pages#home', :as => :new_user_registration
+    get 'sign-up' => 'registrations#new', :as => :user_registration
     post 'sign-up' => 'registrations#create'
     post 'users' => 'registrations#create', :as => :user
     put 'users' => 'registrations#update', :as => :user
