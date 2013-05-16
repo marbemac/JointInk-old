@@ -85,5 +85,3 @@ JointInk::Application.configure do
     password: ENV["SENDGRID_PASSWORD"]
   }
 end
-
-JointInk::Application.default_url_options = JointInk::Application.config.action_mailer.default_url_options
