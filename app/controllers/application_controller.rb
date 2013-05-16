@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include UrlHelper
-  before_filter :catch_flash, :init, :set_user_time_zone, :save_referer
+  before_filter :catch_flash, :init, :set_user_time_zone, :save_referer, :mailer_set_url_options
 
   unless Rails.application.config.consider_all_requests_local
     rescue_from Exception, :with => (lambda do |exception|
@@ -49,6 +49,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def mailer_set_url_options
+    ActionMailer::Base.default_url_options[:host] = request.host_with_port
+  end
 
   def catch_flash
     if params[:notice] || params[:alert]
