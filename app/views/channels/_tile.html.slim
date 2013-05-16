@@ -1,7 +1,7 @@
 - cache channel do
   .channel-tile
 
-    a href=channel_url(channel, :subdomain => false, :host => JointInk::Application.config.action_mailer.default_url_options[:host])
+    a href=channel_url(channel, :subdomain => false, :host => 'jointink.com')
       h4.name.sans-serif= channel.name
 
       - if channel.cover_photo.present?
