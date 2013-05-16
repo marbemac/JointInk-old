@@ -1,7 +1,7 @@
 - cache channel do
   .channel-tile
 
-    a href=channel_url(channel, :subdomain => false)
+    a href=channel_path(channel)
       h4.name.sans-serif= channel.name
 
       - if channel.cover_photo.present?
