@@ -1,5 +1,6 @@
 JointInk::Application.routes.draw do
 
+  get 'health_check' => 'pages#health_check'
   get 'switch_user', :controller => 'switch_user', :action => 'set_current_user'
 
   #authenticated :user do

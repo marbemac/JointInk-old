@@ -11,4 +11,8 @@ class PagesController < ApplicationController
     end
   end
 
+  def health_check
+    render :text => 'Everything looks A-OK!', :layout => false
+  end
+
 end
