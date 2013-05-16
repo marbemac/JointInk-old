@@ -62,6 +62,25 @@
 
 .section
   .inner
+    h2.sans-serif Channels
+    h4.sans-serif Blog Together
+
+    .full.full-channels
+      .caption A channel is a place for people to express themselves around a common idea, theme, or prompt.
+      - for channel in Channel.popular(6)
+        = render 'channels/tile', :channel => channel
+
+.section.dark
+  .inner
+    h2.sans-serif Dashboard
+    h4.sans-serif Analytics Made For Publishers
+
+    .full
+      .caption Track traditional metrics like views and referrals as well as publishing specific metrics like reads
+      img src=image_path('splash-6.jpg')
+
+.section
+  .inner
     h2.sans-serif MOARR
     h4.sans-serif Because we love you.
 
@@ -80,5 +99,5 @@
         i.icon-rss
       li
         .head Social Ready
-        p Built in Facebook and Twitter sharing. Facebook open graph ready.
+        p Built in Facebook and Twitter sharing. Facebook open graph and twitter card enabled.
         i.icon-twitter

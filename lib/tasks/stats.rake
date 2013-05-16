@@ -19,7 +19,7 @@ task :generate_page_view_stats => :environment do
       end
 
       stat = Stat.create_from_page_analytics('Page View', nil, [post], referer, nil)
-      stat.created_at = (30-i).days.ago
+      stat.created_at = (30-(i+1)).days.ago
       stat.save
     end
   end
@@ -44,7 +44,7 @@ task :generate_recommend_stats => :environment do
       end
 
       stat = Stat.create_from_page_analytics('Recommend', nil, [post], referer, nil)
-      stat.created_at = (30-i).days.ago
+      stat.created_at = (30-(i+1)).days.ago
       stat.save
     end
   end
@@ -69,7 +69,7 @@ task :generate_read_stats => :environment do
       end
 
       stat = Stat.create_from_page_analytics('Read', nil, [post], referer, nil)
-      stat.created_at = (30-i).days.ago
+      stat.created_at = (30-(i+1)).days.ago
       stat.save
     end
   end

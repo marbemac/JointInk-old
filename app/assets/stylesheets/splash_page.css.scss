@@ -152,6 +152,17 @@
         }
       }
     }
+    .full-channels {
+      text-align: center;
+      .caption {
+        margin-bottom: 30px;
+        margin-bottom: 3rem;
+      }
+      .channel-tile {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+    }
     ul {
       li {
         position: relative;
