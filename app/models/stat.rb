@@ -39,8 +39,8 @@ class Stat < ActiveRecord::Base
       stat.referer = referer
 
       # if it's a jointink channel, store it as the host so we can group by channel url's in stats
-      if referer =~ /jointink.com\/[a-z\-A-Z_0-9]*$/
-        stat.referer_host = referer
+      if referer =~ /http:\/\/jointink.com\/[a-z\-A-Z_0-9]*$/
+        stat.referer_host = URI(referer).host + URI(referer).path
       else
         stat.referer_host = URI(referer).host
       end
@@ -99,7 +99,7 @@ class Stat < ActiveRecord::Base
     data = []
     total = query.inject(0) {|sum, hash| sum + hash['value'].to_i}
     query.each do |q|
-      if q['name'] =~ /jointink.com\/[a-z\-A-Z_0-9]*$/
+      if q['name'] =~ /http:\/\/jointink.com\/[a-z\-A-Z_0-9]*$/
         channel = Channel.find(q['name'].split('/').last)
         name = channel ? channel.name : 'Unknown Channel'
       elsif q['name']
