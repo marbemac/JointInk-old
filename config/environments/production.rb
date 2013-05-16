@@ -68,7 +68,7 @@ JointInk::Application.configure do
   config.active_support.deprecation = :notify
 
   config.action_mailer.default_url_options = { :host => 'jointink.com' }
-  Rails.application.routes.default_url_options = config.action_mailer.default_url_options # because this is what Resque looks for
+
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
@@ -85,3 +85,5 @@ JointInk::Application.configure do
     password: ENV["SENDGRID_PASSWORD"]
   }
 end
+
+JointInk::Application.default_url_options = JointInk::Application.config.action_mailer.default_url_options
