@@ -40,6 +40,7 @@ class Channel < ActiveRecord::Base
   scope :active, where(:status => 'active')
   scope :public, where(:privacy => 'public')
   scope :private, where(:privacy => 'invite')
+  scope :with_posts, where('channels.posts_count > 0')
 
   after_update :update_denorms
   before_destroy :disconnect

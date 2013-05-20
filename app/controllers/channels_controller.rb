@@ -2,7 +2,7 @@ class ChannelsController < ApplicationController
   before_filter :authenticate_user!, :only => [:new,:update,:edit]
 
   def index
-    @channels = Channel.active.order("posts_count DESC")
+    @channels = Channel.active.with_posts.order("posts_count DESC")
   end
 
   def new

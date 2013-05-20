@@ -62,6 +62,8 @@ class Post < ActiveRecord::Base
   end
 
   def disconnect
+    self.status = 'pending_delete'
+    save
   end
 
   def set_published_at
@@ -228,16 +230,6 @@ class Post < ActiveRecord::Base
     conditions = {:status => status}
     conditions[:shares][:channel_id] = channel.id if channel
 
-    # Sort by shares over the past X hours
-    #score_query = "
-    #SELECT COUNT(DISTINCT shares.id)
-    #FROM shares
-    #WHERE shares.post_id = posts.id AND shares.created_at >= '#{Chronic.parse('4 hours ago')}'
-    #"
-
-    # possible alternative scoring algorithm: p / (t + 2)^1.5
-    #Post.select('posts.*, ((COUNT(posts.id)) / (extract(epoch from age(posts.created_at)) / 60 / 60 / 60 + 1) ^ 1.5) as score')
-    #Post.select("posts.*, (#{score_query}) as score")
     Post.select("posts.*")
       .where(conditions)
       .group('posts.id')
