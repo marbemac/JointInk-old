@@ -2,7 +2,7 @@ module ChannelHelper
 
   def channel_photo_path(channel, options={})
     update_image_options(options)
-    target = channel.photo_image
+    target = channel.cover_photo
     if options[:format]
       target = target.split('.')[0..-2].join('')
     end

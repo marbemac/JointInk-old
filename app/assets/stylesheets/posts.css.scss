@@ -38,6 +38,18 @@ $post-full-padding-rem: 1.5rem;
       @include border-radius(2px);
       display: block;
     }
+    .no-channel-image {
+      width: 65px;
+      height: 65px;
+      background: #CCC;
+      display: block;
+      text-align: center;
+      line-height: 65px;
+      font-size: 65px;
+      i {
+        color: #AAA;
+      }
+    }
     .user {
       display: block;
       margin: 0 0 20px 0;
