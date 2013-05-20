@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :create_read, :show_redirect, :create_vote, :destroy_vote]
 
   def new
-    if params[:id]
+    if params[:id] # This is a channel id because Marc doesn't know how parameter labels work
       @channel = Channel.find(params[:id])
       authorize! :post, @channel
     else
