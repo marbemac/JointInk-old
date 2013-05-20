@@ -3,6 +3,7 @@
 #post-editor {
   height: 100%;
   position: relative;
+  padding-bottom: 55px;
 
   .post-full-content-wrapper {
     padding-bottom: 250px;
@@ -131,6 +132,8 @@ $editor-section-horizontal-padding: 17px;
 .editor-channel-remove {
   float: right;
 }
+
+
 
 #editor-channel-autocomplete {
   padding: 0 $editor-section-horizontal-padding;

@@ -106,6 +106,7 @@ module ApplicationHelper
         Stat.create_from_page_analytics('Page View', current_user, @page_entities.map{|e| e['entity']}, request.referer, request.remote_ip)
       end
     end
+    nil
   end
 
   # helper to generate channel/user cover photo URLs

@@ -7,12 +7,18 @@
           i.icon-chevron-up
     .menu
       ul
-        li.editor-style-item data-value='full-page' class=(@post.style == 'full-page' ? 'on' : '')
-          | Full Page Style
-        li.editor-style-item data-value='half-page' class=(@post.style == 'half-page' ? 'on' : '')
-          | Half Page Style
-        li.editor-style-item data-value='default' class=(@post.style == 'small-image' || @post.style == 'default' ? 'on' : '')
-          | Default Style
+        - if @post.post_type == 'text'
+          li.editor-style-item data-value='full-page' class=(@post.style == 'full-page' ? 'on' : '')
+            | Full Page Style
+          li.editor-style-item data-value='half-page' class=(@post.style == 'half-page' ? 'on' : '')
+            | Half Page Style
+          li.editor-style-item data-value='default' class=(@post.style == 'small-image' || @post.style == 'default' ? 'on' : '')
+            | Default Style
+        - else
+          li.editor-style-item data-value='cover-image' class=(@post.style == 'cover-image' ? 'on' : '')
+            | Cover Image
+          li.editor-style-item data-value='contain-image' class=(@post.style == 'contain-image' ? 'on' : '')
+            | Default Style
 
   .editor-bar-section.pull-left.with-menu.editor-channels
     .display
