@@ -681,6 +681,10 @@ body,
   text-align: center;
 }
 
+#analytics-data {
+  display: none;
+}
+
 @import "foundation_overrides";
 @import "users";
 @import "channels";
