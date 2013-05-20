@@ -19,6 +19,6 @@ jQuery ->
     $($(@).data('target')).toggle()
 
   # prevent page loads when clicking/tapping on links that are on
-  $('body').on 'click', '.on a,a.on', (e) ->
+  $('body').on 'touchend click', '.on a,a.on', (e) ->
     e.preventDefault()
     false
