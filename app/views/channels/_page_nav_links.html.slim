@@ -5,7 +5,7 @@ ul
       span.name = pluralize(@channel.posts_count, "Post")
 
   li class=(params[:action] == 'new' ? 'on' : '')
-    a href=new_post_url('text', 'article', :id => @channel.id, :subdomain => false)
+    a href=new_post_url('text', 'article', :id => @channel.id, :subdomain => false) data-skip-pjax=true
       i.icon.icon-pencil
       span.name Post to this Channel
 
