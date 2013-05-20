@@ -1,7 +1,7 @@
 ul
   li class=(params[:action] == 'show' ? 'on' : '')
     a href=user_url(:subdomain => @user.username)
-      i.icon.icon-pencil
+      i.icon.icon-file-alt
       span.name = pluralize(@user.posts_count, "Post")
   li class=(params[:action] == 'channels' ? 'on' : '')
     a href=user_channels_url(:subdomain => @user.username)

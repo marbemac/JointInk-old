@@ -1,8 +1,13 @@
 ul
   li class=(params[:action] == 'show' ? 'on' : '')
     a href=channel_url(@channel, :subdomain => false)
-      i.icon.icon-pencil
+      i.icon.icon-file-alt
       span.name = pluralize(@channel.posts_count, "Post")
+
+  li class=(params[:action] == 'new' ? 'on' : '')
+    a href=new_post_url('text', 'article', :id => @channel.id, :subdomain => false)
+      i.icon.icon-pencil
+      span.name Post to this Channel
 
   - if can? :update, @channel
     li class=(params[:action] == 'edit' ? 'on' : '')
