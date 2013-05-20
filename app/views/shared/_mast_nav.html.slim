@@ -14,10 +14,10 @@
           a href=user_url(:subdomain => current_user.username)
             i.icon.icon-user
             | My Blog
-        li.ideas
-          a href=user_ideas_url(:subdomain => false)
+        li.drafts
+          a href=user_drafts_url(:subdomain => false)
             i.icon.icon-lightbulb
-            = pluralize(current_user.ideas_count, "Idea")
+            = pluralize(current_user.drafts_count, "Draft")
         li.settings
           a href=settings_url(:subdomain => false)
             i.icon.icon-cog

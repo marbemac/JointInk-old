@@ -27,8 +27,6 @@
       .post-full-body
         == markdown(@post.content)
 
-  = render "posts/author_box"
-
 - if defined?(@editing)
   .post-full-markdown
     = render "posts/markdown_help"

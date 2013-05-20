@@ -1,13 +1,19 @@
-- if @post.status == 'idea' && !defined?(@editing)
-  .notice.idea This post is an idea. It is only viewable by you until you publish it!
+- if @post.status == 'draft' && !defined?(@editing)
+  .notice.idea This post is a draft. It is only viewable by you until you publish it!
 
   - if can? :update, @post && !defined?(@editing)
     = render "posts/admin_btns"
 
 div class="post-full #{@post.post_type} #{@post.post_subtype} #{@post.style.present? ? @post.style : 'default'} #{defined?(@editing) ? 'editing' : ''}"
-  = yield
+  .frame
+    .row
+      = yield
+      = render "posts/next_prev_buttons"
 
-  = render "posts/next_prev_buttons"
+    .sticky-footer
+      = render "posts/show_actions"
+      = render "posts/show_author_box"
+      = render "posts/show_channels"
 
 - if @post.audio.present? || defined?(@editing)
   = render 'posts/audio_player'

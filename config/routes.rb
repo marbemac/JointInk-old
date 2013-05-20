@@ -91,7 +91,7 @@ JointInk::Application.routes.draw do
 
   get 'home' => 'pages#home', :as => :home
   get 'settings' => 'users#settings', :as => :settings
-  get 'ideas' => 'users#ideas', :as => :user_ideas
+  get 'drafts' => 'users#drafts', :as => :user_drafts
   get 'recommendations' => 'users#recommendations', :as => :user_recommendations
   get 'dashboard' => 'users#dashboard', :as => :user_dashboard
 

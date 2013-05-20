@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     end
 
     authorize! :create, @post
-    @post = current_user.posts.create(:status => 'idea', :post_type => params[:type], :post_subtype => params[:subtype])
+    @post = current_user.posts.create(:status => 'draft', :post_type => params[:type], :post_subtype => params[:subtype])
     set_session_analytics("Start Post", {:postId => @post.id})
     if @channel
       @post.add_channel current_user, @channel

@@ -111,8 +111,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def ideas
-    posts.ideas
+  def drafts
+    posts.drafts
   end
 
   def posts_count
@@ -121,9 +121,9 @@ class User < ActiveRecord::Base
     end
   end
 
-  def ideas_count
-    Rails.cache.fetch "#{cache_key}/ideas_count" do
-      posts.ideas.count
+  def drafts_count
+    Rails.cache.fetch "#{cache_key}/drafts_count" do
+      posts.drafts.count
     end
   end
 

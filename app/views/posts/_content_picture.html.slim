@@ -1,4 +1,4 @@
-.post-full-picture
+.post-full-picture class=(@post.photo.present? ? 'has-image' : '')
   .image class=@post.style style="background-image: url('#{@post.photo_url}')"
 
   - if defined?(@editing)
@@ -14,5 +14,3 @@
       == !@post.title.blank? ? span_first_word(@post.title) : 'Title... (click to edit)'
 
     = render "top_meta", :post => @post
-
-= render "posts/author_box"

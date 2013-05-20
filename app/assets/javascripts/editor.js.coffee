@@ -248,7 +248,7 @@ jQuery ->
     if $(@).hasClass('editor-publish')
       data['post']['status'] = 'active'
     else
-      data['post']['status'] = 'idea'
+      data['post']['status'] = 'draft'
 
     $.ajax
       url: $('#editor-submit-url').data('url')

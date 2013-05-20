@@ -66,7 +66,7 @@
     h4.sans-serif Blog Together
 
     .full.full-channels
-      .caption A channel is a place for people to express themselves around a common idea, theme, or prompt.
+      .caption A channel is a place for people to express themselves around a common draft, theme, or prompt.
       - for channel in Channel.popular(6)
         = render 'channels/tile', :channel => channel
 
@@ -90,8 +90,8 @@
         p Let us take care of hosting and securing your content, for free. No page view limits and no ads.
         i.icon-cloud
       li
-        .head Ideas
-        p Jot down ideas before publishing them. Easily share ideas privately with friends to get feedback.
+        .head Drafts
+        p Jot down drafts before publishing them. Easily share drafts privately with friends to get feedback.
         i.icon-lightbulb
       li
         .head RSS & JSON

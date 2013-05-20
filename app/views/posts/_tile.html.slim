@@ -1,4 +1,4 @@
-div id="posts-#{post.token}" class="post-tile #{params[:controller] == 'users' && ['show','ideas'].include?(params[:action]) ? 'user-page' : ''} #{params[:controller] == 'channels' ? 'channel-page' : ''}"
+div id="posts-#{post.token}" class="post-tile #{params[:controller] == 'users' && ['show','drafts'].include?(params[:action]) ? 'user-page' : ''} #{params[:controller] == 'channels' ? 'channel-page' : ''}"
 
   - cache post do
     div class="post-tile-content #{post.post_type} #{post.post_subtype} #{post.style}"

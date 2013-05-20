@@ -85,10 +85,10 @@ jQuery ->
 
   # link entire post tile
   $('body').on 'click', '.post-tile-content', (e) ->
-    console.log 'fee'
     unless $(e.target).is('a,h3')
       target = $(@).siblings('.target-url')
       if window.location.host.toLowerCase().indexOf(target.attr('href').toLowerCase().split('/')[2]) != -1
+        console.log 'fee'
         target.click()
       else
         window.location = target.attr('href')

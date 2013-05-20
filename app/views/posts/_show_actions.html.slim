@@ -1,0 +1,4 @@
+.post-full-actions
+  = render "posts/recommend_btn"
+  - if @post.status == 'active'
+    = render "posts/share_btns"

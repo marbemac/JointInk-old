@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     redirect_to root_url(:subdomain => @user.username), :status => :moved_permanently
   end
 
-  def ideas
+  def drafts
     if request.subdomain.blank?
       @user = current_user
     else
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     end
 
     @page_title = "Your Ideas"
-    @posts = @user.posts.ideas.page(params[:page]).order('created_at DESC')
+    @posts = @user.posts.drafts.page(params[:page]).order('created_at DESC')
     add_page_entity('channel', @channel)
   end
 
@@ -147,7 +147,7 @@ class UsersController < ApplicationController
 
     @referalData = Stat.referal_data(10, 30, filter)
 
-    @posts = @user.posts.active
+    @posts = @user.posts.active.order('published_at DESC')
 
     respond_to do |format|
       format.html

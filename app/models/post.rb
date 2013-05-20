@@ -46,7 +46,7 @@ class Post < ActiveRecord::Base
   attr_accessible :title, :content, :photo, :status, :post_type, :post_subtype, :style, :attribution_link
 
   scope :active, where(:status => 'active')
-  scope :ideas, where(:status => 'idea')
+  scope :drafts, where(:status => 'draft')
 
   before_save :sanitize, :set_published_at
   after_save :touch_channels, :email_after_published

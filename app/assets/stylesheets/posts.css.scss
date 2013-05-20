@@ -649,6 +649,17 @@ $post-full-padding-rem: 1.5rem;
 .post-full {
   height: 100%;
 
+  .frame {
+    height: 100%;
+  }
+  .row {
+    height: 100%;
+    background: $body-bg-color-lighter;
+  }
+  .sticky-footer {
+    background: $body-bg-color-lighter;
+  }
+
   // POST STYLES
   &.small-image,
   &.default {
@@ -688,7 +699,19 @@ $post-full-padding-rem: 1.5rem;
 
   // POST TYPES
   &.article {
-
+    .frame {
+      display: table;
+      height: 100%;
+      width: 100%
+    }
+    .row {
+      display: table-row;
+      height: auto;
+    }
+    .sticky-footer {
+      display: table-row;
+      height: 1px;
+    }
   }
   &.picture {
     .post-full-picture {

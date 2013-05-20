@@ -1,0 +1,9 @@
+.post-full-meta-section.channels.dark
+  .inner
+    .head Channels
+    .content
+      ul
+        - for channel in @post.channels
+          li
+            a href=channel_url(channel, :subdomain => false) = channel.name
+    .add-channel +Add
