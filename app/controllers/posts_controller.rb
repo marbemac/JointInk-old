@@ -186,8 +186,6 @@ class PostsController < ApplicationController
   def remove_channel
     @post = Post.find_by_token(params[:id])
     authorize! :destroy, @post
-    @channel = Channel.find(params[:channel_id])
-    authorize! :post, @channel
 
     respond_to do |format|
       if @post.channels.include?(@channel)
