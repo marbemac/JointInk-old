@@ -9,6 +9,17 @@ module PostHelper
     end
   end
 
+  def post_pretty_url(post)
+    (post.primary_channel ? post_via_channel_url(post.primary_channel, post, :subdomain => post.user.username) : post_url(post.token, :subdomain => post.user.username))
+  end
+
+  class RenderDifferentHeaderCode < Redcarpet::Render::HTML
+    def header(text, header_level)
+      header = [header_level+2, 6].min
+      "<h#{header}>#{text}</h#{header}>"
+    end
+  end
+
   def markdown(text, render_options={})
     return '<p>Write content here..</p>'.html_safe unless text
 
@@ -18,7 +29,7 @@ module PostHelper
 
     render_options = render_options.merge(hard_wrap: false, filter_html: true, prettify: true, no_styles: true, :link_attributes => {:rel => 'nofollow'})
 
-    renderer = Redcarpet::Render::HTML.new(render_options)
+    renderer = RenderDifferentHeaderCode.new(render_options)
     options = {
         autolink: true,
         no_intra_emphasis: true,
@@ -28,10 +39,6 @@ module PostHelper
         superscript: true
     }
     Redcarpet::Markdown.new(renderer, options).render(text).html_safe
-  end
-
-  def post_pretty_url(post)
-    (post.primary_channel ? post_via_channel_url(post.primary_channel, post, :subdomain => post.user.username) : post_url(post.token, :subdomain => post.user.username))
   end
 
 end

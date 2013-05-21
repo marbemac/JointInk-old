@@ -26,6 +26,9 @@ var toMarkdown = function(string) {
             replacement: function(str, hLevel, attrs, innerHTML) {
                 var hPrefix = '';
                 for(var i = 0; i < hLevel; i++) {
+                    if (i<2) { // h3 is # and h4 is ##, so reduce # by 2
+                        continue;
+                    }
                     hPrefix += '#';
                 }
                 return '\n\n' + hPrefix + ' ' + innerHTML + '\n';

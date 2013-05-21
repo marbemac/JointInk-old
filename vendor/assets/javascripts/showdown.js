@@ -765,6 +765,7 @@ Showdown.converter = function(converter_options) {
     }
 
 
+    // MODIFIED
     var _DoHeaders = function(text) {
 
         // Setext-style headers:
@@ -775,10 +776,10 @@ Showdown.converter = function(converter_options) {
         //	--------
         //
         text = text.replace(/^(.+)[ \t]*\n=+[ \t]*\n+/gm,
-            function(wholeMatch,m1){return hashBlock('<h1 id="' + headerId(m1) + '">' + _RunSpanGamut(m1) + "</h1>");});
+            function(wholeMatch,m1){return hashBlock('<h3 id="' + headerId(m1) + '">' + _RunSpanGamut(m1) + "</h1>");});
 
         text = text.replace(/^(.+)[ \t]*\n-+[ \t]*\n+/gm,
-            function(matchFound,m1){return hashBlock('<h2 id="' + headerId(m1) + '">' + _RunSpanGamut(m1) + "</h2>");});
+            function(matchFound,m1){return hashBlock('<h4 id="' + headerId(m1) + '">' + _RunSpanGamut(m1) + "</h2>");});
 
         // atx-style headers:
         //  # Header 1
@@ -802,6 +803,10 @@ Showdown.converter = function(converter_options) {
         text = text.replace(/^(\#{1,6})[ \t]*(.+?)[ \t]*\#*\n+/gm,
             function(wholeMatch,m1,m2) {
                 var h_level = m1.length;
+
+                h_level += 2;
+                h_level = Math.min(h_level, 6);
+
                 return hashBlock("<h" + h_level + ' id="' + headerId(m2) + '">' + _RunSpanGamut(m2) + "</h" + h_level + ">");
             });
 
