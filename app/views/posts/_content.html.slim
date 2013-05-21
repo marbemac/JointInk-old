@@ -8,12 +8,14 @@ div class="post-full #{@post.post_type} #{@post.post_subtype} #{@post.style.pres
   .frame
     .row
       = yield
-      = render "posts/next_prev_buttons"
 
     .sticky-footer
       = render "posts/show_actions"
       = render "posts/show_author_box"
       = render "posts/show_channels"
+
+  - unless defined?(@editing)
+    = render "posts/next_prev_buttons"
 
 - if @post.audio.present? || defined?(@editing)
   = render 'posts/audio_player'
