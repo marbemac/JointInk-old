@@ -1,4 +1,5 @@
 li
   a.name href=channel_path(channel) target='_blank' data-skip-pjax=true = channel.name
-  a.editor-channel-remove href=post_remove_channel_path(:id => @post.token, :channel_id => channel.id) data-skip-pjax=true
-    i.icon-remove title='Remove this channel.'
+  - if can? :manage, @post
+    a.editor-channel-remove href=post_remove_channel_path(:id => @post.token, :channel_id => channel.id) data-skip-pjax=true
+      i.icon-remove title='Remove this channel.'

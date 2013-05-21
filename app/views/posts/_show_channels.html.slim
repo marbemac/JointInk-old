@@ -1,9 +1,21 @@
-.post-full-meta-section.channels.dark
-  .inner
-    .head Channels
-    .content
-      ul
-        - for channel in @post.channels
-          li
-            a href=channel_url(channel, :subdomain => false) = channel.name
-    .add-channel +Add
+- if signed_in? || @post.channels.length > 0
+  .post-full-meta-section.channels.dark
+    .inner
+      .head Channels
+
+      - if signed_in?
+        .post-add-channel
+          .display
+            span.name Add
+            span
+              i.icon-plus
+          .menu
+            .autocomplete
+            #post-channel-autocomplete
+              input type='text' placeholder='Channel name...' autocomplete='off'
+            .help
+              = 'search above or '
+              a href=new_channel_path target='_blank' data-skip-pjax=true create a new channel
+
+      .content class=(@post.channels.length == 0 ? 'hide' : '')
+        = render "posts/channels_list", :channels => @post.channels

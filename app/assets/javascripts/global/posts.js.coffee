@@ -130,5 +130,48 @@ jQuery ->
   $("#jquery_jplayer_1").livequery ->
     $('body').trigger('reset-audio-player')
 
-  # add channels to posts
-#  $('body').on 'click', '.add-channel', (e) ->
+
+  # ADDING and REMOVING channels on post show pages
+  # toggle channel autocomplete
+  updatePostChannel = ->
+    channel_count = $('.editor-channels .menu li').length
+    if channel_count
+      target = $('.editor-channels .menu li:first .name')
+      $('.post-full-channel').attr('href': target.attr('href')).text(target.text())
+    else
+      $('.post-full-channel').attr('href', '#').text('none')
+
+    if channel_count == 1
+      $('.editor-channels .display .name').text('1 Channel')
+    else
+      $('.editor-channels .display .name').text("#{channel_count} Channels")
+
+  $('#post-channel-autocomplete input').autocomplete
+    serviceUrl: '/search/channels'
+    minChars: 3
+    deferRequestBy: 50
+    noCache: false
+    appendTo: '.post-add-channel .autocomplete'
+    position: 'static'
+    onSelect: (suggestion) ->
+      $.ajax
+        url: "#{$('#post-data').data('d').url}/channels"
+        type: 'PUT'
+        dataType: 'json'
+        data: {channel_id: suggestion.data.id}
+        success: (data, textStatus, jqXHR) ->
+          $('.post-full-meta-section.channels .content').show().find('ul').append(data.channel.list_item)
+          $(window).scrollTop($(document).height());
+          $('#post-channel-autocomplete input').val('')
+
+  $('body').on 'click', '.editor-channel-remove', (e) ->
+    e.preventDefault()
+    self = $(@)
+    $.ajax
+      url: $(@).attr('href')
+      type: 'DELETE'
+      dataType: 'json'
+      success: (data, textStatus, jqXHR) ->
+        self.parents('li:first').remove()
+        updatePostChannel()
+    false
