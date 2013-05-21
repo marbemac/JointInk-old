@@ -16,7 +16,7 @@ class Ability
         can :destroy, Channel, :user_id => user.id
         can :update, User, :id => user.id
         can :destroy, User, :id => user.id
-        can :post, Channel
+        can :post, Channel, :privacy => "public"
       end
     end
   end

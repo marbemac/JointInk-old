@@ -3,16 +3,16 @@ ul
     a href=channel_url(@channel, :subdomain => false)
       i.icon.icon-file-alt
       span.name = pluralize(@channel.posts_count, "Post")
+  - if can? :post, @channel
+    li class=(params[:action] == 'new' ? 'on' : '')
+      a href=new_post_url('text', 'article', :id => @channel.id, :subdomain => false) data-skip-pjax=true
+        i.icon.icon-pencil
+        span.name New Article in Channel
 
-  li class=(params[:action] == 'new' ? 'on' : '')
-    a href=new_post_url('text', 'article', :id => @channel.id, :subdomain => false) data-skip-pjax=true
-      i.icon.icon-pencil
-      span.name New Article in Channel
-
-  li class=(params[:action] == 'new' ? 'on' : '')
-    a href=new_post_url('picture', 'caption', :id => @channel.id, :subdomain => false) data-skip-pjax=true
-      i.icon.icon-camera-retro
-      span.name New Image in Channel
+    li class=(params[:action] == 'new' ? 'on' : '')
+      a href=new_post_url('picture', 'caption', :id => @channel.id, :subdomain => false) data-skip-pjax=true
+        i.icon.icon-camera-retro
+        span.name New Image in Channel
 
   - if can? :update, @channel
     li class=(params[:action] == 'edit' ? 'on' : '')

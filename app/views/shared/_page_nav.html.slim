@@ -10,6 +10,8 @@
 
         / this is ugly.. should probably refactor this entire page nav
         - if params[:controller] == 'channels' && defined?(@channel)
+          - if @channel.privacy = 'private'
+            .private-channel Invite Only
           .created-by
             = 'created by '
             a href=user_url(:subdomain => @channel.user.username) = @channel.user.name
