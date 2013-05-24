@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :create_read, :show_redirect, :create_vote, :destroy_vote]
+  include PostHelper
 
   def new
     if params[:id] # This is a channel id because Marc doesn't know how parameter labels work
