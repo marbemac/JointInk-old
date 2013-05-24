@@ -317,7 +317,7 @@ jQuery ->
 
   # toggle text post styles
   $('.editor-style-item').click (e) ->
-    $('.post-show').removeClass('post-show--default-article post-show--large-image-article post-show--cover-page-article post-show--text-on-image post-show--cover-image post-show--contain-image').addClass("post-show--#{$(@).data('value')}")
+    $('.post-show').removeClass('post-show--default-article post-show--large-image-article post-show--cover-page-article post-show--text-on-image post-show--cover-screen post-show--fit-on-screen').addClass("post-show--#{$(@).data('value')}")
     $('.editor-style-item').removeClass('on')
     $(@).addClass('on')
     $('.editor-style .display .name').text($(@).text())

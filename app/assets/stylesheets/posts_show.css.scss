@@ -441,7 +441,7 @@
     display: none;
   }
 
-  &.post-show--default {
+  &.post-show--fit-on-screen {
     .post-show__main-image {
       .image {
         @extend .contain-image;
@@ -449,7 +449,7 @@
     }
   }
 
-  &.post-show--cover-image {
+  &.post-show--cover-screen {
     .post-show__main-image {
       .image {
         @extend .cover-image;

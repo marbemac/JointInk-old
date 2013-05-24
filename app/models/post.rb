@@ -72,7 +72,7 @@ class Post < ActiveRecord::Base
     if post_type == 'text'
       self.style = 'default-article'
     else
-      self.style = 'contain-image'
+      self.style = 'fit-on-screen'
     end
   end
 
@@ -101,6 +101,10 @@ class Post < ActiveRecord::Base
         'Cover Page Article'
       when 'large-image-article'
         'Large Image Article'
+      when 'fit-on-screen'
+        'Fit on Screen'
+      when 'cover-screen'
+        'Cover Screen'
       else
         'Default Article'
     end
