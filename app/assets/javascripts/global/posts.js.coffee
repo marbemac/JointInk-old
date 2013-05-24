@@ -1,6 +1,8 @@
 jQuery ->
 
   $(document).on 'keyup', (e) ->
+    return if $('#post-editor').length > 0
+
     keycode = if e.keyCode then e.keyCode else e.which
 
     # go back in browser history when user clicks escape on post show page

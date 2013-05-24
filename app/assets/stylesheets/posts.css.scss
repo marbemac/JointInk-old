@@ -51,8 +51,7 @@ $post-full-padding-rem: 1.5rem;
   text-align: center;
 
   input {
-    @include transform(translate(-5000px, 360px));
-    @include transform(scale(25));
+    @include transform(translate(-5000px, 360px) scale(25));
   }
   .upload-help {
     color: #FFF;

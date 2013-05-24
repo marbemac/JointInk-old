@@ -1,5 +1,5 @@
 #post-editor {
-  *[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
+  *[data-placeholder][data-div-placeholder-show]:not(:focus):before {
     content: attr(data-placeholder);
     float: left;
     margin-left: 2px;
