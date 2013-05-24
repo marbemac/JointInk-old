@@ -99,7 +99,7 @@ class Stat < ActiveRecord::Base
     data = []
     total = query.inject(0) {|sum, hash| sum + hash['value'].to_i}
     query.each do |q|
-      if q['name'] =~ /http:\/\/jointink.com\/[a-z\-A-Z_0-9]*$/
+      if q['name'] =~ /jointink.com\/[a-z\-A-Z_0-9]*$/
         channel = Channel.find(q['name'].split('/').last)
         name = channel ? channel.name : 'Unknown Channel'
       elsif q['name']
