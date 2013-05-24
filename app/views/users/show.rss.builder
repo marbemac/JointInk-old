@@ -12,7 +12,7 @@ xml.rss :version => "2.0" do
         #if post.photo.present?
         #  xml.description << (image_tag(post.photo_url) + markdown(post.content)).html_safe
         #else
-        xml.description << post.content
+        xml.description 'test'
         #end
 
         xml.pubDate post.published_at.to_s(:rfc822)
