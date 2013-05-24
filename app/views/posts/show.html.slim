@@ -1,5 +1,8 @@
 - if @post.photo.present?
   - content_for :og_tags do
-    meta property='og:image' content=@post.photo_url
+    meta property='og:image' content=post_photo_path(@post, :width => 1000, :crop => :limit)
+
+- content_for :head do
+  link rel="canonical" href=@post.permalink
 
 = render :partial => "posts/show--#{@post.post_type ? @post.post_type : 'text'}", :layout => 'posts/show', :locals => {:post => @post}
