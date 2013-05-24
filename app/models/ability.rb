@@ -10,12 +10,9 @@ class Ability
 
       if user.persisted?
         can :create, :all
-        can :update, Post, :user_id => user.id
-        can :destroy, Post, :user_id => user.id
-        can :update, Channel, :user_id => user.id
-        can :destroy, Channel, :user_id => user.id
-        can :update, User, :id => user.id
-        can :destroy, User, :id => user.id
+        can :manage, Post, :user_id => user.id
+        can :manage, Channel, :user_id => user.id
+        can :manage, User, :id => user.id
         can :post, Channel, :privacy => "public"
       end
     end
