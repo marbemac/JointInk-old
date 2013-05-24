@@ -83,16 +83,7 @@ class Channel < ActiveRecord::Base
   end
 
   def disconnect
-    # remove mentions of this channel
-    Share.where(:channel => self).each do |share|
-      share.unset_channel
-      share.save
-    end
-    # remove mentions of this topic
-    Share.where(:channel => self).each do |share|
-      share.unset_topic
-      share.save
-    end
+
   end
 
   def photo_image
