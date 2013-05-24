@@ -43,6 +43,20 @@ jQuery ->
 
   $('.post-show__title h1, .post-show__body').attr('contenteditable', true)
 
+  # capture changes to the title and clean (main purpose of this is copy paste)
+  $('.post-show__title h1').on 'paste', (e) ->
+    e.preventDefault()
+    document.execCommand('inserttext', false, prompt('Paste something.'))
+
+  $('.post-show__title h1').bind 'paste', (e) ->
+    console.log e
+    self = $(@)
+    setTimeout ->
+      console.log self
+      console.log self.html()
+#      self.text(self.text())
+    , 50
+
   # start the redactor editor
   if $('.post-show__body').length
     $('.post-show__body').redactor
@@ -156,9 +170,12 @@ jQuery ->
       progress = parseInt(data.loaded / data.total * 100, 10)
       $('.post-show__fileinput-button .loading').text(" #{progress}%")
     done: (e,data) ->
+      console.log e
+      console.log data
       result = $.parseJSON(data.result)
+      console.log result
       $('.post-show__fileinput-button .loading').text('')
-      $('.post-show__main-image').addClass('with-image')
+      $('.post-show__main-image').addClass('post-show__main-image--present')
       $('.post-show__main-image .image').css('background-image', "url(#{result.url})")
       $('.post-show__main-image img').attr('src', result.url)
 
@@ -300,7 +317,7 @@ jQuery ->
 
   # toggle text post styles
   $('.editor-style-item').click (e) ->
-    $('.post-show').removeClass('post-show--default post-show--small-image post-show--half-page post-show--full-page post-show--cover-image post-show--contain-image').addClass("post-show--#{$(@).data('value')}")
+    $('.post-show').removeClass('post-show--default-article post-show--large-image-article post-show--cover-page-article post-show--text-on-image post-show--cover-image post-show--contain-image').addClass("post-show--#{$(@).data('value')}")
     $('.editor-style-item').removeClass('on')
     $(@).addClass('on')
     $('.editor-style .display .name').text($(@).text())

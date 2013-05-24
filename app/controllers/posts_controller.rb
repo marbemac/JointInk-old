@@ -98,7 +98,7 @@ class PostsController < ApplicationController
     @post.update_photo_attributes
     @post.save
 
-    render :text => "{\"url\" : \"#{@post.photo_url}\"", :content_type => "text/plain"
+    render :text => "{\"url\" : \"#{@post.photo_url}\"}", :content_type => "text/plain"
   end
 
   def remove_photo

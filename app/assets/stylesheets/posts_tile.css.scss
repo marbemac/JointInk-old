@@ -66,8 +66,20 @@
 
 
 .post-tile__main-image {
-  width: 100%;
-  display: block;
+  position: relative;
+
+  img {
+    width: 100%;
+    display: block;
+  }
+}
+.post-tile__main-image__bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
 }
 
 
@@ -168,8 +180,11 @@
 .post-tile__when__day {}
 
 
-.post-tile--full-page,
+.post-tile--cover-page-article,
 .post-tile--picture {
+  .post-tile__body {
+    display: none;
+  }
   .post-tile__text {
     position: absolute;
     top: 0;
@@ -192,7 +207,7 @@
 
 
 .post-tile--article {
-  &.post-tile--full-page {
+  &.post-tile--cover-page-article {
     .post-tile__text {
       @include box-shadow(0 70px 70px -20px rgba(0, 0, 0, 0.65) inset);
     }
@@ -221,5 +236,38 @@
     a {
       color: #FFF;
     }
+  }
+}
+
+
+.post-tile--text-on-image {
+  .post-tile__main-image__bg {
+    background: rgba(0,0,0,0.4);
+    display: block;
+  }
+  .post-tile__title {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    bottom: 5.5rem;
+    overflow: hidden;
+    text-align: center;
+
+    h2 {
+      color: #FFF;
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+  .post-tile__title__inner {
+    display: table;
+    height: 100%;
+  }
+  .post-tile__text-meta {
+    padding: 0.5rem 1.5rem;
+  }
+  .post-tile__body {
+    display: none;
   }
 }

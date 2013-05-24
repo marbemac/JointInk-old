@@ -1,7 +1,7 @@
 jQuery ->
 
     updateDivPlaceholder = (target) ->
-      if target.textContent
+      if $.trim(target.textContent)
         target.removeAttribute 'data-div-placeholder-show'
       else
         target.setAttribute 'data-div-placeholder-show', 'true'

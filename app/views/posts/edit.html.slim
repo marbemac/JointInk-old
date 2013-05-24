@@ -2,18 +2,20 @@
   .editor-bar-section.pull-left.first.with-menu.editor-style
     .display
       .medium.clear.button.split
-        .name Default Style
+        .name = @post.post_style_pretty
         span
           i.icon-chevron-up
     .menu
       ul
         - if @post.post_type == 'text'
-          li.editor-style-item data-value='full-page' class=(@post.style == 'full-page' ? 'on' : '')
-            | Full Page Style
-          li.editor-style-item data-value='half-page' class=(@post.style == 'half-page' ? 'on' : '')
-            | Half Page Style
-          li.editor-style-item data-value='default' class=(@post.style == 'small-image' || @post.style == 'default' ? 'on' : '')
-            | Default Style
+          li.editor-style-item data-value='text-on-image' class=(@post.style == 'text-on-image' ? 'on' : '')
+            | Text on Image
+          li.editor-style-item data-value='cover-page-article' class=(@post.style == 'cover-page-article' ? 'on' : '')
+            | Cover Page Article
+          li.editor-style-item data-value='large-image-article' class=(@post.style == 'large-image-article' ? 'on' : '')
+            | Large Image Article
+          li.editor-style-item data-value='default-article' class=(@post.style == 'default-article' || @post.style == 'default' ? 'on' : '')
+            | Default Article
         - else
           li.editor-style-item data-value='cover-image' class=(@post.style == 'cover-image' ? 'on' : '')
             | Cover Image

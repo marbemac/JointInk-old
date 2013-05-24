@@ -38,7 +38,7 @@ class Post < ActiveRecord::Base
   has_and_belongs_to_many :channels
   has_many :post_votes
 
-  validates :title, :length => {:maximum => 250}
+  validates :title, :length => {:maximum => 500}
   validates :title, :presence => true, :if => lambda { |post| post.is_active? }
   validates :content, :length => {:maximum => 20000}
   validates :post_type, :presence => true, :if => lambda { |post| post.is_active? }
@@ -49,6 +49,7 @@ class Post < ActiveRecord::Base
   scope :active, where(:status => 'active')
   scope :drafts, where(:status => 'draft')
 
+  before_create :set_default_style
   before_save :sanitize, :set_published_at
   after_save :touch_channels, :email_after_published
   before_create :generate_token
@@ -67,6 +68,14 @@ class Post < ActiveRecord::Base
     save
   end
 
+  def set_default_style
+    if post_type == 'text'
+      self.style = 'default-article'
+    else
+      self.style = 'contain-image'
+    end
+  end
+
   def set_published_at
     if status == "active" && published_at.nil?
       self.published_at = Time.now
@@ -81,6 +90,19 @@ class Post < ActiveRecord::Base
           UserMailer.posted_in_channel(id, c.id).deliver
         end
       end
+    end
+  end
+
+  def post_style_pretty
+    case style
+      when 'text-on-image'
+        'Text on Image'
+      when 'cover-page-article'
+        'Cover Page Article'
+      when 'large-image-article'
+        'Large Image Article'
+      else
+        'Default Article'
     end
   end
 

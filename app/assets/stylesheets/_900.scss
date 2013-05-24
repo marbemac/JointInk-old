@@ -230,6 +230,19 @@
   display: none;
 }
 
+.post-show--text-on-image {
+  .post-show__title {
+    top: 5%;
+    left: 5%;
+    bottom: 17%;
+    right: 5%;
+  }
+
+  h1 {
+    line-height: 40px;
+    line-height: 4rem;
+  }
+}
 
 .post-tile {
   max-width: none;

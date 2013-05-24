@@ -97,6 +97,7 @@ $editor-section-horizontal-padding: 17px;
     }
     li {
       padding: 3px $editor-section-horizontal-padding;
+      white-space: nowrap;
     }
   }
   .autocomplete-suggestions {
@@ -288,5 +289,19 @@ $editor-section-horizontal-padding: 17px;
     padding: 0;
     resize: none;
     width: 100%;
+  }
+}
+
+#post-editor {
+  .post-show--text-on-image {
+    padding-bottom: 40px;
+
+    .post-show__content-wrapper {
+      display: none;
+    }
+    .post-show__title {
+      right: auto;
+      bottom: auto;
+    }
   }
 }

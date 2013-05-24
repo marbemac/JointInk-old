@@ -45,7 +45,9 @@
   }
 }
 
-.post-show--text {
+.post-show--cover-page-article,
+.post-show--large-image-article,
+.post-show--default-article {
   .post-show__actions {
     padding-left: 0;
     padding-right: 0;
