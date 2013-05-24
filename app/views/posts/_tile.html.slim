@@ -1,7 +1,11 @@
-- cache post do
-  article id="posts-#{post.token}" class="post-tile post-tile--#{post.post_type} post-tile--#{post.post_subtype} post-tile--#{post.style}"
-    .post-tile__content
+article id="posts-#{post.token}" class="post-tile post-tile--#{post.post_type} post-tile--#{post.post_subtype} post-tile--#{post.style}"
+  .post-tile__content
+    - cache post do
       = yield
-    a.js-target-url.u-hide href=post_pretty_url(post)
+      a.js-target-url.u-hide href=post_pretty_url(post)
 
+    - if can? :manage, post
+      = render 'posts/tile__actions', :post => post
+
+  - cache post do
     = render 'posts/tile__visual_meta', :post => post

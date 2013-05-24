@@ -7,6 +7,45 @@
 }
 
 
+.post-tile__actions {
+  background: $secondary-color;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-size: 1.2rem;
+
+  .icon-chevron-down,
+  .icon-cog {
+    color: #FFF;
+  }
+  .icon-cog {
+    margin-right: 5px;
+  }
+  ul {
+    display: none;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 5px 0;
+    background: $primary-color;
+  }
+  li {
+    font-weight: bold;
+    a {
+      padding: 5px 15px;
+      color: #FFF;
+    }
+  }
+  &:hover {
+    ul {
+      display: block;
+    }
+  }
+}
+
+
 .post-tile__content {
   position: relative;
   display: block;
@@ -18,6 +57,10 @@
 
   &:hover {
     border-color: $primary-color;
+
+    .post-tile__actions {
+      background: $primary-color;
+    }
   }
 }
 
