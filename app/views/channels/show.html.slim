@@ -3,6 +3,8 @@
 
 = render "shared/page_nav", channel_page_nav_options(@channel)
 
-h4#page-header.sans-serif Posts
+= render 'shared/page_header', :name => 'Posts', :feed => "#{channel_url(@channel)}/feed.atom"
 
 = render "posts/collection", :posts => @posts
+
+= auto_discovery_link_tag(:atom, "#{channel_url(@channel)}/feed.atom")

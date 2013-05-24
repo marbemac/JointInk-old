@@ -3,9 +3,11 @@
 
 = render "shared/page_nav", user_page_nav_options(@user)
 
-h4#page-header.sans-serif Posts
+= render 'shared/page_header', :name => 'Posts', :feed => "#{user_url(:subdomain => @user.username)}feed.atom"
 
 - if @posts.length > 0
   = render "posts/collection", :posts => @posts
 - else
   = render "posts/tile--empty_user_feed"
+
+= auto_discovery_link_tag(:atom, "#{user_url(:subdomain => @user.username)}feed.atom")

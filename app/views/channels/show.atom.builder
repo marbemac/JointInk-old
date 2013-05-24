@@ -9,7 +9,7 @@ atom_feed :language => 'en-US' do |feed|
 
       entry.content :type => 'html' do
         if post.photo.present?
-          entry << "<![CDATA[ #{(image_tag(post.photo_url) + markdown(post.content)).html_safe} ]]>"
+          entry << "<![CDATA[ #{(image_tag(post_photo_path(post, :width => 1000, :crop => :limit)) + markdown(post.content)).html_safe} ]]>"
         else
           entry << "<![CDATA[ #{markdown(post.content).html_safe} ]]>"
         end
