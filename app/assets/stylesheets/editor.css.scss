@@ -3,28 +3,38 @@
 #post-editor {
   height: 100%;
   position: relative;
-  padding-bottom: 55px;
   background: $body-bg-color-lighter;
 
-  .post-full-content-wrapper {
-    padding-bottom: 250px;
+  .post-show__content-wrapper {
+    padding-bottom: 200px;
+    padding-bottom: 20rem;
+  }
+  .post-show__actions,
+  .post-show__author,
+  .post-show__channels,
+  .notice {
+    display: none;
+  }
+  .post-show__fileinput-button,
+  .post-show__main-image {
+    display: block;
   }
   &.markdown-on {
-    .post-full-picture,
-    .post-full-picture-placeholder,
-    .post-full-header-wrapper,
-    .post-full-body {
+    .post-show__main-image,
+    .post-show__main-image-placeholder,
+    .post-show__header-wrapper,
+    .post-show__body {
       display: none !important;
     }
-    .post-full-content-wrapper,
-    .post-full-content {
+    .post-show__content-wrapper,
+    .post-show__content {
       padding: 0;
     }
-    .post-full-content-wrapper {
+    .post-show__content-wrapper {
       padding-top: 50px;
       padding-top: 5rem;
     }
-    .post-full-markdown {
+    .post-show__markdown {
       display: block;
     }
   }
@@ -190,7 +200,7 @@ $editor-section-horizontal-padding: 17px;
   }
 }
 
-.post-full-markdown {
+.post-show__markdown {
   display: none;
   padding: 0 0 250px 0;
   padding: 0 0 25rem 0;

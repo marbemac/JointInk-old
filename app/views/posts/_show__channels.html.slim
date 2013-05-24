@@ -1,10 +1,10 @@
 - if signed_in? || @post.channels.length > 0
-  .post-full-meta-section.channels.dark
+  .post-show__channels
     .inner
       .head Channels
 
       - if signed_in?
-        .post-add-channel
+        .post-show__add-channel
           .display
             span.name Add
             span

@@ -1,0 +1,15 @@
+.post-show__text-meta
+
+  span.post-show__text-meta__author
+    = 'By '
+    a href=user_url(:subdomain => post.user.username) = "#{post.user.name} "
+
+  - if post.primary_channel
+    span.post-show__text-meta__channel
+      = 'in '
+      a href=channel_url(post.primary_channel, :subdomain => false) = post.primary_channel.name
+  - else
+    a href='#'
+
+  - if post.status == 'active'
+    span.post-show__text-meta__when = " on #{post.published_at.strftime('%b %e')}"

@@ -1,30 +1,7 @@
-div id="posts-#{post.token}" class="post-tile #{params[:controller] == 'users' && ['show','drafts'].include?(params[:action]) ? 'user-page' : ''} #{params[:controller] == 'channels' ? 'channel-page' : ''}"
-
-  - cache post do
-    div class="post-tile-content #{post.post_type} #{post.post_subtype} #{post.style}"
+- cache post do
+  article id="posts-#{post.token}" class="post-tile post-tile--#{post.post_type} post-tile--#{post.post_subtype} post-tile--#{post.style}"
+    .post-tile__content
       = yield
+    a.js-target-url.u-hide href=post_pretty_url(post)
 
-    .right-meta
-      a.user.has-tip href=user_url(:subdomain => post.user.username) title=post.user.username data-placement='left'
-        img src=user_avatar_path(post.user, :width => 65, :height => 65, :crop => :thumb, :gravity => :face)
-
-      - if post.channels.length > 0
-        ul.channels
-          - post.channels.each do |channel|
-            li
-              a.has-tip href=channel_url(channel, :subdomain => false) title=channel.name data-placement='left'
-                - if channel.cover_photo.present?
-                  img src=channel_photo_path(channel, :width => 65, :height => 65, :crop => :thumb)
-                - else
-                  .no-channel-image
-                    i.icon-circle-blank
-
-      - if post.status == 'active'
-        .when
-          .month = post.published_at.strftime('%b')
-          .day = post.published_at.strftime('%e')
-
-    a.target-url href=post_pretty_url(post)
-
-  - if can? :update, post
-    = render "posts/tile_actions", :post => post
+    = render 'posts/tile__visual_meta', :post => post

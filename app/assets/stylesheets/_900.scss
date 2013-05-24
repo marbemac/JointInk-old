@@ -230,6 +230,7 @@
   display: none;
 }
 
+
 .post-tile {
   max-width: none;
 }
@@ -237,15 +238,6 @@
 .post-tile-blank {
   margin-left: -5px;
   margin-left: -0.5rem;
-}
-
-.post-full-meta-section {
-  &.channels {
-    .add-channel {
-      left: 120px;
-      left: 12rem;
-    }
-  }
 }
 
 .post-title {

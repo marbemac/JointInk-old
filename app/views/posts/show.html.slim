@@ -2,4 +2,4 @@
   - content_for :og_tags do
     meta property='og:image' content=@post.photo_url
 
-= render :partial => "content_#{@post.post_type}", :layout => 'content'
+= render :partial => "posts/show--#{@post.post_type ? @post.post_type : 'text'}", :layout => 'posts/show', :locals => {:post => @post}

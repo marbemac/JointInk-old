@@ -1,0 +1,5 @@
+.post-tile__body
+  - if post.photo_url
+    = truncate_html(markdown(post.content_short, {:no_links => true}), :length => 250)
+  - else
+    = truncate_html(markdown(post.content_short, {:no_links => true}), :length => 350)

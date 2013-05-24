@@ -45,28 +45,26 @@
   }
 }
 
-.post-full {
-  &.article {
-    .post-full-actions {
+.post-show--text {
+  .post-show__actions {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .post-show__author {
+    a {
+      margin: 0;
+    }
+  }
+  .post-show__channels {
+    .inner {
       padding-left: 0;
       padding-right: 0;
-    }
-    .post-full-author-section {
-      a {
-        margin: 0;
-      }
-    }
-    .post-full-meta-section {
-      .inner {
-        padding-left: 0;
-        padding-right: 0;
-      }
     }
   }
 }
 
-.post-full-header,
-.post-full-content {
+.post-show__header,
+.post-show__content {
   padding-left: 0;
   padding-right: 0;
 }
@@ -78,7 +76,7 @@
   margin-bottom: 5rem;
 }
 
-.post-tile-content {
+.post-tile__content {
   border-top: 3px solid $secondary-color;
   border-bottom: none;
 }

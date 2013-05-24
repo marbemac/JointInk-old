@@ -1,0 +1,12 @@
+.post-show__main-image class=(post.photo.present? ? 'post-show__main-image--present' : '')
+  .image style="background-image: url('#{post.photo_url}')"
+
+  - if post.post_type == 'text'
+    img src=post.photo_url
+
+  .fileinput-button.post-show__fileinput-button
+    .upload-help
+      i.icon-picture
+      = 'click to upload an image'
+      span.loading
+    input type='file' name='post[photo]' data-url=post_update_photo_url(post.token, :subdomain => false)

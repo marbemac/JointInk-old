@@ -8,4 +8,4 @@ h4#page-header.sans-serif Posts
 - if @posts.length > 0
   = render "posts/collection", :posts => @posts
 - else
-  = render "posts/tile_blank_user"
+  = render "posts/tile--empty_user_feed"

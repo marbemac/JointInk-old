@@ -4,7 +4,7 @@ jQuery ->
     keycode = if e.keyCode then e.keyCode else e.which
 
     # go back in browser history when user clicks escape on post show page
-    if keycode == 27 && $('.post-full').length > 0
+    if keycode == 27 && $('.post-show').length > 0
       history.back();
 
     if keycode == 37 && $('#prev-post').length > 0
@@ -86,7 +86,7 @@ jQuery ->
   # link entire post tile
   $('body').on 'click', '.post-tile-content', (e) ->
     unless $(e.target).is('a,h3')
-      target = $(@).siblings('.target-url')
+      target = $(@).siblings('.js-target-url')
       if window.location.host.toLowerCase().indexOf(target.attr('href').toLowerCase().split('/')[2]) != -1
         console.log 'fee'
         target.click()
@@ -133,25 +133,12 @@ jQuery ->
 
   # ADDING and REMOVING channels on post show pages
   # toggle channel autocomplete
-  updatePostChannel = ->
-    channel_count = $('.editor-channels .menu li').length
-    if channel_count
-      target = $('.editor-channels .menu li:first .name')
-      $('.post-full-channel').attr('href': target.attr('href')).text(target.text())
-    else
-      $('.post-full-channel').attr('href', '#').text('none')
-
-    if channel_count == 1
-      $('.editor-channels .display .name').text('1 Channel')
-    else
-      $('.editor-channels .display .name').text("#{channel_count} Channels")
-
   $('#post-channel-autocomplete input').autocomplete
     serviceUrl: '/search/channels'
     minChars: 3
     deferRequestBy: 50
     noCache: false
-    appendTo: '.post-add-channel .autocomplete'
+    appendTo: '.post-show__add-channel .autocomplete'
     position: 'static'
     onSelect: (suggestion) ->
       $.ajax
@@ -160,11 +147,12 @@ jQuery ->
         dataType: 'json'
         data: {channel_id: suggestion.data.id}
         success: (data, textStatus, jqXHR) ->
-          $('.post-full-meta-section.channels .content').show().find('ul').append(data.channel.list_item)
+          $('.post-show__channels .content').show().find('ul').append(data.channel.list_item)
           $(window).scrollTop($(document).height());
           $('#post-channel-autocomplete input').val('')
 
   $('body').on 'click', '.editor-channel-remove', (e) ->
+    return if $('#post-editor').length > 0
     e.preventDefault()
     self = $(@)
     $.ajax
@@ -173,5 +161,4 @@ jQuery ->
       dataType: 'json'
       success: (data, textStatus, jqXHR) ->
         self.parents('li:first').remove()
-        updatePostChannel()
     false

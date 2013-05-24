@@ -686,9 +686,14 @@ body,
 }
 
 @import "foundation_overrides";
+@import "layout";
 @import "users";
 @import "channels";
+
 @import "posts";
+@import "posts_show";
+@import "posts_tile";
+
 @import "splash_page";
 @import "jquery.autocomplete";
 @import "jquery.jplayer";

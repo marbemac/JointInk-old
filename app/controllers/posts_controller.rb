@@ -97,7 +97,7 @@ class PostsController < ApplicationController
     @post.update_photo_attributes
     @post.save
 
-    render :text => "{\"url\" : \"#{@post.photo_url}\", \"class\" : \"#{@post.photo_ratio >= 1.4 ? 'cover-image' : 'contain-image'}\"}", :content_type => "text/plain"
+    render :text => "{\"url\" : \"#{@post.photo_url}\"", :content_type => "text/plain"
   end
 
   def remove_photo
@@ -186,6 +186,7 @@ class PostsController < ApplicationController
   def remove_channel
     @post = Post.find_by_token(params[:id])
     authorize! :destroy, @post
+    @channel = Channel.find(params[:channel_id])
 
     respond_to do |format|
       if @post.channels.include?(@channel)

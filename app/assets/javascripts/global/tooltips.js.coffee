@@ -68,14 +68,14 @@ jQuery ->
 
     $tooltip.css({top: $offsetTop, right: $offsetRight, left: $offsetLeft, visibility: 'visible'})
 
-  $('body').on 'mouseenter', '.has-tip:not(.manual-tip)', (e) ->
+  $('body').on 'mouseenter', '.js-tip:not(.manual-tip)', (e) ->
     buildTooltip($(e.currentTarget))
 
-  $('body').on 'mouseleave', '.has-tip:not(.manual-tip)', (e) ->
+  $('body').on 'mouseleave', '.js-tip:not(.manual-tip)', (e) ->
     $('.tooltip').hide()
 
-  $('body').on 'tooltip-show', '.has-tip', (e) ->
+  $('body').on 'tooltip-show', '.js-tip', (e) ->
     buildTooltip($(e.currentTarget))
 
-  $('body').on 'tooltip-hide', '.has-tip', (e) ->
+  $('body').on 'tooltip-hide', '.js-tip', (e) ->
     $('.tooltip').hide()

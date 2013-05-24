@@ -1,0 +1,53 @@
+.l-absolute {
+  position: absolute;
+}
+.l-fixed {
+  position: fixed;
+}
+.l-static {
+  position: static;
+}
+.l-position-trbl {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.l-position-rbl {
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.l-position-trl {
+  top: 0;
+  right: 0;
+  left: 0;
+}
+.l-position-bl {
+  bottom: 0;
+  left: 0;
+}
+.l-position-rb {
+  bottom: 0;
+  right: 0;
+}
+.l-position-tr {
+  top: 0;
+  right: 0;
+}
+.l-position-tl {
+  top: 0;
+  left: 0;
+}
+.l-position-t {
+  top: 0;
+}
+.l-position-r {
+  right: 0;
+}
+.l-position-b {
+  bottom: 0;
+}
+.l-position-l {
+  left: 0;
+}

@@ -1,8 +1,10 @@
-.meta
-  span.author
+.post-tile__text-meta
+
+  span.post-tile__text-meta__author
     = 'By '
     a href=user_url(:subdomain => post.user.username) = "#{post.user.name} "
+
   - if post.primary_channel
-    span.channel
+    span.post-tile__text-meta__channel
       = 'in '
       a href=channel_url(post.primary_channel, :subdomain => false) = post.primary_channel.name

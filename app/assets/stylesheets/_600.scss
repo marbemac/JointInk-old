@@ -11,49 +11,45 @@
 
 // 1. ROOT 					==============================
 
-.post-full {
-  &.full-page {
-    .post-full-picture {
-      position: fixed;
-      left: 0;
-      right: 0;
-      top: 0;
-      z-index: 10;
-      height: 90%;
-    }
-    .post-full-picture-placeholder {
-      display: block;
-      height: 90%;
-    }
-    .post-full-header-wrapper {
-      position: fixed;
-      top: 15%;
-      left: 0;
-      right: 0;
-      z-index: 20;
-      background: transparent;
-    }
-    .post-full-header {
-      .post-full-header-inner {
-        padding: 3% 7% 3% 4%;
-        background: rgba(255,255,255,0.8);
-        max-width: 500px;
-        display: inline-block;
-        border: 1px solid #222;
-      }
-      .post-full-top-meta {
-        padding-bottom: 0;
-        border-bottom: none;
-        color: #666;
+.post-show--full-page {
+  .post-show__main-image {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 10;
+    height: 90%;
+  }
+  .post-show__main-image-placeholder {
+    display: block;
+    height: 90%;
+  }
+  .post-show__header-wrapper {
+    position: fixed;
+    top: 15%;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    background: transparent;
+  }
+  .post-show__header-inner {
+    padding: 3% 7% 3% 4%;
+    background: rgba(255,255,255,0.8);
+    max-width: 500px;
+    display: inline-block;
+    border: 1px solid #222;
+  }
+  .post-show__text-meta {
+    padding-bottom: 0;
+    border-bottom: none;
+    color: #666;
 
-        a {
-          color: #333;
-        }
-      }
+    a {
+      color: #333;
     }
-    .post-full-content {
-      padding-top: 3rem;
-    }
+  }
+  .post-show__content {
+    padding-top: 3rem;
   }
 }
 

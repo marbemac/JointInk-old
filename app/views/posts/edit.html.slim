@@ -21,7 +21,7 @@
             | Default Style
 
   .editor-bar-section.pull-left.with-menu.editor-channels
-    .post-add-channel
+    .post-show__add-channel
       .display
         .medium.clear.button.split
           .name = pluralize(@post.channels.count, 'Channel')
@@ -92,6 +92,6 @@
           span.loading
           input type='file' name='post[photo]' data-url=post_add_inline_photo_url(@post.token, :subdomain => Rails.env == 'production' ? 'www' : false)
 
-  = render :partial => "content_#{@post.post_type}", :layout => 'content'
+  = render :partial => "posts/show--#{@post.post_type ? @post.post_type : 'text'}", :layout => 'posts/show', :locals => {:post => @post}
 
 = render "shared/small_screen_cover"

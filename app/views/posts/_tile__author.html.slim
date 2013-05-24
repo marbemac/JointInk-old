@@ -1,0 +1,3 @@
+- cache post.user do
+  a.post-tile__visual-meta__author.js-tip href=user_url(:subdomain => post.user.username) title=post.user.username data-placement='left'
+    img src=user_avatar_path(post.user, :width => 65, :height => 65, :crop => :thumb, :gravity => :face)
