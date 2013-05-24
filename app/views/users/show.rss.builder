@@ -9,11 +9,11 @@ xml.rss :version => "2.0" do
       xml.item do
         xml.title post.title
 
-        if post.photo.present?
-          xml.description << (image_tag(post.photo_url) + markdown(post.content)).html_safe
-        else
-          xml.description << markdown(post.content).html_safe
-        end
+        #if post.photo.present?
+        #  xml.description << (image_tag(post.photo_url) + markdown(post.content)).html_safe
+        #else
+        xml.description << post.content
+        #end
 
         xml.pubDate post.published_at.to_s(:rfc822)
         xml.link post_pretty_url(post)
