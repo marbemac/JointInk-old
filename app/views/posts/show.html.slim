@@ -1,4 +1,6 @@
 - content_for :og_tags do
+  meta property='twitter:url' content=@post.permalink
+
   - if @post.photo.present?
     meta property='og:image' content=post_photo_path(@post, :width => 500, :crop => :limit)
 

@@ -47,7 +47,7 @@ class PostsController < ApplicationController
     @channel = @post.primary_channel
     @title = @post.title
     @description = @post.og_description
-    build_og_tags(@post.og_title, @post.og_type, @post.permalink, @post.og_description)
+    build_og_tags(@post.og_title, @post.og_type, post_pretty_url(@post), @post.og_description)
 
     add_page_entity('channel', @channel)
     add_page_entity('post', @post)
