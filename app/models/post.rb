@@ -42,7 +42,7 @@ class Post < ActiveRecord::Base
   validates :title, :presence => true, :if => lambda { |post| post.is_active? }
   validates :content, :length => {:maximum => 20000}
   validates :post_type, :presence => true, :if => lambda { |post| post.is_active? }
-  validates :photo, :presence => true, :if => lambda { |post| post.is_active? && post.post_type == 'picture' }
+  validates :photo, :presence => true, :if => lambda { |post| post.is_active? && (post.post_type == 'picture' || post.style == 'text-on-image') }
 
   attr_accessible :title, :content, :photo, :status, :post_type, :post_subtype, :style, :attribution_link
 

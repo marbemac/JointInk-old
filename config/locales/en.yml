@@ -23,7 +23,7 @@ en:
             channel:
               blank: "Please choose a channel."
             photo:
-              blank: "You must add a photo."
+              blank: "is required for this post type & style."
         channel:
           attributes:
             name:
