@@ -1,2 +1,2 @@
 .post-show__title
-  h1 == !post.title.blank? ? span_first_word(post.title) : 'Title... (click to edit)'
+  h1 data-placeholder='Required Title' == !post.title.blank? ? span_first_word(post.title) : '&nbsp;'

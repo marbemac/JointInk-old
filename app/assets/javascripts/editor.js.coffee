@@ -41,7 +41,7 @@ jQuery ->
   }
   `
 
-  $('.post-show__title, .post-show__body').attr('contenteditable', true)
+  $('.post-show__title h1, .post-show__body').attr('contenteditable', true)
 
   # start the redactor editor
   if $('.post-show__body').length
@@ -239,9 +239,10 @@ jQuery ->
     self = $(@)
     return if $(@).hasClass('disabled')
     $('.editor-save, .editor-publish').addClass('disabled')
+    $('.editor-bar__errors').hide().empty()
 
     data = {'post':{}}
-    data['post']['title'] = $.trim($('.post-show__title').text())
+    data['post']['title'] = $.trim($('.post-show__title h1').text())
     data['post']['content'] = $.trim($('.post-show__markdown textarea').val())
     data['post']['style'] = $('.editor-style-item.on').data('value')
 
@@ -266,6 +267,11 @@ jQuery ->
       error: (jqXHR, textStatus, errorThrown) ->
         $('.editor-save,.editor-publish').removeClass('disabled')
         data = $.parseJSON(jqXHR.responseText)
+
+        if data.errors
+          $('.editor-bar__errors').show()
+          for error in data.errors
+            $('.editor-bar__errors').append("<li>#{error}</li>")
 
   # auto save the post every x seconds
   $('.editor').livequery ->

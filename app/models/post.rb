@@ -39,6 +39,7 @@ class Post < ActiveRecord::Base
   has_many :post_votes
 
   validates :title, :length => {:maximum => 250}
+  validates :title, :presence => true, :if => lambda { |post| post.is_active? }
   validates :content, :length => {:maximum => 20000}
   validates :post_type, :presence => true, :if => lambda { |post| post.is_active? }
   validates :photo, :presence => true, :if => lambda { |post| post.is_active? && post.post_type == 'picture' }
@@ -111,7 +112,7 @@ class Post < ActiveRecord::Base
 
   def sanitize
     # remove all tags from title
-    if title_changed?
+    if !persisted? || title_changed?
       self.title = ActionView::Base.full_sanitizer.sanitize(title)
     end
     # only allow some tags on content

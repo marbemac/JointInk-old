@@ -21,7 +21,7 @@ module PostHelper
   end
 
   def markdown(text, render_options={})
-    return '<p>Write content here..</p>'.html_safe unless text
+    return '' unless text
 
     if render_options[:no_links]
       text.gsub! /\[([^\]]+)\]\(([^)]+)\)/, '\1'

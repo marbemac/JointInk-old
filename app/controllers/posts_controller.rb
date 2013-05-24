@@ -35,7 +35,7 @@ class PostsController < ApplicationController
         format.js { render :json => {:post => @post, :url => @post.primary_channel ? post_via_channel_url(@post.primary_channel, @post, :subdomain => @post.user.username) : post_url(@post, :subdomain => @post.user.username)} }
       else
         format.html { render action: "edit" }
-        format.json { render :json => {:errors => @post.errors}, status: :unprocessable_entity }
+        format.json { render :json => {:errors => @post.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end

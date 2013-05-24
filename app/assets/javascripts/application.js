@@ -30,6 +30,7 @@
 //= require jquery.cookie
 //= require jquery.autocomplete
 //= require jquery.jplayer
+//= require jquery.divPlaceholder
 //= require foundation.reveal
 //= require highcharts.js
 

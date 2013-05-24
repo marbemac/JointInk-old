@@ -49,6 +49,22 @@
   z-index: 1000;
 }
 
+.editor-bar__errors {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 40%;
+  background: $red;
+  margin: 0;
+  margin-left: -20%;
+  padding: 10px 20px;
+  padding: 1rem 2rem;
+  color: #FFF;
+  font-weight: bold;
+  display: none;
+  z-index: 10;
+}
+
 $editor-section-horizontal-padding: 17px;
 .editor-bar-section {
   position: relative;
@@ -74,6 +90,7 @@ $editor-section-horizontal-padding: 17px;
     background: #777;
     color: #FFF;
     display: none;
+    z-index: 30;
 
     ul {
       margin: 0;
