@@ -1,8 +1,9 @@
-.post-tile__visual-meta
-  = render 'posts/tile__author', :post => post
+- cache post do
+  .post-tile__visual-meta
+    = render 'posts/tile__author', :post => post
 
-  - if post.channels_count > 0
-    = render 'posts/tile__channels', :post => post
+    - if post.channels_count > 0
+      = render 'posts/tile__channels', :post => post
 
-  - if post.status == 'active'
-    = render 'posts/tile__when', :post => post
+    - if post.status == 'active'
+      = render 'posts/tile__when', :post => post

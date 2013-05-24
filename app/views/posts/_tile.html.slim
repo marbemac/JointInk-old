@@ -7,5 +7,4 @@ article id="posts-#{post.token}" class="post-tile post-tile--#{post.post_type} p
     - if can? :manage, post
       = render 'posts/tile__actions', :post => post
 
-  - cache post do
-    = render 'posts/tile__visual_meta', :post => post
+  = render 'posts/tile__visual_meta', :post => post

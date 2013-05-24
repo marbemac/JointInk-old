@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   layout 'splash_page', :only => [:home]
+  caches_action :home, if: lambda { !signed_in? }
 
   def home
     @fullscreen = true
