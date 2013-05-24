@@ -4,8 +4,7 @@ atom_feed :language => 'en-US' do |feed|
   feed.updated @posts.maximum(:updated_at)
 
   @posts.scoped.each do |post|
-    feed.entry(post) do |entry|
-      entry.link post_pretty_url(post)
+    feed.entry post, published: post.published_at do |entry|
       entry.title post.title
 
       entry.content :type => 'html' do
@@ -16,8 +15,7 @@ atom_feed :language => 'en-US' do |feed|
         end
       end
 
-      entry.published(post.published_at)
-
+      entry.link post_pretty_url(post)
       entry.author do |author|
         author.name post.user.username
       end
