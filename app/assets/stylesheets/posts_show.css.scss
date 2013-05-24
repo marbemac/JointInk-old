@@ -374,6 +374,11 @@
     height: 82%;
     background: #111111;
     max-width: none;
+
+    .image {
+      display: block;
+      height: 100%;
+    }
   }
   .post-show__text-meta {
     border-bottom: none;
@@ -405,5 +410,21 @@
   #prev-post,
   #next-post {
     display: none;
+  }
+
+  &.post-show--default {
+    .post-show__main-image {
+      .image {
+        @extend .contain-image;
+      }
+    }
+  }
+
+  &.post-show--cover-image {
+    .post-show__main-image {
+      .image {
+        @extend .cover-image;
+      }
+    }
   }
 }
