@@ -8,14 +8,15 @@ atom_feed :language => 'en-US' do |feed|
       entry.link post_pretty_url(post)
       entry.title post.title
 
-      if post.photo.present?
-        entry.content == image_tag(post.photo_url).html_safe + markdown(post.content)
-      else
-        entry.content == markdown(post.content)
+      entry.content :type => 'html' do
+        if post.photo.present?
+          entry << (image_tag(post.photo_url) + markdown(post.content)).html_safe
+        else
+          entry << markdown(post.content).html_safe
+        end
       end
 
-      entry.updated(post.updated_at.strftime("%Y-%m-%dT%H:%M:%SZ"))
-      entry.published(post.published_at.strftime("%Y-%m-%dT%H:%M:%SZ"))
+      entry.published(post.published_at)
 
       entry.author do |author|
         author.name post.user.username
