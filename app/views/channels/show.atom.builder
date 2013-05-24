@@ -1,6 +1,6 @@
 atom_feed :language => 'en-US' do |feed|
-  feed.title "#{@user.username}'s Posts on Joint Ink"
-  feed.subtitle @user.bio
+  feed.title "\"#{@channel.name}\" Channel on Joint Ink"
+  feed.subtitle @channel.description
   feed.updated @posts.maximum(:updated_at)
 
   @posts.scoped.each do |post|
@@ -12,7 +12,7 @@ atom_feed :language => 'en-US' do |feed|
       entry.published(post.published_at.strftime("%Y-%m-%dT%H:%M:%SZ"))
 
       entry.author do |author|
-        author.name @user.username
+        author.name post.user.username
       end
     end
   end

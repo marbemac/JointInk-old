@@ -94,6 +94,7 @@ JointInk::Application.routes.draw do
   get 'drafts' => 'users#drafts', :as => :user_drafts
   get 'recommendations' => 'users#recommendations', :as => :user_recommendations
   get 'dashboard' => 'users#dashboard', :as => :user_dashboard
+  get 'feed' => 'users#show', :as => :user_feed
 
   # Users
   scope 'users' do
@@ -112,9 +113,10 @@ JointInk::Application.routes.draw do
   # channels
   resources :channels
   scope ':id' do
-    get 'new-:type-:subtype-post' => 'posts#new', :as => :new_channel_post
+    get 'feed' => 'channels#show', :as => :channel_feed
     get 'edit' => 'channels#edit', :as => :edit_channel
     get 'members' => 'channels#members', :as => :channel_members
+    get 'new-:type-:subtype-post' => 'posts#new', :as => :new_channel_post
     put '' => 'channels#update'
     scope ':post_id(/:title)' do
       get '' => 'posts#show', :as => :post_via_channel

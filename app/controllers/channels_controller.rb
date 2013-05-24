@@ -64,6 +64,12 @@ class ChannelsController < ApplicationController
     @description = @channel.description
     build_og_tags(@channel.og_title, @channel.og_type, @channel.permalink, @channel.og_description)
     add_page_entity('channel', @channel)
+
+    respond_to do |format|
+      format.html
+      format.atom { render :layout => false }
+      format.rss { redirect_to channel_feed_path(:format => :atom), :status => :moved_permanently }
+    end
   end
 
   # invited members
