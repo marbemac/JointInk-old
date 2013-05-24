@@ -40,7 +40,8 @@ JointInk::Application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production
-  config.cache_store = :dalli_store
+  config.cache_store = :dalli_store, 'memcached1',
+      { :compress => true }
 
   #config.action_dispatch.rack_cache = {
   #    :metastore    => Dalli::Client.new,
