@@ -133,6 +133,7 @@ class PostsController < ApplicationController
       render :json => {:status => 'error'}, status: :unprocessable_entity
     else
       PostVote.add(@post.id, request.remote_ip, current_user ? current_user.id : nil)
+      current_user.touch if current_user
       if current_user && current_user.email_recommended
         UserMailer.recommended(@post.id, current_user.id).deliver
       end
@@ -146,6 +147,7 @@ class PostsController < ApplicationController
     stat = PostVote.retrieve(@post.id, request.remote_ip, current_user ? current_user.id : nil)
     if stat
       stat.destroy
+      current_user.touch if current_user
       render :json => {:status => 'success', :votes_count => @post.votes_count - 1}, status: 200
     else
       render :json => {:status => 'error'}, status: :unprocessable_entity

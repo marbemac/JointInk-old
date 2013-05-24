@@ -1,19 +1,20 @@
-= render 'posts/show__main_image', :post => post
+- cache post do
+  = render 'posts/show__main_image', :post => post
 
-.post-show__main-image-placeholder
+  .post-show__main-image-placeholder
 
-.post-show__header-wrapper
-  .post-show__header
-    .post-show__header-inner
-      = render 'posts/show__title', :post => post
-      = render "posts/show__text_meta", :post => post
+  .post-show__header-wrapper
+    .post-show__header
+      .post-show__header-inner
+        = render 'posts/show__title', :post => post
+        = render "posts/show__text_meta", :post => post
 
-.post-show__content-wrapper
-  .post-show__content
-    .post-show__body
-      == markdown(post.content)
+  .post-show__content-wrapper
+    .post-show__content
+      .post-show__body
+        == markdown(post.content)
 
-- if defined?(@editing)
-  .post-show__markdown
-    = render "posts/markdown_help"
-    textarea value=post.content
+  - if defined?(@editing)
+    .post-show__markdown
+      = render "posts/markdown_help"
+      textarea value=post.content

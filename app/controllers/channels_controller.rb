@@ -40,6 +40,7 @@ class ChannelsController < ApplicationController
 
     respond_to do |format|
       if @channel.update_attributes(params[:channel])
+        @channel.touch_posts
         format.html { redirect_to channel_path(@channel), notice: 'Channel was successfully updated.' }
       else
         format.html { render action: "edit" }

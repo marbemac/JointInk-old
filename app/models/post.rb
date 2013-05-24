@@ -83,6 +83,12 @@ class Post < ActiveRecord::Base
     end
   end
 
+  def channels_count
+    Rails.cache.fetch "#{cache_key}/channels_count" do
+      channels.active.count
+    end
+  end
+
   def touch_channels
     if status_changed?
       channels.each do |c|
@@ -158,6 +164,12 @@ class Post < ActiveRecord::Base
 
   def photo_image
     self['photo'] ? self['photo'].split('/').last : nil
+  end
+
+  def primary_channel?
+    Rails.cache.fetch "#{cache_key}/primary_channel?" do
+      primary_channel ? true : false
+    end
   end
 
   def primary_channel

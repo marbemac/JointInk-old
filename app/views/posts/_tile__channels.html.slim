@@ -1,9 +1,8 @@
 ul.post-tile__visual-meta__channels
   - post.channels.each do |channel|
-    - cache channel do
-      li
-        a.js-tip.post-tile__visual-meta__channels__item class=(channel.cover_photo.blank? ? 'post-tile__visual-meta__channels__item--blank' : '') href=channel_url(channel, :subdomain => false) title=channel.name data-placement='left'
-          - if channel.cover_photo.blank?
-            i.icon-circle-blank
-          - else
-            img src=channel_photo_path(channel, :width => 65, :height => 65, :crop => :thumb)
+    li
+      a.js-tip.post-tile__visual-meta__channels__item class=(channel.cover_photo.blank? ? 'post-tile__visual-meta__channels__item--blank' : '') href=channel_url(channel, :subdomain => false) title=channel.name data-placement='left'
+        - if channel.cover_photo.blank?
+          i.icon-circle-blank
+        - else
+          img src=channel_photo_path(channel, :width => 65, :height => 65, :crop => :thumb)

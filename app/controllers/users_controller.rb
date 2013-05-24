@@ -73,6 +73,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       current_user.update_attributes(params[:user])
       if current_user.save
+        current_user.touch_posts
         format.html { redirect_to :back, notice: 'Successfully updated.' }
         format.json { head :no_content }
       else

@@ -1,9 +1,10 @@
-- if post.photo_url
-  = render "posts/tile__main_image", :post => post
+- cache post do
+  - if post.photo_url
+    = render "posts/tile__main_image", :post => post
 
-.post-tile__text
-  = render "posts/tile__title", :post => post
-  = render "posts/tile__text_meta", :post => post
+  .post-tile__text
+    = render "posts/tile__title", :post => post
+    = render "posts/tile__text_meta", :post => post
 
-  - if post.style != 'full-page'
-    = render "posts/tile__body", :post => post
+    - if post.style != 'full-page'
+      = render "posts/tile__body", :post => post

@@ -78,7 +78,6 @@ class User < ActiveRecord::Base
   validate :username_change
 
   after_create :send_welcome_email, :send_personal_email
-  after_update :update_denorms
   before_destroy :disconnect
 
   def is_active?
@@ -161,7 +160,9 @@ class User < ActiveRecord::Base
   end
 
   def recommendations_count
-    recommendations.count
+    Rails.cache.fetch "#{cache_key}/recommendations_count" do
+      recommendations.count
+    end
   end
 
   ###
@@ -417,6 +418,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def touch_posts
+    posts.update_all(:updated_at => Time.now)
+  end
+
   protected
 
   # Devise hacks for stub users
@@ -426,12 +431,6 @@ class User < ActiveRecord::Base
 
   def email_required?
     is_active?
-  end
-
-  def update_denorms
-    if username_changed? || status_changed?
-      #resque.enqueue(SmCreateUser, id)
-    end
   end
 
 end

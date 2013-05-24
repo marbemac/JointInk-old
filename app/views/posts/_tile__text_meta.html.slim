@@ -5,6 +5,6 @@
     a href=user_url(:subdomain => post.user.username) = "#{post.user.name} "
 
   - if post.primary_channel
-    span.post-tile__text-meta__channel
+      span.post-tile__text-meta__channel
       = 'in '
       a href=channel_url(post.primary_channel, :subdomain => false) = post.primary_channel.name

@@ -42,7 +42,6 @@ class Channel < ActiveRecord::Base
   scope :private, where(:privacy => 'invite')
   scope :with_posts, where('channels.posts_count > 0')
 
-  after_update :update_denorms
   before_destroy :disconnect
 
   include PgSearch
@@ -146,11 +145,11 @@ class Channel < ActiveRecord::Base
     topic
   end
 
+  def touch_posts
+    posts.update_all(:updated_at => Time.now)
+  end
+
   protected
 
-  def update_denorms
-    if name_changed? || slug_changed?
-      #resque.enqueue(SmCreateTopic, id)
-    end
-  end
+
 end
