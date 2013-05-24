@@ -54,7 +54,7 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.6'
   gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier'
-  gem 'compass-rails'
+  gem 'bourbon'
   gem 'zurb-foundation', '~> 4.1.3'
   gem 'font-awesome-rails'
   gem 'jquery-fileupload-rails'

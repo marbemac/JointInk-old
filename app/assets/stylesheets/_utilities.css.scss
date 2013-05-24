@@ -223,12 +223,13 @@
   cursor: pointer;
 }
 .fileinput-button input {
-  @include opacity(0);
+  @include transform(translate(-5000px, -360px));
+  @include transform(scale(25));
+  opacity: 0;
   position: absolute;
   top: 0;
   right: 0;
   margin: 0;
-  transform: translate(-5000px, -360px) scale(25);
   direction: ltr;
   cursor: pointer;
 }

@@ -24,18 +24,11 @@
 "foundation/components/alert-boxes";
 
 // Compass compontents
-@import
-"compass/css3/border-radius",
-"compass/css3/transition",
-"compass/css3/transform",
-"compass/css3/text-shadow",
-"compass/css3/opacity",
-"compass/css3/images",
-"compass/css3/box-shadow",
-"compass/utilities/general";
+@import "bourbon";
 
 // Custom variables
 @import "variables";
+@import "mixins";
 
 @import "element_defaults";
 @import "utilities";
@@ -625,7 +618,7 @@ body,
     padding: 8px;
   }
   &.in {
-    @include opacity(0.9);
+    opacity: 0.9;
   }
   &.error {
     .tooltip-inner {

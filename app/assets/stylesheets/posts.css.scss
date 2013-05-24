@@ -51,7 +51,8 @@ $post-full-padding-rem: 1.5rem;
   text-align: center;
 
   input {
-    transform: translate(-5000px, 360px) scale(25);
+    @include transform(translate(-5000px, 360px));
+    @include transform(scale(25));
   }
   .upload-help {
     color: #FFF;
@@ -154,7 +155,7 @@ $post-full-padding-rem: 1.5rem;
 
 #prev-post,
 #next-post {
-  @include opacity(0.5);
+  opacity: 0.5;
 
   display: none;
   overflow: hidden;
@@ -180,18 +181,18 @@ $post-full-padding-rem: 1.5rem;
   }
 
   &:hover {
-    @include opacity(1);
+    opacity: 1;
   }
 }
 
 #prev-post {
-  @include rotate(-90deg);
+  @include transform(rotate(-90deg));
   left: -100px;
   left: -10rem;
 }
 
 #next-post {
-  @include rotate(90deg);
+  @include transform(rotate(90deg));
   right: -100px;
   right: -10rem;
 }
