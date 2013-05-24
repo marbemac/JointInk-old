@@ -1,8 +1,0 @@
-#post-editor {
-  *[data-placeholder][data-div-placeholder-show]:not(:focus):before {
-    content: attr(data-placeholder);
-    float: left;
-    margin-left: 2px;
-    color: #b3b3b3;
-  }
-}
