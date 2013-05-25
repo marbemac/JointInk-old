@@ -1,5 +1,7 @@
 JointInk::Application.routes.draw do
-
+  get '/mu-3398791d-9410f6e1-1a6b44de-32a18f3a' do
+    '42'
+  end
   get 'health_check' => 'pages#health_check'
   get 'switch_user', :controller => 'switch_user', :action => 'set_current_user'
 
