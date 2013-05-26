@@ -10,8 +10,6 @@ html
 
         = render 'layouts/messages'
 
-        = render "shared/mast_nav"
-
         = yield :page_nav
 
         #main-content-wrapper class=(content_for?(:page_nav) ? 'with-page-nav' : '')
@@ -25,8 +23,9 @@ html
       - if ['users','channels','posts'].include?(params[:controller]) && ['show'].include?(params[:action])
         == track_page_load(current_user, (defined?(@user) ? @user : nil))
 
-    == common_js
+    = render "shared/mast_nav"
 
+    == common_js
     = javascript_include_tag "application"
 
     script

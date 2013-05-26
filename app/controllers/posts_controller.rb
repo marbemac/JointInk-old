@@ -44,7 +44,8 @@ class PostsController < ApplicationController
     @post = Post.find_by_token(params[:post_id])
     authorize! :read, @post
 
-    if stale?(@post)
+    expires_in 10.seconds, :public => true
+    if stale? etag: @post, last_modified: @post.updated_at, public: true
       @channel = @post.primary_channel
       @title = @post.title
       @description = @post.og_description

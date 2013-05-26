@@ -1,3 +1,4 @@
-- for name,msg in flash
-  div class="alert alert-#{name == :notice ? 'success' : 'error'}"
-    = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
+- unless response.cache_control[:public]
+  - for name,msg in flash
+    div class="alert alert-#{name == :notice ? 'success' : 'error'}"
+      = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)

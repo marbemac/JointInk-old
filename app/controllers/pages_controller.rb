@@ -1,8 +1,9 @@
 class PagesController < ApplicationController
   layout 'splash_page', :only => [:home]
+  caches_action :home, if: lambda { !signed_in? }
 
   def home
-    expires_in 1.hours, :public => true
+    #expires_in 3.hours, :public => true
 
     if signed_in?
       redirect_to root_url(:subdomain => current_user.username)
