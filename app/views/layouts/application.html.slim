@@ -4,6 +4,8 @@ html
 
   body data-loggedIn='#{signed_in? ? true : false}'
 
+    == common_js
+
     #data-pjax-container data-pjax-container=true
 
       div id="page-wrapper" class="#{params[:controller]}-#{params[:action]} #{params[:controller]}-c #{@fullscreen ? 'fullscreen' : ''}"
@@ -20,17 +22,13 @@ html
           #loader Loading...
 
       #analytics-data data-d=page_analytics_data.to_json
-      - if ['users','channels','posts'].include?(params[:controller]) && ['show'].include?(params[:action])
-        == track_page_load(current_user, (defined?(@user) ? @user : nil))
 
-    = render "shared/mast_nav"
-
-    == common_js
+    script src=active_user_js_url
     = javascript_include_tag "application"
 
-    script
-      = yield :javascript
+    = yield :javascript
 
+    script
       / Hack for getting user info in the track requests.
       - if session[:analytics]
         | analytics.track('#{session[:analytics][:event]}', #{session[:analytics][:properties].to_json.html_safe})

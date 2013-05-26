@@ -11,7 +11,7 @@ JointInk::Application.configure do
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = false
+  config.action_controller.perform_caching = true
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -24,6 +24,8 @@ JointInk::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.app_url = 'http://lvh.me:3000'
 
   # ActionMailer Config
   # Setup for development - deliveries, errors raised

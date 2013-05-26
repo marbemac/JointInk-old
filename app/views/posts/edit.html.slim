@@ -36,7 +36,7 @@
         .help
           = 'search above or '
           a href=new_channel_path target='_blank' data-skip-pjax=true create a new channel
-        = render "posts/channels_list"
+        = render "posts/channels_list", :remove_link => true
 
   .editor-bar-section.pull-left.editor-audio
     .display class=(@post.audio.present? ? '' : 'fileinput-button') data-remove-url=post_remove_audio_path(:id => @post.token) data-skip-pjax=true

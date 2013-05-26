@@ -15,3 +15,5 @@ div class="post-show post-show--#{post.post_type} post-show--#{post.post_subtype
     = render 'posts/show__audio_player', :post => post
 
 #post-data  data-d={:id => post.id, :url => post_url(post.token)}.to_json status=post.status
+
+script src=active_user_post_js_url(post.token)

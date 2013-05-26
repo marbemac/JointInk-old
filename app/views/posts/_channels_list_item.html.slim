@@ -1,5 +1,5 @@
 li
   a.name href=channel_url(channel, :subdomain => false) data-skip-pjax=true = channel.name
-  - if can? :manage, @post
+  - if remove_link && can?(:manage, @post)
     a.editor-channel-remove href=post_remove_channel_path(:id => @post.token, :channel_id => channel.id) data-skip-pjax=true
       i.icon-remove title='Remove this channel.'

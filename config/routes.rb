@@ -3,9 +3,17 @@ JointInk::Application.routes.draw do
   get 'health_check' => 'pages#health_check'
   #get 'switch_user', :controller => 'switch_user', :action => 'set_current_user'
 
+  get 'active_user/posts/:id.js' => 'posts#active_user', :as => :active_user_post_js
+  get 'active_user.js' => 'users#active_user', :as => :active_user_js
+
   #authenticated :user do
     #root :to => 'pages#index'
   #end
+
+  # stats
+  scope 'stats' do
+    post '' => 'stats#create', :as => :stat
+  end
 
   # posts
   scope 'p' do
@@ -23,7 +31,6 @@ JointInk::Application.routes.draw do
       put 'update-audio' => 'posts#update_audio', :as => :post_update_audio
       put 'remove-audio' => 'posts#remove_audio', :as => :post_remove_audio
 
-      post 'read_post' => 'posts#create_read', :as => :read_post
       get '' => 'posts#show_redirect', :as => :post
 
       scope 'vote' do

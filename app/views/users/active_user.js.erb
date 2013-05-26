@@ -1,0 +1,21 @@
+$(document).ready(function() {
+
+  <% if current_user %>
+
+    analytics.identify(<%= current_user.id %>, <%= current_user.analytics_data.to_json.html_safe %>);
+
+    $('#post-collection').livequery(function() {
+
+      <% if current_user.role?('admin') %>
+        $('.post-tile .post-tile__actions').show()
+      <% else %>
+        $('.post-tile.author-<%= current_user.id %> .post-tile__actions').show()
+      <% end %>
+
+    });
+
+  <% end %>
+
+  $('body').append('<%=escape_javascript render("shared/mast_nav") %>').find('#mast-nav').fadeIn(250)
+
+});

@@ -1,6 +1,11 @@
 class PostsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show, :create_read, :show_redirect, :create_vote, :destroy_vote]
+  before_filter :authenticate_user!, :except => [:active_user, :show, :create_read, :show_redirect, :create_vote, :destroy_vote]
   include PostHelper
+
+  def active_user
+    @post = Post.find_by_token(params[:id])
+    stale? etag: [@post, (current_user ? current_user : request.remote_ip)]
+  end
 
   def new
     if params[:id] # This is a channel id because Marc doesn't know how parameter labels work
@@ -44,16 +49,16 @@ class PostsController < ApplicationController
     @post = Post.find_by_token(params[:post_id])
     authorize! :read, @post
 
-    #expires_in 10.seconds, :public => true
-    #if stale? etag: @post, last_modified: @post.updated_at, public: true
-    @channel = @post.primary_channel
-    @title = @post.title
-    @description = @post.og_description
-    build_og_tags(@post.og_title, @post.og_type, post_pretty_url(@post), @post.og_description)
+    expires_in 10.seconds, :public => true
+    if stale? etag: @post, last_modified: @post.updated_at, public: true
+      @channel = @post.primary_channel
+      @title = @post.title
+      @description = @post.og_description
+      build_og_tags(@post.og_title, @post.og_type, post_pretty_url(@post), @post.og_description)
 
-    add_page_entity('channel', @channel)
-    add_page_entity('post', @post)
-    #end
+      add_page_entity('channel', @channel)
+      add_page_entity('post', @post)
+    end
   end
 
   def show_redirect
@@ -154,18 +159,6 @@ class PostsController < ApplicationController
       render :json => {:status => 'success', :votes_count => @post.votes_count - 1}, status: 200
     else
       render :json => {:status => 'error'}, status: :unprocessable_entity
-    end
-  end
-
-  def create_read
-    @post = Post.find_by_token(params[:id])
-    user_id = current_user ? current_user.id : nil
-
-    if @post.user_id == user_id || @post.status != 'active'
-      render :json => {:status => 'success'}, status: 200
-    else
-      Stat.create_from_page_analytics('Post Read', current_user, [@post], request.referer, request.remote_ip)
-      render :json => {:status => 'success'}, status: 200
     end
   end
 

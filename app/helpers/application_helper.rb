@@ -56,10 +56,7 @@ module ApplicationHelper
   end
 
   def page_analytics_data
-    data = {
-        'pageReferer' => request.referer,
-        'pageRefererHost' => request.referer ? URI(request.referer).host : nil
-    }
+    data = {}
     @page_entities.each do |entity_data|
       data.merge!(entity_data['entity'].analytics_data(entity_data['name']))
     end
@@ -85,28 +82,7 @@ module ApplicationHelper
                  analytics.load('qlnuv1pca2');</script>"
     end
 
-    # identify the current user for segment.io
-    if current_user
-      script += "<script>
-                  $(document).ready(function () {
-                    analytics.identify(#{ current_user.id }, #{current_user.analytics_data.to_json});
-                  });
-                </script>"
-    end
-
     script
-  end
-
-  def track_page_load(viewer, page_user)
-    # do some dumb bot exclusion
-    # TODO: Make this bot filter more robust
-    unless request.env["HTTP_USER_AGENT"].match(/\(.*https?:\/\/.*\)/)
-      # don't track user page views on their own pages
-      unless viewer && page_user && viewer.id == page_user.id
-        Stat.create_from_page_analytics('Page View', viewer, @page_entities.map{|e| e['entity']}, request.referer, request.remote_ip)
-      end
-    end
-    nil
   end
 
   # helper to generate channel/user cover photo URLs

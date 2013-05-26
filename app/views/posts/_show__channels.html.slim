@@ -1,22 +1,20 @@
-- if signed_in? || @post.channels.length > 0
-  .post-show__channels
-    .inner
-      .head Channels
+.post-show__channels
+  .inner
+    .head Channels
 
-      - if signed_in?
-        .post-show__add-channel
-          .display
-            span.name Add
-            span
-              i.icon-plus
-          .menu
-            .autocomplete
-            #post-channel-autocomplete
-              input type='text' placeholder='Channel name...' autocomplete='off'
-            .help
-              = 'search above or '
-              a href=new_channel_path target='_blank' data-skip-pjax=true create a new channel
+    .post-show__add-channel
+      .display
+        span.name Add
+        span
+          i.icon-plus
+      .menu
+        .autocomplete
+        #post-channel-autocomplete
+          input type='text' placeholder='Channel name...' autocomplete='off'
+        .help
+          = 'search above or '
+          a href=new_channel_path target='_blank' data-skip-pjax=true create a new channel
 
-      .clear
-      .content class=(@post.channels.length == 0 ? 'hide' : '')
-        = render "posts/channels_list", :channels => @post.channels
+    .clear
+    .content class=(@post.channels.length == 0 ? 'hide' : '')
+      = render "posts/channels_list", :channels => @post.channels, :remove_link => false
