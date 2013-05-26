@@ -41,6 +41,7 @@ gem 'cache_digests'
 gem 'simple_form'
 gem 'sanitize'
 gem 'pg_search'
+gem 'turbo-sprockets-rails3'
 
 gem 'truncate_html'
 
