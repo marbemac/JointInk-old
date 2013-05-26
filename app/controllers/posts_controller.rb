@@ -52,6 +52,8 @@ class PostsController < ApplicationController
 
     add_page_entity('channel', @channel)
     add_page_entity('post', @post)
+
+    expires_in 3.hours, :public => true, 'max-stale' => 0
   end
 
   def show_redirect
