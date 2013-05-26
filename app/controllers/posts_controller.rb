@@ -43,17 +43,16 @@ class PostsController < ApplicationController
   def show
     @post = Post.find_by_token(params[:post_id])
     authorize! :read, @post
-    @body_class = "#{@post.post_type} #{@post.post_subtype} #{@post.style}"
-    @fullscreen = @post.post_type == 'picture' ? true : false
-    @channel = @post.primary_channel
-    @title = @post.title
-    @description = @post.og_description
-    build_og_tags(@post.og_title, @post.og_type, post_pretty_url(@post), @post.og_description)
 
-    add_page_entity('channel', @channel)
-    add_page_entity('post', @post)
+    if stale?(@post)
+      @channel = @post.primary_channel
+      @title = @post.title
+      @description = @post.og_description
+      build_og_tags(@post.og_title, @post.og_type, post_pretty_url(@post), @post.og_description)
 
-    expires_in 3.hours, :public => true, 'max-stale' => 0
+      add_page_entity('channel', @channel)
+      add_page_entity('post', @post)
+    end
   end
 
   def show_redirect
