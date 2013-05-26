@@ -44,7 +44,8 @@ class PostsController < ApplicationController
     @post = Post.find_by_token(params[:post_id])
     authorize! :read, @post
 
-    if stale?(@post)
+    #if stale?(@post)
+    if true
       @channel = @post.primary_channel
       @title = @post.title
       @description = @post.og_description
