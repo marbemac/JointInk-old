@@ -14,7 +14,7 @@
       .post-show__body data-placeholder='Write here'
         == markdown(post.content).strip
 
-  - if defined?(@editing)
-    .post-show__markdown
-      = render "posts/markdown_help"
-      textarea value=post.content placeholder='Write here'
+  /- if defined?(@editing)
+  .post-show__markdown
+    = render "posts/markdown_help"
+    textarea value=post.content placeholder='Write here'
