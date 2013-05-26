@@ -66,9 +66,14 @@ class UsersController < ApplicationController
 
   def recommendations
     @user = User.find(request.subdomain.downcase)
-    @page_title = @user.name + "'s Recommended Posts"
     @posts = @user.recommendations.page(params[:page])
-    add_page_entity('userViewed', @user)
+
+    expires_in 10.seconds, :public => true
+    maximum = @posts.maximum(:updated_at)
+    if stale? etag: [@user, maximum], last_modified: maximum, public: true
+      @page_title = @user.name + "'s Recommended Posts"
+      add_page_entity('userViewed', @user)
+    end
   end
 
   def settings

@@ -59,16 +59,21 @@ class ChannelsController < ApplicationController
     end
 
     @posts = @channel.posts.active.order('votes_count DESC, created_at DESC')
-    @title = @channel.name
-    @page_title = @channel.name
-    @description = @channel.description
-    build_og_tags(@channel.og_title, @channel.og_type, @channel.permalink, @channel.og_description)
-    add_page_entity('channel', @channel)
 
-    respond_to do |format|
-      format.html
-      format.atom { render :layout => false }
-      format.rss { redirect_to channel_feed_path(:format => :atom), :status => :moved_permanently }
+    expires_in 10.seconds, :public => true
+    maximum = @posts.maximum(:updated_at)
+    if stale? etag: [@channel, maximum], last_modified: maximum, public: true
+      @title = @channel.name
+      @page_title = @channel.name
+      @description = @channel.description
+      build_og_tags(@channel.og_title, @channel.og_type, @channel.permalink, @channel.og_description)
+      add_page_entity('channel', @channel)
+
+      respond_to do |format|
+        format.html
+        format.atom { render :layout => false }
+        format.rss { redirect_to channel_feed_path(:format => :atom), :status => :moved_permanently }
+      end
     end
   end
 
