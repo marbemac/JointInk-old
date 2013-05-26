@@ -8,6 +8,7 @@ class PagesController < ApplicationController
     if signed_in?
       redirect_to root_url(:subdomain => current_user.username)
     else
+      expires_in 3.hours, :public => true, 'max-stale' => 0
       render
     end
   end

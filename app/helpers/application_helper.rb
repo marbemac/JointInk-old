@@ -97,13 +97,13 @@ module ApplicationHelper
     script
   end
 
-  def track_page_load
+  def track_page_load(viewer, page_user)
     # do some dumb bot exclusion
     # TODO: Make this bot filter more robust
     unless request.env["HTTP_USER_AGENT"].match(/\(.*https?:\/\/.*\)/)
       # don't track user page views on their own pages
-      unless current_user && defined?(@user) && current_user == @user
-        Stat.create_from_page_analytics('Page View', current_user, @page_entities.map{|e| e['entity']}, request.referer, request.remote_ip)
+      unless viewer && page_user && viewer.id == page_user.id
+        Stat.create_from_page_analytics('Page View', viewer, @page_entities.map{|e| e['entity']}, request.referer, request.remote_ip)
       end
     end
     nil

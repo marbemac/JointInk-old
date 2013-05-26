@@ -23,7 +23,7 @@ html
 
       #analytics-data data-d=page_analytics_data.to_json
       - if ['users','channels','posts'].include?(params[:controller]) && ['show'].include?(params[:action])
-        == track_page_load
+        == track_page_load(current_user, (defined?(@user) ? @user : nil))
 
     == common_js
 
