@@ -137,10 +137,6 @@ class UsersController < ApplicationController
 
     filter = {:post_user_id => @user.id}
     @post = nil
-    if params[:post_id]
-      @post = Post.find(params[:post_id])
-      filter[:post_id] = params[:post_id]
-    end
 
     @postViews = Stat.retrieve_count('Page View', 30, 'day', filter)
     @postViewsSum = @postViews ? @postViews.inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
@@ -168,33 +164,7 @@ class UsersController < ApplicationController
 
     @referalData = Stat.referal_data(10, 30, filter)
 
-    @posts = @user.posts.active.order('published_at DESC')
-
-    respond_to do |format|
-      format.html
-      format.json do
-        render :partial => 'users/dashboard_post_analytics'
-      end
-    end
-  end
-
-  def content
-
-    if request.subdomain.blank?
-      @user = current_user
-    else
-      @user = User.find(request.subdomain.downcase)
-      authorize! :manage, @user
-    end
-
     @posts = @user.posts.order('created_at DESC')
-
-    if params[:post_id]
-      @post = Post.find(params[:post_id])
-    else
-      @post = @posts.first
-    end
-
   end
 
 end

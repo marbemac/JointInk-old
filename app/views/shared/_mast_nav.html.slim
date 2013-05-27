@@ -3,6 +3,13 @@
     .handle
       i.icon-reorder
     ul
+      li.head Explore
+      li.spacer
+      li
+        a href=channels_url(:subdomain => false)
+          i.icon.icon-circle-blank
+          | Channels
+      li.spacer
       - if signed_in?
         li.head = current_user.first_name
         li.spacer
@@ -14,10 +21,6 @@
           a href=user_url(:subdomain => current_user.username)
             i.icon.icon-user
             | My Blog
-        li.drafts
-          a href=user_drafts_url(:subdomain => false)
-            i.icon.icon-lightbulb
-            = pluralize(current_user.drafts_count, "Draft")
         li.settings
           a href=settings_url(:subdomain => false)
             i.icon.icon-cog
@@ -60,11 +63,3 @@
             i.icon.icon-user
             | Sign In
         li.spacer
-
-      li.head Explore
-      li.spacer
-      li
-        a href=channels_url(:subdomain => false)
-          i.icon.icon-circle-blank
-          | Channels
-      li.spacer

@@ -1,3 +1,5 @@
+#= require highcharts
+#= require global/dashboard
 #= require global/to-markdown
 #= require showdown
 #= require_self
@@ -41,14 +43,6 @@ jQuery ->
   }
   `
 
-  updateListTitle = ->
-    id = $('#post-data').data('d').id
-    title = $('.post-show__title h1').text()
-    $("#posts-#{id} .name").text((if $.trim(title).length > 0 then title else 'No Title'))
-
-  $('body').on 'keyup', '.post-show__title h1', (e) ->
-    updateListTitle()
-
   # toggle show/hide on the left post list
   $('body').on 'click', '.manage-sections__toggler', (e) ->
     $('.manage-sections').toggleClass('manage-sections--expanded-preview')
@@ -56,6 +50,15 @@ jQuery ->
   # make title and body content editable
   $('.post-show__title h1, .post-show__body').livequery ->
     $(@).attr('contenteditable', true)
+
+  # update the title in the left post navigator when the change it in the editor
+  updateListTitle = ->
+    id = $('#post-data').data('d').id
+    title = $('.post-show__title h1').text()
+    $("#posts-#{id} .name").text((if $.trim(title).length > 0 then title else 'No Title'))
+
+  $('body').on 'keyup', '.post-show__title h1', (e) ->
+    updateListTitle()
 
   # capture changes to the title and clean (main purpose of this is copy paste)
   $('body').on 'paste', '.post-show__title h1', (e) ->
@@ -159,7 +162,7 @@ jQuery ->
 
   # prompt them before they leave the page, unless they are publishing or discarding
   $(window).bind 'beforeunload', ->
-    unless $('.editor-publish,.editor-discard').hasClass('disabled')
+    unless $('.editor-publish,.editor-discard').hasClass('disabled') || $('#post-editor').length == 0
       return 'Are you sure you want to leave?'
 
   # handle main photo uploads
@@ -381,3 +384,30 @@ jQuery ->
         self.parents('li:first').remove()
         updatePostChannel()
     false
+
+  # change pages when clicking on the left post navigator
+  $('body').on 'click', '.manage-posts__item', (e) ->
+    $('.manage-posts__item').removeClass('on')
+    $(@).addClass('on')
+
+  $('#data-pjax-container').pjax '.manage-posts__item,.dashboard-section__post-edit', '.manage-section--preview',
+    timeout: 200000
+  .on 'pjax:start', ->
+    $('.manage-sections').addClass('manage-sections--hidden-preview')
+    $('body').oneTime 1000, 'show-loader', ->
+      $('#loader').fadeIn(200)
+  .on 'pjax:end', ->
+    $('.manage-sections').removeClass('manage-sections--hidden-preview')
+    $('body').stopTime 'show-loader'
+    $('#loader').hide()
+
+  $('body').on 'keyup', '.manage-section__filters .search', (e) ->
+    filter = $(@).val()
+    if $.trim(filter).length > 0
+      $(".manage-posts__item .name:not(:icontains('#{filter}'))").parent().hide()
+      $(".manage-posts__item .name:icontains('#{filter}')").parent().show()
+    else
+      $(".manage-posts__item").show()
+
+  jQuery.expr[':'].icontains = (a,i,m) ->
+    (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase())>=0

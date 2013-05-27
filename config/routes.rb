@@ -20,6 +20,7 @@ JointInk::Application.routes.draw do
     get 'new-:type-:subtype-post' => 'posts#new', :as => :new_post
     scope ':id' do
       get 'edit' => 'posts#edit', :as => :edit_post
+      get 'stats' => 'posts#stats', :as => :post_stats
       put '' => 'posts#update'
       delete '' => 'posts#destroy'
 
@@ -101,7 +102,6 @@ JointInk::Application.routes.draw do
   get 'drafts' => 'users#drafts', :as => :user_drafts
   get 'recommendations' => 'users#recommendations', :as => :user_recommendations
   get 'dashboard' => 'users#dashboard', :as => :user_dashboard
-  get 'content' => 'users#content', :as => :user_content
   get 'feed' => 'users#show', :as => :user_feed
 
   # Users

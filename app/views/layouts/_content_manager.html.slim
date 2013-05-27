@@ -1,0 +1,31 @@
+.manage-sections class=(defined?(expanded_preview) ? 'manage-sections--expanded-preview' : '')
+  .manage-section.manage-section--posts
+    .manage-section__filters
+      input.search placeholder='Search Posts' autocomplete='off'
+
+    ul.manage-posts
+      li
+        a.manage-posts__item data-skip-pjax=true href=user_dashboard_url(:subdomain => false) class=(@post ? '' : 'on')
+          .name All Posts
+
+      - for post in @posts
+        li
+          /a.manage-posts__item data-skip-pjax=true id="posts-#{post.id}" href=edit_post_url(post.token, :subdomain => false) class=(@post && @post.id == post.id ? 'on' : '') data-id=post.id
+          a.manage-posts__item data-skip-pjax=true id="posts-#{post.id}" href=post_stats_url(post.token, :subdomain => false) class=(@post && @post.id == post.id ? 'on' : '') data-id=post.id
+            - if post.post_type == 'text'
+              i.icon-pencil
+            - else
+              i.icon-camera
+
+            .name = post.title.blank? ? 'No Title' : post.title
+            .meta
+              .state = post.status == 'active' ? 'Published' : 'Draft'
+              .created = post.status == 'active' ? post.published_at.strftime('%b %e') : post.updated_at.strftime('%b %e')
+
+
+    .manage-sections__toggler
+      i.icon-arrow-right
+      i.icon-arrow-left
+
+  .manage-section.manage-section--preview
+    = yield

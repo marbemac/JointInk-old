@@ -23,7 +23,7 @@ html
 
       #analytics-data data-d=page_analytics_data.to_json
 
-    script src=active_user_js_url
+    script src=JointInk::Application.config.app_url+active_user_js_path
     = javascript_include_tag "application"
 
     = yield :javascript
@@ -35,6 +35,6 @@ html
         - session[:analytics] = nil
 
     / TODO: this is an ugly way of including the editor js files only on certain pages
-    - if (params[:controller] == 'users' && params[:action] == 'content') || (params[:controller] == 'posts' && ['edit','new','create','update'].include?(params[:action]))
+    - if (params[:controller] == 'users' && params[:action] == 'dashboard') || (params[:controller] == 'posts' && ['edit','new','create','update','stats'].include?(params[:action]))
       = javascript_include_tag "redactor"
       = javascript_include_tag "editor"

@@ -13,8 +13,8 @@
   }
 }
 
-.users-dashboard {
-  background: $body-bg-color;
+#dashboard {
+  height: 100%;
 }
 
 #page-wrapper.users-content {
@@ -85,95 +85,51 @@
       }
     }
   }
-  &.create {
-    ul {
-      text-align: center;
-    }
-    li {
-      display: inline-block;
-      width: 30%;
-    }
-    a {
-      margin: 0 1.11%;
-      padding: 15px 0;
-      padding: 1.5rem 0;
-      color: #BBB;
-      display: block;
-
-      &:hover {
-        background: $primary-color;
-        color: #FFF;
-      }
-    }
-    .icon {
-      display: block;
-      margin: auto;
-      font-size: 5rem;
-    }
+  .chart {
+    overflow: hidden;
   }
-  &.site-name {
-    background: $secondary-color-darker;
-    display: none;
+}
+.dashboard-section--page {
+  display: none;
+  padding: 25px 25px 5px 25px;
+  padding: 2.5rem 2.5rem 0.5rem 2.5rem;
 
-    h1 {
-      color: #FFF;
-      font-family: SpecialElite;
-      text-align: center;
-      margin-top: 19%;
+  h1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  ul {
+    @include clearfix();
+    li {
+      float: left;
+    }
+    .create {
+      color: #BBB;
       cursor: default;
     }
-  }
-  &.post-views {
-    .first {
-      margin: 0 0 15px 0;
-    }
-  }
-  &.posts {
-    overflow: auto;
-    max-height: 50%;
-
-    ul {
-      margin: 0;
-    }
-    li {
-      padding: 5px 10px 5px 30px;
-      padding: 0.5rem 1rem 0.5rem 3rem;
-      position: relative;
-      border-bottom: 1px solid #EEE;
-      line-height: 20px;
-      line-height: 2rem;
-      cursor: pointer;
+    a {
+      color: #999;
 
       i {
-        position: absolute;
-        top: 50%;
-        left: 10px;
-        font-size: 12px;
-        font-size: 1.2rem;
-        margin-top: -0.6rem;
-        color: #CCC;
+        margin: 0 5px 0 25px;
+        font-size: 10px;
+        font-size: 1rem;
+        position: relative;
+        top: -1px;
       }
+      .name {
 
-      &:hover {
-        background: $primary-color;
-        color: #FFF;
-
-        i {
-          color: #FFF;
-        }
-      }
-      &.on {
-        background: $primary-color-darker;
-        color: #FFF;
-        cursor: default;
-
-        i {
-          color: #FFF;
-        }
       }
     }
   }
 }
+.dashboard-section-views {
+  .first {
+    margin: 0 0 15px 0;
+  }
+}
+
 
 
 
@@ -232,13 +188,17 @@
 }
 
 .manage-posts__item {
-  border-bottom: 1px solid #DDD;
+  background: darken(#FAFAFA, 1%);
+  @include background-image(linear-gradient(#FAFAFA 0, darken(#FAFAFA, 1%) 100%));
+  border-top: 1px solid #FFF;
+  border-bottom: 1px solid #D9D9D9;
   position: relative;
   padding: 5px 10px 5px 35px;
   display: block;
   color: #222;
   font-size: 12px;
   font-size: 1.2rem;
+  cursor: pointer;
 
   i {
     position: absolute;
@@ -248,21 +208,57 @@
     font-size: 10px;
     font-size: 1rem;
   }
+  .meta {
+    @include clearfix();
+    font-size: 10px;
+    font-size: 1rem;
+    color: #BBB;
+
+    .state {
+      float: left;
+    }
+    .created {
+      float: right;
+    }
+  }
   &:hover {
-    background: $primary-color;
-    color: #FFF;
+    background: darken(#F1F1F1, 1%);
+    @include background-image(linear-gradient(#F1F1F1 0, darken(#F1F1F1, 1%) 100%));
+    color: #222;
   }
   &.on {
     background: $primary-color-darker;
+    @include background-image(linear-gradient($primary-color-darker 0, darken($primary-color-darker, 2%) 100%));
+    border-top-color: $primary-color-darker;
+    border-bottom-color: darken($primary-color-darker, 2%);
     cursor: default;
     color: #FFF;
+    .meta,i {
+      color: #FFF;
+    }
+  }
+}
+
+.manage-section__filters {
+  margin: 0;
+  background: #222;
+
+  .search {
+    margin: 0;
+    padding: 7px 10px 7px 34px;
+    font-size: 12px;
+    font-size: 1.2rem;
+    background: transparent;
+    border: none;
+    color: #FFF;
+    width: 100%;
   }
 }
 
 .manage-sections__toggler {
   @include transition (all 0.2s ease-in-out);
   position: absolute;
-  left: 100%;
+  right: 0;
   top: 0;
   background: #222;
   padding: 7px 9px;
@@ -307,6 +303,8 @@
   }
   .manage-sections__toggler {
     background: #EEE;
+    left: 100%;
+    right: auto;
 
     i {
       color: #B3B3B3;
@@ -317,5 +315,14 @@
     .icon-arrow-left {
       display: none;
     }
+  }
+}
+
+.manage-sections--hidden-preview {
+  .manage-section--preview {
+    margin-left: -70%;
+  }
+  .editor-bar {
+    bottom: -100%;
   }
 }

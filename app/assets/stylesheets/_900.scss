@@ -149,9 +149,8 @@
 // DASHBOARD
 .dashboard-section {
   float: left;
-  width: 32.3%;
-  margin: 0.5%;
-  height: 32%;
+  width: 40%;
+  height: 34%;
   border-bottom: none;
 
   .numbers {
@@ -161,36 +160,35 @@
   .chart {
     &.column {
       position: absolute;
-      bottom: 1px;
+      bottom: 0;
       left: 0;
       right: 0;
     }
   }
 
   &.double-h {
-    height: 64.7%;
+    height: 66%;
   }
   &.triple-h {
-    height: 98%;
+    height: 100%;
   }
   &.double-w {
-    width: 65.5%;
-  }
-  &.posts {
-    max-height: none;
-  }
-  &.create {
-    display: none;
-    ul {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding-top: 22%;
-    }
+    width: 60%;
   }
 }
+.dashboard-section--page {
+  border-bottom: 1px solid #EEE;
+  border-right: 1px solid #EEE;
+  display: block;
+}
+.dashboard-section--referrals {
+  border-bottom: 1px solid #EEE;
+}
+.dashboard-section--views {
+  border-right: 1px solid #EEE;
+}
+
+
 
 .tt-form {
   .section {
@@ -224,10 +222,6 @@
 
 .channel-tile {
   margin: 0 20px 20px 0;
-}
-
-.small-screen-cover {
-  display: none;
 }
 
 .post-show--text-on-image {

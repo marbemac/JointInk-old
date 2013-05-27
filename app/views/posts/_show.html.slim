@@ -1,19 +1,20 @@
-- if post.status == 'draft'
-  .notice.idea This post is a draft. It is only viewable by you until you publish it!
+- cache post do
+  - if post.status == 'draft'
+    .notice.idea This post is a draft. It is only viewable by you until you publish it!
 
-div class="post-show post-show--#{post.post_type} post-show--#{post.post_subtype} post-show--#{post.style.present? ? post.style : 'default'}"
-  = yield
+  div class="post-show post-show--#{post.post_type} post-show--#{post.post_subtype} post-show--#{post.style.present? ? post.style : 'default'}"
+    = yield
 
-  .post-show__footer
-    = render "posts/show__actions", :post => post
-    = render "posts/show__author_box", :post => post
-    = render "posts/show__channels", :post => post
+    .post-show__footer
+      = render "posts/show__actions", :post => post
+      = render "posts/show__author_box", :post => post
+      = render "posts/show__channels", :post => post
 
-  = render "posts/show__next_prev_buttons", :post => post
+    = render "posts/show__next_prev_buttons", :post => post
 
-  - if post.audio.present?
-    = render 'posts/show__audio_player', :post => post
+    - if post.audio.present?
+      = render 'posts/show__audio_player', :post => post
 
-#post-data  data-d={:id => post.id, :url => post_url(post.token)}.to_json status=post.status
+  = render 'posts/data_div', :post => post
 
-script src=active_user_post_js_url(post.token)
+  script src=JointInk::Application.config.app_url+active_user_post_js_path(post.token)

@@ -71,12 +71,66 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find_by_token(params[:id])
+    if request.subdomain.blank?
+      @user = current_user
+    else
+      @user = User.find(request.subdomain.downcase)
+      authorize! :manage, @user
+    end
+
+    @posts = @user.posts.order('created_at DESC')
+
+    if params[:id]
+      @post = Post.find_by_token(params[:id])
+    else
+      @post = @posts.first
+    end
+
     authorize! :update, @post
-    @body_class = "#{@post.post_type} #{@post.post_subtype} #{@post.style}"
-    @fullscreen = @post.post_type == 'picture' ? true : false
-    @editing = true
-    add_page_entity('post', @post)
+  end
+
+  def stats
+    if request.subdomain.blank?
+      @user = current_user
+    else
+      @user = User.find(request.subdomain.downcase)
+      authorize! :manage, @user
+    end
+
+    filter = {:post_user_id => @user.id}
+    @post = nil
+    if params[:id]
+      @post = Post.find_by_token(params[:id])
+      filter[:post_id] = @post.id
+    end
+
+    @postViews = Stat.retrieve_count('Page View', 30, 'day', filter)
+    @postViewsSum = @postViews ? @postViews.inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+    sevenDaySum = @postViews[22..29] ? @postViews[22..29].inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+    previousSevenDaySum = @postViews[15..21] ? @postViews[15..21].inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+    @postViews7DayIncrease =  previousSevenDaySum != 0 ? (((sevenDaySum - previousSevenDaySum).to_f / previousSevenDaySum.to_f) * 100).to_i : '--'
+
+    if @post && @post.post_type == 'picture'
+      @postReads = nil
+      @postReadsSum = '--'
+      @postReads7DayIncrease = '--'
+    else
+      @postReads = Stat.retrieve_count('Read', 30, 'day', filter)
+      @postReadsSum = @postReads ? @postReads.inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+      sevenDaySum = @postReads[22..29] ? @postReads[22..29].inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+      previousSevenDaySum = @postReads[15..21] ? @postReads[15..21].inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+      @postReads7DayIncrease =  previousSevenDaySum != 0 ? (((sevenDaySum - previousSevenDaySum).to_f / previousSevenDaySum.to_f) * 100).to_i : '--'
+    end
+
+    @postRecs = Stat.retrieve_count('Recommend', 30, 'day', filter)
+    @postRecsSum = @postRecs ? @postRecs.inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+    sevenDaySum = @postRecs[22..29] ? @postRecs[22..29].inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+    previousSevenDaySum = @postRecs[15..21] ? @postRecs[15..21].inject(0) {|sum, hash| sum + hash['value'].to_i} : 0
+    @postRecs7DayIncrease =  previousSevenDaySum != 0 ? (((sevenDaySum - previousSevenDaySum).to_f / previousSevenDaySum.to_f) * 100).to_i : '--'
+
+    @referalData = Stat.referal_data(10, 30, filter)
+
+    @posts = @user.posts.order('created_at DESC')
   end
 
   def destroy
@@ -84,7 +138,7 @@ class PostsController < ApplicationController
     authorize! :destroy, @post
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to user_url(:subdomain => current_user.username) }
+      format.html { redirect_to user_dashboard_url(:subdomain => nil) }
       format.js
     end
   end

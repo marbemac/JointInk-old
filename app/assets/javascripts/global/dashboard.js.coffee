@@ -165,20 +165,8 @@ jQuery ->
     drawRecsChart()
     drawReferralsChart()
 
-  $('.users-dashboard').livequery ->
+  $('#dashboard').livequery ->
     drawCharts()
-
-  $('body').on 'click', '.dashboard-section.posts li:not(.on)', (e) ->
-    $self = $(@)
-    $.ajax
-      url: $self.data('url')
-      type: 'GET'
-      dataType: 'JSON'
-      complete: (data, textStatus) ->
-        $('.dashboard-section.posts li').removeClass('on')
-        $self.addClass('on')
-        $('.post-analytics').html(data.responseText)
-        drawCharts()
 
 
   $.event.special.debouncedresize.threshold = 300;

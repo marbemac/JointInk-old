@@ -1,1 +1,1 @@
-= render 'posts/editor', :post => @post
+= render :partial => 'posts/editor', :layout => 'layouts/content_manager', :locals => {:post => @post, :expanded_preview => true}

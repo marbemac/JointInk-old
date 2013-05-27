@@ -11,15 +11,13 @@
 
 // 1. ROOT 					==============================
 
-.dashboard-section {
-  &.post-views {
-    .first {
-      margin: 0;
-      float: left;
-    }
-    .second {
-      float: right;
-    }
+.dashboard-section--views {
+  .first {
+    margin: 0;
+    float: left;
+  }
+  .second {
+    float: right;
   }
 }
 

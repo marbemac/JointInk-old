@@ -16,25 +16,9 @@
 }
 
 .dashboard-section {
-  width: 29%;
-  height: 31.4%;
-
   .numbers {
     padding: 25px 25px 5px 25px;
     padding: 2.5rem 2.5rem 0.5rem 2.5rem;
-  }
-
-  &.double-h {
-    height: 64.7%;
-  }
-  &.double-w {
-    width: 39%;
-  }
-  &.create {
-    display: block;
-  }
-  &.site-name {
-    display: block;
   }
 }
 

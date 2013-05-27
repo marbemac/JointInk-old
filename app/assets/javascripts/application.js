@@ -32,6 +32,5 @@
 //= require jquery.jplayer
 //= require jquery.divPlaceholder
 //= require foundation.reveal
-//= require highcharts.js
 
 //= require_tree ./global
