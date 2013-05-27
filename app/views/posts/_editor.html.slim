@@ -1,0 +1,101 @@
+.editor-bar
+  .editor-bar-section.pull-left.first.with-menu.editor-style
+    .display
+      .medium.clear.button.split
+        .name = post.post_style_pretty
+        span
+          i.icon-chevron-up
+    .menu
+      ul
+        - if post.post_type == 'text'
+          li.editor-style-item data-value='text-on-image' class=(post.style == 'text-on-image' ? 'on' : '')
+            | Text on Image
+          li.editor-style-item data-value='cover-page-article' class=(post.style == 'cover-page-article' ? 'on' : '')
+            | Cover Page Article
+          li.editor-style-item data-value='large-image-article' class=(post.style == 'large-image-article' ? 'on' : '')
+            | Large Image Article
+          li.editor-style-item data-value='default-article' class=(post.style == 'default-article' || post.style == 'default' ? 'on' : '')
+            | Default Article
+        - else
+          li.editor-style-item data-value='cover-screen' class=(post.style == 'cover-screen' ? 'on' : '')
+            | Cover Screen
+          li.editor-style-item data-value='fit-on-screen' class=(post.style == 'fit-on-screen' ? 'on' : '')
+            | Fit on Screen
+
+  .editor-bar-section.pull-left.with-menu.editor-channels
+    .post-show__add-channel
+      .display
+        .medium.clear.button.split
+          .name = pluralize(post.channels.count, 'Channel')
+          span
+            i.icon-chevron-up
+      .menu
+        .autocomplete
+        #editor-channel-autocomplete
+          input type='text' placeholder='Channel name...' autocomplete='off'
+        .help
+          = 'search above or '
+          a href=new_channel_path target='_blank' data-skip-pjax=true create a new channel
+        = render "posts/channels_list", :post => post, :remove_link => true
+
+  .editor-bar-section.pull-left.editor-audio
+    .display class=(post.audio.present? ? '' : 'fileinput-button') data-remove-url=post_remove_audio_path(:id => post.token) data-skip-pjax=true
+      .medium.clear.button.split
+        .name
+          = 'Audio: '
+          = post.audio.present? ? post.audio_name : 'None'
+        span
+          i.icon-plus.editor-audio-add
+          i.icon-remove.editor-audio-remove.hide
+
+      input type='file' data-url=post_update_audio_path(post.token) name='post[audio]'
+
+  .editor-bar-section.pull-right.editor-actions
+    .editor-actions.with-menu
+      .display
+        .status = (post.status == 'active' ? 'published' : 'draft')
+        .medium.action.button.split class=(post.status == 'active' ? 'editor-publish' : 'editor-save')
+          - if post.status == 'active'
+            i.icon-upload
+            | Re-Publish Now
+          - else
+            i.icon-save
+            | Save Draft
+          span.caret
+            i.icon-chevron-up
+            .menu
+              ul
+                li
+                  a.editor-discard.gray.medium.button href=post_path(post) data-method='delete' data-confirm='Are you sure you want to discard this post?' data-skip-pjax=true
+                    i.icon-remove
+                    | Discard
+                - if post.status == 'active'
+                  li
+                    .editor-save.gray.medium.button
+                      i.icon-save
+                      | Save as Draft
+                - else
+                  li
+                    .editor-publish.gray.medium.button
+                      i.icon-upload
+                      | Publish Now
+
+  ul.editor-bar__errors
+
+#post-editor
+
+  #editor-submit-url data-url=post_path(post.token)
+
+  #inline-image-edit.reveal-modal.medium
+    .close-reveal-modal x
+    .title Add Inline Image
+    .content
+      .options
+        .fileinput-button.medium.upload.button
+          | Upload Image
+          span.loading
+          input type='file' name='post[photo]' data-url=post_add_inline_photo_url(post.token, :subdomain => Rails.env == 'production' ? 'www' : false)
+
+  = render :partial => "posts/show--#{post.post_type ? post.post_type : 'text'}", :layout => 'posts/show', :locals => {:post => post}
+
+= render "shared/small_screen_cover"

@@ -101,6 +101,7 @@ JointInk::Application.routes.draw do
   get 'drafts' => 'users#drafts', :as => :user_drafts
   get 'recommendations' => 'users#recommendations', :as => :user_recommendations
   get 'dashboard' => 'users#dashboard', :as => :user_dashboard
+  get 'content' => 'users#content', :as => :user_content
   get 'feed' => 'users#show', :as => :user_feed
 
   # Users

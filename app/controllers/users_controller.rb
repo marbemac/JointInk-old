@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [:active_user, :index,:show,:channels,:check_username,:recommendations]
 
   def active_user
-    foo = request
     expires_in 10.seconds, :public => true
     fresh_when current_user
   end
@@ -177,6 +176,25 @@ class UsersController < ApplicationController
         render :partial => 'users/dashboard_post_analytics'
       end
     end
+  end
+
+  def content
+
+    if request.subdomain.blank?
+      @user = current_user
+    else
+      @user = User.find(request.subdomain.downcase)
+      authorize! :manage, @user
+    end
+
+    @posts = @user.posts.order('created_at DESC')
+
+    if params[:post_id]
+      @post = Post.find(params[:post_id])
+    else
+      @post = @posts.first
+    end
+
   end
 
 end

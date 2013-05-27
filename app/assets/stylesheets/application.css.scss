@@ -62,7 +62,8 @@ body,
 
   &.posts-c,
   &.pages-home,
-  &.users-dashboard {
+  &.users-dashboard,
+  &.users-content {
     height: 100%;
   }
 }

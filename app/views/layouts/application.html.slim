@@ -35,6 +35,6 @@ html
         - session[:analytics] = nil
 
     / TODO: this is an ugly way of including the editor js files only on certain pages
-    - if params[:controller] == 'posts' && ['edit','new','create','update'].include?(params[:action])
+    - if (params[:controller] == 'users' && params[:action] == 'content') || (params[:controller] == 'posts' && ['edit','new','create','update'].include?(params[:action]))
       = javascript_include_tag "redactor"
       = javascript_include_tag "editor"

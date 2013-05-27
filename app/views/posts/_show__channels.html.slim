@@ -16,5 +16,5 @@
           a href=new_channel_path target='_blank' data-skip-pjax=true create a new channel
 
     .clear
-    .content class=(@post.channels.length == 0 ? 'hide' : '')
-      = render "posts/channels_list", :channels => @post.channels, :remove_link => false
+    .content class=(post.channels.length == 0 ? 'hide' : '')
+      = render "posts/channels_list", :post => post, :channels => post.channels, :remove_link => false

@@ -6,8 +6,8 @@ jQuery ->
       else
         target.setAttribute 'data-div-placeholder-show', 'true'
 
-    for placeholder in $('*[data-placeholder]')
-      updateDivPlaceholder(placeholder)
+    $('*[data-placeholder]').livequery ->
+      updateDivPlaceholder(@)
 
     $(document).on 'change keydown keypress input', '*[data-placeholder]', ->
       updateDivPlaceholder(@)

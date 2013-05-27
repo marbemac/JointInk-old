@@ -41,25 +41,17 @@ jQuery ->
   }
   `
 
-  $('.post-show__title h1, .post-show__body').attr('contenteditable', true)
+  $('.post-show__title h1, .post-show__body').livequery ->
+    $(@).attr('contenteditable', true)
 
   # capture changes to the title and clean (main purpose of this is copy paste)
-  $('.post-show__title h1').on 'paste', (e) ->
+  $('body').on 'paste', '.post-show__title h1', (e) ->
     e.preventDefault()
     document.execCommand('inserttext', false, prompt('Paste something.'))
 
-  $('.post-show__title h1').bind 'paste', (e) ->
-    console.log e
-    self = $(@)
-    setTimeout ->
-      console.log self
-      console.log self.html()
-#      self.text(self.text())
-    , 50
-
   # start the redactor editor
-  if $('.post-show__body').length
-    $('.post-show__body').redactor
+  $('.post-show__body').livequery ->
+    $(@).redactor
       fixed: true
       fixedBox: true
       fixedTop: 40
@@ -146,7 +138,7 @@ jQuery ->
       htmlToMarkdown($('.post-show__body').html())
 
   # toggle markdown hints
-  $('.markdown-help .head span,.markdown-help .hide-hints').click (e) ->
+  $('body').on 'click', '.markdown-help .head span,.markdown-help .hide-hints', (e) ->
     $('.markdown-help .content').toggle()
 
   # prompt them before they leave the page, unless they are publishing or discarding
@@ -155,29 +147,30 @@ jQuery ->
       return 'Are you sure you want to leave?'
 
   # handle main photo uploads
-  $('.post-show__fileinput-button input').fileupload
-    dataType: "text"
-    type: 'POST'
-    paramName: 'post[photo]'
-    add: (e,data) ->
-      types = /(\.|\/)(gif|jpe?g|png)$/i
-      file = data.files[0]
-      if types.test(file.type) || types.test(file.name)
-        data.submit()
-      else
-        alert("#{file.name} is not a gif, jpeg, or png image file")
-    progress: (e, data) ->
-      progress = parseInt(data.loaded / data.total * 100, 10)
-      $('.post-show__fileinput-button .loading').text(" #{progress}%")
-    done: (e,data) ->
-      console.log e
-      console.log data
-      result = $.parseJSON(data.result)
-      console.log result
-      $('.post-show__fileinput-button .loading').text('')
-      $('.post-show__main-image').addClass('post-show__main-image--present')
-      $('.post-show__main-image .image').css('background-image', "url(#{result.url})")
-      $('.post-show__main-image img').attr('src', result.url)
+  $('.post-show__fileinput-button input').livequery ->
+    $(@).fileupload
+      dataType: "text"
+      type: 'POST'
+      paramName: 'post[photo]'
+      add: (e,data) ->
+        types = /(\.|\/)(gif|jpe?g|png)$/i
+        file = data.files[0]
+        if types.test(file.type) || types.test(file.name)
+          data.submit()
+        else
+          alert("#{file.name} is not a gif, jpeg, or png image file")
+      progress: (e, data) ->
+        progress = parseInt(data.loaded / data.total * 100, 10)
+        $('.post-show__fileinput-button .loading').text(" #{progress}%")
+      done: (e,data) ->
+        console.log e
+        console.log data
+        result = $.parseJSON(data.result)
+        console.log result
+        $('.post-show__fileinput-button .loading').text('')
+        $('.post-show__main-image').addClass('post-show__main-image--present')
+        $('.post-show__main-image .image').css('background-image', "url(#{result.url})")
+        $('.post-show__main-image img').attr('src', result.url)
 
   # handle inline photo uploads
   $('#inline-image-edit .fileinput-button input').livequery ->
@@ -252,7 +245,7 @@ jQuery ->
     false
 
   # submit the form
-  $('.editor-save, .editor-publish').on 'click', (e) ->
+  $('body').on 'click', '.editor-save, .editor-publish', (e) ->
     self = $(@)
     return if $(@).hasClass('disabled')
     $('.editor-save, .editor-publish').addClass('disabled')
@@ -291,10 +284,10 @@ jQuery ->
             $('.editor-bar__errors').append("<li>#{error}</li>")
 
   # auto save the post every x seconds
-  $('.editor').livequery ->
-    if $('#post-data').data('d').status != 'active'
-      $('body').everyTime "30s", 'save-form', ->
-        $('.editor-save').click()
+#  $('.editor').livequery ->
+#    if $('#post-data').data('d').status != 'active'
+#      $('body').everyTime "30s", 'save-form', ->
+#        $('.editor-save').click()
 
   # save on ctrl + s
   $('body,.post-show__title,.post-show__body').bind 'keydown', 'ctrl+s', (e) ->
@@ -316,7 +309,7 @@ jQuery ->
     false
 
   # toggle text post styles
-  $('.editor-style-item').click (e) ->
+  $('body').on 'click', '.editor-style-item', (e) ->
     $('.post-show').removeClass('post-show--default-article post-show--large-image-article post-show--cover-page-article post-show--text-on-image post-show--cover-screen post-show--fit-on-screen').addClass("post-show--#{$(@).data('value')}")
     $('.editor-style-item').removeClass('on')
     $(@).addClass('on')
@@ -342,23 +335,24 @@ jQuery ->
     else
       $('.editor-channels .display .name').text("#{channel_count} Channels")
 
-  $('#editor-channel-autocomplete input').autocomplete
-    serviceUrl: '/search/channels'
-    minChars: 3
-    deferRequestBy: 50
-    noCache: false
-    appendTo: '.editor-channels .autocomplete'
-    position: 'static'
-    onSelect: (suggestion) ->
-      $.ajax
-        url: "#{$('#post-data').data('d').url}/channels"
-        type: 'PUT'
-        dataType: 'json'
-        data: {channel_id: suggestion.data.id}
-        success: (data, textStatus, jqXHR) ->
-          $('.editor-channels .menu ul').append(data.channel.list_item)
-          $('#editor-channel-autocomplete input').val('')
-          updatePostChannel()
+  $('#editor-channel-autocomplete input').livequery ->
+    $(@).autocomplete
+      serviceUrl: '/search/channels'
+      minChars: 3
+      deferRequestBy: 50
+      noCache: false
+      appendTo: '.editor-channels .autocomplete'
+      position: 'static'
+      onSelect: (suggestion) ->
+        $.ajax
+          url: "#{$('#post-data').data('d').url}/channels"
+          type: 'PUT'
+          dataType: 'json'
+          data: {channel_id: suggestion.data.id}
+          success: (data, textStatus, jqXHR) ->
+            $('.editor-channels .menu ul').append(data.channel.list_item)
+            $('#editor-channel-autocomplete input').val('')
+            updatePostChannel()
 
   $('body').on 'click', '.editor-channel-remove', (e) ->
     e.preventDefault()

@@ -20,7 +20,7 @@ jQuery ->
   $('.posts-c.posts-show, .users-c.users-show, .channels-c.channels-show').livequery ->
     sendStatRequest('Page View')
 
-  $('.post-show--text').livequery ->
+  $('.posts-c.posts-show .post-show--text').livequery ->
     return if $('#post-editor').length > 0
 
     clearedTime = false
