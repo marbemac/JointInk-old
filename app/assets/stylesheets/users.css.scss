@@ -7,12 +7,18 @@
 
 .users-dashboard,
 .users-content {
-  background: $body-bg-color;
-
   #main-content-wrapper,
   #main-content {
     height: 100%;
   }
+}
+
+.users-dashboard {
+  background: $body-bg-color;
+}
+
+#page-wrapper.users-content {
+  background: #FFF;
 }
 
 .dashboard-section {
@@ -175,9 +181,11 @@
 
 
 
+.manage-sections {
+  height: 100%;
 
-.users-content {
   .editor-bar {
+    @include transition (all 0.2s ease-in-out);
     position: fixed;
     left: 30%;
   }
@@ -197,13 +205,16 @@
   }
 }
 
-.manage-section{
+.manage-section {
+  @include transition (all 0.2s ease-in-out);
   background: #FFF;
   height: 100%;
   float: left;
+  position: relative;
 }
 
 .manage-section--posts {
+  @include transition (all 0.2s ease-in-out);
   width: 30%;
   margin: 0;
   background: #F9F9F9;
@@ -211,28 +222,24 @@
   left: 0;
   bottom: 0;
   top: 0;
-  overflow: auto;
-  border-right: 2px solid #222;
+  border-right: 4px solid #222;
+  z-index: 10;
+}
 
-  a {
-    border-bottom: 1px solid #DDD;
-    position: relative;
-    padding: 5px 10px 5px 35px;
-    display: block;
-    color: #222;
-    font-size: 12px;
-    font-size: 1.2rem;
-    
-    &:hover {
-      background: $primary-color;
-      color: #FFF;
-    }
-    &.on {
-      background: $primary-color-darker;
-      cursor: default;
-      color: #FFF;
-    }
-  }
+.manage-posts {
+  overflow: auto;
+  height: 100%;
+}
+
+.manage-posts__item {
+  border-bottom: 1px solid #DDD;
+  position: relative;
+  padding: 5px 10px 5px 35px;
+  display: block;
+  color: #222;
+  font-size: 12px;
+  font-size: 1.2rem;
+
   i {
     position: absolute;
     top: 12px;
@@ -241,8 +248,32 @@
     font-size: 10px;
     font-size: 1rem;
   }
-  .name {
+  &:hover {
+    background: $primary-color;
+    color: #FFF;
+  }
+  &.on {
+    background: $primary-color-darker;
+    cursor: default;
+    color: #FFF;
+  }
+}
 
+.manage-sections__toggler {
+  @include transition (all 0.2s ease-in-out);
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background: #222;
+  padding: 7px 9px;
+  cursor: pointer;
+
+  i {
+    display: block;
+    color: #FFF;
+  }
+  .icon-arrow-right {
+    display: none;
   }
 }
 
@@ -254,5 +285,37 @@
   .notice,
   .post-show__footer {
     display: none;
+  }
+}
+
+.manage-sections {
+
+}
+
+.manage-sections--expanded-preview {
+  .editor-bar {
+    left: 0;
+  }
+  .manage-section--posts {
+    width: 0;
+    border-color: #EEE;
+  }
+  .manage-section--preview {
+    width: 100%;
+    padding-left: 4px;
+    margin-left: 0;
+  }
+  .manage-sections__toggler {
+    background: #EEE;
+
+    i {
+      color: #B3B3B3;
+    }
+    .icon-arrow-right {
+      display: block;
+    }
+    .icon-arrow-left {
+      display: none;
+    }
   }
 }

@@ -47,7 +47,7 @@ $post-full-padding-rem: 1.5rem;
   bottom: 0;
   right: 0;
   left: 0;
-  background: $tertiary-color;
+  background: #e3e7e8;
   text-align: center;
 
   input {
@@ -55,7 +55,7 @@ $post-full-padding-rem: 1.5rem;
   }
   .upload-help {
     color: #FFF;
-    color: darken($tertiary-color, 25%);
+    color: darken(#e3e7e8, 35%);
     font-size: 16px;
     font-size: 1.6rem;
     font-weight: bold;
@@ -71,7 +71,7 @@ $post-full-padding-rem: 1.5rem;
     }
   }
   &:hover {
-    background: darken($tertiary-color, 5%);
+    background: darken(#e3e7e8, 5%);
   }
 }
 

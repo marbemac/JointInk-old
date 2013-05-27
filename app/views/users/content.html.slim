@@ -1,17 +1,22 @@
-.manage-section.manage-section--posts
-  - if @posts.empty?
-    .empty This is an analytics dashboard for your posts. Create something and watch it grow!
-  ul
-    - for post in @posts
-      li
-        a href=user_content_path(:post_id => post.id) class=(@post && @post.id == post.id ? 'on' : '')
-          - if post.post_type == 'text'
-            i.icon-pencil
-          - else
-            i.icon-camera
+.manage-sections
+  .manage-section.manage-section--posts
+    - if @posts.empty?
+      .empty This is an analytics dashboard for your posts. Create something and watch it grow!
+    ul.manage-posts
+      - for post in @posts
+        li
+          a.manage-posts__item href=user_content_path(:post_id => post.id) class=(@post && @post.id == post.id ? 'on' : '')
+            - if post.post_type == 'text'
+              i.icon-pencil
+            - else
+              i.icon-camera
 
-          .name = post.title.blank? ? 'No Title' : post.title
+            .name = post.title.blank? ? 'No Title' : post.title
 
-.manage-section.manage-section--preview
-  - if @post
-    = render 'posts/editor', :post => @post
+    .manage-sections__toggler
+      i.icon-arrow-right
+      i.icon-arrow-left
+
+  .manage-section.manage-section--preview
+    - if @post
+      = render 'posts/editor', :post => @post

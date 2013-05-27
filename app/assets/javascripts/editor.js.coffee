@@ -41,6 +41,10 @@ jQuery ->
   }
   `
 
+  #
+  $('body').on 'click', '.manage-sections__toggler', (e) ->
+    $('.manage-sections').toggleClass('manage-sections--expanded-preview')
+
   $('.post-show__title h1, .post-show__body').livequery ->
     $(@).attr('contenteditable', true)
 
