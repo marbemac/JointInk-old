@@ -17,7 +17,7 @@
             - else
               i.icon-camera
 
-            .name = post.title.blank? ? 'No Title' : post.title
+            .name = post.title.blank? ? 'Untitled' : post.title
             .meta
               .state = post.status == 'active' ? 'Published' : 'Draft'
               .created = post.status == 'active' ? post.published_at.strftime('%b %e') : post.updated_at.strftime('%b %e')

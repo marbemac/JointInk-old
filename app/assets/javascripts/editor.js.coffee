@@ -55,7 +55,7 @@ jQuery ->
   updateListTitle = ->
     id = $('#post-data').data('d').id
     title = $('.post-show__title h1').text()
-    $("#posts-#{id} .name").text((if $.trim(title).length > 0 then title else 'No Title'))
+    $("#posts-#{id} .name").text((if $.trim(title).length > 0 then title else 'Untitled'))
 
   $('body').on 'keyup', '.post-show__title h1', (e) ->
     updateListTitle()
@@ -397,6 +397,7 @@ jQuery ->
     $('body').oneTime 1000, 'show-loader', ->
       $('#loader').fadeIn(200)
   .on 'pjax:end', ->
+    analytics.pageview()  # Analytics.js
     $('.manage-sections').removeClass('manage-sections--hidden-preview')
     $('body').stopTime 'show-loader'
     $('#loader').hide()
