@@ -2,7 +2,7 @@
   .dashboard-section.double-w.dashboard-section--page
     - if @post
       h1.sans-serif = @post.title
-      p = truncate(@post.content_plain, :length => 200, :omission => '...')
+      p = truncate(@post.content_plain, :length => 200, :omission => '...').html_safe
       ul
         li.create manage
         li
