@@ -41,10 +41,19 @@ jQuery ->
   }
   `
 
-  #
+  updateListTitle = ->
+    id = $('#post-data').data('d').id
+    title = $('.post-show__title h1').text()
+    $("#posts-#{id} .name").text((if $.trim(title).length > 0 then title else 'No Title'))
+
+  $('body').on 'keyup', '.post-show__title h1', (e) ->
+    updateListTitle()
+
+  # toggle show/hide on the left post list
   $('body').on 'click', '.manage-sections__toggler', (e) ->
     $('.manage-sections').toggleClass('manage-sections--expanded-preview')
 
+  # make title and body content editable
   $('.post-show__title h1, .post-show__body').livequery ->
     $(@).attr('contenteditable', true)
 
@@ -52,6 +61,9 @@ jQuery ->
   $('body').on 'paste', '.post-show__title h1', (e) ->
     e.preventDefault()
     document.execCommand('inserttext', false, prompt('Paste something.'))
+    setTimeout ->
+      updateListTitle()
+    , 1
 
   # start the redactor editor
   $('.post-show__body').livequery ->
