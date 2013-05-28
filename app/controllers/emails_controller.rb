@@ -1,27 +1,29 @@
 class EmailsController < ApplicationController
 
   def post
-    # process various message parameters:
+    user = User.where(:email => params['sender']).first
+    if user
+      title = params['subject']
 
-    user = User.find(1)
-    post = user.posts.new(:title => 'Email Debug', :content => params.to_s)
-    post.status = 'draft'
-    post.save
+      if params['stripped-html'] && !params['stripped-html'].blank?
+        html = params['stripped-html'].gsub(params['stripped-signature'], '') # remove the signature if we can
+        content = ReverseMarkdown.parse content # if they formatted html this will turn that into markdown
+      else
+        content = params['stripped-text']
+      end
 
-    #user_email  = params['sender']
-    #title = params['subject']
-    #
-    ## get the "stripped" body of the message, i.e. without
-    ## the quoted part
-    #actual_body = params["stripped-text"]
-    #
-    ## process all attachments:
-    #count = params['attachment-count'].to_i
-    #count.times do |i|
-    #  stream = params["attachment-#{i+1}"]
-    #  filename = stream.original_filename
-    #  data = stream.read()
-    #end
+      post = user.posts.new(:title => title, :content => content)
+      post.status = params['status']
+      post.save
+
+      # process all attachments:
+      #count = params['attachment-count'].to_i
+      #count.times do |i|
+      #  stream = params["attachment-#{i+1}"]
+      #  filename = stream.original_filename
+      #  data = stream.read()
+      #end
+    end
 
     render :text => "OK"
   end

@@ -6,12 +6,12 @@
       ul
         li.create manage
         li
-          a.dashboard-section__post-edit href=edit_post_url(@post.token, :subdomain => false)
+          a.dashboard-section__post-edit href=edit_post_url(@post.token, :subdomain => false) data-skip-pjax=true
             i.icon.icon-pencil
             | edit
         li
           a href=new_post_url('picture', 'caption', :subdomain => false) data-skip-pjax=true
-          a href=post_path(@post) data-method='delete' data-confirm='Are you sure you want to delete this post?' data-skip-pjax=true
+          a href=post_path(@post.token) data-method='delete' data-confirm='Are you sure you want to delete this post?' data-skip-pjax=true
             i.icon.icon-remove
             | delete
     - else
