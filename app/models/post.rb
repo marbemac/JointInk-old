@@ -48,7 +48,9 @@ class Post < ActiveRecord::Base
   attr_accessible :title, :content, :photo, :status, :post_type, :post_subtype, :style, :attribution_link
 
   scope :active, where(:status => 'active')
+  scope :published, where(:status => 'active')
   scope :drafts, where(:status => 'draft')
+  scope :notes, where(:status => 'note')
 
   before_create :set_default_style
   before_save :sanitize, :set_published_at
