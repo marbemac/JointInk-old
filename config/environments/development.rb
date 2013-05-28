@@ -38,11 +38,10 @@ JointInk::Application.configure do
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.smtp_settings = {
       :domain => 'jointink.com',
-      :address => 'smtp.sendgrid.net',
+      :address => 'smtp.mailgun.org',
       :port => 587,
       :authentication => :plain,
-      :enable_starttls_auto => true,
-      :user_name => 'app9707905@heroku.com',
-      :password => '25oda0a3'
+      :user_name => 'postmaster@jointink.com',
+      :password => '4dk4on3znay0'
   }
 end

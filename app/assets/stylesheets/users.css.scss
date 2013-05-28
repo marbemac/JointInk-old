@@ -141,7 +141,7 @@
   height: 100%;
 
   .editor-bar {
-    @include transition (all 0.2s ease-in-out);
+    @include transition (all 0.3s ease-in-out);
     position: fixed;
     left: 30%;
   }
@@ -162,7 +162,7 @@
 }
 
 .manage-section {
-  @include transition (all 0.2s ease-in-out);
+  @include transition (all 0.3s ease-in-out);
   background: #FFF;
   height: 100%;
   float: left;
@@ -170,7 +170,7 @@
 }
 
 .manage-section--posts {
-  @include transition (all 0.2s ease-in-out);
+  @include transition (all 0.3s ease-in-out);
   width: 30%;
   margin: 0;
   background: #F9F9F9;
@@ -256,7 +256,7 @@
 }
 
 .manage-sections__toggler {
-  @include transition (all 0.2s ease-in-out);
+  @include transition (all 0.3s ease-in-out);
   position: absolute;
   right: 0;
   top: 0;

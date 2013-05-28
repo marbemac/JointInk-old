@@ -13,7 +13,6 @@ gem 'devise' # Authentication
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'yajl-ruby' # json
-gem "sendgrid"
 gem "cancan", ">= 1.6.8"
 gem 'koala', '1.6' # facebook graph api support
 gem 'twitter' # twitter api support
