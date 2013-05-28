@@ -1,5 +1,6 @@
 include ActionView::Helpers::TextHelper
 include ActionView::Helpers::AssetTagHelper
+include PostHelper
 
 class UserMailer < ActionMailer::Base
   layout 'email'#, :except => [:matt_welcome, :marc_welcome]
@@ -23,6 +24,11 @@ class UserMailer < ActionMailer::Base
   def post_admin(post_id)
     @post = Post.find(post_id)
     mail(:to => "matt.c.mccormick@gmail.com, marbemac@gmail.com", :subject => "New Post: #{@post.title}")
+  end
+
+  def published_by_email_confirmation(post_id)
+    @post = Post.find(post_id)
+    mail(:to => (@post.emailed_from ? @post.emailed_from : @post.user.email), :subject => "Your post was published")
   end
 
   def posted_in_channel(post_id, channel_id)

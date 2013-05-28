@@ -1,0 +1,10 @@
+<p>
+    Your post "<%= @post.title %>" was successfully published! Check it out <%= link_to 'here', post_pretty_url(@post) %>
+</p>
+
+<p>
+    Feel free to share it on
+    <a href="http://twitter.com/share?text=<%= @post.title %>&url=<%= @post.permalink %>">Twitter</a>
+    and/or
+    <a href="http://www.facebook.com/sharer/sharer.php?u=<%= @post.permalink %>">Facebook</a>.
+</p>
