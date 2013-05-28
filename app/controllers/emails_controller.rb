@@ -7,7 +7,7 @@ class EmailsController < ApplicationController
 
       if params['stripped-html'] && !params['stripped-html'].blank?
         html = params['stripped-html'].gsub(params['stripped-signature'], '') # remove the signature if we can
-        content = ReverseMarkdown.parse(params['stripped-html']) # if they formatted html this will turn that into markdown
+        content = ReverseMarkdown.parse(html) # if they formatted html this will turn that into markdown
       else
         content = params['stripped-text']
       end
