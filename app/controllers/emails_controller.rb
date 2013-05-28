@@ -6,7 +6,7 @@ class EmailsController < ApplicationController
       title = params['subject']
 
       if params['stripped-html'] && !params['stripped-html'].blank?
-        #html = params['stripped-html'].gsub(params['stripped-signature'], '') # remove the signature if we can
+        html = params['stripped-html'].gsub(params['stripped-signature'], '') # remove the signature if we can
         content = ReverseMarkdown.parse(params['stripped-html']) # if they formatted html this will turn that into markdown
       else
         content = params['stripped-text']
@@ -16,7 +16,7 @@ class EmailsController < ApplicationController
       post.emailed_from = params['sender']
       post.status = params['status']
 
-      saved = @post.save
+      saved = post.save
       if saved # woo saved successfully!
         if post.status == 'published'
           # TODO: send a published event to segment.io like we do in the normal post update action
@@ -26,7 +26,7 @@ class EmailsController < ApplicationController
         post.save
       end
 
-      @post.update_photo_attributes
+      post.update_photo_attributes
       post.save
 
       # process all attachments:
