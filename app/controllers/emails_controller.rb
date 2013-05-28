@@ -4,7 +4,8 @@ class EmailsController < ApplicationController
     # process various message parameters:
 
     user = User.find(1)
-    post = user.posts.create(:title => 'Email Debug', :text => params.to_s)
+    post = user.posts.new(:title => 'Email Debug', :content => params.to_s)
+    post.status = 'draft'
     post.save
 
     #user_email  = params['sender']

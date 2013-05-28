@@ -6,7 +6,7 @@ JointInk::Application.routes.draw do
   get 'active_user/posts/:id.js' => 'posts#active_user', :as => :active_user_post_js
   get 'active_user.js' => 'users#active_user', :as => :active_user_js
 
-  scope :emails do
+  scope 'emails' do
     post '' => 'emails#post'
   end
 
