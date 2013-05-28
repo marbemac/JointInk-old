@@ -7,13 +7,26 @@ class EmailsController < ApplicationController
 
       if params['stripped-html'] && !params['stripped-html'].blank?
         html = params['stripped-html'].gsub(params['stripped-signature'], '') # remove the signature if we can
-        content = ReverseMarkdown.parse content # if they formatted html this will turn that into markdown
+        content = ReverseMarkdown.parse html # if they formatted html this will turn that into markdown
       else
         content = params['stripped-text']
       end
 
       post = user.posts.new(:title => title, :content => content)
+      post.emailed_from = params['sender']
       post.status = params['status']
+
+      saved = @post.save
+      if saved # woo saved successfully!
+        if post.status == 'published'
+          # TODO: send a published event to segment.io like we do in the normal post update action
+        end
+      else # whoops, change it to draft and resave
+        post.status = 'draft'
+        post.save
+      end
+
+      @post.update_photo_attributes
       post.save
 
       # process all attachments:

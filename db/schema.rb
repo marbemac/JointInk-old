@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130524190640) do
+ActiveRecord::Schema.define(:version => 20130528005531) do
 
   create_table "accounts", :force => true do |t|
     t.string  "username",                       :null => false
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20130524190640) do
     t.datetime "published_at"
     t.string   "attribution_link"
     t.string   "token"
+    t.string   "emailed_from"
   end
 
   add_index "posts", ["post_type"], :name => "index_posts_on_post_type"

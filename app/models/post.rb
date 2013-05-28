@@ -6,6 +6,7 @@
 #  audio            :string(255)
 #  content          :text
 #  created_at       :datetime         not null
+#  emailed_from     :string(255)
 #  id               :integer          not null, primary key
 #  photo            :string(255)
 #  photo_exif       :hstore
@@ -17,7 +18,7 @@
 #  published_at     :datetime
 #  status           :string(255)      default("active")
 #  style            :string(255)      default("default")
-#  title            :string(255)
+#  title            :text
 #  token            :string(255)
 #  updated_at       :datetime         not null
 #  url              :text
