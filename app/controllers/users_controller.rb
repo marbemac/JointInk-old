@@ -16,33 +16,35 @@ class UsersController < ApplicationController
     @user = User.find(request.subdomain.downcase)
     @posts = @user.sharing(@channel).page(params[:page])
 
-    expires_in 10.seconds, :public => true
-    maximum = @posts.maximum(:updated_at)
-    if stale? etag: [@user, maximum], last_modified: maximum, public: true
-      @title = @user.name + "'s Posts"
-      @page_title = @user.name
 
-      @page = params[:page]
-      @channel = nil
-      if params[:channel_id]
-        @channel = Channel.find(params[:channel_id])
-        @title += ' in ' + @channel.name
-      end
-      @description = @user.bio
-      build_og_tags(@user.og_title, @user.og_type, @user.permalink, @user.og_description)
+    # TODO: the caching below doesn't work well with the set_session_analytics system and Sign Up events (the sign up events get recorded multiple times since the JS is cached with the rest of the page)
+    #maximum = @posts.maximum(:updated_at)
+    #expires_in 10.seconds, :public => true
+    #if stale? etag: [@user, maximum], last_modified: maximum, public: true
+    @title = @user.name + "'s Posts"
+    @page_title = @user.name
 
-      if @posts.length == 0
-        @channel_suggestions = Channel.popular(5)
-      end
-
-      add_page_entity('userViewed', @user)
-
-      respond_to do |format|
-        format.html
-        format.atom { render :layout => false }
-        format.rss { redirect_to user_feed_path(:format => :atom), :status => :moved_permanently }
-      end
+    @page = params[:page]
+    @channel = nil
+    if params[:channel_id]
+      @channel = Channel.find(params[:channel_id])
+      @title += ' in ' + @channel.name
     end
+    @description = @user.bio
+    build_og_tags(@user.og_title, @user.og_type, @user.permalink, @user.og_description)
+
+    if @posts.length == 0
+      @channel_suggestions = Channel.popular(5)
+    end
+
+    add_page_entity('userViewed', @user)
+
+    respond_to do |format|
+      format.html
+      format.atom { render :layout => false }
+      format.rss { redirect_to user_feed_path(:format => :atom), :status => :moved_permanently }
+    end
+    #end
   end
 
   def show_redirect
