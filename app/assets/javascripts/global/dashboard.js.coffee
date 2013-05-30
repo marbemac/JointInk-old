@@ -2,6 +2,8 @@ jQuery ->
 
   drawPostViewsChart = ->
     $container = $('#post-views-chart')
+    return unless $('#post-views-chart').length > 0
+
     categories = _.map($container.data('data1'), (data) -> data['stat']['time'])
     viewDataPoints = _.map($container.data('data1'), (data) -> parseInt(data['stat']['value']))
     readDataPoints = if $container.data('data2') then _.map($container.data('data2'), (data) -> parseInt(data['stat']['value'])) else null
@@ -63,6 +65,8 @@ jQuery ->
 
   drawRecsChart = ->
     $container = $('#post-recs-chart')
+    return unless $('#post-recs-chart').length > 0
+
     categories = _.map($container.data('data'), (data) -> data['stat']['time'])
     dataPoints = _.map($container.data('data'), (data) -> parseInt(data['stat']['value']))
     $container.highcharts({
@@ -112,6 +116,7 @@ jQuery ->
 
   drawReferralsChart = ->
     $container = $('#post-referrals-chart')
+    return unless $('#post-referrals-chart').length > 0
 
     sourceData = _.map($container.data('data'), (data) -> {y: parseInt(data['value']), name: data['name']})
 
@@ -169,6 +174,5 @@ jQuery ->
     drawCharts()
 
 
-  $.event.special.debouncedresize.threshold = 300;
-  $(window).on "debouncedresize", (event) ->
+  $(window).smartresize ->
     drawCharts()

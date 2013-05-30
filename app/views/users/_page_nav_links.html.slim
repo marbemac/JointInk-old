@@ -1,13 +1,13 @@
 ul
-  li class=(params[:action] == 'show' ? 'on' : '')
-    a href=user_url(:subdomain => @user.username)
+  li
+    a href=user_url(:subdomain => @user.username) class=(params[:action] == 'show' ? 'on' : '')
       i.icon.icon-file-alt
       span.name = pluralize(@user.posts_count, "Post")
-  li class=(params[:action] == 'channels' ? 'on' : '')
-    a href=user_channels_url(:subdomain => @user.username)
+  li
+    a href=user_channels_url(:subdomain => @user.username) class=(params[:action] == 'channels' ? 'on' : '')
       i.icon.icon-circle-blank
       span.name = pluralize(@user.channels_count, "Channel")
-  li class=(params[:action] == 'recommendations' ? 'on' : '')
-    a href=user_recommendations_url(:subdomain => @user.username)
+  li
+    a href=user_recommendations_url(:subdomain => @user.username) class=(params[:action] == 'recommendations' ? 'on' : '')
       i.icon.icon-plus-sign
       span.name #{@user.recommendations_count} Recommended

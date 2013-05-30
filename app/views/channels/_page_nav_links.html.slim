@@ -1,21 +1,21 @@
 ul
-  li class=(params[:action] == 'show' ? 'on' : '')
-    a href=channel_url(@channel, :subdomain => false)
+  li
+    a href=channel_url(@channel, :subdomain => false) class=(params[:action] == 'show' ? 'on' : '')
       i.icon.icon-file-alt
       span.name = pluralize(@channel.posts_count, "Post")
   - if can? :post, @channel
-    li class=(params[:action] == 'new' ? 'on' : '')
-      a href=new_post_url('text', 'article', :id => @channel.id, :subdomain => false) data-skip-pjax=true
+    li
+      a href=new_post_url('text', 'article', :id => @channel.id, :subdomain => false) data-skip-pjax=true class=(params[:action] == 'new' ? 'on' : '')
         i.icon.icon-pencil
         span.name New Article in Channel
 
-    li class=(params[:action] == 'new' ? 'on' : '')
-      a href=new_post_url('picture', 'caption', :id => @channel.id, :subdomain => false) data-skip-pjax=true
+    li
+      a href=new_post_url('picture', 'caption', :id => @channel.id, :subdomain => false) data-skip-pjax=true class=(params[:action] == 'new' ? 'on' : '')
         i.icon.icon-camera-retro
         span.name New Image in Channel
 
   - if can? :update, @channel
-    li class=(params[:action] == 'edit' ? 'on' : '')
-      a href=edit_channel_url(@channel.id, :subdomain => false) data-skip-pjax=true
+    li
+      a href=edit_channel_url(@channel.id, :subdomain => false) data-skip-pjax=true class=(params[:action] == 'edit' ? 'on' : '')
         i.icon.icon-cog
         span.name Edit Channel

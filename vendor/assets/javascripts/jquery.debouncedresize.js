@@ -1,47 +1,27 @@
-/*
- * debouncedresize: special jQuery event that happens once after a window resize
- *
- * latest version and complete README available on Github:
- * https://github.com/louisremi/jquery-smartresize
- *
- * Copyright 2012 @louis_remi
- * Licensed under the MIT license.
- *
- * This saved you an hour of work?
- * Send me music http://www.amazon.co.uk/wishlist/HNTU0468LQON
- */
-(function($) {
+(function($,sr){
 
-    var $event = $.event,
-        $special,
-        resizeTimeout;
+    // debouncing function from John Hann
+    // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
+    var debounce = function (func, threshold, execAsap) {
+        var timeout;
 
-    $special = $event.special.debouncedresize = {
-        setup: function() {
-            $( this ).on( "resize", $special.handler );
-        },
-        teardown: function() {
-            $( this ).off( "resize", $special.handler );
-        },
-        handler: function( event, execAsap ) {
-            // Save the context
-            var context = this,
-                args = arguments,
-                dispatch = function() {
-                    // set correct event type
-                    event.type = "debouncedresize";
-                    $event.dispatch.apply( context, args );
-                };
+        return function debounced () {
+            var obj = this, args = arguments;
+            function delayed () {
+                if (!execAsap)
+                    func.apply(obj, args);
+                timeout = null;
+            };
 
-            if ( resizeTimeout ) {
-                clearTimeout( resizeTimeout );
-            }
+            if (timeout)
+                clearTimeout(timeout);
+            else if (execAsap)
+                func.apply(obj, args);
 
-            execAsap ?
-                dispatch() :
-                resizeTimeout = setTimeout( dispatch, $special.threshold );
-        },
-        threshold: 150
-    };
+            timeout = setTimeout(delayed, threshold || 300);
+        };
+    }
+    // smartresize
+    jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
 
-})(jQuery);
+})(jQuery,'smartresize');

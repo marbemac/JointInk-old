@@ -1,7 +1,7 @@
 jQuery ->
 
   # pjax
-  $('#data-pjax-container').pjax 'a:not([data-remote]):not([data-behavior]):not([data-skip-pjax])',
+  $('#data-pjax-container').pjax 'a:not([data-remote]):not([data-behavior]):not([data-skip-pjax]):not(.on)',
     timeout: 5000
   .on 'pjax:start', ->
     # unbind the read stat tracking
