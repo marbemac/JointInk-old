@@ -174,5 +174,5 @@ jQuery ->
     drawCharts()
 
 
-  $(window).smartresize ->
-    drawCharts()
+#  $(window).smartresize ->
+#    drawCharts()
