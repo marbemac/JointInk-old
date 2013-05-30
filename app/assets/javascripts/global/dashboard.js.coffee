@@ -175,9 +175,6 @@ jQuery ->
 
 
   # hack because mobile browsers seem to fire resize events when scrolling...
-  $(window).scroll ->
-    $(window).resize (e) ->
-      e.stopPropagation()
-
   $(window).smartresize ->
-    drawCharts()
+    unless /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
+      drawCharts()
