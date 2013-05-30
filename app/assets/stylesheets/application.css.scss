@@ -76,84 +76,74 @@ body,
 
 #mast-nav {
   position: fixed;
-  bottom: 0;
-  right: 5px;
-  z-index: 1000;
+  top: 0;
+  right: 0;
+  z-index: 11000;
 
-  .horizontal-menu {
+  .handle {
+    color: #FFF;
+    background: #222;
+    padding: 6px 8px;
+    padding: 0.6rem 0.8rem;
+    font-size: 18px;
+    font-size: 1.8rem;
+    cursor: default;
+  }
+  ul {
+    position: absolute;
+    top: 32px;
+    top: 3.2rem;
+    right: 0px;
+    background: #222;
+    padding: 0;
     display: none;
+    margin: 0;
   }
-  .vertical-menu {
-    .handle {
-      @include box-shadow(rgba(0, 0, 0, 0.5) 0 0 3px);
-      color: #FFF;
-      background: #222;
-      padding: 6px 8px;
-      padding: 0.6rem 0.8rem;
-      font-size: 18px;
-      font-size: 1.8rem;
+  li {
+    &:hover {
+      a {
+        background: #FFF;
+        border-color: $primary-color;
+        color: $body-text-color;
+      }
+    }
+    &.spacer {
+      height: 5px;
+      height: 0.5rem;
+    }
+    &.head {
       cursor: default;
-    }
-    ul {
-      position: absolute;
-      bottom: 30px;
-      bottom: 3rem;
-      right: -5px;
-      background: #222;
-      padding: 0;
-      display: none;
-      margin: 0;
-    }
-    li {
-      &:hover {
-        a {
-          background: #FFF;
-          border-color: $primary-color;
-          color: $body-text-color;
-        }
-      }
-      &.spacer {
-        height: 5px;
-        height: 0.5rem;
-      }
-      &.head {
-        cursor: default;
-        background: #444;
-        color: #FFF;
-        font-size: 12px;
-        font-size: 1.2rem;
-        padding: 3px 25px 3px 11px;
-        padding: 0.3rem 2.5rem 0.3rem 1.1rem;
-      }
-    }
-    a {
+      background: #444;
       color: #FFF;
-      white-space: nowrap;
-      border-left: 3px solid transparent;
-      border-right: 3px solid transparent;
-      font-size: 14px;
-      font-size: 1.4rem;
-      padding: 3px 25px 3px 7px;
-      padding: 0.3rem 2.5rem 0.3rem 0.7rem;
-      display: block;
-    }
-    .icon {
-      margin: 0 6px 0 0;
-      margin: 0 0.6rem 0 0;
-      position: relative;
-      top: -1px;
-      font-size: 10px;
-      font-size: 1rem;
+      font-size: 12px;
+      font-size: 1.2rem;
+      padding: 3px 25px 3px 11px;
+      padding: 0.3rem 2.5rem 0.3rem 1.1rem;
     }
   }
+  a {
+    color: #FFF;
+    white-space: nowrap;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    font-size: 14px;
+    font-size: 1.4rem;
+    padding: 3px 25px 3px 7px;
+    padding: 0.3rem 2.5rem 0.3rem 0.7rem;
+    display: block;
+  }
+  .icon {
+    margin: 0 6px 0 0;
+    margin: 0 0.6rem 0 0;
+    position: relative;
+    top: -1px;
+    font-size: 10px;
+    font-size: 1rem;
+  }
+
   &:hover {
-    .vertical-menu {
-      .handle {
-        @include box-shadow(none);
-      }
-      ul {
-        display: block;
-      }
+    ul {
+      display: block;
     }
   }
 }

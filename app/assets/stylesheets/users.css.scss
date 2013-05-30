@@ -162,7 +162,7 @@
 
 .manage-section--posts {
   @include transition (all 0.3s ease-in-out);
-  width: 95%;
+  width: 90%;
   margin: 0;
   background: #F9F9F9;
   position: fixed;
@@ -174,7 +174,8 @@
 }
 
 .manage-posts {
-  overflow: auto;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
   height: 100%;
 }
 
@@ -236,7 +237,7 @@
 
   .search {
     margin: 0;
-    padding: 7px 10px 7px 34px;
+    padding: 9px 10px 8px 34px;
     font-size: 12px;
     font-size: 1.2rem;
     background: transparent;
@@ -250,7 +251,7 @@
   @include transition (all 0.3s ease-in-out);
   position: absolute;
   right: 0;
-  top: 0;
+  top: 1px;
   background: #222;
   padding: 7px 9px;
   cursor: pointer;

@@ -6,15 +6,15 @@
 // TRANSITION TO SIDEBAR LAYOUT
 #mast-nav {
   bottom: auto;
-  top: 0;
-  right: 25px;
+  top: 5px;
+  right: 5px;
+  top: 0.5rem;
+  right: 0.5rem;
 
-  .vertical-menu {
-    ul {
-      bottom: auto;
-      top: 0;
-      right: -29px;
-    }
+  ul {
+    bottom: auto;
+    top: 0;
+    right: 0;
   }
 }
 
