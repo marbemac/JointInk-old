@@ -1,6 +1,8 @@
 #= require jquery_ujs
 #= require jquery.easing
 #= require global/global_functions
+#= require jquery.scrollTo.js
+#= require swipe
 #= require_self
 
 jQuery ->
@@ -47,3 +49,20 @@ jQuery ->
       $(window).scrollTop($('.signup-form:visible,.signin-form:visible').height())
       $('.signup-form:visible input:visible:first,.signin-form:visible input:visible:first').focus()
     , 1
+
+  window.publishSwiper = new Swipe document.getElementById('splash-publishing-slider'),
+    speed: 800,
+    auto: 5000,
+    continuous: true,
+    disableScroll: false,
+    callback: (index, elem) ->
+      $(".splash-page-publish-tabs li").removeClass('on')
+      $(".splash-page-publish-tabs li[data-index='#{index}']").addClass('on')
+
+  $(".splash-page-publish-tabs li").click (e) ->
+    $(@).addClass('on').siblings().removeClass('on')
+    window.publishSwiper.slide($(@).data('index'), 800)
+
+  $('.splash-page-lets-go').click (e) ->
+    $.scrollTo(0, 1000)
+    $('#user_username').focus()
