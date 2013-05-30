@@ -174,5 +174,10 @@ jQuery ->
     drawCharts()
 
 
-#  $(window).smartresize ->
-#    drawCharts()
+  # hack because mobile browsers seem to fire resize events when scrolling...
+  $(window).scroll ->
+    $(window).resize (e) ->
+      e.stopPropagation()
+
+  $(window).smartresize ->
+    drawCharts()
