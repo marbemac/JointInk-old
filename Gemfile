@@ -46,6 +46,7 @@ gem 'truncate_html'
 
 gem 'newrelic_rpm'
 
+gem 'bust_rails_etags'
 gem 'capistrano'
 gem 'rvm-capistrano'
 gem 'foreman'
