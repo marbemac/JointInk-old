@@ -82,6 +82,14 @@
   border-bottom: none;
 }
 
+.editor-actions {
+  .button {
+    >i {
+      display: inline-block;
+    }
+  }
+}
+
 // 2. TYPOGRAPHY 			==============================
 
 html {

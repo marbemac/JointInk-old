@@ -212,15 +212,18 @@
     font-size: 1.6rem;
   }
   &.split {
-    padding-right: 55px;
+    padding-right: 45px;
+    padding-right: 4.5rem;
 
     span {
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
-      padding: 15px 0 0 0;
-      width: 42px;
+      padding: 11px 0 0 0;
+      padding: 1.1rem 0 0 0;
+      width: 35px;
+      width: 3.5rem;
       text-align: center;
     }
   }

@@ -1,6 +1,24 @@
 .editor-bar
+  .editor-bar-section.pull-left.with-menu.editor-channels
+    .post-show__add-channel
+      .display
+        i.icon.icon-circle-blank
+        .medium.clear.button.split
+          .name = pluralize(post.channels.count, 'Channel')
+          span
+            i.icon-chevron-up
+      .menu
+        .autocomplete
+        #editor-channel-autocomplete
+          input type='text' placeholder='Channel name...' autocomplete='off'
+        .help
+          = 'search above or '
+          a href=new_channel_path target='_blank' data-skip-pjax=true create a new channel
+        = render "posts/channels_list", :post => post, :remove_link => true
+
   .editor-bar-section.pull-left.first.with-menu.editor-style
     .display
+      i.icon.icon-info
       .medium.clear.button.split
         .name = post.post_style_pretty
         span
@@ -22,24 +40,9 @@
           li.editor-style-item data-value='fit-on-screen' class=(post.style == 'fit-on-screen' ? 'on' : '')
             | Fit on Screen
 
-  .editor-bar-section.pull-left.with-menu.editor-channels
-    .post-show__add-channel
-      .display
-        .medium.clear.button.split
-          .name = pluralize(post.channels.count, 'Channel')
-          span
-            i.icon-chevron-up
-      .menu
-        .autocomplete
-        #editor-channel-autocomplete
-          input type='text' placeholder='Channel name...' autocomplete='off'
-        .help
-          = 'search above or '
-          a href=new_channel_path target='_blank' data-skip-pjax=true create a new channel
-        = render "posts/channels_list", :post => post, :remove_link => true
-
   .editor-bar-section.pull-left.editor-audio
     .display class=(post.audio.present? ? '' : 'fileinput-button') data-remove-url=post_remove_audio_path(:id => post.token) data-skip-pjax=true
+      .i.icon.icon-microphone
       .medium.clear.button.split
         .name
           = 'Audio: '
@@ -97,5 +100,3 @@
           input type='file' name='post[photo]' data-url=post_add_inline_photo_url(post.token, :subdomain => Rails.env == 'production' ? 'www' : false)
 
   = render :partial => "posts/show--#{post.post_type ? post.post_type : 'text'}", :layout => 'posts/show', :locals => {:post => post}
-
-= render "shared/small_screen_cover"

@@ -179,7 +179,6 @@
 .dashboard-section--page {
   border-bottom: 1px solid #EEE;
   border-right: 1px solid #EEE;
-  display: block;
 }
 .dashboard-section--referrals {
   border-bottom: 1px solid #EEE;
@@ -252,6 +251,12 @@
   font-size: 3.6rem;
   line-height: 40px;
   line-height: 4rem;
+}
+
+.editor-actions {
+  .status {
+    display: block;
+  }
 }
 
 // 2. TYPOGRAPHY 			==============================

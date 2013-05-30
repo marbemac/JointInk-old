@@ -394,6 +394,10 @@ jQuery ->
     timeout: 200000
   .on 'pjax:start', ->
     $('.manage-sections').addClass('manage-sections--hidden-preview')
+
+    if $(window).width() < 600 && $('.manage-sections--expanded-preview').length == 0
+      $('.manage-sections__toggler').click()
+
     $('body').oneTime 1000, 'show-loader', ->
       $('#loader').fadeIn(200)
   .on 'pjax:end', ->

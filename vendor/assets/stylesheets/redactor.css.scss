@@ -46,6 +46,7 @@ body .redactor_air {
 	margin: 0 !important;
 	padding: 0 !important;
 	padding-left: 5px !important;
+	padding-right: 5px !important;
 	line-height: 0 !important;
 	list-style: none !important;
 	font-size: 0;
@@ -68,9 +69,8 @@ body .redactor_air .redactor_toolbar {
 .redactor_toolbar li.redactor_separator {
 	float: left;
 	height: 34px;
-    width: 100%;
-	border-left: 1px solid #47b8eb;
-	border-right: 1px solid #6ebfe8;
+    border-left: 1px solid #CCC;
+	border-right: 1px solid #DDD;
 	padding: 0;
 	margin: 0 5px 0 6px !important;
 }
@@ -122,6 +122,7 @@ body .redactor_air .redactor_toolbar {
 .redactor_toolbar {
   &.vertical {
     padding-left: 0px !important;
+    padding-right: 0px !important;
     height: auto !important;
 
     li {
@@ -141,6 +142,10 @@ body .redactor_air .redactor_toolbar {
         margin: 5px 0 !important;
         padding: 0;
       }
+    }
+
+    .redactor_toolbar li.redactor_separator {
+      width: 100%;
     }
   }
 }

@@ -671,7 +671,7 @@ var RLANG = {
 				// toolbar
 				this.buildToolbar();
 
-				// PLUGINS
+                // PLUGINS
 				if (typeof this.opts.plugins === 'object')
 				{
 					$.each(this.opts.plugins, $.proxy(function(i,s)
@@ -803,6 +803,9 @@ var RLANG = {
 				{
 					this.$toolbar.find('a').attr('tabindex', '-1');
 				}
+
+                $(window).resize($.proxy(this.observeWindowSize, this));
+                this.observeWindowSize();
 			}
 
 			// construct editor
@@ -1329,43 +1332,62 @@ var RLANG = {
 			}, this));
 
 		},
-		observeTables: function()
-		{
-			this.$editor.find('table').click($.proxy(this.tableObserver, this));
-		},
-		observeScroll: function()
-		{
-			var scrolltop = $(this.document).scrollTop();
-			var boxtop = this.$box.offset().top;
-			var left = 0;
+        // CUSTOM
+        observeWindowSize: function()
+        {
+            this.$toolbar.removeClass('horizontal');
+            var scrolltop = $(this.document).scrollTop();
+            var boxtop = this.$box.offset().top;
+            var left = 0;
+            var top = 0;
+            var smallWindow = $(window).width() < 790 ? true : false
 
-            this.$toolbar.addClass('vertical')
+            if (smallWindow) {
+                this.$toolbar.addClass('horizontal').removeClass('vertical')
+            } else {
+                this.$toolbar.addClass('vertical').removeClass('horizontal')
+            }
 
-			if (scrolltop > boxtop)
-			{
-				var width = '100%';
-				if (this.opts.fixedBox)
-				{
-//					left = this.$box.offset().left;
-					left = this.$box.offset().left - 70;
-					width = this.$box.innerWidth();
-				}
 
-				this.fixed = true;
-//				this.$toolbar.css({ position: 'fixed', width: width, zIndex: 1005, top: this.opts.fixedTop + 'px', left: left });
-				this.$toolbar.css({ position: 'fixed', zIndex: 1005, top: this.opts.fixedTop + 'px', left: left });
-			}
-			else
-			{
-				this.fixed = false;
-//				this.$toolbar.css({ position: 'relative', width: 'auto', zIndex: 1, top: 0, left: left });
-				this.$toolbar.css({ position: 'absolute', zIndex: 1, top: 0, left: '-70px' });
-			}
-		},
+            if (scrolltop > boxtop)
+            {
+                if (this.opts.fixedBox)
+                {
+                    if (smallWindow) {
+                        top = 5;
+                        left = this.$box.offset().left + 20;
+                    } else {
+                        top = 40;
+                        left = this.$box.offset().left - 70;
+                    }
+                }
 
-		// BUFFER
-		setBuffer: function()
-		{
+                this.fixed = true;
+                this.$toolbar.css({ position: 'fixed', zIndex: 1005, top: top + 'px', left: left });
+            }
+            else
+            {
+                if (smallWindow) {
+                    this.$toolbar.css({'position':'relative','left':0,'top':0,'display':'inline-block'})
+                } else {
+                    this.$toolbar.css({ position: 'absolute', zIndex: 1, top: 0, left: '-70px' });
+                }
+                this.fixed = false;
+                // this.$toolbar.css({ position: 'relative', width: 'auto', zIndex: 1, top: 0, left: left });
+            }
+        },
+        observeTables: function()
+        {
+            this.$editor.find('table').click($.proxy(this.tableObserver, this));
+        },
+        observeScroll: function()
+        {
+            this.observeWindowSize()
+        },
+
+        // BUFFER
+        setBuffer: function()
+        {
 			this.saveSelection();
 			this.opts.buffer = this.$editor.html();
 		},

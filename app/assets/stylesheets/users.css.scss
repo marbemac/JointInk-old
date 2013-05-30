@@ -90,7 +90,6 @@
   }
 }
 .dashboard-section--page {
-  display: none;
   padding: 25px 25px 5px 25px;
   padding: 2.5rem 2.5rem 0.5rem 2.5rem;
 
@@ -151,14 +150,6 @@
   .post-show__content-wrapper {
     background: #FFF;
   }
-  .post-show--cover-page-article {
-    .post-show__main-image {
-      position: absolute;
-    }
-    .post-show__header-wrapper {
-      position: absolute;
-    }
-  }
 }
 
 .manage-section {
@@ -171,7 +162,7 @@
 
 .manage-section--posts {
   @include transition (all 0.3s ease-in-out);
-  width: 30%;
+  width: 95%;
   margin: 0;
   background: #F9F9F9;
   position: fixed;
@@ -179,7 +170,7 @@
   bottom: 0;
   top: 0;
   border-right: 4px solid #222;
-  z-index: 50;
+  z-index: 6000;
 }
 
 .manage-posts {
@@ -274,9 +265,9 @@
 }
 
 .manage-section--preview {
-  width: 70%;
   position: relative;
-  margin-left: 30%;
+  width: 100%;
+  margin-left: 0;
 
   .notice,
   .post-show__footer {
@@ -320,7 +311,7 @@
 
 .manage-sections--hidden-preview {
   .manage-section--preview {
-    margin-left: -70%;
+    margin-left: -100%;
   }
   .editor-bar {
     bottom: -100%;

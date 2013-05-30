@@ -29,6 +29,8 @@
     .post-show__content-wrapper,
     .post-show__content {
       padding: 0;
+      z-index: 1000;
+      position: relative;
     }
     .post-show__content-wrapper {
       padding-top: 50px;
@@ -46,7 +48,7 @@
   left: 0;
   right: 0;
   background: #222;
-  z-index: 1000;
+  z-index: 5000;
 }
 
 .editor-bar__errors {
@@ -70,6 +72,16 @@ $editor-section-horizontal-padding: 17px;
   position: relative;
   .display {
     padding: 5px;
+
+    .icon {
+      color: #FFF;
+      font-size: 20px;
+      font-size: 2rem;
+      padding: 7px 10px 5px 10px;
+      padding: 0.7rem 1rem 0.5rem;
+      display: block;
+      cursor: default;
+    }
   }
   .help {
     font-size: 10px;
@@ -126,12 +138,22 @@ $editor-section-horizontal-padding: 17px;
     }
   }
   &.pull-left {
-    margin-left: 20px;
-    margin-left: 2rem;
+    //margin-left: 20px;
+    //margin-left: 2rem;
 
     &.first {
       margin-left: 0;
       border-left: none;
+    }
+  }
+}
+
+.editor-style,
+.editor-channels,
+.editor-audio {
+  .display {
+    .button {
+      display: none;
     }
   }
 }
@@ -151,8 +173,13 @@ $editor-section-horizontal-padding: 17px;
 
     }
     li {
+      overflow: auto;
+
       a {
         color: #FFF;
+      }
+      .name {
+        float: left;
       }
     }
   }
@@ -163,7 +190,6 @@ $editor-section-horizontal-padding: 17px;
 }
 
 .editor-audio {
-
   input {
     display: none;
   }
@@ -177,8 +203,11 @@ $editor-section-horizontal-padding: 17px;
 }
 
 .editor-actions {
+  float: right;
+
   .status {
     position: absolute;
+    display: none;
     color: #FFF;
     font-size: 12px;
     font-size: 1.2rem;
@@ -194,9 +223,9 @@ $editor-section-horizontal-padding: 17px;
 
     >i {
       margin-right: 10px;
+      display: none;
     }
     &.action {
-      width: 17.15rem;
     }
   }
   .caret {
@@ -210,7 +239,7 @@ $editor-section-horizontal-padding: 17px;
     right: 0;
     background: darken($primary-color, 25%);
     width: 233px;
-    width: 17.15rem;
+    width: 20rem;
     .button {
       white-space: nowrap;
       width: 100%;
@@ -220,8 +249,8 @@ $editor-section-horizontal-padding: 17px;
 
 .post-show__markdown {
   display: none;
-  padding: 0 0 250px 0;
-  padding: 0 0 25rem 0;
+  padding: 0 10px 250px 10px;
+  padding: 0 1rem 25rem 1rem;
   margin: 0 auto;
   position: relative;
   z-index: 100;
