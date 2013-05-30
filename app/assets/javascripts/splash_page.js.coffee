@@ -64,5 +64,5 @@ jQuery ->
     window.publishSwiper.slide($(@).data('index'), 800)
 
   $('.splash-page-lets-go').click (e) ->
-    $.scrollTo(0, 1000)
+    $.scrollTo($('.login-signup'), 1000)
     $('#user_username').focus()
