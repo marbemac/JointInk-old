@@ -140,7 +140,7 @@
   height: 100%;
 
   .editor-bar {
-    @include transition (all 0.3s ease-in-out);
+    @include transition (all 0.4s ease-in-out);
     @extend .triggerGPU;
     position: fixed;
     left: 30%;
@@ -154,7 +154,7 @@
 }
 
 .manage-section {
-  @include transition (all 0.3s ease-in-out);
+  @include transition (all 0.4s ease-in-out);
   @extend .triggerGPU;
   background: #FFF;
   height: 100%;
@@ -163,7 +163,7 @@
 }
 
 .manage-section--posts {
-  @include transition (all 0.3s ease-in-out);
+  @include transition (all 0.4s ease-in-out);
   @extend .triggerGPU;
   width: 90%;
   margin: 0;
@@ -252,7 +252,7 @@
 }
 
 .manage-sections__toggler {
-  @include transition (all 0.3s ease-in-out);
+  @include transition (all 0.4s ease-in-out);
   @extend .triggerGPU;
   position: absolute;
   right: 0;
