@@ -228,7 +228,7 @@ class PostsController < ApplicationController
         format.js { render :json => {:status => 'error'}, :status => 400 }
       else
         @post.add_channel(current_user, @channel)
-        list_item_html = render_to_string('posts/_channels_list_item', :layout => false, :locals => { :channel => @channel })
+        list_item_html = render_to_string('posts/_channels_list_item', :layout => false, :locals => { :channel => @channel, :remove_link => true })
         format.html { redirect_to :back }
         format.js { render :json => {:status => 'success', :channel => {:id => @channel.id, :name => @channel.name, :list_item => list_item_html}} }
       end
