@@ -18,7 +18,7 @@ class EmailsController < ApplicationController
 
       saved = post.save
       if saved # woo saved successfully!
-        if post.status == 'published'
+        if post.status == 'active'
           UserMailer.published_by_email_confirmation(post.id).deliver
           # TODO: send a published event to segment.io like we do in the normal post update action
         end
