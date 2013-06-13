@@ -1,6 +1,6 @@
 .post-show__author
   a href=user_pretty_url(post.user)
     .content
-      img src=user_avatar_path(post.user, :width => 150, :height => 150, :crop => :thumb, :gravity => :face)
+      img src=user_avatar_path(post.user, :width => 150, :height => 150, :crop => :fill, :gravity => :face)
       .name = post.user.name
       .bio = post.user.bio

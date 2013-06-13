@@ -35,7 +35,7 @@ module UserHelper
       options[:subheader] = user.bio
     end
 
-    options[:badge_url] = user_avatar_path(user, :width => 250, :height => 250, :crop => :thumb, :gravity => :face)
+    options[:badge_url] = user_avatar_path(user, :width => 250, :height => 250, :crop => :fill, :gravity => :face)
 
     if user.cover_photo.present?
       options[:cover_photo_url] = cover_photo_path(user, :width => 450, :crop => :limit)
