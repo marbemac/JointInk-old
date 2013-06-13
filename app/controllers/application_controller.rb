@@ -48,6 +48,10 @@ class ApplicationController < ActionController::Base
     response
   end
 
+  def not_found(message='Not Found')
+    raise ActionController::RoutingError.new(message)
+  end
+
   private
 
   def catch_flash

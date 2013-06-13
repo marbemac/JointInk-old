@@ -4,6 +4,7 @@ class PostsController < ApplicationController
 
   def active_user
     @post = Post.find_by_token(params[:id])
+    not_found unless @post
     stale? etag: [@post, (current_user ? current_user : request.remote_ip)]
   end
 
@@ -47,6 +48,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by_token(params[:post_id])
+    not_found unless @post
     authorize! :read, @post
 
     expires_in 10.seconds, :public => true
