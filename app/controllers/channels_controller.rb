@@ -81,5 +81,4 @@ class ChannelsController < ApplicationController
   def members
 
   end
-
 end

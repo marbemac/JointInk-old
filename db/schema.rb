@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130612231114) do
+ActiveRecord::Schema.define(:version => 20130613184128) do
 
   create_table "accounts", :force => true do |t|
     t.string  "username",                       :null => false
@@ -39,8 +39,10 @@ ActiveRecord::Schema.define(:version => 20130612231114) do
     t.datetime "updated_at"
     t.integer  "posts_count", :default => 0
     t.text     "info"
+    t.string   "email"
   end
 
+  add_index "channels", ["email"], :name => "index_channels_on_email", :unique => true
   add_index "channels", ["posts_count"], :name => "index_channels_on_posts_count"
   add_index "channels", ["slug"], :name => "index_channels_on_slug", :unique => true
   add_index "channels", ["user_id"], :name => "index_channels_on_user_id"

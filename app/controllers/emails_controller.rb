@@ -31,11 +31,13 @@ class EmailsController < ApplicationController
       post.save
 
       # process all attachments:
+      #data = ''
       #count = params['attachment-count'].to_i
       #count.times do |i|
       #  stream = params["attachment-#{i+1}"]
-      #  filename = stream.original_filename
-      #  data = stream.read()
+      #  data += "#{stream.content_type} - #{stream.original_filename} - #{stream.size}"
+      #  #filename = stream.original_filename
+      #  #data = stream.read()
       #end
     end
 

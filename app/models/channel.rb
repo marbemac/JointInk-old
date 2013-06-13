@@ -31,11 +31,12 @@ class Channel < ActiveRecord::Base
   has_and_belongs_to_many :posts
 
   validates :user, :presence => true
-  validates :name, :presence => true, :length => { :minimum => 2, :maximum => 50 }
+  validates :name, :presence => true, :length => { :minimum => 2, :maximum => 100 }, :uniqueness => true
   validates :description, :presence => true, :length => { :minimum => 2, :maximum => 200 }
   validates :privacy, :inclusion => { :in => ['public', 'invite'] }
+  validates :email, :length => { :minimum => 2, :maximum => 200 }, :uniqueness => true
 
-  attr_accessible :name, :photo, :cover_photo, :description, :privacy, :info
+  attr_accessible :name, :photo, :cover_photo, :description, :privacy, :info, :email
 
   scope :active, where(:status => 'active')
   scope :public, where(:privacy => 'public')

@@ -1,29 +1,33 @@
-#channel_form.tt-form
+#channel_form.ji-form
   = simple_form_for @channel do |f|
 
     = f.error_notification
     = f.error :base
 
-    .section.basic
-      .help.show-for-touch click the items below to edit
+    section.ji-form__section
 
-      = f.input :name, :label => false, :input_html => {:placeholder => 'Channel Name', :autocomplete => 'off'}
-      = f.input :description, :as => :text, :label => false, :input_html => {:placeholder => 'Channel Description', :autocomplete => 'off', :rows => 3}
+      .ji-form__item.ji-form__item--channel-name
+        .ji-form__item__name Name
+        = f.input :name, :label => false, :input_html => {:placeholder => 'topic, idea, prompt, or theme', :autocomplete => 'off'}
 
-      .line
-        .name Cover Photo
-        .content
-          .fileinput-button.rectangle
-            span.prompt Choose Photo
-            div
-              img src=(@channel.cover_photo.present? ? cover_photo_path(@channel, :width => 200, :height => 250, :crop => :fit) : '')
-              = f.hidden_field :cover_photo_cache
-            = f.file_field :cover_photo, :tabindex => '-1'
-          = f.error :cover_photo
+      .ji-form__item
+        .ji-form__item__name Description
+        = f.input :description, :as => :text, :label => false, :input_html => {:placeholder => 'a brief description', :autocomplete => 'off', :rows => 3}
+
+      .ji-form__item.ji-form__item--channel-email.ji-form__item--with-suffix
+        .ji-form__item__name Email
+        = f.input :email, :label => false, :input_html => {:placeholder => 'for users to post by email', :autocomplete => 'off', :rows => 3}, :disabled => (@channel.email ? true : false)
+        .ji-form__item__suffix @jointink.com
+
+      .ji-form__item
+        .ji-form__item__name Cover Photo
+        = f.file_field :cover_photo, :tabindex => '-1'
+        = f.hidden_field :cover_photo_cache
+        = f.error :cover_photo
 
     - if current_user.role? "admin"
-      .section.permissions
-        .help.show-for-touch choose permissions
+      .section.ji-form__section.permissions
+        .ji-form__item__name Channel Permissions
         .option-wrapper.first
           div class=("option #{@channel.privacy == 'public' ? 'on' : ''}") data-value='public'
             .head

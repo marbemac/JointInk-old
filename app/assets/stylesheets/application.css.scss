@@ -368,6 +368,124 @@ body,
   display: none;
 }
 
+
+.ji-form {
+  text-align: left;
+  padding: 30px 15px;
+  padding: 3rem 1.5rem;
+}
+.ji-form__section {
+  width: 100%;
+}
+.ji-form__item {
+  margin-bottom: 30px;
+  margin-bottom: 3rem;
+  position: relative;
+
+  input,
+  textarea {
+    width: 100%;
+    display: block;
+    background: transparent;
+    padding: 0;
+    border: none;
+    resize: none;
+    max-width: 500px;
+    font-size: 14px;
+    font-size: 1.4rem;
+    margin: 0;
+  }
+}
+.ji-form__item--with-suffix {
+  padding-right: 37%;
+}
+.ji-form__item__name {
+  font-size: 20px;
+  font-size: 2rem;
+  border-bottom: 1px dashed darken($tertiary-color-darker, 10%);
+  display: inline-block;
+  padding: 0 0 3px 0;
+  margin: 0 0 10px 0;
+  cursor: default;
+  font-weight: bold;
+}
+.ji-form__item__suffix {
+  position: absolute;
+  bottom: -4px;
+  bottom: -0.4rem;
+  right: 0;
+  color: #999;
+  cursor: default;
+  max-width: 43%;
+  text-align: right;
+  background: #FFF;
+  padding: 3px 5px;
+  padding: 0.3rem 0.5rem;
+}
+
+
+.option-wrapper {
+  @include clearfix();
+  width: 50%;
+  display: inline-block;
+  max-width: 230px;
+
+  i {
+    margin-right: 5px;
+  }
+  .head {
+    margin-bottom: 6px;
+    margin-bottom: 0.6rem;
+  }
+  &.first {
+    padding-right: 3px;
+    .option {
+      float: right;
+    }
+  }
+  &.second {
+    padding-left: 3px;
+    .option {
+      float: left;
+    }
+  }
+}
+.option {
+  background: transparent;
+  padding: 10px 15px;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  height: 160px;
+  height: 16rem;
+  text-align: left;
+
+  &:hover {
+    background: #CCC;
+    cursor: pointer;
+  }
+  &.on {
+    background: #999;
+    color: #FFF;
+    cursor: default;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .tt-form {
   max-width: 575px;
   margin: auto;
@@ -454,46 +572,6 @@ body,
       @include clearfix();
       text-align: center;
 
-      .option-wrapper {
-        @include clearfix();
-        width: 50%;
-        display: inline-block;
-        max-width: 230px;
-
-        &.first {
-          padding-right: 7px;
-          .option {
-            float: right;
-          }
-        }
-        &.second {
-          padding-left: 7px;
-          .option {
-            float: left;
-          }
-        }
-      }
-      .option {
-        border: 1px dashed #CCC;
-        background: #FCFCFC;
-        padding: 15px;
-        padding: 1.5rem;
-        width: 100%;
-        height: 160px;
-        height: 16rem;
-        text-align: left;
-
-        &:hover {
-          background: #EFEFEF;
-          cursor: pointer;
-        }
-        &.on {
-          border: 1px solid lighten($primary-color, 10%);
-          background: lighten($primary-color, 10%);
-          color: #FFF;
-          cursor: default;
-        }
-      }
       .icon {
         margin-right: 5px;
         margin-right: 0.5rem;
