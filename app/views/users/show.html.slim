@@ -3,11 +3,11 @@
 
 = render "shared/page_nav", user_page_nav_options(@user)
 
-= render 'shared/page_header', :name => 'Posts', :feed => "#{user_pretty_url(@user)}feed.atom"
+= render 'shared/page_header', :name => 'Posts', :feed => "#{user_pretty_url(@user)}/feed.atom"
 
 - if @posts.length > 0
   = render "posts/collection", :posts => @posts
 - else
   = render "posts/tile--empty_user_feed"
 
-= auto_discovery_link_tag(:atom, "#{user_pretty_url(@user)}feed.atom")
+= auto_discovery_link_tag(:atom, "#{user_pretty_url(@user)}/feed.atom")
