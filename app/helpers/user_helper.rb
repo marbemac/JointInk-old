@@ -48,6 +48,22 @@ module UserHelper
     options
   end
 
+  def user_pretty_url(user, target_url=nil)
+    if user.domain
+      if target_url
+        "http://#{user.domain}#{send("#{target_url}_path")}"
+      else
+        "http://#{user.domain}"
+      end
+    else
+      if target_url
+        send("#{target_url}_url", :subdomain => user.username)
+      else
+        user_url(:subdomain => user.username)
+      end
+    end
+  end
+
   def user_social_icon(link)
     match = /facebook|twitter|linkedin|pinterest|google|github|@/.match(link)
     if %w(facebook twitter linkedin pinterest).include? match.to_s

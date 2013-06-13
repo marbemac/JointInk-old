@@ -418,6 +418,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.find_by_request(request)
+    if request.host.include?('jointink.com') || request.host.include?('lvh.me')
+      find(request.subdomain.downcase)
+    else
+      find_by_domain(request.host)
+    end
+  end
+
   def touch_posts
     posts.update_all(:updated_at => Time.now)
   end

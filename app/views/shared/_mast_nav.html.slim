@@ -17,7 +17,7 @@
           i.icon.icon-dashboard
           | Dashboard
       li.blog
-        a href=user_url(:subdomain => current_user.username)
+        a href=user_pretty_url(current_user)
           i.icon.icon-user
           | My Blog
       li.settings

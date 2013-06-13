@@ -1,5 +1,5 @@
 <p style="color:rgb(34,34,34);font-family:arial,sans-serif;line-height:normal">
-  <%= link_to @post.user.name, user_url(:subdomain => @post.user.username) %> just published a new post in your channel:
+  <%= link_to @post.user.name, user_pretty_url(@post.user) %> just published a new post in your channel:
 </p>
 
 <p style="color:rgb(34,34,34);font-family:arial,sans-serif;line-height:normal">

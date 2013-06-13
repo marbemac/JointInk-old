@@ -14,7 +14,7 @@
             .private-channel Invite Only
           .created-by
             = 'created by '
-            a href=user_url(:subdomain => @channel.user.username) = @channel.user.name
+            a href=user_pretty_url(@channel.user) = @channel.user.name
 
         - if defined? badge_url
           .badge

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :except => [:active_user, :index,:show,:channels,:check_username,:recommendations]
+  before_filter :authenticate_user!, :except => [:active_user, :index,:show, :channels, :check_username, :recommendations]
 
   def active_user
     expires_in 10.seconds, :public => true
@@ -7,44 +7,40 @@ class UsersController < ApplicationController
   end
 
   def index
-
   end
 
+  #TODO: Gross controller
   def show
-    #TODO: Gross controller
-
-    @user = User.find(request.subdomain.downcase)
+    @user = User.find_by_request(request)
     @posts = @user.sharing(@channel).page(params[:page])
 
+    maximum = @posts.maximum(:updated_at)
+    expires_in 10.seconds, :public => true
+    if stale? etag: [@user, maximum], last_modified: maximum, public: true
+      @title = @user.name + "'s Posts"
+      @page_title = @user.name
 
-    # TODO: the caching below doesn't work well with the set_session_analytics system and Sign Up events (the sign up events get recorded multiple times since the JS is cached with the rest of the page)
-    #maximum = @posts.maximum(:updated_at)
-    #expires_in 10.seconds, :public => true
-    #if stale? etag: [@user, maximum], last_modified: maximum, public: true
-    @title = @user.name + "'s Posts"
-    @page_title = @user.name
+      @page = params[:page]
+      @channel = nil
+      if params[:channel_id]
+        @channel = Channel.find(params[:channel_id])
+        @title += ' in ' + @channel.name
+      end
+      @description = @user.bio
+      build_og_tags(@user.og_title, @user.og_type, @user.permalink, @user.og_description)
 
-    @page = params[:page]
-    @channel = nil
-    if params[:channel_id]
-      @channel = Channel.find(params[:channel_id])
-      @title += ' in ' + @channel.name
+      if @posts.length == 0
+        @channel_suggestions = Channel.popular(5)
+      end
+
+      add_page_entity('userViewed', @user)
+
+      respond_to do |format|
+        format.html
+        format.atom { render :layout => false }
+        format.rss { redirect_to user_feed_path(:format => :atom), :status => :moved_permanently }
+      end
     end
-    @description = @user.bio
-    build_og_tags(@user.og_title, @user.og_type, @user.permalink, @user.og_description)
-
-    if @posts.length == 0
-      @channel_suggestions = Channel.popular(5)
-    end
-
-    add_page_entity('userViewed', @user)
-
-    respond_to do |format|
-      format.html
-      format.atom { render :layout => false }
-      format.rss { redirect_to user_feed_path(:format => :atom), :status => :moved_permanently }
-    end
-    #end
   end
 
   def show_redirect
@@ -52,21 +48,8 @@ class UsersController < ApplicationController
     redirect_to root_url(:subdomain => @user.username), :status => :moved_permanently
   end
 
-  def drafts
-    if request.subdomain.blank?
-      @user = current_user
-    else
-      @user = User.find(request.subdomain.downcase)
-      authorize! :manage, @user
-    end
-
-    @page_title = "Your Ideas"
-    @posts = @user.posts.drafts.page(params[:page]).order('created_at DESC')
-    add_page_entity('channel', @channel)
-  end
-
   def recommendations
-    @user = User.find(request.subdomain.downcase)
+    @user = User.find_by_request(request)
     @posts = @user.recommendations.page(params[:page])
 
     expires_in 10.seconds, :public => true
@@ -106,7 +89,7 @@ class UsersController < ApplicationController
   end
 
   def channels
-    @user = User.find(request.subdomain.downcase)
+    @user = User.find_by_request(request)
     add_page_entity('userViewed', @user)
   end
 
@@ -127,7 +110,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # ugggglaayyy
+  #TODO: Gross controller
   def dashboard
 
     if request.subdomain.blank?

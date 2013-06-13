@@ -1,5 +1,5 @@
 <p>
-  <%= link_to @post.user.name, user_url(:subdomain => @post.user.username) %> just published a new post:
+  <%= link_to @post.user.name, user_pretty_url(@post.user) %> just published a new post:
 </p>
 
 <p>

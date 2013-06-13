@@ -2,7 +2,7 @@
 
   span.post-show__text-meta__author
     = 'By '
-    a href=user_url(:subdomain => post.user.username) = "#{post.user.name} "
+    a href=user_pretty_url(post.user) = "#{post.user.name} "
 
   - if post.primary_channel
     span.post-show__text-meta__channel

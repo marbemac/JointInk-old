@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130528005531) do
+ActiveRecord::Schema.define(:version => 20130612231114) do
 
   create_table "accounts", :force => true do |t|
     t.string  "username",                       :null => false
@@ -170,10 +170,12 @@ ActiveRecord::Schema.define(:version => 20130528005531) do
     t.boolean      "email_channel_post",     :default => true
     t.boolean      "email_newsletter",       :default => true
     t.text         "social_links",           :default => "[]"
+    t.string       "domain"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
+  add_index "users", ["domain"], :name => "index_users_on_domain"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true

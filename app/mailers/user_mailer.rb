@@ -1,15 +1,12 @@
 include ActionView::Helpers::TextHelper
 include ActionView::Helpers::AssetTagHelper
 include PostHelper
+include UserHelper
 
 class UserMailer < ActionMailer::Base
   layout 'email'#, :except => [:matt_welcome, :marc_welcome]
   default :from => "Joint Ink <team@jointink.com>"
   add_template_helper(ApplicationHelper)
-
-  #def initialize
-  #  @image_url = "#{request.protocol}#{request.host_with_port}#{asset_path('joint-ink-logo.gif')}"
-  #end
 
   def welcome_email(user_id)
     @user = User.find(user_id)

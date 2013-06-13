@@ -10,7 +10,6 @@
 
       - for post in @posts
         li
-          /a.manage-posts__item data-skip-pjax=true id="posts-#{post.id}" href=edit_post_url(post.token, :subdomain => false) class=(@post && @post.id == post.id ? 'on' : '') data-id=post.id
           a.manage-posts__item data-skip-pjax=true id="posts-#{post.id}" href=post_stats_url(post.token, :subdomain => false) class=(@post && @post.id == post.id ? 'on' : '') data-id=post.id
             - if post.post_type == 'text'
               i.icon-pencil
