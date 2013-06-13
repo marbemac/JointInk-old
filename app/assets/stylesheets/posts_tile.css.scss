@@ -209,7 +209,7 @@
 .post-tile--article {
   &.post-tile--cover-page-article {
     .post-tile__text {
-      @include box-shadow(0 70px 70px -20px rgba(0, 0, 0, 0.65) inset);
+      box-shadow: 0 70px 70px -20px rgba(0, 0, 0, 0.65) inset;
     }
   }
 }
@@ -217,7 +217,7 @@
 
 .post-tile--picture {
   .post-tile__text {
-    @include box-shadow(0 -70px 70px -20px rgba(0, 0, 0, 0.65) inset);
+    box-shadow: 0 -70px 70px -20px rgba(0, 0, 0, 0.65) inset;
   }
   .post-tile__title {
     h1 {

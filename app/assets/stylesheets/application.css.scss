@@ -182,8 +182,8 @@ body,
       margin: 0;
     }
     .bg {
-      @include box-shadow(0 80px 70px 15px rgba(0, 0, 0, 0.45) inset);
-      @include box-shadow(0 8rem 7rem 1.5rem rgba(0, 0, 0, 0.45) inset);
+      box-shadow: 0 80px 70px 15px rgba(0, 0, 0, 0.45) inset;
+      box-shadow: 0 8rem 7rem 1.5rem rgba(0, 0, 0, 0.45) inset;
       position: absolute;
       top: 0;
       bottom: 0;
@@ -239,7 +239,7 @@ body,
   }
 
   .badge {
-    @include box-shadow(rgba(0, 0, 0, 0.7) 0 0 2px);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
     @include border-radius(1000px);
     position: absolute;
     bottom: 10px;

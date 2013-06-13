@@ -76,7 +76,7 @@
 
 .button {
   @include transition(0.25s);
-  @include box-shadow(none);
+  box-shadow: none;
   border: none;
   text-transform: uppercase;
   margin: 0;
