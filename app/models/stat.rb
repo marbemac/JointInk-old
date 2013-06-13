@@ -85,7 +85,7 @@ class Stat < ActiveRecord::Base
     query = query.where(:event => event) if event
     query = query.where('created_at > ?', timeframe.days.ago) if timeframe
     query = query.where(filters) if filters
-    query = query.select("to_char(created_at, 'Mon DD') AS time").group("time").order('time ASC') if interval
+    query = query.select("to_char(created_at, 'MM/DD/YYYY') AS time").group("time").order('time ASC') if interval
 
     fill_date_gaps(query.to_a, timeframe)
   end
@@ -121,7 +121,7 @@ class Stat < ActiveRecord::Base
     return data if data.length == timeframe
 
     (timeframe+1).times do |i|
-      time = (timeframe-i).days.ago.strftime('%b %d')
+      time = (timeframe-i).days.ago.strftime('%m/%d/%Y')
       if !data[i] || data[i]['time'] != time
         data.insert(i, {
             'stat' => {
