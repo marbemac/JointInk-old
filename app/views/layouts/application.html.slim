@@ -23,7 +23,8 @@ html
 
       #analytics-data data-d=page_analytics_data.to_json
 
-    script src=JointInk::Application.config.app_url+active_user_js_path
+    = render 'shared/load_js', :src => JointInk::Application.config.app_url+active_user_js_path
+
     = javascript_include_tag "application"
 
     = yield :javascript

@@ -17,4 +17,4 @@
 
   = render 'posts/data_div', :post => post
 
-  script src=JointInk::Application.config.app_url+active_user_post_js_path(post.token)
+  = render 'shared/load_js', :src => JointInk::Application.config.app_url+active_user_post_js_path(post.token)
