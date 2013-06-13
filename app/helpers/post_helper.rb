@@ -10,7 +10,11 @@ module PostHelper
   end
 
   def post_pretty_url(post)
-    (post.primary_channel ? post_via_channel_url(post.primary_channel, post, :subdomain => post.user.username) : post_url(post, :subdomain => post.user.username))
+    if post.primary_channel
+      user_pretty_url(post.user) + post_via_channel_path(post.primary_channel, post)
+    else
+      user_pretty_url(post.user) + post_path(post)
+    end
   end
 
   class RenderDifferentHeaderCode < Redcarpet::Render::HTML

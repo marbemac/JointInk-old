@@ -51,15 +51,15 @@ module UserHelper
   def user_pretty_url(user, target_url=nil)
     if user.domain
       if target_url
-        "http://#{user.domain}#{send("#{target_url}_path")}"
+        url = "http://#{user.domain}#{send("#{target_url}_path")}"
       else
-        "http://#{user.domain}"
+        url = "http://#{user.domain}"
       end
     else
       if target_url
-        send("#{target_url}_url", :subdomain => user.username)
+        url = send("#{target_url}_url", :subdomain => user.username.downcase).chomp('/')
       else
-        user_url(:subdomain => user.username)
+        url = user_url(:subdomain => user.username.downcase).chomp('/')
       end
     end
   end

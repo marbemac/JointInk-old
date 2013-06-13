@@ -4,6 +4,4 @@ article id="posts-#{post.token}" class="post-tile post-tile--#{post.post_type} p
       = yield
       a.js-target-url.u-hide href=post_pretty_url(post)
 
-      = render 'posts/tile__actions', :post => post
-
   = render 'posts/tile__visual_meta', :post => post
