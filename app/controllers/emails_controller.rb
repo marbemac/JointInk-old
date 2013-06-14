@@ -43,8 +43,9 @@ class EmailsController < ApplicationController
         email = recipient.split('@').first
         channel = Channel.where("LOWER(email) = ?", email.downcase).first
         if channel
-          authorize! :post, channel
-          post.add_channel(user, channel)
+          if can? :post, channel
+            post.add_channel(user, channel)
+          end
         end
       end
 
