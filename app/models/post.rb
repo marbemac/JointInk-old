@@ -207,6 +207,7 @@ class Post < ActiveRecord::Base
   end
 
   def add_channel(user, channel)
+    return if channels.include?(channel)
     relationship = ChannelsPosts.new
     relationship.user = user
     relationship.channel = channel
