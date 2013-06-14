@@ -15,9 +15,9 @@ class ApplicationController < ActionController::Base
     end)
   end
 
-  #def new_user_session_path(resource)
-  #  root_path
-  #end
+  def current_ability
+    current_user.ability
+  end
 
   # Redirect after sign in / sign up
   def after_sign_in_path_for(resource)

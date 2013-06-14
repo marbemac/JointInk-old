@@ -44,6 +44,8 @@
 class User < ActiveRecord::Base
   include ActionView::Helpers::TextHelper
 
+  delegate :can?, :cannot?, :to => :ability
+
   serialize :theme_data, ActiveRecord::Coders::Hstore
   serialize :social_links, JSON
 
@@ -428,6 +430,10 @@ class User < ActiveRecord::Base
 
   def touch_posts
     posts.update_all(:updated_at => Time.now)
+  end
+
+  def ability
+    @ability ||= Ability.new(self)
   end
 
   protected
