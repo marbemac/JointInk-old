@@ -34,19 +34,20 @@ class EmailsController < ApplicationController
         end
 
         post.update_photo_attributes
+        post.content = params['recipient']
         post.save
 
-      end
-
-      # handle channels
-      params['recipient'].split(',').each do |recipient|
-        email = recipient.split('@').first
-        channel = Channel.where("LOWER(email) = ?", email.downcase).first
-        if channel
-          if user.can? :post, channel
-            post.add_channel(user, channel)
+        # handle channels
+        params['recipient'].split(',').each do |recipient|
+          email = recipient.split('@').first
+          channel = Channel.where("LOWER(email) = ?", email.downcase).first
+          if channel
+            if user.can?(:post, channel)
+              post.add_channel(user, channel)
+            end
           end
         end
+
       end
 
       # process all attachments:
