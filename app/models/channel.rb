@@ -35,6 +35,8 @@ class Channel < ActiveRecord::Base
   validates :description, :presence => true, :length => { :minimum => 2, :maximum => 200 }
   validates :privacy, :inclusion => { :in => ['public', 'invite'] }
   validates :email, :length => { :minimum => 2, :maximum => 200 }, :uniqueness => true
+  validates_exclusion_of :email, :in => %w(draft drafts publish published www note notes user help team tech admin marc matt atif founders info contact hello hi),
+                         :message => "Email {{value}} is not available."
 
   attr_accessible :name, :photo, :cover_photo, :description, :privacy, :info, :email
 
