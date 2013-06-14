@@ -34,12 +34,11 @@ class EmailsController < ApplicationController
         end
 
         post.update_photo_attributes
-        post.content = params['recipient']
         post.save
 
         # handle channels
         params['recipient'].split(',').each do |recipient|
-          email = recipient.split('@').first
+          email = recipient.strip.split('@').first
           channel = Channel.where("LOWER(email) = ?", email.downcase).first
           if channel
             if user.can?(:post, channel)
