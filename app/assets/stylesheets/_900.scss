@@ -187,34 +187,6 @@
   border-right: 1px solid #EEE;
 }
 
-
-
-.tt-form {
-  .section {
-    .line {
-      .name {
-        display: inline-block;
-        padding: 3px 10px 0 0;
-        padding: 0.3rem 1rem 0 0;
-        width: 49%;
-        vertical-align: top;
-        text-align: right;
-      }
-      .content {
-        width: 49%;
-        padding-left: 10px;
-        padding-left: 1rem;
-        display: block;
-        float: right;
-
-        input {
-          min-width: 100%;
-        }
-      }
-    }
-  }
-}
-
 #channel-collection {
   text-align: left;
 }

@@ -1,9 +1,7 @@
 jQuery ->
 
-  $('.users-settings').on "click", ".more-social", (e) ->
-    self = e.target
-    new_line = $(self).closest('form').find('.line').first().clone()
-    new_line.find('input').val('')
-    console.log new_line
-    new_line.insertBefore(self)
-    new_line.find('.name').remove()
+  $('body').on "click", ".ji-form__plus", (e) ->
+    line = $(@).prev().clone()
+    return if $.trim(line.val()).length == 0
+    line.val('')
+    $(@).before(line)

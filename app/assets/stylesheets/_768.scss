@@ -90,6 +90,27 @@
   }
 }
 
+.ji-form {
+  padding: 60px 0;
+  padding: 6rem 0;
+}
+.ji-form__section {
+  padding-left: 20px;
+  padding-left: 20rem;
+}
+.ji-form__item__name {
+  position: absolute;
+  top: -2px;
+  top: -0.2rem;
+  right: 100%;
+  max-width: 200px;
+  max-width: 20rem;
+  margin-right: 18px;
+  margin-right: 1.8rem;
+  text-align: right;
+  border: none;
+}
+
 // 2. TYPOGRAPHY 			==============================
 
 html {

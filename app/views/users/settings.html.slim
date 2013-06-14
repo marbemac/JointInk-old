@@ -2,78 +2,82 @@
   h1.sans-serif Settings
 
 .centered-page
-  #settings.tt-form
-    .section.basic
+  #settings.ji-form
+    section.ji-form__section
       = simple_form_for @user, :url => user_url(:subdomain => @user.username) do |f|
-        .help.show-for-touch Click something to change it. Click "Save Changes" to... save changes.
 
         = f.error_notification
         = f.error :base
 
-        .fileinput-button.circle
-          span.prompt Choose Photo
-          div
-            img src=(@user.avatar.present? ? user_avatar_path(@user, :width => 200, :height => 200, :crop => :thumb, :gravity => :face) : '')
-            = f.hidden_field :avatar_cache
-          = f.file_field :avatar, :tabindex => '-1'
-        = f.error :avatar
+        .ji-form__item
+          .ji-form__item__name Name
+          = f.input :name, :label => false, :input_html => {:placeholder => @user.name, :autocomplete => 'off'}
 
-        = f.input :name, :label => false, :input_html => {:placeholder => @user.name, :autocomplete => 'off'}
-        = f.input :bio, :label => false, :input_html => {:placeholder => 'My Bio', :autocomplete => 'off', :rows => 3}
+        .ji-form__item
+          .ji-form__item__name Bio
+          = f.input :bio, :label => false, :input_html => {:placeholder => 'My Bio', :autocomplete => 'off', :rows => 3}
+
+        .ji-form__item
+          .ji-form__item__name Profile Image
+          = f.file_field :avatar, :tabindex => '-1'
+          = f.hidden_field :avatar_cache
+          = f.error :avatar
+
+        .ji-form__item
+          .ji-form__item__name Cover Photo
+          = f.hidden_field :cover_photo_cache
+          = f.file_field :cover_photo, :tabindex => '-1'
+          = f.error :cover_photo
 
         = f.button :submit, :class => 'medium action submit button', :value => 'Save Basic Info'
 
-    .section.theme
+    section.ji-form__section.ji-form__section--list.ji-form__section--top-border
       = simple_form_for @user, :url => user_url(:subdomain => @user.username) do |f|
 
-        = f.error_notification
-        = f.error :base
+        .ji-form__item
+          .ji-form__item__name Links
+          - (@user.social_links + [""]).each_with_index do |s, i|
+            input name="user[social_links][]" type="text" placeholder='Twitter/Facebook/Website URL or Email Address' autocomplete='off' value=s
+          /.more-social.action.button.small Add More
+          .ji-form__plus + add more
 
-        .line
-          .name Cover Photo
-          .content
-            .fileinput-button.rectangle
-              span.prompt Choose Photo
-              div
-                img src=(@user.cover_photo.present? ? cover_photo_path(@user, :width => 200, :height => 250, :crop => :fit) : '')
-                = f.hidden_field :cover_photo_cache
-              = f.file_field :cover_photo, :tabindex => '-1'
-            = f.error :cover_photo
-
-        = f.button :submit, :class => 'medium action submit button', :value => 'Save Cover Photo'
-
-    .section.links
-      = simple_form_for @user, :url => user_url(:subdomain => @user.username) do |f|
-        .help.show-for-touch add links to your facebook, twitter, blog, email, etc
-
-        - (@user.social_links + [""]).each_with_index do |s, i|
-          .line.smaller
-            - if i == 0
-              .name My links
-            .content
-              input name="user[social_links][]" type="text" value=s
-        .more-social.action.button.small Add More
         = f.button :submit, :class => 'medium action submit button', :value => 'Save Links'
 
 
-    .section.email
+    section.ji-form__section.ji-form__section--top-border
       = simple_form_for @user, :url => user_url(:subdomain => @user.username), :html => {:class => "custom"} do |f|
 
         = f.error_notification
         = f.error :base
 
-        h3.sans-serif Email me when...
-        .line.smaller
-          .name Someone recommends my post
-          .content.checkbox-wrap
-            = f.check_box :email_recommended, :class => "checkbox"
-        .line.smaller
-          .name Someone posts in my channel
-          .content.checkbox-wrap
-            = f.check_box :email_channel_post, :class => "checkbox"
-        .line.smaller
-          .name Joint Ink has new features
-          .content.checkbox-wrap
-            = f.check_box :email_newsletter, :class => "checkbox"
+        .ji-form__item
+          .ji-form__item__name Emails
+
+          .ji-form__switch
+            .ji-form__switch__name Someone recommends my post
+            .switch.small
+              input id='user_email_recommended_false' name='user[email_recommended]' type='radio' value='false' checked=(@user.email_recommended ? false : true)
+              label for='user_email_recommended_false' Off
+              input id='user_email_recommended_true' name='user[email_recommended]' type='radio' value='true' checked=(@user.email_recommended ? true : false)
+              label for='user_email_recommended_true' On
+              span
+
+          .ji-form__switch
+            .ji-form__switch__name Someone posts in my channel
+            .switch.small
+              input id='email_channel_post_false' name='user[email_channel_post]' type='radio' value='false' checked=(@user.email_channel_post ? false : true)
+              label for='email_channel_post_false' Off
+              input id='email_channel_post_true' name='user[email_channel_post]' type='radio' value='true' checked=(@user.email_channel_post ? true : false)
+              label for='email_channel_post_true' On
+              span
+
+          .ji-form__switch
+            .ji-form__switch__name Joint Ink has new features
+            .switch.small
+              input id='email_newsletter_false' name='user[email_newsletter]' type='radio' value='false' checked=(@user.email_newsletter ? false : true)
+              label for='email_newsletter_false' Off
+              input id='email_newsletter_true' name='user[email_newsletter]' type='radio' value='true' checked=(@user.email_newsletter ? true : false)
+              label for='email_newsletter_true' On
+              span
 
         = f.button :submit, :class => 'medium action submit button', :value => 'Save Email Settings'
