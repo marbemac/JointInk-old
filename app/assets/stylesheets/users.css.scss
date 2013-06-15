@@ -187,7 +187,7 @@
   position: relative;
   padding: 5px 10px 5px 35px;
   display: block;
-  color: #222;
+  color: $body-text-color;
   font-size: 12px;
   font-size: 1.2rem;
   cursor: pointer;
@@ -254,7 +254,8 @@
   right: 0;
   top: 0;
   background: #222;
-  padding: 9px;
+  padding: 8.4px;
+  padding: .84rem;
   cursor: pointer;
   width: 20%;
   text-align: right;

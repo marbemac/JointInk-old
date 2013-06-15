@@ -9,6 +9,8 @@ body {
   background: $body-bg-color;
   min-height: 100%;
   color: $body-text-color;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
 }
 
 body {
@@ -27,7 +29,7 @@ ul, ol, p {
 h1,h2,h3,h4,h5,h6 {
   margin: 0;
   padding: 0;
-  color: $body-text-color;
+  color: darken($body-text-color, 10%);
 }
 
 h1 {
@@ -82,6 +84,8 @@ a {
 p,ul,ol {
   margin: 0 0 15px 0;
   margin: 0 0 1.5rem 0;
+  line-height: 22px;
+  line-height: 2.2rem;
 }
 
 ul {
