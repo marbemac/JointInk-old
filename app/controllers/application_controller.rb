@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_ability
-    current_user ? current_user.ability : nil
+    current_user ? current_user.ability : Ability.new(nil)
   end
 
   # Redirect after sign in / sign up
