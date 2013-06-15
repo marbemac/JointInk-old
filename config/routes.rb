@@ -1,6 +1,8 @@
 JointInk::Application.routes.draw do
 
   get 'health_check' => 'pages#health_check'
+
+  # javascripts
   get 'active_user/posts/:id.js' => 'posts#active_user', :as => :active_user_post_js
   get 'active_user.js' => 'users#active_user', :as => :active_user_js
 
@@ -51,10 +53,6 @@ JointInk::Application.routes.draw do
     get ':resource' => 'search#go', :resource => 'all'
   end
 
-  # pages
-  get 'about' => 'pages#about', :as => :about
-  get 'faq' => 'pages#faq', :as => :faq
-
   #admin_constraint = lambda do |request|
     #request.env['warden'].authenticate? and request.env['warden'].user.role?('admin')
     #true
@@ -96,23 +94,17 @@ JointInk::Application.routes.draw do
   #  put ':id/deauth' => 'users#account_deauth', :as => :account_deauth
   #end
 
+  # general
   get 'home' => 'pages#home', :as => :home
   get 'settings' => 'users#settings', :as => :settings
-  get 'recommendations' => 'users#recommendations', :as => :user_recommendations
   get 'dashboard' => 'users#dashboard', :as => :user_dashboard
-  get 'feed' => 'users#show', :as => :user_feed
 
-  # Users
-  scope 'users' do
-    put 'update_avatar' => 'users#update_avatar', :as => :update_user_avatar
-  end
-
-  put 'add/:user_id(/:channel_id)' => 'users#add', :as => :user_add
-  put 'remove/:user_id(/:channel_id)' => 'users#remove', :as => :user_remove
-
-  constraints(Subdomain) do
+  # users
+  constraints(UserDomain) do
     get '' => 'users#show', :as => :user
     put '' => 'users#update', :as => :update_user
+    get 'feed' => 'users#show', :as => :user_feed
+    get 'recommendations' => 'users#recommendations', :as => :user_recommendations
     get 'channels' => 'users#channels', :as => :user_channels
   end
 
