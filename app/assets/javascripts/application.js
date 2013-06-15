@@ -31,6 +31,7 @@
 //= require jquery.autocomplete
 //= require jquery.jplayer
 //= require jquery.divPlaceholder
+//= require detect_timezone.js
 //= require foundation.reveal
 
 //= require_tree ./global

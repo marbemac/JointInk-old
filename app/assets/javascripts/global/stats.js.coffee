@@ -1,6 +1,6 @@
 jQuery ->
 
-  sendStatRequest = (type) ->
+  window.sendStatRequest = (type) ->
     page_data = $('#analytics-data').data('d')
     data = {
       type: type
@@ -18,7 +18,7 @@ jQuery ->
       data: data
 
   $('.posts-c.posts-show, .users-c.users-show, .channels-c.channels-show').livequery ->
-    sendStatRequest('Page View')
+    window.sendStatRequest('Page View')
 
   $('.posts-c.posts-show .post-show--text').livequery ->
     return if $('#post-editor').length > 0
@@ -26,7 +26,7 @@ jQuery ->
     clearedTime = false
     clearedScroll = false
     words = $.trim($('.post-show__body').text()).split(' ').length
-    console.log(words + " words")
+
     setTimeout ->
       if $('.post-show--text').length
         if $(window).height() >= $(".post-show__body").height()
@@ -46,4 +46,4 @@ jQuery ->
     console.log 'Track Read'
     $('.recommend').trigger('tooltip-show')
     analytics.track('Post Read', $('#analytics-data').data('d'))
-    sendStatRequest('Read')
+    window.sendStatRequest('Read')

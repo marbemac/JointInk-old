@@ -22,3 +22,8 @@ jQuery ->
   $('body').on 'touchend click', '.on a,a.on', (e) ->
     e.preventDefault()
     false
+
+
+  unless $.cookie 'time_zone'
+    current_time = new Date()
+    $.cookie 'time_zone', current_time.getTimezoneOffset()

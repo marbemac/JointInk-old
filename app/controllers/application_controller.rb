@@ -77,8 +77,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_user_time_zone
-    Time.zone = current_user.time_zone if signed_in? && current_user
-    Chronic.time_class = Time.zone
+    if request.cookies["time_zone"]
+      min = request.cookies["time_zone"].to_i
+      Time.zone = ActiveSupport::TimeZone[-min.minutes]
+      Chronic.time_class = Time.zone
+    end
   end
 
   # open graph tags

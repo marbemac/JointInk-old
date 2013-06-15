@@ -85,9 +85,10 @@ class Stat < ActiveRecord::Base
     query = query.where(:event => event) if event
     query = query.where('created_at > ?', timeframe.days.ago) if timeframe
     query = query.where(filters) if filters
-    query = query.select("to_char(created_at, 'MM/DD/YYYY') AS time").group("time").order('time ASC') if interval
+    query = query.select("to_char(created_at + interval '#{Time.zone.utc_offset} seconds', 'MM/DD/YYYY') AS time").group("time").order('time ASC') if interval
+    query = query.to_a
 
-    fill_date_gaps(query.to_a, timeframe)
+    fill_date_gaps(query, timeframe)
   end
 
   def self.referal_data(limit=10, timeframe=nil, filters=nil)
