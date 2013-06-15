@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   #TODO: Gross controller
   def show
     @user = User.find_by_request(request)
+    not_found unless @user
     @posts = @user.sharing(@channel).page(params[:page])
 
     maximum = @posts.maximum(:updated_at)

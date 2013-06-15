@@ -5,6 +5,7 @@
 #  cover_photo :string(255)
 #  created_at  :datetime
 #  description :string(255)
+#  email       :string(255)
 #  id          :integer          not null, primary key
 #  info        :text
 #  name        :string(255)

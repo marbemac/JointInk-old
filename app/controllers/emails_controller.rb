@@ -33,6 +33,7 @@ class EmailsController < ApplicationController
           post.save
         end
 
+        post.spam_score = params['X-Mailgun-Sscore']
         post.update_photo_attributes
         post.save
 

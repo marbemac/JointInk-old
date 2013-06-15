@@ -13,6 +13,7 @@
 #  created_at             :datetime         not null
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string(255)
+#  domain                 :string(255)
 #  email                  :string(255)
 #  email_channel_post     :boolean          default(TRUE)
 #  email_newsletter       :boolean          default(TRUE)
