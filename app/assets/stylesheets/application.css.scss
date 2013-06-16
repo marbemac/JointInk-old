@@ -445,7 +445,7 @@ body,
   display: inline-block;
 }
 .ji-form__item--with-suffix {
-  padding-right: 37%;
+  padding-right: 62%;
 }
 .ji-form__item__name {
   font-size: 20px;
@@ -465,11 +465,16 @@ body,
   right: 0;
   color: #999;
   cursor: default;
-  max-width: 43%;
+  max-width: 60%;
   text-align: right;
   background: #FFF;
   padding: 3px 5px;
   padding: 0.3rem 0.5rem;
+}
+.ji-form__submit {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 

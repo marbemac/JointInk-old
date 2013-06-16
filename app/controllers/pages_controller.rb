@@ -1,12 +1,13 @@
 class PagesController < ApplicationController
   layout 'splash_page', :only => [:home]
+  include UserHelper
   caches_action :home, if: lambda { !signed_in? }
 
   def home
     #expires_in 3.hours, :public => true
 
     if signed_in?
-      redirect_to root_url(:subdomain => current_user.username)
+      redirect_to user_pretty_url(current_user)
     else
       @fullscreen = true
       @channels = Channel.active.order("posts_count DESC").limit(3)

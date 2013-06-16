@@ -15,9 +15,9 @@
         = f.input :description, :as => :text, :label => false, :input_html => {:placeholder => 'a brief description', :autocomplete => 'off', :rows => 3}
 
       .ji-form__item.ji-form__item--channel-email.ji-form__item--with-suffix
-        .ji-form__item__name Email
-        = f.input :email, :label => false, :input_html => {:placeholder => 'for users to post by email', :autocomplete => 'off', :rows => 3}, :disabled => (!current_user.role?('admin') && @channel.persisted? && @channel.email ? true : false)
-        .ji-form__item__suffix @jointink.com
+        .ji-form__item__name Post by Email
+        = f.input :email, :label => false, :input_html => {:placeholder => 'email..', :autocomplete => 'off', :rows => 3}, :disabled => (!current_user.role?('admin') && @channel.persisted? && @channel.email ? true : false)
+        .ji-form__item__suffix @channels.jointink.com
 
       .ji-form__item
         .ji-form__item__name Cover Photo
@@ -45,4 +45,4 @@
 
         = f.input :privacy, :as => :hidden, :label => false, :input_html => { :value => @channel.persisted? ? @channel.privacy : 'public' }
 
-    = f.button :submit, :class => 'large action submit button', :value => @channel.persisted? ? 'Update Channel' : 'Create Channel'
+    = f.button :submit, :class => 'large action submit button ji-form__submit', :value => @channel.persisted? ? 'Update Channel' : 'Create Channel'
