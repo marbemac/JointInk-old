@@ -33,7 +33,7 @@ class Channel < ActiveRecord::Base
 
   validates :user, :presence => true
   validates :name, :presence => true, :length => { :minimum => 2, :maximum => 100 }, :uniqueness => true
-  validates :description, :length => { :minimum => 2, :maximum => 200 }
+  validates :description, :length => { :maximum => 200 }
   validates :privacy, :inclusion => { :in => ['public', 'invite'] }
   validates :email, :length => { :minimum => 2, :maximum => 200 }, :uniqueness => true
   validates_format_of :email, :with => /^[a-zA-Z][a-zA-Z\d_]*$/, :message => "You must start with a letter, and may only use letters, digits, and underscores"
