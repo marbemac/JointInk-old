@@ -5,14 +5,17 @@
       .inner
         h1.sans-serif= name
 
+        - if params[:controller] == 'channels' && defined?(@channel) && @channel.email
+          .channel-email = "#{@channel.email}@jointink.com"
+
         - if defined? subheader
           h4.subheader.text-thin.sans-serif= subheader
 
         / this is ugly.. should probably refactor this entire page nav
         - if params[:controller] == 'channels' && defined?(@channel)
-          - if @channel.privacy == 'invite'
-            .private-channel Invite Only
           .created-by
+            - if @channel.privacy == 'invite'
+              .private-channel Invite Only
             = 'created by '
             a href=user_pretty_url(@channel.user) = @channel.user.name
 
