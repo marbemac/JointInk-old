@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   layout 'splash_page', :only => [:home]
   include UserHelper
-  caches_action :home, if: lambda { !signed_in? }
+  #caches_action :home, if: lambda { !signed_in? }
 
   def home
     #expires_in 3.hours, :public => true

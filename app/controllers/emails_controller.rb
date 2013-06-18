@@ -11,39 +11,43 @@ class EmailsController < ApplicationController
 
         title = params['subject']
 
-        if params['stripped-html'] && !params['stripped-html'].blank?
-          html = params['stripped-html'].gsub(params['stripped-signature'], '') # remove the signature if we can
-          content = ReverseMarkdown.parse(html) # if they formatted html this will turn that into markdown
-        else
-          content = params['stripped-text']
-        end
+        duplicate = user.posts.where(:title => title).first
 
-        post = user.posts.new(:title => title, :content => content)
-        post.emailed_from = params['sender']
-        post.status = params['status']
-
-        saved = post.save
-        if saved # woo saved successfully!
-          if post.status == 'active'
-            UserMailer.published_by_email_confirmation(post.id).deliver
-            # TODO: send a published event to segment.io like we do in the normal post update action
+        unless duplicate
+          if params['stripped-html'] && !params['stripped-html'].blank?
+            html = params['stripped-html'].gsub(params['stripped-signature'], '') # remove the signature if we can
+            content = ReverseMarkdown.parse(html) # if they formatted html this will turn that into markdown
+          else
+            content = params['stripped-text']
           end
-        else # whoops, change it to draft and resave
-          post.status = 'draft'
+
+          post = user.posts.new(:title => title, :content => content)
+          post.emailed_from = params['sender']
+          post.status = params['status']
+
+          saved = post.save
+          if saved # woo saved successfully!
+            if post.status == 'active'
+              UserMailer.published_by_email_confirmation(post.id).deliver
+              # TODO: send a published event to segment.io like we do in the normal post update action
+            end
+          else # whoops, change it to draft and resave
+            post.status = 'draft'
+            post.save
+          end
+
+          post.spam_score = params['X-Mailgun-Sscore']
+          post.update_photo_attributes
           post.save
-        end
 
-        post.spam_score = params['X-Mailgun-Sscore']
-        post.update_photo_attributes
-        post.save
-
-        # handle channels
-        params['recipient'].split(',').each do |recipient|
-          email = recipient.strip.split('@').first
-          channel = Channel.where("LOWER(email) = ?", email.downcase).first
-          if channel
-            if user.can?(:post, channel)
-              post.add_channel(user, channel)
+          # handle channels
+          params['recipient'].split(',').each do |recipient|
+            email = recipient.strip.split('@').first
+            channel = Channel.where("LOWER(email) = ?", email.downcase).first
+            if channel
+              if user.can?(:post, channel)
+                post.add_channel(user, channel)
+              end
             end
           end
         end
