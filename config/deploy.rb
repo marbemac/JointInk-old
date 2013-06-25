@@ -4,7 +4,7 @@ require "rvm/capistrano"
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
-set :rvm_ruby_string, '2.0.0-p195-rvm'
+set :rvm_ruby_string, '2.0.0-p195'
 set :rvm_type, :user
 set :rvm_require_role, :app
 
