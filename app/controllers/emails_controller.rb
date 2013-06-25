@@ -1,5 +1,3 @@
-require 'secure random'
-
 class EmailsController < ApplicationController
 
   def post
