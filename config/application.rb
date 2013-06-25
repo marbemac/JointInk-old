@@ -74,8 +74,5 @@ module JointInk
 
     # pjax
     config.middleware.use Rack::Pjax
-
-    # for heroku
-    config.assets.initialize_on_precompile = false
   end
 end

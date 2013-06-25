@@ -188,26 +188,13 @@ class User < ActiveRecord::Base
     self.roles.delete(role) if roles
   end
 
-  def send_welcome_email
-    if is_active?
-      UserMailer.welcome_email(id).deliver
-      UserMailer.welcome_email_admins(id).deliver
-    end
-  end
-
-  def send_personal_email
-    if is_active?
-      hour = Time.now.hour
-      variation = rand(7200)
-      if hour < 11
-        delay = Chronic.parse('Today at 11AM').to_i - Time.now.utc.to_i + variation
-        #resque.enqueue_in(delay, SendPersonalWelcome, id, "today")
-      elsif hour >= 11 && hour < 18
-        #resque.enqueue_in(1.hours + variation, SendPersonalWelcome, id, "today")
-      else
-        delay = Chronic.parse('Tomorrow at 11AM').to_i - Time.now.utc.to_i + variation
-        #resque.enqueue_in(delay, SendPersonalWelcome, id, "yesterday")
-      end
+  def generate_username_from_email(count=0)
+    possible_username = count > 0 ? "#{email.split('@').first}#{count}" : email.split('@').first
+    found = User.where(:username => possible_username).first
+    if found && found.id != id
+      generate_username_from_email(count+1)
+    else
+      self.username = possible_username
     end
   end
 

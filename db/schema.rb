@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130615205538) do
+ActiveRecord::Schema.define(:version => 20130624034239) do
 
   create_table "accounts", :force => true do |t|
     t.string  "username",                       :null => false
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20130615205538) do
     t.string   "token"
     t.string   "emailed_from"
     t.float    "spam_score"
+    t.boolean  "anonymous",        :default => false
   end
 
   add_index "posts", ["post_type"], :name => "index_posts_on_post_type"

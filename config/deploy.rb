@@ -52,6 +52,7 @@ after 'deploy:setup' do
 end
 after "deploy:update_code", "deploy:update_permissions"
 before "deploy:assets:precompile", "deploy:link_db_file"
+after "deploy:restart", "deploy:cleanup"
 
 desc "tail production log files"
 task :tail_logs, :roles => :app do
