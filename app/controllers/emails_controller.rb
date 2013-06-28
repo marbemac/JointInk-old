@@ -20,7 +20,7 @@ class EmailsController < ApplicationController
     last_post = user.posts.order('created_at DESC').first
 
     # don't allow posts within 60 seconds
-    unless Time.now.to_i - last_post.created_at.to_i < 60
+    unless last_post && Time.now.to_i - last_post.created_at.to_i < 60
 
       title = params['subject']
 
