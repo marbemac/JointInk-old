@@ -80,7 +80,6 @@ class User < ActiveRecord::Base
   validates :bio, :length => { :maximum => 250, :message => 'Bio has a max length of 250' }
   validate :username_change
 
-  after_create :send_welcome_email, :send_personal_email
   before_destroy :disconnect
 
   def is_active?
