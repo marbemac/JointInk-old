@@ -7,7 +7,7 @@
 
     .post-show__footer
       = render "posts/show__actions", :post => post
-      = render "posts/show__author_box", :post => post
+      = render "posts/show__author_box", :user => post.user
       = render "posts/show__channels", :post => post
 
     = render "posts/show__next_prev_buttons", :post => post

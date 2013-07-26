@@ -6,4 +6,4 @@ ul.post-tile__visual-meta__channels
         - if channel.cover_photo.blank?
           i.icon-circle-blank
         - else
-          img src=channel_photo_path(channel, :width => 65, :height => 65, :crop => :thumb)
+          img*cloudinary_image(channel.cover_photo_id, {:width => 65, :height => 65, 'data-crop' => 'thumb'})

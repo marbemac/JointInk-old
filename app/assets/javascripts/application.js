@@ -20,6 +20,7 @@
 //= require jquery-fileupload/jquery.iframe-transport
 //= require jquery-fileupload/jquery.fileupload
 //= require jquery-fileupload/vendor/tmpl
+//= require jquery.cloudinary.js
 //= require jquery.easing
 //= require jquery.timer
 //= require jquery.autosize

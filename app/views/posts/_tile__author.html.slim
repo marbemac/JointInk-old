@@ -1,2 +1,2 @@
-a.post-tile__visual-meta__author.js-tip href=user_pretty_url(post.user) title=post.user.username data-placement='left'
-  img src=user_avatar_path(post.user, :width => 65, :height => 65, :crop => :fill, :gravity => :face)
+a.post-tile__visual-meta__author.js-tip href=user_pretty_url(user) title=user.username data-placement='left'
+  img *cloudinary_image(user.avatar_id, {'data-gravity' => 'face'})

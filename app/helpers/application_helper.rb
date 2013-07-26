@@ -29,32 +29,6 @@ module ApplicationHelper
     text.sub(firstWord, "<strong>#{firstWord}</strong>")
   end
 
-  def update_image_options(options)
-    if cookies[:clientInfo]
-      begin
-        clientInfo = JSON.parse(cookies[:clientInfo])
-      rescue
-        return
-      end
-
-      # resize the image if we're on small screens
-      max_dimension = clientInfo['device_screen_width'] > clientInfo['device_screen_height'] ? clientInfo['device_screen_width'] : clientInfo['device_screen_height']
-      if options[:width] && max_dimension < options[:width]
-        original_width = options[:width]
-        options[:width] = max_dimension
-        if options[:height]
-          ratio = original_width / options[:height]
-          options[:height] = original_width / ratio
-        end
-      end
-
-      if clientInfo['device_pixel_ratio_rounded'] > 1 && clientInfo['connection_test_result'] == 'networkSuccess' && clientInfo['bandwith'] == 'high'
-        options[:width] *= 2 if options[:width]
-        options[:height] *= 2 if options[:height]
-      end
-    end
-  end
-
   def page_analytics_data
     data = {}
     @page_entities.each do |entity_data|

@@ -223,6 +223,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def avatar_id
+    self['avatar']
+  end
+
+  def cover_photo_id
+    self['cover_photo']
+  end
+
   def og_title
     name
   end

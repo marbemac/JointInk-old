@@ -1,6 +1,6 @@
 - cache post do
   .post-tile__visual-meta
-    = render 'posts/tile__author', :post => post
+    = render 'posts/tile__author', :user => post.user
 
     - if post.channels_count > 0
       = render 'posts/tile__channels', :post => post

@@ -127,6 +127,14 @@ class Channel < ActiveRecord::Base
     data
   end
 
+  def cover_photo_id
+    self['cover_photo']
+  end
+
+  def photo_id
+    self['photo']
+  end
+
   def self.popular(limit=10)
     Channel.active.public.joins(:posts).select("channels.*, COUNT(posts.id) as counter").group("channels.id").order("counter DESC").limit(limit)
   end

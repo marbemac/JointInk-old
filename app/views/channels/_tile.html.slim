@@ -5,7 +5,7 @@
       h4.name.sans-serif= channel.name
 
       - if channel.cover_photo.present?
-        .cover-image style="background-image: url('#{cover_photo_path(channel, :width => 250, :crop => :limit)}')"
+        .cover-image*cloudinary_background_image(channel.photo_id)
       - else
         .squares
 

@@ -1,7 +1,7 @@
 - content_for :page_nav do
   #page-nav-padder
   #page-nav class="#{params[:controller]}-c"
-    header class=(defined?(cover_photo_url) || (params[:controller] == 'channels' && defined?(@channel)) ? 'with-cover-photo' : '')
+    header class=(defined?(cover_photo_id) || (params[:controller] == 'channels' && defined?(@channel)) ? 'with-cover-photo' : '')
       .inner
         h1.sans-serif= name
 
@@ -21,10 +21,10 @@
 
         - if defined? badge_url
           .badge
-            img src=badge_url
+            img*cloudinary_image(badge_url)
 
-      - if defined? cover_photo_url
-        .bg.cover-image style="background-image: url('#{cover_photo_url}')"
+      - if defined? cover_photo_id
+        .bg.cover-image*cloudinary_background_image(cover_photo_id)
       - elsif params[:controller] == 'channels' && defined?(@channel)
         .squares
 

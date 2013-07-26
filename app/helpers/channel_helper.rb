@@ -1,7 +1,6 @@
 module ChannelHelper
 
   def channel_photo_path(channel, options={})
-    update_image_options(options)
     target = channel.cover_photo
     if options[:format]
       target = target.split('.')[0..-2].join('')
@@ -18,7 +17,7 @@ module ChannelHelper
     options[:subheader] = channel.description
 
     if channel.cover_photo.present?
-      options[:cover_photo_url] = cover_photo_path(channel, :width => 450, :crop => :limit)
+      options[:cover_photo_id] = channel.photo_id
     end
 
     options

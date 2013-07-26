@@ -1,5 +1,5 @@
 .post-show__main-image class=(post.photo.present? ? 'post-show__main-image--present' : '')
-  .image style="background-image: url('#{post.photo_url}')"
+  .image*cloudinary_background_image(post.photo_id)
 
   .post-show__main-image__bg
 

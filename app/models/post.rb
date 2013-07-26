@@ -217,6 +217,10 @@ class Post < ActiveRecord::Base
     ChannelsPosts.where(:post_id => id, :channel_id => channel.id).first.destroy
   end
 
+  def photo_id
+    self['photo']
+  end
+
   def og_title
     title
   end
