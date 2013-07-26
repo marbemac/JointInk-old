@@ -1,4 +1,4 @@
-.recommend.js-tip data-placement='bottom' title="Did you like this post? #{signed_in? ? '' : 'Anonymous recommendations welcome.'}"
+.recommend.js-tip data-placement='bottom' title="Did you like this post? #{user_signed_in? ? '' : 'Anonymous recommendations welcome.'}"
   span data-id=@post.id data-url=post_vote_path(@post.token) class="medium button #{@post.voted?(current_user, request) ? 'gray' : 'action'}"
     - if @post.voted?(current_user, request)
       | Recommended

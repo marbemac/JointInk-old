@@ -9,7 +9,7 @@
         i.icon.icon-circle-blank
         | Channels
     li.spacer
-    - if signed_in?
+    - if user_signed_in?
       li.head = current_user.first_name
       li.spacer
       li.dashboard

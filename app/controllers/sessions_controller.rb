@@ -1,8 +1,8 @@
 class SessionsController < Devise::SessionsController
   layout 'splash_page'
 
-  prepend_before_filter :require_no_authentication, :only => [ :new, :create ]
-  prepend_before_filter :allow_params_authentication!, :only => :create
+  prepend_before_action :require_no_authentication, :only => [ :new, :create ]
+  prepend_before_action :allow_params_authentication!, :only => :create
 
   # GET /resource/sign_in
   def new

@@ -1,12 +1,12 @@
 class PagesController < ApplicationController
   layout 'splash_page', :only => [:home]
   include UserHelper
-  #caches_action :home, if: lambda { !signed_in? }
+  #caches_action :home, if: lambda { !user_signed_in? }
 
   def home
     #expires_in 3.hours, :public => true
 
-    if signed_in?
+    if user_signed_in?
       redirect_to user_pretty_url(current_user)
     else
       @fullscreen = true

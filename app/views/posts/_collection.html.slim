@@ -2,6 +2,6 @@
 
   - if posts
     - posts.each do |post|
-      = render :partial => "posts/tile--#{post.post_type ? post.post_type : 'text'}", :layout => 'posts/tile', :locals => {:post => post}
+      = render :partial => "posts/tile#{post.post_type.capitalize ? post.post_type.capitalize : 'Text'}", :layout => 'posts/tile', :locals => {:post => post}
 
   .end ~ The End ~

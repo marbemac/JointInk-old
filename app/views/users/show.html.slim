@@ -8,6 +8,6 @@
 - if @posts.length > 0
   = render "posts/collection", :posts => @posts
 - else
-  = render "posts/tile--empty_user_feed"
+  = render "posts/tile_empty_user_feed"
 
 = auto_discovery_link_tag(:atom, "#{user_pretty_url(@user)}/feed.atom")

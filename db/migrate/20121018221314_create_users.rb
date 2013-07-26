@@ -50,7 +50,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :origin
       t.string :avatar, :default => nil
       t.string :cover_photo, :default => nil
-      t.string_array :roles, :default => Array.new
+      t.string_array :roles, :array => true, :default => Array.new
     end
 
     add_index :users, :email,                :unique => true

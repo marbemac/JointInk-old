@@ -36,16 +36,14 @@ class Channel < ActiveRecord::Base
   validates :description, :length => { :maximum => 200 }
   validates :privacy, :inclusion => { :in => ['public', 'invite'] }
   validates :email, :length => { :minimum => 2, :maximum => 200 }, :uniqueness => true
-  validates_format_of :email, :with => /^[a-zA-Z][a-zA-Z\d_]*$/, :message => "You must start with a letter, and may only use letters, digits, and underscores"
+  validates_format_of :email, :with => /^[a-zA-Z][a-zA-Z\d_]*$/, :multiline => true, :message => "You must start with a letter, and may only use letters, digits, and underscores"
   validates_exclusion_of :email, :in => %w(draft drafts publish published www note notes user help team tech admin marc matt atif founders info contact hello hi),
                          :message => "Email {{value}} is not available."
 
-  attr_accessible :name, :photo, :cover_photo, :description, :privacy, :info, :email
-
-  scope :active, where(:status => 'active')
-  scope :public, where(:privacy => 'public')
-  scope :private, where(:privacy => 'invite')
-  scope :with_posts, where('channels.posts_count > 0')
+  scope :active, -> { where(:status => 'active') }
+  scope :public, -> { where(:privacy => 'public') }
+  scope :private, -> { where(:privacy => 'invite') }
+  scope :with_posts, -> { where('channels.posts_count > 0') }
 
   before_destroy :disconnect
 

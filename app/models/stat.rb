@@ -101,7 +101,7 @@ class Stat < ActiveRecord::Base
     total = query.inject(0) {|sum, hash| sum + hash['value'].to_i}
     query.each do |q|
       if q['name'] =~ /jointink.com\/[a-z\-A-Z_0-9]*$/
-        channel = Channel.find_by_slug(q['name'].split('/').last)
+        channel = Channel.where(:slug => q['name'].split('/').last).first
         name = channel ? channel.name : 'Unknown Channel'
       elsif q['name']
         name = q['name'].gsub(/\.com/, '').capitalize

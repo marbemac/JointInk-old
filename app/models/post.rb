@@ -30,7 +30,7 @@ class Post < ActiveRecord::Base
   include ActionView::Helpers::TextHelper
   include PostHelper
 
-  serialize :photo_exif, ActiveRecord::Coders::Hstore
+  store_accessor :photo_exif
 
   mount_uploader :photo, ImageUploader
   mount_uploader :audio, AudioUploader
@@ -45,12 +45,10 @@ class Post < ActiveRecord::Base
   validates :post_type, :presence => true, :if => lambda { |post| post.is_active? }
   validates :photo, :presence => true, :if => lambda { |post| post.is_active? && (post.post_type == 'picture' || post.style == 'text-on-image') }
 
-  attr_accessible :title, :content, :photo, :status, :post_type, :post_subtype, :style, :attribution_link
-
-  scope :active, where(:status => 'active')
-  scope :published, where(:status => 'active')
-  scope :drafts, where(:status => 'draft')
-  scope :notes, where(:status => 'note')
+  scope :active, -> { where(:status => 'active') }
+  scope :published, -> { where(:status => 'active') }
+  scope :drafts, -> { where(:status => 'draft') }
+  scope :notes, -> { where(:status => 'note') }
 
   before_create :set_default_style
   before_save :sanitize, :set_published_at

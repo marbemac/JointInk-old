@@ -3,32 +3,30 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 
 gem 'bundler'
-gem 'rails', '~> 3.2.13'
+gem 'rails', '4.0.0'
 
 gem 'jquery-rails'
-gem "slim-rails", '~> 1.1.1'
+gem "slim-rails"
 gem 'pg'
 gem 'honeybadger' # Exception notification
 gem 'devise' # Authentication
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'yajl-ruby' # json
-gem "cancan", ">= 1.6.8"
-gem 'koala', '1.6' # facebook graph api support
+gem "cancan"
+gem 'koala' # facebook graph api support
 gem 'twitter' # twitter api support
 gem 'chronic' # Date/Time management
 
 gem 'dalli' # memcache
 
-gem 'rack-contrib', '1.1.0'
+gem 'rack-contrib'
 gem 'rack-pjax'
 
 gem 'cloudinary'
 gem "switch_user"
 gem 'annotate'
-gem 'activerecord-postgres-hstore'
-gem 'ar_pg_array'
-gem "friendly_id", "~> 4.0.9"
+gem 'friendly_id', github: 'FriendlyId/friendly_id', branch: 'rails4'
 
 gem 'redcarpet'
 gem 'reverse_markdown'
@@ -36,10 +34,10 @@ gem 'carrierwave'
 gem 'fog'
 
 gem 'kaminari'
-gem 'cache_digests'
-gem 'simple_form'
+gem 'simple_form', '~> 3.0.0.rc'
 gem 'sanitize'
 gem 'pg_search'
+gem 'pg_array_parser'
 gem 'turbo-sprockets-rails3'
 
 gem 'truncate_html'
@@ -51,15 +49,13 @@ gem 'capistrano'
 gem 'rvm-capistrano'
 gem 'foreman'
 
-group :assets do
-  gem 'sass-rails',   '~> 3.2.6'
-  gem 'coffee-rails', '~> 3.2.2'
-  gem 'uglifier'
-  gem 'bourbon'
-  gem 'zurb-foundation', '~> 4.1.3'
-  gem 'font-awesome-rails'
-  gem 'jquery-fileupload-rails'
-end
+gem 'sass-rails',   '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'uglifier'
+gem 'bourbon'
+gem 'zurb-foundation', '~> 4.3.1'
+gem 'font-awesome-rails'
+gem 'jquery-fileupload-rails'
 
 group :production, :staging do
   gem "rack-timeout"
@@ -71,5 +67,4 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
-  gem 'rails-dev-tweaks'
 end

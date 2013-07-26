@@ -37,7 +37,7 @@ JointInk::Application.routes.draw do
 
       scope 'vote' do
         put '' => 'posts#create_vote', :as => :post_vote
-        delete '' => 'posts#destroy_vote', :as => :post_vote
+        delete '' => 'posts#destroy_vote'
       end
 
       scope 'channels' do
@@ -78,12 +78,11 @@ JointInk::Application.routes.draw do
   devise_scope :user do
     get 'sign-out' => 'sessions#destroy', :as => :destroy_user_session
     get 'sign-in' => 'sessions#new', :as => :user_session
-    post 'sign-in' => 'sessions#create', :as => :user_session
+    post 'sign-in' => 'sessions#create'
     get 'users/sign_in' => 'sessions#create' # stupid redirect after sign in if not confirmed
     get 'sign-up' => 'registrations#new', :as => :user_registration
     post 'sign-up' => 'registrations#create'
-    post 'users' => 'registrations#create', :as => :user
-    put 'users' => 'registrations#update', :as => :user
+    post 'users' => 'registrations#create'
   end
   get '/users/auth/:provider' => 'omniauth_callbacks#passthru'
 
@@ -109,7 +108,10 @@ JointInk::Application.routes.draw do
   end
 
   # channels
-  resources :channels
+  scope 'channels' do
+    get 'new' => 'channels#new', :as => :new_channel
+    get '' => 'channels#index', :as => :channels
+  end
   scope ':id' do
     get 'feed' => 'channels#show', :as => :channel_feed
     get 'edit' => 'channels#edit', :as => :edit_channel

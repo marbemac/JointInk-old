@@ -22,7 +22,7 @@ class Account < ActiveRecord::Base
 
   validates :username, :presence => { :message => 'Account username cannot be blank.' }
 
-  default_scope where(:status => 'active')
+  default_scope -> { where(:status => 'active') }
 
   def url
     if user_id

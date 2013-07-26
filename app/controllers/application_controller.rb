@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include UrlHelper
-  before_filter :catch_flash, :init, :set_user_time_zone, :save_referer
+  before_action :catch_flash, :init, :set_user_time_zone, :save_referer
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   unless Rails.application.config.consider_all_requests_local
     rescue_from Exception, :with => (lambda do |exception|
@@ -31,7 +32,7 @@ class ApplicationController < ActionController::Base
   end
 
   def save_referer
-    unless signed_in?
+    unless user_signed_in?
       unless session['referer']
         session['referer'] = request.referer || 'none'
       end
@@ -53,6 +54,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :password) }
+  end
 
   def catch_flash
     if params[:notice] || params[:alert]

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :except => [:active_user, :index,:show, :channels, :check_username, :recommendations]
+  before_action :authenticate_user!, :except => [:active_user, :index,:show, :channels, :check_username, :recommendations]
 
   def active_user
     expires_in 10.seconds, :public => true
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
     params[:user][:social_links].reject! {|l| l.blank?} if params[:user][:social_links]
 
     respond_to do |format|
-      current_user.update_attributes(params[:user])
+      current_user.update_attributes(user_params)
       if current_user.save
         current_user.touch_posts
         format.html { redirect_to :back, notice: 'Successfully updated.' }
@@ -151,6 +151,15 @@ class UsersController < ApplicationController
     @referalData = Stat.referal_data(10, 30, filter)
 
     @posts = @user.posts.order('created_at DESC')
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:username, :name, :email, :password, :password_confirmation, :remember_me,
+                                 :login, :bio, :avatar, :cover_photo, :theme_header_color, :theme_header_height,
+                                 :theme_background_pattern, :email_recommended, :email_channel_post, :email_newsletter,
+                                 :social_links)
   end
 
 end

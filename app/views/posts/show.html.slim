@@ -18,4 +18,4 @@
 - content_for :head do
   link rel="canonical" href=@post.permalink
 
-= render :partial => "posts/show--#{@post.post_type ? @post.post_type : 'text'}", :layout => 'posts/show', :locals => {:post => @post}
+= render :partial => "posts/show#{@post.post_type.capitalize ? @post.post_type.capitalize : 'Text'}", :layout => 'posts/show', :locals => {:post => @post}

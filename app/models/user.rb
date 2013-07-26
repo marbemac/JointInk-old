@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
 
   delegate :can?, :cannot?, :to => :ability
 
-  serialize :theme_data, ActiveRecord::Coders::Hstore
+  store_accessor :theme_data
   serialize :social_links, JSON
 
   extend FriendlyId
@@ -69,13 +69,9 @@ class User < ActiveRecord::Base
   has_many :post_votes
 
   attr_accessor :login
-  attr_accessible :username, :name, :email, :password, :password_confirmation, :remember_me,
-                  :login, :bio, :avatar, :cover_photo, :theme_header_color, :theme_header_height,
-                  :theme_background_pattern, :email_recommended, :email_channel_post, :email_newsletter,
-                  :social_links
 
   validates :username, :length => { :minimum => 3, :maximum => 15 }, :uniqueness => true
-  validates_format_of :username, :with => /^[a-zA-Z][a-zA-Z\d_]*$/, :message => "You must start with a letter, and may only use letters, digits, and underscores"
+  validates_format_of :username, :with => /^[a-zA-Z][a-zA-Z\d_]*$/, :multiline => true, :message => "You must start with a letter, and may only use letters, digits, and underscores"
   validates :name, :length => { :minimum => 3, :maximum => 50 }
   validates :bio, :length => { :maximum => 250, :message => 'Bio has a max length of 250' }
   validate :username_change
@@ -411,7 +407,7 @@ class User < ActiveRecord::Base
     if request.host.include?('jointink.com') || request.host.include?('lvh.me')
       find(request.subdomain.downcase)
     else
-      find_by_domain(request.host)
+      where(:domain => request.host).first
     end
   end
 

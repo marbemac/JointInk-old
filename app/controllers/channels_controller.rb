@@ -1,5 +1,5 @@
 class ChannelsController < ApplicationController
-  before_filter :authenticate_user!, :only => [:new,:update,:edit]
+  before_action :authenticate_user!, :only => [:new,:update,:edit]
 
   def index
     @channels = Channel.active.with_posts.order("posts_count DESC")
@@ -19,7 +19,7 @@ class ChannelsController < ApplicationController
   end
 
   def create
-    @channel = current_user.channels.build(params[:channel])
+    @channel = current_user.channels.build(channel_params)
     authorize! :create, @channel
 
     respond_to do |format|
@@ -39,7 +39,7 @@ class ChannelsController < ApplicationController
     authorize! :update, @channel
 
     respond_to do |format|
-      if @channel.update_attributes(params[:channel])
+      if @channel.update_attributes(channel_params)
         @channel.touch_posts
         format.html { redirect_to channel_path(@channel), notice: 'Channel was successfully updated.' }
       else
@@ -81,4 +81,11 @@ class ChannelsController < ApplicationController
   def members
 
   end
+
+  private
+
+  def channel_params
+    params.require(:channel).permit(:name, :photo, :cover_photo, :description, :privacy, :info, :email)
+  end
+  
 end

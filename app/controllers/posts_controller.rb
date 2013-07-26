@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:active_user, :show, :create_read, :show_redirect, :create_vote, :destroy_vote]
+  before_action :authenticate_user!, :except => [:active_user, :show, :create_read, :show_redirect, :create_vote, :destroy_vote]
   include PostHelper
 
   def active_user
-    @post = Post.find_by_token(params[:id])
+    @post = Post.where(:token => params[:id]).first
     not_found unless @post
     stale? etag: [@post, (current_user ? current_user : request.remote_ip)]
   end
@@ -27,12 +27,12 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find_by_token(params[:id])
+    @post = Post.where(:token => params[:id]).first
     authorize! :update, @post
     pub = @post.published_at
 
     respond_to do |format|
-      if @post.update_attributes(params[:post])
+      if @post.update_attributes(post_params)
         set_session_analytics("Publish", {:postId => @post.id}) if !pub && @post.published_at # Not super clean, but it works
         @post.update_photo_attributes
         @post.save
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by_token(params[:post_id])
+    @post = Post.where(:token => params[:post_id]).first
     not_found unless @post
     authorize! :read, @post
 
@@ -64,7 +64,7 @@ class PostsController < ApplicationController
   end
 
   def show_redirect
-    @post = Post.find_by_token(params[:id])
+    @post = Post.where(:token => params[:id]).first
     if @post.primary_channel
       redirect_to post_via_channel_url(@post.primary_channel, @post, :subdomain => @post.user.username), :status => :moved_permanently
     else
@@ -83,7 +83,7 @@ class PostsController < ApplicationController
     @posts = @user.posts.order('created_at DESC')
 
     if params[:id]
-      @post = Post.find_by_token(params[:id])
+      @post = Post.where(:token => params[:id]).first
     else
       @post = @posts.first
     end
@@ -102,7 +102,7 @@ class PostsController < ApplicationController
     filter = {:post_user_id => @user.id}
     @post = nil
     if params[:id]
-      @post = Post.find_by_token(params[:id])
+      @post = Post.where(:token => params[:id]).first
       filter[:post_id] = @post.id
     end
 
@@ -136,7 +136,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find_by_token(params[:id])
+    @post = Post.where(:token => params[:id]).first
     authorize! :destroy, @post
     @post.destroy
     respond_to do |format|
@@ -146,17 +146,17 @@ class PostsController < ApplicationController
   end
 
   def add_inline_photo
-    @post = Post.find_by_token(params[:id])
+    @post = Post.where(:token => params[:id]).first
     authorize! :update, @post
-    photo = Cloudinary::Uploader.upload(params[:post][:photo], {:tags => ["post-#{@post.id}"], :format => 'jpg', :transformation => {:crop => :limit, :width => 1400, :height => 1400, :quality => 80}})
+    photo = Cloudinary::Uploader.upload(post_params[:photo], {:tags => ["post-#{@post.id}"], :format => 'jpg', :transformation => {:crop => :limit, :width => 1400, :height => 1400, :quality => 80}})
     url = Cloudinary::Utils.cloudinary_url("v#{photo['version']}/#{photo['public_id']}.jpg", {:crop => :limit, :width => 700})
     render :text => "{\"url\" : \"#{url}\", \"photo\" : \"v#{photo['version']}/#{photo['public_id']}.jpg\", \"id\" : \"#{photo['public_id']}\"}", :content_type => "text/plain"
   end
 
   def update_photo
-    @post = Post.find_by_token(params[:id])
+    @post = Post.where(:token => params[:id]).first
     authorize! :update, @post
-    @post.photo = params[:post][:photo]
+    @post.photo = post_params[:photo]
     @post.save
     @post.update_photo_attributes
     @post.save
@@ -165,7 +165,7 @@ class PostsController < ApplicationController
   end
 
   def remove_photo
-    @post = Post.find_by_token(params[:id])
+    @post = Post.where(:token => params[:id]).first
     authorize! :update, @post
     @post.remove_photo!
     @post.update_photo_attributes
@@ -173,16 +173,16 @@ class PostsController < ApplicationController
   end
 
   def update_audio
-    @post = Post.find_by_token(params[:id])
+    @post = Post.where(:token => params[:id]).first
     authorize! :update, @post
-    @post.audio = params[:post][:audio]
+    @post.audio = post_params[:audio]
     @post.save
 
     render :json => {:url => @post.audio_url, :name => @post.audio_name}
   end
 
   def remove_audio
-    @post = Post.find_by_token(params[:id])
+    @post = Post.where(:token => params[:id]).first
     authorize! :update, @post
     @post.remove_audio!
     @post.save
@@ -190,7 +190,7 @@ class PostsController < ApplicationController
   end
 
   def create_vote
-    @post = Post.find_by_token(params[:id])
+    @post = Post.where(:token => params[:id]).first
 
     # can't vote on your own posts
     if current_user && @post.user_id == current_user.id
@@ -207,7 +207,7 @@ class PostsController < ApplicationController
   end
 
   def destroy_vote
-    @post = Post.find_by_token(params[:id])
+    @post = Post.where(:token => params[:id]).first
 
     stat = PostVote.retrieve(@post.id, request.remote_ip, current_user ? current_user.id : nil)
     if stat
@@ -221,7 +221,7 @@ class PostsController < ApplicationController
   end
 
   def add_channel
-    @post = Post.find_by_token(params[:id])
+    @post = Post.where(:token => params[:id]).first
     authorize! :destroy, @post
     @channel = Channel.find(params[:channel_id])
     authorize! :post, @channel
@@ -240,7 +240,7 @@ class PostsController < ApplicationController
   end
 
   def remove_channel
-    @post = Post.find_by_token(params[:id])
+    @post = Post.where(:token => params[:id]).first
     authorize! :destroy, @post
     @channel = Channel.find(params[:channel_id])
 
@@ -254,6 +254,12 @@ class PostsController < ApplicationController
         format.js { render :json => {:status => 'error'}, :status => 400 }
       end
     end
-
   end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:title, :content, :photo, :status, :post_type, :post_subtype, :style, :attribution_link)
+  end
+
 end

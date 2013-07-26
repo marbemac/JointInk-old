@@ -2,7 +2,7 @@ doctype html
 html
   = render "layouts/head"
 
-  body data-loggedIn='#{signed_in? ? true : false}'
+  body data-loggedIn='#{user_signed_in? ? true : false}'
 
     div id="page-wrapper" class="#{params[:controller]}-#{params[:action]} #{params[:controller]}-c"
 
