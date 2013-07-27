@@ -18,7 +18,7 @@ set :deploy_via,          :remote_cache
 set :keep_releases,       3
 set :torquebox_home,      '/opt/torquebox/current'
 set :jboss_control_style, :binscripts
-set :app_environment,     {:RAILS_ENV => 'production'}
+set :app_environment,     {}
 set :rails_env,           "production"
 set :app_context,         "/"
 set :default_environment, {
