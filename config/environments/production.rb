@@ -75,10 +75,6 @@ JointInk::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # Use a different cache store in production
-  config.cache_store = :dalli_store, 'memcached1',
-      { :compress => true }
-
   config.app_url = 'http://jointink.com'
 
   config.action_mailer.default_url_options = { :host => 'jointink.com' }
