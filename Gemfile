@@ -50,6 +50,7 @@ gem 'foreman'
 
 gem 'sass-rails',   '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'sprockets-helpers'
 gem 'uglifier'
 gem 'bourbon'
 gem 'zurb-foundation', '~> 4.3.1'
