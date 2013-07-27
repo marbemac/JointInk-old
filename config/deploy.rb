@@ -21,6 +21,9 @@ set :jboss_control_style, :binscripts
 set :app_environment,     {:RAILS_ENV => 'production'}
 set :rails_env,           "production"
 set :app_context,         "/"
+set :default_environment, {
+    'PATH' => "/opt/torquebox/current/jruby/bin:$PATH"
+}
 
 ssh_options[:forward_agent] = false
 
