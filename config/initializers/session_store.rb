@@ -1,8 +1,7 @@
-# Be sure to restart your server when you modify this file.
-
-JointInk::Application.config.session_store :cookie_store, key: '_JointInk_session', :domain => :all
-
-# Use the database for sessions instead of the cookie-based default,
-# which shouldn't be used to store highly confidential information
-# (create the session table with "rails generate session_migration")
-# JointInk::Application.config.session_store :active_record_store
+# Configure the TorqueBox Servlet-based session store.
+# Provides for server-based, in-memory, cluster-compatible sessions
+if ENV['TORQUEBOX_APP_NAME']
+  JointInk::Application.config.session_store :torquebox_store, :key => '_JointInk_session', :domain => :all
+else
+  JointInk::Application.config.session_store :cookie_store, :key => '_JointInk_session', :domain => :all
+end  

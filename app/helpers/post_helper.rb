@@ -17,32 +17,42 @@ module PostHelper
     end
   end
 
-  class RenderDifferentHeaderCode < Redcarpet::Render::HTML
-    def header(text, header_level)
-      header = [header_level+2, 6].min
-      "<h#{header}>#{text}</h#{header}>"
-    end
-  end
+  #class RenderDifferentHeaderCode < Redcarpet::Render::HTML
+  #  #def header(text, header_level)
+  #  #  header = [header_level+2, 6].min
+  #  #  "<h#{header}>#{text}</h#{header}>"
+  #  #end
+  #end
 
   def markdown(text, render_options={})
-    return '' unless text
-
-    if render_options[:no_links]
-      text.gsub! /\[([^\]]+)\]\(([^)]+)\)/, '\1'
+    return text
+    if text.present?
+      Markdown.new(text).to_html
+    else
+      text
     end
-
-    render_options = render_options.merge(hard_wrap: false, filter_html: true, prettify: true, no_styles: true, :link_attributes => {:rel => 'nofollow'})
-
-    renderer = RenderDifferentHeaderCode.new(render_options)
-    options = {
-        autolink: true,
-        no_intra_emphasis: true,
-        fenced_code_blocks: true,
-        lax_html_blocks: true,
-        strikethrough: true,
-        superscript: true
-    }
-    Redcarpet::Markdown.new(renderer, options).render(text).html_safe
   end
+
+  #def markdown(text, render_options={})
+  #  ""
+    #return '' unless text
+    #
+    #if render_options[:no_links]
+    #  text.gsub! /\[([^\]]+)\]\(([^)]+)\)/, '\1'
+    #end
+    #
+    #render_options = render_options.merge(hard_wrap: false, filter_html: true, prettify: true, no_styles: true, :link_attributes => {:rel => 'nofollow'})
+    #
+    #renderer = RenderDifferentHeaderCode.new(render_options)
+    #options = {
+    #    autolink: true,
+    #    no_intra_emphasis: true,
+    #    fenced_code_blocks: true,
+    #    lax_html_blocks: true,
+    #    strikethrough: true,
+    #    superscript: true
+    #}
+    #Redcarpet::Markdown.new(renderer, options).render(text).html_safe
+  #end
 
 end

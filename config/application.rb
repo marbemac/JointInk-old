@@ -7,6 +7,11 @@ Bundler.require(:default, Rails.env)
 
 module JointInk
   class Application < Rails::Application
+      # Use TorqueBox::Infinispan::Cache for the Rails cache store
+  if defined? TorqueBox::Infinispan::Cache
+    config.cache_store = :torquebox_store
+  end
+
 
     # don't generate RSpec tests for views and helpers
     config.generators do |g|
@@ -20,7 +25,7 @@ module JointInk
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
-    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += %W(#{config.root}/lib #{config.root}/java)
 
     config.logger = Logger.new(STDOUT)
 
@@ -47,6 +52,8 @@ module JointInk
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
+
+    config.cache_store = :torquebox_store
 
     # Use SQL instead of Active Record's schema dumper when creating the database.
     # This is necessary if your schema can't be completely dumped by the schema dumper,
