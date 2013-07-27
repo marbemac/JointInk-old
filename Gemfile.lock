@@ -314,9 +314,6 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     truncate_html (0.9.2)
-    turbo-sprockets-rails3 (0.2.9)
-      railties (>= 3.1.0)
-      sprockets (>= 2.0.0)
     twitter (4.8.1)
       faraday (~> 0.8, < 0.10)
       multi_json (~> 1.0)
@@ -380,7 +377,6 @@ DEPENDENCIES
   torquebox (= 3.0.0.beta1)
   torquebox-capistrano-support
   truncate_html
-  turbo-sprockets-rails3
   twitter
   uglifier
   zurb-foundation (~> 4.3.1)
