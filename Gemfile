@@ -38,7 +38,6 @@ gem 'simple_form', '~> 3.0.0.rc'
 gem 'sanitize'
 gem 'pg_search'
 gem 'pg_array_parser'
-gem 'turbo-sprockets-rails3'
 
 gem 'truncate_html'
 
