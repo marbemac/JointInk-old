@@ -6,7 +6,7 @@ default_run_options[:pty] = true
 # SCM
 set :application,         'joint_ink'
 set :repository,          'git@github.com:evario/JointInk.git'
-set :branch,              "master"
+set :branch,              "torquebox"
 set :user,                "deployer"
 set :scm,                 :git
 set :scm_verbose,         true
