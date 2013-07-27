@@ -18,7 +18,11 @@ set :deploy_via,          :remote_cache
 set :keep_releases,       3
 set :torquebox_home,      '/opt/torquebox/current'
 set :jboss_control_style, :binscripts
-set :app_environment,     {}
+set :app_environment,     {
+    'CLOUDINARY_CLOUD_NAME' => 'hbbxbyt3m',
+    'CLOUDINARY_API_KEY' => '777285174847975',
+    'CLOUDINARY_API_SECRET' => 'f19g-mKTyaXNJirF3ArQxqdLxO4'
+}
 set :rails_env,           "production"
 set :app_context,         "/"
 set :default_environment, {
