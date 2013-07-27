@@ -24,7 +24,7 @@ JointInk::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  config.app_url = 'http://lvh.me:3000'
+  config.app_url = 'http://lvh.me:8080'
 
   # ActionMailer Config
   # Setup for development - deliveries, errors raised

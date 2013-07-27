@@ -25,7 +25,6 @@ module PostHelper
   #end
 
   def markdown(text, render_options={})
-    return text
     if text.present?
       Markdown.new(text).to_html
     else

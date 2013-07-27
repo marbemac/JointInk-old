@@ -1,12 +1,20 @@
 class Markdown
-  include_class Java::OrgPegdown::PegDownProcessor
 
   def initialize(text)
     @text = text
-    @processor = PegDownProcessor.new
+    @processor = Kramdown::Document.new(@text)
   end
 
   def to_html
-    @processor.markdownToHtml(@text)
+    @processor.to_html
   end
+
+  def to_markdown
+    @processor.to_markdown
+  end
+
+  def to_kramdown
+    @processor.to_kramdown
+  end
+
 end

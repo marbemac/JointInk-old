@@ -9,7 +9,7 @@ html
     #data-pjax-container data-pjax-container=true
 
       div id="page-wrapper" class="#{params[:controller]}-#{params[:action]} #{params[:controller]}-c #{@fullscreen ? 'fullscreen' : ''}"
-
+        = ENV['TORQUEBOX_APP_NAME']
         = render 'layouts/messages'
 
         = yield :page_nav

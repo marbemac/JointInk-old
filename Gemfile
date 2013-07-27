@@ -21,12 +21,13 @@ gem 'chronic' # Date/Time management
 gem 'rack-contrib'
 gem 'rack-pjax'
 
+gem 'kramdown'
+
 gem 'cloudinary'
 gem "switch_user"
 gem 'annotate'
 gem 'friendly_id', github: 'FriendlyId/friendly_id', branch: 'rails4'
 
-gem 'reverse_markdown'
 gem 'carrierwave'
 gem 'fog'
 
