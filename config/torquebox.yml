@@ -9,5 +9,8 @@ ruby:
 
 web:
   context: "/"
+  session_timeout: 24h
+  type: shared
+  lazy: false
 
 environment:
