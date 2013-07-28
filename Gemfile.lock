@@ -250,9 +250,6 @@ GEM
       tilt (~> 1.1)
     switch_user (0.9.3)
     temple (0.6.5)
-    therubyrhino (2.0.2)
-      therubyrhino_jar (>= 1.7.3)
-    therubyrhino_jar (1.7.4)
     thor (0.18.1)
     thread_safe (0.1.2-java)
       atomic
@@ -353,7 +350,6 @@ DEPENDENCIES
   sprockets-helpers
   sprockets-sass
   switch_user
-  therubyrhino
   torquebox (= 3.0.0.beta1)
   torquebox-capistrano-support
   truncate_html
