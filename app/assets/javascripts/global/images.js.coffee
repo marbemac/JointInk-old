@@ -54,10 +54,11 @@ jQuery ->
     options
 
   generate_photo_id = (target) ->
-    if webp_supported
-      target.data('src').split('.').slice(0, -1).join('.')
+    source = target.data('src')
+    if source && webp_supported
+      source.split('.').slice(0, -1).join('.')
     else
-      target.data('src')
+      source
 
   setTimeout ->
 
