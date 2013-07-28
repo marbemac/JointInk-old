@@ -147,7 +147,6 @@ GEM
     net-ssh (2.6.8)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    newrelic_rpm (3.6.6.147)
     nokogiri (1.6.0-java)
       mini_portile (~> 0.5.0)
     oauth (0.4.7)
@@ -337,7 +336,6 @@ DEPENDENCIES
   koala
   kramdown
   meta_request
-  newrelic_rpm
   omniauth-facebook
   omniauth-twitter
   pg_array_parser
