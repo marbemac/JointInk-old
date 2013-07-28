@@ -8,11 +8,11 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- //= require font-awesome
  *= require_self
 */
 
 @import "normalize";
+@import "font-awesome";
 
 // Foundation Components
 @import
@@ -37,7 +37,7 @@
 
 @font-face {
   font-family: SpecialElite;
-  src: url('/assets/fonts/SpecialElite.ttf');
+  src: font-url('SpecialElite.ttf');
 }
 
 html,
