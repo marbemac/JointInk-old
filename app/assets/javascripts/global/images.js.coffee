@@ -18,6 +18,7 @@ jQuery ->
 
     webp.done ->
       webp_supported = true
+      console.log 'webp supported'
     .fail ->
       webp_supported = false
 
@@ -49,19 +50,24 @@ jQuery ->
 
     if webp_supported
       options['format'] = 'webp'
-      photo_id = photo_id.split('.').slice(0, -1).join('.')
 
     options
+
+  generate_photo_id = (target) ->
+    if webp_supported
+      $(@).data('src').split('.').slice(0, -1).join('.')
+    else
+      $(@).data('src')
 
   setTimeout ->
 
     $('.cn-bg-img').livequery ->
-      photo_id = $(@).data('src')
+      photo_id = generate_photo_id($(@))
       return unless photo_id
       $(@).css('background-image', "url(#{$.cloudinary.url(photo_id, generate_options($(@), photo_id))})")
 
     $('.cn-img').livequery ->
-      photo_id = $(@).data('src')
+      photo_id = generate_photo_id($(@))
       return unless photo_id
       $(@).attr('src', $.cloudinary.url(photo_id, generate_options($(@), photo_id)))
 
