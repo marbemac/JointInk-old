@@ -28,7 +28,7 @@ module PostHelper
     if text.present?
       Markdown.new(text).to_html
     else
-      text
+      ''
     end
   end
 
