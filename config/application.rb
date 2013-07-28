@@ -37,7 +37,7 @@ module JointInk
     config.autoload_paths += %W(#{config.root}/lib)
 
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-    config.assets.precompile += %w('errors.css editor.js editor.css redactor.js redactor.css modernizr.js splash_page.js .svg .eot .woff .ttf )
+    config.assets.precompile += %w('errors.css editor.js editor.css redactor.js redactor.css splash_page.js .svg .eot .woff .ttf )
 
     # pjax
     config.middleware.use Rack::Pjax

@@ -60,7 +60,6 @@ gem 'torquebox-capistrano-support'
 
 group :production, :staging do
   gem "rack-timeout"
-  gem 'therubyrhino'
 end
 
 group :development do
