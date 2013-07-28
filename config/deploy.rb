@@ -1,4 +1,4 @@
-require 'torquebox-capistrano-support'
+#require 'torquebox-capistrano-support'
 require 'bundler/capistrano'
 
 default_run_options[:pty] = true
@@ -38,10 +38,10 @@ role :app, app1_domain
 role :db,  app1_domain, :primary => true
 
 namespace :deploy do
-  #desc "Restart Passenger"
-  #task :restart, :roles => :app, :except => { :no_release => true } do
-  #  run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-  #end
+  desc "Restart Torquebox Web Process"
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    run "touch #{File.join(current_path,'tmp','restart.txt')}"
+  end
 
   desc "update permissions"
   task :update_permissions, :roles => :app do
