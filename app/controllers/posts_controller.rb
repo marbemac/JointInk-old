@@ -51,7 +51,7 @@ class PostsController < ApplicationController
     not_found unless @post
     authorize! :read, @post
 
-    expires_in 10.seconds, :public => true
+    expires_in 60.seconds, :public => true
     if stale? etag: @post, last_modified: @post.updated_at, public: true
       @channel = @post.primary_channel
       @title = @post.title

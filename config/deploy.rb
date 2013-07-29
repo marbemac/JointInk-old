@@ -40,7 +40,7 @@ role :db,  app1_domain, :primary => true
 namespace :deploy do
   desc "Restart Torquebox Web Process"
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "touch #{File.join(release_path,'tmp','restart.txt')}"
+    run "touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 
   desc "update permissions"
