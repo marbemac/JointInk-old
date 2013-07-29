@@ -32,9 +32,10 @@ set :default_environment, {
 ssh_options[:forward_agent] = false
 
 set :app1_domain, '162.216.19.26'
+set :app2_domain, '162.216.19.152'
 set :db1_domain, '96.126.111.109'
-role :web, app1_domain
-role :app, app1_domain
+role :web, app1_domain, app2_domain
+role :app, app1_domain, app2_domain
 role :db,  app1_domain, :primary => true
 
 namespace :deploy do
