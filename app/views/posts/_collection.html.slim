@@ -1,7 +1,8 @@
-#post-collection
+- if posts
+  - cache posts do
+    #post-collection
 
-  - if posts
-    - posts.each do |post|
-      = render :partial => "posts/tile#{post.post_type.capitalize ? post.post_type.capitalize : 'Text'}", :layout => 'posts/tile', :locals => {:post => post}
+      - posts.each do |post|
+        = render :partial => "posts/tile#{post.post_type.capitalize ? post.post_type.capitalize : 'Text'}", :layout => 'posts/tile', :locals => {:post => post}
 
-  .end ~ The End ~
+      .end ~ The End ~

@@ -43,8 +43,7 @@ module JointInk
     config.middleware.use Rack::Pjax
 
     # Use TorqueBox::Infinispan::Cache for the Rails cache store
-    if defined? TorqueBox::Infinispan::Cache
-      config.cache_store = :torquebox_store
-    end
+    config.cache_store = :torquebox_store
+
   end
 end
