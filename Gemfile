@@ -39,7 +39,7 @@ gem 'pg_array_parser'
 
 gem 'truncate_html'
 
-#gem 'newrelic_rpm'
+gem 'newrelic_rpm'
 
 gem 'bust_rails_etags'
 gem 'capistrano'

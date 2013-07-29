@@ -1,5 +1,5 @@
 class UserDomain
   def self.matches?(request)
-    (request.host != 'mmdebug.com' && request.host != 'jointink.com' && request.host != 'lvh.me') || (request.subdomain.present? && request.subdomain != "www")
+    !%w(mmdebug.com jointink.com lvh.me localhost).include?(request.host) || (request.subdomain.present? && request.subdomain != "www")
   end
 end
