@@ -1,33 +1,33 @@
 require 'bundler/capistrano'
 require "rvm/capistrano"
 
-default_run_options[:pty] = true
-ssh_options[:forward_agent] = true
-
+# RVM
 set :rvm_ruby_string, '2.0.0-p195'
 set :rvm_type, :user
+set :user, 'deployer'
+set :keep_releases, 3
 
-set :application, 'joint_ink'
+default_run_options[:pty] = true
+ssh_options[:forward_agent] = false
+
+# SCM
+set :application,         'joint_ink'
 set :rack_env, "production"
+set :repository,          'git@github.com:evario/JointInk.git'
+set :branch,              "master"
+set :user,                "deployer"
+set :scm,                 :git
+set :scm_verbose,         true
+set :use_sudo,            false
+
+# roles (servers)
+set :application, 'joint_ink'
 set :app1_domain, '97.107.133.156'
 set :app2_domain, '97.107.130.51'
 set :db1_domain, '96.126.111.109'
-
-# roles (servers)
 role :web, app1_domain, app2_domain
 role :app, app1_domain, app2_domain
 role :db,  app1_domain, :primary => true
-
-set :scm, :git
-set :scm_verbose, true
-set :repository,  'git@github.com:evario/JointInk.git'
-set :branch,  'master'
-set :deploy_to, "/var/www/#{application}"
-set :deploy_via, :remote_cache
-set :use_sudo, false
-set :keep_releases, 3
-set :user, 'deployer'
-set :ssh_options, {:forward_agent => true}
 
 namespace :deploy do
   desc "Restart Passenger"
@@ -52,19 +52,3 @@ end
 after "deploy:update_code", "deploy:update_permissions"
 before "deploy:assets:precompile", "deploy:link_db_file"
 after "deploy:restart", "deploy:cleanup"
-
-desc "tail production log files"
-task :tail_logs, :roles => :app do
-  run "tail -f #{shared_path}/log/production.log" do |channel, stream, data|
-    puts  # for an extra line break before the host name
-    puts "#{channel[:host]}: #{data}"
-    break if stream == :err
-  end
-end
-
-namespace :rails do
-  desc "Open the rails console on one of the remote servers"
-  task :console, :roles => :app do
-    run "#{current_path}/script/rails c #{rails_env}"
-  end
-end
