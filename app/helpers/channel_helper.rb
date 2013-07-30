@@ -17,7 +17,7 @@ module ChannelHelper
     options[:subheader] = channel.description
 
     if channel.cover_photo.present?
-      options[:cover_photo_id] = channel.photo_id
+      options[:cover_photo_id] = channel.cover_photo_id
     end
 
     options

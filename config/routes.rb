@@ -101,7 +101,7 @@ JointInk::Application.routes.draw do
   # users
   constraints(UserDomain) do
     get '' => 'users#show', :as => :user
-    put '' => 'users#update', :as => :update_user
+    patch '' => 'users#update', :as => :update_user
     get 'feed' => 'users#show', :as => :user_feed
     get 'recommendations' => 'users#recommendations', :as => :user_recommendations
     get 'channels' => 'users#channels', :as => :user_channels
@@ -117,7 +117,7 @@ JointInk::Application.routes.draw do
     get 'edit' => 'channels#edit', :as => :edit_channel
     get 'members' => 'channels#members', :as => :channel_members
     get 'new-:type-:subtype-post' => 'posts#new', :as => :new_channel_post
-    put '' => 'channels#update'
+    patch '' => 'channels#update'
     scope ':post_id(/:title)' do
       get '' => 'posts#show', :as => :post_via_channel
     end
