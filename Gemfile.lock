@@ -335,6 +335,7 @@ DEPENDENCIES
   kramdown
   meta_request
   newrelic_rpm
+  nokogiri
   omniauth-facebook
   omniauth-twitter
   pg_array_parser

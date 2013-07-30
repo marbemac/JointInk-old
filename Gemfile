@@ -22,6 +22,7 @@ gem 'rack-contrib'
 gem 'rack-pjax'
 
 gem 'kramdown'
+gem 'nokogiri'
 
 gem 'cloudinary'
 gem "switch_user"
