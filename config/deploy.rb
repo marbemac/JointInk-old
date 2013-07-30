@@ -8,14 +8,15 @@ set :user, 'deployer'
 set :keep_releases, 3
 
 default_run_options[:pty] = true
-ssh_options[:forward_agent] = false
+ssh_options[:forward_agent] = true
 
 # SCM
 set :application,         'joint_ink'
-set :rack_env, "production"
+set :rack_env,            "production"
 set :repository,          'git@github.com:evario/JointInk.git'
 set :branch,              "master"
 set :user,                "deployer"
+set :deploy_to,           "/var/www/#{application}"
 set :scm,                 :git
 set :scm_verbose,         true
 set :use_sudo,            false
