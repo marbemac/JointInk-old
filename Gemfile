@@ -55,7 +55,6 @@ gem 'sprockets-helpers'
 gem 'uglifier'
 gem 'bourbon'
 gem 'zurb-foundation', '~> 4.3.1'
-gem 'font-awesome-rails'
 gem 'jquery-fileupload-rails'
 
 group :production, :staging do
