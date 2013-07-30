@@ -1,109 +1,110 @@
-= render "pages/splash_title_box"
+- cache 'home-page'
+  = render "pages/splash_title_box"
 
-.login-signup
+  .login-signup
 
-  = simple_form_for('user', :url => user_registration_path, :html => {:class => 'signup-form'}) do |f|
-    ul.errors
+    = simple_form_for('user', :url => user_registration_path, :html => {:class => 'signup-form'}) do |f|
+      ul.errors
 
-    .username-input
-      = f.input :username, :label => false, :placeholder => 'username', :input_html => {:autocomplete => 'off'}
-      .url .#{request.host_with_port}
+      .username-input
+        = f.input :username, :label => false, :placeholder => 'username', :input_html => {:autocomplete => 'off'}
+        .url .#{request.host_with_port}
 
-    .extra
-      = f.input :name, :label => false, :placeholder => 'full name', :input_html => {:autocomplete => 'off'}
-      = f.input :email, :label => false, :placeholder => 'email', :input_html => {:autocomplete => 'off'}
+      .extra
+        = f.input :name, :label => false, :placeholder => 'full name', :input_html => {:autocomplete => 'off'}
+        = f.input :email, :label => false, :placeholder => 'email', :input_html => {:autocomplete => 'off'}
+        = f.input :password, :label => false, :placeholder => 'password', :input_html => {:autocomplete => 'off'}
+
+      .step-1
+        .medium.action.submit.claim.button data-url=check_username_path Claim Username
+        .opposite or login
+      .step-2
+        = f.submit "Sign Up", :class => 'medium action submit button'
+
+    = simple_form_for('user', :url => user_session_path, :html => {:class => 'signin-form hide'}) do |f|
+      = f.input :login, :label => false, :placeholder => 'username or email', :input_html => {:autocomplete => 'off'}
       = f.input :password, :label => false, :placeholder => 'password', :input_html => {:autocomplete => 'off'}
+      .step-1
+        = f.submit "Sign In", :class => 'medium action submit button'
+        .opposite or register
 
-    .step-1
-      .medium.action.submit.claim.button data-url=check_username_path Claim Username
-      .opposite or login
-    .step-2
-      = f.submit "Sign Up", :class => 'medium action submit button'
+  .section
+    .inner.expanded
+      h2.sans-serif Publishing
+      ul.splash-page-publish-tabs
+        li.on data-index=0 organized
+        li data-index=1 simple
+        li data-index=2 expressive
+        li data-index=3 lightweight
+        li data-index=4 portable
 
-  = simple_form_for('user', :url => user_session_path, :html => {:class => 'signin-form hide'}) do |f|
-    = f.input :login, :label => false, :placeholder => 'username or email', :input_html => {:autocomplete => 'off'}
-    = f.input :password, :label => false, :placeholder => 'password', :input_html => {:autocomplete => 'off'}
-    .step-1
-      = f.submit "Sign In", :class => 'medium action submit button'
-      .opposite or register
+      .full
+        #splash-publishing-slider.swipe
+          .swipe-wrap
+            div
+              .splash-page-slider-item
+                .caption Command and control. Track and manage your content on the dashboard.
+                img src=image_path('splash-dashboard.jpg')
+            div
+              .splash-page-slider-item
+                .caption A beautiful, integrated editing experience. What you see is what you truly get.
+                img src=image_path('splash-wysiwyg.jpg')
+            div
+              .splash-page-slider-item
+                .caption Express yourself with multiple post styles.
+                img src=image_path('splash-styles.jpg')
+            div
+              .splash-page-slider-item
+                .caption Loose the distractions and write with markdown.
+                img src=image_path('splash-markdown.jpg')
+            div
+              .splash-page-slider-item.no-shadow
+                .caption Post by email. Use your email client's native editing features, or send Markdown.
+                img src=image_path('splash-email.jpg')
 
-.section
-  .inner.expanded
-    h2.sans-serif Publishing
-    ul.splash-page-publish-tabs
-      li.on data-index=0 organized
-      li data-index=1 simple
-      li data-index=2 expressive
-      li data-index=3 lightweight
-      li data-index=4 portable
+  .section.dark
+    .inner.expanded
+      h2.sans-serif Display
+      h4.sans-serif Responsive and ready to rock and roll.
 
-    .full
-      #splash-publishing-slider.swipe
-        .swipe-wrap
-          div
-            .splash-page-slider-item
-              .caption Command and control. Track and manage your content on the dashboard.
-              img src=image_path('splash-dashboard.jpg')
-          div
-            .splash-page-slider-item
-              .caption A beautiful, integrated editing experience. What you see is what you truly get.
-              img src=image_path('splash-wysiwyg.jpg')
-          div
-            .splash-page-slider-item
-              .caption Express yourself with multiple post styles.
-              img src=image_path('splash-styles.jpg')
-          div
-            .splash-page-slider-item
-              .caption Loose the distractions and write with markdown.
-              img src=image_path('splash-markdown.jpg')
-          div
-            .splash-page-slider-item.no-shadow
-              .caption Post by email. Use your email client's native editing features, or send Markdown.
-              img src=image_path('splash-email.jpg')
+      .full.no-shadow
+        img src=image_path('splash-responsive.jpg')
 
-.section.dark
-  .inner.expanded
-    h2.sans-serif Display
-    h4.sans-serif Responsive and ready to rock and roll.
+  .section
+    .inner
+      h2.sans-serif Channels
+      h4.sans-serif Blog together.
 
-    .full.no-shadow
-      img src=image_path('splash-responsive.jpg')
+      .full.full-channels
+        .caption A place for communities to express themselves around a common idea, theme, or prompt.
+        - for channel in Channel.popular(6)
+          = render 'channels/tile', :channel => channel
 
-.section
-  .inner
-    h2.sans-serif Channels
-    h4.sans-serif Blog together.
+  .section
+    .inner
+      h2.sans-serif MOARR
+      h4.sans-serif Because why not.
 
-    .full.full-channels
-      .caption A place for communities to express themselves around a common idea, theme, or prompt.
-      - for channel in Channel.popular(6)
-        = render 'channels/tile', :channel => channel
+      ul.splash-page-moar-list
+        li
+          .head Free Hosting
+          p Let us take care of hosting and securing your content, for free. No page view limits and no ads.
+          i.icon-cloud
+        li
+          .head Drafts
+          p Jot down drafts before publishing them. Easily share drafts privately with friends to get feedback.
+          i.icon-lightbulb
+        li
+          .head Atom Feeds
+          p Automatic Atom support for every feed, from your personal feed to channel feeds.
+          i.icon-rss
+        li
+          .head Social Ready
+          p Built in Facebook and Twitter sharing. Facebook open graph and twitter card enabled.
+          i.icon-twitter
 
-.section
-  .inner
-    h2.sans-serif MOARR
-    h4.sans-serif Because why not.
+      .splash-page-and and we're just getting started...
 
-    ul.splash-page-moar-list
-      li
-        .head Free Hosting
-        p Let us take care of hosting and securing your content, for free. No page view limits and no ads.
-        i.icon-cloud
-      li
-        .head Drafts
-        p Jot down drafts before publishing them. Easily share drafts privately with friends to get feedback.
-        i.icon-lightbulb
-      li
-        .head Atom Feeds
-        p Automatic Atom support for every feed, from your personal feed to channel feeds.
-        i.icon-rss
-      li
-        .head Social Ready
-        p Built in Facebook and Twitter sharing. Facebook open graph and twitter card enabled.
-        i.icon-twitter
-
-    .splash-page-and and we're just getting started...
-
-.splash-page-lets-go.large.action.button
-  | All Aboard
-  i.icon-rocket
+  .splash-page-lets-go.large.action.button
+    | All Aboard
+    i.icon-rocket
