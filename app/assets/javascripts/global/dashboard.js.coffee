@@ -4,6 +4,7 @@ jQuery ->
     $container = $('#post-views-chart')
     return unless $('#post-views-chart').length > 0
 
+    console.log $container.data('data1')
     categories = _.map($container.data('data1'), (data) -> data['stat']['time'])
     viewDataPoints = _.map($container.data('data1'), (data) -> parseInt(data['stat']['value']))
     readDataPoints = if $container.data('data2') then _.map($container.data('data2'), (data) -> parseInt(data['stat']['value'])) else null

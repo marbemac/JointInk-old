@@ -1,4 +1,5 @@
-#= require jquery_ujs
+#= require jquery.rails-ujs.js
+#= require jquery.livequery
 #= require jquery.easing
 #= require global/global_functions
 #= require jquery.scrollTo.js
@@ -58,8 +59,7 @@ jQuery ->
     continuous: true,
     disableScroll: false,
     callback: (index, elem) ->
-      $(".splash-page-publish-tabs li").removeClass('on')
-      $(".splash-page-publish-tabs li[data-index='#{index}']").addClass('on')
+      $(".splash-page-publish-tabs li[data-index='#{index}']").click()
 
   $(".splash-page-publish-tabs li").click (e) ->
     $(@).addClass('on').siblings().removeClass('on')

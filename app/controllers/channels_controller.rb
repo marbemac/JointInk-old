@@ -61,8 +61,8 @@ class ChannelsController < ApplicationController
     @posts = @channel.posts.active.order('votes_count DESC, created_at DESC')
 
     expires_in 10.seconds, :public => true
-    maximum = @posts.maximum(:updated_at)
-    if stale? etag: [@channel, maximum], last_modified: maximum, public: true
+    @maximum = @posts.maximum(:updated_at)
+    if stale? etag: [@channel, @maximum], last_modified: @maximum, public: true
       @title = @channel.name
       @page_title = @channel.name
       @description = @channel.description

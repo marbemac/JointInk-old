@@ -13,11 +13,11 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by_request(request)
     not_found unless @user
-    @posts = @user.sharing(@channel).page(params[:page])
+    @posts = @user.sharing.page(params[:page])
 
-    maximum = @posts.maximum(:updated_at)
+    @maximum = @posts.maximum(:updated_at)
     expires_in 10.seconds, :public => true
-    if stale? etag: [@user, maximum], last_modified: maximum, public: true
+    if stale? etag: [@user, @maximum], last_modified: @maximum, public: true
       @title = @user.name + "'s Posts"
       @page_title = @user.name
 
