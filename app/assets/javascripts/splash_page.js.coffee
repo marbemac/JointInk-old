@@ -2,6 +2,7 @@
 #= require jquery.easing
 #= require global/global_functions
 #= require jquery.scrollTo.js
+#= require jquery.cloudinary.js
 #= require global/images
 #= require swipe
 #= require_self
