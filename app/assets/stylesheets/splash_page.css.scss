@@ -1,6 +1,6 @@
 @font-face {
   font-family: SpecialElite;
-  src: url('/assets/fonts/SpecialElite.ttf');
+  src: asset-url('SpecialElite.ttf', $digest: true);
 }
 
 .signup-form,
