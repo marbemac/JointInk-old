@@ -5,9 +5,9 @@ jQuery ->
     return unless $('#post-views-chart').length > 0
 
     console.log $container.data('data1')
-    categories = _.map($container.data('data1'), (data) -> data['stat']['time'])
-    viewDataPoints = _.map($container.data('data1'), (data) -> parseInt(data['stat']['value']))
-    readDataPoints = if $container.data('data2') then _.map($container.data('data2'), (data) -> parseInt(data['stat']['value'])) else null
+    categories = _.map($container.data('data1'), (data) -> data['time'])
+    viewDataPoints = _.map($container.data('data1'), (data) -> parseInt(data['value']))
+    readDataPoints = if $container.data('data2') then _.map($container.data('data2'), (data) -> parseInt(data['value'])) else null
     series = [{
       data: viewDataPoints
       name: 'views'
@@ -68,8 +68,8 @@ jQuery ->
     $container = $('#post-recs-chart')
     return unless $('#post-recs-chart').length > 0
 
-    categories = _.map($container.data('data'), (data) -> data['stat']['time'])
-    dataPoints = _.map($container.data('data'), (data) -> parseInt(data['stat']['value']))
+    categories = _.map($container.data('data'), (data) -> data['time'])
+    dataPoints = _.map($container.data('data'), (data) -> parseInt(data['value']))
     $container.highcharts({
       chart:
         type: 'line'

@@ -125,10 +125,8 @@ class Stat < ActiveRecord::Base
       time = (timeframe-i).days.ago.strftime('%m/%d/%Y')
       if !data[i] || data[i]['time'] != time
         data.insert(i, {
-            'stat' => {
-                'time' => time,
-                'value' => value
-            }
+            'time' => time,
+            'value' => value
         })
       end
     end
