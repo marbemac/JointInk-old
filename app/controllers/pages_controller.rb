@@ -16,7 +16,7 @@ class PagesController < ApplicationController
   end
 
   def health_check
-    render :text => "Everything looks A-OK on server #{ENV['SERVER_SOFTWARE']}", :layout => false
+    render :text => "Everything looks A-OK on server #{request.env['SERVER_SOFTWARE']}", :layout => false
   end
 
 end
