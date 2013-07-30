@@ -26,7 +26,7 @@ module PostHelper
 
   def markdown(text, render_options={})
     if text.present?
-      Markdown.new(text).to_html
+      Kramdown::Document.new(text).to_html
     else
       ''
     end

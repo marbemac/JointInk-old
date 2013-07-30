@@ -38,7 +38,7 @@ class EmailsController < ApplicationController
         unless duplicate
           if params['stripped-html'] && !params['stripped-html'].blank?
             html = params['stripped-html'].gsub(params['stripped-signature'], '') # remove the signature if we can
-            content = Markdown.new(html).to_kramdown # if they formatted html this will turn that into markdown
+            content = Kramdown::Document.new(html).to_kramdown # if they formatted html this will turn that into markdown
           else
             content = params['stripped-text']
           end
