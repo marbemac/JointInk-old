@@ -1,9 +1,9 @@
 atom_feed :language => 'en-US' do |feed|
   feed.title "#{@user.username}'s Posts on Joint Ink".html_safe
   feed.subtitle @user.bio
-  feed.updated @posts.maximum(:updated_at)
+  feed.updated @maximum
 
-  @posts.scoped.each do |post|
+  @posts.each do |post|
     feed.entry post, published: post.published_at do |entry|
       entry.title post.title
 

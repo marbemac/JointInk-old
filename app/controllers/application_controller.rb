@@ -57,6 +57,7 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :password) }
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :name, :email, :password) }
   end
 
   def catch_flash

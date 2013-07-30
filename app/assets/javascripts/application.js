@@ -13,7 +13,7 @@
 
 //= require jquery-ui.custom.js
 //= require jquery.mobile.custom.js
-//= require jquery_ujs
+//= require jquery.rails-ujs.js
 //= require jquery.pjax
 //= require jquery.livequery
 //= require jquery-fileupload/vendor/jquery.ui.widget
