@@ -15,7 +15,7 @@ html
 
     == common_js
 
-    = javascript_include_tag "splash_page"
+    = javascript_include_tag "#{JointInk::Application.config.app_url}/splash_page"
 
     script
       = yield :javascript

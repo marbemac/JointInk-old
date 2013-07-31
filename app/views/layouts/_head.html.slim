@@ -20,10 +20,10 @@ head
 
   / TODO: this is an ugly way of including the editor css files only on certain pages
   - if (params[:controller] == 'users' && params[:action] == 'dashboard') || (params[:controller] == 'posts' && ['edit','new','create','update','stats'].include?(params[:action]))
-    = stylesheet_link_tag "redactor", :media => "all"
-    = stylesheet_link_tag "editor", :media => "all"
+    = stylesheet_link_tag "#{JointInk::Application.config.app_url}/redactor", :media => "all"
+    = stylesheet_link_tag "#{JointInk::Application.config.app_url}/editor", :media => "all"
 
-  = stylesheet_link_tag "application", :media => "all"
+  = stylesheet_link_tag "#{JointInk::Application.config.app_url}/application", :media => "all"
 
   = csrf_meta_tags unless response.cache_control[:public]
 

@@ -24,7 +24,7 @@ html
 
     = render 'shared/load_js', :src => JointInk::Application.config.app_url+active_user_js_path
 
-    = javascript_include_tag "application"
+    = javascript_include_tag "#{JointInk::Application.config.app_url}/application"
 
     = yield :javascript
 
