@@ -95,4 +95,14 @@ module ApplicationHelper
       ''
     end
   end
+
+  def prepend_absolute_js_url(tag)
+    tag.gsub('src="', 'src="'+JointInk::Application.config.app_url)
+  end
+
+  def prepend_absolute_css_url(tag)
+    tag.gsub('href="', 'href="'+JointInk::Application.config.app_url)
+  end
+
+
 end
