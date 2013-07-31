@@ -1,6 +1,7 @@
 JointInk::Application.routes.draw do
 
   get 'health_check' => 'pages#health_check'
+  get 'debug' => 'pages#debug'
 
   # javascripts
   get 'active_user/posts/:id.js' => 'posts#active_user', :as => :active_user_post_js

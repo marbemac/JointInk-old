@@ -19,4 +19,8 @@ class PagesController < ApplicationController
     render :text => "Everything looks A-OK!", :layout => false
   end
 
+  def debug
+    render :layout => false
+  end
+
 end
