@@ -31,11 +31,10 @@ set :default_environment, {
 
 ssh_options[:forward_agent] = false
 
-set :app1_domain, '162.216.19.26'
-set :app2_domain, '162.216.19.152'
+set :app1_domain, '162.216.16.75'
 set :db1_domain, '96.126.111.109'
-role :web, app1_domain, app2_domain
-role :app, app1_domain, app2_domain
+role :web, app1_domain
+role :app, app1_domain
 role :db,  app1_domain, :primary => true
 
 namespace :deploy do
@@ -46,7 +45,7 @@ namespace :deploy do
 
   desc "update permissions"
   task :update_permissions, :roles => :app do
-    run "cd #{release_path} && chmod -R 777 tmp"
+    run "cd #{release_path} && chmod -R 777 tmp && chmod 777 public/uploads"
   end
 
   desc "link database file"

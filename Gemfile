@@ -24,8 +24,8 @@ gem 'rack-pjax'
 gem 'kramdown'
 gem 'nokogiri'
 
-gem 'cloudinary'
 gem "switch_user"
+gem 'cloudinary'
 gem 'annotate'
 gem 'friendly_id', github: 'FriendlyId/friendly_id', branch: 'rails4'
 
@@ -40,7 +40,7 @@ gem 'pg_array_parser'
 
 gem 'truncate_html'
 
-gem 'newrelic_rpm'
+#gem 'newrelic_rpm'
 
 gem 'bust_rails_etags'
 gem 'capistrano'
