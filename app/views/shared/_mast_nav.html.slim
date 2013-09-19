@@ -2,13 +2,13 @@
   .handle
     i.icon-reorder
   ul
-    li.head Explore
-    li.spacer
-    li
-      a href=channels_url(:subdomain => false)
-        i.icon.icon-circle-blank
-        | Channels
-    li.spacer
+    /li.head Explore
+    /li.spacer
+    /li
+    /  a href=channels_url(:subdomain => false)
+    /    i.icon.icon-circle-blank
+    /    | Channels
+    /li.spacer
     - if user_signed_in?
       li.head = current_user.first_name
       li.spacer
@@ -49,14 +49,14 @@
     - else
       li.head Joint Ink
       li.spacer
-      li
-        a href=root_url(:subdomain => false)
-          i.icon.icon-home
-          | Home
-      li
-        a href=user_registration_url(:subdomain => false)
-          i.icon.icon-heart
-          | Sign Up
+      /li
+      /  a href=root_url(:subdomain => false)
+      /    i.icon.icon-home
+      /    | Home
+      /li
+      /  a href=user_registration_url(:subdomain => false)
+      /    i.icon.icon-heart
+      /    | Sign Up
       li
         a href=user_session_url(:subdomain => false)
           i.icon.icon-user

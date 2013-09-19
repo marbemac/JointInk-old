@@ -75,9 +75,9 @@ JointInk::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.app_url = 'http://jointink.com'
+  config.app_url = 'http://public.jointink.com'
 
-  config.action_mailer.default_url_options = { :host => 'jointink.com' }
+  config.action_mailer.default_url_options = { :host => 'public.jointink.com' }
 
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised

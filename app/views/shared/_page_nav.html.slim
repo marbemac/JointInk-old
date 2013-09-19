@@ -5,8 +5,8 @@
       .inner
         h1.sans-serif= name
 
-        - if params[:controller] == 'channels' && defined?(@channel) && @channel.email
-          .channel-email = "#{@channel.email}@jointink.com"
+        /- if params[:controller] == 'channels' && defined?(@channel) && @channel.email
+          /.channel-email = "#{@channel.email}@jointink.com"
 
         - if defined? subheader
           h4.subheader.text-thin.sans-serif= subheader

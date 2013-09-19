@@ -234,7 +234,7 @@ class Post < ActiveRecord::Base
   end
 
   def permalink
-    "http://jointink.com/p/#{token}"
+    "http://public.jointink.com/p/#{token}"
   end
 
   # has the user voted on this post?

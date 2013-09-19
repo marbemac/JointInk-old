@@ -113,7 +113,7 @@ class Channel < ActiveRecord::Base
   end
 
   def permalink
-    "http://jointink.com/c/#{id}"
+    "http://public.jointink.com/c/#{id}"
   end
 
   def analytics_data(key_prefix=nil)
