@@ -29,7 +29,7 @@ set :default_environment, {
     'PATH' => "/opt/torquebox/current/jruby/bin:$PATH"
 }
 
-ssh_options[:forward_agent] = false
+ssh_options[:forward_agent] = true
 
 set :app1_domain, '162.216.16.75'
 set :db1_domain, '96.126.111.109'
