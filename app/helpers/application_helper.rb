@@ -20,7 +20,7 @@ module ApplicationHelper
       when 'staging'
         'foobar-staging.herokuapp.com'
       when 'production'
-        'public.jointink.com'
+        'joint-ink.com'
     end
   end
 
