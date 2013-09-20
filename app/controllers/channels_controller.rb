@@ -54,7 +54,7 @@ class ChannelsController < ApplicationController
 
     if params[:id].is_a? Integer
       redirect_to channel_url(@channel, :subdomain => false), :status => :moved_permanently
-    elsif request.subdomain && request.subdomain.present? && request.subdomain != 'www'
+    elsif request.subdomain && request.subdomain.present? && request.subdomain != 'www' && request.subdomain != 'public'
       redirect_to channel_url(@channel, :subdomain => false)
     end
 

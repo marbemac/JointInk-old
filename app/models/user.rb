@@ -412,7 +412,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_request(request)
-    if request.host.include?('public.jointink.com') || request.host.include?('lvh.me')
+    if request.host.include?('jointink.com') || request.host.include?('lvh.me')
       find(request.subdomain.downcase)
     else
       where(:domain => request.host).first

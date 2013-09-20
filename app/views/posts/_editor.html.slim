@@ -97,6 +97,6 @@
         .fileinput-button.medium.upload.button
           | Upload Image
           span.loading
-          input type='file' name='post[photo]' data-url=post_add_inline_photo_url(post.token, :subdomain => Rails.env == 'production' ? 'www' : false)
+          input type='file' name='post[photo]' data-url=post_add_inline_photo_url(post.token, :subdomain => Rails.env == 'production' ? 'public' : false)
 
   = render :partial => "posts/show#{post.post_type.capitalize ? post.post_type.capitalize : 'Text'}", :layout => 'posts/show', :locals => {:post => post}
