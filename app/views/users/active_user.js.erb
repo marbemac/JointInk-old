@@ -2,12 +2,12 @@ $(document).ready(function() {
 
   <% if current_user %>
 
-    analytics.identify(<%= current_user.id %>, <%= current_user.analytics_data.to_json.html_safe %>);
+//    analytics.identify(<%= current_user.id %>, <%= current_user.analytics_data.to_json.html_safe %>);
 
   <% end %>
 
   <% if session[:analytics] %>
-    analytics.track('<%= session[:analytics][:event] %>', <%= session[:analytics][:properties].to_json.html_safe %>)
+//    analytics.track('<%= session[:analytics][:event] %>', <%= session[:analytics][:properties].to_json.html_safe %>)
     <% session[:analytics] = nil %>
   <% end %>
 
