@@ -45,5 +45,5 @@ jQuery ->
   sendReadRequest = ->
     console.log 'Track Read'
     $('.recommend').trigger('tooltip-show')
-    analytics.track('Post Read', $('#analytics-data').data('d'))
+#    analytics.track('Post Read', $('#analytics-data').data('d'))
     window.sendStatRequest('Read')

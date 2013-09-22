@@ -401,7 +401,7 @@ jQuery ->
     $('body').oneTime 1000, 'show-loader', ->
       $('#loader').fadeIn(200)
   .on 'pjax:end', ->
-    analytics.pageview()  # Analytics.js
+#    analytics.pageview()  # Analytics.js
     $('.manage-sections').removeClass('manage-sections--hidden-preview')
     $('body').stopTime 'show-loader'
     $('#loader').hide()
